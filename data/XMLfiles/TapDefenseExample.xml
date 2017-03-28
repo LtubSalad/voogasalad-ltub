@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Game GameType="TapDefense">
+    <numRows>32</numRows>
+    <numColumns>16</numColumns>
+    <Gold>100</Gold>
+    <Halos>1</Halos>
+    <Lives>20</Lives>
+    <Level>2</Level>
+    <Points>2253</Points>
+    <Cell Position="0" TileType="GRASS" Health=POSITIVE_INFINITY/>
+    <Cell Position="1" TileType="STONEPATH" Health=POSITIVE_INFINITY/>
+    <Cell Position="2" TileType="ARROWTOWER" Health=POSITIVE_INFINITY/>
+    <Cell Position="3" TileType="ENEMY1" Health=10/>
+</Game>
