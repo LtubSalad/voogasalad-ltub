@@ -2,6 +2,8 @@ package examples;
 
 import api.Sprite.Sprite;
 import examples.example3.DisplaySelectionViewEvent;
+import javafx.event.Event;
+import javafx.event.EventType;
 
 public class UserInputManager {
 	private EventBus bus;
@@ -18,8 +20,7 @@ public class UserInputManager {
 		});
 
 		bus.on(MouseRightClickEvent.ANY, (e) -> {
-			Sprite s = e.getSprite();
-			bus.emit(new DisplaySelectionViewEvent(s, e.getLocation()));
+			bus.emit(new DisplaySelectionViewEvent(e.getLocation()));
 			// different event handler from the previous use case
 		});
 	}
