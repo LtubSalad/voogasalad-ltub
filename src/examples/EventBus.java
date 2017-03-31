@@ -28,5 +28,10 @@ public class EventBus implements IEventBus {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public EventBus getBus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
