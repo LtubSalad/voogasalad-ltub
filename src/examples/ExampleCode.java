@@ -56,7 +56,8 @@ public class ExampleCode {
 	}
 
 	public void exampleCase4(){
-
+		//Look at the relation between SelectionManager and UserInputManager,
+		//it handles selecting
 	}
 
 	public void exampleCase5(){
