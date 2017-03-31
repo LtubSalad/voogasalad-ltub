@@ -15,6 +15,5 @@ public interface ISprite {
 	 */
 	public void setAttribute(String attributeType);
 
-	public void onAttacked(Object e);
 	
 }
