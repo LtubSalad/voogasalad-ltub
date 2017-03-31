@@ -10,7 +10,7 @@ public class EventBus implements IEventBus {
 	public EventBus(){
 		name = "tester";
 	}
-	public void emit(spriteAttackedEvent ev){
+	public void emit(SpriteAttackedEvent ev){
 		; 
 	}
 	@Override

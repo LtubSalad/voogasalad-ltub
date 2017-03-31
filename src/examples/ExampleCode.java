@@ -31,24 +31,13 @@ public class ExampleCode {
 		Sprite someSprite = new Sprite();
 		/*
 		someSprite.onAttacked(e -> {
-			getBus().emit(new spriteAttackedEvent(thisSprite));
-		});*/
+			getBus().emit(new SpriteAttackedEvent(thisSprite));
+		});
 		EventBus eb = new EventBus(); 
 		if (someSprite.isAttacked()){
-			eb.emit(new spriteAttackedEvent(someSprite));
+			eb.emit(new SpriteAttackedEvent(someSprite));
 		}
-	
-		
-	/*	public ViewDisplayManager {
-			private void initHandlers() {
-				getBus().on(spriteAttackedEvent, e -> { 
-					// get the attacked sprite from the event
-					// update the health view of the sprite
-				});
-			}
-		}
-*/
-	
+		*/
 }
 
 	public void exampleCase3(){
@@ -56,8 +45,9 @@ public class ExampleCode {
 	}
 
 	public void exampleCase4(){
-		//Look at the relation between SelectionManager and UserInputManager,
-		//it handles selecting
+		// right click the mouse to move a sprite
+		// 1) JavaFX scene receives mouse click event
+		// 2) user input handler processes the event
 	}
 
 	public void exampleCase5(){
