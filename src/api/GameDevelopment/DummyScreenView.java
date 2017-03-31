@@ -1,5 +1,6 @@
 package api.GameDevelopment;
 
+import javafx.scene.Group;
 import javafx.scene.Node;
 /**
  * 
@@ -8,11 +9,13 @@ import javafx.scene.Node;
  * through binding.
  *
  */
-public interface DummyScreenView {
+public class DummyScreenView extends Group{
 	/**
 	 * @param node
 	 * Adds a node to its internal scene, nodes are only called when Sprites are added to the ScreenModel.
 	 * 
 	 */
-	public void addNode(Node node);
+	public void addNode(Node node){
+		
+	}
 }
