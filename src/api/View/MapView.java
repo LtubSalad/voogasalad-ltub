@@ -1,5 +1,7 @@
 package api.View;
 
-public class MapView {
-
+public interface MapView {
+	
+	public void resetMap();
+	
 }
