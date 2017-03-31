@@ -2,7 +2,6 @@ package examples;
 
 
 
-import api.EventBus.EventBus;
 import api.Sprite.Sprite;
 import javafx.event.EventType;
 

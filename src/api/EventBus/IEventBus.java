@@ -4,7 +4,7 @@ import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.event.EventHandler;
 
-public interface EventBus {
+public interface IEventBus {
 
 	public <T extends Event> void on(EventType<T> et, EventHandler<? super T> eh);
 	
