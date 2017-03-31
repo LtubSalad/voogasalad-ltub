@@ -7,6 +7,7 @@ import javafx.event.EventType;
 public class MouseRightClickEvent extends Event{
 
 	public static final EventType<MouseRightClickEvent> ANY = new EventType<>(Event.ANY, "MOUSE_RIGHT_CLICK_EVENT");
+	public double loc;
 	
 	public MouseRightClickEvent(EventType<? extends Event> eventType) {
 		super(eventType);
@@ -17,8 +18,8 @@ public class MouseRightClickEvent extends Event{
 		return null;
 	}
 
-	public Sprite getLocation() {
+	public double getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		return loc;
 	}
 }
