@@ -23,4 +23,9 @@ public class EventBus implements IEventBus {
 	public void emit(Event event) {
 		group.fireEvent(event);
 	}
+
+	public EventBus getBus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
