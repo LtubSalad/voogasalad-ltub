@@ -1,30 +1,33 @@
 package examples;
 
+import java.util.List;
 
-
-import api.EventBus.EventBus;
 import api.Sprite.Sprite;
 import javafx.event.EventType;
 
 public class SelectionManager {
 	private EventBus bus;
+	private List<Sprite> spriteList;
 	
 	public SelectionManager(EventBus eventBus){
 		bus = eventBus;
 	}
-	/*
-	// public Sprite getSelected(); // assume only one is selected
+	
+	// assume only one is selected for this example
+	public Sprite getSelected(){
+		return spriteList.get(0);
+	} 
 	
 	private void initHandlers() {
-		bus.on(EventType.ROOT, (e) -> {
-			Sprite target = e.getTarget();
+		bus.on(ClickTargetEvent.ANY, (e) -> {
+			Sprite target = e.getSprite();
 			if (target.isLandTile()) {
-				getSelected().moveTo(e.getLocation());
+				getSelected().move(e.getLocation());
 			};
-			if (s.isTargetable()) {
-					getSelected().moveAndAttack(target);				
+			if (target.isTargetable()) {
+					getSelected().attack(target);				
 			}
 		});
 	};
-	*/
+	
 }
