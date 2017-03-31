@@ -29,15 +29,13 @@ public class ExampleCode {
 	
 	public void exampleCase2(){
 		Sprite someSprite = new Sprite();
-		/*
-		someSprite.onAttacked(e -> {
-			getBus().emit(new SpriteAttackedEvent(thisSprite));
-		});
+		
+		//This event bus would be passed in during the real code 
 		EventBus eb = new EventBus(); 
+		
 		if (someSprite.isAttacked()){
-			eb.emit(new SpriteAttackedEvent(someSprite));
-		}
-		*/
+			eb.emit(new SpriteAttackedEvent(SpriteAttackedEvent.ANY, someSprite));
+		}		
 }
 
 	public void exampleCase3(){
