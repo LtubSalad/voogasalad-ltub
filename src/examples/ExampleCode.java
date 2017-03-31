@@ -1,5 +1,6 @@
 package examples;
 
+//import api.EventBus.EventBus;
 import api.Sprite.Sprite;
 
 public class ExampleCode {
@@ -17,24 +18,48 @@ public class ExampleCode {
 		// StationaryMover, 
 		//This would switch the sprite to be movable
 		sprite.setAttribute("MovableMover");
-		
+
 		//Sets the Attacker attribute component of the sprite
 		sprite.setAttribute("LongRangeAttacker");
 	}
+
+	/**
+	 * This example shows the adding of an event when a sprite is attacked.
+	 */
 	
 	public void exampleCase2(){
+		Sprite someSprite = new Sprite();
+		/*
+		someSprite.onAttacked(e -> {
+			getBus().emit(new spriteAttackedEvent(thisSprite));
+		});*/
+		EventBus eb = new EventBus(); 
+		if (someSprite.isAttacked()){
+			eb.emit(new spriteAttackedEvent(someSprite));
+		}
+	
 		
-	}
+	/*	public ViewDisplayManager {
+			private void initHandlers() {
+				getBus().on(spriteAttackedEvent, e -> { 
+					// get the attacked sprite from the event
+					// update the health view of the sprite
+				});
+			}
+		}
+*/
+	
+}
 
 	public void exampleCase3(){
-		
+
 	}
-	
+
 	public void exampleCase4(){
-		
+
 	}
-	
+
 	public void exampleCase5(){
-		
+
 	}
 }
