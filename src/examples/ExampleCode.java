@@ -41,7 +41,7 @@ public class ExampleCode {
 }
 
 	public void exampleCase3(){
-
+		//Look at the code in example 3 package
 	}
 
 	public void exampleCase4(){
@@ -51,6 +51,6 @@ public class ExampleCode {
 	}
 
 	public void exampleCase5(){
-
+		//look at the code in the example 5 package
 	}
 }
