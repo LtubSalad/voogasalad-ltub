@@ -1,13 +1,21 @@
 package examples.example3;
 
-import api.Sprite.Sprite;
-import examples.spriteAttackedEvent;
+import javafx.event.Event;
+import javafx.event.EventType;
+import javafx.geometry.Point2D;
 
-public class DisplaySelectionViewEvent extends spriteAttackedEvent {
+public class DisplaySelectionViewEvent extends Event {
 
-	public DisplaySelectionViewEvent(Sprite s, double d) {
-		super(s);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2989410279153830499L;
+	public static final EventType<DisplaySelectionViewEvent> ANY = new EventType<>(Event.ANY, "DISPLAY_EVENT");
+	
+	public DisplaySelectionViewEvent(Point2D d) {
+		super(DisplaySelectionViewEvent.ANY);
 		// TODO Auto-generated constructor stub
 	}
+	
 
 }
