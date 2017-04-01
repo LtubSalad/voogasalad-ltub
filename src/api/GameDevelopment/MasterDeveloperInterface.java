@@ -1,7 +1,13 @@
 package api.GameDevelopment;
+
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+
 /**
  * 
- * @author Jake,Daniel
+ * @author Jake, Daniel
  * Holds three tabs: the ClassCreator user interface, the screenmodelcreator interface, 
  * and the GeneralDataModel creator interface
  *
@@ -10,6 +16,22 @@ package api.GameDevelopment;
  * 
  * No public methods because they most of its actions are event based.
  */
-public interface MasterDeveloperInterface {
+public class MasterDeveloperInterface{
+	private Scene developerScene;
+	private TabPane developerTabs;
+	public MasterDeveloperInterface() {
+		instantiateTabs();
+		developerScene=new Scene(developerTabs);
+	}
 	
+	private void instantiateTabs(){
+		developerTabs=new TabPane();
+		Tab classCreatorTab = new Tab("ClassCreator", new ClassCreator());
+		ObservableList<Tab> myTabs= developerTabs.getTabs();
+		myTabs.add(classCreatorTab);
+	}
+	
+	public Scene getScene(){
+		return developerScene;
+	}
 }
