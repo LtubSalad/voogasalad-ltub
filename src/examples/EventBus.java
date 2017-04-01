@@ -10,7 +10,7 @@ public class EventBus implements IEventBus {
 	public EventBus(){
 		name = "tester";
 	}
-	public void emit(spriteAttackedEvent ev){
+	public void emit(SpriteAttackedEvent ev){
 		; 
 	}
 	@Override
@@ -27,6 +27,11 @@ public class EventBus implements IEventBus {
 	public void emit(Event ev) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public EventBus getBus() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
