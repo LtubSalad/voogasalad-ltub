@@ -1,5 +1,7 @@
 package api.Data;
 
+import java.util.List;
+import java.util.ArrayList;
 import javafx.util.Pair;
 
 /**
@@ -7,10 +9,14 @@ import javafx.util.Pair;
  * @author Daniel
  * Stores the data not specific to any screen, such as health, lives, score.
  */
-public interface GeneralModelData {
+public class GeneralModelData {
 	/**
 	 * Put in data representing variable-variable name pairs.
 	 * @param data
 	 */
-	public void addData(Pair<String,String> data);
+	private List<Pair<String,String>> myData = new ArrayList<Pair<String,String>>();
+	
+	public void addData(Pair<String,String> data) {
+		myData.add(data);
+	}
 }

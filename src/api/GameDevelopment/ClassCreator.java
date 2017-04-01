@@ -9,34 +9,35 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
+
 /**
  * 
- * @author Jake, Daniel 
- * Takes in data concerning interface data from the interface popup box and puts it in a 
- * xStream-readable format, to produce the data for a single object type.
- * Gives this data to a XML file producer when needed.
+ * @author Jake, Daniel Takes in data concerning interface data from the
+ *         interface popup box and puts it in a xStream-readable format, to
+ *         produce the data for a single object type. Gives this data to a XML
+ *         file producer when needed.
  */
-public class ClassCreator extends BorderPane{
-	//Put in attribute data from an attribute
+public class ClassCreator extends BorderPane {
+	// Put in attribute data from an attribute
 	private ComboBox<String> attributeComboBox;
-	
-	public ClassCreator(){
-		attributeComboBox=createAttributeSelector();
+
+	public ClassCreator() {
+		attributeComboBox = createAttributeSelector();
 		this.setRight(attributeComboBox);
 		this.setLeft(new AttributeCustomizerPane());
 	}
-	
-	public void putInterfaceData(InterfaceData data){
-		
+
+	public void putInterfaceData(InterfaceData data) {
+
 	}
-	
-	//Produce XML file for this class' data.
-	public File createClassData(){
+
+	// Produce XML file for this class' data.
+	public File createClassData() {
 		return null;
 	}
-	
-	private ComboBox<String> createAttributeSelector(){
-		List<String> attributeNames=new ArrayList<String>();
+
+	private ComboBox<String> createAttributeSelector() {
+		List<String> attributeNames = new ArrayList<String>();
 		attributeNames.add("Actor");
 		attributeNames.add("Sprite");
 		attributeNames.add("EntityFinder");
@@ -45,11 +46,10 @@ public class ClassCreator extends BorderPane{
 		attributeNames.add("Specific- Tower");
 		attributeNames.add("Specific- Monster");
 		ObservableList<String> observableAttributeNames = FXCollections.observableList(attributeNames);
-		
-		ComboBox<String> attributesBox= new ComboBox<String>();
+
+		ComboBox<String> attributesBox = new ComboBox<String>();
 		attributesBox.setItems(observableAttributeNames);
 		attributesBox.setPromptText("Add Attribute");
 		return attributesBox;
-		
 	}
 }
