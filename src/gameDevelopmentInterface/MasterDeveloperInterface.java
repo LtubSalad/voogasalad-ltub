@@ -1,4 +1,4 @@
-package api.GameDevelopment;
+package gameDevelopmentInterface;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -26,7 +26,7 @@ public class MasterDeveloperInterface{
 	
 	private void instantiateTabs(){
 		developerTabs=new TabPane();
-		Tab classCreatorTab = new Tab("ClassCreator", new ClassCreatorScreen());
+		Tab classCreatorTab = new Tab("Create AttributeHolder", new AttributeHolderCreator());
 		ObservableList<Tab> myTabs= developerTabs.getTabs();
 		myTabs.add(classCreatorTab);
 	}

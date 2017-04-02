@@ -1,4 +1,4 @@
-package api.GameDevelopment;
+package gameDevelopmentInterface;
 
 import api.Data.ScreenModelData;
 import javafx.scene.layout.BorderPane;
