@@ -1,4 +1,4 @@
-package RealGameDevelopment;
+package gameDevelopmentInterface;
 
 import javafx.scene.layout.BorderPane;
 

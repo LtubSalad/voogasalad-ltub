@@ -1,4 +1,4 @@
-package RealGameDevelopment;
+package gameDevelopmentInterface;
 import api.Data.AttributeData;
 import javafx.scene.Node;
 

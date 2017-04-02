@@ -1,4 +1,4 @@
-package RealGameDevelopment;
+package gameDevelopmentInterface;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
