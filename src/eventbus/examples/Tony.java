@@ -6,7 +6,9 @@ import javafx.event.EventHandler;
 public class Tony {
 	private String message = "unreceived";
 
-	private EventHandler<HelloEvent> helloHandler = (e) -> message = e.getMessage();
+	private EventHandler<HelloEvent> helloHandler = (e) -> {
+		message = e.getMessage();
+	};
 
 	public Tony() {
 		initEventHandlers();
