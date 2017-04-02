@@ -1,6 +1,7 @@
 package api.Data;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * 
  * @author Daniel, Jake
@@ -9,20 +10,28 @@ import java.util.Collection;
  *
  */
 
-public interface ScreenModelData {
+public class ScreenModelData {
+	private List<String> myScreenData = new ArrayList<String>();
 	/**
 	 * Will put this object into the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
 	 */
-	public void addObjectData(String data);
+	public void addObjectData(String data) {
+		myScreenData.add(data);
+	}
 	/**
 	 * Will remove this object from the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
 	 */
-	public void removeObject(String data);
+	public void removeObject(String data) {
+		myScreenData.remove(data);
+	}
 	/**
 	 * 
 	 * @return all the objects on the screen
 	 */
-	public Collection<String> getAllObjectsOnScreen();
+	public List<String> getAllObjectsOnScreen() {
+		return myScreenData;
+		
+	}
 }
