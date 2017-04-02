@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.Data.InterfaceData;
+import api.Data.AttributeData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -27,7 +27,7 @@ public class ClassCreator extends BorderPane {
 		this.setLeft(new AttributeCustomizerPane());
 	}
 
-	public void putInterfaceData(InterfaceData data) {
+	public void putInterfaceData(AttributeData data) {
 
 	}
 
