@@ -1,8 +1,13 @@
 package bus;
 
+/**
+ * A Basic implementation of the {@link EventBus}
+ * @author keping
+ *
+ */
 public class BasicEventBus implements EventBus {
 
-	private final SubscriberRegistry subscribers = new SubscriberRegistry(this);
+	private final SubscriberRegistry subscribers = new SubscriberRegistry();
 	
 	@Override
 	public <T extends BusEvent> void on(BusEventType<T> eventType, BusEventHandler<? super T> eventHandler) {

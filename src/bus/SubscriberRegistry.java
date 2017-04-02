@@ -5,18 +5,21 @@ import java.util.Iterator;
 import java.util.List;
 
 
+/**
+ * A registry for subscribers.
+ * @author keping
+ *
+ */
 final class SubscriberRegistry implements Iterable<Subscriber<? extends BusEvent>> {
 
-	private final BasicEventBus bus;
 	private final List<Subscriber<? extends BusEvent>> subscribers; // TODO: ??? a more efficient implementation than List
 	
-	SubscriberRegistry(BasicEventBus bus) {
+	SubscriberRegistry() {
 		this.subscribers = new ArrayList<Subscriber<? extends BusEvent>>();
-		this.bus = bus;
 	}
 	
 	<T extends BusEvent> void register(BusEventType<T> eventType, BusEventHandler<? super T> eventHandler) {
-		subscribers.add(new Subscriber<T>(bus, eventType, eventHandler));
+		subscribers.add(new Subscriber<T>(eventType, eventHandler));
 	}
 	
 	<T extends BusEvent> void unregister(BusEventType<T> eventType, BusEventHandler<? super T> eventHandler) {

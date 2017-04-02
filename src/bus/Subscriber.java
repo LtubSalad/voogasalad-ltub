@@ -1,28 +1,45 @@
 package bus;
 
+/**
+ * Used to store the registered eventType and the corresponding handler. 
+ * @author keping
+ *
+ * @param <T>
+ */
 final class Subscriber<T extends BusEvent> {
 
-	private BusEventType<T> busEventType;
-	private BusEventHandler<? super T> busEventHandler;
+	private BusEventType<T> registeredEventType;
+	private BusEventHandler<? super T> registeredHandler;
 	
-	Subscriber(BasicEventBus bus, BusEventType<T> busEventType, BusEventHandler<? super T> busEventHandler) {
-		this.busEventType = busEventType;
-		this.busEventHandler = busEventHandler;
+	Subscriber(BusEventType<T> busEventType, BusEventHandler<? super T> busEventHandler) {
+		this.registeredEventType = busEventType;
+		this.registeredHandler = busEventHandler;
 	}
 	
 	BusEventType<T> getBusEventType() {
-		return busEventType;
+		return registeredEventType;
 	}
 	
 	BusEventHandler<? super T> getBusEventHanlder() {
-		return busEventHandler;
+		return registeredHandler;
 	}
 	
+	/**
+	 * The event is handled if following conditions both hold:
+	 * 1) The specified eventType during creation is a subtype of the registered eventType.
+	 * 2) The created event is subtype of (can be cast to) the registered event type T.
+	 * @param busEvent
+	 */
 	@SuppressWarnings("unchecked")
 	void handle(BusEvent busEvent) {
-		if (busEventType == busEvent.getEventType()) {
+		BusEventType<? extends BusEvent> specifiedEventType = busEvent.getEventType();
+		while (registeredEventType != specifiedEventType && 
+				specifiedEventType != BusEventType.ROOT) {
+			specifiedEventType = specifiedEventType.getSuperType();
+		}
+		if (registeredEventType == specifiedEventType) {
 			try { // TODO: a better way to check whether busEvent could be cast to T
-				busEventHandler.handle((T) busEvent);
+				registeredHandler.handle((T) busEvent);
 			} catch(ClassCastException e) {
 				// don't handle if the specified eventType and the constructed eventType differ.
 			};

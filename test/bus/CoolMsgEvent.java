@@ -4,9 +4,9 @@ package bus;
 // test for event extension
 public class CoolMsgEvent extends MsgEvent {
 
-	public static final BusEventType<CoolMsgEvent> ANY = new BusEventType<>("COOL_MSG_EVENT");
+	// To extends event, must specify super event type.
+	public static final BusEventType<CoolMsgEvent> ANY = new BusEventType<>(MsgEvent.ANY, "COOL_MSG_EVENT");
 
-	
 	private String msg;
 	
 	public CoolMsgEvent(BusEventType<CoolMsgEvent> eventType, String msg) {
