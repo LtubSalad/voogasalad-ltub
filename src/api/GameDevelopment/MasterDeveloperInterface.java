@@ -7,9 +7,9 @@ import javafx.scene.control.TabPane;
 
 /**
  * 
- * @author Jake, Daniel Holds three tabs: the ClassCreator user interface, the
- *         screenmodelcreator interface, and the GeneralDataModel creator
- *         interface
+ * @author Jake, Daniel
+ * Holds three tabs: the ClassCreator user interface, the ScreenModelCreator interface, 
+ * and the GeneralDataModel creator interface
  *
  *         Has a save button that takes the GeneralModelData, InterfaceData,
  *         ScreenModelData and produces XML files from them to be read from.
@@ -31,6 +31,7 @@ public class MasterDeveloperInterface {
 		Tab GeneralDataTab = new Tab("General Data", new GeneralDataCreator());
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
 		myTabs.addAll(classCreatorTab, GeneralDataTab);
+
 	}
 
 	public Scene getScene() {

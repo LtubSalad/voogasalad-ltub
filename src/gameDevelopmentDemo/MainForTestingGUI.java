@@ -1,6 +1,6 @@
-package main;
+package gameDevelopmentDemo;
 
-import api.GameDevelopment.MasterDeveloperInterface;
+import gameDevelopmentInterface.MasterDeveloperInterface;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
