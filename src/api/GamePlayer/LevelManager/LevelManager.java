@@ -6,7 +6,6 @@ package api.GamePlayer.LevelManager;
  *
  */
 public interface LevelManager {
-	
 	/**
 	 * the method to ask the user to choose the next level to play, or to quit the game
 	 */
