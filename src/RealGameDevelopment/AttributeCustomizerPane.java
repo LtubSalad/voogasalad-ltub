@@ -21,7 +21,7 @@ public class AttributeCustomizerPane extends BorderPane{
 	
 	public AttributeCustomizerPane(){
 		simpleParameters=new HashMap<>();
-		simpleParameters.put("name", "foo");
+		simpleParameters.put("attribute name", "foo");
 		simpleParameters.put("health", "foo");
 		simpleParameters.put("parameter 3", "foo");
 		

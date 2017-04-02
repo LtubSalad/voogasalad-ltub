@@ -24,12 +24,12 @@ import javafx.util.Callback;
  *         produce the data for a single object type. Gives this data to a XML
  *         file producer when needed.
  */
-public class ClassCreatorScreen extends BorderPane {
+public class AttributeHolderCreator extends BorderPane {
 	// Put in attribute data from an attribute
 	private Node attributePane;
 	private ClassData attributeHolder;
 
-	public ClassCreatorScreen() {
+	public AttributeHolderCreator() {
 		attributePane = new AttributeSelectorPane();
 		this.setRight(attributePane);
 		this.setLeft(new AttributeCustomizerPane());
