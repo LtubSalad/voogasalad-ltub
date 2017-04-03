@@ -9,6 +9,6 @@ import javafx.scene.layout.BorderPane;
  * No public methods, because its actions are event-based.
  * Instantiates new GeneralModelData classes when the save button is pressed on the text input box.
  */
-public class GeneralDataCreator extends BorderPane{
+public class GeneralDataCreator extends BorderPane {
 
 }
