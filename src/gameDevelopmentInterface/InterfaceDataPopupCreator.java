@@ -1,5 +1,5 @@
 package gameDevelopmentInterface;
-import api.Data.AttributeData;
+import data.AttributeData;
 import javafx.scene.Node;
 
 //Creates a popup box based for each kind of interface, which allows the user to set the data used 

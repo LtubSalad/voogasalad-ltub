@@ -1,4 +1,4 @@
-package api.Data;
+package data;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import javafx.util.Pair;
 
 /**
  * 
- * @author Daniel
+ * @author Jake
  * Stores the data not specific to any screen, such as health, lives, score.
  */
 public class GeneralModelData {

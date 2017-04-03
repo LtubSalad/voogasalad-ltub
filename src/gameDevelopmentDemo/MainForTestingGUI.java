@@ -8,7 +8,7 @@ public class MainForTestingGUI extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("DeveloperGUI");
 		primaryStage.show();
-		MasterDeveloperInterface developerView=new MasterDeveloperInterface();
+		MasterDeveloperInterface developerView = new MasterDeveloperInterface();
 		primaryStage.setScene(developerView.getScene());
 	}
 
