@@ -1,6 +1,7 @@
 package sprite;
 
-public interface AttackerAttribute {
+public interface AttackerAttribute extends SpriteAttribute{
 
 	
 }
+
