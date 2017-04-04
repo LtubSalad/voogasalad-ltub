@@ -2,36 +2,29 @@ package engine.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import static commons.RunningMode.DEV_MODE;
 
+import commons.RunningMode;
 import engine.gameloop.LoopComponent;
 import engine.sprite.Sprite;
-import engine.view.View;
 
 public class BasicModel implements Model {
 
 	
 	private List<Sprite> sprites = new ArrayList<>();
-	private View view;
-
-	@Override
-	public void setView(View view) {
-		this.view = view;
-	}
 
 	@Override
 	public void addSprite(Sprite sprite) {
-		if (view == null && DEV_MODE) {
-			System.out.println("View is null");
+		if (sprite == null && RunningMode.DEV_MODE) {
+			System.out.println("Model received null sprite: "+sprite);
 		}
-		if (view != null) {
-			view.addSprite(sprite);
+		if (sprite != null) {
+			sprites.add(sprite);
 		}
 	}
 
 	@Override
 	public void removeSprite(Sprite sprite) {
-		// TODO Auto-generated method stub
+		sprites.remove(sprite);
 	}
 
 	@Override
@@ -41,6 +34,11 @@ public class BasicModel implements Model {
 				sprite.update(dt);
 			}
 		};
+	}
+
+	@Override
+	public List<Sprite> getSprites() {
+		return sprites;
 	}
 
 }

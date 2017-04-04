@@ -1,5 +1,7 @@
 package engine.sprite;
 
+import java.util.Optional;
+
 public class Sprite {
 
 //	private boolean locked = false; // TODO
@@ -24,7 +26,7 @@ public class Sprite {
 	}
 
 	public double x() {
-		return x;		
+		return x;
 	}
 	public double y() {
 		return y;
@@ -46,8 +48,8 @@ public class Sprite {
 	public void setMovable(Movable movable) {
 		this.movable = movable;
 	}
-	public Movable getMovable() {
-		return movable;
+	public Optional<Movable> getMovable() {
+		return Optional.ofNullable(movable);
 	}
 	
 	public void update(double dt) {
