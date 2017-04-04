@@ -1,10 +1,10 @@
 package sprite;
 
-public class StationaryMoverAttribute implements MoverAttribute{
+public class RunnerMoverAttribute implements MoverAttribute{
 
 	@Override
 	public void move() {
-		System.out.println("Switch failed");
+		System.out.println("Switch successful");
 	}
 
 	@Override
@@ -13,5 +13,4 @@ public class StationaryMoverAttribute implements MoverAttribute{
 		
 	}
 
-	
 }
