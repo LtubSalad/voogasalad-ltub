@@ -3,6 +3,7 @@ package engine.app;
 import engine.gameloop.GameLoop;
 import engine.model.BasicModel;
 import engine.model.Model;
+import engine.sprite.Image;
 import engine.sprite.Sprite;
 import engine.view.FXView;
 import engine.view.View;
@@ -21,6 +22,7 @@ public class App extends Application {
 		View view = new FXView();
 		model.setView(view);
 		Sprite sprite1 = new Sprite();
+		sprite1.setImage(new Image("data/images/characters/bahamut_left.png"));
 		model.addSprite(sprite1);
 		
 //		Scene scene = gameFactory.createGameScene();
