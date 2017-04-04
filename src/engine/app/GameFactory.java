@@ -26,17 +26,6 @@ public class GameFactory {
 		return new FXView(bus);
 	}
 	
-//	public Scene createGameScene() {
-//        VBox root = new VBox();
-//        Button soundBtn = new Button("music");
-//        soundBtn.setOnAction((e) -> {
-//        	bus.emit(new SoundEvent("data/sounds/01-dark-covenant.mp3"));
-//        });
-//        root.getChildren().add(soundBtn);
-//        Scene scene = new Scene(root, 400, 300);
-//        return scene;
-//	}
-	
 	public GameLoop createGameLoop() {
 		return new FXGameLoop();
 	}

@@ -2,6 +2,7 @@ package engine.view;
 
 import bus.EventBus;
 import engine.input.MouseClickEvent;
+import engine.model.Model;
 import engine.sprite.Sprite;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -26,29 +27,29 @@ public class FXView implements View {
 		this.bus = bus;
 		root = new Group();
 		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
-		scene.setOnMouseClicked(e -> {
-        	bus.emit(new MouseClickEvent(e));
-        });
 		canvas = new Canvas(WIDTH, HEIGHT);
 		root.getChildren().add(canvas);
 		gc = canvas.getGraphicsContext2D();
+		initHandlers();
+	}
+	
+	private void initHandlers() {
+		scene.setOnMouseClicked(e -> {
+        	bus.emit(new MouseClickEvent(e));
+        });
 	}
 	
 	@Override
-	public void addSprite(Sprite sprite) {
-		// TODO
-		Image realImage = new Image(sprite.getImage().getInputStream());
-		gc.drawImage(realImage, 0, 0);
-	}
-
-	@Override
-	public void removeSprite(Sprite sprite) {
-		// TODO Auto-generated method stub		
-	}
-
-	@Override
 	public Scene getScene() {
 		return scene;
+	}
+
+	@Override
+	public void render(Model model) {
+		gc.clearRect(0, 0, WIDTH, HEIGHT);
+		for (Sprite sprite : model.getSprites()) {
+			gc.drawImage(new Image(sprite.getImage().getInputStream()), sprite.x(), sprite.y());
+		}
 	}
 
 }

@@ -15,7 +15,7 @@ public class SelectionChecker {
 		
 	}
 	
-	public Sprite checkSelection(Model model, double x, double y) {
+	public Sprite getSelection(Model model, double x, double y) {
 		for (Sprite sprite: model.getSprites()) {
 			Image spriteImage = new Image(sprite.getImage().getInputStream());
 			ImageView spriteImageView = new ImageView(spriteImage);
@@ -33,9 +33,12 @@ public class SelectionChecker {
 				return sprite;
 			}
 		}
+		// TODO if nothing is selected, return the background "sprite"
+		return model.getSprites().get(0);
 	}
 
 	private boolean rayCasting(int nVert, List<Double> xList, List<Double> yList, double xClicked, double yClicked ) {
+		// TODO
 		return true;
 	}
 }

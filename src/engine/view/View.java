@@ -1,14 +1,12 @@
 package engine.view;
 
-import engine.sprite.Sprite;
+import engine.model.Model;
 import javafx.scene.Scene;
 
 public interface View {
-
-	public void addSprite(Sprite sprite);
-	
-	public void removeSprite(Sprite sprite);
 	
 	public Scene getScene();
 	
+	public void render(Model model);
+
 }

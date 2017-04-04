@@ -2,6 +2,7 @@ package engine.input;
 
 import bus.EventBus;
 import engine.model.Model;
+import engine.sprite.Sprite;
 
 public class InputManager {
 	
@@ -18,17 +19,20 @@ public class InputManager {
 
 	private void initHandlers() {
 		bus.on(MouseClickEvent.ANY, e -> {
-			select(e.getX(), e.getY());
+			Sprite selected = selectionChecker.getSelection(model, e.getX(), e.getY());
+			selected.getMovable().ifPresent((movable) -> {
+				movable.moveTo(e.getX(), e.getY());
+			});
 		});
 	}
 	
-	private void select(double x, double y) {
-		if (selectionChecker.checkSelection(model, x, y)) {
-			System.out.println("The click is in one polygon.");
-		}
-		else {
-			System.out.println("The click is not in any polygon.");
-		}
-	}
+//	private void select(double x, double y) {
+//		if (selectionChecker.checkSelection(model, x, y)) {
+//			System.out.println("The click is in one polygon.");
+//		}
+//		else {
+//			System.out.println("The click is not in any polygon.");
+//		}
+//	}
 
 }

@@ -6,7 +6,7 @@ import commons.RunningMode;
 public class Movable {
 	
 	Sprite sprite;
-	private double speed = 100; // TODO: game data
+	private double speed = 300; // TODO: game data
 	private boolean moving = false;
 	private double xDest;
 	private double yDest;
