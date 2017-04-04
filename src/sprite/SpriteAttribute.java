@@ -2,7 +2,7 @@ package sprite;
 
 public interface SpriteAttribute {
 
-	void move();
-
+	public void getAttributeName();
 }
+
 

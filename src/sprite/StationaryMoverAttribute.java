@@ -8,7 +8,7 @@ public class StationaryMoverAttribute implements MoverAttribute{
 	}
 
 	@Override
-	public void testMethod() {
+	public void getAttributeName() {
 		// TODO Auto-generated method stub
 		
 	}

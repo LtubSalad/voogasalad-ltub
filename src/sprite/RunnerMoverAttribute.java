@@ -2,16 +2,21 @@ package sprite;
 
 public class RunnerMoverAttribute implements MoverAttribute{
 
-	@Override
-	public void move() {
-		System.out.println("Switch successful");
-	}
 
-	@Override
-	public void testMethod() {
+	
+	public void move() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
+	public void getAttributeName() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+
 }
+
 
