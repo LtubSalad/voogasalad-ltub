@@ -21,7 +21,7 @@ public class App extends Application {
 	public void start(Stage stage) throws Exception {
 		GameFactory gameFactory = new GameFactory();
 		
-		Model model = new BasicModel();
+		Model model = gameFactory.createModel();
 		View view = gameFactory.createView();
 		Sprite sprite1 = new Sprite();
 		sprite1.setPos(new Point(100, 100));
@@ -29,6 +29,8 @@ public class App extends Application {
 		Movable movable1 = new Movable(sprite1);
 		sprite1.setMovable(movable1);
 		model.addSprite(sprite1);
+		
+		model.setPlayerSelectionState(gameFactory.createPlayerSelectionState());
 		
 		Scene scene = view.getScene();
 		

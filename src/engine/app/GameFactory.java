@@ -7,6 +7,8 @@ import engine.gameloop.GameLoop;
 import engine.input.ActionManager;
 import engine.input.InputManager;
 import engine.input.PlayerInputState;
+import engine.input.PlayerSelectionState;
+import engine.model.BasicModel;
 import engine.model.Model;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
@@ -22,6 +24,10 @@ public class GameFactory {
 	 */
 	public GameFactory() {
 		bus = new BasicEventBus();
+	}
+	
+	public Model createModel() {
+		return new BasicModel();
 	}
 	
 	public View createView() {
@@ -47,4 +53,9 @@ public class GameFactory {
 	public PlayerInputState createPlayerInputState() {
 		return new PlayerInputState(bus);
 	}
+	
+	public PlayerSelectionState createPlayerSelectionState() {
+		return new PlayerSelectionState(bus);
+	}
+	
 }
