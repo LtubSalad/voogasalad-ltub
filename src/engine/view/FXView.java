@@ -1,7 +1,9 @@
 package engine.view;
 
+
 import bus.EventBus;
 import commons.Point;
+import engine.input.KeyEvent;
 import engine.input.MouseClickEvent;
 import engine.model.Model;
 import engine.sprite.Sprite;
@@ -38,6 +40,15 @@ public class FXView implements View {
 		scene.setOnMouseClicked(e -> {
         	bus.emit(new MouseClickEvent(e));
         });
+		scene.setOnKeyPressed(e -> {
+			bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
+		});
+		scene.setOnKeyReleased(e -> {
+			bus.emit(new KeyEvent(KeyEvent.RELEASE, e.getCode()));
+		});
+		scene.setOnKeyTyped(e -> {
+			bus.emit(new KeyEvent(KeyEvent.TYPE, e.getCode()));
+		});
 	}
 	
 	@Override

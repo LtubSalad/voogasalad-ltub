@@ -4,6 +4,7 @@ import commons.Point;
 import engine.gameloop.GameLoop;
 import engine.input.ActionManager;
 import engine.input.InputManager;
+import engine.input.PlayerInputState;
 import engine.model.BasicModel;
 import engine.model.Model;
 import engine.sprite.Image;
@@ -38,9 +39,12 @@ public class App extends Application {
 		gameLoop.start(); // nothing added in the loop yet.
 		
 		gameFactory.createSoundManager(); // Automatically linked by the event bus.
-		InputManager inputManager = gameFactory.createInputManager(model); 
+		InputManager inputManager = gameFactory.createInputManager(model);
+		PlayerInputState playerInputState = gameFactory.createPlayerInputState();
 		ActionManager actionManager = gameFactory.createActionManager();
+		inputManager.setPlayerInputState(playerInputState);
 		inputManager.setActionManager(actionManager);
+		inputManager.initHandlers();
 		
         stage.setTitle("My JavaFX Application");
         stage.setScene(scene);

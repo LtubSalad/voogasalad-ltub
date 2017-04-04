@@ -2,6 +2,7 @@ package engine.sprite;
 
 import java.util.Optional;
 
+import commons.MathUtils;
 import commons.Point;
 import engine.player.Player;
 
@@ -18,6 +19,7 @@ public class Sprite {
 	 * The player that this sprite belongs to.
 	 */
 	private Player player = Player.DEFAULT;
+	private ActionQueue actionQueue = new ActionQueue();
 	
 	public Sprite() {
 		
@@ -50,10 +52,27 @@ public class Sprite {
 	public Player getPlayer() {
 		return player;
 	}
+	public void queueAction(Action action) {
+		actionQueue.addAction(action);
+	}
 	
 	public void update(double dt) {
+		double tRemain = dt;
+		// TODO: this piece of actions queueing code has to be improved
 		if (movable != null) {
-			movable.update(dt);	
+			if (!movable.isMoving()) {
+				if (!actionQueue.isEmpty()) {
+					actionQueue.executeNextAction();
+				}
+			}
+			while (!MathUtils.doubleEquals(tRemain, 0) && movable.isMoving()) {
+				tRemain = movable.update(dt);
+				if (!MathUtils.doubleEquals(tRemain, 0)) {
+					if (!actionQueue.isEmpty()) {
+						actionQueue.executeNextAction();
+					}
+				}
+			}
 		}
 	}
 	

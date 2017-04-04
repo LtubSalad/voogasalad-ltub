@@ -6,6 +6,7 @@ import engine.gameloop.FXGameLoop;
 import engine.gameloop.GameLoop;
 import engine.input.ActionManager;
 import engine.input.InputManager;
+import engine.input.PlayerInputState;
 import engine.model.Model;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
@@ -41,5 +42,9 @@ public class GameFactory {
 	
 	public ActionManager createActionManager() {
 		return new ActionManager(bus);
+	}
+	
+	public PlayerInputState createPlayerInputState() {
+		return new PlayerInputState(bus);
 	}
 }

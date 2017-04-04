@@ -14,7 +14,7 @@ public class Player {
 		return name;
 	}
 	
-	public boolean canControlPlayer(Player other) {
+	public boolean canControl(Player other) {
 		return true;
 	}
 }
