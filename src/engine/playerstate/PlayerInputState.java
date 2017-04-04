@@ -1,4 +1,4 @@
-package engine.input;
+package engine.playerstate;
 
 import java.util.HashMap;
 import java.util.Map;

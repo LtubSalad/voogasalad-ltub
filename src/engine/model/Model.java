@@ -3,7 +3,7 @@ package engine.model;
 import java.util.List;
 
 import engine.gameloop.LoopComponent;
-import engine.input.PlayerSelectionState;
+import engine.playerstate.PlayerSelectionState;
 import engine.sprite.Sprite;
 
 public interface Model {

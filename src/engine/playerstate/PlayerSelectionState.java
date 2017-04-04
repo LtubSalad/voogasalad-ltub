@@ -1,4 +1,4 @@
-package engine.input;
+package engine.playerstate;
 
 import java.util.ArrayList;
 import java.util.List;

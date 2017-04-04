@@ -4,6 +4,7 @@ import bus.EventBus;
 import commons.Point;
 import engine.model.Model;
 import engine.player.Player;
+import engine.playerstate.PlayerInputState;
 import engine.sprite.Sprite;
 import javafx.scene.input.KeyCode;
 

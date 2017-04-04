@@ -5,7 +5,7 @@ import java.util.List;
 
 import commons.RunningMode;
 import engine.gameloop.LoopComponent;
-import engine.input.PlayerSelectionState;
+import engine.playerstate.PlayerSelectionState;
 import engine.sprite.Sprite;
 
 public class BasicModel implements Model {
