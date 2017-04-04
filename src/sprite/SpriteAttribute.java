@@ -5,3 +5,4 @@ public interface SpriteAttribute {
 	void move();
 
 }
+
