@@ -4,12 +4,12 @@ import bus.BasicEventBus;
 import bus.EventBus;
 import engine.gameloop.FXGameLoop;
 import engine.gameloop.GameLoop;
+import engine.input.InputManager;
+import engine.model.Model;
 import engine.sound.FXSoundManager;
-import engine.sound.SoundEvent;
 import engine.sound.SoundManager;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
+import engine.view.FXView;
+import engine.view.View;
 
 public class GameFactory {
 
@@ -22,15 +22,8 @@ public class GameFactory {
 		bus = new BasicEventBus();
 	}
 	
-	public Scene createGameScene() {
-        VBox root = new VBox();
-        Button soundBtn = new Button("music");
-        soundBtn.setOnAction((e) -> {
-        	bus.emit(new SoundEvent("data/sounds/01-dark-covenant.mp3"));
-        });
-        root.getChildren().add(soundBtn);
-        Scene scene = new Scene(root, 400, 300);
-        return scene;
+	public View createView() {
+		return new FXView(bus);
 	}
 	
 	public GameLoop createGameLoop() {
@@ -39,6 +32,10 @@ public class GameFactory {
 	
 	public SoundManager createSoundManager() {
 		return new FXSoundManager(bus);
+	}
+	
+	public InputManager createInputManager(Model model) {
+		return new InputManager(bus, model);
 	}
 	
 }
