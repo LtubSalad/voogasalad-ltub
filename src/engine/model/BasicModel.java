@@ -1,10 +1,16 @@
 package engine.model;
 
-import engine.sprite.KepingSprite;
+import java.util.List;
+import static commons.RunningMode.DEV_MODE;
+
+import engine.gameloop.LoopComponent;
+import engine.sprite.Sprite;
 import engine.view.View;
 
 public class BasicModel implements Model {
 
+	
+	private List<Sprite> sprites;
 	private View view;
 
 	@Override
@@ -13,15 +19,27 @@ public class BasicModel implements Model {
 	}
 
 	@Override
-	public void addSprite(KepingSprite sprite) {
-		// TODO Auto-generated method stub
-		
+	public void addSprite(Sprite sprite) {
+		if (view == null && DEV_MODE) {
+			System.out.println("View is null");
+		}
+		if (view != null) {
+			view.addSprite(sprite);
+		}
 	}
 
 	@Override
-	public void removeSprite(KepingSprite sprite) {
+	public void removeSprite(Sprite sprite) {
 		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public LoopComponent getLoopComponent() {
+		return (dt) -> {
+			for (Sprite sprite : sprites) {
+				sprite.update(dt);
+			}
+		};
 	}
 
 }
