@@ -21,6 +21,10 @@ public class FXSoundManager implements SoundManager {
 		});
 	}
 	
+	public void play(Sound sound) {
+		
+	}
+	
 	@Override
 	public void play(String soundFileName) {
 		Media sound = new Media(new File(soundFileName).toURI().toString());
