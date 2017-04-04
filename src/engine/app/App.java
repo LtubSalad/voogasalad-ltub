@@ -5,7 +5,6 @@ import engine.model.BasicModel;
 import engine.model.Model;
 import engine.sprite.Image;
 import engine.sprite.Sprite;
-import engine.view.FXView;
 import engine.view.View;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -19,10 +18,10 @@ public class App extends Application {
 		GameFactory gameFactory = new GameFactory();
 		
 		Model model = new BasicModel();
-		View view = new FXView();
+		View view = gameFactory.createView();
 		model.setView(view);
 		Sprite sprite1 = new Sprite();
-		sprite1.setImage(new Image("data/images/characters/bahamut_left.png"));
+		sprite1.setImage(new Image("images/characters/bahamut_left.png"));
 		model.addSprite(sprite1);
 		
 //		Scene scene = gameFactory.createGameScene();
@@ -33,9 +32,7 @@ public class App extends Application {
 		gameLoop.start(); // nothing added in the loop yet.
 		
 		gameFactory.createSoundManager(); // Automatically linked by the event bus.
-		
-		
-		
+		gameFactory.createInputManager(model); 
 		
         stage.setTitle("My JavaFX Application");
         stage.setScene(scene);

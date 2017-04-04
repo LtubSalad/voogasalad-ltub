@@ -1,5 +1,6 @@
 package engine.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import static commons.RunningMode.DEV_MODE;
 
@@ -10,7 +11,7 @@ import engine.view.View;
 public class BasicModel implements Model {
 
 	
-	private List<Sprite> sprites;
+	private List<Sprite> sprites = new ArrayList<>();
 	private View view;
 
 	@Override

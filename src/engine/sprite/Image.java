@@ -1,5 +1,7 @@
 package engine.sprite;
 
+import java.io.InputStream;
+
 public class Image {
 	
 	private String filename;
@@ -14,6 +16,10 @@ public class Image {
 	
 	public String getFileName() {
 		return filename;
+	}
+	
+	public InputStream getInputStream() {
+		return getClass().getClassLoader().getResourceAsStream(filename);
 	}
 	
 }
