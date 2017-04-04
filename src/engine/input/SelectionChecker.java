@@ -30,6 +30,7 @@ public class SelectionChecker {
 			yList.add(spriteImageView.getY() + spriteImageView.getFitHeight());
 			yList.add(spriteImageView.getY() + spriteImageView.getFitHeight());
 			if (rayCasting(4, xList, yList, x, y)) {
+				System.out.println("Sprite " + sprite.toString() + " is selected.");
 				return sprite;
 			}
 		}
@@ -39,6 +40,18 @@ public class SelectionChecker {
 
 	private boolean rayCasting(int nVert, List<Double> xList, List<Double> yList, double xClicked, double yClicked ) {
 		// TODO
-		return true;
+		System.out.println(xList);
+		System.out.println(yList);
+		System.out.println(xClicked);
+		System.out.println(yClicked);
+		int i, j;
+		boolean selected = false;
+		for (i = 0, j = nVert-1; i < nVert; j = i++) {
+			if ((yList.get(i) > yClicked) != (yList.get(j) > yClicked) && 
+					(xClicked < (xList.get(j)-xList.get(i)) * (yClicked-yList.get(i)) / (yList.get(j)-yList.get(i)) + xList.get(i)) ) {
+				selected = !selected;
+			}
+		}
+		return selected;
 	}
 }

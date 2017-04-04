@@ -20,6 +20,7 @@ public class InputManager {
 	private void initHandlers() {
 		bus.on(MouseClickEvent.ANY, e -> {
 			Sprite selected = selectionChecker.getSelection(model, e.getX(), e.getY());
+//			System.out.println("The sprite is clicked.");
 			selected.getMovable().ifPresent((movable) -> {
 				movable.moveTo(e.getX(), e.getY());
 			});
