@@ -1,5 +1,6 @@
 package engine.app;
 
+import commons.Point;
 import engine.gameloop.GameLoop;
 import engine.model.BasicModel;
 import engine.model.Model;
@@ -21,7 +22,7 @@ public class App extends Application {
 		Model model = new BasicModel();
 		View view = gameFactory.createView();
 		Sprite sprite1 = new Sprite();
-		sprite1.setPos(100, 100);
+		sprite1.setPos(new Point(100, 100));
 		sprite1.setImage(new Image("images/characters/bahamut_left.png"));
 		Movable movable1 = new Movable(sprite1);
 		sprite1.setMovable(movable1);

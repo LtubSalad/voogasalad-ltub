@@ -1,6 +1,7 @@
 package engine.view;
 
 import bus.EventBus;
+import commons.Point;
 import engine.input.MouseClickEvent;
 import engine.model.Model;
 import engine.sprite.Sprite;
@@ -48,7 +49,8 @@ public class FXView implements View {
 	public void render(Model model) {
 		gc.clearRect(0, 0, WIDTH, HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
-			gc.drawImage(new Image(sprite.getImage().getInputStream()), sprite.x(), sprite.y());
+			Point pos = sprite.getPos();
+			gc.drawImage(new Image(sprite.getImage().getInputStream()), pos.x(), pos.y());
 		}
 	}
 

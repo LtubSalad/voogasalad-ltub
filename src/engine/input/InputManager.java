@@ -1,6 +1,7 @@
 package engine.input;
 
 import bus.EventBus;
+import commons.Point;
 import engine.model.Model;
 import engine.sprite.Sprite;
 
@@ -21,7 +22,7 @@ public class InputManager {
 		bus.on(MouseClickEvent.ANY, e -> {
 			Sprite selected = selectionChecker.getSelection(model, e.getX(), e.getY());
 			selected.getMovable().ifPresent((movable) -> {
-				movable.moveTo(e.getX(), e.getY());
+				movable.moveTo(new Point(e.getX(), e.getY()));
 			});
 		});
 	}
