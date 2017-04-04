@@ -30,7 +30,7 @@ public class Movable {
 	public boolean isMoving() {
 		return moving;
 	}
-
+	
 	public void update(double dt) {
 		if (RunningMode.DEV_MODE) {
 			if (sprite == null) {
