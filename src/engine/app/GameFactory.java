@@ -4,8 +4,12 @@ import bus.BasicEventBus;
 import bus.EventBus;
 import engine.gameloop.FXGameLoop;
 import engine.gameloop.GameLoop;
+import engine.input.ActionManager;
 import engine.input.InputManager;
+import engine.model.BasicModel;
 import engine.model.Model;
+import engine.playerstate.PlayerInputState;
+import engine.playerstate.PlayerSelectionState;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
 import engine.view.FXView;
@@ -22,6 +26,10 @@ public class GameFactory {
 		bus = new BasicEventBus();
 	}
 	
+	public Model createModel() {
+		return new BasicModel();
+	}
+	
 	public View createView() {
 		return new FXView(bus);
 	}
@@ -36,6 +44,18 @@ public class GameFactory {
 	
 	public InputManager createInputManager(Model model) {
 		return new InputManager(bus, model);
+	}
+	
+	public ActionManager createActionManager() {
+		return new ActionManager(bus);
+	}
+	
+	public PlayerInputState createPlayerInputState() {
+		return new PlayerInputState(bus);
+	}
+	
+	public PlayerSelectionState createPlayerSelectionState() {
+		return new PlayerSelectionState(bus);
 	}
 	
 }

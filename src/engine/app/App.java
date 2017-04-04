@@ -1,8 +1,12 @@
 package engine.app;
 
+import commons.Point;
 import engine.gameloop.GameLoop;
+import engine.input.ActionManager;
+import engine.input.InputManager;
 import engine.model.BasicModel;
 import engine.model.Model;
+import engine.playerstate.PlayerInputState;
 import engine.sprite.Image;
 import engine.sprite.Movable;
 import engine.sprite.Sprite;
@@ -12,20 +16,21 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
-
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		GameFactory gameFactory = new GameFactory();
 		
-		Model model = new BasicModel();
+		Model model = gameFactory.createModel();
 		View view = gameFactory.createView();
 		Sprite sprite1 = new Sprite();
-		sprite1.setPos(100, 100);
+		sprite1.setPos(new Point(100, 100));
 		sprite1.setImage(new Image("images/characters/bahamut_left.png"));
 		Movable movable1 = new Movable(sprite1);
 		sprite1.setMovable(movable1);
 		model.addSprite(sprite1);
+		
+		model.setPlayerSelectionState(gameFactory.createPlayerSelectionState());
 		
 		Scene scene = view.getScene();
 		
@@ -35,7 +40,12 @@ public class App extends Application {
 		gameLoop.start(); // nothing added in the loop yet.
 		
 		gameFactory.createSoundManager(); // Automatically linked by the event bus.
-		gameFactory.createInputManager(model); 
+		InputManager inputManager = gameFactory.createInputManager(model);
+		PlayerInputState playerInputState = gameFactory.createPlayerInputState();
+		ActionManager actionManager = gameFactory.createActionManager();
+		inputManager.setPlayerInputState(playerInputState);
+		inputManager.setActionManager(actionManager);
+		inputManager.initHandlers();
 		
         stage.setTitle("My JavaFX Application");
         stage.setScene(scene);
