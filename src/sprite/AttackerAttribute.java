@@ -6,3 +6,4 @@ public interface AttackerAttribute extends SpriteAttribute{
 	
 }
 
+

@@ -6,3 +6,4 @@ public interface HealthAttribute extends SpriteAttribute{
 	public int getHealth();
 }
 
+

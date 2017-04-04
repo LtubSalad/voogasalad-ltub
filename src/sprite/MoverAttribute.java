@@ -6,3 +6,4 @@ public interface MoverAttribute extends SpriteAttribute{
 	
 }
 
+
