@@ -21,17 +21,14 @@ public class ActionManager {
 		return true;
 	}
 	
-	public void moveSpriteTo(Player actionSender, Sprite sprite, Point dest) {
+	public void moveSpriteTo(ActionMode actionMode, Player actionSender, Sprite sprite, Point dest) {
 		if (!moveSpriteToAllowed(actionSender, sprite, dest)) { return; }
 		sprite.getMovable().ifPresent((movable) -> {
-			movable.moveTo(dest);
-		});
-	}
-	
-	public void queueMoveSpriteTo(Player actionSender, Sprite sprite, Point dest) {
-		if (!moveSpriteToAllowed(actionSender, sprite, dest)) { return; }
-		sprite.getMovable().ifPresent((movable) -> {
-			sprite.queueAction(() -> movable.moveTo(dest));
+			if (actionMode == ActionMode.QUEUE) {
+				sprite.queueAction(() -> movable.moveTo(dest));
+			} else {
+				sprite.executeAction(() -> movable.moveTo(dest));
+			}
 		});
 	}
 	

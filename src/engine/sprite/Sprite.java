@@ -52,6 +52,10 @@ public class Sprite {
 	public Player getPlayer() {
 		return player;
 	}
+	public void executeAction(Action action) {
+		actionQueue.clearQueue();
+		action.execute();
+	}
 	public void queueAction(Action action) {
 		actionQueue.addAction(action);
 	}

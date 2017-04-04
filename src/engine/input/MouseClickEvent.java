@@ -16,7 +16,6 @@ public class MouseClickEvent extends BusEvent {
 	}
 	
 	public MouseClickEvent(BusEventType<? extends BusEvent> busEventType, MouseEvent mouseEvent) {
-		// TODO Auto-generated constructor stub
 		super(busEventType);
 		x = mouseEvent.getSceneX();
 		y = mouseEvent.getSceneY();

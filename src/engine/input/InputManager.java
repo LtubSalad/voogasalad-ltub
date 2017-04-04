@@ -8,7 +8,7 @@ import engine.sprite.Sprite;
 import javafx.scene.input.KeyCode;
 
 public class InputManager {
-	
+
 	private EventBus bus;
 	private Model model;
 	private SelectionChecker selectionChecker;
@@ -20,10 +20,11 @@ public class InputManager {
 		this.model = model;
 		selectionChecker = new SelectionChecker();
 	}
-	
+
 	public void setActionManager(ActionManager actionManager) {
 		this.actionManager = actionManager;
 	}
+
 	public void setPlayerInputState(PlayerInputState playerInputState) {
 		this.playerInputState = playerInputState;
 	}
@@ -37,22 +38,20 @@ public class InputManager {
 		});
 		bus.on(MouseClickEvent.ANY, e -> {
 			Sprite selected = selectionChecker.getSelection(model, e.getX(), e.getY());
-			if (playerInputState.isKeyPressed(KeyCode.SHIFT)) {
-				actionManager.queueMoveSpriteTo(Player.DEFAULT, selected, new Point(e.getX(), e.getY()));
-			} else {
-				actionManager.moveSpriteTo(Player.DEFAULT, selected, new Point(e.getX(), e.getY()));
-			}
+			ActionMode actionMode = playerInputState.isKeyPressed(KeyCode.SHIFT) ? ActionMode.QUEUE
+					: ActionMode.INSTANT;
+			actionManager.moveSpriteTo(actionMode, Player.DEFAULT, selected, new Point(e.getX(), e.getY()));
+
 		});
 	}
-	
 
-//	private void select(double x, double y) {
-//		if (selectionChecker.checkSelection(model, x, y)) {
-//			System.out.println("The click is in one polygon.");
-//		}
-//		else {
-//			System.out.println("The click is not in any polygon.");
-//		}
-//	}
+	// private void select(double x, double y) {
+	// if (selectionChecker.checkSelection(model, x, y)) {
+	// System.out.println("The click is in one polygon.");
+	// }
+	// else {
+	// System.out.println("The click is not in any polygon.");
+	// }
+	// }
 
 }

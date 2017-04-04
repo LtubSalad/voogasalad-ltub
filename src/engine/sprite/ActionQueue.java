@@ -14,6 +14,10 @@ public class ActionQueue {
 		return actions.isEmpty();
 	}
 	
+	public void clearQueue() {
+		actions.clear();
+	}
+	
 	public void executeNextAction() {
 		if (!isEmpty()) {
 			actions.removeFirst().execute();
