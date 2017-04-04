@@ -4,6 +4,7 @@ import bus.BasicEventBus;
 import bus.EventBus;
 import engine.gameloop.FXGameLoop;
 import engine.gameloop.GameLoop;
+import engine.input.ActionManager;
 import engine.input.InputManager;
 import engine.model.Model;
 import engine.sound.FXSoundManager;
@@ -38,4 +39,7 @@ public class GameFactory {
 		return new InputManager(bus, model);
 	}
 	
+	public ActionManager createActionManager() {
+		return new ActionManager(bus);
+	}
 }
