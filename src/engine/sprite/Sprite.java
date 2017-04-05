@@ -10,7 +10,8 @@ public class Sprite {
 
 	
 	// initialize empty image.
-	private Image image = new Image(null);
+	private LtubImage ltubImage = LtubImage.EMPTY_IMAGE;
+	private Point imageOffset = null;
 //	private boolean locked = false; // TODO
 	private Point pos;
 	private int z;
@@ -25,14 +26,28 @@ public class Sprite {
 		
 	}
 
-	public void setImage(Image image) {
-		this.image = image;
+	public void setImage(LtubImage ltubImage) {
+		this.ltubImage = ltubImage;
 	}
 	
-	public Image getImage() {
-		return image;
+	public LtubImage getImage() {
+		return ltubImage;
 	}
 
+	public void setImageOffset(Point offset) {
+		this.imageOffset = offset;
+	}
+	/**
+	 * The default offset is half the size of the image.
+	 * @return
+	 */
+	public Point getImageOffset() {
+		if (imageOffset != null) {
+			return imageOffset;
+		} else {
+			return new Point(ltubImage.width()/2, ltubImage.height()/2);
+		}
+	}
 	public Point getPos() {
 		return pos;
 	}

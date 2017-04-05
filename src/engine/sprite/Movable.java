@@ -14,6 +14,10 @@ public class Movable {
 	public Movable(Sprite sprite) {
 		this.sprite = sprite;
 	}
+	
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
 
 	public void moveTo(Point pDest) {
 		this.pDest = pDest;

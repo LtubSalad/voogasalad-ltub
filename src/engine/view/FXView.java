@@ -70,7 +70,8 @@ public class FXView implements View {
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
 			Point pos = sprite.getPos();
-			gc.drawImage(new Image(sprite.getImage().getInputStream()), pos.x(), pos.y());
+			Point offset = sprite.getImageOffset();
+			gc.drawImage(new Image(sprite.getImage().getInputStream()), pos.x()-offset.x(), pos.y()-offset.y());
 		}
 		
 		// render selection graphics
