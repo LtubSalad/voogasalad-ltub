@@ -1,5 +1,7 @@
 package engine.sprite;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import commons.MathUtils;
@@ -15,6 +17,8 @@ public class Sprite {
 	private Point pos;
 	private int z;
 	private Movable movable;
+	private SelectionRange selectionRange;
+	
 	/**
 	 * The player that this sprite belongs to.
 	 */
@@ -27,10 +31,17 @@ public class Sprite {
 
 	public void setImage(Image image) {
 		this.image = image;
+		if (selectionRange == null) {
+			selectionRange = SelectionRange.RECTANGLE;
+		}
 	}
 	
 	public Image getImage() {
 		return image;
+	}
+	
+	public void setSelectionRange(SelectionRange selectionRange) {
+		this.selectionRange = selectionRange;
 	}
 
 	public Point getPos() {
