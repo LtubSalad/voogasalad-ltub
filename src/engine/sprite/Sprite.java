@@ -5,31 +5,32 @@ import java.util.Optional;
 import commons.MathUtils;
 import commons.Point;
 import engine.player.Player;
+import engine.sprite.collision.Collidable;
 
 public class Sprite {
 
-	
 	// initialize empty image.
 	private LtubImage ltubImage = LtubImage.EMPTY_IMAGE;
 	private Point imageOffset = null;
-//	private boolean locked = false; // TODO
+	// private boolean locked = false; // TODO
 	private Point pos;
 	private int z;
-	private Movable movable;
+	private Movable movable = null;
+	private Collidable collidable = null;
 	/**
 	 * The player that this sprite belongs to.
 	 */
 	private Player player = Player.DEFAULT;
 	private ActionQueue actionQueue = new ActionQueue();
-	
+
 	public Sprite() {
-		
+
 	}
 
 	public void setImage(LtubImage ltubImage) {
 		this.ltubImage = ltubImage;
 	}
-	
+
 	public LtubImage getImage() {
 		return ltubImage;
 	}
@@ -39,13 +40,14 @@ public class Sprite {
 	}
 	/**
 	 * The default offset is half the size of the image.
+	 * 
 	 * @return
 	 */
 	public Point getImageOffset() {
 		if (imageOffset != null) {
 			return imageOffset;
 		} else {
-			return new Point(ltubImage.width()/2, ltubImage.height()/2);
+			return new Point(ltubImage.width() / 2, ltubImage.height() / 2);
 		}
 	}
 	public Point getPos() {
@@ -61,6 +63,12 @@ public class Sprite {
 	public Optional<Movable> getMovable() {
 		return Optional.ofNullable(movable);
 	}
+	public void setCollidable(Collidable collidable) {
+		this.collidable = collidable;
+	}
+	public Optional<Collidable> getCollidable() {
+		return Optional.ofNullable(collidable);
+	}
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
@@ -74,7 +82,7 @@ public class Sprite {
 	public void queueAction(Action action) {
 		actionQueue.addAction(action);
 	}
-	
+
 	public void update(double dt) {
 		double tRemain = dt;
 		// TODO: this piece of actions queueing code has to be improved
@@ -94,5 +102,5 @@ public class Sprite {
 			}
 		}
 	}
-	
+
 }

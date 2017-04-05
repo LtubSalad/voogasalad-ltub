@@ -12,6 +12,8 @@ import engine.playerstate.PlayerInputState;
 import engine.playerstate.PlayerSelectionState;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
+import engine.sprite.collision.CollisionChecker;
+import engine.sprite.collision.CollisionManager;
 import engine.view.FXView;
 import engine.view.View;
 
@@ -57,5 +59,14 @@ public class GameFactory {
 	public PlayerSelectionState createPlayerSelectionState() {
 		return new PlayerSelectionState(bus);
 	}
+	
+	public CollisionChecker createCollisionChecker() {
+		return new CollisionChecker(bus);
+	}
+	
+	public CollisionManager createCollisionManager() {
+		return new CollisionManager(bus);
+	}
+	
 	
 }
