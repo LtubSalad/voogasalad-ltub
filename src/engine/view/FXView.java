@@ -4,7 +4,7 @@ package engine.view;
 import bus.EventBus;
 import commons.Point;
 import engine.input.KeyEvent;
-import engine.input.MouseClickEvent;
+import engine.input.MouseEvent;
 import engine.model.Model;
 import engine.playerstate.PlayerSelectionState;
 import engine.playerstate.PlayerSelectionState.SelectionType;
@@ -46,7 +46,7 @@ public class FXView implements View {
 	
 	private void initHandlers() {
 		scene.setOnMouseClicked(e -> {
-        	bus.emit(new MouseClickEvent(e));
+        	bus.emit(new MouseEvent(MouseEvent.LEFT, new Point(e.getX(), e.getY())));
         });
 		scene.setOnKeyPressed(e -> {
 			bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));

@@ -17,10 +17,10 @@ public class SelectionChecker {
 		
 	}
 	
-	public Sprite getSelection(Model model, double x, double y) {
+	public Sprite getSelection(Model model, Point pos) {
 		for (Sprite sprite: model.getSprites()) {
 			if (sprite.getSelectionBound() == SelectionBound.IMAGE) {
-				if (checkPointOnImage(sprite.getImage().getFXImage(), x-sprite.getDisplayPos().x(), y-sprite.getDisplayPos().y())) {
+				if (checkPointOnImage(sprite.getImage().getFXImage(), pos.x()-sprite.getDisplayPos().x(), pos.y()-sprite.getDisplayPos().y())) {
 					System.out.println("Sprite " + sprite.toString() + " is selected in image.");
 					return sprite;
 				}
@@ -32,7 +32,7 @@ public class SelectionChecker {
 					xList.add(point.x());
 					yList.add(point.y());
 				}
-				if (checkPointInPolygon(sprite.getSelectionBoundVertices().size(), xList, yList, x, y)) {
+				if (checkPointInPolygon(sprite.getSelectionBoundVertices().size(), xList, yList, pos.x(), pos.y())) {
 					System.out.println("Sprite " + sprite.toString() + " is selected in polygon.");
 					return sprite;
 				}

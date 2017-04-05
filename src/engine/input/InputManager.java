@@ -5,6 +5,7 @@ import commons.Point;
 import engine.model.Model;
 import engine.player.Player;
 import engine.playerstate.PlayerInputState;
+import engine.playerstate.PlayerSelectionState;
 import engine.sprite.Sprite;
 import javafx.scene.input.KeyCode;
 
@@ -15,6 +16,7 @@ public class InputManager {
 	private SelectionChecker selectionChecker;
 	private ActionManager actionManager;
 	private PlayerInputState playerInputState;
+	private PlayerSelectionState playerSelectionState;
 
 	public InputManager(EventBus bus, Model model) {
 		this.bus = bus;
@@ -37,8 +39,8 @@ public class InputManager {
 		bus.on(KeyEvent.RELEASE, e -> {
 			playerInputState.releaseKey(e.getCode());
 		});
-		bus.on(MouseClickEvent.ANY, e -> {
-			Sprite selected = selectionChecker.getSelection(model, e.getX(), e.getY());
+		bus.on(MouseEvent.LEFT, e -> {
+			Sprite selected = selectionChecker.getSelection(model, e.getPos());
 			
 			ActionMode actionMode = playerInputState.isKeyPressed(KeyCode.SHIFT) ? ActionMode.QUEUE
 					: ActionMode.INSTANT;
