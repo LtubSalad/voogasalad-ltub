@@ -1,10 +1,12 @@
 package sprite;
 
-public class StationaryMoverAttribute implements MoverAttribute{
+public class RunnerMoverAttribute implements MoverAttribute{
 
-	@Override
+
+	
 	public void move() {
-		System.out.println("Switch failed");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -12,7 +14,9 @@ public class StationaryMoverAttribute implements MoverAttribute{
 		// TODO Auto-generated method stub
 		
 	}
-
 	
+
+
 }
+
 

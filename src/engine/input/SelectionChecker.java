@@ -18,18 +18,17 @@ public class SelectionChecker {
 	public Sprite getSelection(Model model, double x, double y) {
 		for (Sprite sprite: model.getSprites()) {
 			Image spriteImage = new Image(sprite.getImage().getInputStream());
-			ImageView spriteImageView = new ImageView(spriteImage);
 			List<Double> xList = new ArrayList<>(); // ImageView rectangle nodes are added in the clock-wise order
-			xList.add(spriteImageView.getX());
-			xList.add(spriteImageView.getX() + spriteImageView.getFitWidth());
-			xList.add(spriteImageView.getX() + spriteImageView.getFitWidth());
-			xList.add(spriteImageView.getX());
+			xList.add(sprite.getPos().x());
+			xList.add(sprite.getPos().x() + spriteImage.getWidth());
+			xList.add(sprite.getPos().x() + spriteImage.getWidth());
+			xList.add(sprite.getPos().x());
 			List<Double> yList = new ArrayList<>();
-			yList.add(spriteImageView.getY());
-			yList.add(spriteImageView.getY());
-			yList.add(spriteImageView.getY() + spriteImageView.getFitHeight());
-			yList.add(spriteImageView.getY() + spriteImageView.getFitHeight());
-			if (rayCasting(4, xList, yList, x, y)) {
+			yList.add(sprite.getPos().y());
+			yList.add(sprite.getPos().y());
+			yList.add(sprite.getPos().y() + spriteImage.getHeight());
+			yList.add(sprite.getPos().y() + spriteImage.getHeight());
+			if (checkPointInPolygon(4, xList, yList, x, y)) {
 				System.out.println("Sprite " + sprite.toString() + " is selected.");
 				return sprite;
 			}
@@ -38,12 +37,7 @@ public class SelectionChecker {
 		return model.getSprites().get(0);
 	}
 
-	private boolean rayCasting(int nVert, List<Double> xList, List<Double> yList, double xClicked, double yClicked ) {
-		// TODO
-		System.out.println(xList);
-		System.out.println(yList);
-		System.out.println(xClicked);
-		System.out.println(yClicked);
+	private boolean checkPointInPolygon(int nVert, List<Double> xList, List<Double> yList, double xClicked, double yClicked ) {
 		int i, j;
 		boolean selected = false;
 		for (i = 0, j = nVert-1; i < nVert; j = i++) {
