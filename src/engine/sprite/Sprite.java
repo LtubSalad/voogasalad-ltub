@@ -1,5 +1,7 @@
 package engine.sprite;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import commons.MathUtils;
@@ -17,6 +19,8 @@ public class Sprite {
 	private int z;
 	private Movable movable = null;
 	private Collidable collidable = null;
+	private SelectionBound selectionBound = SelectionBound.IMAGE;
+	private List<Point> selectionBoundVertices;
 	/**
 	 * The player that this sprite belongs to.
 	 */
@@ -34,10 +38,11 @@ public class Sprite {
 	public LtubImage getImage() {
 		return ltubImage;
 	}
-
+	
 	public void setImageOffset(Point offset) {
 		this.imageOffset = offset;
 	}
+	
 	/**
 	 * The default offset is half the size of the image.
 	 * 
@@ -50,11 +55,54 @@ public class Sprite {
 			return new Point(ltubImage.width() / 2, ltubImage.height() / 2);
 		}
 	}
+	
 	public Point getPos() {
 		return pos;
 	}
+	
 	public void setPos(Point pos) {
 		this.pos = pos;
+	}
+	
+	/**
+	 * Get the display position of the Sprite
+	 * @return Point
+	 */
+	public Point getDisplayPos() {
+		return new Point(pos.x() - this.getImageOffset().x(), pos.y() - this.getImageOffset().y());
+	}
+
+	public void setSelectionBound(SelectionBound selectionBound) {
+		this.selectionBound = selectionBound;
+	}
+	
+	public SelectionBound getSelectionBound() {
+		return selectionBound;
+	}
+	
+	private void setSelectionBoundVertices() {
+		selectionBoundVertices = new ArrayList<>();
+		if (selectionBound == SelectionBound.IMAGE) {
+//			if (ltubImage != null) {
+//				// Image rectangle nodes are added in a clock-wise order
+//				selectionBoundVertices.add(this.getDisplayPos());
+//				selectionBoundVertices.add(new Point(this.getDisplayPos().x() + ltubImage.width(), this.getDisplayPos().y()));
+//				selectionBoundVertices.add(new Point(this.getDisplayPos().x() + ltubImage.width(), this.getDisplayPos().y() + ltubImage.height()));
+//				selectionBoundVertices.add(new Point(this.getDisplayPos().x(), this.getDisplayPos().y() + ltubImage.height()));
+//			}
+		}
+		else if (selectionBound == SelectionBound.POLYGON) {
+			// TODO
+		}
+	}
+	
+	/**
+	 * Get a list of Point indicating the definite display positions of selection bound vertices
+	 * @return List<Point>
+	 */
+	public List<Point> getSelectionBoundVertices() {
+		setSelectionBoundVertices();
+		return selectionBoundVertices;
 	}
 
 	public void setMovable(Movable movable) {

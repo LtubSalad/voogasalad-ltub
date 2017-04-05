@@ -6,6 +6,7 @@ import engine.input.ActionManager;
 import engine.input.InputManager;
 import engine.model.Model;
 import engine.playerstate.PlayerInputState;
+import engine.playerstate.PlayerSelectionState;
 import engine.sprite.LtubImage;
 import engine.sprite.Movable;
 import engine.sprite.Sprite;
@@ -48,7 +49,8 @@ public class App extends Application {
 		sprite2.setMovable(movable2);
 		model.addSprite(sprite2);
 		
-		model.setPlayerSelectionState(gameFactory.createPlayerSelectionState());
+		PlayerSelectionState playerSelectionState = gameFactory.createPlayerSelectionState();
+		model.setPlayerSelectionState(playerSelectionState);
 		
 		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
 		gameFactory.createCollisionManager();		
@@ -65,6 +67,7 @@ public class App extends Application {
 		PlayerInputState playerInputState = gameFactory.createPlayerInputState();
 		ActionManager actionManager = gameFactory.createActionManager();
 		inputManager.setPlayerInputState(playerInputState);
+		inputManager.setPlayerSelectionState(playerSelectionState);
 		inputManager.setActionManager(actionManager);
 		inputManager.initHandlers();
 		
