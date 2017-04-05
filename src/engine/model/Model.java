@@ -17,6 +17,6 @@ public interface Model {
 	public PlayerSelectionState getPlayerSelectionState();
 	public void setPlayerSelectionState(PlayerSelectionState selectionState);
 	
-	public LoopComponent getLoopComponent();
+	public void update(double dt);
 	
 }

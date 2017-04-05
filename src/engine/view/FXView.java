@@ -4,7 +4,7 @@ package engine.view;
 import bus.EventBus;
 import commons.Point;
 import engine.input.KeyEvent;
-import engine.input.MouseClickEvent;
+import engine.input.MouseEvent;
 import engine.model.Model;
 import engine.playerstate.PlayerSelectionState;
 import engine.playerstate.PlayerSelectionState.SelectionType;
@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -46,7 +47,11 @@ public class FXView implements View {
 	
 	private void initHandlers() {
 		scene.setOnMouseClicked(e -> {
-        	bus.emit(new MouseClickEvent(e));
+			if (e.getButton() == MouseButton.PRIMARY) {
+				bus.emit(new MouseEvent(MouseEvent.LEFT, new Point(e.getX(), e.getY())));
+			} else if (e.getButton() == MouseButton.SECONDARY) {
+				bus.emit(new MouseEvent(MouseEvent.RIGHT, new Point(e.getX(), e.getY())));
+			}
         });
 		scene.setOnKeyPressed(e -> {
 			bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
@@ -69,8 +74,7 @@ public class FXView implements View {
 		// render game cast 
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
-			Point pos = sprite.getPos();
-			gc.drawImage(new Image(sprite.getImage().getInputStream()), pos.x(), pos.y());
+			gc.drawImage(new Image(sprite.getImage().getInputStream()), sprite.getDisplayPos().x(), sprite.getDisplayPos().y());
 		}
 		
 		// render selection graphics
