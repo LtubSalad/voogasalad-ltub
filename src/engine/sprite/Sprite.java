@@ -82,13 +82,13 @@ public class Sprite {
 	private void setSelectionBoundVertices() {
 		selectionBoundVertices = new ArrayList<>();
 		if (selectionBound == SelectionBound.IMAGE) {
-			if (ltubImage != null) {
-				// Image rectangle nodes are added in a clock-wise order
-				selectionBoundVertices.add(this.getDisplayPos());
-				selectionBoundVertices.add(new Point(this.getDisplayPos().x() + ltubImage.width(), this.getDisplayPos().y()));
-				selectionBoundVertices.add(new Point(this.getDisplayPos().x() + ltubImage.width(), this.getDisplayPos().y() + ltubImage.height()));
-				selectionBoundVertices.add(new Point(this.getDisplayPos().x(), this.getDisplayPos().y() + ltubImage.height()));
-			}
+//			if (ltubImage != null) {
+//				// Image rectangle nodes are added in a clock-wise order
+//				selectionBoundVertices.add(this.getDisplayPos());
+//				selectionBoundVertices.add(new Point(this.getDisplayPos().x() + ltubImage.width(), this.getDisplayPos().y()));
+//				selectionBoundVertices.add(new Point(this.getDisplayPos().x() + ltubImage.width(), this.getDisplayPos().y() + ltubImage.height()));
+//				selectionBoundVertices.add(new Point(this.getDisplayPos().x(), this.getDisplayPos().y() + ltubImage.height()));
+//			}
 		}
 		else if (selectionBound == SelectionBound.POLYGON) {
 			// TODO

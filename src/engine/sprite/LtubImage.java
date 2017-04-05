@@ -33,6 +33,10 @@ public class LtubImage {
 		return filename;
 	}
 	
+	public Image getFXImage() {
+		return image;
+	}
+	
 	public double width() {
 		return image != null ? image.getWidth() : 0;
 	}

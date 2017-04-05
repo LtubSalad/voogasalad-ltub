@@ -7,6 +7,8 @@ import commons.Point;
 import engine.model.Model;
 import engine.sprite.SelectionBound;
 import engine.sprite.Sprite;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class SelectionChecker {
 	
@@ -17,16 +19,21 @@ public class SelectionChecker {
 	
 	public Sprite getSelection(Model model, double x, double y) {
 		for (Sprite sprite: model.getSprites()) {
-			List<Double> xList = new ArrayList<>(); 
-			List<Double> yList = new ArrayList<>();
-			for (Point point: sprite.getSelectionBoundVertices()) {
-				xList.add(point.x());
-				yList.add(point.y());
-			}
 			if (sprite.getSelectionBound() == SelectionBound.IMAGE) {
+				if (checkPointOnImage(sprite.getImage().getFXImage(), x-sprite.getDisplayPos().x(), y-sprite.getDisplayPos().y())) {
+					System.out.println("Sprite " + sprite.toString() + " is selected in image.");
+					return sprite;
+				}
+			}
+			else if (sprite.getSelectionBound() == SelectionBound.POLYGON) {
+				List<Double> xList = new ArrayList<>(); 
+				List<Double> yList = new ArrayList<>();
+				for (Point point: sprite.getSelectionBoundVertices()) {
+					xList.add(point.x());
+					yList.add(point.y());
+				}
 				if (checkPointInPolygon(sprite.getSelectionBoundVertices().size(), xList, yList, x, y)) {
-					// TODO check if clicked on a transparent pixel
-					System.out.println("Sprite " + sprite.toString() + " is selected.");
+					System.out.println("Sprite " + sprite.toString() + " is selected in polygon.");
 					return sprite;
 				}
 			}
@@ -35,6 +42,16 @@ public class SelectionChecker {
 		return model.getSprites().get(0);
 	}
 
+	/**
+	 * Check if the clicked point is in the Polygon Selection Bound.
+	 * Used when the {@code SelectionBound} variable of the {@code Sprite} instance is set to {@code SelectionBound.POLYGON}.
+	 * @param nVert number of vertices in the polygon bound
+	 * @param xList the list of absolute display x coordinates of vertices in the polygon bound
+	 * @param yList the list of absolute display y coordinates of vertices in the polygon bound
+	 * @param xClicked the absolute display x coordinate of the clicked point
+	 * @param yClicked the absolute display y coordinate of the clicked point
+	 * @return
+	 */
 	private boolean checkPointInPolygon(int nVert, List<Double> xList, List<Double> yList, double xClicked, double yClicked ) {
 		int i, j;
 		boolean selected = false;
@@ -45,5 +62,17 @@ public class SelectionChecker {
 			}
 		}
 		return selected;
+	}
+	
+	/**
+	 * Check if the clicked point is in the opaque areas of the Image.
+	 * Used when the {@code SelectionBound} variable of the {@code Sprite} instance is set to {@code SelectionBound.IMAGE}.
+	 * @param image JavaFX image
+	 * @param x the relative x coordinate of the clicked point relative to the upper-left point of the image
+	 * @param y the relative y coordinate of the clicked point relative to the upper-left point of the image
+	 * @return
+	 */
+	private boolean checkPointOnImage(Image image, double x, double y) {		
+		return new ImageView(image).contains(x, y);
 	}
 }
