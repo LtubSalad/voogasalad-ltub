@@ -1,6 +1,3 @@
-/**
- * 
- */
 package LevelChoice;
 
 import javafx.animation.KeyFrame;
@@ -8,9 +5,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -63,7 +57,6 @@ public class Loader {
 		vb.setLayoutY(30);
 		vb.getChildren().addAll( timerLabel, progressBar);
 		
-
 		root.getChildren().add(vb);
 
 		primaryStage.setScene(scene);
@@ -89,7 +82,10 @@ public class Loader {
 	}
 	
 	private void eventHandle(Stage primaryStage){
-		 primaryStage.close();
+		 primaryStage.hide();
+
+		 LevelManager levelManager = new LevelManager();
+		 
 		
 	}
 
