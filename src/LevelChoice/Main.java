@@ -14,7 +14,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		Loader l = new Loader();
+		Loader loader = new Loader();
 
 
 	}
