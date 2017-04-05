@@ -39,9 +39,10 @@ public class InputManager {
 		});
 		bus.on(MouseClickEvent.ANY, e -> {
 			Sprite selected = selectionChecker.getSelection(model, e.getX(), e.getY());
+			
 			ActionMode actionMode = playerInputState.isKeyPressed(KeyCode.SHIFT) ? ActionMode.QUEUE
 					: ActionMode.INSTANT;
-			actionManager.moveSpriteTo(actionMode, Player.DEFAULT, selected, new Point(e.getX(), e.getY()));
+//			actionManager.moveSpriteTo(actionMode, Player.DEFAULT, selected, new Point(e.getX(), e.getY()));
 		});
 	}
 

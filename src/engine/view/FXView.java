@@ -69,8 +69,7 @@ public class FXView implements View {
 		// render game cast 
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
-			Point pos = sprite.getPos();
-			gc.drawImage(new Image(sprite.getImage().getInputStream()), pos.x(), pos.y());
+			gc.drawImage(new Image(sprite.getImage().getInputStream()), sprite.getDisplayPos().x(), sprite.getDisplayPos().y());
 		}
 		
 		// render selection graphics

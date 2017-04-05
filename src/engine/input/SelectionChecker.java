@@ -3,10 +3,10 @@ package engine.input;
 import java.util.ArrayList;
 import java.util.List;
 
+import commons.Point;
 import engine.model.Model;
+import engine.sprite.SelectionBound;
 import engine.sprite.Sprite;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class SelectionChecker {
 	
@@ -17,20 +17,18 @@ public class SelectionChecker {
 	
 	public Sprite getSelection(Model model, double x, double y) {
 		for (Sprite sprite: model.getSprites()) {
-			Image spriteImage = new Image(sprite.getImage().getInputStream());
-			List<Double> xList = new ArrayList<>(); // ImageView rectangle nodes are added in the clock-wise order
-			xList.add(sprite.getPos().x());
-			xList.add(sprite.getPos().x() + spriteImage.getWidth());
-			xList.add(sprite.getPos().x() + spriteImage.getWidth());
-			xList.add(sprite.getPos().x());
+			List<Double> xList = new ArrayList<>(); 
 			List<Double> yList = new ArrayList<>();
-			yList.add(sprite.getPos().y());
-			yList.add(sprite.getPos().y());
-			yList.add(sprite.getPos().y() + spriteImage.getHeight());
-			yList.add(sprite.getPos().y() + spriteImage.getHeight());
-			if (checkPointInPolygon(4, xList, yList, x, y)) {
-				System.out.println("Sprite " + sprite.toString() + " is selected.");
-				return sprite;
+			for (Point point: sprite.getSelectionBoundVertices()) {
+				xList.add(point.x());
+				yList.add(point.y());
+			}
+			if (sprite.getSelectionBound() == SelectionBound.IMAGE) {
+				if (checkPointInPolygon(sprite.getSelectionBoundVertices().size(), xList, yList, x, y)) {
+					// TODO check if clicked on a transparent pixel
+					System.out.println("Sprite " + sprite.toString() + " is selected.");
+					return sprite;
+				}
 			}
 		}
 		// TODO if nothing is selected, return the background "sprite"
