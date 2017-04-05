@@ -30,8 +30,9 @@ public class MasterDeveloperInterface {
 		developerTabs = new TabPane();
 		Tab classCreatorTab = new Tab("Create AttributeHolder", new AttributeHolderCreator());
 		Tab GeneralDataTab = new Tab("General Data", new GeneralDataCreator());
+		Tab ScreenSettingView = new Tab("Screen Setting", new ScreenModelCreator());
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
-		myTabs.addAll(classCreatorTab, GeneralDataTab);
+		myTabs.addAll(classCreatorTab, GeneralDataTab, ScreenSettingView);
 	}
 
 	public Scene getScene() {
