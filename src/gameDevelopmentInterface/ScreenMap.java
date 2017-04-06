@@ -35,31 +35,24 @@ public class ScreenMap extends StackPane {
 	}
 	
 	public Pair<Integer, Integer> getCoordOfSpriteHover(double x, double y) {
-		Integer colNum = 0;
-		Integer rowNum = 0;
-		int currCol = 0;
-		int currRow = 0;
 		Bounds boundsInScreen = myGrid.localToScreen(myGrid.getBoundsInLocal());
-		for (int i = 0; i < myGrid.getWidth(); i += myGrid.getWidth()/NUM_COLS) {
-			double xOffset = boundsInScreen.getMinX();
-			//System.out.println("xOffset: "+ xOffset);
-			double lowerBounds = i + xOffset;
-			double upperBounds = lowerBounds + myGrid.getWidth()/NUM_COLS;
-			if (lowerBounds <= x && x < upperBounds) {
-				colNum = currCol;
-			}
-			currCol += 1;
-		}
-		for (int i = 0; i < myGrid.getHeight(); i += myGrid.getHeight()/NUM_ROWS) {
-			double yOffset = boundsInScreen.getMinY();
-			double lowerBounds = i + yOffset;
-			double upperBounds = lowerBounds + myGrid.getHeight()/NUM_ROWS;
-			if (lowerBounds <= y && y < upperBounds) {
-				rowNum = currRow;
-			}
-			currRow += 1;
-		}
+		int colNum = getColOrRowPlacement(boundsInScreen.getMinX(), myGrid.getWidth(), myGrid.getWidth()/NUM_COLS, x, boundsInScreen);
+		int rowNum = getColOrRowPlacement(boundsInScreen.getMinY(), myGrid.getHeight(), myGrid.getHeight()/NUM_ROWS, y, boundsInScreen);
 		return new Pair<Integer, Integer>(colNum, rowNum);
+	}
+
+	private int getColOrRowPlacement(double offset, double bounds, double step, double x, Bounds boundsInScreen) {
+		int targetRowOrCol = 0;
+		int currRowOrCol = 0;
+		for (int i = 0; i < bounds; i += step) {
+			double lowerBounds = i + offset;
+			double upperBounds = lowerBounds + step;
+			if (lowerBounds <= x && x < upperBounds) {
+				targetRowOrCol = currRowOrCol;
+			}
+			currRowOrCol += 1;
+		}
+		return targetRowOrCol;
 	}
 	
 	private void makeGrid() {
