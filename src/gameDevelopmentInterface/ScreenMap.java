@@ -12,7 +12,7 @@ import javafx.util.Pair;
 public class ScreenMap extends StackPane {
 	private static final int SCREEN_SIZE = 350;
 	private GridPane myGrid;
-	private int NUM_ROWS = 10;
+	private int NUM_ROWS = 10; //make these two as parameters to the constructor, so the user can set them?
 	private int NUM_COLS = 8;
 	
 	public ScreenMap() {
