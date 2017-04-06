@@ -1,5 +1,7 @@
 package sprite;
 
-public interface AnimatorAttribute {
+public interface AnimatorAttribute extends SpriteAttribute{
 
 }
+
+
