@@ -1,0 +1,83 @@
+.root {
+	-fx-font-size: 12pt;
+	-fx-font-family: "Avenir Black";
+    -fx-base: #6680e6;
+    -fx-background-color: 
+    	linear-gradient(#A9A9A9, #696969);
+    -fx-border-color: BLACK;
+}
+
+.button {
+	-fx-text-fill: WHITE;
+	-fx-background-color:
+    	linear-gradient(#8A2BE2, #6495ED);
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+}
+
+.button:hover {
+	-fx-background-color:
+		linear-gradient(#5d10b2, #25c4fd);
+}
+
+.hbox {
+	-fx-background-color: grey; 
+	-fx-text-fill:black;
+}
+
+.vbox {
+	-fx-background-color: BLACK;
+}
+
+.tab {
+	-fx-text-fill: WHITE;
+	-fx-background-color:
+    	linear-gradient(#8A2BE2, #6495ED);
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+}
+
+.tab:hover {
+	-fx-background-color:
+		linear-gradient(#5d10b2, #25c4fd);
+}
+
+.combo-box-base {
+	-fx-background-color:
+    	linear-gradient(#4d804d, #13e213);
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+	-fx-padding: 2;
+}
+
+.combo-box-base:hover {
+	-fx-background-color:
+	 linear-gradient(#5d10b2, #25c4fd);
+}
+
+.combo-box-popup .list-view .list-cell {
+	-fx-background-color:
+    	linear-gradient(#00ff2e, #13e213);
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover {
+	-fx-background-color: #8099ff;
+}
+
+.label {
+	-fx-font-size: 10pt;
+	-fx-font-family: "Arial Black";
+	-fx-text-fill: BLACK;
+}
+
+#header {
+	-fx-font-size: 50pt;
+	-fx-font-family: "Arial Black";
+	-fx-fill:
+    	linear-gradient(#54baff, #61ff5b);
+}
+#subtext {
+	-fx-font-size: 15pt;
+	-fx-font-family: "Arial Black";
+	-fx-fill: #c6c6c6;
+}

@@ -1,6 +1,5 @@
 package gameDevelopmentInterface;
 
-import api.Data.ScreenModelData;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -15,10 +14,19 @@ import javafx.scene.layout.BorderPane;
  *
  */
 
-//
 public class ScreenModelCreator extends BorderPane {
+	private ScreenObjectHolder myObjectsToPlace = new ScreenObjectHolder(this);
+	private ScreenMap myScreen = new ScreenMap();
+	
 	public ScreenModelCreator() {
-		
+		this.setBottom(myObjectsToPlace);
+		this.setCenter(myScreen);
 	}
-
+	/**
+	 * 
+	 * @return the screen this border pane instantiates for use in ScreenObjectHolder
+	 */
+	public ScreenMap getScreen() {
+		return myScreen;
+	}
 }
