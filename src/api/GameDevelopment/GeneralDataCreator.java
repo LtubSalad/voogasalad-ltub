@@ -1,6 +1,6 @@
 package api.GameDevelopment;
 
-import api.Data.GeneralModelData;
+import gameSettingsData.GeneralModelData;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;

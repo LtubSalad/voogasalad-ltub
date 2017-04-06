@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.Data.AttributeData;
-import api.Data.ClassData;
+import gameSettingsData.AttributeData;
+import gameSettingsData.ClassData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;

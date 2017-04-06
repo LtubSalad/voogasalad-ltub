@@ -1,8 +1,11 @@
 package gameDevelopmentInterface;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import data.AttributeData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -12,7 +15,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Pair;
 
 public class AttributeSelectorPane extends VBox {
 	private final double prefWidth = 150;
@@ -21,8 +27,10 @@ public class AttributeSelectorPane extends VBox {
 	private List<String> presetAttributes;
 	private List<String> userCreatedAttributes;
 	private List<String> usedAttributes;
+	private AttributeData attributeHolder;
 
 	public AttributeSelectorPane() {
+		this.attributeHolder=new AttributeData("dummy");
 		makeAttributeLists();
 		Node customAttributesDisplay = makeAttributesList("Add Custom Attributes", attributeNames);
 		Node presetAttributesDisplay = makeAttributesList("Add Preset Attributes", presetAttributes);
@@ -79,6 +87,9 @@ public class AttributeSelectorPane extends VBox {
 			}
 			Button attributeCustomizer = new Button(item);
 			attributeCustomizer.setOnAction((c) -> {
+				FileChooser fc = new FileChooser();
+				fc.setInitialDirectory(new File(System.getProperty("user.dir")));
+				new AttributeCustomizerPane(fc.showOpenDialog(new Stage()));
 				new AttributeCustomizerPopup(item);
 			});
 			attributeCustomizer.setPrefWidth(prefWidth);
