@@ -1,2 +1,2 @@
-<?target data?>
-<ObjectHolder variableList_secondaryObjects="sword_ball" function_getObjects="return secondaryObjects;"></ObjectHolder>
+
+<ObjectHolder function_getObjects="return secondaryObject;" variable_secondaryObject="projectile"></ObjectHolder>

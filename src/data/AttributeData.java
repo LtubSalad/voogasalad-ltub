@@ -7,7 +7,13 @@ import java.util.Map;
 
 import javafx.util.Pair;
 
-//Serves as a way to store the data concerning how any given attribute is implemented, and pass it on.
+/**
+ * Serves as a way to store the data concerning how any given attribute is implemented, and pass it on.
+ * An instance of AttributeData cannot store two subAttributes of the same kind. For example, the AttributeData
+ * only possesses one instance of the ImageHolder attribute within its tree of attributes.
+ * @author Daniel
+ *
+ */
 public class AttributeData {
 	//The first string represents the function name and its inputs, and the second represents the actual
 	//script it uses.
@@ -16,24 +22,11 @@ public class AttributeData {
 	private Map<String,String> attributeVariables;
 	private List<AttributeData> subAttributes;
 	
-	public AttributeData(String name, Map<String,String> variables, Map<Pair<String,List<String>>,String> scripts){
-		attributeName=name;
-		attributeVariables=variables;
-		attributeScripts=scripts;
-	}
-	
 	public AttributeData(String name){
 		attributeVariables=new HashMap<>();
 		attributeScripts=new HashMap<>();
 		subAttributes=new ArrayList<>();
 		attributeName=name;
-		
-	}
-	
-	public AttributeData(List<AttributeData> subAttributes){
-		this.subAttributes=subAttributes;
-		attributeVariables=new HashMap<>();
-		attributeScripts= new HashMap<>();
 	}
 	
 	public Map<Pair<String, List<String>>,String> getScripts(){
@@ -47,18 +40,6 @@ public class AttributeData {
 	public String getName(){
 		return attributeName;
 	}
-	/*
-	public AttributeData getAttribute(String attributeName){
-		if(this.attributeName.equals(attributeName)){
-			return this;
-		}
-		for(AttributeData attributeData:subAttributes){
-			if(attributeData.getAttribute(attributeName)!=null){
-				return attributeData.getAttribute(attributeName);
-			}
-		};
-		return null;
-	}*/
 
 	public List<AttributeData> getAttributes(){
 		return subAttributes;
@@ -70,7 +51,6 @@ public class AttributeData {
 	}
 	
 	public void removeAttributeData(String attributeName){
-		
 		subAttributes.forEach((attributeData)->{
 			if(attributeData.getName().equals(attributeName)){
 				subAttributes.remove(attributeData);

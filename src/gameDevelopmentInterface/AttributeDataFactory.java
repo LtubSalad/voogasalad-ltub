@@ -17,7 +17,6 @@ import org.w3c.dom.NodeList;
 import javafx.util.Pair;
 
 public class AttributeDataFactory {
-	
 	public AttributeData produceAttribute(File file){
 		try{	
 			DocumentBuilderFactory dbf= DocumentBuilderFactory.newInstance();
@@ -25,7 +24,6 @@ public class AttributeDataFactory {
 			Document doc=db.parse(file);
 			return produceAttributeHelper(doc.getFirstChild());
 		}
-		
 		//TODO Handle exceptions properly later
 		catch(Exception e){
 			e.printStackTrace();
@@ -35,7 +33,6 @@ public class AttributeDataFactory {
 	
 	private AttributeData produceAttributeHelper(Node element){
 		String name=element.getNodeName();
-		System.out.println(name);
 		AttributeData fullAttribute=new AttributeData(name);
 		NamedNodeMap elementAttributes=element.getAttributes();
 		for(int i=0;i<elementAttributes.getLength();i++){

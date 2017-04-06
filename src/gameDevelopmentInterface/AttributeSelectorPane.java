@@ -1,6 +1,8 @@
 package gameDevelopmentInterface;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,79 +25,35 @@ import javafx.util.Pair;
 public class AttributeSelectorPane extends VBox {
 	private final double prefWidth = 150;
 	private final double prefHeight = 200;
-	private AttributeDataFactory fileToDataConverter;
-	private List<String> attributeNames;
-	private List<String> presetAttributes;
-	private List<String> userCreatedAttributes;
-	private List<String> usedAttributes;
+	private final String basicAttributesFile = "data/attributeSkeletons/basicAttributes";
+	private final String presetAttributesFile = "data/attributeSkeletons/presetAttributes";
+	private final String userCreatedAttributesFile = "data/attributeSkeletons/userCreatedAttributes";
+	private List<AttributeData> usedAttributes;
 	private AttributeData attributeHolder;
 
 	public AttributeSelectorPane(AttributeData attributeHolder) {
-		fileToDataConverter=new AttributeDataFactory();
-		this.attributeHolder=attributeHolder;
-		makeAttributeLists();
-		Node customAttributesDisplay = makeAttributesList("Add Custom Attributes", attributeNames);
-		Node presetAttributesDisplay = makeAttributesList("Add Preset Attributes", presetAttributes);
-		Node userCreatedAttributesDisplay = makeAttributesList("Add User-Created Attributes", userCreatedAttributes);
-		Node thisClassesAttributes = makeAttributesList("Edit This Class' Attributes", usedAttributes);
+		usedAttributes = new ArrayList<>();
+		this.attributeHolder = attributeHolder;
+		Node customAttributesDisplay = new AttributeDisplay("Add Custom Attributes",
+				getAttributesFromFolder(new File(basicAttributesFile)),attributeHolder);
+		Node presetAttributesDisplay = new AttributeDisplay("Add Preset Attributes",
+				getAttributesFromFolder(new File(presetAttributesFile)),attributeHolder);
+		Node userCreatedAttributesDisplay = new AttributeDisplay("Add User-Created Attributes",
+				getAttributesFromFolder(new File(userCreatedAttributesFile)),attributeHolder);
+		Node thisClassesAttributes = new AttributeDisplay("Edit This Class' Attributes", usedAttributes,attributeHolder);
 		this.setPrefSize(prefWidth, prefHeight);
 		this.getChildren().addAll(customAttributesDisplay, presetAttributesDisplay, userCreatedAttributesDisplay,
 				thisClassesAttributes);
 	}
-
-	private void makeAttributeLists() {
-		attributeNames = new ArrayList<String>();
-		attributeNames.add("Actor");
-		attributeNames.add("Sprite");
-		attributeNames.add("EntityFinder");
-		attributeNames.add("ObjectCreator");
-		attributeNames.add("SoundPlayer");
-
-		presetAttributes = new ArrayList<String>();
-		presetAttributes.add("Tower");
-		presetAttributes.add("Monster");
-		presetAttributes.add("Map");
-
-		usedAttributes = new ArrayList<String>();
-
-		userCreatedAttributes = new ArrayList<String>();
-	}
-
-	private Node makeAttributesList(String listTitle, List<String> attributes) {
-		VBox attributeDisplay = new VBox();
-		ObservableList<String> observableAttributeNames = FXCollections.observableList(attributes);
-		ListView<String> attributesBox = new ListView<String>();
-		attributesBox.setItems(observableAttributeNames);
-
-		attributesBox.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-			@Override
-			public ListCell<String> call(ListView<String> list) {
-				return new AttributeCustomizerOption();
-			}
-		});
-
-		attributesBox.setPrefWidth(prefWidth);
-		Label title = new Label(listTitle);
-		attributeDisplay.getChildren().addAll(title, attributesBox);
-		return attributeDisplay;
-	}
-
-	class AttributeCustomizerOption extends ListCell<String> {
-		@Override
-		public void updateItem(String item, boolean empty) {
-			super.updateItem(item, empty);
-			if (item == null) {
-				return;
-			}
-			Button attributeCustomizer = new Button(item);
-			attributeCustomizer.setOnAction((c) -> {
-				FileChooser fc = new FileChooser();
-				fc.setInitialDirectory(new File(System.getProperty("user.dir")));
-				new AttributeCustomizerPopup(fileToDataConverter.produceAttribute(fc.showOpenDialog(new Stage())));
-			});
-			attributeCustomizer.setPrefWidth(prefWidth);
-			setGraphic(attributeCustomizer);
+	
+	private List<AttributeData> getAttributesFromFolder(File file){
+		AttributeDataFactory factory = new AttributeDataFactory();
+		File[] attributeFiles=file.listFiles();
+		List<AttributeData> attributes=new ArrayList<>();
+		for(File attributeFile:attributeFiles){
+			attributes.add(factory.produceAttribute(attributeFile));
 		}
+		return attributes;
 	}
 
 }
