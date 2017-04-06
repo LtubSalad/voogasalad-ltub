@@ -17,6 +17,13 @@ public class SelectionChecker {
 		
 	}
 	
+	/**
+	 * Get the corresponding sprite at the clicked point.
+	 * By checking the position relationship between all sprites in the game and the clicked point.
+	 * @param model {@code Model} the model holding all sprites in the game
+	 * @param pos {@code Point} the clicked point
+	 * @return Sprite the clicked sprite
+	 */
 	public Sprite getSelection(Model model, Point pos) {
 		for (Sprite sprite: model.getSprites()) {
 			if (sprite.getSelectionBound() == SelectionBound.IMAGE) {
@@ -49,7 +56,9 @@ public class SelectionChecker {
 	 * @param yList the list of absolute display y coordinates of vertices in the polygon bound
 	 * @param xClicked the absolute display x coordinate of the clicked point
 	 * @param yClicked the absolute display y coordinate of the clicked point
-	 * @return
+	 * @return boolean if the clicked point is in the polygon
+	 * 
+	 * @see <a href="http://stackoverflow.com/questions/217578/how-can-i-determine-whether-a-2d-point-is-within-a-polygon">StackOverflow</a>
 	 */
 	private boolean checkPointInPolygon(int nVert, List<Double> xList, List<Double> yList, double xClicked, double yClicked ) {
 		int i, j;
@@ -69,9 +78,10 @@ public class SelectionChecker {
 	 * @param image JavaFX image
 	 * @param x the relative x coordinate of the clicked point relative to the upper-left point of the image
 	 * @param y the relative y coordinate of the clicked point relative to the upper-left point of the image
-	 * @return
+	 * @return boolean if the clicked point is in the image
 	 */
 	private boolean checkPointOnImage(Image image, double x, double y) {		
+		// uses JavaFX ImageView to realize
 		return new ImageView(image).contains(x, y);
 	}
 }
