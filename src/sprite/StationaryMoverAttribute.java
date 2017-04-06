@@ -4,7 +4,7 @@ public class StationaryMoverAttribute implements MoverAttribute{
 
 	@Override
 	public void move() {
-		System.out.println("Switch failed");
+		
 	}
 
 	@Override
