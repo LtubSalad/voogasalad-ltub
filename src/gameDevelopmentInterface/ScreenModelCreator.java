@@ -1,6 +1,5 @@
 package gameDevelopmentInterface;
 
-import gameSettingsData.ScreenModelData;
 import javafx.scene.layout.BorderPane;
 
 /**

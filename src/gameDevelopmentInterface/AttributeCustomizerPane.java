@@ -36,8 +36,6 @@ public class AttributeCustomizerPane extends VBox {
 			this.getChildren().add(new AttributeCustomizerPane(subAttribute));
 		});	
 	}
-	/*
-	}*/
 
 	private VBox variableSetter(Map<String, String> variables) {
 		VBox parameterSelector = new VBox();

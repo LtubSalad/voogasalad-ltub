@@ -23,14 +23,16 @@ import javafx.util.Pair;
 public class AttributeSelectorPane extends VBox {
 	private final double prefWidth = 150;
 	private final double prefHeight = 200;
+	private AttributeDataFactory fileToDataConverter;
 	private List<String> attributeNames;
 	private List<String> presetAttributes;
 	private List<String> userCreatedAttributes;
 	private List<String> usedAttributes;
 	private AttributeData attributeHolder;
 
-	public AttributeSelectorPane() {
-		this.attributeHolder=new AttributeData("dummy");
+	public AttributeSelectorPane(AttributeData attributeHolder) {
+		fileToDataConverter=new AttributeDataFactory();
+		this.attributeHolder=attributeHolder;
 		makeAttributeLists();
 		Node customAttributesDisplay = makeAttributesList("Add Custom Attributes", attributeNames);
 		Node presetAttributesDisplay = makeAttributesList("Add Preset Attributes", presetAttributes);
@@ -89,8 +91,7 @@ public class AttributeSelectorPane extends VBox {
 			attributeCustomizer.setOnAction((c) -> {
 				FileChooser fc = new FileChooser();
 				fc.setInitialDirectory(new File(System.getProperty("user.dir")));
-				new AttributeCustomizerPane(fc.showOpenDialog(new Stage()));
-				new AttributeCustomizerPopup(item);
+				new AttributeCustomizerPopup(fileToDataConverter.produceAttribute(fc.showOpenDialog(new Stage())));
 			});
 			attributeCustomizer.setPrefWidth(prefWidth);
 			setGraphic(attributeCustomizer);
