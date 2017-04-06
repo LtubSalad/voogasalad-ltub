@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class AttributeData {
 	public AttributeData(String name){
 		attributeVariables=new HashMap<>();
 		attributeScripts=new HashMap<>();
+		subAttributes=new ArrayList<>();
 		attributeName=name;
 		
 	}

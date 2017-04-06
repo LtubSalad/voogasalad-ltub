@@ -4,15 +4,12 @@ import data.AttributeData;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -26,18 +23,19 @@ public class AttributeDataFactory {
 			DocumentBuilderFactory dbf= DocumentBuilderFactory.newInstance();
 			DocumentBuilder db=dbf.newDocumentBuilder();
 			Document doc=db.parse(file);
-
-			return produceAttributeHelper(doc);
+			return produceAttributeHelper(doc.getFirstChild());
 		}
 		
-		//TODO Handle exceptioons properly later
+		//TODO Handle exceptions properly later
 		catch(Exception e){
+			e.printStackTrace();
 			return null;
 		}
 	}
 	
 	private AttributeData produceAttributeHelper(Node element){
 		String name=element.getNodeName();
+		System.out.println(name);
 		AttributeData fullAttribute=new AttributeData(name);
 		NamedNodeMap elementAttributes=element.getAttributes();
 		for(int i=0;i<elementAttributes.getLength();i++){

@@ -41,7 +41,7 @@ public class AttributeCustomizerPane extends VBox {
 		VBox parameterSelector = new VBox();
 		variables.forEach((parameterName, parameter) -> {
 			Label whatParameter = new Label(parameterName);
-			TextField parameterSetter = new TextField("Input parameter");
+			TextField parameterSetter = new TextField(parameter);
 			parameterSetter.setPrefWidth(100);
 			whatParameter.setPrefWidth(300);
 			HBox selectorRow = new HBox();
@@ -54,19 +54,18 @@ public class AttributeCustomizerPane extends VBox {
 
 	private VBox functionSetter(Map<Pair<String,List<String>>,String> functions) {
 		VBox scriptingInterface = new VBox();
-		functions.forEach((functionName, parameters) -> {
+		functions.forEach((declarationDetails, script) -> {
 			VBox singleFunctionEditor = new VBox();
-			String functionDeclaration = "Function: " + functionName;
-			if (!parameters.isEmpty()) {
+			String functionDeclaration = "Function: " + declarationDetails.getKey();
+			if (!declarationDetails.getValue().isEmpty()) {
 				functionDeclaration += "|    Parameters:";
-				for (String parameter : functionName.getValue()) {
+				for (String parameter : declarationDetails.getValue()) {
 					functionDeclaration += " ";
 					functionDeclaration += parameter;
 				}
-				;
 			}
 			Label functionInfo = new Label(functionDeclaration);
-			TextArea scriptBox = new TextArea("Write scripts here");
+			TextArea scriptBox = new TextArea(script);
 			singleFunctionEditor.getChildren().addAll(functionInfo, scriptBox);
 			scriptingInterface.getChildren().add(singleFunctionEditor);
 		});
