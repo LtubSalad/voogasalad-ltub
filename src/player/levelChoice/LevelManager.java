@@ -1,7 +1,7 @@
 /**
  * 
  */
-package LevelChoice;
+package player.levelChoice;
 
 import java.util.ArrayList;
 import java.util.List;

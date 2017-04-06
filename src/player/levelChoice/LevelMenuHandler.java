@@ -1,4 +1,4 @@
-package LevelChoice;
+package player.levelChoice;
 
 import javafx.scene.control.MenuItem;
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package LevelChoice;
+package player.levelChoice;
 
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
