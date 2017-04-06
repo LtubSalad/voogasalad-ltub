@@ -4,10 +4,16 @@ import bus.BasicEventBus;
 import bus.EventBus;
 import engine.gameloop.FXGameLoop;
 import engine.gameloop.GameLoop;
+import engine.input.ActionManager;
 import engine.input.InputManager;
+import engine.model.BasicModel;
 import engine.model.Model;
+import engine.playerstate.PlayerInputState;
+import engine.playerstate.PlayerSelectionState;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
+import engine.sprite.collision.CollisionChecker;
+import engine.sprite.collision.CollisionManager;
 import engine.view.FXView;
 import engine.view.View;
 
@@ -20,6 +26,10 @@ public class GameFactory {
 	 */
 	public GameFactory() {
 		bus = new BasicEventBus();
+	}
+	
+	public Model createModel() {
+		return new BasicModel();
 	}
 	
 	public View createView() {
@@ -37,5 +47,26 @@ public class GameFactory {
 	public InputManager createInputManager(Model model) {
 		return new InputManager(bus, model);
 	}
+	
+	public ActionManager createActionManager() {
+		return new ActionManager(bus);
+	}
+	
+	public PlayerInputState createPlayerInputState() {
+		return new PlayerInputState(bus);
+	}
+	
+	public PlayerSelectionState createPlayerSelectionState() {
+		return new PlayerSelectionState(bus);
+	}
+	
+	public CollisionChecker createCollisionChecker() {
+		return new CollisionChecker(bus);
+	}
+	
+	public CollisionManager createCollisionManager() {
+		return new CollisionManager(bus);
+	}
+	
 	
 }
