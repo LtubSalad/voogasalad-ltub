@@ -1,12 +1,13 @@
 package engine.app;
 
 import commons.Point;
+import engine.action.ActionManager;
 import engine.gameloop.GameLoop;
-import engine.input.ActionManager;
 import engine.input.InputManager;
 import engine.model.Model;
 import engine.playerstate.PlayerInputState;
 import engine.playerstate.PlayerSelectionState;
+import engine.playerstate.PlayerSkillState;
 import engine.sprite.LtubImage;
 import engine.sprite.Movable;
 import engine.sprite.Sprite;
@@ -52,8 +53,12 @@ public class App extends Application {
 		model.addSprite(sprite2);
 		sprite2.setDetectionRange(256);
 		
+		
 		PlayerSelectionState playerSelectionState = gameFactory.createPlayerSelectionState();
 		model.setPlayerSelectionState(playerSelectionState);
+		PlayerSkillState playerSkillState = gameFactory.createPlayerSkillState();
+		model.setPlayerSkillState(playerSkillState);
+		
 		
 		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
 		gameFactory.createCollisionManager();	

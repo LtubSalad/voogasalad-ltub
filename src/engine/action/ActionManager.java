@@ -1,4 +1,4 @@
-package engine.input;
+package engine.action;
 
 import bus.EventBus;
 import commons.Point;

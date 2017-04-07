@@ -2,6 +2,10 @@ package engine.input;
 
 import bus.EventBus;
 import commons.Point;
+import engine.action.ActionManager;
+import engine.action.ActionMode;
+import engine.input.events.KeyEvent;
+import engine.input.events.MouseEvent;
 import engine.model.Model;
 import engine.player.Player;
 import engine.playerstate.PlayerInputState;
@@ -56,14 +60,5 @@ public class InputManager {
 			}
 		});
 	}
-
-	// private void select(double x, double y) {
-	// if (selectionChecker.checkSelection(model, x, y)) {
-	// System.out.println("The click is in one polygon.");
-	// }
-	// else {
-	// System.out.println("The click is not in any polygon.");
-	// }
-	// }
-
+	
 }

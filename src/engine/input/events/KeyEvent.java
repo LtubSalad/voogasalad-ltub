@@ -1,4 +1,4 @@
-package engine.input;
+package engine.input.events;
 
 import bus.BusEvent;
 import bus.BusEventType;
