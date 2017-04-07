@@ -1,0 +1,24 @@
+# reference: https://gitlab.com/gitlab-org/gitlab-ci-yml/blob/master/Maven.gitlab-ci.yml
+image: maven:3.3.9-jdk-8
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+
+cache:
+  paths:
+    - .m2/repository
+
+stages:
+  - compile
+  - test
+
+compile:
+  stage: compile
+  script:
+    - "mvn $MAVEN_CLI_OPTS clean test-compile"
+  
+test:
+  stage: test
+  script:
+    - "mvn $MAVEN_CLI_OPTS verify"
