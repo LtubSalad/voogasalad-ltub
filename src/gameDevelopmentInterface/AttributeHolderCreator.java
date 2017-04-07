@@ -4,8 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.Data.AttributeData;
-import api.Data.ClassData;
+import data.AttributeData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -27,12 +26,13 @@ import javafx.util.Callback;
 public class AttributeHolderCreator extends BorderPane {
 	// Put in attribute data from an attribute
 	private Node attributePane;
-	private ClassData attributeHolder;
+	private AttributeData attributeHolder;
 
 	public AttributeHolderCreator() {
-		attributePane = new AttributeSelectorPane();
+		attributeHolder=new AttributeData("dummy");
+		attributePane = new AttributeSelectorPane(attributeHolder);
 		this.setRight(attributePane);
-		this.setLeft(new AttributeCustomizerPane());
+		this.setLeft(new AttributeCustomizerPane(attributeHolder));
 	}
 
 	// Produce XML file for this class' data.
