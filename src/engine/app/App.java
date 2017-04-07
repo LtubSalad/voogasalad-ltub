@@ -1,16 +1,18 @@
 package engine.app;
 
-import commons.Point;
+
+import engine.camera.Camera;
+import engine.camera.GamePoint;
 import engine.gameloop.GameLoop;
 import engine.model.Model;
 import engine.model.PlayerLocalModel;
-import engine.sprite.LtubImage;
+import engine.player.Player;
 import engine.sprite.Movable;
 import engine.sprite.Sprite;
 import engine.sprite.collision.Collidable;
 import engine.sprite.collision.CollisionBound;
-import engine.sprite.collision.CollisionChecker;
-import engine.sprite.range.InRangeChecker;
+import engine.sprite.images.ImageSet;
+import engine.sprite.images.LtubImage;
 import engine.view.View;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -23,12 +25,13 @@ public class App extends Application {
 		
 		GameFactory gameFactory = new GameFactory();
 		
-		
 		// sprite1
 		Sprite sprite1 = new Sprite();
-		sprite1.setPos(new Point(100, 100));
+		sprite1.setPos(new GamePoint(100, 100));
 		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
-		sprite1.setImage(image1);
+		ImageSet imageSet1 = new ImageSet();
+		imageSet1.setImage(image1);
+		sprite1.setImageSet(imageSet1);
 		Movable movable1 = new Movable(sprite1);
 		sprite1.setMovable(movable1);
 		sprite1.setCollidable(new Collidable(new CollisionBound(image1)));
@@ -37,30 +40,35 @@ public class App extends Application {
 		
 		// sprite2
 		Sprite sprite2 = new Sprite();
-		sprite2.setPos(new Point(200, 100));
+		sprite2.setPos(new GamePoint(200, 100));
 		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
-		sprite2.setImage(image2);
+		ImageSet imageSet2 = new ImageSet();
+		imageSet2.setImage(image1);
+		sprite2.setImageSet(imageSet1);
 		Movable movable2 = new Movable(sprite2);
 		movable2.setSpeed(100);
 		sprite2.setCollidable(new Collidable(new CollisionBound(image2)));
 		sprite2.setMovable(movable2);
 		sprite2.setDetectionRange(256);
 		
+		// game player (user)
+		Player player = new Player("Player 1");
 		
 		// model and view
-		Model model = gameFactory.createModel();
+		Model model = gameFactory.createModel(player);
 		model.addSprite(sprite1);
 		model.addSprite(sprite2);
 		PlayerLocalModel localModel = gameFactory.createPlayerLocalModel();
-		View view = gameFactory.createView();
-		
+		Camera camera = gameFactory.createCamera();
+		View view = gameFactory.createView(camera);
+
 		
 		// game loop
 		GameLoop gameLoop = gameFactory.createGameLoop();
-		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
-		gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
-		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
-		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites()));
+//		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
+//		gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
+//		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
+//		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites()));
 		gameLoop.addLoopComponent((dt) -> model.update(dt));
 		gameLoop.addLoopComponent((dt) -> view.render(model));
 		gameLoop.addLoopComponent((dt) -> view.render(localModel));
@@ -70,10 +78,10 @@ public class App extends Application {
 		gameFactory.createCollisionManager();
 		gameFactory.createInRangeManager();
 		gameFactory.createSoundManager();
-		gameFactory.createInputManager(model, localModel);
+		gameFactory.createInputManager(model, camera);
 		gameFactory.createActionFilter();
 		gameFactory.createActionManager();
-
+		
 		
 		// set scene, start loop, and show stage
 		Scene scene = view.getScene();

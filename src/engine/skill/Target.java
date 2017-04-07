@@ -1,30 +1,31 @@
 package engine.skill;
 
-import commons.Point;
+
+import java.util.Optional;
+
+import engine.camera.GamePoint;
 import engine.sprite.Sprite;
 
 public class Target {
 	
+	private GamePoint location = null;
 	private Sprite sprite = null;
-	private Point location = null;
 	
 	public Target(Sprite sprite) {
 		this.sprite = sprite;
 	}
-	public Target(Point location) {
+	public Target(GamePoint location) {
 		this.location = location;
 	}
+	public Target(GamePoint location, Sprite sprite) {
+		this.location = location;
+		this.sprite = sprite;
+	}
 	
-	public boolean isSprite() {
-		return sprite != null;
+	public Optional<Sprite> getSprite() {
+		return Optional.ofNullable(sprite);
 	}
-	public boolean isLocation() {
-		return location != null;
-	}
-	public Sprite getSprite() {
-		return sprite;
-	}
-	public Point getLocation() {
-		return location;
+	public Optional<GamePoint> getLocation() {
+		return Optional.ofNullable(location);
 	}
 }

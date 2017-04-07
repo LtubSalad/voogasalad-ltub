@@ -2,6 +2,7 @@ package engine.model;
 
 import java.util.List;
 
+import engine.player.Player;
 import engine.sprite.Sprite;
 
 /**
@@ -18,6 +19,7 @@ public interface Model {
 	
 	public List<Sprite> getSprites();
 
+	public Player getPlayer();
 	
 	public void update(double dt);
 	

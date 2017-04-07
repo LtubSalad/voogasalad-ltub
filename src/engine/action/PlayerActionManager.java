@@ -17,7 +17,7 @@ public class PlayerActionManager {
 		bus.on(SelectSkillEvent.SELECT, (e) -> {
 			if (e.getSkill().isInstant()) {
 				bus.emit(new ConfirmSkillEvent(ConfirmSkillEvent.CONFIRM, e.getSkill()));
-				bus.emit(new SelectSkillEvent(SelectSkillEvent.DESELECT, e.getSkill()));
+				bus.emit(new SelectSkillEvent(SelectSkillEvent.CANCEL, e.getSkill()));
 			}
 		});
 	}

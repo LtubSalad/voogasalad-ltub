@@ -1,19 +1,19 @@
 package engine.model;
 
 import bus.EventBus;
-import engine.playerstate.PlayerInputState;
+import engine.input.KeyInputState;
 import engine.playerstate.PlayerSelectionState;
 import engine.playerstate.PlayerSkillState;
 
 /**
  * Contains data local to the player (user).
+ * Not seen by other players.
  * @author keping
  *
  */
 public class PlayerLocalModel {
 	
 	private EventBus bus;
-	private PlayerInputState inputState;
 	private PlayerSelectionState selectionState;
 	private PlayerSkillState skillState;
 	
@@ -23,13 +23,6 @@ public class PlayerLocalModel {
 	
 	private void initHandlers() {
 		
-	}
-	
-	public PlayerInputState getPlayerInputState() {
-		return inputState;
-	}
-	public void setPlayerInputState(PlayerInputState inputState) {
-		this.inputState = inputState;
 	}
 	
 	public PlayerSelectionState getPlayerSelectionState() {

@@ -7,7 +7,7 @@ import engine.skill.Skill;
 public class SelectSkillEvent extends BusEvent {
 
 	public static final BusEventType<SelectSkillEvent> SELECT = new BusEventType<>("SELECT_SKILL");
-	public static final BusEventType<SelectSkillEvent> DESELECT = new BusEventType<>("DESELECT_SKILL");
+	public static final BusEventType<SelectSkillEvent> CANCEL = new BusEventType<>("DESELECT_SKILL");
 	
 	private Skill skill;
 	

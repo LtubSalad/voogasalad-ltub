@@ -22,12 +22,13 @@ public class ActionManager {
 			// TODO: currently assume target is position.
 			sprite.getMovable().ifPresent((movable) -> {
 				if (actionMode == ActionMode.QUEUE) {
-					sprite.queueAction(() -> movable.moveTo(target.getLocation()));
+					sprite.queueAction(() -> movable.moveTo(target.getLocation().get()));
 				} else {
-					sprite.executeAction(() -> movable.moveTo(target.getLocation()));
+					sprite.executeAction(() -> movable.moveTo(target.getLocation().get()));
 				}
 			});
 		});
 	}
-	
+
+
 }

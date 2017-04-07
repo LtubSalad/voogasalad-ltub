@@ -4,13 +4,14 @@ import bus.BasicEventBus;
 import bus.EventBus;
 import engine.action.ActionFilter;
 import engine.action.ActionManager;
+import engine.camera.Camera;
 import engine.gameloop.FXGameLoop;
 import engine.gameloop.GameLoop;
 import engine.input.InputManager;
 import engine.model.BasicModel;
 import engine.model.Model;
 import engine.model.PlayerLocalModel;
-import engine.playerstate.PlayerInputState;
+import engine.player.Player;
 import engine.playerstate.PlayerSelectionState;
 import engine.playerstate.PlayerSkillState;
 import engine.sound.FXSoundManager;
@@ -33,24 +34,28 @@ public class GameFactory {
 		bus = new BasicEventBus();
 	}
 	
-	public Model createModel() {
-		return new BasicModel(bus);
+	public Model createModel(Player player) {
+		return new BasicModel(bus, player);
 	}
 	
-	public View createView() {
-		return new FXView(bus);
+	public View createView(Camera camera) {
+		return new FXView(bus, camera);
 	}
 	
 	public GameLoop createGameLoop() {
 		return new FXGameLoop();
 	}
 	
+	public Camera createCamera() {
+		return new Camera();
+	}
+	
 	public SoundManager createSoundManager() {
 		return new FXSoundManager(bus);
 	}
 	
-	public InputManager createInputManager(Model model, PlayerLocalModel localModel) {
-		return new InputManager(bus, model, localModel);
+	public InputManager createInputManager(Model model, Camera camera) {
+		return new InputManager(bus, model, camera);
 	}
 
 	public ActionFilter createActionFilter() {
@@ -77,10 +82,6 @@ public class GameFactory {
 		return new InRangeManager(bus);
 	}
 	
-	private PlayerInputState createPlayerInputState() {
-		return new PlayerInputState(bus);
-	}
-	
 	private PlayerSelectionState createPlayerSelectionState() {
 		return new PlayerSelectionState(bus);
 	}
@@ -91,7 +92,6 @@ public class GameFactory {
 	
 	public PlayerLocalModel createPlayerLocalModel() {
 		PlayerLocalModel localModel = new PlayerLocalModel(bus);
-		localModel.setPlayerInputState(createPlayerInputState());
 		localModel.setPlayerSelectionState(createPlayerSelectionState());
 		localModel.setPlayerSkillState(createPlayerSkillState());
 		return localModel;

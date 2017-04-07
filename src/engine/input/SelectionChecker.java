@@ -3,8 +3,7 @@ package engine.input;
 import java.util.ArrayList;
 import java.util.List;
 
-import commons.Point;
-import engine.model.Model;
+import engine.camera.GamePoint;
 import engine.sprite.SelectionBound;
 import engine.sprite.Sprite;
 import javafx.scene.image.Image;
@@ -24,17 +23,17 @@ public class SelectionChecker {
 	 * @param pos {@code Point} the clicked point
 	 * @return Sprite the clicked sprite
 	 */
-	public Sprite getSelection(Model model, Point pos) {
-		for (Sprite sprite: model.getSprites()) {
+	public Sprite getSelection(List<Sprite> sprites, GamePoint pos) {
+		for (Sprite sprite: sprites) {
 			if (sprite.getSelectionBound() == SelectionBound.IMAGE) {
-				if (checkPointOnImage(sprite.getImage().getFXImage(), pos.x()-sprite.getDisplayPos().x(), pos.y()-sprite.getDisplayPos().y())) {
+				if (checkPointOnImage(sprite.getImage().getFXImage(), pos.x()-sprite.getImage().getImageOffset().x(), pos.y()-sprite.getImage().getImageOffset().y())) {
 					return sprite;
 				}
 			}
 			else if (sprite.getSelectionBound() == SelectionBound.POLYGON) {
 				List<Double> xList = new ArrayList<>(); 
 				List<Double> yList = new ArrayList<>();
-				for (Point point: sprite.getSelectionBoundVertices()) {
+				for (GamePoint point: sprite.getSelectionBoundVertices()) {
 					xList.add(point.x());
 					yList.add(point.y());
 				}
@@ -45,7 +44,7 @@ public class SelectionChecker {
 			}
 		}
 		// TODO if nothing is selected, return the background "sprite"
-		return model.getSprites().get(0);
+		return null;
 	}
 
 	/**
