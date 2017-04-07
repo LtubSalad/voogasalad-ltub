@@ -15,7 +15,10 @@ public class ButtonsPanel extends VBox {
 	}
 
 	private void makeButtons() {
-		drawPathButton.setOnAction(e -> myPathCreator.makePath());
+		drawPathButton.setOnAction(e -> {
+			myPathCreator.getReplacementPath().clear();
+			myPathCreator.makePath();
+		});
 		finishPathButton.setOnAction(e -> myPathCreator.replacePath());
 	}
 }
