@@ -1,38 +1,37 @@
 package engine.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import commons.RunningMode;
 import engine.gameloop.LoopComponent;
+import engine.model.SpriteModel.SpriteHandler;
 import engine.playerstate.PlayerSelectionState;
 import engine.sprite.Sprite;
 
+
+// also needs to implement statsModel
 public class BasicModel implements Model {
 
-	private List<Sprite> sprites = new ArrayList<>();
 	private PlayerSelectionState selectionState;
-
-	@Override
-	public List<Sprite> getSprites() {
-		return sprites;
+	private SpriteModel spriteModel; 
+	private SpriteHandler handler; 
+	
+	public BasicModel(){
+		spriteModel = new SpriteModel(); 
+		handler = (SpriteHandler) spriteModel.getHandler();
+	
 	}
-	@Override
-	public void addSprite(Sprite sprite) {
-		if (sprite == null && RunningMode.DEV_MODE) {
-			System.out.println("Model received null sprite: " + sprite);
-		}
-		if (sprite != null) {
-			sprites.add(sprite);
-		}
-	}
-	@Override
-	public void removeSprite(Sprite sprite) {
-		sprites.remove(sprite);
+	
+	public BasicModel(SpriteModel spriteModel){
+		this.spriteModel = spriteModel; 
+		handler = (SpriteHandler) spriteModel.getHandler();
 	}
 
 	@Override
 	public void update(double dt) {
+		Collection<Sprite> sprites = handler.getSprites();
 		for (Sprite sprite : sprites) {
 			sprite.update(dt);
 		}
