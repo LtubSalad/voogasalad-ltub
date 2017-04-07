@@ -5,7 +5,9 @@ import java.util.Map;
 
 
 import data.AttributeData;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -14,14 +16,12 @@ import javafx.util.Pair;
 
 public class AttributeCustomizerPane extends VBox {
 	private AttributeData myAttribute;
+	private VBox variableCustomizer;
+	private VBox functionCustomizer;
 	
 	public AttributeCustomizerPane(AttributeData attributeData){
 		myAttribute=attributeData;
-		this.getChildren().addAll(new Label("Attribute Name: "+myAttribute.getName()),
-				variableSetter(attributeData.getVariables()),functionSetter(attributeData.getScripts()));
-		myAttribute.getAttributes().forEach((subAttribute)->{
-			this.getChildren().add(new AttributeCustomizerPane(subAttribute));
-		});	
+		refreshDisplay();
 	}
 
 	private VBox variableSetter(Map<String, String> variables) {
@@ -62,6 +62,23 @@ public class AttributeCustomizerPane extends VBox {
 	
 	public AttributeData getAttribute(){
 		return myAttribute;
+	}
+	
+	public void refreshDisplay(){
+		this.getChildren().clear();
+		variableCustomizer=variableSetter(myAttribute.getVariables());
+		functionCustomizer=functionSetter(myAttribute.getScripts());
+		Button refresher = new Button("Refresh");
+		refresher.setOnAction((c)->{
+			refreshDisplay();
+		});
+		this.getChildren().addAll(new Label("Attribute Name: "+myAttribute.getName()),
+				variableCustomizer,functionCustomizer);
+		myAttribute.getAttributes().forEach((subAttribute)->{
+			this.getChildren().add(new AttributeCustomizerPane(subAttribute));
+		});	
+		this.getChildren().add(refresher);
+
 	}
 	
 }

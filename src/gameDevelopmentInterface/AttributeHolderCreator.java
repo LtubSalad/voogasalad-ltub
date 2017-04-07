@@ -34,7 +34,6 @@ public class AttributeHolderCreator extends BorderPane {
 		this.setRight(attributePane);
 		this.setLeft(new AttributeCustomizerPane(attributeHolder));
 	}
-
 	// Produce XML file for this class' data.
 	public File createClassData() {
 		return null;
