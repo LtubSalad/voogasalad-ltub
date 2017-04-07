@@ -55,23 +55,4 @@ public class BasicModel implements Model {
 		}
 	}
 
-	@Override
-	public PlayerSelectionState getPlayerSelectionState() {
-		return selectionState;
-	}
-	@Override
-	public void setPlayerSelectionState(PlayerSelectionState selectionState) {
-		this.selectionState = selectionState;
-	}
-
-	@Override
-	public PlayerSkillState getPlayerSkillState() {
-		return playerSkillState;
-	}
-
-	@Override
-	public void setPlayerSkillState(PlayerSkillState skillState) {
-		this.playerSkillState = skillState;
-	}
-
 }

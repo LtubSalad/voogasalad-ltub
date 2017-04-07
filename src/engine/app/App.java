@@ -1,13 +1,9 @@
 package engine.app;
 
 import commons.Point;
-import engine.action.ActionManager;
 import engine.gameloop.GameLoop;
-import engine.input.InputManager;
 import engine.model.Model;
-import engine.playerstate.PlayerInputState;
-import engine.playerstate.PlayerSelectionState;
-import engine.playerstate.PlayerSkillState;
+import engine.model.PlayerLocalModel;
 import engine.sprite.LtubImage;
 import engine.sprite.Movable;
 import engine.sprite.Sprite;
@@ -24,10 +20,9 @@ public class App extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
+		
 		GameFactory gameFactory = new GameFactory();
 		
-		Model model = gameFactory.createModel();
-		View view = gameFactory.createView();
 		
 		// sprite1
 		Sprite sprite1 = new Sprite();
@@ -38,7 +33,6 @@ public class App extends Application {
 		sprite1.setMovable(movable1);
 		sprite1.setCollidable(new Collidable(new CollisionBound(image1)));
 //		sprite1.setImageOffset(new Point(30, 30));
-		model.addSprite(sprite1);
 		sprite1.setDetectionRange(128);
 		
 		// sprite2
@@ -50,39 +44,40 @@ public class App extends Application {
 		movable2.setSpeed(100);
 		sprite2.setCollidable(new Collidable(new CollisionBound(image2)));
 		sprite2.setMovable(movable2);
-		model.addSprite(sprite2);
 		sprite2.setDetectionRange(256);
 		
 		
-		PlayerSelectionState playerSelectionState = gameFactory.createPlayerSelectionState();
-		model.setPlayerSelectionState(playerSelectionState);
-		PlayerSkillState playerSkillState = gameFactory.createPlayerSkillState();
-		model.setPlayerSkillState(playerSkillState);
+		// model and view
+		Model model = gameFactory.createModel();
+		model.addSprite(sprite1);
+		model.addSprite(sprite2);
+		PlayerLocalModel localModel = gameFactory.createPlayerLocalModel();
+		View view = gameFactory.createView();
 		
 		
-		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
-		gameFactory.createCollisionManager();	
-		
-		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
-		gameFactory.createInRangeManager();		
-		
+		// game loop
 		GameLoop gameLoop = gameFactory.createGameLoop();
+		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
 		gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
+		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
 		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites()));
 		gameLoop.addLoopComponent((dt) -> model.update(dt));
 		gameLoop.addLoopComponent((dt) -> view.render(model));
-		gameLoop.start(); // nothing added in the loop yet.
+		gameLoop.addLoopComponent((dt) -> view.render(localModel));
 		
-		gameFactory.createSoundManager(); // Automatically linked by the event bus.
-		InputManager inputManager = gameFactory.createInputManager(model);
-		PlayerInputState playerInputState = gameFactory.createPlayerInputState();
-		ActionManager actionManager = gameFactory.createActionManager();
-		inputManager.setPlayerInputState(playerInputState);
-		inputManager.setPlayerSelectionState(playerSelectionState);
-		inputManager.setActionManager(actionManager);
-		inputManager.initHandlers();
 		
+		// create other event managers (they are automatically linked by the bus)
+		gameFactory.createCollisionManager();
+		gameFactory.createInRangeManager();
+		gameFactory.createSoundManager();
+		gameFactory.createInputManager(model, localModel);
+		gameFactory.createActionFilter();
+		gameFactory.createActionManager();
+
+		
+		// set scene, start loop, and show stage
 		Scene scene = view.getScene();
+		gameLoop.start();
         stage.setTitle("My JavaFX Application");
         stage.setScene(scene);
         stage.show();		

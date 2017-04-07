@@ -27,7 +27,7 @@ public class PlayerSkillState {
 		bus.on(SelectSkillEvent.SELECT, (e) -> {
 			setSelectedSkill(e.getSkill());
 		});
-		bus.off(SelectSkillEvent.DESELECT, (e) -> {
+		bus.on(SelectSkillEvent.DESELECT, (e) -> {
 			setSelectedSkill(null);
 		});
 	}
@@ -35,7 +35,7 @@ public class PlayerSkillState {
 	private void setSelectedSkill(Skill skill) {
 		this.skill = skill;
 	}
-	
+		
 	public Optional<Skill> getSelectedSkill() {
 		return Optional.ofNullable(skill);
 	}

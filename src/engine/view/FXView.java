@@ -5,6 +5,7 @@ import commons.Point;
 import engine.input.events.KeyEvent;
 import engine.input.events.MouseEvent;
 import engine.model.Model;
+import engine.model.PlayerLocalModel;
 import engine.playerstate.PlayerSelectionState;
 import engine.playerstate.PlayerSelectionState.SelectionType;
 import engine.sprite.Sprite;
@@ -84,17 +85,22 @@ public class FXView implements View {
 					sprite.getDisplayPos().y());
 		}
 
+	}
+
+	@Override
+	public void render(PlayerLocalModel localModel) {
+
 		// render selection graphics
 		gcSelected.clearRect(0, 0, WIDTH, HEIGHT - CANVAS_HEIGHT);
 		// gcSelected.fillOval(0, 0, 30, 40);
-		PlayerSelectionState selectionState = model.getPlayerSelectionState();
+		PlayerSelectionState selectionState = localModel.getPlayerSelectionState();
 		if (selectionState.getSelectionType() == SelectionType.SINGLE) {
 			Sprite selectedSprite = selectionState.getSelectedSprite();
 			gcSelected.drawImage(new Image(selectedSprite.getImage().getInputStream()), 20, 20);
 		}
 
 		// render skill box
-		skillBox.render(model.getPlayerSelectionState().getAvailableSkills());
+		skillBox.render(localModel.getPlayerSelectionState().getAvailableSkills());
 	}
 
 }

@@ -2,12 +2,14 @@ package engine.app;
 
 import bus.BasicEventBus;
 import bus.EventBus;
+import engine.action.ActionFilter;
 import engine.action.ActionManager;
 import engine.gameloop.FXGameLoop;
 import engine.gameloop.GameLoop;
 import engine.input.InputManager;
 import engine.model.BasicModel;
 import engine.model.Model;
+import engine.model.PlayerLocalModel;
 import engine.playerstate.PlayerInputState;
 import engine.playerstate.PlayerSelectionState;
 import engine.playerstate.PlayerSkillState;
@@ -47,26 +49,18 @@ public class GameFactory {
 		return new FXSoundManager(bus);
 	}
 	
-	public InputManager createInputManager(Model model) {
-		return new InputManager(bus, model);
+	public InputManager createInputManager(Model model, PlayerLocalModel localModel) {
+		return new InputManager(bus, model, localModel);
 	}
-	
+
+	public ActionFilter createActionFilter() {
+		return new ActionFilter(bus);
+	}
 	public ActionManager createActionManager() {
 		return new ActionManager(bus);
 	}
 	
-	public PlayerInputState createPlayerInputState() {
-		return new PlayerInputState(bus);
-	}
-	
-	public PlayerSelectionState createPlayerSelectionState() {
-		return new PlayerSelectionState(bus);
-	}
-	
-	public PlayerSkillState createPlayerSkillState() {
-		return new PlayerSkillState(bus);
-	}
-	
+
 	public CollisionChecker createCollisionChecker() {
 		return new CollisionChecker(bus);
 	}
@@ -83,5 +77,23 @@ public class GameFactory {
 		return new InRangeManager(bus);
 	}
 	
+	private PlayerInputState createPlayerInputState() {
+		return new PlayerInputState(bus);
+	}
 	
+	private PlayerSelectionState createPlayerSelectionState() {
+		return new PlayerSelectionState(bus);
+	}
+	
+	private PlayerSkillState createPlayerSkillState() {
+		return new PlayerSkillState(bus);
+	}
+	
+	public PlayerLocalModel createPlayerLocalModel() {
+		PlayerLocalModel localModel = new PlayerLocalModel(bus);
+		localModel.setPlayerInputState(createPlayerInputState());
+		localModel.setPlayerSelectionState(createPlayerSelectionState());
+		localModel.setPlayerSkillState(createPlayerSkillState());
+		return localModel;
+	}
 }
