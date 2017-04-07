@@ -75,13 +75,13 @@ public class Path {
 		nextCoord = myPath.poll();		
 	}
 	
-	private void test() {
-		for (int i = 0; i < 4; i++) {
-			System.out.println("currCoord: " + currCoord);
-			System.out.println("nextCoord: " + nextCoord);
-			System.out.println("Heading: " + getNextHeading());
-			System.out.println();
-		}
-	}
+//	private void test() {
+//		for (int i = 0; i < 4; i++) {
+//			System.out.println("currCoord: " + currCoord);
+//			System.out.println("nextCoord: " + nextCoord);
+//			System.out.println("Heading: " + getNextHeading());
+//			System.out.println();
+//		}
+//	}
 	
 }
