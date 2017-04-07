@@ -1,0 +1,2 @@
+<Tower>
+<ObjectHolder variableList_secondaryObjects="sword_ball" function_getObjects="return secondaryObjects;"></ObjectHolder></Tower>

@@ -1,0 +1,31 @@
+####Part 1
+What about your API/design is intended to be flexible?
+My API should allow the details of any kind of object to be set using the editor interface, as they can be built from smaller subattributes. The skeletons of each attribute class are based on XML files instead of hard code, making it easier to save and load new data for attributes.
+	
+How is your API/design encapsulating your implementation decisions?
+My API hides my implementation decisions by setting internal data structures within classes to be private, and minimizing public methods across the developer interface.
+
+How is your part linked to other parts of the project?
+It saves data to xml files to be read by the gameplayer.
+	
+What exceptions (error cases) might occur in your part and how will you handle them (or not, by throwing)?
+If the syntax script does not make sense to Groovy, an error message will be displayed.
+
+Why do you think your API/design is good (also define what your measure of good is)?
+It supports the creation of nearly any kind of class without needing additional code, so the creation of classes is kept extensible.
+
+####Part 2
+What feature/design problem are you most excited to work on?
+	I’m excited to work on the scripting interface of our program because it’s an area I have not tried using before.
+	
+What feature/design problem are you most worried about working on?
+I'm worried that making the set of the user interface something that is hardcoded into the games will limit the flexibility of the code. Ideally, I would want the user to be able to set his own user interface.
+
+What major feature do you plan to implement this weekend?
+	This weekend, I plan to work with my partner on the developer side to allow for the population of a screenmodel with the required AttributeData instances. I also plan to allow AttributeData to be saved to a file.
+	
+Discuss the use cases/issues created for your pieces: are they descriptive, appropriate, and reasonably sized?
+	I think the use cases I created for my part gave me a good idea of how I wanted to implement my front end. For example, detailing how an attribute could be constructed from smaller subattributes as one of my use cases helped guide me towards the current design of the class data.
+	
+Do you have use cases for errors that might occur?
+	If the developer forgets to set an image for an imageholder and clicks save, an exception should be thrown.
