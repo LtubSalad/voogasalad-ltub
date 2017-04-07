@@ -3,16 +3,32 @@ package engine.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import bus.EventBus;
 import commons.RunningMode;
-import engine.gameloop.LoopComponent;
-import engine.playerstate.PlayerSelectionState;
+import engine.player.Player;
 import engine.sprite.Sprite;
 
 public class BasicModel implements Model {
 
+	private EventBus bus;
+	private Player player;
 	private List<Sprite> sprites = new ArrayList<>();
-	private PlayerSelectionState selectionState;
 
+	public BasicModel(EventBus bus, Player player) {
+		this.bus = bus;
+		this.player = player;
+		initHandlers();
+	}
+	
+	private void initHandlers() {
+		bus.on(SpriteModelEvent.ADD, (e) -> {
+			addSprite(e.getSprite());
+		});
+		bus.on(SpriteModelEvent.REMOVE, (e) -> {
+			removeSprite(e.getSprite());
+		});
+	}
+	
 	@Override
 	public List<Sprite> getSprites() {
 		return sprites;
@@ -39,12 +55,8 @@ public class BasicModel implements Model {
 	}
 
 	@Override
-	public PlayerSelectionState getPlayerSelectionState() {
-		return selectionState;
-	}
-	@Override
-	public void setPlayerSelectionState(PlayerSelectionState selectionState) {
-		this.selectionState = selectionState;
+	public Player getPlayer() {
+		return player;
 	}
 
 }

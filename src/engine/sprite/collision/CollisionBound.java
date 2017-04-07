@@ -4,27 +4,27 @@ package engine.sprite.collision;
 import java.util.ArrayList;
 import java.util.List;
 
-import commons.Point;
-import engine.sprite.LtubImage;
+import engine.camera.GamePoint;
+import engine.sprite.images.LtubImage;
 
 public class CollisionBound {
 
-	private List<Point> bound;
+	private List<GamePoint> bound;
 	
-	public CollisionBound(List<Point> bound) {
+	public CollisionBound(List<GamePoint> bound) {
 		this.bound = bound;
 	}
 	public CollisionBound(LtubImage ltubImage) {
-		bound = new ArrayList<Point>();
+		bound = new ArrayList<GamePoint>();
 		double w = ltubImage.width();
 		double h = ltubImage.height();
-		bound.add(new Point(0, 0));
-		bound.add(new Point(w, 0));
-		bound.add(new Point(w, h));
-		bound.add(new Point(0, h));
+		bound.add(new GamePoint(0, 0));
+		bound.add(new GamePoint(w, 0));
+		bound.add(new GamePoint(w, h));
+		bound.add(new GamePoint(0, h));
 	}
 	
-	public List<Point> getBoundPoints() {
+	public List<GamePoint> getBoundPoints() {
 		return bound;
 	}
 	

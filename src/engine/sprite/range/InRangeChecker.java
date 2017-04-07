@@ -3,7 +3,7 @@ package engine.sprite.range;
 import java.util.List;
 
 import bus.EventBus;
-import commons.Point;
+import engine.camera.GamePoint;
 import engine.sprite.Sprite;
 
 /**
@@ -35,8 +35,8 @@ public class InRangeChecker {
 	}
 
 	private boolean inRange(Sprite detector, Sprite detectee) {
-		Point detectorPos = detector.getPos();
-		Point detecteePos = detectee.getPos();
+		GamePoint detectorPos = detector.getPos();
+		GamePoint detecteePos = detectee.getPos();
 		double distance = detectorPos.distFrom(detecteePos);
 		if (distance <= detector.getDetectionRange()) {
 			return true;

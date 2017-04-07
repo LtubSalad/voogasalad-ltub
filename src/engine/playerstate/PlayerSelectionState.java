@@ -4,7 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bus.EventBus;
+import engine.action.events.MoveSpriteEvent;
+import engine.camera.GamePoint;
+import engine.input.events.GameWorldMouseEvent;
+import engine.skill.PlayerCreateSpriteSkill;
+import engine.skill.Skill;
+import engine.sprite.Movable;
 import engine.sprite.Sprite;
+import engine.sprite.collision.Collidable;
+import engine.sprite.collision.CollisionBound;
+import engine.sprite.images.ImageSet;
+import engine.sprite.images.LtubImage;
 
 public class PlayerSelectionState {
 
@@ -15,7 +25,7 @@ public class PlayerSelectionState {
 	private EventBus bus;
 	private Sprite sprite;
 	private List<Sprite> sprites;
-	private SelectionType type = SelectionType.EMPTY;
+	private SelectionType selectionType = SelectionType.EMPTY;
 	
 	public PlayerSelectionState(EventBus bus) {
 		this.bus = bus;
@@ -23,29 +33,55 @@ public class PlayerSelectionState {
 	}
 	
 	private void initHandlers() {
-		
+		bus.on(GameWorldMouseEvent.SELECT_SPRITE, (e) -> {
+			e.getTarget().getSprite().ifPresent((sprite) -> {
+				setSelectedSprite(sprite);
+			});
+		});
+		bus.on(GameWorldMouseEvent.CANCEL_SKILL_AND_MOVE_SPRITE, (e) -> {
+			if (selectionType == SelectionType.SINGLE) {
+				// TODO: where comes the current player
+				bus.emit(new MoveSpriteEvent(MoveSpriteEvent.RAW, e.getActionMode(), e.getPlayer(), sprite, e.getTarget()));
+			}
+			// TODO group selection
+		});
 	}
 	
+	public List<Skill> getAvailableSkills() {
+		// TODO different skills according to the current selected sprite
+		List<Skill> availableSkills = new ArrayList<>();
+		Sprite sprite = new Sprite();
+		sprite.setPos(new GamePoint(100, 100));
+		LtubImage image = new LtubImage("images/characters/bahamut_left.png");
+		ImageSet imageSet = new ImageSet();
+		imageSet.setImage(image);
+		sprite.setImageSet(imageSet);
+		Movable movable = new Movable(sprite);
+		sprite.setMovable(movable);
+		sprite.setCollidable(new Collidable(new CollisionBound(image)));
+		availableSkills.add(new PlayerCreateSpriteSkill(bus, sprite));
+		return availableSkills;
+	}
 	
-	public void setSelectedSprite(Sprite sprite) {
+	private void setSelectedSprite(Sprite sprite) {
 		this.sprite = sprite;
-		type = SelectionType.SINGLE;
+		selectionType = SelectionType.SINGLE;
 	}
 	public Sprite getSelectedSprite() {
 		return sprite;
 	}
 	public void setSelectedSprites(List<Sprite> sprites) {
 		sprites = new ArrayList<>(sprites);
-		type = SelectionType.GROUP;
+		selectionType = SelectionType.GROUP;
 	}
 	public List<Sprite> getSelectedSprites() {
 		return new ArrayList<Sprite>(sprites);
 	}
 	public void clearSelection() {
-		type = SelectionType.EMPTY;
+		selectionType = SelectionType.EMPTY;
 	}
 	public SelectionType getSelectionType() {
-		return type;
+		return selectionType;
 	}
 	
 }
