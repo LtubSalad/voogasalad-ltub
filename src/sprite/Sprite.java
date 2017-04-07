@@ -29,6 +29,10 @@ public class Sprite {
 	public void setHealthAttribute(String attributeClassName) throws ClassNotFoundException{
 		//health = (HealthAttribute) setAttribute(attributeClassName);
 	}
+	
+	public MoverAttribute getMoverAttribute(){
+		return mover;
+	}
 
 	private Object setAttribute(String attributeClassName) throws ClassNotFoundException{
 		//The success of this is dependent on the package the attribute is in
