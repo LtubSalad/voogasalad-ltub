@@ -17,10 +17,12 @@ import javafx.scene.layout.BorderPane;
 public class ScreenModelCreator extends BorderPane {
 	private ScreenObjectHolder myObjectsToPlace = new ScreenObjectHolder(this);
 	private ScreenMap myScreen = new ScreenMap();
+	private ButtonsPanel myButtonsPanel = new ButtonsPanel(this);
 	
 	public ScreenModelCreator() {
 		this.setBottom(myObjectsToPlace);
 		this.setCenter(myScreen);
+		this.setRight(myButtonsPanel);
 	}
 	/**
 	 * 
