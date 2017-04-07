@@ -2,14 +2,15 @@ package engine.app;
 
 import bus.BasicEventBus;
 import bus.EventBus;
+import engine.action.ActionManager;
 import engine.gameloop.FXGameLoop;
 import engine.gameloop.GameLoop;
-import engine.input.ActionManager;
 import engine.input.InputManager;
 import engine.model.BasicModel;
 import engine.model.Model;
 import engine.playerstate.PlayerInputState;
 import engine.playerstate.PlayerSelectionState;
+import engine.playerstate.PlayerSkillState;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
 import engine.sprite.collision.CollisionChecker;
@@ -29,7 +30,7 @@ public class GameFactory {
 	}
 	
 	public Model createModel() {
-		return new BasicModel();
+		return new BasicModel(bus);
 	}
 	
 	public View createView() {
@@ -58,6 +59,10 @@ public class GameFactory {
 	
 	public PlayerSelectionState createPlayerSelectionState() {
 		return new PlayerSelectionState(bus);
+	}
+	
+	public PlayerSkillState createPlayerSkillState() {
+		return new PlayerSkillState(bus);
 	}
 	
 	public CollisionChecker createCollisionChecker() {
