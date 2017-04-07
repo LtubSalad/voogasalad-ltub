@@ -15,6 +15,8 @@ import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
 import engine.sprite.collision.CollisionChecker;
 import engine.sprite.collision.CollisionManager;
+import engine.sprite.range.InRangeChecker;
+import engine.sprite.range.InRangeManager;
 import engine.view.FXView;
 import engine.view.View;
 
@@ -71,6 +73,14 @@ public class GameFactory {
 	
 	public CollisionManager createCollisionManager() {
 		return new CollisionManager(bus);
+	}
+	
+	public InRangeChecker createInRangeChecker() {
+		return new InRangeChecker(bus);
+	}
+	
+	public InRangeManager createInRangeManager() {
+		return new InRangeManager(bus);
 	}
 	
 	

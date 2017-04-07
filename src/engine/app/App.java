@@ -14,6 +14,7 @@ import engine.sprite.Sprite;
 import engine.sprite.collision.Collidable;
 import engine.sprite.collision.CollisionBound;
 import engine.sprite.collision.CollisionChecker;
+import engine.sprite.range.InRangeChecker;
 import engine.view.View;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -38,6 +39,7 @@ public class App extends Application {
 		sprite1.setCollidable(new Collidable(new CollisionBound(image1)));
 //		sprite1.setImageOffset(new Point(30, 30));
 		model.addSprite(sprite1);
+		sprite1.setDetectionRange(128);
 		
 		// sprite2
 		Sprite sprite2 = new Sprite();
@@ -49,6 +51,7 @@ public class App extends Application {
 		sprite2.setCollidable(new Collidable(new CollisionBound(image2)));
 		sprite2.setMovable(movable2);
 		model.addSprite(sprite2);
+		sprite2.setDetectionRange(256);
 		
 		
 		PlayerSelectionState playerSelectionState = gameFactory.createPlayerSelectionState();
@@ -58,11 +61,14 @@ public class App extends Application {
 		
 		
 		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
-		gameFactory.createCollisionManager();		
+		gameFactory.createCollisionManager();	
 		
+		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
+		gameFactory.createInRangeManager();		
 		
 		GameLoop gameLoop = gameFactory.createGameLoop();
 		gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
+		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites()));
 		gameLoop.addLoopComponent((dt) -> model.update(dt));
 		gameLoop.addLoopComponent((dt) -> view.render(model));
 		gameLoop.start(); // nothing added in the loop yet.
