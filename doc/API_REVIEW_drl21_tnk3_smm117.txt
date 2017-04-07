@@ -16,10 +16,10 @@ It supports the creation of nearly any kind of class without needing additional 
 
 ####Part 2
 What feature/design problem are you most excited to work on?
-	I’m excited to work on the scripting interface of our program because it’s an area I have not tried using before.
+	Iâ€™m excited to work on the scripting interface of our program because itâ€™s an area I have not tried using before.
 	
 What feature/design problem are you most worried about working on?
-I am worried about how to divide labor within the team. It seems to me that, depending on whether we get scripting to work or not, the people on the game engine should not have much to do.
+I'm worried that making the set of the user interface something that is hardcoded into the games will limit the flexibility of the code. Ideally, I would want the user to be able to set his own user interface.
 
 What major feature do you plan to implement this weekend?
 	This weekend, I plan to work with my partner on the developer side to allow for the population of a screenmodel with the required AttributeData instances. I also plan to allow AttributeData to be saved to a file.
