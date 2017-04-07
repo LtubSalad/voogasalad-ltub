@@ -63,7 +63,7 @@ public class App extends Application {
 		View view = gameFactory.createView(camera);
 
 		
-		// game loop
+		// game loop 
 		GameLoop gameLoop = gameFactory.createGameLoop();
 //		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
 //		gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
