@@ -23,10 +23,10 @@ public class Main extends Application {
 		//Loader loader = new Loader();
 
 		 primaryStage = new Stage();
-			primaryStage.setTitle("Game Loading");
+			primaryStage.setTitle("Test Image");
 			Group root = new Group();
 			Scene scene = new Scene(root, 400, 400);
-			ResourceBundle myResources = ResourceBundle.getBundle("resources");
+			ResourceBundle myResources = ResourceBundle.getBundle("data/images/characters");
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString("bahamut_left.png")));
 			ImageView logo = new ImageView(image);
 			root.getChildren().add(logo);
