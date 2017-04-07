@@ -60,7 +60,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-			<scope>test</scope> <!-- thus junit is not included in final packaging -->
+			<!-- <scope>test</scope> thus junit is not included in final packaging -->
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
