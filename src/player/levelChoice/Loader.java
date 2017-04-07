@@ -1,4 +1,4 @@
-package LevelChoice;
+package player.levelChoice;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
