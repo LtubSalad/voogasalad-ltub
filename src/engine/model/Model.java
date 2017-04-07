@@ -8,6 +8,12 @@ import engine.sprite.Sprite;
 
 public interface Model {
 
+	public void addSprite(Sprite sprite);
+	
+	public void removeSprite(Sprite sprite);
+	
+	public List<Sprite> getSprites();
+	
 	public PlayerSelectionState getPlayerSelectionState();
 	public void setPlayerSelectionState(PlayerSelectionState selectionState);
 	
