@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.util.Pair;
 
 /**
@@ -18,14 +21,15 @@ public class AttributeData {
 	//The first string represents the function name and its inputs, and the second represents the actual
 	//script it uses.
 	private String attributeName;
-	private Map<Pair<String, List<String>>,String> attributeScripts;
-	private Map<String,String> attributeVariables;
-	private List<AttributeData> subAttributes;
+	private ObservableMap<Pair<String, List<String>>,String> attributeScripts;
+	private ObservableMap<String,String> attributeVariables;
+	private ObservableList<AttributeData> subAttributes;
 	
 	public AttributeData(String name){
-		attributeVariables=new HashMap<>();
-		attributeScripts=new HashMap<>();
-		subAttributes=new ArrayList<>();
+		attributeVariables=FXCollections.observableMap(new HashMap<>());
+		attributeScripts=FXCollections.observableMap(new HashMap<>());
+		List<AttributeData> subAttributesUnobservable=new ArrayList<>();
+		subAttributes=FXCollections.observableList(subAttributesUnobservable);
 		attributeName=name;
 	}
 	
@@ -41,7 +45,7 @@ public class AttributeData {
 		return attributeName;
 	}
 
-	public List<AttributeData> getAttributes(){
+	public ObservableList<AttributeData> getAttributes(){
 		return subAttributes;
 	}
 	
