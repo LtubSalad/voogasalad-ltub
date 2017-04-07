@@ -35,8 +35,8 @@ public class InRangeChecker {
 	}
 
 	private boolean inRange(Sprite detector, Sprite detectee) {
-		GamePoint detectorPos = detector.getInitialPos();
-		GamePoint detecteePos = detectee.getInitialPos();
+		GamePoint detectorPos = detector.getPos();
+		GamePoint detecteePos = detectee.getPos();
 		double distance = detectorPos.distFrom(detecteePos);
 		if (distance <= detector.getDetectionRange()) {
 			return true;

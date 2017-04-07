@@ -1,9 +1,13 @@
 package engine.skill;
 
-import engine.camera.GamePoint;
+import java.util.Optional;
 
 public interface Skill {
 
-	public void trigger(GamePoint pos);
-	
+	public boolean isInstant();
+
+	public void setTarget(Target target);
+	public Optional<Target> getTarget();
+	public void trigger();
+
 }

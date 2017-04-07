@@ -5,19 +5,18 @@ import java.util.List;
 
 import bus.EventBus;
 import commons.RunningMode;
-import engine.playerstate.PlayerSelectionState;
-import engine.playerstate.PlayerSkillState;
+import engine.player.Player;
 import engine.sprite.Sprite;
 
 public class BasicModel implements Model {
 
 	private EventBus bus;
+	private Player player;
 	private List<Sprite> sprites = new ArrayList<>();
-	private PlayerSelectionState selectionState;
-	private PlayerSkillState playerSkillState;
 
-	public BasicModel(EventBus bus) {
+	public BasicModel(EventBus bus, Player player) {
 		this.bus = bus;
+		this.player = player;
 		initHandlers();
 	}
 	
@@ -56,22 +55,8 @@ public class BasicModel implements Model {
 	}
 
 	@Override
-	public PlayerSelectionState getPlayerSelectionState() {
-		return selectionState;
-	}
-	@Override
-	public void setPlayerSelectionState(PlayerSelectionState selectionState) {
-		this.selectionState = selectionState;
-	}
-
-	@Override
-	public PlayerSkillState getPlayerSkillState() {
-		return playerSkillState;
-	}
-
-	@Override
-	public void setPlayerSkillState(PlayerSkillState skillState) {
-		this.playerSkillState = skillState;
+	public Player getPlayer() {
+		return player;
 	}
 
 }

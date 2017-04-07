@@ -1,66 +1,65 @@
 package engine.input;
 
 import bus.EventBus;
-import engine.action.ActionManager;
 import engine.action.ActionMode;
 import engine.camera.Camera;
+import engine.camera.GamePoint;
+import engine.camera.ViewPoint;
+import engine.input.events.GameWorldMouseEvent;
 import engine.input.events.KeyEvent;
 import engine.input.events.MouseEvent;
 import engine.model.Model;
 import engine.player.Player;
-import engine.playerstate.PlayerInputState;
-import engine.playerstate.PlayerSelectionState;
-import engine.playerstate.PlayerSelectionState.SelectionType;
+import engine.skill.Target;
 import engine.sprite.Sprite;
 import javafx.scene.input.KeyCode;
 
 public class InputManager {
 
 	private EventBus bus;
-	private Camera camera;
 	private Model model;
+	private Camera camera;
+	private KeyInputState keyInputState;
 	private SelectionChecker selectionChecker;
-	private ActionManager actionManager;
-	private PlayerInputState playerInputState;
-	private PlayerSelectionState playerSelectionState;
-
+	
 	public InputManager(EventBus bus, Model model, Camera camera) {
 		this.bus = bus;
 		this.model = model;
 		this.camera = camera;
+		keyInputState = new KeyInputState(bus);
 		selectionChecker = new SelectionChecker();
+		initHandlers();
 	}
 
-	public void setActionManager(ActionManager actionManager) {
-		this.actionManager = actionManager;
+	private Target target(ViewPoint viewPoint) {
+		GamePoint gamePoint = camera.viewToGame(viewPoint);
+		Sprite selected = selectionChecker.getSelection(model.getSprites(), gamePoint);
+		return new Target(gamePoint, selected);
 	}
-	public void setPlayerInputState(PlayerInputState playerInputState) {
-		this.playerInputState = playerInputState;
+	private ActionMode actionMode() {
+		ActionMode actionMode = keyInputState.isKeyPressed(KeyCode.SHIFT) ? ActionMode.QUEUE
+				: ActionMode.INSTANT;
+		return actionMode;
 	}
-	public void setPlayerSelectionState(PlayerSelectionState playerSelectionState) {
-		this.playerSelectionState = playerSelectionState;
+	private Player player() {
+		return model.getPlayer();
 	}
-	
 
-	public void initHandlers() {
+	private void initHandlers() {
 		bus.on(KeyEvent.PRESS, e -> {
-			playerInputState.pressKey(e.getCode());
+			keyInputState.pressKey(e.getCode());
 		});
 		bus.on(KeyEvent.RELEASE, e -> {
-			playerInputState.releaseKey(e.getCode());
+			keyInputState.releaseKey(e.getCode());
 		});
 		bus.on(MouseEvent.LEFT, e -> {
-			Sprite selected = selectionChecker.getSelection(model, camera.viewToGame(e.getPos()));
-			playerSelectionState.setSelectedSprite(selected);
+			// left click: trigger skill if a skill is selected, else select sprite.
+			bus.emit(new GameWorldMouseEvent(GameWorldMouseEvent.CONFIRM_SKILL, target(e.getPos()), actionMode(), player()));
 		});
 		bus.on(MouseEvent.RIGHT, e -> {
-			if (playerSelectionState.getSelectionType() == SelectionType.SINGLE) {
-				Sprite selected = playerSelectionState.getSelectedSprite();
-				ActionMode actionMode = playerInputState.isKeyPressed(KeyCode.SHIFT) ? ActionMode.QUEUE
-						: ActionMode.INSTANT;
-				actionManager.moveSpriteTo(actionMode, Player.DEFAULT, selected, camera.viewToGame(e.getPos()));
-			}
+			// right click: cancel selected skill if present. And let the sprite move (or move & attack).
+			bus.emit(new GameWorldMouseEvent(GameWorldMouseEvent.CANCEL_SKILL_AND_MOVE_SPRITE, target(e.getPos()), actionMode(), player()));
 		});
 	}
-	
+
 }

@@ -1,6 +1,7 @@
 package engine.view;
 
 import engine.model.Model;
+import engine.model.PlayerLocalModel;
 import javafx.scene.Scene;
 
 public interface View {
@@ -9,4 +10,6 @@ public interface View {
 	
 	public void render(Model model);
 
+	public void render(PlayerLocalModel localModel);
+	
 }

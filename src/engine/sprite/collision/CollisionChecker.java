@@ -26,10 +26,10 @@ public class CollisionChecker {
 	}
 	
 	private boolean collides(Sprite s1, Sprite s2) {
-		GamePoint pos1 = s1.getInitialPos();
+		GamePoint pos1 = s1.getPos();
 		CollisionBound bound1 = s1.getCollidable().get().getCollisionBound();
 		Polygon polygon1 = getFXPolygon(bound1.getBoundPoints(), pos1);
-		GamePoint pos2 = s2.getInitialPos();
+		GamePoint pos2 = s2.getPos();
 		CollisionBound bound2 = s2.getCollidable().get().getCollisionBound();
 		Polygon polygon2 = getFXPolygon(bound2.getBoundPoints(), pos2);
 		return polygon1.intersects(polygon2.getBoundsInLocal());

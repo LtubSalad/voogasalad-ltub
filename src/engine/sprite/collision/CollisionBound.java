@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.camera.GamePoint;
-import engine.sprite.LtubImage;
+import engine.sprite.images.LtubImage;
 
 public class CollisionBound {
 

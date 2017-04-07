@@ -8,14 +8,15 @@ import commons.MathUtils;
 import engine.camera.GamePoint;
 import engine.player.Player;
 import engine.sprite.collision.Collidable;
+import engine.sprite.images.ImageSet;
+import engine.sprite.images.LtubImage;
 
 public class Sprite {
 
 	// initialize empty image.
-	private LtubImage ltubImage = LtubImage.EMPTY_IMAGE;
+	private ImageSet imageSet;
 	// private boolean locked = false; // TODO
-	private GamePoint initialPos;
-	private GamePoint adjustedPos;
+	private GamePoint pos;
 	private int z;
 	private Movable movable = null;
 	private Collidable collidable = null;
@@ -32,26 +33,26 @@ public class Sprite {
 
 	}
 
-	public void setImage(LtubImage ltubImage) {
-		this.ltubImage = ltubImage;
-		
+	public void setImageSet(ImageSet imageSet) {
+		this.imageSet = imageSet;		
 	}
 
+	/**
+	 * Return an image corresponding to the sprite at the 
+	 * current frame. Could change with direction and moving distance.
+	 * @return
+	 */
 	public LtubImage getImage() {
-		return ltubImage;
+		// TODO: pass in angle and dist
+		return imageSet.getImage(0, 0);
 	}
 	
-	public GamePoint getInitialPos() {
-		return initialPos;
+	public GamePoint getPos() {
+		return pos;
 	}
 	
-	public void setInitialPos(GamePoint pos) {
-		this.initialPos = pos;
-	}
-	
-	public GamePoint getAdjustedPos() {
-		adjustedPos = new GamePoint(initialPos.x() - ltubImage.getImageOffset().x(), initialPos.y() - ltubImage.getImageOffset().y());
-		return adjustedPos;
+	public void setPos(GamePoint pos) {
+		this.pos = pos;
 	}
 
 	public void setSelectionBound(SelectionBound selectionBound) {

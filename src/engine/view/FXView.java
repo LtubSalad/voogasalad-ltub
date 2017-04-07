@@ -2,10 +2,12 @@ package engine.view;
 
 import bus.EventBus;
 import engine.camera.Camera;
+import engine.camera.GamePoint;
 import engine.camera.ViewPoint;
 import engine.input.events.KeyEvent;
 import engine.input.events.MouseEvent;
 import engine.model.Model;
+import engine.model.PlayerLocalModel;
 import engine.playerstate.PlayerSelectionState;
 import engine.playerstate.PlayerSelectionState.SelectionType;
 import engine.sprite.Sprite;
@@ -83,22 +85,30 @@ public class FXView implements View {
 		// render game cast
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
-			ViewPoint viewPos = camera.gameToView(sprite.getAdjustedPos());
+			GamePoint gamePos = new GamePoint(sprite.getPos().x() - sprite.getImage().getImageOffset().x(), 
+					sprite.getPos().y() - sprite.getImage().getImageOffset().y());
+			ViewPoint viewPos = camera.gameToView(gamePos);
 			gc.drawImage(new Image(sprite.getImage().getInputStream()), viewPos.x(),
 					viewPos.y());
 		}
 
+	}
+
+	@Override
+	public void render(PlayerLocalModel localModel) {
+		// TODO: filter the available stats and skills by the current player
+
 		// render selection graphics
 		gcSelected.clearRect(0, 0, WIDTH, HEIGHT - CANVAS_HEIGHT);
 		// gcSelected.fillOval(0, 0, 30, 40);
-		PlayerSelectionState selectionState = model.getPlayerSelectionState();
+		PlayerSelectionState selectionState = localModel.getPlayerSelectionState();
 		if (selectionState.getSelectionType() == SelectionType.SINGLE) {
 			Sprite selectedSprite = selectionState.getSelectedSprite();
 			gcSelected.drawImage(new Image(selectedSprite.getImage().getInputStream()), 20, 20);
 		}
 
 		// render skill box
-		skillBox.render(model.getPlayerSelectionState().getAvailableSkills());
+//		skillBox.render(localModel.getPlayerSelectionState().getAvailableSkills());
 	}
 
 }

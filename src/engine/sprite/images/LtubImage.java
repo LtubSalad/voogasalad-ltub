@@ -1,26 +1,27 @@
-package engine.sprite;
+package engine.sprite.images;
 
 import java.io.InputStream;
 
 import commons.RunningMode;
 import engine.camera.GamePoint;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class LtubImage {
 
 	public static final LtubImage EMPTY_IMAGE = new LtubImage();
 	
 	private String filename;
-	private Image image;
+	private Image imageView;
 	// imageOffSet is a relative position of an image to its upper-left point.
-	private GamePoint imageOffset = null;
+	private GamePoint pivot = null;
 	
 	LtubImage() { }
 	
 	public LtubImage(String filename) {
 		this.filename = filename;
 		try {
-			image = new Image(getInputStream());
+			imageView = new Image(getInputStream());
 		} catch (NullPointerException e) {
 			if (RunningMode.DEV_MODE) {
 				e.printStackTrace();
@@ -37,25 +38,25 @@ public class LtubImage {
 	}
 	
 	public Image getFXImage() {
-		return image;
+		return imageView;
 	}
 	
 	public double width() {
-		return image != null ? image.getWidth() : 0;
+		return imageView != null ? imageView.getWidth() : 0;
 	}
 	public double height() {
-		return image != null ? image.getHeight() : 0;
+		return imageView != null ? imageView.getHeight() : 0;
 	}
 	public void setImageOffset(GamePoint offset) {
-		this.imageOffset = offset;
+		this.pivot = offset;
 	}
 	/**
 	 * The default offset is half the size of the image.
 	 * @return GamePoint
 	 */
 	public GamePoint getImageOffset() {
-		if (imageOffset != null) {
-			return imageOffset;
+		if (pivot != null) {
+			return pivot;
 		} else {
 			return new GamePoint(width() / 2, height() / 2);
 		}

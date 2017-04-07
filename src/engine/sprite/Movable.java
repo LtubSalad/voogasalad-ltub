@@ -51,7 +51,7 @@ public class Movable {
 
 		double xDest = pDest.x();
 		double yDest = pDest.y();
-		GamePoint pos = sprite.getInitialPos();
+		GamePoint pos = sprite.getPos();
 		double x = pos.x();
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
@@ -64,7 +64,7 @@ public class Movable {
 
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
-			sprite.setInitialPos(new GamePoint(xDest, yDest));
+			sprite.setPos(new GamePoint(xDest, yDest));
 			stopMoving();
 			return dist - (speed * dt);
 		}
@@ -80,7 +80,7 @@ public class Movable {
 			vx = speed / dist * xDiff;
 			vy = speed / dist * yDiff;
 		}
-		sprite.setInitialPos(new GamePoint(x + vx * dt, y + vy * dt));
+		sprite.setPos(new GamePoint(x + vx * dt, y + vy * dt));
 		return 0.0;
 
 	}
