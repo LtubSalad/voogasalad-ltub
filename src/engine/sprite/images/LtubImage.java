@@ -13,7 +13,10 @@ public class LtubImage {
 	
 	private String filename;
 	private Image imageView;
-	// imageOffSet is a relative position of an image to its upper-left point.
+	/**
+	 * Pivot is the assigned center of a image.
+	 * It is a relative position of an image to its upper-left point.
+	 */
 	private GamePoint pivot = null;
 	
 	LtubImage() { }

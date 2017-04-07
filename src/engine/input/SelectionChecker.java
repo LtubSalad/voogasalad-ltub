@@ -26,7 +26,9 @@ public class SelectionChecker {
 	public Sprite getSelection(List<Sprite> sprites, GamePoint pos) {
 		for (Sprite sprite: sprites) {
 			if (sprite.getSelectionBound() == SelectionBound.IMAGE) {
-				if (checkPointOnImage(sprite.getImage().getFXImage(), pos.x()-sprite.getImage().getImageOffset().x(), pos.y()-sprite.getImage().getImageOffset().y())) {
+				GamePoint adjustedPos = new GamePoint(sprite.getPos().x() - sprite.getImage().getImageOffset().x(),
+						sprite.getPos().y() - sprite.getImage().getImageOffset().y());
+				if (checkPointOnImage(sprite.getImage().getFXImage(), pos.x() - adjustedPos.x(), pos.y()-adjustedPos.y())) {
 					return sprite;
 				}
 			}
