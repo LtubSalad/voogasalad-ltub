@@ -1,6 +1,6 @@
 ####Part 1
 What about your API/design is intended to be flexible?
-	My API should allow the details of any kind of object to be set using the editor interface, as they are set 
+My API should allow the details of any kind of object to be set using the editor interface, as they can be built from smaller subattributes. The skeletons of each attribute class are based on XML files instead of hard code, making it easier to save and load new data for attributes.
 	
 How is your API/design encapsulating your implementation decisions?
 My API hides my implementation decisions by setting internal data structures within classes to be private, and minimizing public methods across the developer interface.
