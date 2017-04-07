@@ -1,9 +1,7 @@
 package engine.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-
+	
 import commons.RunningMode;
 import engine.gameloop.LoopComponent;
 import engine.model.SpriteModel.SpriteHandler;
@@ -12,15 +10,27 @@ import engine.sprite.Sprite;
 
 
 // also needs to implement statsModel
-public class BasicModel implements Model {
+public class BasicModel implements Model, IStatsModel, ISpriteModel<Sprite> {
 
 	private PlayerSelectionState selectionState;
 	private SpriteModel spriteModel; 
 	private SpriteHandler handler; 
 	
+	int points; 
+	int lives; 
+	int health; 
+	double timeRemaining; 
+	int bonuses; 
+	
 	public BasicModel(){
 		spriteModel = new SpriteModel(); 
 		handler = (SpriteHandler) spriteModel.getHandler();
+		
+		points = 0; 
+		lives = 0; 
+		health = 100; // need default value 
+		timeRemaining = 0; // need default value 
+		bonuses = 0; // need default value 
 	
 	}
 	
@@ -44,6 +54,49 @@ public class BasicModel implements Model {
 	@Override
 	public void setPlayerSelectionState(PlayerSelectionState selectionState) {
 		this.selectionState = selectionState;
+	}
+
+
+
+	@Override
+	public Collection<Sprite> getSprites() {
+		return handler.getSprites(); 
+	}
+
+	@Override
+	public int getPoints() {
+		return points;
+	}
+
+	@Override
+	public int getLives() {
+		return lives; 
+	}
+
+	@Override
+	public int getHealth() {
+		return health; 
+	}
+
+	@Override
+	public double getTimeRemaining() {
+		return timeRemaining; 
+	}
+
+	@Override
+	public int getBonuses() {
+		return bonuses; 
+	}
+
+	@Override
+	public void addSprite(Sprite sprite) {
+		handler.addSprite(sprite);
+		
+	}
+
+	@Override
+	public void removeSprite(Sprite sprite) {
+		handler.removeSprite(sprite);
 	}
 
 }
