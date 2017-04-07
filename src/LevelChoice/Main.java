@@ -1,12 +1,9 @@
 package LevelChoice;
 
-import java.util.ResourceBundle;
-
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -26,10 +23,10 @@ public class Main extends Application {
 			primaryStage.setTitle("Test Image");
 			Group root = new Group();
 			Scene scene = new Scene(root, 400, 400);
-			ResourceBundle myResources = ResourceBundle.getBundle("data/images/characters");
-			Image image = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString("bahamut_left.png")));
-			ImageView logo = new ImageView(image);
-			root.getChildren().add(logo);
+			//ResourceBundle myResources = ResourceBundle.getBundle("data/images/characters");
+			Image image = new Image("src/resources/bahamut_left.png");
+//			ImageView logo = new ImageView(image);
+//			root.getChildren().add(logo);
 
 			
 			primaryStage.setScene(scene);
