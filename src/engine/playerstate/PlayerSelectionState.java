@@ -34,7 +34,6 @@ public class PlayerSelectionState {
 	
 	private void initHandlers() {
 		bus.on(GameWorldMouseEvent.SELECT_SPRITE, (e) -> {
-			System.out.println(e.getTarget().getSprite());
 			e.getTarget().getSprite().ifPresent((sprite) -> {
 				setSelectedSprite(sprite);
 			});
@@ -53,13 +52,13 @@ public class PlayerSelectionState {
 		List<Skill> availableSkills = new ArrayList<>();
 		Sprite sprite = new Sprite();
 		sprite.setPos(new GamePoint(100, 100));
-		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
-		ImageSet imageSet1 = new ImageSet();
-		imageSet1.setImage(image1);
-		sprite.setImageSet(imageSet1);
-		Movable movable1 = new Movable(sprite);
-		sprite.setMovable(movable1);
-		sprite.setCollidable(new Collidable(new CollisionBound(image1)));
+		LtubImage image = new LtubImage("images/characters/bahamut_left.png");
+		ImageSet imageSet = new ImageSet();
+		imageSet.setImage(image);
+		sprite.setImageSet(imageSet);
+		Movable movable = new Movable(sprite);
+		sprite.setMovable(movable);
+		sprite.setCollidable(new Collidable(new CollisionBound(image)));
 		availableSkills.add(new PlayerCreateSpriteSkill(bus, sprite));
 		return availableSkills;
 	}

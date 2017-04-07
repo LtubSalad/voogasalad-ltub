@@ -43,8 +43,8 @@ public class App extends Application {
 		sprite2.setPos(new GamePoint(200, 100));
 		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
 		ImageSet imageSet2 = new ImageSet();
-		imageSet2.setImage(image1);
-		sprite2.setImageSet(imageSet1);
+		imageSet2.setImage(image2);
+		sprite2.setImageSet(imageSet2);
 		Movable movable2 = new Movable(sprite2);
 		movable2.setSpeed(100);
 		sprite2.setCollidable(new Collidable(new CollisionBound(image2)));
@@ -81,6 +81,7 @@ public class App extends Application {
 		gameFactory.createInputManager(model, camera);
 		gameFactory.createActionFilter();
 		gameFactory.createActionManager();
+		gameFactory.createSkillManager();
 		
 		
 		// set scene, start loop, and show stage

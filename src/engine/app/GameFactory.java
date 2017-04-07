@@ -14,6 +14,7 @@ import engine.model.PlayerLocalModel;
 import engine.player.Player;
 import engine.playerstate.PlayerSelectionState;
 import engine.playerstate.PlayerSkillState;
+import engine.skill.SkillManager;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
 import engine.sprite.collision.CollisionChecker;
@@ -95,5 +96,9 @@ public class GameFactory {
 		localModel.setPlayerSelectionState(createPlayerSelectionState());
 		localModel.setPlayerSkillState(createPlayerSkillState());
 		return localModel;
+	}
+	
+	public SkillManager createSkillManager() {
+		return new SkillManager(bus);
 	}
 }

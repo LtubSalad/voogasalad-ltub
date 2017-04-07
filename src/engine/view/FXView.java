@@ -11,6 +11,7 @@ import engine.model.PlayerLocalModel;
 import engine.playerstate.PlayerSelectionState;
 import engine.playerstate.PlayerSelectionState.SelectionType;
 import engine.sprite.Sprite;
+import engine.sprite.images.LtubImage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -35,6 +36,9 @@ public class FXView implements View {
 	private HBox bottomPane;
 	private GraphicsContext gcSelected;
 	private SkillBox skillBox;
+	
+	// TODO: mouse location should belong to player input state
+	private ViewPoint mousePos;
 
 	public FXView(EventBus bus, Camera camera) {
 		this.bus = bus;
@@ -63,6 +67,9 @@ public class FXView implements View {
 			} else if (e.getButton() == MouseButton.SECONDARY) {
 				bus.emit(new MouseEvent(MouseEvent.RIGHT, new ViewPoint(e.getX(), e.getY())));
 			}
+		});
+		gameWorldCanvas.setOnMouseMoved(e -> {
+			mousePos = new ViewPoint(e.getX(), e.getY());
 		});
 		scene.setOnKeyPressed(e -> {
 			bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
@@ -107,8 +114,15 @@ public class FXView implements View {
 			gcSelected.drawImage(new Image(selectedSprite.getImage().getInputStream()), 20, 20);
 		}
 
+		// render selected skill
+		// TODO render mouse image from selected skill.
+		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
+		localModel.getPlayerSkillState().getSelectedSkill().ifPresent((skill) -> {
+			gc.drawImage(new Image(image2.getInputStream()), mousePos.x(), mousePos.y());
+		});
+		
 		// render skill box
-//		skillBox.render(localModel.getPlayerSelectionState().getAvailableSkills());
+		skillBox.render(localModel.getPlayerSelectionState().getAvailableSkills());
 	}
 
 }

@@ -30,19 +30,23 @@ public class PlayerSkillState {
 			setSelectedSkill(e.getSkill());
 		});
 		bus.on(SelectSkillEvent.CANCEL, (e) -> {
-			setSelectedSkill(null);
+			if (skill != null) {
+				setSelectedSkill(null);
+			}
 		});
 		bus.on(GameWorldMouseEvent.CONFIRM_SKILL, (e) -> {
-			System.out.println(e);
 			if (skill != null) {
 				skill.setTarget(e.getTarget());
 				bus.emit(new ConfirmSkillEvent(ConfirmSkillEvent.CONFIRM, skill));
+				setSelectedSkill(null);
 			} else {
 				bus.emit(new GameWorldMouseEvent(GameWorldMouseEvent.SELECT_SPRITE, e.getTarget(), e.getActionMode(), e.getPlayer()));
 			}
 		});
 		bus.on(GameWorldMouseEvent.CANCEL_SKILL_AND_MOVE_SPRITE, (e) -> {
-			setSelectedSkill(null);
+			if (skill != null) {
+				setSelectedSkill(null);				
+			}
 		});
 	}
 
