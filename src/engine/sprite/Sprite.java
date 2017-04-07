@@ -21,6 +21,7 @@ public class Sprite {
 	private Collidable collidable = null;
 	private SelectionBound selectionBound = SelectionBound.IMAGE;
 	private List<Point> selectionBoundVertices;
+	private double detectionRange;
 	/**
 	 * The player that this sprite belongs to.
 	 */
@@ -103,6 +104,14 @@ public class Sprite {
 	public List<Point> getSelectionBoundVertices() {
 		setSelectionBoundVertices();
 		return selectionBoundVertices;
+	}
+	
+	public void setDetectionRange(double detectionRange) {
+		this.detectionRange = detectionRange;
+	}
+	
+	public double getDetectionRange() {
+		return detectionRange;
 	}
 
 	public void setMovable(Movable movable) {
