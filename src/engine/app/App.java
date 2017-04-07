@@ -39,7 +39,7 @@ public class App extends Application {
 		sprite1.setDetectionRange(128);
 		
 		// sprite2
-		Sprite sprite2 = new Sprite()
+		Sprite sprite2 = new Sprite();
 		sprite2.setPos(new GamePoint(200, 100));
 		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
 		ImageSet imageSet2 = new ImageSet();
