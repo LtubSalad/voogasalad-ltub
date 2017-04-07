@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import commons.MathUtils;
-import commons.Point;
+import engine.camera.GamePoint;
 import engine.player.Player;
 import engine.sprite.collision.Collidable;
 
@@ -13,14 +13,14 @@ public class Sprite {
 
 	// initialize empty image.
 	private LtubImage ltubImage = LtubImage.EMPTY_IMAGE;
-	private Point imageOffset = null;
 	// private boolean locked = false; // TODO
-	private Point pos;
+	private GamePoint initialPos;
+	private GamePoint adjustedPos;
 	private int z;
 	private Movable movable = null;
 	private Collidable collidable = null;
 	private SelectionBound selectionBound = SelectionBound.IMAGE;
-	private List<Point> selectionBoundVertices;
+	private List<GamePoint> selectionBoundVertices;
 	private double detectionRange;
 	/**
 	 * The player that this sprite belongs to.
@@ -34,43 +34,24 @@ public class Sprite {
 
 	public void setImage(LtubImage ltubImage) {
 		this.ltubImage = ltubImage;
+		
 	}
 
 	public LtubImage getImage() {
 		return ltubImage;
 	}
 	
-	public void setImageOffset(Point offset) {
-		this.imageOffset = offset;
+	public GamePoint getInitialPos() {
+		return initialPos;
 	}
 	
-	/**
-	 * The default offset is half the size of the image.
-	 * 
-	 * @return
-	 */
-	public Point getImageOffset() {
-		if (imageOffset != null) {
-			return imageOffset;
-		} else {
-			return new Point(ltubImage.width() / 2, ltubImage.height() / 2);
-		}
+	public void setInitialPos(GamePoint pos) {
+		this.initialPos = pos;
 	}
 	
-	public Point getPos() {
-		return pos;
-	}
-	
-	public void setPos(Point pos) {
-		this.pos = pos;
-	}
-	
-	/**
-	 * Get the display position of the Sprite
-	 * @return Point
-	 */
-	public Point getDisplayPos() {
-		return new Point(pos.x() - this.getImageOffset().x(), pos.y() - this.getImageOffset().y());
+	public GamePoint getAdjustedPos() {
+		adjustedPos = new GamePoint(initialPos.x() - ltubImage.getImageOffset().x(), initialPos.y() - ltubImage.getImageOffset().y());
+		return adjustedPos;
 	}
 
 	public void setSelectionBound(SelectionBound selectionBound) {
@@ -101,7 +82,7 @@ public class Sprite {
 	 * Get a list of Point indicating the definite display positions of selection bound vertices
 	 * @return List<Point>
 	 */
-	public List<Point> getSelectionBoundVertices() {
+	public List<GamePoint> getSelectionBoundVertices() {
 		setSelectionBoundVertices();
 		return selectionBoundVertices;
 	}

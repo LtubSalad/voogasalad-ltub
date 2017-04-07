@@ -3,6 +3,7 @@ package engine.sprite;
 import java.io.InputStream;
 
 import commons.RunningMode;
+import engine.camera.GamePoint;
 import javafx.scene.image.Image;
 
 public class LtubImage {
@@ -11,6 +12,8 @@ public class LtubImage {
 	
 	private String filename;
 	private Image image;
+	// imageOffSet is a relative position of an image to its upper-left point.
+	private GamePoint imageOffset = null;
 	
 	LtubImage() { }
 	
@@ -43,7 +46,20 @@ public class LtubImage {
 	public double height() {
 		return image != null ? image.getHeight() : 0;
 	}
-	
+	public void setImageOffset(GamePoint offset) {
+		this.imageOffset = offset;
+	}
+	/**
+	 * The default offset is half the size of the image.
+	 * @return GamePoint
+	 */
+	public GamePoint getImageOffset() {
+		if (imageOffset != null) {
+			return imageOffset;
+		} else {
+			return new GamePoint(width() / 2, height() / 2);
+		}
+	}
 	public InputStream getInputStream() {
 		return getClass().getClassLoader().getResourceAsStream(filename);
 	}

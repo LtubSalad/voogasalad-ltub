@@ -1,9 +1,9 @@
 package engine.input;
 
 import bus.EventBus;
-import commons.Point;
 import engine.action.ActionManager;
 import engine.action.ActionMode;
+import engine.camera.Camera;
 import engine.input.events.KeyEvent;
 import engine.input.events.MouseEvent;
 import engine.model.Model;
@@ -17,15 +17,17 @@ import javafx.scene.input.KeyCode;
 public class InputManager {
 
 	private EventBus bus;
+	private Camera camera;
 	private Model model;
 	private SelectionChecker selectionChecker;
 	private ActionManager actionManager;
 	private PlayerInputState playerInputState;
 	private PlayerSelectionState playerSelectionState;
 
-	public InputManager(EventBus bus, Model model) {
+	public InputManager(EventBus bus, Model model, Camera camera) {
 		this.bus = bus;
 		this.model = model;
+		this.camera = camera;
 		selectionChecker = new SelectionChecker();
 	}
 
@@ -48,7 +50,7 @@ public class InputManager {
 			playerInputState.releaseKey(e.getCode());
 		});
 		bus.on(MouseEvent.LEFT, e -> {
-			Sprite selected = selectionChecker.getSelection(model, e.getPos());
+			Sprite selected = selectionChecker.getSelection(model, camera.viewToGame(e.getPos()));
 			playerSelectionState.setSelectedSprite(selected);
 		});
 		bus.on(MouseEvent.RIGHT, e -> {
@@ -56,7 +58,7 @@ public class InputManager {
 				Sprite selected = playerSelectionState.getSelectedSprite();
 				ActionMode actionMode = playerInputState.isKeyPressed(KeyCode.SHIFT) ? ActionMode.QUEUE
 						: ActionMode.INSTANT;
-				actionManager.moveSpriteTo(actionMode, Player.DEFAULT, selected, e.getPos());
+				actionManager.moveSpriteTo(actionMode, Player.DEFAULT, selected, camera.viewToGame(e.getPos()));
 			}
 		});
 	}

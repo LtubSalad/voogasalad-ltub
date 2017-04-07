@@ -1,7 +1,6 @@
 package engine.action;
 
 import bus.EventBus;
-import commons.Point;
 import engine.player.Player;
 import engine.sprite.Sprite;
 

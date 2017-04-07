@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bus.EventBus;
-import commons.Point;
+import engine.camera.GamePoint;
 import engine.skill.PlayerCreateSpriteSkill;
 import engine.skill.Skill;
 import engine.sprite.LtubImage;
@@ -35,7 +35,7 @@ public class PlayerSelectionState {
 		// TODO different skills according to the current selected sprite
 		List<Skill> availableSkills = new ArrayList<>();
 		Sprite sprite = new Sprite();
-		sprite.setPos(new Point(100, 100));
+		sprite.setInitialPos(new GamePoint(100, 100));
 		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
 		sprite.setImage(image1);
 		Movable movable1 = new Movable(sprite);

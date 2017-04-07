@@ -1,7 +1,8 @@
 package engine.app;
 
-import commons.Point;
 import engine.action.ActionManager;
+import engine.camera.Camera;
+import engine.camera.GamePoint;
 import engine.gameloop.GameLoop;
 import engine.input.InputManager;
 import engine.model.Model;
@@ -25,13 +26,14 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		GameFactory gameFactory = new GameFactory();
+		Camera camera = gameFactory.createCamera();
 		
 		Model model = gameFactory.createModel();
-		View view = gameFactory.createView();
+		View view = gameFactory.createView(camera);
 		
 		// sprite1
 		Sprite sprite1 = new Sprite();
-		sprite1.setPos(new Point(100, 100));
+		sprite1.setInitialPos(new GamePoint(100, 100));
 		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
 		sprite1.setImage(image1);
 		Movable movable1 = new Movable(sprite1);
@@ -43,7 +45,7 @@ public class App extends Application {
 		
 		// sprite2
 		Sprite sprite2 = new Sprite();
-		sprite2.setPos(new Point(200, 100));
+		sprite2.setInitialPos(new GamePoint(200, 100));
 		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
 		sprite2.setImage(image2);
 		Movable movable2 = new Movable(sprite2);
@@ -52,7 +54,6 @@ public class App extends Application {
 		sprite2.setMovable(movable2);
 		model.addSprite(sprite2);
 		sprite2.setDetectionRange(256);
-		
 		
 		PlayerSelectionState playerSelectionState = gameFactory.createPlayerSelectionState();
 		model.setPlayerSelectionState(playerSelectionState);
@@ -74,7 +75,7 @@ public class App extends Application {
 		gameLoop.start(); // nothing added in the loop yet.
 		
 		gameFactory.createSoundManager(); // Automatically linked by the event bus.
-		InputManager inputManager = gameFactory.createInputManager(model);
+		InputManager inputManager = gameFactory.createInputManager(model, camera);
 		PlayerInputState playerInputState = gameFactory.createPlayerInputState();
 		ActionManager actionManager = gameFactory.createActionManager();
 		inputManager.setPlayerInputState(playerInputState);

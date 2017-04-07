@@ -1,9 +1,9 @@
 package engine.skill;
 
-import commons.Point;
+import engine.camera.GamePoint;
 
 public interface Skill {
 
-	public void trigger(Point pos);
+	public void trigger(GamePoint pos);
 	
 }

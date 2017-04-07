@@ -3,6 +3,7 @@ package engine.app;
 import bus.BasicEventBus;
 import bus.EventBus;
 import engine.action.ActionManager;
+import engine.camera.Camera;
 import engine.gameloop.FXGameLoop;
 import engine.gameloop.GameLoop;
 import engine.input.InputManager;
@@ -35,20 +36,24 @@ public class GameFactory {
 		return new BasicModel(bus);
 	}
 	
-	public View createView() {
-		return new FXView(bus);
+	public View createView(Camera camera) {
+		return new FXView(bus, camera);
 	}
 	
 	public GameLoop createGameLoop() {
 		return new FXGameLoop();
 	}
 	
+	public Camera createCamera() {
+		return new Camera();
+	}
+	
 	public SoundManager createSoundManager() {
 		return new FXSoundManager(bus);
 	}
 	
-	public InputManager createInputManager(Model model) {
-		return new InputManager(bus, model);
+	public InputManager createInputManager(Model model, Camera camera) {
+		return new InputManager(bus, model, camera);
 	}
 	
 	public ActionManager createActionManager() {

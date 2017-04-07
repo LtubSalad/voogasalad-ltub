@@ -1,7 +1,7 @@
 package engine.action;
 
 import bus.EventBus;
-import commons.Point;
+import engine.camera.GamePoint;
 import engine.player.Player;
 import engine.sprite.Sprite;
 
@@ -14,14 +14,14 @@ public class ActionManager {
 	}
 	
 	// TODO: it could be a separate action filter class.
-	public boolean moveSpriteToAllowed(Player actionSender, Sprite sprite, Point dest) {
+	public boolean moveSpriteToAllowed(Player actionSender, Sprite sprite, GamePoint dest) {
 		if (actionSender == null || sprite == null || dest == null) { return false; }
 		if (!actionSender.canControl(sprite.getPlayer())) { return false; }
 		if (!sprite.getMovable().isPresent()) { return false; }
 		return true;
 	}
 	
-	public void moveSpriteTo(ActionMode actionMode, Player actionSender, Sprite sprite, Point dest) {
+	public void moveSpriteTo(ActionMode actionMode, Player actionSender, Sprite sprite, GamePoint dest) {
 		if (!moveSpriteToAllowed(actionSender, sprite, dest)) { return; }
 		sprite.getMovable().ifPresent((movable) -> {
 			if (actionMode == ActionMode.QUEUE) {

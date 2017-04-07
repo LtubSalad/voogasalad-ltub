@@ -1,7 +1,8 @@
 package engine.view;
 
 import bus.EventBus;
-import commons.Point;
+import engine.camera.Camera;
+import engine.camera.ViewPoint;
 import engine.input.events.KeyEvent;
 import engine.input.events.MouseEvent;
 import engine.model.Model;
@@ -25,6 +26,7 @@ public class FXView implements View {
 	public static final Paint BACKGROUND = Color.BISQUE;
 
 	private EventBus bus;
+	private Camera camera;
 	private Scene scene;
 	private Canvas gameWorldCanvas;
 	private GraphicsContext gc;
@@ -32,8 +34,9 @@ public class FXView implements View {
 	private GraphicsContext gcSelected;
 	private SkillBox skillBox;
 
-	public FXView(EventBus bus) {
+	public FXView(EventBus bus, Camera camera) {
 		this.bus = bus;
+		this.camera = camera;
 		VBox root = new VBox();
 		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
 		gameWorldCanvas = new Canvas(WIDTH, CANVAS_HEIGHT);
@@ -54,9 +57,9 @@ public class FXView implements View {
 	private void initHandlers() {
 		gameWorldCanvas.setOnMouseClicked(e -> {
 			if (e.getButton() == MouseButton.PRIMARY) {
-				bus.emit(new MouseEvent(MouseEvent.LEFT, new Point(e.getX(), e.getY())));
+				bus.emit(new MouseEvent(MouseEvent.LEFT, new ViewPoint(e.getX(), e.getY())));
 			} else if (e.getButton() == MouseButton.SECONDARY) {
-				bus.emit(new MouseEvent(MouseEvent.RIGHT, new Point(e.getX(), e.getY())));
+				bus.emit(new MouseEvent(MouseEvent.RIGHT, new ViewPoint(e.getX(), e.getY())));
 			}
 		});
 		scene.setOnKeyPressed(e -> {
@@ -80,8 +83,9 @@ public class FXView implements View {
 		// render game cast
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
-			gc.drawImage(new Image(sprite.getImage().getInputStream()), sprite.getDisplayPos().x(),
-					sprite.getDisplayPos().y());
+			ViewPoint viewPos = camera.gameToView(sprite.getAdjustedPos());
+			gc.drawImage(new Image(sprite.getImage().getInputStream()), viewPos.x(),
+					viewPos.y());
 		}
 
 		// render selection graphics

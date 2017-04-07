@@ -1,7 +1,7 @@
 package engine.skill;
 
 import bus.EventBus;
-import commons.Point;
+import engine.camera.GamePoint;
 import engine.model.SpriteModelEvent;
 import engine.sprite.Sprite;
 
@@ -16,8 +16,8 @@ public class PlayerCreateSpriteSkill implements Skill {
 	}
 	
 	@Override
-	public void trigger(Point pos) {
-		sprite.setPos(pos);
+	public void trigger(GamePoint pos) {
+		sprite.setInitialPos(pos);
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprite));
 	}
 
