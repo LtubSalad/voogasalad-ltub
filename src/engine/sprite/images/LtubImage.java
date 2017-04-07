@@ -14,8 +14,8 @@ public class LtubImage {
 	private String filename;
 	private Image imageView;
 	/**
-	 * Pivot is the assigned center of a image.
-	 * It is a relative position of an image to its upper-left point.
+	 * {@code pivot} is the assigned center of an image.
+	 * It is a relative position to the upper-left point of the image.
 	 */
 	private GamePoint pivot = null;
 	
