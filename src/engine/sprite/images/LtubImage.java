@@ -50,14 +50,14 @@ public class LtubImage {
 	public double height() {
 		return imageView != null ? imageView.getHeight() : 0;
 	}
-	public void setImageOffset(GamePoint offset) {
-		this.pivot = offset;
+	public void setImagePivot(GamePoint pivot) {
+		this.pivot = pivot;
 	}
 	/**
 	 * The default offset is half the size of the image.
 	 * @return GamePoint
 	 */
-	public GamePoint getImageOffset() {
+	public GamePoint getImagePivot() {
 		if (pivot != null) {
 			return pivot;
 		} else {

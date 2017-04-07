@@ -92,8 +92,8 @@ public class FXView implements View {
 		// render game cast
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
-			GamePoint gamePos = new GamePoint(sprite.getPos().x() - sprite.getImage().getImageOffset().x(), 
-					sprite.getPos().y() - sprite.getImage().getImageOffset().y());
+			GamePoint gamePos = new GamePoint(sprite.getPos().x() - sprite.getImage().getImagePivot().x(), 
+					sprite.getPos().y() - sprite.getImage().getImagePivot().y());
 			ViewPoint viewPos = camera.gameToView(gamePos);
 			gc.drawImage(new Image(sprite.getImage().getInputStream()), viewPos.x(),
 					viewPos.y());
@@ -118,7 +118,8 @@ public class FXView implements View {
 		// TODO render mouse image from selected skill.
 		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
 		localModel.getPlayerSkillState().getSelectedSkill().ifPresent((skill) -> {
-			gc.drawImage(new Image(image2.getInputStream()), mousePos.x(), mousePos.y());
+			gc.drawImage(new Image(image2.getInputStream()), mousePos.x()-image2.getImagePivot().x(), 
+					mousePos.y() - image2.getImagePivot().y());
 		});
 		
 		// render skill box
