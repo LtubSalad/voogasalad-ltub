@@ -1,4 +1,4 @@
-package engine.playerstate;
+package engine.input;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,12 +6,12 @@ import java.util.Map;
 import bus.EventBus;
 import javafx.scene.input.KeyCode;
 
-public class PlayerInputState {
+public class KeyInputState {
 	
 	private EventBus bus;
 	private Map<KeyCode, Boolean> keysOnMap = new HashMap<>();
 	
-	public PlayerInputState(EventBus bus) {
+	public KeyInputState(EventBus bus) {
 		this.bus = bus;
 	}
 	
