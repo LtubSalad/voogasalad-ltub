@@ -1,47 +1,34 @@
 package gameDevelopmentInterface;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import data.AttributeData;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
 
-public class AttributeCustomizerPane extends BorderPane {
-	// The data structures listed below should ideally be obtained from the
-	// Attribute somehow
-	private Map<String, String> imageParameters;
-	private Map<String, String> simpleParameters;
-	private Map<String, List<String>> functions;
-
-	public AttributeCustomizerPane() {
-		simpleParameters = new HashMap<>();
-		simpleParameters.put("attribute name", "foo");
-		simpleParameters.put("health", "foo");
-		simpleParameters.put("parameter 3", "foo");
-
-		functions = new HashMap<>();
-		functions.put("run", new ArrayList<String>());
-		ArrayList<String> test = new ArrayList<String>();
-		test.add("parameter1name");
-		test.add("parameter2name");
-		functions.put("MultiInputFunction", test);
-
-		this.setTop(simpleParameterSelector());
-		this.setBottom(scriptFunctionInterface());
+public class AttributeCustomizerPane extends VBox {
+	private AttributeData myAttribute;
+	
+	public AttributeCustomizerPane(AttributeData attributeData){
+		myAttribute=attributeData;
+		this.getChildren().addAll(new Label("Attribute Name: "+myAttribute.getName()),
+				variableSetter(attributeData.getVariables()),functionSetter(attributeData.getScripts()));
+		myAttribute.getAttributes().forEach((subAttribute)->{
+			this.getChildren().add(new AttributeCustomizerPane(subAttribute));
+		});	
 	}
 
-	private VBox simpleParameterSelector() {
+	private VBox variableSetter(Map<String, String> variables) {
 		VBox parameterSelector = new VBox();
-		simpleParameters.forEach((parameterName, parameter) -> {
+		variables.forEach((parameterName, parameter) -> {
 			Label whatParameter = new Label(parameterName);
-			TextField parameterSetter = new TextField("Input parameter");
+			TextField parameterSetter = new TextField(parameter);
 			parameterSetter.setPrefWidth(100);
 			whatParameter.setPrefWidth(300);
 			HBox selectorRow = new HBox();
@@ -52,25 +39,29 @@ public class AttributeCustomizerPane extends BorderPane {
 		return parameterSelector;
 	}
 
-	private VBox scriptFunctionInterface() {
+	private VBox functionSetter(Map<Pair<String,List<String>>,String> functions) {
 		VBox scriptingInterface = new VBox();
-		functions.forEach((functionName, parameters) -> {
+		functions.forEach((declarationDetails, script) -> {
 			VBox singleFunctionEditor = new VBox();
-			String functionDeclaration = "Function: " + functionName;
-			if (!parameters.isEmpty()) {
+			String functionDeclaration = "Function: " + declarationDetails.getKey();
+			if (!declarationDetails.getValue().isEmpty()) {
 				functionDeclaration += "|    Parameters:";
-				for (String parameter : parameters) {
+				for (String parameter : declarationDetails.getValue()) {
 					functionDeclaration += " ";
 					functionDeclaration += parameter;
 				}
-				;
 			}
 			Label functionInfo = new Label(functionDeclaration);
-			TextArea scriptBox = new TextArea("Write scripts here");
+			TextArea scriptBox = new TextArea(script);
 			singleFunctionEditor.getChildren().addAll(functionInfo, scriptBox);
 			scriptingInterface.getChildren().add(singleFunctionEditor);
 		});
 
 		return scriptingInterface;
 	}
+	
+	public AttributeData getAttribute(){
+		return myAttribute;
+	}
+	
 }

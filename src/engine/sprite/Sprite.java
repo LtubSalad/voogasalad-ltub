@@ -5,22 +5,24 @@ import java.util.List;
 import java.util.Optional;
 
 import commons.MathUtils;
-import commons.Point;
+import engine.camera.GamePoint;
 import engine.player.Player;
 import engine.sprite.collision.Collidable;
+import engine.sprite.images.ImageSet;
+import engine.sprite.images.LtubImage;
 
 public class Sprite {
 
 	// initialize empty image.
-	private LtubImage ltubImage = LtubImage.EMPTY_IMAGE;
-	private Point imageOffset = null;
+	private ImageSet imageSet;
 	// private boolean locked = false; // TODO
-	private Point pos;
+	private GamePoint pos;
 	private int z;
 	private Movable movable = null;
 	private Collidable collidable = null;
 	private SelectionBound selectionBound = SelectionBound.IMAGE;
-	private List<Point> selectionBoundVertices;
+	private List<GamePoint> selectionBoundVertices;
+	private double detectionRange;
 	/**
 	 * The player that this sprite belongs to.
 	 */
@@ -31,45 +33,26 @@ public class Sprite {
 
 	}
 
-	public void setImage(LtubImage ltubImage) {
-		this.ltubImage = ltubImage;
+	public void setImageSet(ImageSet imageSet) {
+		this.imageSet = imageSet;		
 	}
 
-	public LtubImage getImage() {
-		return ltubImage;
-	}
-	
-	public void setImageOffset(Point offset) {
-		this.imageOffset = offset;
-	}
-	
 	/**
-	 * The default offset is half the size of the image.
-	 * 
+	 * Return an image corresponding to the sprite at the 
+	 * current frame. Could change with direction and moving distance.
 	 * @return
 	 */
-	public Point getImageOffset() {
-		if (imageOffset != null) {
-			return imageOffset;
-		} else {
-			return new Point(ltubImage.width() / 2, ltubImage.height() / 2);
-		}
+	public LtubImage getImage() {
+		// TODO: pass in angle and dist
+		return imageSet.getImage(0, 0);
 	}
 	
-	public Point getPos() {
+	public GamePoint getPos() {
 		return pos;
 	}
 	
-	public void setPos(Point pos) {
+	public void setPos(GamePoint pos) {
 		this.pos = pos;
-	}
-	
-	/**
-	 * Get the display position of the Sprite
-	 * @return Point
-	 */
-	public Point getDisplayPos() {
-		return new Point(pos.x() - this.getImageOffset().x(), pos.y() - this.getImageOffset().y());
 	}
 
 	public void setSelectionBound(SelectionBound selectionBound) {
@@ -100,9 +83,17 @@ public class Sprite {
 	 * Get a list of Point indicating the definite display positions of selection bound vertices
 	 * @return List<Point>
 	 */
-	public List<Point> getSelectionBoundVertices() {
+	public List<GamePoint> getSelectionBoundVertices() {
 		setSelectionBoundVertices();
 		return selectionBoundVertices;
+	}
+	
+	public void setDetectionRange(double detectionRange) {
+		this.detectionRange = detectionRange;
+	}
+	
+	public double getDetectionRange() {
+		return detectionRange;
 	}
 
 	public void setMovable(Movable movable) {

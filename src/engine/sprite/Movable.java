@@ -1,15 +1,15 @@
 package engine.sprite;
 
 import commons.MathUtils;
-import commons.Point;
 import commons.RunningMode;
+import engine.camera.GamePoint;
 
 public class Movable {
 
 	Sprite sprite;
 	private double speed = 300; // TODO: game data
 	private boolean moving = false;
-	private Point pDest;
+	private GamePoint pDest;
 
 	public Movable(Sprite sprite) {
 		this.sprite = sprite;
@@ -19,7 +19,7 @@ public class Movable {
 		this.speed = speed;
 	}
 
-	public void moveTo(Point pDest) {
+	public void moveTo(GamePoint pDest) {
 		this.pDest = pDest;
 		startMoving();
 	}
@@ -51,7 +51,7 @@ public class Movable {
 
 		double xDest = pDest.x();
 		double yDest = pDest.y();
-		Point pos = sprite.getPos();
+		GamePoint pos = sprite.getPos();
 		double x = pos.x();
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
@@ -64,7 +64,7 @@ public class Movable {
 
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
-			sprite.setPos(new Point(xDest, yDest));
+			sprite.setPos(new GamePoint(xDest, yDest));
 			stopMoving();
 			return dist - (speed * dt);
 		}
@@ -80,7 +80,7 @@ public class Movable {
 			vx = speed / dist * xDiff;
 			vy = speed / dist * yDiff;
 		}
-		sprite.setPos(new Point(x + vx * dt, y + vy * dt));
+		sprite.setPos(new GamePoint(x + vx * dt, y + vy * dt));
 		return 0.0;
 
 	}

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import bus.EventBus;
-import commons.Point;
+import engine.camera.GamePoint;
 import engine.sprite.Sprite;
 import javafx.scene.shape.Polygon;
 
@@ -16,7 +16,7 @@ public class CollisionChecker {
 		this.bus = bus;
 	}
 	
-	private Polygon getFXPolygon(List<Point> bound, Point pos) {
+	private Polygon getFXPolygon(List<GamePoint> bound, GamePoint pos) {
 		double[] points = new double[bound.size() * 2];
 		for (int i = 0; i < bound.size(); i++) {
 			points[i*2]   = bound.get(i).x() + pos.x();
@@ -26,10 +26,10 @@ public class CollisionChecker {
 	}
 	
 	private boolean collides(Sprite s1, Sprite s2) {
-		Point pos1 = s1.getPos();
+		GamePoint pos1 = s1.getPos();
 		CollisionBound bound1 = s1.getCollidable().get().getCollisionBound();
 		Polygon polygon1 = getFXPolygon(bound1.getBoundPoints(), pos1);
-		Point pos2 = s2.getPos();
+		GamePoint pos2 = s2.getPos();
 		CollisionBound bound2 = s2.getCollidable().get().getCollisionBound();
 		Polygon polygon2 = getFXPolygon(bound2.getBoundPoints(), pos2);
 		return polygon1.intersects(polygon2.getBoundsInLocal());

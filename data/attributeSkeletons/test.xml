@@ -1,0 +1,5 @@
+<SampleClass>
+	<actor function_run=""></actor>
+	<healthHolder variable_health="" function_adjustHealth_value="health+=value;"></healthHolder>
+	<tower>
+		<attacker function_attack=""></attacker></tower></SampleClass>

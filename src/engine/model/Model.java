@@ -2,10 +2,15 @@ package engine.model;
 
 import java.util.List;
 
-import engine.gameloop.LoopComponent;
-import engine.playerstate.PlayerSelectionState;
+import engine.player.Player;
 import engine.sprite.Sprite;
 
+/**
+ * Contains data for the overall game.
+ * Local player data is stored in {@link PlayerLocalModel}.
+ * @author keping
+ *
+ */
 public interface Model {
 
 	public void addSprite(Sprite sprite);
@@ -13,9 +18,8 @@ public interface Model {
 	public void removeSprite(Sprite sprite);
 	
 	public List<Sprite> getSprites();
-	
-	public PlayerSelectionState getPlayerSelectionState();
-	public void setPlayerSelectionState(PlayerSelectionState selectionState);
+
+	public Player getPlayer();
 	
 	public void update(double dt);
 	

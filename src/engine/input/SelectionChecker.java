@@ -3,8 +3,7 @@ package engine.input;
 import java.util.ArrayList;
 import java.util.List;
 
-import commons.Point;
-import engine.model.Model;
+import engine.camera.GamePoint;
 import engine.sprite.SelectionBound;
 import engine.sprite.Sprite;
 import javafx.scene.image.Image;
@@ -17,17 +16,26 @@ public class SelectionChecker {
 		
 	}
 	
-	public Sprite getSelection(Model model, Point pos) {
-		for (Sprite sprite: model.getSprites()) {
+	/**
+	 * Get the corresponding sprite at the clicked point.
+	 * By checking the position relationship between all sprites in the game and the clicked point.
+	 * @param model {@code Model} the model holding all sprites in the game
+	 * @param pos {@code Point} the clicked point
+	 * @return Sprite the clicked sprite
+	 */
+	public Sprite getSelection(List<Sprite> sprites, GamePoint pos) {
+		for (Sprite sprite: sprites) {
 			if (sprite.getSelectionBound() == SelectionBound.IMAGE) {
-				if (checkPointOnImage(sprite.getImage().getFXImage(), pos.x()-sprite.getDisplayPos().x(), pos.y()-sprite.getDisplayPos().y())) {
+				GamePoint adjustedPos = new GamePoint(sprite.getPos().x() - sprite.getImage().getImageOffset().x(),
+						sprite.getPos().y() - sprite.getImage().getImageOffset().y());
+				if (checkPointOnImage(sprite.getImage().getFXImage(), pos.x() - adjustedPos.x(), pos.y()-adjustedPos.y())) {
 					return sprite;
 				}
 			}
 			else if (sprite.getSelectionBound() == SelectionBound.POLYGON) {
 				List<Double> xList = new ArrayList<>(); 
 				List<Double> yList = new ArrayList<>();
-				for (Point point: sprite.getSelectionBoundVertices()) {
+				for (GamePoint point: sprite.getSelectionBoundVertices()) {
 					xList.add(point.x());
 					yList.add(point.y());
 				}
@@ -38,7 +46,7 @@ public class SelectionChecker {
 			}
 		}
 		// TODO if nothing is selected, return the background "sprite"
-		return model.getSprites().get(0);
+		return null;
 	}
 
 	/**
@@ -49,7 +57,9 @@ public class SelectionChecker {
 	 * @param yList the list of absolute display y coordinates of vertices in the polygon bound
 	 * @param xClicked the absolute display x coordinate of the clicked point
 	 * @param yClicked the absolute display y coordinate of the clicked point
-	 * @return
+	 * @return boolean if the clicked point is in the polygon
+	 * 
+	 * @see <a href="http://stackoverflow.com/questions/217578/how-can-i-determine-whether-a-2d-point-is-within-a-polygon">StackOverflow</a>
 	 */
 	private boolean checkPointInPolygon(int nVert, List<Double> xList, List<Double> yList, double xClicked, double yClicked ) {
 		int i, j;
@@ -69,9 +79,10 @@ public class SelectionChecker {
 	 * @param image JavaFX image
 	 * @param x the relative x coordinate of the clicked point relative to the upper-left point of the image
 	 * @param y the relative y coordinate of the clicked point relative to the upper-left point of the image
-	 * @return
+	 * @return boolean if the clicked point is in the image
 	 */
 	private boolean checkPointOnImage(Image image, double x, double y) {		
+		// uses JavaFX ImageView to realize
 		return new ImageView(image).contains(x, y);
 	}
 }
