@@ -18,7 +18,7 @@ public class SkillBox {
 	private Button btn2 = new Button("Fire");
 	private boolean rendered = false;
 		
-	public SkillBox(EventBus bus) {
+	public SkillBox(EventBus bus) { 
 		this.bus = bus;
 		box = new HBox();
 		box.getChildren().add(btn1);
