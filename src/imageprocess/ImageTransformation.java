@@ -3,14 +3,13 @@
  */
 package imageprocess;
 
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.util.HashSet;
+import java.util.Set;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Polygon;
 
 /**
  * @author Zhiyong
@@ -36,29 +35,29 @@ public class ImageTransformation implements ImageProcessor {
 		imageView.setPreserveRatio(preserveRatio);
 		return imageView.snapshot(null, null);	
 	}
-
+	
+	// returns a HashSet of strings that list all the pixels in an image that aren't transparent
+	// the pixels contained in the HashSet follow the guideline of:
+	// x,y where x is the absolute x position of the pixel and y is the absolute y position of the pixel
 	@Override
-	public Image rotate(Image t, double angle) {
-		BufferedImage buffImg= SwingFXUtils.fromFXImage(t, null);
-		buffImg = getRotatedImage(buffImg, angle); 
-		t = SwingFXUtils.toFXImage(buffImg, null);
-		
-		return t;
+	public Set<Coordinate<Integer,Integer>> getMask(Image image ) {
+		BufferedImage buffImg= SwingFXUtils.fromFXImage(image, null);
+		Set<Coordinate<Integer,Integer>> mask = new HashSet<>();
+		int pixel, transparency;
+		for(int i =0; i < image.getWidth(); i++){
+			for(int j = 0; j < image.getHeight(); j++){
+				pixel = buffImg.getRGB(i,j);
+				//check the transparency of the pixel at (i,j)
+				transparency = (pixel >> 24) & 0xff;
+				
+				if(transparency != 0){
+					mask.add(new Coordinate<Integer, Integer>(i,j));
+				}
+			}
+		}
+		return mask;
 	}
 
-	@Override
-	public Polygon getHull(Image I) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-
-	private BufferedImage getRotatedImage(BufferedImage bufferedImage, double angle) {
-	     AffineTransform transform = new AffineTransform();
-	     transform.rotate(angle);
-	     AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
-	     bufferedImage = op.filter(bufferedImage, null);
-	     return bufferedImage;
-	}
 
 }

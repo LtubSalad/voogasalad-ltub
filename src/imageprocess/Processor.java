@@ -29,13 +29,6 @@ public interface Processor<T> {
 	 * and height ratio
 	 */
 	T resize(T t, double targetWidth, double targetHeight, boolean preserveRatio);
-	 
-	 /**
-	 * @param t
-	 * @param angle
-	 * rotate the element t by the given angle in the second argument
-	 */
-	T rotate( T t, double angle);
 	 	 
 
 }
