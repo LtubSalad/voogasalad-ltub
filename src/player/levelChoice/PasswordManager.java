@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 public class PasswordManager extends Application {
 
+	public static final String TITLE = "Login";
 	String user = "LTUB";
 	String pw = "123456";
 	String checkUser, checkPw;
@@ -31,7 +32,7 @@ public class PasswordManager extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		primaryStage.setTitle("JavaFX 2 Login");
+		primaryStage.setTitle(TITLE);
 		BorderPane bp = new BorderPane();
 		bp.setPadding(new Insets(10,50,50,50));
 		HBox hb = new HBox();
@@ -67,7 +68,7 @@ public class PasswordManager extends Application {
 		dropShadow.setOffsetY(5);
 		//Adding text and DropShadow effect to it
 
-		Text text = new Text("JavaFX 2 Login");
+		Text text = new Text("Game Login");
 
 		text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
 
@@ -103,13 +104,15 @@ public class PasswordManager extends Application {
 		bp.setCenter(gridPane); 
 		//Adding BorderPane to the scene and loading CSS
 		Scene scene = new Scene(bp);
-		scene.getStylesheets().add(getClass().getClassLoader().getResource("login.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getClassLoader().getResource("login.css").toExternalForm());
 		primaryStage.setScene(scene);
-		primaryStage.titleProperty().bind(
-				scene.widthProperty().asString().
-				concat(" : ").
-				concat(scene.heightProperty().asString()));
+//		primaryStage.titleProperty().bind(
+//				scene.widthProperty().asString().
+//				concat(" : ").
+//				concat(scene.heightProperty().asString()));
 		//primaryStage.setResizable(false);
+
 		primaryStage.show();
+		
 	}
 }
