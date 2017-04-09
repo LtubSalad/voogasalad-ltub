@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.util.Pair;
 
 public class ScreenObjectHolder extends HBox {
-	public static final String MARIO_IMAGE = "images/Mario.jpg";
+	public static final String MARIO_IMAGE = "images/marioCropped.gif";
 	public static final String GRASS_IMAGE = "images/Grass.jpg";
 	public static final String STONE_IMAGE = "images/Stone.jpg";
 	public static final String WATER_IMAGE = "images/Water.jpg";
@@ -66,7 +66,7 @@ public class ScreenObjectHolder extends HBox {
 			toAdd.setFitWidth(grid.getWidth()/target.getNumCols());
 			double spriteX = e.getScreenX();
 			double spriteY = e.getScreenY();
-			Pair<Integer, Integer> coords = target.getCoordOfSpriteHover(spriteX, spriteY);
+			Pair<Integer, Integer> coords = target.getCoordOfMouseHover(spriteX, spriteY);
 			grid.add(toAdd, coords.getKey(), coords.getValue());
 			success = true;
 		}

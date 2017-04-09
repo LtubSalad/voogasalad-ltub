@@ -1,0 +1,2 @@
+<Monster><ConstantActor function_run="move(50)"></ConstantActor><HealthHolder function_adjustHealth_value="health+=value;" variable_health="100"></HealthHolder>
+<ImageHolder variable_xPosition="0" variable_yPosition="0" variable_image="bahumut_left.png" function_getImage="return image" variable_displayPriority="1"></ImageHolder></Monster>
