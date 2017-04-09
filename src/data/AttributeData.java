@@ -5,27 +5,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.util.Pair;
 
 /**
  * Serves as a way to store the data concerning how any given attribute is implemented, and pass it on.
  * An instance of AttributeData cannot store two subAttributes of the same kind. For example, the AttributeData
- * only possesses one instance of the ImageHolder attribute within its tree of attributes.
+ * only possesses one instance of the ImageHolder attribute within its entire tree of attributes.
+ * No repetition of function declarations/variable names allowed.
+ * 
  * @author Daniel
  *
  */
 public class AttributeData {
-	//The first string represents the function name and its inputs, and the second represents the actual
-	//script it uses.
 	private String attributeName;
 	private Map<Pair<String, List<String>>,String> attributeScripts;
 	private Map<String,String> attributeVariables;
 	private List<AttributeData> subAttributes;
 	
 	public AttributeData(String name){
-		attributeVariables=new HashMap<>();
-		attributeScripts=new HashMap<>();
-		subAttributes=new ArrayList<>();
+		attributeVariables=FXCollections.observableMap(new HashMap<>());
+		attributeScripts=FXCollections.observableMap(new HashMap<>());
+		List<AttributeData> subAttributesUnobservable=new ArrayList<>();
+		subAttributes=FXCollections.observableList(subAttributesUnobservable);
 		attributeName=name;
 	}
 	
@@ -37,6 +41,14 @@ public class AttributeData {
 		return attributeVariables;
 	}
 	
+	public void setScripts(Map<Pair<String, List<String>>,String> scripts){
+		attributeScripts=scripts;
+	}
+	
+	public void setVariables(Map<String, String> variables){
+		attributeVariables=variables;
+	}
+	
 	public String getName(){
 		return attributeName;
 	}
@@ -46,7 +58,6 @@ public class AttributeData {
 	}
 	
 	public void addAttributeData(AttributeData data){
-		removeAttributeData(data.getName());
 		subAttributes.add(data);
 	}
 	
