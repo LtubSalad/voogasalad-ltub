@@ -1,5 +1,6 @@
 package engine.model;
 
+import java.util.Collection;
 import java.util.List;
 
 import engine.player.Player;
@@ -12,6 +13,12 @@ import engine.sprite.Sprite;
  *
  */
 public interface Model {
+	
+	public void addSprite(Sprite sprite);
+	
+	public void removeSprite(Sprite sprite);
+	
+	public List<Sprite> getSprites();
 
 	public void addSprite(Sprite sprite);
 	

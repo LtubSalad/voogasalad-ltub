@@ -14,6 +14,10 @@ public class Path {
 		//test();
 	}
 	
+	public Queue<Pair<Integer, Integer>> getStartAndEndAndTurningPoints() {
+		return myPath; //TODO change this to actual turning points
+	}
+	
 	/**
 	 * Not sure if the back end will actually need this anymore
 	 * @return the path
@@ -75,13 +79,13 @@ public class Path {
 		nextCoord = myPath.poll();		
 	}
 	
-	private void test() {
-		for (int i = 0; i < 4; i++) {
-			System.out.println("currCoord: " + currCoord);
-			System.out.println("nextCoord: " + nextCoord);
-			System.out.println("Heading: " + getNextHeading());
-			System.out.println();
-		}
-	}
+//	private void test() {
+//		for (int i = 0; i < 4; i++) {
+//			System.out.println("currCoord: " + currCoord);
+//			System.out.println("nextCoord: " + nextCoord);
+//			System.out.println("Heading: " + getNextHeading());
+//			System.out.println();
+//		}
+//	}
 	
 }

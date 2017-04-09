@@ -21,13 +21,13 @@ public class AttributeSelectorPane extends VBox {
 		Node customAttributesDisplay = new AttributeDisplay("Add Custom Attributes",
 				getAttributesFromFolder(new File(basicAttributesFile)),this.attributeHolder);
 		Node presetAttributesDisplay = new AttributeDisplay("Add Preset Attributes",
-				getAttributesFromFolder(new File(presetAttributesFile)),this.attributeHolder);
-		Node userCreatedAttributesDisplay = new AttributeDisplay("Add User-Created Attributes",
-				getAttributesFromFolder(new File(userCreatedAttributesFile)),this.attributeHolder);
-		Node thisClassesAttributes = new AttributeDisplay("Edit This Class' Attributes", this.attributeHolder.getAttributes(),this.attributeHolder);
+				getAttributesFromFolder(new File(presetAttributesFile)),attributeHolder);
+//		Node userCreatedAttributesDisplay = new AttributeDisplay("Add User-Created Attributes",
+//				getAttributesFromFolder(new File(userCreatedAttributesFile)),attributeHolder);
+		Node thisClassesAttributes = new AttributeDisplay("Edit This Class' Attributes", attributeHolder.getAttributes(),attributeHolder);
 
 		this.setPrefSize(prefWidth, prefHeight);
-		this.getChildren().addAll(customAttributesDisplay, presetAttributesDisplay, userCreatedAttributesDisplay,
+		this.getChildren().addAll(customAttributesDisplay, presetAttributesDisplay, //userCreatedAttributesDisplay,
 				thisClassesAttributes);
 	}
 	
