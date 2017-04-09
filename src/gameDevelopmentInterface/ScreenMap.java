@@ -9,6 +9,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 
+/**
+ * This class will hold the grid on which players can place sprites or tiles to set up their
+ * gaming environment. 
+ * @author Jake
+ *
+ */
+
 public class ScreenMap extends StackPane {
 	private static final int SCREEN_SIZE = 350;
 	private GridPane myGrid;
@@ -34,7 +41,7 @@ public class ScreenMap extends StackPane {
 		return NUM_COLS;
 	}
 	
-	public Pair<Integer, Integer> getCoordOfSpriteHover(double x, double y) {
+	public Pair<Integer, Integer> getCoordOfMouseHover(double x, double y) {
 		Bounds boundsInScreen = myGrid.localToScreen(myGrid.getBoundsInLocal());
 		int colNum = getColOrRowPlacement(boundsInScreen.getMinX(), myGrid.getWidth(), myGrid.getWidth()/NUM_COLS, x, boundsInScreen);
 		int rowNum = getColOrRowPlacement(boundsInScreen.getMinY(), myGrid.getHeight(), myGrid.getHeight()/NUM_ROWS, y, boundsInScreen);

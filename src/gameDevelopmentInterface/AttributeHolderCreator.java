@@ -1,20 +1,9 @@
 package gameDevelopmentInterface;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import data.AttributeData;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Callback;
 
 /**
  * 
@@ -29,14 +18,18 @@ public class AttributeHolderCreator extends BorderPane {
 	private AttributeData attributeHolder;
 
 	public AttributeHolderCreator() {
+		Button saveButton = new Button("Save attribute to file");
+		saveButton.setOnAction((c)->createClassData());
 		attributeHolder=new AttributeData("dummy");
 		attributePane = new AttributeSelectorPane(attributeHolder);
 		this.setRight(attributePane);
-		this.setLeft(new AttributeCustomizerPane(attributeHolder));
+		this.setCenter(new AttributeCustomizerPane(attributeHolder));
+		this.setBottom(saveButton);
 	}
-
 	// Produce XML file for this class' data.
-	public File createClassData() {
-		return null;
+	public void createClassData() {
+		/*
+		XStream xstream=new Xstream();
+		return null;*/
 	}
 }

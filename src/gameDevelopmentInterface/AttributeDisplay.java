@@ -1,7 +1,6 @@
 package gameDevelopmentInterface;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import data.AttributeData;
@@ -13,12 +12,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class AttributeDisplay extends VBox{
 	private final double prefWidth=200;
-	private AttributeDataFactory fileConverter;
 	private AttributeData targetData;
 	
 	public AttributeDisplay(String listTitle, List<AttributeData> displayedData, AttributeData targetData) {

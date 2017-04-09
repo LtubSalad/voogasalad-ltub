@@ -17,13 +17,14 @@ import javafx.scene.control.TabPane;
  *         No public methods because they most of its actions are event based.
  */
 public class MasterDeveloperInterface {
+	private static final String PATH_TO_STYLE_SHEETS = "/styleSheets/MainStyle.css";
 	private Scene developerScene;
 	private TabPane developerTabs;
 
 	public MasterDeveloperInterface() {
 		instantiateTabs();
 		developerScene = new Scene(developerTabs);
-		developerScene.getStylesheets().setAll("/styleSheets/MainStyle.css");
+		developerScene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 	}
 
 	private void instantiateTabs() {

@@ -65,9 +65,7 @@ public class App extends Application {
 		
 		// game loop 
 		GameLoop gameLoop = gameFactory.createGameLoop();
-//		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
 //		gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
-//		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
 //		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites()));
 		gameLoop.addLoopComponent((dt) -> model.update(dt));
 		gameLoop.addLoopComponent((dt) -> view.render(model));
