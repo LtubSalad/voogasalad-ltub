@@ -1,9 +1,8 @@
 package engine.model;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-import bus.EventBus;
 import commons.RunningMode;
 import engine.player.Player;
 import engine.sprite.Sprite;
@@ -20,13 +19,38 @@ public class BasicModel implements Model {
 		initHandlers();
 	}
 	
-	private void initHandlers() {
-		bus.on(SpriteModelEvent.ADD, (e) -> {
-			addSprite(e.getSprite());
-		});
-		bus.on(SpriteModelEvent.REMOVE, (e) -> {
-			removeSprite(e.getSprite());
-		});
+	public BasicModel(SpriteModel spriteModel){
+		this.spriteModel = spriteModel; 
+		handler = (SpriteHandler) spriteModel.getHandler();
+	}
+
+	@Override
+	public void update(double dt) {
+		Collection<Sprite> sprites = handler.getSprites();
+		for (Sprite sprite : sprites) {
+			sprite.update(dt);
+		}
+	}
+
+	@Override
+	public PlayerSelectionState getPlayerSelectionState() {
+		return selectionState;
+	}
+	@Override
+	public void setPlayerSelectionState(PlayerSelectionState selectionState) {
+		this.selectionState = selectionState;
+	}
+
+
+
+	@Override
+	public List<Sprite> getSprites() {
+		return (List<Sprite>) handler.getSprites(); 
+	}
+
+	@Override
+	public int getPoints() {
+		return points;
 	}
 	
 	@Override
