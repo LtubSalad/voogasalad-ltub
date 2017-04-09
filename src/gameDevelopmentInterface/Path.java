@@ -14,6 +14,10 @@ public class Path {
 		//test();
 	}
 	
+	public Queue<Pair<Integer, Integer>> getStartAndEndAndTurningPoints() {
+		return myPath; //TODO change this to actual turning points
+	}
+	
 	/**
 	 * Not sure if the back end will actually need this anymore
 	 * @return the path
