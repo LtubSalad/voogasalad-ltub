@@ -11,7 +11,7 @@ public interface GameLoop {
 	/**
 	 * Add a {@link LoopComponent} to the GameLoop, so that the {@code update(double dt)} 
 	 * method of the {@link LoopComponent} would be called once each frame when
-	 * the loop is running.
+	 * the loop is running. Each component is executed in the order they are added.
 	 * 
 	 * null object, or {@link LoopComponent} that is previously added, are ignored.
 	 * 

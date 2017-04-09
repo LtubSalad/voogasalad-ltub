@@ -3,12 +3,21 @@ package gameDevelopmentInterface;
 import data.AttributeData;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class AttributeCustomizerPopup extends Stage {
 	public AttributeCustomizerPopup(AttributeData dataToAdd, AttributeData targetData) {
 		Group root = new Group();
-		root.getChildren().add(new AttributeAdderPane(dataToAdd,targetData));
+		VBox box=new VBox();
+		AttributeCustomizerPane customizer=new AttributeCustomizerPane(dataToAdd);
+		Button saveButton= new Button("Add Attribute");
+		saveButton.setOnAction((c)->{
+			targetData.addAttributeData(customizer.getAttribute());
+		});
+		box.getChildren().addAll(customizer,saveButton);
+		root.getChildren().add(box);
 
 		Scene myScene = new Scene(root);
 		this.setTitle("Set properties of " + dataToAdd.getName());

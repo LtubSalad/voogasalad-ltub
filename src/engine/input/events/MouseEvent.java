@@ -1,8 +1,8 @@
-package engine.input;
+package engine.input.events;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import commons.Point;
+import engine.camera.ViewPoint;
 
 public class MouseEvent extends BusEvent {	
 	
@@ -13,14 +13,14 @@ public class MouseEvent extends BusEvent {
 	public static final BusEventType<MouseEvent> MIDDLE = new BusEventType<>("MIDDLE_CLICK");
 	public static final BusEventType<MouseEvent> SCROLL =  new BusEventType<>("MIDDL_SCROLL"); // TODO related to camera
 	
-	private Point pos;
+	private ViewPoint pos;
 	
-	public MouseEvent(BusEventType<? extends BusEvent> busEventType, Point pos) {
+	public MouseEvent(BusEventType<? extends BusEvent> busEventType, ViewPoint pos) {
 		super(busEventType);
 		this.pos = pos;
 	}
 	
-	public Point getPos() {
+	public ViewPoint getPos() {
 		return pos;
 	}
 

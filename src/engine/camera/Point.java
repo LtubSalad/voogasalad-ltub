@@ -1,6 +1,6 @@
-package commons;
+package engine.camera;
 
-public class Point {
+abstract class Point {
 
 	private double x;
 	private double y;
