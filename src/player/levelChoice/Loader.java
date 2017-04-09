@@ -28,10 +28,10 @@ public class Loader {
 	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME*100);
 
 	public Loader(){
-		show();
+		
 	}
 
-	private void show(){
+	public void show(){
 		Stage primaryStage = new Stage();
 		primaryStage.setTitle("Game Loading");
 		Group root = new Group();
@@ -85,6 +85,7 @@ public class Loader {
 		 primaryStage.hide();
 
 		 LevelManager levelManager = new LevelManager();
+		 levelManager.show();
 		 
 		
 	}

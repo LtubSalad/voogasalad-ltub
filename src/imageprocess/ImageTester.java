@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  * @author Zhiyong
  *
  */
-public class Test extends Application{
+public class ImageTester extends Application{
 	public static void main(String[] args){
 //		int[][] img = {{0,0,0,0},{0,1,1,0},{1,1,1,0},{0,1,1,0},{1,1,1,1},{1,0,0,0}};
 //		CCLabeling c = new CCLabeling(img,6,4);

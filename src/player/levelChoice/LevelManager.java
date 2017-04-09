@@ -36,10 +36,10 @@ public class LevelManager {
 	public LevelManager(){
 		numberOfLevel = 2;
 		
-		show();
+		
 		
 	}
-	private void show(){
+	public void show(){
 		
 		Menu level = initLevelMenu();
 		Menu setting = initSettingMenu();

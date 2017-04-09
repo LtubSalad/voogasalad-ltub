@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import player.gameChoice.GameManager;
 
-public class Main extends Application {
+public class LoaderTester extends Application {
 	public static final String RESOURCES_LOCATION = "resources/menu";
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
@@ -20,6 +20,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		Loader loader = new Loader();
 //		GameManager gameManager = new GameManager(primaryStage);
+		loader.show();
 
 	}
 }
