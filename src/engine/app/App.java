@@ -11,8 +11,10 @@ import engine.sprite.Movable;
 import engine.sprite.Sprite;
 import engine.sprite.collision.Collidable;
 import engine.sprite.collision.CollisionBound;
+import engine.sprite.collision.CollisionChecker;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
+import engine.sprite.range.InRangeChecker;
 import engine.view.View;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -65,8 +67,10 @@ public class App extends Application {
 		
 		// game loop 
 		GameLoop gameLoop = gameFactory.createGameLoop();
-//		gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
-//		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites()));
+		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
+		gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
+		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
+		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites()));
 		gameLoop.addLoopComponent((dt) -> model.update(dt));
 		gameLoop.addLoopComponent((dt) -> view.render(model));
 		gameLoop.addLoopComponent((dt) -> view.render(localModel));
