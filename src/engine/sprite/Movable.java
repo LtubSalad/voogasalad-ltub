@@ -5,15 +5,16 @@ import commons.RunningMode;
 import engine.camera.GamePoint;
 import engine.skill.Target;
 
-public class Movable {
+public class Movable implements Attribute {
 
 	Sprite sprite;
 	private double speed = 300; // TODO: game data
-	private boolean moving = false;
 	private GamePoint pDest;
+	private Boolean isMovable;
 
 	public Movable(Sprite sprite) {
 		this.sprite = sprite;
+		isMovable = false;
 	}
 	
 	public void setSpeed(double speed) {
@@ -22,22 +23,10 @@ public class Movable {
 
 	public void moveTo(GamePoint pDest) {
 		this.pDest = pDest;
-		startMoving();
+		switchOn();
 	}
 	public void moveTo(Target target) {
 		// TODO
-	}
-
-	private void startMoving() {
-		moving = true;
-	}
-
-	private void stopMoving() {
-		moving = false;
-	}
-
-	public boolean isMoving() {
-		return moving;
 	}
 
 	public double update(double dt) {
@@ -46,7 +35,7 @@ public class Movable {
 				System.out.println("Sprite is not set for movable!");
 			}
 		}
-		if (!isMoving()) {
+		if (!isAttribute()) {
 			return dt;
 		}
 		if (sprite == null) {
@@ -59,7 +48,7 @@ public class Movable {
 		double x = pos.x();
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
-			stopMoving();
+			switchOff();
 			return dt;
 		}
 		double xDiff = xDest - x;
@@ -69,7 +58,7 @@ public class Movable {
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			sprite.setPos(new GamePoint(xDest, yDest));
-			stopMoving();
+			switchOff();
 			return dist - (speed * dt);
 		}
 
@@ -87,6 +76,21 @@ public class Movable {
 		sprite.setPos(new GamePoint(x + vx * dt, y + vy * dt));
 		return 0.0;
 
+	}
+
+	@Override
+	public void switchOn() {
+		isMovable = true;
+	}
+
+	@Override
+	public void switchOff() {
+		isMovable = false;
+	}
+
+	@Override
+	public Boolean isAttribute() {
+		return isMovable;
 	}
 
 }
