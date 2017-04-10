@@ -33,6 +33,17 @@ public class InRangeChecker {
 			}
 		}
 	}
+	
+	public void checkMonstersInRange(List<Sprite> tower, List<Sprite> monsters){
+		for (Sprite detector: tower) {
+			for (Sprite detectee: monsters) {
+				if (detector == detectee) { continue; }
+				if (inRange(detector, detectee)) {
+					bus.emit(new MonsterInRangeEvent(MonsterInRangeEvent.ANY, detector, detectee));
+				}
+			}
+		}
+	}
 
 	private boolean inRange(Sprite detector, Sprite detectee) {
 		GamePoint detectorPos = detector.getPos();

@@ -57,8 +57,9 @@ public class PlayerSelectionState {
 		imageSet.setImage(image);
 		sprite.setImageSet(imageSet);
 		Movable movable = new Movable(sprite);
-		sprite.setMovable(movable);
-		sprite.setCollidable(new Collidable(new CollisionBound(image)));
+		// TODO: FIX
+	//	sprite.setMovable(movable);
+	//	sprite.setCollidable(new Collidable(new CollisionBound(image)));
 		availableSkills.add(new PlayerCreateSpriteSkill(bus, sprite));
 		return availableSkills;
 	}
