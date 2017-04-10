@@ -26,10 +26,10 @@ public class AttributeData {
 	private List<AttributeData> subAttributes;
 	
 	public AttributeData(String name){
-		attributeVariables=FXCollections.observableMap(new HashMap<>());
-		attributeScripts=FXCollections.observableMap(new HashMap<>());
+		attributeVariables=new HashMap<>();
+		attributeScripts=new HashMap<>();
 		List<AttributeData> subAttributesUnobservable=new ArrayList<>();
-		subAttributes=FXCollections.observableList(subAttributesUnobservable);
+		subAttributes=subAttributesUnobservable;
 		attributeName=name;
 	}
 	

@@ -1,5 +1,11 @@
 package gameDevelopmentInterface;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import data.AttributeData;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -16,6 +22,7 @@ public class AttributeHolderCreator extends BorderPane {
 	// Put in attribute data from an attribute
 	private Node attributePane;
 	private AttributeData attributeHolder;
+	private final String userCreatedAttributesFile = "data/attributeSkeletons/userCreatedAttributes";
 
 	public AttributeHolderCreator() {
 		Button saveButton = new Button("Save attribute to file");
@@ -28,8 +35,12 @@ public class AttributeHolderCreator extends BorderPane {
 	}
 	// Produce XML file for this class' data.
 	public void createClassData() {
-		/*
-		XStream xstream=new Xstream();
-		return null;*/
+		XStream xstream = new XStream(new DomDriver());
+		try {
+            FileOutputStream fs = new FileOutputStream(userCreatedAttributesFile+"/"+attributeHolder.getName()+".xml");
+            xstream.toXML(attributeHolder, fs);
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        }
 	}
 }
