@@ -1,0 +1,46 @@
+<data.AttributeData>
+  <attributeName>Choose attribute name</attributeName>
+  <changeableName>true</changeableName>
+  <isConcrete>true</isConcrete>
+  <attributeScripts/>
+  <attributeVariables/>
+  <subAttributes>
+    <data.AttributeData>
+      <attributeName>ConstantActor</attributeName>
+      <changeableName>false</changeableName>
+      <isConcrete>false</isConcrete>
+      <attributeScripts>
+        <entry>
+          <javafx.util.Pair>
+            <key class="string">run</key>
+            <value class="list"/>
+          </javafx.util.Pair>
+          <string>move(50)</string>
+        </entry>
+      </attributeScripts>
+      <attributeVariables/>
+      <subAttributes/>
+    </data.AttributeData>
+    <data.AttributeData>
+      <attributeName>ObjectHolder</attributeName>
+      <changeableName>false</changeableName>
+      <isConcrete>false</isConcrete>
+      <attributeScripts>
+        <entry>
+          <javafx.util.Pair>
+            <key class="string">getObjects</key>
+            <value class="list"/>
+          </javafx.util.Pair>
+          <string>return secondaryObject;</string>
+        </entry>
+      </attributeScripts>
+      <attributeVariables>
+        <entry>
+          <string>secondaryObject</string>
+          <string>projectile</string>
+        </entry>
+      </attributeVariables>
+      <subAttributes/>
+    </data.AttributeData>
+  </subAttributes>
+</data.AttributeData>

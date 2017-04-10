@@ -21,16 +21,25 @@ import javafx.util.Pair;
  */
 public class AttributeData {
 	private String attributeName;
+	private boolean changeableName;
+	private boolean isConcrete;
+	private String implementationSpecifier;
 	private Map<Pair<String, List<String>>,String> attributeScripts;
 	private Map<String,String> attributeVariables;
 	private List<AttributeData> subAttributes;
 	
-	public AttributeData(String name){
-		attributeVariables=FXCollections.observableMap(new HashMap<>());
-		attributeScripts=FXCollections.observableMap(new HashMap<>());
+	public AttributeData(String name, boolean changeableName, boolean isConcrete, String implementationSpecifier){
+		attributeVariables=new HashMap<>();
+		attributeScripts=new HashMap<>();
 		List<AttributeData> subAttributesUnobservable=new ArrayList<>();
-		subAttributes=FXCollections.observableList(subAttributesUnobservable);
+		subAttributes=subAttributesUnobservable;
 		attributeName=name;
+		this.isConcrete=isConcrete;
+		this.changeableName=changeableName;
+	}
+	
+	public AttributeData(String name){
+		this(name, false, false,null);
 	}
 	
 	public Map<Pair<String, List<String>>,String> getScripts(){
@@ -49,12 +58,20 @@ public class AttributeData {
 		attributeVariables=variables;
 	}
 	
+	public void setName(String name){
+		this.attributeName=name;
+	}
+	
 	public String getName(){
 		return attributeName;
 	}
 
 	public List<AttributeData> getAttributes(){
 		return subAttributes;
+	}
+	
+	public boolean nameModifiable(){
+		return changeableName;
 	}
 	
 	public void addAttributeData(AttributeData data){

@@ -11,6 +11,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import data.AttributeData;
+
 
 
 /**
@@ -40,7 +42,9 @@ public class SpriteBuilder {
 			  Element element = (Element) rootNode;
 			  NodeList attributeList = element.getElementsByTagName(ATTRIBUTE_TAG);
 			  for(int i = 0; i < ATTRIBUTE_TITLES.size(); i++){
-				  AttributeBuilder aBuilder = new AttributeBuilder(docBuilder, attributeList.item(i), ATTRIBUTE_TITLES.get(i));
+				  // TODO make it work for attribute data
+				  AttributeData attributeData = new AttributeData(null);
+				  AttributeBuilder aBuilder = new AttributeBuilder(attributeData);
 			  }
 		  }
 	  }

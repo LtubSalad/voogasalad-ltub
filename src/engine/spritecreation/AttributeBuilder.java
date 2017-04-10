@@ -1,12 +1,10 @@
 package engine.spritecreation;
 
-import javax.xml.parsers.DocumentBuilder;
-
-import org.w3c.dom.Node;
+import data.AttributeData;
 
 public class AttributeBuilder {
 
-	public AttributeBuilder(DocumentBuilder docBuilder, Node item, String string) {
+	public AttributeBuilder(AttributeData data) {
 		// TODO Auto-generated constructor stub
 	}
 

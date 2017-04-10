@@ -5,6 +5,13 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/groovy-all-2.4.10-indy.jar"/>
+	<classpathentry kind="lib" path="lib/groovy-all-2.4.10-indy.jar" sourcepath="lib/groovy-src.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/voogasalad_ltub/lib/groovy-doc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/xstream-1.4.9.jar"/>
+	<classpathentry kind="lib" path="lib/xstream-doc.jar"/>
+	<classpathentry kind="lib" path="lib/xstream-src.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
