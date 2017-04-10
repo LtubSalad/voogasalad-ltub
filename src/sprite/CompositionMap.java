@@ -7,6 +7,10 @@ import java.util.Observable;
 
 public class CompositionMap extends Observable {
 	
+	// string to attribute = attribute map 
+	
+	private Sprite mySprite; 
+	
 	private HashMap<String, SpriteAttribute> namesToAttributes; 
 	
 	public CompositionMap(){
@@ -18,7 +22,11 @@ public class CompositionMap extends Observable {
 	}
 	
 	public CompositionMap(Sprite sprite) {
-		// TODO Auto-generated constructor stub
+		this.mySprite = sprite; 
+	}
+
+	public CompositionMap(Map<String, SpriteAttribute> attributeMap) {
+		this.namesToAttributes = (HashMap<String, SpriteAttribute>) attributeMap; // get rid of this cast 
 	}
 
 	private void configureMap(List<String> attributes) {

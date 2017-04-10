@@ -8,21 +8,30 @@ import java.util.Observer;
 
 import javafx.collections.ObservableMap;
 
-public class Sprite  implements Observer{
+public class Sprite implements Observer{
 	private AttackerAttribute attacker;
 	private MoverAttribute mover;
 	private CompositionMap CM; 
-	
+	private Map<String, SpriteAttribute> attributeMap; 
 	//Just an example constructor, not the real one
+	
+	
 	public Sprite(){
 		mover = new StationaryMoverAttribute();
 		attacker = new MeleeAttackerAttribute();
-		CM = new CompositionMap();
+		configureAttributeMap(); 
+		CM = new CompositionMap(attributeMap);
 		CM.addObserver(this);
-
+		// other way - use sprite constructor
 
 	}
 	
+	private void configureAttributeMap() {
+		attributeMap = new HashMap<String, SpriteAttribute>(); 
+		attributeMap.put("Attacker",this.attacker);
+		attributeMap.put("Mover", this.mover);
+	}
+
 	public void setMoverAttribute(String attributeClassName) throws ClassNotFoundException{
 		mover = (MoverAttribute) setAttribute(attributeClassName);
 	}
