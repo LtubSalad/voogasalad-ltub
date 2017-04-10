@@ -10,27 +10,44 @@ import engine.player.Player;
 import engine.sprite.collision.Collidable;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
+import engine.sprite.spritefactory.NonSpawningSpriteFactory;
+import engine.sprite.spritefactory.SpriteFactory;
 
-public class Sprite {
+public class Sprite implements SpriteCreator {
 
 	// initialize empty image.
 	private ImageSet imageSet;
 	// private boolean locked = false; // TODO
 	private GamePoint pos;
 	private int z;
-	private Movable movable = null;
-	private Collidable collidable = null;
+	
 	private SelectionBound selectionBound = SelectionBound.IMAGE;
 	private List<GamePoint> selectionBoundVertices;
 	private double detectionRange;
+	
+	// composition objects 
+		private Movable movable = null;
+		private Collidable collidable = null;
+		private SpriteFactory spriteFactory;
+		// need health 
+		// need weapon
+		// need images 
+	
+		
 	/**
 	 * The player that this sprite belongs to.
 	 */
 	private Player player = Player.DEFAULT;
 	private ActionQueue actionQueue = new ActionQueue();
 
+	/**
+	 * sprite constructor - sets all composition elements (movable, collidable, spritefactory, health, weapon, images to default values)
+	 */
 	public Sprite() {
-
+		// set movable = stationary
+		// set collidable = default
+		this.spriteFactory = new NonSpawningSpriteFactory();
+		
 	}
 
 	public void setImageSet(ImageSet imageSet) {
@@ -140,6 +157,11 @@ public class Sprite {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void setFactory(SpriteFactory factory) {
+		this.spriteFactory = factory; 		
 	}
 
 }

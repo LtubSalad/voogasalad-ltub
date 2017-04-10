@@ -10,6 +10,7 @@ public class SpawningSpriteFactory extends SpriteFactory {
 	@Override
 	protected void spawn() {
 		// TODO Auto-generated method stub
+		// for every time interval, create a new sprite, add it to the screen etc.  
 		
 	}
 
