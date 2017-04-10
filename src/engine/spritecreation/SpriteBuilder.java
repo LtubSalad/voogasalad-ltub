@@ -28,7 +28,8 @@ public class SpriteBuilder {
 			"NodeHolder",
 			"HealthHolder",
 			"Attacker",
-			"SpriteFactory"
+			"SpriteFactory", 
+			"Weapon"
 	});
 	
 	  public SpriteBuilder(DocumentBuilder docBuilder, Node item)  {
@@ -37,12 +38,17 @@ public class SpriteBuilder {
 		  createAttributes();
 	  }
 	  
+
+	  public SpriteBuilder(String filePath){
+		  ;
+	  }
+	  
+
 	  private void createAttributes() {
 		  if(rootNode.getNodeType() == Node.ELEMENT_NODE){
 			  Element element = (Element) rootNode;
 			  NodeList attributeList = element.getElementsByTagName(ATTRIBUTE_TAG);
 			  for(int i = 0; i < ATTRIBUTE_TITLES.size(); i++){
-				  // TODO make it work for attribute data
 				  AttributeData attributeData = new AttributeData(null);
 				  AttributeBuilder aBuilder = new AttributeBuilder(attributeData);
 			  }
