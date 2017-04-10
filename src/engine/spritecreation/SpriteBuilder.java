@@ -11,6 +11,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import data.AttributeData;
+
 
 
 /**
@@ -47,10 +49,8 @@ public class SpriteBuilder {
 			  Element element = (Element) rootNode;
 			  NodeList attributeList = element.getElementsByTagName(ATTRIBUTE_TAG);
 			  for(int i = 0; i < ATTRIBUTE_TITLES.size(); i++){
-				  System.out.println(attributeList.item(0).getTextContent());
-				  //Need to rebuild this AttributeBuilder for default
-				//  AttributeBuilder aBuilder = new AttributeBuilder(docBuilder, attributeList.item(i), ATTRIBUTE_TITLES.get(i));
-				  AttributeBuilder aBuilder = new AttributeBuilder(docBuilder, attributeList.item(i), ATTRIBUTE_TITLES.get(i));
+				  AttributeData attributeData = new AttributeData(null);
+				  AttributeBuilder aBuilder = new AttributeBuilder(attributeData);
 			  }
 		  }
 	  }
