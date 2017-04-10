@@ -1,5 +1,6 @@
 package gameDevelopmentInterface;
 
+import data.ScreenModelData;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.BorderPane;
@@ -17,13 +18,12 @@ import javafx.scene.layout.BorderPane;
  */
 
 public class ScreenModelCreator extends BorderPane {
-	private ScreenObjectHolder myObjectsToPlace = new ScreenObjectHolder(this);
+	private ScreenModelData myScreenModel = new ScreenModelData();
+	private ScreenObjectHolder myObjectsToPlace = new ScreenObjectHolder(this, myScreenModel);
 	private ScreenMap myScreen = new ScreenMap();
 	private ButtonsPanel myButtonsPanel = new ButtonsPanel(this);
-	private AttributeHolderCreator myAttributeHolderCreator;
 	
 	public ScreenModelCreator(AttributeHolderCreator attributeHolderCreator) {
-		this.myAttributeHolderCreator = attributeHolderCreator;
 		this.setBottom(myObjectsToPlace);
 		this.setCenter(myScreen);
 		this.setRight(myButtonsPanel);

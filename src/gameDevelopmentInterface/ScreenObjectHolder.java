@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import data.AttributeData;
+import data.ScreenModelData;
 import engine.model.BasicModel;
 import engine.sprite.Sprite;
 import javafx.collections.ObservableList;
@@ -33,10 +34,12 @@ public class ScreenObjectHolder extends HBox {
 	public static final String TEST_FILE_PATH = "images/characters/bahamut_left.png";
 	private ImageView mario, grass, stone, water;
 	private ScreenModelCreator myScreenModel;
+	private ScreenModelData myScreenData;
 	private Map<ImageView, AttributeData> myScreenObjects = new HashMap<ImageView, AttributeData>();
 	
-	public ScreenObjectHolder(ScreenModelCreator smc) {
+	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd) {
 		myScreenModel = smc;
+		myScreenData = smd;
 		Image m = new Image(getClass().getClassLoader().getResourceAsStream(MARIO_IMAGE), 100, 100, false, false);
 		Image g = new Image(getClass().getClassLoader().getResourceAsStream(GRASS_IMAGE), 100, 100, false, false);
 		Image s = new Image(getClass().getClassLoader().getResourceAsStream(STONE_IMAGE), 100, 100, false, false);
@@ -50,7 +53,7 @@ public class ScreenObjectHolder extends HBox {
 		stone.setOnMousePressed(e -> dragAndDrop(stone));
 		water.setOnMousePressed(e -> dragAndDrop(water));
 		this.getChildren().addAll(mario, grass, stone, water);
-		addObject(new AttributeDataFactory().produceAttribute(new File(TOWER_XML)));
+		addObject(new File(TOWER_XML));
 	}
 	
 	/**
@@ -69,6 +72,10 @@ public class ScreenObjectHolder extends HBox {
 				spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
 			}
 		});
+	}
+	
+	public void addObject(File file) {
+		addObject(new AttributeDataFactory().produceAttribute(file));
 	}
 	
 	private void dragAndDrop(ImageView source) {
@@ -95,7 +102,7 @@ public class ScreenObjectHolder extends HBox {
 			Pair<Integer, Integer> coords = target.getCoordOfMouseHover(spriteX, spriteY);
 			grid.add(toAdd, coords.getKey(), coords.getValue());
 			//add this sprite to the model
-			//myModel.add(new Sprite());
+			myScreenData.addObjectData(new Sprite());
 			success = true;
 		}
 		e.setDropCompleted(success);
