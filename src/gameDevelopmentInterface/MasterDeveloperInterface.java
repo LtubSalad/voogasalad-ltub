@@ -21,7 +21,8 @@ public class MasterDeveloperInterface {
 	private Scene developerScene;
 	private TabPane developerTabs;
 	private AttributeHolderCreator myAttributeHolderCreator = new AttributeHolderCreator();
-	private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(myAttributeHolderCreator);
+	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
+	private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(myGeneralDataCreator);
 
 	public MasterDeveloperInterface() {
 		instantiateTabs();
@@ -32,7 +33,7 @@ public class MasterDeveloperInterface {
 	private void instantiateTabs() {
 		developerTabs = new TabPane();
 		Tab classCreatorTab = new Tab("Create AttributeHolder", myAttributeHolderCreator);
-		Tab GeneralDataTab = new Tab("General Data", new GeneralDataCreator());
+		Tab GeneralDataTab = new Tab("General Data", myGeneralDataCreator);
 		Tab ScreenSettingView = new Tab("Screen Setting", myScreenModelCreator);
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
 		myTabs.addAll(classCreatorTab, GeneralDataTab, ScreenSettingView);
