@@ -32,7 +32,8 @@ public class SpriteBuilder {
 			"NodeHolder",
 			"HealthHolder",
 			"Attacker",
-			"SpriteFactory"
+			"SpriteFactory", 
+			"Weapon"
 	});
 	
 	  public SpriteBuilder(DocumentBuilder docBuilder, Node item) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -41,13 +42,17 @@ public class SpriteBuilder {
 		  createAttributes();
 	  }
 	  
+	  public SpriteBuilder(String filePath){
+		  ;
+	  }
+	  
 	  private void createAttributes() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		  if(rootNode.getNodeType() == Node.ELEMENT_NODE){
 			  Element element = (Element) rootNode;
 			  NodeList attributeList = element.getElementsByTagName("Attribute");
 			  for(int i = 0; i < ATTRIBUTE_TITLES.size(); i++){
 				  System.out.println(attributeList.item(0).getTextContent());
-				  //Need to rebuild this AttributeBuilder fo default
+				  //Need to rebuild this AttributeBuilder for default
 				//  AttributeBuilder aBuilder = new AttributeBuilder(docBuilder, attributeList.item(i), ATTRIBUTE_TITLES.get(i));
 			  }
 		  }

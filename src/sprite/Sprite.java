@@ -1,16 +1,25 @@
 package sprite;
 
 import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Sprite {
+import javafx.collections.ObservableMap;
+
+public class Sprite  implements Observer{
 	private AttackerAttribute attacker;
 	private MoverAttribute mover;
+	private CompositionMap CM; 
 	
 	//Just an example constructor, not the real one
 	public Sprite(){
 		mover = new StationaryMoverAttribute();
 		attacker = new MeleeAttackerAttribute();
-		
+		CM = new CompositionMap();
+		CM.addObserver(this);
+
 
 	}
 	
@@ -66,6 +75,16 @@ public class Sprite {
 	
 	public void move(){
 		mover.move();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		CompositionMap currentMap = (CompositionMap) o; 
+		Map<String, SpriteAttribute> newMap = currentMap.getMap();
+		// iterate through all the objects' class names
+		// set this.object = map.get(classname)
+	
+		
 	}
 	
 }
