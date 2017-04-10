@@ -20,6 +20,8 @@ public class MasterDeveloperInterface {
 	private static final String PATH_TO_STYLE_SHEETS = "/styleSheets/MainStyle.css";
 	private Scene developerScene;
 	private TabPane developerTabs;
+	private AttributeHolderCreator myAttributeHolderCreator = new AttributeHolderCreator();
+	private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(myAttributeHolderCreator);
 
 	public MasterDeveloperInterface() {
 		instantiateTabs();
@@ -29,9 +31,9 @@ public class MasterDeveloperInterface {
 
 	private void instantiateTabs() {
 		developerTabs = new TabPane();
-		Tab classCreatorTab = new Tab("Create AttributeHolder", new AttributeHolderCreator());
+		Tab classCreatorTab = new Tab("Create AttributeHolder", myAttributeHolderCreator);
 		Tab GeneralDataTab = new Tab("General Data", new GeneralDataCreator());
-		Tab ScreenSettingView = new Tab("Screen Setting", new ScreenModelCreator());
+		Tab ScreenSettingView = new Tab("Screen Setting", myScreenModelCreator);
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
 		myTabs.addAll(classCreatorTab, GeneralDataTab, ScreenSettingView);
 	}

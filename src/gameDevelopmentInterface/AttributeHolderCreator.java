@@ -15,15 +15,15 @@ import javafx.scene.layout.BorderPane;
 public class AttributeHolderCreator extends BorderPane {
 	// Put in attribute data from an attribute
 	private Node attributePane;
-	private AttributeData attributeHolder;
+	private AttributeData attributeHolder = new AttributeData("dummy");
+	private AttributeCustomizerPane myAttributeCustomizerPane = new AttributeCustomizerPane(attributeHolder);
 
 	public AttributeHolderCreator() {
 		Button saveButton = new Button("Save attribute to file");
 		saveButton.setOnAction((c)->createClassData());
-		attributeHolder=new AttributeData("dummy");
 		attributePane = new AttributeSelectorPane(attributeHolder);
 		this.setRight(attributePane);
-		this.setCenter(new AttributeCustomizerPane(attributeHolder));
+		this.setCenter(myAttributeCustomizerPane);
 		this.setBottom(saveButton);
 	}
 	// Produce XML file for this class' data.
@@ -32,4 +32,5 @@ public class AttributeHolderCreator extends BorderPane {
 		XStream xstream=new Xstream();
 		return null;*/
 	}
+	
 }

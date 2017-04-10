@@ -1,9 +1,8 @@
 package gameDevelopmentInterface;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import data.AttributeData;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -11,7 +10,7 @@ import javafx.scene.layout.VBox;
 
 public class AttributeCustomizerPane extends ScrollPane {
 	private AttributeData myAttribute;
-	private List<AttributeCustomizerPane> subPanes;
+	private ObservableList<AttributeCustomizerPane> subPanes;
 	private VariableSetter variableSetter;
 	private FunctionSetter functionSetter;
 	private final double prefHeight=500;
@@ -27,7 +26,6 @@ public class AttributeCustomizerPane extends ScrollPane {
 		this.setMaxWidth(maxWidth);
 		instantiate();
 	}
-
 
 	public AttributeData getAttribute() {
 		updateAttribute();
@@ -45,7 +43,7 @@ public class AttributeCustomizerPane extends ScrollPane {
 
 	private void instantiate() {
 		VBox myContents=new VBox();
-		subPanes=new ArrayList<>();
+		subPanes= FXCollections.observableArrayList();
 		variableSetter = new VariableSetter(myAttribute.getVariables());
 		functionSetter = new FunctionSetter(myAttribute.getScripts());
 		Button refresher = new Button("Refresh");

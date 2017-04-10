@@ -1,9 +1,20 @@
 package gameDevelopmentInterface;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import data.AttributeData;
+import engine.model.BasicModel;
+import engine.sprite.Sprite;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
@@ -13,12 +24,16 @@ import javafx.scene.layout.HBox;
 import javafx.util.Pair;
 
 public class ScreenObjectHolder extends HBox {
+	public static final String TOWER_XML = "data/attributeSkeletons/presetAttributes/Tower.xml";
+	private AttributeData tower;
 	public static final String MARIO_IMAGE = "images/marioCropped.gif";
 	public static final String GRASS_IMAGE = "images/Grass.jpg";
 	public static final String STONE_IMAGE = "images/Stone.jpg";
 	public static final String WATER_IMAGE = "images/Water.jpg";
+	public static final String TEST_FILE_PATH = "images/characters/bahamut_left.png";
 	private ImageView mario, grass, stone, water;
 	private ScreenModelCreator myScreenModel;
+	private Map<ImageView, AttributeData> myScreenObjects = new HashMap<ImageView, AttributeData>();
 	
 	public ScreenObjectHolder(ScreenModelCreator smc) {
 		myScreenModel = smc;
@@ -35,14 +50,25 @@ public class ScreenObjectHolder extends HBox {
 		stone.setOnMousePressed(e -> dragAndDrop(stone));
 		water.setOnMousePressed(e -> dragAndDrop(water));
 		this.getChildren().addAll(mario, grass, stone, water);
+		addObject(new AttributeDataFactory().produceAttribute(new File(TOWER_XML)));
 	}
 	
 	/**
 	 * Add a created sprite to the screen object selector
 	 * @param screenObject the sprite to add to the HBox
 	 */
-	public void addObject(Node screenObject) {
-		this.getChildren().add(screenObject);
+	public void addObject(AttributeData screenObject) {
+		screenObject.getAttributes().forEach(attr -> {
+			if (attr.getName().equals("ImageHolder")) {
+				Map<String,String> varMap = attr.getVariables();
+				Image si = new Image(getClass().getClassLoader().getResourceAsStream("images/characters/"+varMap.get("image")), 100, 100, false, false);
+				ImageView spriteImage = new ImageView(si);
+				spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
+				myScreenObjects.put(spriteImage, screenObject);
+				this.getChildren().add(spriteImage);
+				spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
+			}
+		});
 	}
 	
 	private void dragAndDrop(ImageView source) {
@@ -68,6 +94,8 @@ public class ScreenObjectHolder extends HBox {
 			double spriteY = e.getScreenY();
 			Pair<Integer, Integer> coords = target.getCoordOfMouseHover(spriteX, spriteY);
 			grid.add(toAdd, coords.getKey(), coords.getValue());
+			//add this sprite to the model
+			//myModel.add(new Sprite());
 			success = true;
 		}
 		e.setDropCompleted(success);
@@ -101,5 +129,6 @@ public class ScreenObjectHolder extends HBox {
 		content.putImage(source.getImage());
 		db.setContent(content);
 		e.consume();
-	}	
+	}
+
 }
