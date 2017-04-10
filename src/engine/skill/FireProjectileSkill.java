@@ -29,8 +29,8 @@ public class FireProjectileSkill implements Skill {
 		imageSet.setImage(image);
 		sprite.setImageSet(imageSet);
 		Movable movable = new Movable(sprite);
-		sprite.setMovable(movable);
-		sprite.setCollidable(new Collidable(new CollisionBound(image)));
+		sprite.setAttribute("movable", movable);
+		sprite.setAttribute("collidable", new Collidable(new CollisionBound(image)));
 		sprite.setPlayer(Player.NATURE);
 		projectile = sprite;
 	}
@@ -58,7 +58,7 @@ public class FireProjectileSkill implements Skill {
 	public void trigger() {
 		projectile.setPos(source.getPos());
 		projectile.executeAction(() -> {
-			projectile.getMovable().get().moveTo(target);
+			((Movable) projectile.getMovable().get()).moveTo(target);
 		});
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, projectile));
 	}

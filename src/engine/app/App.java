@@ -27,39 +27,39 @@ public class App extends Application {
 		
 		GameFactory gameFactory = new GameFactory();
 		
-		// sprite1
-		Sprite sprite1 = new Sprite();
-		sprite1.setPos(new GamePoint(100, 100));
-		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
-		ImageSet imageSet1 = new ImageSet();
-		imageSet1.setImage(image1);
-		sprite1.setImageSet(imageSet1);
-		Movable movable1 = new Movable(sprite1);
-		sprite1.setMovable(movable1);
-		sprite1.setCollidable(new Collidable(new CollisionBound(image1)));
-//		sprite1.setImageOffset(new Point(30, 30));
-		sprite1.setDetectionRange(128);
-		
-		// sprite2
-		Sprite sprite2 = new Sprite();
-		sprite2.setPos(new GamePoint(200, 100));
-		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
-		ImageSet imageSet2 = new ImageSet();
-		imageSet2.setImage(image2);
-		sprite2.setImageSet(imageSet2);
-		Movable movable2 = new Movable(sprite2);
-		movable2.setSpeed(100);
-		sprite2.setCollidable(new Collidable(new CollisionBound(image2)));
-		sprite2.setMovable(movable2);
-		sprite2.setDetectionRange(256);
+//		// sprite1
+//		Sprite sprite1 = new Sprite();
+//		sprite1.setPos(new GamePoint(100, 100));
+//		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
+//		ImageSet imageSet1 = new ImageSet();
+//		imageSet1.setImage(image1);
+//		sprite1.setImageSet(imageSet1);
+//		Movable movable1 = new Movable(sprite1);
+//		sprite1.setMovable(movable1);
+//		sprite1.setCollidable(new Collidable(new CollisionBound(image1)));
+////		sprite1.setImageOffset(new Point(30, 30));
+//		sprite1.setDetectionRange(128);
+//		
+//		// sprite2
+//		Sprite sprite2 = new Sprite();
+//		sprite2.setPos(new GamePoint(200, 100));
+//		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
+//		ImageSet imageSet2 = new ImageSet();
+//		imageSet2.setImage(image2);
+//		sprite2.setImageSet(imageSet2);
+//		Movable movable2 = new Movable(sprite2);
+//		movable2.setSpeed(100);
+//		sprite2.setCollidable(new Collidable(new CollisionBound(image2)));
+//		sprite2.setMovable(movable2);
+//		sprite2.setDetectionRange(256);
 		
 		// game player (user)
 		Player player = new Player("Player 1");
 		
 		// model and view
 		Model model = gameFactory.createModel(player);
-		model.addSprite(sprite1);
-		model.addSprite(sprite2);
+//		model.addSprite(sprite1);
+//		model.addSprite(sprite2);
 		PlayerLocalModel localModel = gameFactory.createPlayerLocalModel();
 		Camera camera = gameFactory.createCamera();
 		View view = gameFactory.createView(camera);
@@ -68,10 +68,23 @@ public class App extends Application {
 		// game loop 
 		GameLoop gameLoop = gameFactory.createGameLoop();
 		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
-		gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
 		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
-		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites()));
-		gameLoop.addLoopComponent((dt) -> model.update(dt));
+		
+		//gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
+		//gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites()));
+		
+		/*
+		 * move all the monsters forward
+		 * check each tower for monsters in its range (and fire weapons if necessary)
+		 * move all the bullets
+		 * check if any bullets have hit its target (and decrement health)
+		 * remove any monsters that have 0 or negative health
+		 */
+		gameLoop.addLoopComponent((dt) -> model.updatePositions(dt)); 
+		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkMonstersInRange(model.getTowerSprites(), model.getMonsterSprites()));
+		//gameLoop.addLoopComponent((dt) -> collisionChecker.);
+		
+		
 		gameLoop.addLoopComponent((dt) -> view.render(model));
 		gameLoop.addLoopComponent((dt) -> view.render(localModel));
 		
