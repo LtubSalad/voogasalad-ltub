@@ -1,2 +1,1 @@
-
-<ImageHolder variable_xPosition="0" variable_yPosition="0" variable_image="bahumut_left.png" function_getImage="return image" variable_displayPriority="1"></ImageHolder>
+<ImageHolder variable_xPosition="0" variable_yPosition="0" variable_image="Grass.jpg" function_getImage="return image" variable_displayPriority="1"></ImageHolder>

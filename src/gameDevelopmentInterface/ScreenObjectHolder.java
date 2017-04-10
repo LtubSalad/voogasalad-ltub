@@ -25,14 +25,15 @@ import javafx.scene.layout.HBox;
 import javafx.util.Pair;
 
 public class ScreenObjectHolder extends HBox {
-	public static final String TOWER_XML = "data/attributeSkeletons/presetAttributes/Tower.xml";
-	private AttributeData tower;
-	public static final String MARIO_IMAGE = "images/marioCropped.gif";
-	public static final String GRASS_IMAGE = "images/Grass.jpg";
-	public static final String STONE_IMAGE = "images/Stone.jpg";
-	public static final String WATER_IMAGE = "images/Water.jpg";
-	public static final String TEST_FILE_PATH = "images/characters/bahamut_left.png";
-	private ImageView mario, grass, stone, water;
+	private static final String IMAGE_HOLDER = "ImageHolder";
+	private static final String IMAGE = "image";
+	private static final String PATH_TO_IMAGE_FILES = "images/characters/";
+	private static final String PATH_TO_XML_FILES = "data/attributeSkeletons/";
+	private static final String TOWER_XML = PATH_TO_XML_FILES + "presetAttributes/Tower.xml";
+	private static final String MONSTER_XML = PATH_TO_XML_FILES + "presetAttributes/Monster.xml";
+	private static final String GRASS_XML = PATH_TO_XML_FILES + "presetAttributes/Grass.xml";
+	private static final String STONE_XML = PATH_TO_XML_FILES + "presetAttributes/Stone.xml";
+	private static final String WATER_XML = PATH_TO_XML_FILES + "presetAttributes/Water.xml";
 	private ScreenModelCreator myScreenModel;
 	private ScreenModelData myScreenData;
 	private Map<ImageView, AttributeData> myScreenObjects = new HashMap<ImageView, AttributeData>();
@@ -40,20 +41,11 @@ public class ScreenObjectHolder extends HBox {
 	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd) {
 		myScreenModel = smc;
 		myScreenData = smd;
-		Image m = new Image(getClass().getClassLoader().getResourceAsStream(MARIO_IMAGE), 100, 100, false, false);
-		Image g = new Image(getClass().getClassLoader().getResourceAsStream(GRASS_IMAGE), 100, 100, false, false);
-		Image s = new Image(getClass().getClassLoader().getResourceAsStream(STONE_IMAGE), 100, 100, false, false);
-		Image w = new Image(getClass().getClassLoader().getResourceAsStream(WATER_IMAGE), 100, 100, false, false);
-		mario = new ImageView(m);
-		grass = new ImageView(g);
-		stone = new ImageView(s);
-		water = new ImageView(w);
-		mario.setOnMousePressed(e -> dragAndDrop(mario));
-		grass.setOnMousePressed(e -> dragAndDrop(grass));
-		stone.setOnMousePressed(e -> dragAndDrop(stone));
-		water.setOnMousePressed(e -> dragAndDrop(water));
-		this.getChildren().addAll(mario, grass, stone, water);
 		addObject(new File(TOWER_XML));
+		addObject(new File(MONSTER_XML));
+		addObject(new File(GRASS_XML));
+		addObject(new File(STONE_XML));
+		addObject(new File(WATER_XML));
 	}
 	
 	/**
@@ -62,9 +54,9 @@ public class ScreenObjectHolder extends HBox {
 	 */
 	public void addObject(AttributeData screenObject) {
 		screenObject.getAttributes().forEach(attr -> {
-			if (attr.getName().equals("ImageHolder")) {
+			if (attr.getName().equals(IMAGE_HOLDER)) {
 				Map<String,String> varMap = attr.getVariables();
-				Image si = new Image(getClass().getClassLoader().getResourceAsStream("images/characters/"+varMap.get("image")), 100, 100, false, false);
+				Image si = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES+varMap.get(IMAGE)), 100, 100, false, false);
 				ImageView spriteImage = new ImageView(si);
 				spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
 				myScreenObjects.put(spriteImage, screenObject);
@@ -102,7 +94,7 @@ public class ScreenObjectHolder extends HBox {
 			Pair<Integer, Integer> coords = target.getCoordOfMouseHover(spriteX, spriteY);
 			grid.add(toAdd, coords.getKey(), coords.getValue());
 			//add this sprite to the model
-			myScreenData.addObjectData(new Sprite());
+			myScreenData.addObjectData(new Sprite()); //with the source's attribute data loaded up into the sprite
 			success = true;
 		}
 		e.setDropCompleted(success);
