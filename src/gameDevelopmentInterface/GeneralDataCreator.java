@@ -17,6 +17,7 @@ import javafx.util.Pair;
  *         button is pressed on the text input box.
  */
 public class GeneralDataCreator extends GridPane {
+	private static final int INSETS = 50;
 	private static final int MAX_SCREEN_SIZE = 600;
 	private static final String SAVE_ALL_VALUES = "Save All Values";
 	private static final String NUM_STARTING_BONUSES = "Number of Starting Bonuses";
@@ -38,7 +39,8 @@ public class GeneralDataCreator extends GridPane {
 	
 	public GeneralDataCreator() {
 		this.setMaxSize(MAX_SCREEN_SIZE, MAX_SCREEN_SIZE);
-		this.setPadding(new Insets(10, 10, 10, 10));
+		this.setPadding(new Insets(INSETS, INSETS, INSETS, INSETS));
+		this.setHgap(INSETS/5);
 		setupButtons();
 		placeTiles();
 	}

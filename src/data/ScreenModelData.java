@@ -3,6 +3,8 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 import engine.sprite.Sprite;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 /**
  * 
  * @author Daniel, Jake
@@ -12,7 +14,7 @@ import engine.sprite.Sprite;
  */
 
 public class ScreenModelData {
-	private List<Sprite> myScreenData = new ArrayList<Sprite>();
+	private ObservableList<Sprite> myScreenData = FXCollections.observableArrayList();
 	/**
 	 * Will put this object into the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
@@ -31,7 +33,7 @@ public class ScreenModelData {
 	 * 
 	 * @return all the objects on the screen
 	 */
-	public List<Sprite> getAllObjectsOnScreen() {
+	public ObservableList<Sprite> getAllObjectsOnScreen() {
 		return myScreenData;
 		
 	}

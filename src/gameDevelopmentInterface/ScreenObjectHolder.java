@@ -1,21 +1,15 @@
 package gameDevelopmentInterface;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import data.AttributeData;
 import data.ScreenModelData;
-import engine.model.BasicModel;
 import engine.sprite.Sprite;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
@@ -61,7 +55,6 @@ public class ScreenObjectHolder extends HBox {
 				spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
 				myScreenObjects.put(spriteImage, screenObject);
 				this.getChildren().add(spriteImage);
-				spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
 			}
 		});
 	}
