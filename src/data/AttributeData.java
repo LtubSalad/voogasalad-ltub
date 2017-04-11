@@ -1,5 +1,6 @@
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +16,11 @@ import javafx.util.Pair;
  * @author Daniel
  *
  */
-public class AttributeData {
+public class AttributeData implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String attributeType;
 	private boolean changeableName;
 	private boolean isConcrete;
@@ -23,6 +28,16 @@ public class AttributeData {
 	private Map<Pair<String, List<String>>,String> attributeScripts;
 	private Map<String,String> attributeVariables;
 	private List<AttributeData> subAttributes;
+	
+	public AttributeData(AttributeData attrToCopy) {
+		this.attributeType = attrToCopy.attributeType;
+		this.changeableName = attrToCopy.changeableName;
+		this.isConcrete = attrToCopy.isConcrete;
+		this.implementationSpecifier = attrToCopy.implementationSpecifier;
+		this.attributeScripts = attrToCopy.attributeScripts;
+		this.attributeVariables = attrToCopy.attributeVariables;
+		this.subAttributes = attrToCopy.subAttributes;
+	}	
 	
 	public AttributeData(String name, boolean changeableName, boolean isConcrete, String implementationSpecifier){
 		attributeVariables=new HashMap<>();
@@ -100,6 +115,17 @@ public class AttributeData {
 			}
 		}
 		return false;
+	}
+	
+	public void setVariable(String variableName, String variableValue){
+		for(String name:attributeVariables.keySet()){
+			if(name.equals(variableName)){
+				attributeVariables.put(variableName, variableValue);
+			}
+		}
+		for(AttributeData attribute:subAttributes){
+			attribute.setVariable(variableName, variableValue);
+		}
 	}
 	
 	public void removeAttributeData(String attributeName){

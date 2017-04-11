@@ -7,6 +7,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import data.AttributeData;
+import data.AttributesForScreenUse;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -24,12 +25,14 @@ public class AttributeHolderCreator extends BorderPane {
 	private AttributeCustomizerPane attributeCustomizerPane;
 	private AttributeData attributeHolder;
 	private final String userCreatedAttributesFile = "data/attributeSkeletons/userCreatedAttributes";
+	private AttributesForScreenUse myAttributesModel;
 
-	public AttributeHolderCreator() {
+	public AttributeHolderCreator(AttributesForScreenUse attributesModel) {
+		myAttributesModel = attributesModel;
 		Button saveButton = new Button("Save attribute to file");
 		saveButton.setOnAction((c)->createClassData());
 		attributeHolder=new AttributeData("Choose attribute name",true,true,null);
-		attributeSelectorPane = new AttributeSelectorPane(attributeHolder);
+		attributeSelectorPane = new AttributeSelectorPane(myAttributesModel, attributeHolder);
 		attributeCustomizerPane=new AttributeCustomizerPane(attributeHolder);
 		this.setRight(attributeSelectorPane);
 		this.setCenter(attributeCustomizerPane);
@@ -46,4 +49,5 @@ public class AttributeHolderCreator extends BorderPane {
             e1.printStackTrace();
         }
 	}
+	
 }

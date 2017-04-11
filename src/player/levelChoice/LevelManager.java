@@ -31,15 +31,14 @@ public class LevelManager {
 	
 	//TODO : add voice search like google
 	
-	//TODO: add password and username registration
 	
 	public LevelManager(){
 		numberOfLevel = 2;
 		
-		show();
+		
 		
 	}
-	private void show(){
+	public void show(){
 		
 		Menu level = initLevelMenu();
 		Menu setting = initSettingMenu();

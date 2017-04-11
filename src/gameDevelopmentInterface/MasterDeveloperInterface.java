@@ -1,5 +1,6 @@
 package gameDevelopmentInterface;
 
+import data.AttributesForScreenUse;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,6 +25,10 @@ public class MasterDeveloperInterface {
 	private Scene developerScene;
 	private BorderPane view;
 	private TabPane developerTabs;
+	private AttributesForScreenUse attributesModel = new AttributesForScreenUse();
+	private AttributeHolderCreator myAttributeHolderCreator = new AttributeHolderCreator(attributesModel);
+	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
+	private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(attributesModel, myGeneralDataCreator);
 
 	public MasterDeveloperInterface() {
 		instantiate();
@@ -33,9 +38,9 @@ public class MasterDeveloperInterface {
 
 	private void instantiateTabs() {
 		developerTabs = new TabPane();
-		Tab classCreatorTab = new Tab("Create AttributeHolder", new AttributeHolderCreator());
-		Tab GeneralDataTab = new Tab("General Data", new GeneralDataCreator());
-		Tab ScreenSettingView = new Tab("Screen Setting", new ScreenModelCreator());
+		Tab classCreatorTab = new Tab("Create AttributeHolder", myAttributeHolderCreator);
+		Tab GeneralDataTab = new Tab("General Data", myGeneralDataCreator);
+		Tab ScreenSettingView = new Tab("Screen Setting", myScreenModelCreator);
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
 		myTabs.addAll(classCreatorTab, GeneralDataTab, ScreenSettingView);
 	}
@@ -61,11 +66,11 @@ public class MasterDeveloperInterface {
 			Button spriteButton=new Button("Create new Sprite");
 			Button screenButton = new Button("Create new Screen");
 			spriteButton.setOnAction((clicked)->{
-				Tab spriteTab=new Tab("Create Sprite", new AttributeHolderCreator());
+				Tab spriteTab=new Tab("Create Sprite", new AttributeHolderCreator(attributesModel));
 				developerTabs.getTabs().add(spriteTab);
 			});
 			screenButton.setOnAction((clicked)->{
-				Tab screenTab=new Tab("Create new Screen", new ScreenModelCreator());
+				Tab screenTab=new Tab("Create new Screen", new ScreenModelCreator(attributesModel, myGeneralDataCreator));
 				developerTabs.getTabs().add(screenTab);
 			});
 			this.getChildren().addAll(spriteButton,screenButton);
