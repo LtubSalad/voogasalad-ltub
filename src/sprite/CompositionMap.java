@@ -11,10 +11,10 @@ public class CompositionMap extends Observable {
 	
 	private Sprite mySprite; 
 	
-	private HashMap<String, SpriteAttribute> namesToAttributes; 
+	private HashMap<String, Attribute> namesToAttributes; 
 	
 	public CompositionMap(){
-		namesToAttributes = new HashMap<String, SpriteAttribute>();
+		namesToAttributes = new HashMap<String, Attribute>();
 	}
 	
 	public CompositionMap(List<String> attributes){
@@ -25,8 +25,8 @@ public class CompositionMap extends Observable {
 		this.mySprite = sprite; 
 	}
 
-	public CompositionMap(Map<String, SpriteAttribute> attributeMap) {
-		this.namesToAttributes = (HashMap<String, SpriteAttribute>) attributeMap; // get rid of this cast 
+	public CompositionMap(Map<String, Attribute> attributeMap) {
+		this.namesToAttributes = (HashMap<String, Attribute>) attributeMap; // get rid of this cast 
 	}
 
 	private void configureMap(List<String> attributes) {
@@ -38,13 +38,13 @@ public class CompositionMap extends Observable {
 		
 	}
 
-	public void setAttribute(String name, SpriteAttribute attribute){
+	public void setAttribute(String name, Attribute attribute){
 		namesToAttributes.put(name, attribute);
 		setChanged(); 
 		notifyObservers();
 	}
 	
-	public Map<String, SpriteAttribute> getMap(){
+	public Map<String, Attribute> getMap(){
 		return namesToAttributes; 
 	}
 	
