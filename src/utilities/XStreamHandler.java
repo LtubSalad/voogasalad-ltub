@@ -14,10 +14,8 @@ import javafx.stage.Stage;
 
 public class XStreamHandler {
 	//TODO: Remove duplicate code using generics
-	
-	File attributeFile; 
-	
-	
+
+
 	
 	public AttributeData getAttributeFromFile() {
 		XStream xstream = new XStream(new DomDriver());

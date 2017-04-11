@@ -7,6 +7,7 @@ import data.AttributeData;
 
 import engine.sprite.Attribute;
 import engine.sprite.Sprite;
+import engine.sprite.nodeholder.ImageNodeHolder;
 
 /**
  * @authors Tahia Emran and Matthew Tribby 
@@ -24,6 +25,7 @@ public class AttributeBuilder {
 
 	public AttributeBuilder(AttributeData data){
 		this.dataToRead = data; 
+		build(); 
 	}
 	
 /*	public AttributeBuilder(String type){
@@ -48,12 +50,16 @@ public class AttributeBuilder {
 	private void build() {
 		attributeType = dataToRead.getName(); 
 		String specificName = dataToRead.getImplementation();
+		// TESTING ONLY String specificName = dataToRead.getAttributes().get(0).getName();
+		
 		String completePath = ATTRIBUTE_BASE_PATH + attributeType.toLowerCase() + "." + specificName;
+		
 		try {
 			Class <?> attributeClass = Class.forName(completePath);
 			Constructor <?> ctor = attributeClass.getConstructor(AttributeData.class);
 			Object obj = ctor.newInstance(dataToRead);
 			myAttribute = (Attribute) obj; 
+			System.out.println("object created!!!!!!");
 		} 
 		catch (Exception e) {
 			throw new SpriteCreationException("Attribute class not found " + specificName);
