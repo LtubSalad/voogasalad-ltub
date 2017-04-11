@@ -191,9 +191,23 @@ public class Sprite  {
 		this.spriteSpawner = (SpriteSpawner) spawner; 		
 	}
 
-	public void setMovable(Attribute movable1){
-		this.movable = (Movable) movable1; 
+	public void setMovable(Attribute movable){
+		this.movable = (Movable) movable; 
 	}
 
-
+	public void setCollidable(Attribute collidable){
+		this.collidable = (Collidable) collidable;
+	}
+	
+	public void setAttacker(Attribute attacker){
+		this.attacker = (Attacker) attacker;
+	}
+	
+	public void setWeapon(Weapon weapon){
+		this.weapon = (Weapon) weapon;
+	}
+	
+	public void setTeam(Team team){
+		this.team = (Team) team;
+	}	
 }

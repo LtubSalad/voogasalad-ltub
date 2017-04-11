@@ -1,29 +1,23 @@
 package engine.spritecreation;
 
-import java.io.File;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-
+import bus.EventBus;
 import data.AttributeData;
+import engine.model.SpriteModelEvent;
 import engine.sprite.Sprite;
 
 public class SpriteBuildingManager {
-	private AttributeData data; 
+	private EventBus bus;
 
-	public SpriteBuildingManager(AttributeData spriteData) {
-		this.data = spriteData; 
-		makeSprite(); 
+	public SpriteBuildingManager(EventBus bus) {
+		this.bus = bus;
 	}
 
-	private void makeSprite() {
-		SpriteBuilder SB = new SpriteBuilder(data);
-		Sprite createdSprite = SB.getSprite(); 
-		
+	public void createSprite(AttributeData spriteData) {
+		SpriteBuilder SB = new SpriteBuilder(spriteData);
+		addSpriteToModel(SB.getSprite());
 	}
-
-
-
+	
+	private void addSpriteToModel(Sprite sprite){
+		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprite));
+	}
 }
