@@ -3,6 +3,7 @@ package utilities;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -22,11 +23,11 @@ public class XStreamHandler {
 		return attribute;
 	}
 	
-	public ScreenModelData getScreenModelFile() {
+	public List<AttributeData> getScreenModelFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
 		File attributeFile = chooser.showOpenDialog(new Stage());
-		ScreenModelData attribute = (ScreenModelData)xstream.fromXML(attributeFile);
+		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(attributeFile);
 		return attribute;
 	}
 

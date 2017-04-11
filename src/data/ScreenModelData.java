@@ -43,6 +43,12 @@ public class ScreenModelData {
 		});
 		return toReturn;
 	}
+	
+	public void setObjectsOnScreen(List<AttributeData> datas){
+		myScreenData.clear();
+		myScreenData.addAll(datas);
+	}
+	
 	public void printCoordsOfScreenObjects() {
 		myScreenData.forEach(attr -> {
 			System.out.println();
