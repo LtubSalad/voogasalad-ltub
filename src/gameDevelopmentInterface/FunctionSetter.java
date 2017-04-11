@@ -5,32 +5,103 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
-public class FunctionSetter extends VBox {
+public class FunctionSetter extends VBox{
 	List<SingleFunctionSetter> singleFunctionSetters;
+	private boolean modifiableFunctions;
 
-	public FunctionSetter(Map<Pair<String, List<String>>, String> functions) {
+	public FunctionSetter(Map<Pair<String, List<String>>, String> functions, boolean modifiableFunctions) {
+		this.modifiableFunctions=modifiableFunctions;
 		VBox scriptingInterface = new VBox();
 		singleFunctionSetters = new ArrayList<>();
 		this.getChildren().add(new Label("Functions"));
 		functions.forEach((declarationDetails, script) -> {
-			SingleFunctionSetter functionSetter = new SingleFunctionSetter(declarationDetails.getKey(),
+			SingleFunctionSetter singleSetter;
+			if(modifiableFunctions){
+				singleSetter=new UnrestrictedSingleSetter(declarationDetails.getKey(),declarationDetails.getValue(),script);
+			}
+			else{
+			singleSetter = new RestrictedFunctionSetter(declarationDetails.getKey(),
 					declarationDetails.getValue(), script);
-			this.getChildren().add(functionSetter);
-			singleFunctionSetters.add(functionSetter);
+			}
+			this.getChildren().add(singleSetter);
+			singleFunctionSetters.add(singleSetter);
 		});
 	}
+	
+	public FunctionSetter(Map<Pair<String, List<String>>, String> functions) {
+		this(functions,false);
+	}
+	
+	abstract class SingleFunctionSetter extends VBox{
+		public SingleFunctionSetter(String functionName, List<String> parameters, String script){
+			
+		}
+		
+		public abstract String getName();
 
-	class SingleFunctionSetter extends VBox {
+		public abstract List<String> getParameters();
+
+		public abstract String getScript();
+	}
+	
+	class UnrestrictedSingleSetter extends SingleFunctionSetter{
+		private FieldSetter nameSetter;
+		private VBox parameterDisplay;
+		private TextArea scriptBox;
+
+		public UnrestrictedSingleSetter(String functionName, List<String> parameters, String script) {
+			super(functionName, parameters, script);
+			nameSetter=new FieldSetter("Function:",functionName,true);
+			parameterDisplay=new VBox();
+			parameters.forEach((parameter)->{
+				TextField field=new TextField(parameter);
+				parameterDisplay.getChildren().add(field);
+			});
+			scriptBox=new TextArea(script);
+			Button addParameter=new Button("Add parameter");
+			addParameter.setOnAction((click)->{
+				//parameterDisplay.getChildren().add(new TextField("dummy"));
+			});
+			this.getChildren().addAll(nameSetter,parameterDisplay,scriptBox, addParameter);
+		}
+
+		@Override
+		public String getName() {
+			// TODO Auto-generated method stub
+			return nameSetter.getString();
+		}
+
+		@Override
+		public List<String> getParameters() {
+			// TODO Auto-generated method stub
+			return new ArrayList<>();
+		}
+
+		@Override
+		public String getScript() {
+			// TODO Auto-generated method stub
+			return scriptBox.getText();
+		}
+		
+		
+	}
+	
+
+	class RestrictedFunctionSetter extends SingleFunctionSetter {
 		private String functionName;
 		private List<String> parameters;
 		private TextArea scriptBox;
 
-		private SingleFunctionSetter(String functionName, List<String> parameters, String script) {
+		private RestrictedFunctionSetter(String functionName, List<String> parameters, String script) {
+			super(functionName,parameters,script);
 			String functionDeclaration = "Function: " + functionName;
 			if (!parameters.isEmpty()) {
 				functionDeclaration += "|    Parameters:";
@@ -46,15 +117,15 @@ public class FunctionSetter extends VBox {
 			this.getChildren().addAll(functionInfo, scriptBox);
 		}
 
-		private String getName() {
+		public String getName() {
 			return functionName;
 		}
 
-		private List<String> getParameters() {
+		public List<String> getParameters() {
 			return parameters;
 		}
 
-		private String getScript() {
+		public String getScript() {
 			return scriptBox.getText();
 		}
 

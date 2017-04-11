@@ -9,7 +9,6 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import data.AttributeData;
-import data.ScreenModelData;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -26,10 +25,12 @@ public class XStreamHandler {
 		return attribute;
 	}
 	
-	public List<AttributeData> getScreenModelFile(File file) {
-		XStream xstream=new XStream(new DomDriver());
-		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(file);
-		return attribute;
+	public <T> T getObjectFromFile(Class<T> clazz){
+		XStream xstream = new XStream(new DomDriver());
+		FileChooser chooser = new FileChooser();
+		File file = chooser.showOpenDialog(new Stage());
+		T object = (T)xstream.fromXML(file);
+		return object;
 	}
 	
 	public List<AttributeData> getScreenModelFile() {

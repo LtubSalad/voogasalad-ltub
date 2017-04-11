@@ -18,33 +18,35 @@ import javafx.util.Pair;
  */
 public class VariableSetter extends VBox{
 	private final List<SingleVariableSetter> singleVariableSetters;
+	private boolean customizableVariables=false;
 	
-	public VariableSetter(Map<String,String> variables){
+	public VariableSetter(Map<String,String> variables, boolean customizableVariables){
+		this.customizableVariables=customizableVariables;
 		singleVariableSetters= new ArrayList<>();
 		this.getChildren().add(new Label("Variables"));
 		variables.forEach((parameterName, value) -> {
-			SingleVariableSetter singleVariableSetter=new SingleVariableSetter(parameterName,value);
+			SingleVariableSetter singleVariableSetter;
+			if(this.customizableVariables){
+				singleVariableSetter=new UnrestrictedSingleVariableSetter(parameterName,value);
+			}else{
+				singleVariableSetter=new RestrictedSingleVariableSetter(parameterName,value);
+			}
 			this.getChildren().add(singleVariableSetter);
 			singleVariableSetters.add(singleVariableSetter);
 		});
 	}
 	
-	class SingleVariableSetter extends HBox{
-		private final String variableName;
-		private final TextField variableValue;
-		private SingleVariableSetter(String variableName, String value){
-			this.variableName=variableName;
-			Label nameDisplay = new Label(variableName);
-			variableValue = new TextField(value);
-			nameDisplay.setPrefWidth(100);
-			variableValue.setPrefWidth(300);
-			this.getChildren().addAll(nameDisplay, variableValue);
-			
+	public VariableSetter(Map<String,String> variables){
+		this(variables,true);
+	}
+	
+	
+	abstract class SingleVariableSetter extends HBox{
+		public SingleVariableSetter(String variableName, String value) {
 		}
 		
-		private Pair<String,String> getVariableDetails(){
-			return new Pair(variableName,variableValue.getText());
-		}
+		protected abstract Pair<String,String> getVariableDetails();
+		
 	}
 	
 	public Map<String, String> getVariables(){
@@ -56,5 +58,38 @@ public class VariableSetter extends VBox{
 		return variablesWithValues;
 	}
 	
-
+	class UnrestrictedSingleVariableSetter extends SingleVariableSetter{
+		private final TextField variableField;
+		private final TextField variableValue;
+		private UnrestrictedSingleVariableSetter(String variableName, String value){
+			super(variableName,value);
+			this.variableField=new TextField(variableName);
+			variableValue = new TextField(value);
+			variableField.setPrefWidth(200);
+			variableValue.setPrefWidth(300);
+			this.getChildren().addAll(variableField, variableValue);		
+		}
+		
+		public Pair<String,String> getVariableDetails(){
+			return new Pair(variableField.getText(),variableValue.getText());
+		}
+	}
+	
+	class RestrictedSingleVariableSetter extends SingleVariableSetter{
+		private final String variableName;
+		private final TextField variableValue;
+		private RestrictedSingleVariableSetter(String variableName, String value){
+			super(variableName,value);
+			this.variableName=variableName;
+			Label nameDisplay = new Label(variableName);
+			variableValue = new TextField(value);
+			nameDisplay.setPrefWidth(100);
+			variableValue.setPrefWidth(300);
+			this.getChildren().addAll(nameDisplay, variableValue);			
+		}
+		
+		public Pair<String,String> getVariableDetails(){
+			return new Pair(variableName,variableValue.getText());
+		}
+	}
 }
