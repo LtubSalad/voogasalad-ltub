@@ -11,5 +11,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/xstream-1.4.9.jar"/>
+	<classpathentry kind="lib" path="lib/xstream-doc.jar"/>
+	<classpathentry kind="lib" path="lib/xstream-src.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
