@@ -3,7 +3,7 @@ package engine.sprite.health;
 import bus.EventBus;
 import engine.model.SpriteModelEvent;
 import engine.sprite.Sprite;
-import engine.sprite.attack.Weapon;
+import engine.sprite.weapon.Weapon;
 
 public class DecrementHealthManager {
 

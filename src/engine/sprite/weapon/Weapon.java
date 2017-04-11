@@ -1,4 +1,4 @@
-package engine.sprite.attack;
+package engine.sprite.weapon;
 
 import engine.camera.GamePoint;
 import engine.sprite.Attribute;
