@@ -44,4 +44,8 @@ public class ScreenModelCreator extends BorderPane {
 	public ScreenModelData getScreenData() {
 		return myScreenData;
 	}
+	
+	public void setScreenModelData(ScreenModelData data){
+		myScreenData=data;
+	}
 }
