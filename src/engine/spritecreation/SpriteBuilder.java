@@ -11,6 +11,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import engine.sprite.Sprite; 
+
 import data.AttributeData;
 
 
@@ -48,9 +50,11 @@ public class SpriteBuilder {
 		  if(rootNode.getNodeType() == Node.ELEMENT_NODE){
 			  Element element = (Element) rootNode;
 			  NodeList attributeList = element.getElementsByTagName(ATTRIBUTE_TAG);
+			  Sprite newSprite = new Sprite(); 
 			  for(int i = 0; i < ATTRIBUTE_TITLES.size(); i++){
 				  AttributeData attributeData = new AttributeData(null);
 				  AttributeBuilder aBuilder = new AttributeBuilder(attributeData);
+				  aBuilder.configSprite(newSprite); // will want to hand this functionality to setter?
 			  }
 		  }
 	  }
