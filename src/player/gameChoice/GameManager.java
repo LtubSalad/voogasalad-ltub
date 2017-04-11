@@ -14,8 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import player.levelChoice.Loader;
-import player.levelChoice.LoaderTester;
+import player.loaderManager.Loader;
+import player.loaderManager.LoaderTester;
 
 /**
  * The first stage of the Game Player to choose a game to play.

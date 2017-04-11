@@ -1,4 +1,4 @@
-package player.levelChoice;
+package player.loaderManager;
 
 import javafx.animation.Animation;
 import javafx.animation.PathTransition;
@@ -17,6 +17,7 @@ import javafx.scene.shape.VLineTo;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import player.gameChoice.GameManager;
+import player.levelChoice.LevelImageManager;
 
 public class LoaderTester extends Application {
 	public static final String RESOURCES_LOCATION = "resources/menu";
@@ -35,22 +36,22 @@ public class LoaderTester extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-	    //Loader loader = new Loader();
+	    Loader loader = new Loader();
 		//GameManager gameManager = new GameManager(primaryStage);
-		//loader.show();
-		primaryStage.setTitle("Game Level Choice");
-		
-
-		primaryStage.setScene(makeScene());
-		primaryStage.show();
-		primaryStage.setFullScreen(true);
-        Animation myAnimation = makeAnimation(myActor);
-        // start animation
-        myAnimation.play();
-        
-        Animation myAnimation1 = makeAnimation(myActor1);
-        // start animation
-        myAnimation1.play();
+		loader.show();
+//		primaryStage.setTitle("Game Level Choice");
+//		
+//
+//		primaryStage.setScene(makeScene());
+//		primaryStage.show();
+//		primaryStage.setFullScreen(true);
+//        Animation myAnimation = makeAnimation(myActor);
+//        // start animation
+//        myAnimation.play();
+//        
+//        Animation myAnimation1 = makeAnimation(myActor1);
+//        // start animation
+//        myAnimation1.play();
 
 
 	}

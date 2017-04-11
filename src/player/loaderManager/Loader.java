@@ -1,4 +1,4 @@
-package player.levelChoice;
+package player.loaderManager;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -19,6 +19,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import player.passwordManager.PasswordManager;
 
 /**
  * @author Zhiyong

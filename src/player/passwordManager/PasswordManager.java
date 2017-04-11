@@ -1,4 +1,4 @@
-package player.levelChoice;
+package player.passwordManager;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import player.levelChoice.LevelManager;
 
 
 public class PasswordManager{
