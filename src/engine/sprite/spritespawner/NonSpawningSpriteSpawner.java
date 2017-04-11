@@ -14,7 +14,7 @@ public class NonSpawningSpriteSpawner extends SpriteSpawner {
 	//}
 
 	@Override
-	protected void spawn(){
+	public void spawn(){
 		; 
 		
 	}

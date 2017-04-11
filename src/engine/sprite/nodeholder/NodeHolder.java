@@ -7,7 +7,8 @@ import sprite.Attribute;
 
 public class NodeHolder extends Attribute{
 	private Node myNode; 
-	private AttributeData myData; 
+	private AttributeData myData;
+	
 	public NodeHolder(AttributeData data){
 		myData = data; 
 	}

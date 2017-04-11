@@ -8,7 +8,7 @@ public class SpawningSpriteSpawner extends SpriteSpawner {
 	}
 
 	@Override
-	protected void spawn() {
+	public void spawn() {
 		// TODO Auto-generated method stub
 		// for every time interval, create a new sprite, add it to the screen etc.  
 		

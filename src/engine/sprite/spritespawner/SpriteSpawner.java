@@ -14,6 +14,7 @@ public abstract class SpriteSpawner implements Attribute {
 		this.child = childType;
 		this.spawnTime = time; 
 	}
-	protected abstract void spawn();
+	
+	public abstract void spawn();
 	
 }

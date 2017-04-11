@@ -14,17 +14,9 @@ public class Attacker implements Attribute {
 		this.damage = Integer.parseInt(data.getVariable("damage"));
 	}
 	
-	private Boolean isAttacker;
-	
-	
-	public Attacker(EventBus eb){
-		isAttacker = false;
-	}
-	
 	public double getRange(){
 		return this.radius;
 	}
-
 
 	public void setRange(double detectionRange) {
 		this.radius = detectionRange;

@@ -5,8 +5,7 @@ import engine.sprite.Attribute;
 
 public class HealthHolder implements Attribute {
 	
-	protected double currHealth;
-	private Boolean hasHealth;
+	private double currHealth;
 	
 	public HealthHolder(AttributeData data){
 		 this.currHealth = Double.parseDouble(data.getVariable("health"));
@@ -14,7 +13,6 @@ public class HealthHolder implements Attribute {
 	
 	public HealthHolder(double initial){
 		currHealth = initial;
-		hasHealth = true;
 	}
 	
 	public double getHealth(){
@@ -24,7 +22,4 @@ public class HealthHolder implements Attribute {
 	public void decrementHealth(double amt){
 		currHealth = currHealth - amt;
 	}
-	
-	//if health is 0 fire event that will remove this sprite from list of sprites
-
 }
