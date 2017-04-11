@@ -36,11 +36,11 @@ public class ImageTransformation implements ImageProcessor {
 		return imageView.snapshot(null, null);	
 	}
 	
-	// returns a HashSet of strings that list all the pixels in an image that aren't transparent
-	// the pixels contained in the HashSet follow the guideline of:
-	// x,y where x is the absolute x position of the pixel and y is the absolute y position of the pixel
+	// returns a Set of Coordinates that list all the pixels in an image that aren't transparent
+	// the pixels contained in the Set follow the guideline of:
+	// x,y where x is the x position of the pixel and y is the y position of the pixel
 	@Override
-	public Set<Coordinate<Integer,Integer>> getMask(Image image ) {
+	public Set<Coordinate<Integer,Integer>> getMask(Image image) {
 		BufferedImage buffImg= SwingFXUtils.fromFXImage(image, null);
 		Set<Coordinate<Integer,Integer>> mask = new HashSet<>();
 		int pixel, transparency;
@@ -49,8 +49,8 @@ public class ImageTransformation implements ImageProcessor {
 				pixel = buffImg.getRGB(i,j);
 				//check the transparency of the pixel at (i,j)
 				transparency = (pixel >> 24) & 0xff;
-				
-				if(transparency != 0){
+				transparency = transparency > 5? 0 : 1;
+				if(transparency == 0){
 					mask.add(new Coordinate<Integer, Integer>(i,j));
 				}
 			}
