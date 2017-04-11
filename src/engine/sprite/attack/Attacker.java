@@ -36,8 +36,6 @@ public class Attacker implements Attribute {
 	@Override
 	public double update(double dt) {
 		
-		//irc.checkInRange(sprites);
-		
 		return 0.0;
 	}
 	

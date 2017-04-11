@@ -35,7 +35,7 @@ public class Movable implements Attribute {
 				System.out.println("Sprite is not set for movable!");
 			}
 		}
-		if (!isAttribute()) {
+		if (!isMovable) {
 			return dt;
 		}
 		if (sprite == null) {

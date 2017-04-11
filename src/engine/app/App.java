@@ -76,13 +76,13 @@ public class App extends Application {
 		/*
 		 * move all the monsters forward
 		 * check each tower for monsters in its range (and fire weapons if necessary)
-		 * move all the bullets
+		 * move all the bullets 
 		 * check if any bullets have hit its target (and decrement health)
 		 * remove any monsters that have 0 or negative health
 		 */
-		gameLoop.addLoopComponent((dt) -> model.updatePositions(dt)); 
-		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkMonstersInRange(model.getTowerSprites(), model.getMonsterSprites()));
-		//gameLoop.addLoopComponent((dt) -> collisionChecker.);
+		gameLoop.addLoopComponent((dt) -> model.updatePositions(dt)); //updates any sprite with movable attribute including weapons
+		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites(), 1, 2)); //TODO which teams?
+		gameLoop.addLoopComponent((dt) -> collisionChecker.checkWeaponCollision(model.getSprites()));
 		
 		
 		gameLoop.addLoopComponent((dt) -> view.render(model));

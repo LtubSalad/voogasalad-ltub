@@ -40,5 +40,7 @@ public class HealthHolder implements Attribute {
 	public void decrementHealth(double amt){
 		currHealth = currHealth - amt;
 	}
+	
+	//if health is 0 fire event that will remove this sprite from list of sprites
 
 }

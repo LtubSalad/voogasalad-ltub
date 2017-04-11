@@ -28,63 +28,7 @@ public class BasicModel implements Model {
 		bus.on(SpriteModelEvent.REMOVE, (e) -> {
 			removeSprite(e.getSprite());
 		});
-		bus.on(SpriteModelEvent.ADD, (e) -> {
-			addMonster(e.getSprite());
-		});
-		bus.on(SpriteModelEvent.ADD, (e) -> {
-			removeMonster(e.getSprite());
-		});
-		bus.on(SpriteModelEvent.ADD, (e) -> {
-			addTower(e.getSprite());
-		});
-		bus.on(SpriteModelEvent.ADD, (e) -> {
-			removeTower(e.getSprite());
-		});
-		bus.on(SpriteModelEvent.ADD, (e) -> {
-			addBullet(e.getSprite());
-		});
-		bus.on(SpriteModelEvent.ADD, (e) -> {
-			removeBullet(e.getSprite());
-		});
 		
-	}
-
-	public void addMonster(Sprite sprite) {
-		if (sprite == null && RunningMode.DEV_MODE) {
-			System.out.println("Model received null sprite: " + sprite);
-		}
-		if (sprite !=null && sprite.isMonster()){
-			monsterSprites.add(sprite);
-		}
-	}
-	
-	public void removeMonster(Sprite sprite) {
-		monsterSprites.remove(sprite);
-	}
-	
-	public void addTower(Sprite sprite){
-		if (sprite == null && RunningMode.DEV_MODE) {
-			System.out.println("Model received null sprite: " + sprite);
-		}
-		if (sprite != null && sprite.isTower()){
-			towerSprites.add(sprite);
-		}
-	}
-	public void removeTower(Sprite sprite) {
-		towerSprites.remove(sprite);
-	}
-	
-	public void addBullet(Sprite sprite) {
-		if (sprite == null && RunningMode.DEV_MODE) {
-			System.out.println("Model received null sprite: " + sprite);
-		}
-		if (sprite !=null && sprite.isMonster()){
-			bulletSprites.add(sprite);
-		}
-	}
-	
-	public void removeBullet(Sprite sprite) {
-		bulletSprites.remove(sprite);
 	}
 
 	@Override
@@ -105,18 +49,7 @@ public class BasicModel implements Model {
 	public List<Sprite> getSprites() {
 		return sprites;
 	}
-	
-	public List<Sprite> getMonsterSprites(){
-		return monsterSprites;
-	}
-	
-	public List<Sprite> getTowerSprites(){
-		return towerSprites;
-	}
-	
-	public List<Sprite> getBulletSprites(){
-		return bulletSprites;
-	}
+
 	
 	@Override
 	public void updatePositions(double dt) {

@@ -23,7 +23,6 @@ public class Sprite {
 	private int z;
 
 	private HashMap<String, Attribute> attributeMap = new HashMap<String, Attribute>();
-	private HashMap<String, Boolean> identityMap = new HashMap<String, Boolean>();
 
 	private SelectionBound selectionBound = SelectionBound.IMAGE;
 	private List<GamePoint> selectionBoundVertices;
@@ -35,15 +34,7 @@ public class Sprite {
 	private ActionQueue actionQueue = new ActionQueue();
 
 	public Sprite() {
-		initIdentity();
 		initAttributes();
-	}
-
-	private void initIdentity(){
-		identityMap.put("monster", false);
-		identityMap.put("tower", false);
-		identityMap.put("bullet", false);
-		identityMap.put("spawner", false);
 	}
 	
 	private void initAttributes(){
@@ -52,6 +43,9 @@ public class Sprite {
 		attributeMap.put("attacker", null);
 		attributeMap.put("weapon", null);
 		attributeMap.put("healthholder", null);
+		attributeMap.put("spawner", null);
+		attributeMap.put("team", null);
+		
 	}
 
 	public void setImageSet(ImageSet imageSet) {
@@ -116,20 +110,7 @@ public class Sprite {
 	public double getDetectionRange() {
 		return detectionRange;
 	}
-	
-	//setting identity
-	public void setMonster(Boolean b){
-		identityMap.put("monster", b);
-	}
-	public Boolean isMonster(){
-		return identityMap.get("monster");
-	}
-	public void setTower(Boolean b){
-		identityMap.put("tower", b);
-	}
-	public Boolean isTower(){
-		return identityMap.get("tower");
-	}
+
 	
 	//setting attributes
 	public void setAttribute(String name, Attribute attribute){
@@ -149,12 +130,23 @@ public class Sprite {
 	}
 	
 	public Optional<Attribute> getWeapon() {
-		return Optional.ofNullable(attributeMap.get("attacker"));
+		return Optional.ofNullable(attributeMap.get("weapon"));
 	}
 	
 	public Optional<Attribute> getHealthHolder(){
 		return Optional.ofNullable(attributeMap.get("healthholder"));
 	}
+
+	public Optional<Attribute> getSpawner(){
+		return Optional.ofNullable(attributeMap.get("spawner"));
+	}
+	
+	public Optional<Attribute> getTeam(){
+		return Optional.ofNullable(attributeMap.get("team"));
+	}
+	
+	
+	
 	
 	public void setPlayer(Player player) {
 		this.player = player;
@@ -180,7 +172,7 @@ public class Sprite {
 				actionQueue.executeNextAction();
 			}
 		}
-		while (!MathUtils.doubleEquals(tRemain, 0) && attributeMap.get("movable").isAttribute()) {
+		while (!MathUtils.doubleEquals(tRemain, 0) && getMovable().isPresent()) {
 			tRemain = attributeMap.get("movable").update(dt);
 			if (!MathUtils.doubleEquals(tRemain, 0)) {
 				if (!actionQueue.isEmpty()) {
@@ -198,6 +190,6 @@ public class Sprite {
 		}
 		return false;
 	}
-	
+
 
 }

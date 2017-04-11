@@ -5,8 +5,9 @@ import java.util.stream.Collectors;
 
 import bus.EventBus;
 import engine.camera.GamePoint;
+import engine.sprite.Attribute;
 import engine.sprite.Sprite;
-import engine.sprite.attack.Bullet;
+import engine.sprite.attack.Weapon;
 import engine.sprite.health.DecrementHealthEvent;
 import javafx.scene.shape.Polygon;
 
@@ -52,15 +53,15 @@ public class CollisionChecker {
 		}
 	}
 	
-	public void checkBulletCollision(List<Bullet> bullets){
-		List<Bullet> collidableBullets = bullets.stream().filter((s) -> {
-			return s.getCollidable().isPresent() &&
-					s.getCollidable().get().isAttribute() &&
-					s.isMonster();
+	public void checkWeaponCollision(List<Sprite> sprites){
+		List<Sprite> collidableWeapons = sprites.stream().filter((s) -> {
+			return s.getWeapon().isPresent();
 		}).collect(Collectors.toList());
-		for (Bullet b1: collidableBullets) {
-			if (collides(b1, b1.getTarget())){
-				bus.emit(new DecrementHealthEvent(DecrementHealthEvent.ANY, b1, b1.getTarget()));
+		for (Sprite s: collidableWeapons) {
+			Weapon weapon = (Weapon) s.getWeapon().get(); //TODO remove type-casting
+			Sprite target = weapon.getTarget();
+			if (collides(s, target)){
+				bus.emit(new DecrementHealthEvent(DecrementHealthEvent.ANY, s, target));
 			}
 		}
 	}
@@ -68,8 +69,7 @@ public class CollisionChecker {
 	public void checkMonsterCollision(List<Sprite> sprites) {
 		List<Sprite> collidableSprites = sprites.stream().filter((s) -> {
 			return s.getCollidable().isPresent() &&
-					s.getCollidable().get().isAttribute() &&
-					s.isMonster();
+					s.getCollidable().get().isAttribute();
 		}).collect(Collectors.toList());
 		for (Sprite s1 : collidableSprites) {
 			for (Sprite s2 : collidableSprites) {
