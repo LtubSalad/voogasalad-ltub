@@ -11,9 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * @author Zhiyong
@@ -21,6 +24,7 @@ import javafx.stage.Stage;
  */
 public class LevelManager {
 	public static final String RESOURCES_LOCATION = "resources/menu";
+	public static final String IMAGE_NAME = "resources/level_choice.jpg";
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 300;
 	
@@ -48,10 +52,15 @@ public class LevelManager {
 		Stage primaryStage = new Stage();
 		primaryStage.setTitle("Game Level Choice");
 		Group root = new Group();
-		Scene scene = new Scene(root, WIDTH, HEIGHT);
 		root.getChildren().add(menuBar);
+		Scene scene = new Scene(root);
+		
+		Image image = new Image(IMAGE_NAME);
+		scene.setFill(new ImagePattern(image));
 
 		primaryStage.setScene(scene);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
+		primaryStage.setFullScreen(true);
 		primaryStage.show();
 	}
 
