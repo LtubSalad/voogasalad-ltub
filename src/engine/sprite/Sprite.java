@@ -160,6 +160,11 @@ public class Sprite  {
 		return Optional.ofNullable(team);
 	}
 
+	
+	public Optional<Attribute> getNodeHolder(){
+		//System.out.println("it iz a thing " + this.nodeHolder.getClass().getName() );
+		return Optional.ofNullable(nodeHolder);
+	}
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
@@ -217,5 +222,6 @@ public class Sprite  {
 	
 	public void setNodeHolder(NodeHolder nodeHolder){
 		this.nodeHolder = nodeHolder;
+		System.out.println("TESTTTT: " + this.nodeHolder.getClass().getName());
 	}
 }

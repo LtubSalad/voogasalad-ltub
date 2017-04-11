@@ -18,11 +18,12 @@ public class SpriteBuildingManager {
 
 	public void createSprite(AttributeData spriteData) {
 		SpriteBuilder SB = new SpriteBuilder(spriteData);
-		System.out.println("sprite builder created");
-		//addSpriteToModel(SB.getSprite());
+		Sprite s = SB.getSprite();
+		addSpriteToModel(SB.getSprite());
 	}
 	
 	private void addSpriteToModel(Sprite sprite){
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprite));
 	}
+
 }

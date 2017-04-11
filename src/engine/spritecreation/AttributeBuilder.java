@@ -7,6 +7,7 @@ import data.AttributeData;
 
 import engine.sprite.Attribute;
 import engine.sprite.Sprite;
+import engine.sprite.nodeholder.ImageNodeHolder;
 
 /**
  * @authors Tahia Emran and Matthew Tribby 
@@ -48,8 +49,8 @@ public class AttributeBuilder {
 */
 	private void build() {
 		attributeType = dataToRead.getName(); 
-		//String specificName = dataToRead.getImplementation();
-		String specificName = dataToRead.getAttributes().get(0).getName();
+		String specificName = dataToRead.getImplementation();
+		// TESTING ONLY String specificName = dataToRead.getAttributes().get(0).getName();
 		
 		String completePath = ATTRIBUTE_BASE_PATH + attributeType.toLowerCase() + "." + specificName;
 		

@@ -25,7 +25,7 @@ public class SpriteBuilder {
 		List<AttributeData> compositionAttributes = myData.getAttributes(); 
 		for (AttributeData att : compositionAttributes){
 			AttributeBuilder AB = new AttributeBuilder(myData);
-			//AB.configSprite(mySprite);
+			AB.configSprite(mySprite);
 		}
 	}
 	
