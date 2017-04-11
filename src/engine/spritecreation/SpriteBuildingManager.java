@@ -11,10 +11,15 @@ public class SpriteBuildingManager {
 	public SpriteBuildingManager(EventBus bus) {
 		this.bus = bus;
 	}
+	
+	public SpriteBuildingManager(){
+		; 
+	}
 
 	public void createSprite(AttributeData spriteData) {
 		SpriteBuilder SB = new SpriteBuilder(spriteData);
-		addSpriteToModel(SB.getSprite());
+		System.out.println("sprite builder created");
+		//addSpriteToModel(SB.getSprite());
 	}
 	
 	private void addSpriteToModel(Sprite sprite){

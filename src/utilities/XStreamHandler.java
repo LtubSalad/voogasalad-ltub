@@ -15,16 +15,20 @@ import javafx.stage.Stage;
 
 public class XStreamHandler {
 	//TODO: Remove duplicate code using generics
-	
-	File attributeFile; 
-	
-	
+
+
 	
 	public AttributeData getAttributeFromFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
 		File attributeFile = chooser.showOpenDialog(new Stage());
 		AttributeData attribute = (AttributeData)xstream.fromXML(attributeFile);
+		return attribute;
+	}
+	
+	public List<AttributeData> getScreenModelFile(File file) {
+		XStream xstream=new XStream(new DomDriver());
+		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(file);
 		return attribute;
 	}
 	
