@@ -20,8 +20,6 @@ public class ScreenModelData {
 	 * @param data the possibly unique representation of the object
 	 */
 	public void addObjectData(AttributeData newSprite) {
-		System.out.println("xpos when added to model: " + newSprite.getVariable("xPosition"));
-		System.out.println("ypos when added to model: " + newSprite.getVariable("yPosition"));
 		myScreenData.add(newSprite);
 	}
 	/**
@@ -38,11 +36,17 @@ public class ScreenModelData {
 	public ObservableList<AttributeData> getAllObjectsOnScreen() {
 		return myScreenData;
 	}
+	public List<AttributeData> getDataToSave() {
+		List<AttributeData> toReturn = new ArrayList<AttributeData>();
+		myScreenData.forEach(Attr -> {
+			toReturn.add(Attr);
+		});
+		return toReturn;
+	}
 	public void printCoordsOfScreenObjects() {
 		myScreenData.forEach(attr -> {
 			System.out.println();
-			System.out.println("xpos when retrieved from model: " + attr.getVariable("xPosition"));
-			System.out.println("ypos when retrieved from model: " + attr.getVariable("yPosition"));
+			
 		});
 	}
 }

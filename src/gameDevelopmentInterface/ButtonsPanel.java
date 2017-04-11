@@ -32,20 +32,14 @@ public class ButtonsPanel extends VBox {
 		});
 		finishPathButton.setOnAction(e -> myPathCreator.replacePath());
 		saveSetupButton.setOnAction(e -> {
-			mySMC.getScreenData().printCoordsOfScreenObjects();
 			FileOutputStream fs = null;
 			XStream xstream = new XStream(new DomDriver());
 			try {
 				fs = new FileOutputStream(userCreatedAttributesFile+"/"+ "TEST_JAKE" +".xml");
-				xstream.toXML(mySMC.getScreenData(), fs);
+				xstream.toXML(mySMC.getScreenData().getDataToSave(), fs);
 			} catch (FileNotFoundException fnf) {
 				//We are making the file ourselves so this will never trigger
 			}
-//			for (AttributeData attr : mySMC.getScreenData().getAllObjectsOnScreen()) {
-//				System.out.println("xpos when written: " + attr.getVariable("xPosition"));
-//				System.out.println("ypos when written: " + attr.getVariable("yPosition"));
-//		        xstream.toXML(attr, fs);
-//			}
 		});
 	}
 }

@@ -11,7 +11,6 @@ public class AttributesForScreenUse {
 	}
 	
 	public void addAttribute(AttributeData newData) {
-		System.out.println(allPossibleScreenAttributes.size());
 		allPossibleScreenAttributes.add(newData);
 	}
 	
