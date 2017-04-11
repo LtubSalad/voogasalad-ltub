@@ -18,8 +18,8 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		Loader loader = new Loader();
-//		GameManager gameManager = new GameManager(primaryStage);
+//		Loader loader = new Loader();
+		GameManager gameManager = new GameManager(primaryStage);
 
 	}
 }
