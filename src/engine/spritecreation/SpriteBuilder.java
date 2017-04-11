@@ -78,6 +78,9 @@ public class SpriteBuilder {
 		  	}
 		  }
 	  
+	public Sprite getSprite(){
+		return mySprite; 
+	}
 	  
 	 
 	  
