@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import data.AttributeData;
+import data.AttributesForScreenUse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -17,9 +18,11 @@ import javafx.util.Callback;
 public class AttributeDisplay extends VBox{
 	private final double prefWidth=200;
 	private AttributeData targetData;
+	private AttributesForScreenUse myAttributesModel;
 	
-	public AttributeDisplay(String listTitle, List<AttributeData> displayedData, AttributeData targetData) {
+	public AttributeDisplay(AttributesForScreenUse attributesModel, String listTitle, List<AttributeData> displayedData, AttributeData targetData) {
 		this.targetData=targetData;
+		this.myAttributesModel = attributesModel;
 		ObservableList<AttributeData> observableAttributeNames = FXCollections.observableList(displayedData);
 		ListView<AttributeData> attributesBox = new ListView<AttributeData>();
 		attributesBox.setItems(observableAttributeNames);
@@ -47,7 +50,7 @@ public class AttributeDisplay extends VBox{
 			attributeCustomizer.setOnAction((c) -> {
 				FileChooser fc = new FileChooser();
 				fc.setInitialDirectory(new File(System.getProperty("user.dir")));
-				new AttributeCustomizerPopup(item,
+				new AttributeCustomizerPopup(myAttributesModel, item,
 						targetData);
 			});
 			attributeCustomizer.setPrefWidth(prefWidth);

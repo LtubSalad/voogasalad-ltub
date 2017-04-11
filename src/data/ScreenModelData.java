@@ -14,12 +14,14 @@ import javafx.collections.ObservableList;
  */
 
 public class ScreenModelData {
-	private ObservableList<Sprite> myScreenData = FXCollections.observableArrayList();
+	private ObservableList<AttributeData> myScreenData = FXCollections.observableArrayList();
 	/**
 	 * Will put this object into the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
 	 */
-	public void addObjectData(Sprite newSprite) {
+	public void addObjectData(AttributeData newSprite) {
+		System.out.println("xpos when added to model: " + newSprite.getVariable("xPosition"));
+		System.out.println("ypos when added to model: " + newSprite.getVariable("yPosition"));
 		myScreenData.add(newSprite);
 	}
 	/**
@@ -33,8 +35,14 @@ public class ScreenModelData {
 	 * 
 	 * @return all the objects on the screen
 	 */
-	public ObservableList<Sprite> getAllObjectsOnScreen() {
+	public ObservableList<AttributeData> getAllObjectsOnScreen() {
 		return myScreenData;
-		
+	}
+	public void printCoordsOfScreenObjects() {
+		myScreenData.forEach(attr -> {
+			System.out.println();
+			System.out.println("xpos when retrieved from model: " + attr.getVariable("xPosition"));
+			System.out.println("ypos when retrieved from model: " + attr.getVariable("yPosition"));
+		});
 	}
 }

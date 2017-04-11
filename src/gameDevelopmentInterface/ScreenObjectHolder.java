@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import data.AttributeData;
+import data.AttributesForScreenUse;
 import data.ScreenModelData;
 import engine.sprite.Sprite;
+import javafx.collections.ListChangeListener;
+import javafx.collections.MapChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -16,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.util.Pair;
 
 public class ScreenObjectHolder extends HBox {
@@ -23,46 +27,67 @@ public class ScreenObjectHolder extends HBox {
 	private static final String IMAGE = "image";
 	private static final String PATH_TO_IMAGE_FILES = "images/characters/";
 	private static final String PATH_TO_XML_FILES = "data/attributeSkeletons/";
-	private static final String TOWER_XML = PATH_TO_XML_FILES + "presetAttributes/Tower.xml";
-	private static final String MONSTER_XML = PATH_TO_XML_FILES + "presetAttributes/Monster.xml";
-	private static final String GRASS_XML = PATH_TO_XML_FILES + "presetAttributes/Grass.xml";
-	private static final String STONE_XML = PATH_TO_XML_FILES + "presetAttributes/Stone.xml";
-	private static final String WATER_XML = PATH_TO_XML_FILES + "presetAttributes/Water.xml";
 	private ScreenModelCreator myScreenModel;
 	private ScreenModelData myScreenData;
-	private Map<ImageView, AttributeData> myScreenObjects = new HashMap<ImageView, AttributeData>();
-	
-	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd) {
+	private Map<Pair<String, Image>, AttributeData> myScreenObjects = new HashMap<Pair<String, Image>, AttributeData>();
+	private AttributesForScreenUse myAttributesModel;
+
+	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd, AttributesForScreenUse attributesModel) {
 		myScreenModel = smc;
 		myScreenData = smd;
-		addObject(new File(TOWER_XML));
-		addObject(new File(MONSTER_XML));
-		addObject(new File(GRASS_XML));
-		addObject(new File(STONE_XML));
-		addObject(new File(WATER_XML));
+		myAttributesModel = attributesModel;
+		myAttributesModel.getScreenAttributes().addListener(new ListChangeListener<AttributeData>() {
+			@Override
+			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
+				myAttributesModel.getScreenAttributes().forEach(attr -> {
+					attr.getAttributes().forEach(att -> {
+						if (att.getName().equals(IMAGE_HOLDER)) {
+							String imageName = attr.getVariable(IMAGE);
+							if (myScreenObjects.size() == 0) {
+								addObject(attr);
+							} else {
+								boolean wasFound = false;
+								for (Pair<String, Image> p : myScreenObjects.keySet()) {
+									if (p.getKey().equals(imageName)) {
+										wasFound = true;
+									}
+								}
+								if (!wasFound) {
+									addObject(attr);
+								}
+							}
+						}
+					});
+				});
+			}
+		});
 	}
-	
+
 	/**
 	 * Add a created sprite to the screen object selector
-	 * @param screenObject the sprite to add to the HBox
+	 * 
+	 * @param screenObject
+	 *            the sprite to add to the HBox
 	 */
 	public void addObject(AttributeData screenObject) {
 		screenObject.getAttributes().forEach(attr -> {
 			if (attr.getName().equals(IMAGE_HOLDER)) {
-				Map<String,String> varMap = attr.getVariables();
-				Image si = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES+varMap.get(IMAGE)), 100, 100, false, false);
+				Map<String, String> varMap = attr.getVariables();
+				String imageName = varMap.get(IMAGE);
+				Image si = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES + imageName),
+						100, 100, false, false);
 				ImageView spriteImage = new ImageView(si);
 				spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
-				myScreenObjects.put(spriteImage, screenObject);
+				myScreenObjects.put(new Pair<String, Image>(imageName, si), screenObject);
 				this.getChildren().add(spriteImage);
 			}
 		});
 	}
-	
+
 	public void addObject(File file) {
 		addObject(new AttributeDataFactory().produceAttribute(file));
 	}
-	
+
 	private void dragAndDrop(ImageView source) {
 		ScreenMap target = myScreenModel.getScreen();
 		source.setOnDragDetected(e -> sourceSetOnDragDetected(source, e));
@@ -79,15 +104,24 @@ public class ScreenObjectHolder extends HBox {
 		if (e.getDragboard().hasImage()) {
 			GridPane grid = target.getGrid();
 			Image im = db.getImage();
+			String imageName = db.getString();
 			ImageView toAdd = new ImageView(im);
-			toAdd.setFitHeight(grid.getHeight()/target.getNumRows());
-			toAdd.setFitWidth(grid.getWidth()/target.getNumCols());
+			toAdd.setFitHeight(grid.getHeight() / target.getNumRows());
+			toAdd.setFitWidth(grid.getWidth() / target.getNumCols());
 			double spriteX = e.getScreenX();
 			double spriteY = e.getScreenY();
 			Pair<Integer, Integer> coords = target.getCoordOfMouseHover(spriteX, spriteY);
 			grid.add(toAdd, coords.getKey(), coords.getValue());
-			//add this sprite to the model
-			myScreenData.addObjectData(new Sprite()); //with the source's attribute data loaded up into the sprite
+			for (Pair<String, Image> p : myScreenObjects.keySet()) {
+				String iName = p.getKey();
+				if (imageName.equals(iName)) {
+					AttributeData anActualPlacedScreenObject = (AttributeData) new UnoptimizedDeepCopy().copy(myScreenObjects.get(p));//new AttributeData(myScreenObjects.get(p));
+					anActualPlacedScreenObject.setVariable("xPosition", coords.getKey() + "");
+					anActualPlacedScreenObject.setVariable("yPosition", coords.getValue() + "");
+					myScreenData.addObjectData(anActualPlacedScreenObject);
+					break;
+				}
+			}
 			success = true;
 		}
 		e.setDropCompleted(success);
@@ -118,9 +152,23 @@ public class ScreenObjectHolder extends HBox {
 	private void sourceSetOnDragDetected(ImageView source, MouseEvent e) {
 		Dragboard db = source.startDragAndDrop(TransferMode.COPY);
 		ClipboardContent content = new ClipboardContent();
+		Image sourceImage = source.getImage();
+		String imageName = getImageName(sourceImage);
+		content.putString(imageName);
 		content.putImage(source.getImage());
 		db.setContent(content);
 		e.consume();
 	}
-
+	
+	private String getImageName(Image image) {
+		String toReturn = "";
+		for (Pair<String, Image> p : myScreenObjects.keySet()) {
+			String imageName = p.getKey();
+			Image imageValue = p.getValue();
+			if (imageValue.equals(image)) {
+				toReturn = imageName;
+			}
+		}
+		return toReturn;
+	}
 }

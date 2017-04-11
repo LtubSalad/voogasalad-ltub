@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 
 public class AttributeCustomizerPane extends ScrollPane {
 	private AttributeData myAttribute;
-	private ObservableList<AttributeCustomizerPane> subPanes;
+	private List<AttributeCustomizerPane> subPanes;
 	private VariableSetter variableSetter;
 	private FunctionSetter functionSetter;
 	private NameSetter nameSetter;

@@ -1,0 +1,42 @@
+<data.AttributeData>
+  <attributeType>IMAGE_DEFAULT_GRASS</attributeType>
+  <changeableName>false</changeableName>
+  <isConcrete>false</isConcrete>
+  <attributeScripts/>
+  <attributeVariables/>
+  <subAttributes>
+    <data.AttributeData>
+      <attributeType>ImageHolder</attributeType>
+      <changeableName>false</changeableName>
+      <isConcrete>false</isConcrete>
+      <attributeScripts>
+        <entry>
+          <javafx.util.Pair>
+            <key class="string">getImage</key>
+            <value class="list"/>
+          </javafx.util.Pair>
+          <string>return image</string>
+        </entry>
+      </attributeScripts>
+      <attributeVariables>
+        <entry>
+          <string>xPosition</string>
+          <string>1</string>
+        </entry>
+        <entry>
+          <string>image</string>
+          <string>Grass.jpg</string>
+        </entry>
+        <entry>
+          <string>yPosition</string>
+          <string>7</string>
+        </entry>
+        <entry>
+          <string>displayPriority</string>
+          <string>1</string>
+        </entry>
+      </attributeVariables>
+      <subAttributes/>
+    </data.AttributeData>
+  </subAttributes>
+</data.AttributeData>
