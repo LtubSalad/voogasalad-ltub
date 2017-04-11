@@ -3,22 +3,40 @@
  */
 package imageprocess;
 
-import java.time.Duration;
+import java.awt.image.BufferedImage;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
 
 /**
  * @author Zhiyong
  *
  */
-public interface NodeProcessor extends Processor<Node> {
+public class NodeProcessor {
 	
-	 /**
-	 * @param t
-	 * @param angle
-	 * rotate the element t by the given angle in the second argument
-	 * Note here we rotate the nodes that t reside in duration time
+	/**
+	 * @param node
+	 * @return
+	 * Given any javafx node, return the image on the node
 	 */
-	Node rotate(Node node, double angle, Duration duration);
+	BufferedImage getImage(Node node){
+		WritableImage snapshot = node.snapshot(new SnapshotParameters(), null);
+		BufferedImage buffImg= SwingFXUtils.fromFXImage(snapshot, null);
+		return buffImg;
+		
+	}
+	
+	double getAngle(Node node){
+		double xx = node.getLocalToSceneTransform().getMxx();
+		double xy = node.getLocalToSceneTransform().getMxy();
+		double angle = Math.atan2(-xy, xx);
+		
+		angle = Math.toDegrees(angle);
+		//angle = angle < 0 ? angle +360 : angle;
+		return angle;
+		
+	}
 
 }
