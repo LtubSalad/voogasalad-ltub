@@ -56,7 +56,10 @@ public class ButtonsPanel extends VBox {
 			myPathCreator.getReplacementPath().clear();
 			myPathCreator.makePath();
 		});
-		finishPathButton.setOnAction(e -> myPathCreator.replacePath());
+		finishPathButton.setOnAction(e -> {
+			myPathCreator.replacePath();
+			xstreamHandler.saveToFile(myPathCreator.getReplacementPath());
+		});
 		saveSetupButton.setOnAction(e -> {
 			xstreamHandler.saveToFile(mySMC.getScreenData().getDataToSave());
 		});

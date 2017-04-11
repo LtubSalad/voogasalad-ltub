@@ -32,10 +32,7 @@ public class Path {
 	 * @param replacementPath
 	 */
 	public void changePath(Queue<GamePoint> replacementPath) {
-		//System.out.println("New path: " + replacementPath);
 		myPath = replacementPath;
-		currCoord = myPath.poll();
-		nextCoord = myPath.poll();
 	}
 	/**
 	 * 

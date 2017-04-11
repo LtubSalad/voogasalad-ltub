@@ -65,7 +65,7 @@ public class ImageTester extends Application{
 			Rectangle r = new Rectangle(image.getWidth(),image.getHeight());
 			r.setFill(new ImagePattern(image));
 			System.out.println("Rectangle1 x : " + r.getX() + "y:" + r.getY());
-			Rectangle r2 = new Rectangle(400, 400,image.getWidth(),image.getHeight());
+			Rectangle r2 = new Rectangle(0, 0,image.getWidth(),image.getHeight());
 			System.out.println("Rectangle2 x : " + r2.getX() + "y:" + r2.getY());
 
 //			ImagePattern pattern = new ImagePattern(image);
