@@ -115,7 +115,12 @@ public class ScreenObjectHolder extends HBox {
 			for (Pair<String, Image> p : myScreenObjects.keySet()) {
 				String iName = p.getKey();
 				if (imageName.equals(iName)) {
-					myScreenData.addObjectData(myScreenObjects.get(p));
+					AttributeData anActualPlacedScreenObject = myScreenObjects.get(p);
+					anActualPlacedScreenObject.setVariable("xPosition", coords.getKey() + "");
+					anActualPlacedScreenObject.setVariable("yPosition", coords.getValue() + "");
+					System.out.println("xpos: " + anActualPlacedScreenObject.getVariable("xPosition"));
+					System.out.println("ypos: " + anActualPlacedScreenObject.getVariable("yPosition"));
+					myScreenData.addObjectData(anActualPlacedScreenObject);
 					break;
 				}
 			}

@@ -17,8 +17,8 @@ import javafx.scene.layout.BorderPane;
  */
 
 public class ScreenModelCreator extends BorderPane {
-	private ObservableMap<String,String> myData;
-	private ScreenModelData myScreenModel = new ScreenModelData();
+	private ObservableMap<String,String> myGeneralData;
+	private ScreenModelData myScreenData = new ScreenModelData();
 	private ScreenObjectHolder myObjectsToPlace;
 	private ScreenMap myScreen = new ScreenMap();
 	private ButtonsPanel myButtonsPanel = new ButtonsPanel(this);
@@ -26,9 +26,9 @@ public class ScreenModelCreator extends BorderPane {
 	
 	public ScreenModelCreator(AttributesForScreenUse attributesModel, GeneralDataCreator gdc) {
 		myAttributesModel = attributesModel;
-		myObjectsToPlace = new ScreenObjectHolder(this, myScreenModel, myAttributesModel);
-		myData = gdc.getAllData();
-		this.setTop(new GeneralGameDataBar(myData));
+		myObjectsToPlace = new ScreenObjectHolder(this, myScreenData, myAttributesModel);
+		myGeneralData = gdc.getAllData();
+		this.setTop(new GeneralGameDataBar(myGeneralData));
 		this.setBottom(myObjectsToPlace);
 		this.setCenter(myScreen);
 		this.setRight(myButtonsPanel);
@@ -39,5 +39,9 @@ public class ScreenModelCreator extends BorderPane {
 	 */
 	public ScreenMap getScreen() {
 		return myScreen;
+	}
+	
+	public ScreenModelData getScreenData() {
+		return myScreenData;
 	}
 }

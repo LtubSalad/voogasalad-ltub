@@ -20,7 +20,8 @@ public class ScreenModelData {
 	 * @param data the possibly unique representation of the object
 	 */
 	public void addObjectData(AttributeData newSprite) {
-		System.out.println("Object was added to the screen!");
+		System.out.println("xpos when added: " + newSprite.getVariable("xPosition"));
+		System.out.println("ypos when added: " + newSprite.getVariable("yPosition"));
 		myScreenData.add(newSprite);
 	}
 	/**
