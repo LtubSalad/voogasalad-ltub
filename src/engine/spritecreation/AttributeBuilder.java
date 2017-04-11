@@ -16,10 +16,8 @@ public class AttributeBuilder {
 	private Attribute myAttribute; 
 	private String attributeType; 
 	private AttributeData dataToRead; 
-	
-	
-	String implementation; 
-	private static final String ATTRIBUTE_FILEPATH = "engine.sprite.";
+	private String implementation; 
+	private static final String ATTRIBUTE_BASE_PATH = "engine.sprite.";
 	
 
 	public AttributeBuilder(AttributeData data){
@@ -33,11 +31,9 @@ public class AttributeBuilder {
 //	
 //	public void build(String implementation2) {		
 //		try {
-//			String attemptedName = ATTRIBUTE_FILEPATH + implementation2; 
-//			System.out.print("attempted filepath " + attemptedName);
-//			/*WalkerMovable WM = new WalkerMovable(); 
-//			System.out.println(WM.getClass().getName());*/
-//			Class <?> attributeClass = Class.forName(ATTRIBUTE_FILEPATH + implementation2);
+//			String attemptedName = ATTRIBUTE_BASE_PATH + implementation2; 
+//			System.out.println("attempted filepath " + attemptedName);
+//			Class <?> attributeClass = Class.forName(ATTRIBUTE_BASE_PATH + attributeType.toLowerCase() + "." + implementation2);
 //			Constructor <?> ctor = attributeClass.getConstructor();
 //			Object obj = ctor.newInstance();
 //			myAttribute = (Attribute) obj; 
@@ -50,9 +46,9 @@ public class AttributeBuilder {
 	private void build() {
 		attributeType = dataToRead.getName(); 
 		String specificName = dataToRead.getImplementation();
-		
+		String completePath = ATTRIBUTE_BASE_PATH + attributeType.toLowerCase() + "." + specificName;
 		try {
-			Class <?> attributeClass = Class.forName(ATTRIBUTE_FILEPATH + specificName);
+			Class <?> attributeClass = Class.forName(completePath);
 			Constructor <?> ctor = attributeClass.getConstructor(AttributeData.class);
 			Object obj = ctor.newInstance(dataToRead);
 			myAttribute = (Attribute) obj; 
@@ -65,9 +61,9 @@ public class AttributeBuilder {
 	
 	public void configSprite(Sprite s) {
 		String methodName = "set" + attributeType; 
-		System.out.print("method name is " + methodName);
+		System.out.println("method name is " + methodName);
 		try {
-			Method setter = s.getClass().getMethod(methodName, Attribute.class);
+			Method setter = s.getClass().getMethod(methodName, Class.forName(ATTRIBUTE_BASE_PATH + attributeType.toLowerCase() + "." + attributeType));
 			setter.invoke(s, myAttribute);
 		} catch (Exception e) {
 			throw new SpriteCreationException ("can't find method " + methodName);

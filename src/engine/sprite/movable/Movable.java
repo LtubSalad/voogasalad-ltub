@@ -1,10 +1,12 @@
-package engine.sprite;
+package engine.sprite.movable;
 
 import commons.MathUtils;
 import commons.RunningMode;
 import data.AttributeData;
 import engine.camera.GamePoint;
 import engine.skill.Target;
+import engine.sprite.Attribute;
+import engine.sprite.Sprite;
 
 public class Movable implements Attribute {
 	

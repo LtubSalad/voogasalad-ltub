@@ -9,12 +9,12 @@ import engine.camera.GamePoint;
 import engine.input.events.GameWorldMouseEvent;
 import engine.skill.PlayerCreateSpriteSkill;
 import engine.skill.Skill;
-import engine.sprite.Movable;
 import engine.sprite.Sprite;
 import engine.sprite.collision.Collidable;
 import engine.sprite.collision.CollisionBound;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
+import engine.sprite.movable.Movable;
 
 public class PlayerSelectionState {
 

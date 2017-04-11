@@ -1,6 +1,7 @@
-package engine.sprite;
+package engine.sprite.team;
 
 import data.AttributeData;
+import engine.sprite.Attribute;
 
 public class Team implements Attribute {
 	private int teamNum;

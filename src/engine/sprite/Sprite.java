@@ -14,8 +14,10 @@ import engine.sprite.collision.Collidable;
 import engine.sprite.health.HealthHolder;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
+import engine.sprite.movable.Movable;
 import engine.sprite.spritespawner.NonSpawningSpriteSpawner;
 import engine.sprite.spritespawner.SpriteSpawner;
+import engine.sprite.team.Team;
 
 public class Sprite  {
 
@@ -124,9 +126,9 @@ public class Sprite  {
 	}
 
 
-	/*	public Movable getMovable(){
-		return this.movable;
-	}*/
+//    public Movable getMovable(){
+//		return this.movable;
+//	}
 
 	public Optional<Attribute> getMovable() {
 		return Optional.ofNullable(movable);
@@ -187,27 +189,27 @@ public class Sprite  {
 	}
 
 
-	public void setSpawner(Attribute spawner) {
-		this.spriteSpawner = (SpriteSpawner) spawner; 		
+	public void setSpawner(SpriteSpawner spawner) {
+		this.spriteSpawner = spawner; 		
 	}
 
-	public void setMovable(Attribute movable){
-		this.movable = (Movable) movable; 
+	public void setMovable(Movable movable){
+		this.movable = movable; 
 	}
 
-	public void setCollidable(Attribute collidable){
-		this.collidable = (Collidable) collidable;
+	public void setCollidable(Collidable collidable){
+		this.collidable = collidable;
 	}
 	
-	public void setAttacker(Attribute attacker){
-		this.attacker = (Attacker) attacker;
+	public void setAttacker(Attacker attacker){
+		this.attacker = attacker;
 	}
 	
 	public void setWeapon(Weapon weapon){
-		this.weapon = (Weapon) weapon;
+		this.weapon = weapon;
 	}
 	
 	public void setTeam(Team team){
-		this.team = (Team) team;
+		this.team = team;
 	}	
 }
