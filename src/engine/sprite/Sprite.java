@@ -152,9 +152,14 @@ public class Sprite  {
 		attributeMap.put(name, attribute);
 	}
 	
-	public Optional<Attribute> getMovable() {
-		return Optional.ofNullable(attributeMap.get("movable"));
+	
+	public Movable getMovable(){
+		return this.movable;
 	}
+	
+/*	public Optional<Attribute> getMovable() {
+		return Optional.ofNullable(attributeMap.get("movable"));
+	}*/
 	
 	public Optional<Attribute> getCollidable() {
 		return Optional.ofNullable(attributeMap.get("collidable"));
@@ -219,5 +224,10 @@ public class Sprite  {
 	public void setFactory(SpriteSpawner spawner) {
 		this.spriteSpawner = spawner; 		
 	}
+	
+	public void setMovable(Attribute movable1){
+		this.movable = (Movable) movable1; 
+	}
+	
 
 }
