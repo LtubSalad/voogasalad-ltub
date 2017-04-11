@@ -47,9 +47,8 @@ public class ButtonsPanel extends VBox {
 		
 		loadButton=new Button("Load screenModel from file");
 		loadButton.setOnAction((click)->{
-			mySMC.setScreenModelData(xstreamHandler.getScreenModelFile());
+			mySMC.getScreenData().setObjectsOnScreen(xstreamHandler.getScreenModelFile());
 			mySMC.getScreenData().printCoordsOfScreenObjects();
 		});
-		
 	}
 }

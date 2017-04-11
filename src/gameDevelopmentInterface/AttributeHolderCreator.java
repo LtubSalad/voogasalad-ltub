@@ -31,7 +31,6 @@ public class AttributeHolderCreator extends BorderPane {
 	}
 	
 	public void instantiate(){
-		
 		dataHandler=new XStreamHandler();
 		HBox saveAndLoad=new HBox();
 		Button saveButton = new Button("Save attribute to file");
