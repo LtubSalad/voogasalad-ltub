@@ -9,7 +9,6 @@ import commons.MathUtils;
 import engine.camera.GamePoint;
 import engine.player.Player;
 import engine.sprite.attack.Attacker;
-import engine.sprite.attack.Weapon;
 import engine.sprite.collision.Collidable;
 import engine.sprite.health.HealthHolder;
 import engine.sprite.images.ImageSet;
@@ -19,6 +18,7 @@ import engine.sprite.nodeholder.NodeHolder;
 import engine.sprite.spritespawner.NonSpawningSpriteSpawner;
 import engine.sprite.spritespawner.SpriteSpawner;
 import engine.sprite.team.Team;
+import engine.sprite.weapon.Weapon;
 
 public class Sprite  {
 

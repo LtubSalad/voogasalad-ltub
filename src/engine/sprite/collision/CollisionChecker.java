@@ -7,8 +7,8 @@ import bus.EventBus;
 import engine.camera.GamePoint;
 import engine.sprite.Attribute;
 import engine.sprite.Sprite;
-import engine.sprite.attack.Weapon;
 import engine.sprite.health.DecrementHealthEvent;
+import engine.sprite.weapon.Weapon;
 import javafx.scene.shape.Polygon;
 
 public class CollisionChecker {
