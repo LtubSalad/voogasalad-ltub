@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import bus.EventBus;
 import engine.camera.GamePoint;
 import engine.sprite.Sprite;
-import engine.sprite.team.Team;
+import engine.sprite.teammember.TeamMember;
 
 /**
  * Check if one sprite is in the detection range of another sprite.
@@ -42,7 +42,7 @@ public class InRangeChecker {
 		List<Sprite> teamB = new ArrayList<>();
 		for (Sprite s : sprites){
 			if (s.getTeam().isPresent()){
-				Team t = (Team) s.getTeam().get(); //TODO remove type-casting
+				TeamMember t = (TeamMember) s.getTeam().get(); //TODO remove type-casting
 				if (t.getTeamNum() == a){
 					teamA.add(s);
 				} else if (t.getTeamNum() == b) {

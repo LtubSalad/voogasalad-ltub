@@ -1,12 +1,12 @@
-package engine.sprite.team;
+package engine.sprite.teammember;
 
 import data.AttributeData;
 import engine.sprite.Attribute;
 
-public class Team implements Attribute {
+public class TeamMember implements Attribute {
 	private int teamNum;
 
-	public Team(AttributeData data){
+	public TeamMember(AttributeData data){
 		//this.teamNum = Integer.parseInt(data.getVariable("number"));
 		teamNum = 1;
 	}
