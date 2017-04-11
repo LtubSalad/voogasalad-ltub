@@ -103,6 +103,17 @@ public class AttributeData {
 		return false;
 	}
 	
+	public void setVariable(String variableName, String variableValue){
+		for(String name:attributeVariables.keySet()){
+			if(name.equals(variableName)){
+				attributeVariables.put(variableName, variableValue);
+			}
+		}
+		for(AttributeData attribute:subAttributes){
+			attribute.setVariable(variableName, variableValue);
+		}
+	}
+	
 	public void removeAttributeData(String attributeName){
 		subAttributes.forEach((attributeData)->{
 			if(attributeData.getName().equals(attributeName)){

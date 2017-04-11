@@ -14,12 +14,13 @@ import javafx.collections.ObservableList;
  */
 
 public class ScreenModelData {
-	private ObservableList<Sprite> myScreenData = FXCollections.observableArrayList();
+	private ObservableList<AttributeData> myScreenData = FXCollections.observableArrayList();
 	/**
 	 * Will put this object into the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
 	 */
-	public void addObjectData(Sprite newSprite) {
+	public void addObjectData(AttributeData newSprite) {
+		System.out.println("Object was added to the screen!");
 		myScreenData.add(newSprite);
 	}
 	/**
@@ -33,7 +34,7 @@ public class ScreenModelData {
 	 * 
 	 * @return all the objects on the screen
 	 */
-	public ObservableList<Sprite> getAllObjectsOnScreen() {
+	public ObservableList<AttributeData> getAllObjectsOnScreen() {
 		return myScreenData;
 		
 	}
