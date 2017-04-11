@@ -59,7 +59,7 @@ public class FunctionSetter extends VBox{
 
 		public UnrestrictedSingleSetter(String functionName, List<String> parameters, String script) {
 			super(functionName, parameters, script);
-			nameSetter=new FieldSetter(functionName,true);
+			nameSetter=new FieldSetter("Function:",functionName,true);
 			parameterDisplay=new VBox();
 			parameters.forEach((parameter)->{
 				TextField field=new TextField(parameter);

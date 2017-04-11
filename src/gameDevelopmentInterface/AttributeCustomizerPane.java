@@ -13,6 +13,7 @@ public class AttributeCustomizerPane extends ScrollPane {
 	private List<AttributeCustomizerPane> subPanes;
 	private VariableSetter variableSetter;
 	private FunctionSetter functionSetter;
+	private FieldSetter implementationSetter;
 	private boolean customizableVariables;
 	private boolean customizableFunctions;
 	private FieldSetter nameSetter;
@@ -47,6 +48,7 @@ public class AttributeCustomizerPane extends ScrollPane {
 		myAttribute.setScripts(functionSetter.getFunctions());
 		myAttribute.setVariables(variableSetter.getVariables());
 		myAttribute.setName(nameSetter.getString());
+		myAttribute.setImplementation(implementationSetter.getString());
 		subPanes.forEach((subPane) -> {
 			subPane.updateAttribute();
 		});
@@ -58,12 +60,13 @@ public class AttributeCustomizerPane extends ScrollPane {
 		subPanes = new ArrayList<>();
 		variableSetter = new VariableSetter(myAttribute.getVariables(),customizableVariables);
 		functionSetter = new FunctionSetter(myAttribute.getScripts(),customizableFunctions);
-		nameSetter = new FieldSetter(myAttribute.getName(), myAttribute.nameModifiable());
+		nameSetter = new FieldSetter("Name:",myAttribute.getName(), myAttribute.nameModifiable());
+		implementationSetter=new FieldSetter("Implementation:",myAttribute.getImplementation(),true);
 		Button refresher = new Button("Refresh");
 		refresher.setOnAction((clickEvent) -> {
 			instantiate();
 		});
-		myContents.getChildren().addAll(nameSetter, variableSetter, functionSetter);
+		myContents.getChildren().addAll(nameSetter, implementationSetter, variableSetter, functionSetter);
 		myAttribute.getAttributes().forEach((subAttribute) -> {
 			AttributeCustomizerPane subPane = new AttributeCustomizerPane(subAttribute);
 			myContents.getChildren().add(subPane);
