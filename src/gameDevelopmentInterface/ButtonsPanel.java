@@ -32,6 +32,7 @@ public class ButtonsPanel extends VBox {
 		});
 		finishPathButton.setOnAction(e -> myPathCreator.replacePath());
 		saveSetupButton.setOnAction(e -> {
+			mySMC.getScreenData().printCoordsOfScreenObjects();
 			FileOutputStream fs = null;
 			XStream xstream = new XStream(new DomDriver());
 			try {

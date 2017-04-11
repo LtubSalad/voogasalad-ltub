@@ -7,7 +7,7 @@
     </changeBuilder>
     <backingList>
       <data.AttributeData>
-        <attributeType>IMAGE_DEFAULT_STONE</attributeType>
+        <attributeType>IMAGE_DEFAULT_GRASS</attributeType>
         <changeableName>false</changeableName>
         <isConcrete>false</isConcrete>
         <attributeScripts/>
@@ -29,15 +29,15 @@
             <attributeVariables>
               <entry>
                 <string>xPosition</string>
-                <string>6</string>
+                <string>3</string>
               </entry>
               <entry>
                 <string>image</string>
-                <string>Stone.jpg</string>
+                <string>Grass.jpg</string>
               </entry>
               <entry>
                 <string>yPosition</string>
-                <string>4</string>
+                <string>5</string>
               </entry>
               <entry>
                 <string>displayPriority</string>
@@ -71,7 +71,7 @@
             <attributeVariables>
               <entry>
                 <string>xPosition</string>
-                <string>1</string>
+                <string>5</string>
               </entry>
               <entry>
                 <string>image</string>
@@ -79,7 +79,7 @@
               </entry>
               <entry>
                 <string>yPosition</string>
-                <string>5</string>
+                <string>7</string>
               </entry>
               <entry>
                 <string>displayPriority</string>
