@@ -2,6 +2,9 @@ package data;
 
 import java.util.ArrayList;
 import java.util.List;
+import engine.sprite.Sprite;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 /**
  * 
  * @author Daniel, Jake
@@ -11,27 +14,45 @@ import java.util.List;
  */
 
 public class ScreenModelData {
-	private List<String> myScreenData = new ArrayList<String>();
+	private ObservableList<AttributeData> myScreenData = FXCollections.observableArrayList();
 	/**
 	 * Will put this object into the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
 	 */
-	public void addObjectData(String data) {
-		myScreenData.add(data);
+	public void addObjectData(AttributeData newSprite) {
+		myScreenData.add(newSprite);
 	}
 	/**
 	 * Will remove this object from the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
 	 */
-	public void removeObject(String data) {
-		myScreenData.remove(data);
+	public void removeObject(Sprite spriteToRemove) {
+		myScreenData.remove(spriteToRemove);
 	}
 	/**
 	 * 
 	 * @return all the objects on the screen
 	 */
-	public List<String> getAllObjectsOnScreen() {
+	public ObservableList<AttributeData> getAllObjectsOnScreen() {
 		return myScreenData;
-		
+	}
+	public List<AttributeData> getDataToSave() {
+		List<AttributeData> toReturn = new ArrayList<AttributeData>();
+		myScreenData.forEach(Attr -> {
+			toReturn.add(Attr);
+		});
+		return toReturn;
+	}
+	
+	public void setObjectsOnScreen(List<AttributeData> datas){
+		myScreenData.clear();
+		myScreenData.addAll(datas);
+	}
+	
+	public void printCoordsOfScreenObjects() {
+		myScreenData.forEach(attr -> {
+			System.out.println();
+			
+		});
 	}
 }

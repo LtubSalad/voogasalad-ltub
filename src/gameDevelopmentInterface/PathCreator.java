@@ -5,7 +5,11 @@ import java.util.Queue;
 
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
-
+/**
+ * 
+ * @author Jake
+ *
+ */
 public class PathCreator {
 	private Path myPath;
 	private Queue<Pair<Integer, Integer>> replacementPath = new LinkedList<Pair<Integer, Integer>>();
