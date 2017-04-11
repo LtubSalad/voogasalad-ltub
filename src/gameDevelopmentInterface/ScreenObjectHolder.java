@@ -3,13 +3,11 @@ package gameDevelopmentInterface;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-
 import data.AttributeData;
 import data.AttributesForScreenUse;
 import data.ScreenModelData;
-import engine.sprite.Sprite;
+import engine.camera.GamePoint;
 import javafx.collections.ListChangeListener;
-import javafx.collections.MapChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -19,14 +17,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 import javafx.util.Pair;
 
 public class ScreenObjectHolder extends HBox {
+	private static final String Y_POSITION = "yPosition";
+	private static final String X_POSITION = "xPosition";
 	private static final String IMAGE_HOLDER = "ImageHolder";
 	private static final String IMAGE = "image";
 	private static final String PATH_TO_IMAGE_FILES = "images/characters/";
-	private static final String PATH_TO_XML_FILES = "data/attributeSkeletons/";
 	private ScreenModelCreator myScreenModel;
 	private ScreenModelData myScreenData;
 	private Map<Pair<String, Image>, AttributeData> myScreenObjects = new HashMap<Pair<String, Image>, AttributeData>();
@@ -40,21 +38,16 @@ public class ScreenObjectHolder extends HBox {
 			@Override
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
 				myAttributesModel.getScreenAttributes().forEach(attr -> {
-					attr.getAttributes().forEach(att -> {
-						if (att.getName().equals(IMAGE_HOLDER)) {
+					attr.getAttributes().forEach(subAttr -> {
+						if (subAttr.getName().equals(IMAGE_HOLDER)) {
 							String imageName = attr.getVariable(IMAGE);
-							if (myScreenObjects.size() == 0) {
-								addObject(attr);
-							} else {
+							if (myScreenObjects.size() == 0) { addObject(attr); }
+							else {
 								boolean wasFound = false;
 								for (Pair<String, Image> p : myScreenObjects.keySet()) {
-									if (p.getKey().equals(imageName)) {
-										wasFound = true;
-									}
+									if (p.getKey().equals(imageName)) { wasFound = true; }
 								}
-								if (!wasFound) {
-									addObject(attr);
-								}
+								if (!wasFound) { addObject(attr); }
 							}
 						}
 					});
@@ -83,11 +76,14 @@ public class ScreenObjectHolder extends HBox {
 			}
 		});
 	}
-
+	/**
+	 * Make an attribute data object from a file
+	 * @param file
+	 */
 	public void addObject(File file) {
 		addObject(new AttributeDataFactory().produceAttribute(file));
 	}
-
+	
 	private void dragAndDrop(ImageView source) {
 		ScreenMap target = myScreenModel.getScreen();
 		source.setOnDragDetected(e -> sourceSetOnDragDetected(source, e));
@@ -103,20 +99,17 @@ public class ScreenObjectHolder extends HBox {
 		boolean success = false;
 		if (e.getDragboard().hasImage()) {
 			GridPane grid = target.getGrid();
-			Image im = db.getImage();
 			String imageName = db.getString();
-			ImageView toAdd = new ImageView(im);
+			ImageView toAdd = new ImageView(db.getImage());
 			toAdd.setFitHeight(grid.getHeight() / target.getNumRows());
 			toAdd.setFitWidth(grid.getWidth() / target.getNumCols());
-			double spriteX = e.getScreenX();
-			double spriteY = e.getScreenY();
-			Pair<Integer, Integer> coords = target.getCoordOfMouseHover(spriteX, spriteY);
+			GamePoint coords = target.getCoordOfMouseHover(e.getScreenX(), e.getScreenY());
 			for (Pair<String, Image> p : myScreenObjects.keySet()) {
 				String iName = p.getKey();
 				if (imageName.equals(iName)) {
-					AttributeData anActualPlacedScreenObject = (AttributeData) new UnoptimizedDeepCopy().copy(myScreenObjects.get(p));//new AttributeData(myScreenObjects.get(p));
-					anActualPlacedScreenObject.setVariable("xPosition", coords.getKey() + "");
-					anActualPlacedScreenObject.setVariable("yPosition", coords.getValue() + "");
+					AttributeData anActualPlacedScreenObject = (AttributeData) new UnoptimizedDeepCopy().copy(myScreenObjects.get(p));
+					anActualPlacedScreenObject.setVariable(X_POSITION, coords.x() + "");
+					anActualPlacedScreenObject.setVariable(Y_POSITION, coords.y() + "");
 					myScreenData.addObjectData(anActualPlacedScreenObject);
 					break;
 				}
