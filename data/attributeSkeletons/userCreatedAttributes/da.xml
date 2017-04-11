@@ -1,0 +1,25 @@
+<data.AttributeData>
+  <attributeName>da</attributeName>
+  <changeableName>true</changeableName>
+  <isConcrete>true</isConcrete>
+  <attributeScripts/>
+  <attributeVariables/>
+  <subAttributes>
+    <data.AttributeData>
+      <attributeName>ConstantActor</attributeName>
+      <changeableName>false</changeableName>
+      <isConcrete>false</isConcrete>
+      <attributeScripts>
+        <entry>
+          <javafx.util.Pair>
+            <key class="string">run</key>
+            <value class="list"/>
+          </javafx.util.Pair>
+          <string>daniel</string>
+        </entry>
+      </attributeScripts>
+      <attributeVariables/>
+      <subAttributes/>
+    </data.AttributeData>
+  </subAttributes>
+</data.AttributeData>

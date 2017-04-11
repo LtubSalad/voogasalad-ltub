@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.util.Pair;
 
 /**
@@ -21,20 +17,26 @@ import javafx.util.Pair;
  *
  */
 public class AttributeData {
-	/**
-	 * 
-	 */
-	private String attributeName;
+	private String attributeType;
+	private boolean changeableName;
+	private boolean isConcrete;
+	private String implementationSpecifier;
 	private Map<Pair<String, List<String>>,String> attributeScripts;
 	private Map<String,String> attributeVariables;
 	private List<AttributeData> subAttributes;
 	
-	public AttributeData(String name){
-		attributeVariables=FXCollections.observableMap(new HashMap<>());
-		attributeScripts=FXCollections.observableMap(new HashMap<>());
+	public AttributeData(String name, boolean changeableName, boolean isConcrete, String implementationSpecifier){
+		attributeVariables=new HashMap<>();
+		attributeScripts=new HashMap<>();
 		List<AttributeData> subAttributesUnobservable=new ArrayList<>();
-		subAttributes=FXCollections.observableList(subAttributesUnobservable);
-		attributeName=name;
+		subAttributes=subAttributesUnobservable;
+		attributeType=name;
+		this.isConcrete=isConcrete;
+		this.changeableName=changeableName;
+	}
+	
+	public AttributeData(String name){
+		this(name, false, false,null);
 	}
 	
 	public Map<Pair<String, List<String>>,String> getScripts(){
@@ -53,16 +55,52 @@ public class AttributeData {
 		attributeVariables=variables;
 	}
 	
+	public void setName(String name){
+		this.attributeType=name;
+	}
+	
 	public String getName(){
-		return attributeName;
+		return attributeType;
 	}
 
 	public List<AttributeData> getAttributes(){
 		return subAttributes;
 	}
 	
+	public boolean nameModifiable(){
+		return changeableName;
+	}
+	
 	public void addAttributeData(AttributeData data){
 		subAttributes.add(data);
+	}
+	
+	public String getVariable(String variableName){
+		if(attributeVariables.containsKey(variableName)){
+			return attributeVariables.get(variableName);
+		}
+		for(AttributeData attribute:subAttributes){
+			if(attribute.getVariable(variableName)!=null){
+				return attribute.getVariable(variableName);
+			}
+		}
+		return null;
+	}
+	
+	public String getImplementation(){
+		return implementationSpecifier;
+	}
+	
+	public boolean hasVariable(String variableName){
+		if(attributeVariables.keySet().contains(variableName)){
+			return true;
+		}
+		for(AttributeData attribute:subAttributes){
+			if(attribute.hasVariable(variableName)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void removeAttributeData(String attributeName){

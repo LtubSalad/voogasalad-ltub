@@ -2,8 +2,11 @@ package gameDevelopmentInterface;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 /**
  * 
@@ -19,14 +22,15 @@ import javafx.scene.control.TabPane;
 public class MasterDeveloperInterface {
 	private static final String PATH_TO_STYLE_SHEETS = "/styleSheets/MainStyle.css";
 	private Scene developerScene;
+	private BorderPane view;
 	private TabPane developerTabs;
 	private AttributeHolderCreator myAttributeHolderCreator = new AttributeHolderCreator();
 	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
 	private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(myGeneralDataCreator);
 
 	public MasterDeveloperInterface() {
-		instantiateTabs();
-		developerScene = new Scene(developerTabs);
+		instantiate();
+		developerScene = new Scene(view);
 		developerScene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 	}
 
@@ -38,8 +42,36 @@ public class MasterDeveloperInterface {
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
 		myTabs.addAll(classCreatorTab, GeneralDataTab, ScreenSettingView);
 	}
+	
+	private void instantiate(){
+		view=new BorderPane();
+		instantiateTabs();
+		view.setTop(new TabAdder());
+		view.setCenter(developerTabs);
+		
+	}
 
 	public Scene getScene() {
 		return developerScene;
+	}
+	
+	class TabAdder extends HBox{
+		private TabAdder(){
+			instantiate();
+		}
+		
+		private void instantiate(){
+			Button spriteButton=new Button("Create new Sprite");
+			Button screenButton = new Button("Create new Screen");
+			spriteButton.setOnAction((clicked)->{
+				Tab spriteTab=new Tab("Create Sprite", new AttributeHolderCreator());
+				developerTabs.getTabs().add(spriteTab);
+			});
+			screenButton.setOnAction((clicked)->{
+				Tab screenTab=new Tab("Create new Screen", new ScreenModelCreator());
+				developerTabs.getTabs().add(screenTab);
+			});
+			this.getChildren().addAll(spriteButton,screenButton);
+		}	
 	}
 }
