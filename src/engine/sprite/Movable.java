@@ -3,6 +3,7 @@ package engine.sprite;
 import commons.MathUtils;
 import commons.RunningMode;
 import engine.camera.GamePoint;
+import engine.skill.Target;
 
 public class Movable {
 
@@ -22,6 +23,9 @@ public class Movable {
 	public void moveTo(GamePoint pDest) {
 		this.pDest = pDest;
 		startMoving();
+	}
+	public void moveTo(Target target) {
+		// TODO
 	}
 
 	private void startMoving() {

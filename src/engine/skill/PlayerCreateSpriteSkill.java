@@ -11,19 +11,24 @@ public class PlayerCreateSpriteSkill implements Skill {
 	private EventBus bus;
 	private Sprite sprite;
 	private Target target;
+	private boolean isInstant = false;
 
 	public PlayerCreateSpriteSkill(EventBus bus, Sprite sprite) {
 		this.bus = bus;
 		this.sprite = sprite;
 	}
 
+	
+	@Override
+	public void setInstant(boolean instant) {
+		this.isInstant = instant;
+	}
 	/**
 	 * If instant, trigger directly when selected
 	 */
 	@Override
 	public boolean isInstant() {
-		// TODO
-		return false;
+		return isInstant;
 	}
 
 	@Override
@@ -40,5 +45,17 @@ public class PlayerCreateSpriteSkill implements Skill {
 		sprite.setPos(target.getLocation().get());
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprite));
 	}
+
+	@Override
+	public void setSource(Sprite sprite) {
+
+	}
+
+	@Override
+	public Optional<Sprite> getSource() {
+		return Optional.empty();
+	}
+
+
 
 }

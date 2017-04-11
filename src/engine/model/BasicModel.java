@@ -2,14 +2,12 @@ package engine.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import bus.EventBus;
 import commons.RunningMode;
 import engine.player.Player;
 import engine.sprite.Sprite;
 
 public class BasicModel implements Model {
-
 	private EventBus bus;
 	private Player player;
 	private List<Sprite> sprites = new ArrayList<>();
@@ -19,7 +17,7 @@ public class BasicModel implements Model {
 		this.player = player;
 		initHandlers();
 	}
-	
+
 	private void initHandlers() {
 		bus.on(SpriteModelEvent.ADD, (e) -> {
 			addSprite(e.getSprite());
@@ -28,7 +26,7 @@ public class BasicModel implements Model {
 			removeSprite(e.getSprite());
 		});
 	}
-	
+
 	@Override
 	public List<Sprite> getSprites() {
 		return sprites;
@@ -46,17 +44,14 @@ public class BasicModel implements Model {
 	public void removeSprite(Sprite sprite) {
 		sprites.remove(sprite);
 	}
-
 	@Override
 	public void update(double dt) {
 		for (Sprite sprite : sprites) {
 			sprite.update(dt);
 		}
 	}
-
 	@Override
 	public Player getPlayer() {
 		return player;
 	}
-
 }

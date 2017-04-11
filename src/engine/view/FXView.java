@@ -123,7 +123,7 @@ public class FXView implements View {
 		});
 		
 		// render skill box
-		skillBox.render(localModel.getPlayerSelectionState().getAvailableSkills());
+		skillBox.render(localModel.getPlayerSelectionState());
 	}
 
 }

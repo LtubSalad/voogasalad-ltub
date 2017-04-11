@@ -1,2 +1,3 @@
 <Tower>
-<ObjectHolder variableList_secondaryObjects="sword_ball" function_getObjects="return secondaryObjects;"></ObjectHolder></Tower>
+<ObjectHolder variableList_secondaryObjects="missile" function_getObjects="return secondaryObjects;"></ObjectHolder><ConstantActor function_run="move(50)"></ConstantActor>
+<ImageHolder variable_xPosition="0" variable_yPosition="0" variable_image="bahumut_left.png" function_getImage="return image" variable_displayPriority="1"></ImageHolder></Tower>
