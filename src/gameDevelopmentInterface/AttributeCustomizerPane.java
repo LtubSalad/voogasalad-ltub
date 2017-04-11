@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import data.AttributeData;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;

@@ -3,7 +3,11 @@ package gameDevelopmentInterface;
 import java.util.LinkedList;
 import java.util.Queue;
 import javafx.util.Pair;
-
+/**
+ * 
+ * @author Jake
+ *
+ */
 public class Path {
 	private Queue<Pair<Integer, Integer>> myPath = new LinkedList<Pair<Integer, Integer>>();
 	private Pair<Integer, Integer> currCoord;
@@ -15,7 +19,23 @@ public class Path {
 	}
 	
 	public Queue<Pair<Integer, Integer>> getStartAndEndAndTurningPoints() {
-		return myPath; //TODO change this to actual turning points
+		Queue<Pair<Integer, Integer>> startEndAndTurns = new LinkedList<Pair<Integer, Integer>>();
+		Queue<Pair<Integer, Integer>> copyOfMyPath = new LinkedList<Pair<Integer, Integer>>(myPath);
+		copyOfMyPath.poll(); //remove first element to offset the index
+		int idx = 0;
+		Integer currHeading = 0;
+		Integer nextHeading = 0;
+		for (Pair<Integer, Integer> currCoord : myPath) {
+			Pair<Integer, Integer> nextCoord = copyOfMyPath.peek();
+			//getNextHeading(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord)
+			if (idx == 0 || idx == myPath.size()) {
+				startEndAndTurns.add(currCoord);
+			} else if (currHeading != nextHeading) {
+				startEndAndTurns.add(currCoord);
+			}
+			idx += 1;
+		}
+		return myPath;
 	}
 	
 	/**
@@ -43,18 +63,15 @@ public class Path {
 	
 	private Integer getNextHeading() {
 		//next coord is above where the monster currently is
-		if (currCoord.getValue() > nextCoord.getValue() &&
-				currCoord.getKey() == nextCoord.getKey()) {
+		if (isAbove()) {
 			updateCoords();
 			return 0;
 		} // next coord is left of where the monster currently is 
-		else if (currCoord.getValue() == nextCoord.getValue() &&
-				currCoord.getKey() > nextCoord.getKey()) {
+		else if (isLeft()) {
 			updateCoords();
 			return 90;
 		} // next coord is right of where the monster currently is 
-		else if (currCoord.getValue() == nextCoord.getValue() &&
-				currCoord.getKey() < nextCoord.getKey()) {
+		else if (isRight()) {
 			updateCoords();
 			return 270;
 		} // next coord is below where the monster currently is 
@@ -62,6 +79,67 @@ public class Path {
 			updateCoords();
 			return 180;
 		}
+	}
+	
+	private Integer getNextHeading(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord) {
+		//next coord is above where the monster currently is
+		if (isAbove(currCoord, nextCoord)) {
+			updateCoords();
+			return 0;
+		} // next coord is left of where the monster currently is 
+		else if (isLeft(currCoord, nextCoord)) {
+			updateCoords();
+			return 90;
+		} // next coord is right of where the monster currently is 
+		else if (isRight(currCoord, nextCoord)) {
+			updateCoords();
+			return 270;
+		} // next coord is below where the monster currently is 
+		else if (isBelow(currCoord, nextCoord)){
+			updateCoords();
+			return 180;
+		}
+		return 0;
+	}
+	
+	private boolean isRight(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord) {
+		return currCoord.getValue() == nextCoord.getValue() &&
+				currCoord.getKey() < nextCoord.getKey();
+	}
+	
+	private boolean isLeft(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord) {
+		return currCoord.getValue() == nextCoord.getValue() &&
+				currCoord.getKey() > nextCoord.getKey();
+	}
+	
+	private boolean isAbove(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord) {
+		return currCoord.getValue() > nextCoord.getValue() &&
+				currCoord.getKey() == nextCoord.getKey();
+	}
+	
+	private boolean isBelow(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord) {
+		return currCoord.getValue() < nextCoord.getValue() &&
+				currCoord.getKey() == nextCoord.getKey();
+	}
+
+	private boolean isRight() {
+		return currCoord.getValue() == nextCoord.getValue() &&
+				currCoord.getKey() < nextCoord.getKey();
+	}
+
+	private boolean isLeft() {
+		return currCoord.getValue() == nextCoord.getValue() &&
+				currCoord.getKey() > nextCoord.getKey();
+	}
+
+	private boolean isAbove() {
+		return currCoord.getValue() > nextCoord.getValue() &&
+				currCoord.getKey() == nextCoord.getKey();
+	}
+	
+	private boolean isBelow() {
+		return currCoord.getValue() < nextCoord.getValue() &&
+				currCoord.getKey() == nextCoord.getKey();
 	}
 	
 	private void updateCoords() {
@@ -78,14 +156,5 @@ public class Path {
 		currCoord = myPath.poll();
 		nextCoord = myPath.poll();		
 	}
-	
-//	private void test() {
-//		for (int i = 0; i < 4; i++) {
-//			System.out.println("currCoord: " + currCoord);
-//			System.out.println("nextCoord: " + nextCoord);
-//			System.out.println("Heading: " + getNextHeading());
-//			System.out.println();
-//		}
-//	}
 	
 }

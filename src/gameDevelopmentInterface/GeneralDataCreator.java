@@ -1,6 +1,7 @@
 package gameDevelopmentInterface;
 
 import data.GeneralModelData;
+import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -16,6 +17,7 @@ import javafx.util.Pair;
  *         button is pressed on the text input box.
  */
 public class GeneralDataCreator extends GridPane {
+	private static final int INSETS = 50;
 	private static final int MAX_SCREEN_SIZE = 600;
 	private static final String SAVE_ALL_VALUES = "Save All Values";
 	private static final String NUM_STARTING_BONUSES = "Number of Starting Bonuses";
@@ -33,11 +35,21 @@ public class GeneralDataCreator extends GridPane {
 	private Button sendStartingBonusesInput = new Button(SEND);
 	private Button saveAll = new Button(SAVE_ALL_VALUES);
 	private GeneralModelData myGeneralModel = new GeneralModelData();
+	private ObservableMap<String,String> myData = myGeneralModel.getAllData();
 	
 	public GeneralDataCreator() {
 		this.setMaxSize(MAX_SCREEN_SIZE, MAX_SCREEN_SIZE);
-		this.setPadding(new Insets(10, 10, 10, 10));
+		this.setPadding(new Insets(INSETS, INSETS, INSETS, INSETS));
+		this.setHgap(INSETS/5);
 		setupButtons();
+		placeTiles();
+	}
+	
+	public ObservableMap<String,String> getAllData() {
+		return myData;
+	}
+
+	private void placeTiles() {
 		this.add(new Text(NUM_LIVES), 0, 0);
 		this.add(new Text(NUM_LEVELS), 1, 0);
 		this.add(new Text(NUM_STARTING_GOLD), 2, 0);
