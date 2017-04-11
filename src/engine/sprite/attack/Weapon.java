@@ -25,21 +25,6 @@ public class Weapon implements Attribute {
 		return currPos;
 	}
 
-	@Override
-	public void switchOn() {
-		isWeapon = true;
-	}
-
-	@Override
-	public void switchOff() {
-		isWeapon = false;
-	}
-
-	@Override
-	public Boolean isAttribute() {
-		return isWeapon;
-	}
-
 	//	public void setTarget(Sprite s){
 	//		target = s;
 	//	}
@@ -51,12 +36,5 @@ public class Weapon implements Attribute {
 	public double getDamageDealt(){
 		return damageDealt;
 	}
-
-	@Override
-	public double update(double dt) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 
 }

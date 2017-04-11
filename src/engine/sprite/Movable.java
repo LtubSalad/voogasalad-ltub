@@ -15,6 +15,7 @@ public class Movable implements Attribute {
 
 	public Movable(AttributeData data){
 		this.speed = Double.parseDouble(data.getVariable("speed"));
+		
 	}
 	
 	public Movable(){
@@ -88,19 +89,13 @@ public class Movable implements Attribute {
 
 	}
 
-	@Override
 	public void switchOn() {
 		isMovable = true;
 	}
 
-	@Override
 	public void switchOff() {
 		isMovable = false;
 	}
 
-	@Override
-	public Boolean isAttribute() {
-		return isMovable;
-	}
 
 }

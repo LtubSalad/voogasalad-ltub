@@ -25,19 +25,18 @@ public class Sprite  {
 	private GamePoint pos;
 	private int z;
 
-	private HashMap<String, Attribute> attributeMap = new HashMap<String, Attribute>();
-
 	private SelectionBound selectionBound = SelectionBound.IMAGE;
 	private List<GamePoint> selectionBoundVertices;
 	// composition objects 
-		private Movable movable = null;
-		private Collidable collidable = null;
-		private HealthHolder healthHolder;
-		private SpriteSpawner spriteSpawner;
-		private Attacker attacker;
-		private Weapon weapon;
-		
-		
+	private Movable movable;
+	private Collidable collidable;
+	private Attacker attacker;
+	private Weapon weapon;
+	private HealthHolder healthHolder;
+	private SpriteSpawner spriteSpawner;
+	private Team team;
+
+
 	/**
 	 * The player that this sprite belongs to.
 	 */
@@ -50,15 +49,15 @@ public class Sprite  {
 	public Sprite() {
 		initAttributes();
 	}
-	
+
 	private void initAttributes(){
-		attributeMap.put("movable", null);
-		attributeMap.put("collidable", null);
-		attributeMap.put("attacker", null);
-		attributeMap.put("weapon", null);
-		attributeMap.put("healthholder", null);
-		attributeMap.put("spawner", null);
-		attributeMap.put("team", null);
+		movable = null;
+		collidable = null;
+		attacker = null;
+		weapon = null;
+		healthHolder = null;
+		spriteSpawner = null;
+		team = null;
 	}
 
 	public void setImageSet(ImageSet imageSet) {
@@ -124,48 +123,39 @@ public class Sprite  {
 		return attacker.getRange();
 	}
 
-	
-	//setting attributes
-	public void setAttribute(String name, Attribute attribute){
-		attributeMap.put(name, attribute);
-	}
-	
-	
-/*	public Movable getMovable(){
+
+	/*	public Movable getMovable(){
 		return this.movable;
 	}*/
-	
+
 	public Optional<Attribute> getMovable() {
-		return Optional.ofNullable(attributeMap.get("movable"));
+		return Optional.ofNullable(movable);
 	}
-	
+
 	public Optional<Attribute> getCollidable() {
-		return Optional.ofNullable(attributeMap.get("collidable"));
+		return Optional.ofNullable(collidable);
 	}
-	
+
 	public Optional<Attribute> getAttacker() {
-		return Optional.ofNullable(attributeMap.get("attacker"));
+		return Optional.ofNullable(attacker);
 	}
-	
+
 	public Optional<Attribute> getWeapon() {
-		return Optional.ofNullable(attributeMap.get("weapon"));
+		return Optional.ofNullable(weapon);
 	}
-	
+
 	public Optional<Attribute> getHealthHolder(){
-		return Optional.ofNullable(attributeMap.get("healthholder"));
+		return Optional.ofNullable(healthHolder);
 	}
 
 	public Optional<Attribute> getSpawner(){
-		return Optional.ofNullable(attributeMap.get("spawner"));
+		return Optional.ofNullable(spriteSpawner);
 	}
-	
+
 	public Optional<Attribute> getTeam(){
-		return Optional.ofNullable(attributeMap.get("team"));
+		return Optional.ofNullable(team);
 	}
-	
-	
-	
-	
+
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
@@ -185,38 +175,25 @@ public class Sprite  {
 		// TODO: this piece of actions queueing code has to be improved
 
 		//trigger Movable
-		if (shouldTrigger("movable")){
-			if (!actionQueue.isEmpty()) {
+		if (movable != null && !actionQueue.isEmpty()){
+			actionQueue.executeNextAction();
+		}
+		while (!MathUtils.doubleEquals(tRemain, 0) && getMovable().isPresent()) {
+			tRemain = movable.update(dt);
+			if (!MathUtils.doubleEquals(tRemain, 0) && !actionQueue.isEmpty()) {
 				actionQueue.executeNextAction();
 			}
 		}
-		while (!MathUtils.doubleEquals(tRemain, 0) && getMovable().isPresent()) {
-			tRemain = attributeMap.get("movable").update(dt);
-			if (!MathUtils.doubleEquals(tRemain, 0)) {
-				if (!actionQueue.isEmpty()) {
-					actionQueue.executeNextAction();
-				}
-			}
-		}
-	}
-
-	private Boolean shouldTrigger(String s){
-		if (attributeMap.get(s) != null){
-			if (attributeMap.get(s).isAttribute()){
-				return true;
-			}
-		}
-		return false;
 	}
 
 
-	public void setFactory(SpriteSpawner spawner) {
-		this.spriteSpawner = spawner; 		
+	public void setSpawner(Attribute spawner) {
+		this.spriteSpawner = (SpriteSpawner) spawner; 		
 	}
-	
+
 	public void setMovable(Attribute movable1){
 		this.movable = (Movable) movable1; 
 	}
-	
+
 
 }

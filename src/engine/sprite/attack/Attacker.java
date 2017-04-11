@@ -21,28 +21,6 @@ public class Attacker implements Attribute {
 		isAttacker = false;
 	}
 	
-
-	@Override
-	public void switchOn() {
-		isAttacker = true;
-	}
-
-	@Override
-	public void switchOff() {
-		isAttacker = false;
-	}
-
-	@Override
-	public Boolean isAttribute() {
-		return isAttacker;
-	}
-
-	@Override
-	public double update(double dt) {
-		
-		return 0.0;
-	}
-	
 	public double getRange(){
 		return this.radius;
 	}

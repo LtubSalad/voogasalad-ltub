@@ -1,8 +1,9 @@
 package engine.sprite.spritespawner;
 import data.AttributeData;
+import engine.sprite.Attribute;
 import engine.sprite.Sprite; 
 
-public abstract class SpriteSpawner {
+public abstract class SpriteSpawner implements Attribute {
 	private Sprite child;
 	private double spawnTime; 
 	

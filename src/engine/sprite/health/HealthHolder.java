@@ -16,27 +16,6 @@ public class HealthHolder implements Attribute {
 		currHealth = initial;
 		hasHealth = true;
 	}
-
-	@Override
-	public void switchOn() {
-		hasHealth = true;
-	}
-
-	@Override
-	public void switchOff() {
-		hasHealth = false;
-	}
-
-	@Override
-	public Boolean isAttribute() {
-		return hasHealth;
-	}
-
-	@Override
-	public double update(double dt) {
-		//not gonna do anything here because only changes when event is fired
-		return 0;
-	}
 	
 	public double getHealth(){
 		return currHealth;

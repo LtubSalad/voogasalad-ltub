@@ -40,8 +40,7 @@ public class CollisionChecker {
 	
 	public void checkCollision(List<Sprite> sprites) {
 		List<Sprite> collidableSprites = sprites.stream().filter((s) -> {
-			return s.getCollidable().isPresent() &&
-					s.getCollidable().get().isAttribute();
+			return s.getCollidable().isPresent();
 		}).collect(Collectors.toList());
 		for (Sprite s1 : collidableSprites) {
 			for (Sprite s2 : collidableSprites) {
@@ -68,8 +67,7 @@ public class CollisionChecker {
 	
 	public void checkMonsterCollision(List<Sprite> sprites) {
 		List<Sprite> collidableSprites = sprites.stream().filter((s) -> {
-			return s.getCollidable().isPresent() &&
-					s.getCollidable().get().isAttribute();
+			return s.getCollidable().isPresent();
 		}).collect(Collectors.toList());
 		for (Sprite s1 : collidableSprites) {
 			for (Sprite s2 : collidableSprites) {
