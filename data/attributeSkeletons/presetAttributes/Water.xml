@@ -1,0 +1,3 @@
+<IMAGE_DEFAULT_STONE>
+<ImageHolder variable_xPosition="0" variable_yPosition="0" variable_image="Water.jpg" function_getImage="return image" variable_displayPriority="1"></ImageHolder>
+</IMAGE_DEFAULT_STONE>

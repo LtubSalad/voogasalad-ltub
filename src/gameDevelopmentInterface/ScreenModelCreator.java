@@ -1,7 +1,8 @@
 package gameDevelopmentInterface;
 
+import data.ScreenModelData;
+import javafx.collections.ObservableMap;
 import javafx.scene.layout.BorderPane;
-
 /**
  * 
  * The job of the ScreenModelCreator is to provide an interface for the developer to set all the data for a 
@@ -15,11 +16,15 @@ import javafx.scene.layout.BorderPane;
  */
 
 public class ScreenModelCreator extends BorderPane {
-	private ScreenObjectHolder myObjectsToPlace = new ScreenObjectHolder(this);
+	private ObservableMap<String,String> myData;
+	private ScreenModelData myScreenModel = new ScreenModelData();
+	private ScreenObjectHolder myObjectsToPlace = new ScreenObjectHolder(this, myScreenModel);
 	private ScreenMap myScreen = new ScreenMap();
 	private ButtonsPanel myButtonsPanel = new ButtonsPanel(this);
 	
-	public ScreenModelCreator() {
+	public ScreenModelCreator(GeneralDataCreator gdc) {
+		myData = gdc.getAllData();
+		this.setTop(new GeneralGameDataBar(myData));
 		this.setBottom(myObjectsToPlace);
 		this.setCenter(myScreen);
 		this.setRight(myButtonsPanel);

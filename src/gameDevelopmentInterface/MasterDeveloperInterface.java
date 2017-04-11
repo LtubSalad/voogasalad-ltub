@@ -24,6 +24,9 @@ public class MasterDeveloperInterface {
 	private Scene developerScene;
 	private BorderPane view;
 	private TabPane developerTabs;
+	private AttributeHolderCreator myAttributeHolderCreator = new AttributeHolderCreator();
+	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
+	private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(myGeneralDataCreator);
 
 	public MasterDeveloperInterface() {
 		instantiate();
@@ -33,9 +36,9 @@ public class MasterDeveloperInterface {
 
 	private void instantiateTabs() {
 		developerTabs = new TabPane();
-		Tab classCreatorTab = new Tab("Create AttributeHolder", new AttributeHolderCreator());
-		Tab GeneralDataTab = new Tab("General Data", new GeneralDataCreator());
-		Tab ScreenSettingView = new Tab("Screen Setting", new ScreenModelCreator());
+		Tab classCreatorTab = new Tab("Create AttributeHolder", myAttributeHolderCreator);
+		Tab GeneralDataTab = new Tab("General Data", myGeneralDataCreator);
+		Tab ScreenSettingView = new Tab("Screen Setting", myScreenModelCreator);
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
 		myTabs.addAll(classCreatorTab, GeneralDataTab, ScreenSettingView);
 	}

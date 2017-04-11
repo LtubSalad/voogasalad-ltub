@@ -25,9 +25,8 @@ public class ScreenMap extends StackPane {
 	public ScreenMap() {
 		this.setHeight(SCREEN_SIZE);
 		this.setWidth(SCREEN_SIZE);
-		Rectangle background = new Rectangle(SCREEN_SIZE, SCREEN_SIZE, Color.AQUA);
 		makeGrid();
-		this.getChildren().addAll(background, myGrid);
+		this.getChildren().add(myGrid);
 	}
 	
 	public GridPane getGrid() {
@@ -64,7 +63,8 @@ public class ScreenMap extends StackPane {
 	
 	private void makeGrid() {
 		myGrid = new GridPane();
-		myGrid.setMaxSize(SCREEN_SIZE, SCREEN_SIZE);
+		myGrid.setMaxHeight(SCREEN_SIZE);
+		myGrid.setMaxWidth(SCREEN_SIZE);
 		for (int i = 0; i < NUM_ROWS; i++) {
 			RowConstraints row = new RowConstraints(SCREEN_SIZE/NUM_ROWS);
 			myGrid.getRowConstraints().add(row);
@@ -72,6 +72,11 @@ public class ScreenMap extends StackPane {
 		for (int j = 0; j < NUM_COLS; j++) {
 			ColumnConstraints col = new ColumnConstraints(SCREEN_SIZE/NUM_COLS);
 			myGrid.getColumnConstraints().add(col);
+		}
+		for (int i = 0; i < NUM_ROWS; i++) {
+			for (int j = 0; j < NUM_COLS; j++) {
+				myGrid.add(new Rectangle(SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, Color.WHITESMOKE), j, i);
+			}
 		}
 	}
 

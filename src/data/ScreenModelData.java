@@ -2,6 +2,9 @@ package data;
 
 import java.util.ArrayList;
 import java.util.List;
+import engine.sprite.Sprite;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 /**
  * 
  * @author Daniel, Jake
@@ -11,26 +14,26 @@ import java.util.List;
  */
 
 public class ScreenModelData {
-	private List<String> myScreenData = new ArrayList<String>();
+	private ObservableList<Sprite> myScreenData = FXCollections.observableArrayList();
 	/**
 	 * Will put this object into the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
 	 */
-	public void addObjectData(String data) {
-		myScreenData.add(data);
+	public void addObjectData(Sprite newSprite) {
+		myScreenData.add(newSprite);
 	}
 	/**
 	 * Will remove this object from the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
 	 */
-	public void removeObject(String data) {
-		myScreenData.remove(data);
+	public void removeObject(Sprite spriteToRemove) {
+		myScreenData.remove(spriteToRemove);
 	}
 	/**
 	 * 
 	 * @return all the objects on the screen
 	 */
-	public List<String> getAllObjectsOnScreen() {
+	public ObservableList<Sprite> getAllObjectsOnScreen() {
 		return myScreenData;
 		
 	}
