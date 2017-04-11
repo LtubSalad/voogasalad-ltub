@@ -10,10 +10,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
-public class FunctionSetter extends VBox {
+public class RestrictedFunctionSetter extends VBox{
 	List<SingleFunctionSetter> singleFunctionSetters;
 
-	public FunctionSetter(Map<Pair<String, List<String>>, String> functions) {
+	public RestrictedFunctionSetter(Map<Pair<String, List<String>>, String> functions) {
 		VBox scriptingInterface = new VBox();
 		singleFunctionSetters = new ArrayList<>();
 		this.getChildren().add(new Label("Functions"));

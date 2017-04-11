@@ -1,15 +1,10 @@
 package gameDevelopmentInterface;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import data.AttributeData;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
@@ -17,14 +12,17 @@ public class AttributeCustomizerPane extends ScrollPane {
 	private AttributeData myAttribute;
 	private List<AttributeCustomizerPane> subPanes;
 	private VariableSetter variableSetter;
-	private FunctionSetter functionSetter;
+	private RestrictedFunctionSetter functionSetter;
+	private boolean customizableVariables;
 	private NameSetter nameSetter;
 	private final double prefHeight = 500;
 	private final double prefWidth = 500;
 	private final double maxHeight = 600;
 	private final double maxWidth = 600;
 
-	public AttributeCustomizerPane(AttributeData attributeData) {
+
+	public AttributeCustomizerPane(AttributeData attributeData, boolean customizableVariables) {
+		this.customizableVariables=customizableVariables;
 		myAttribute = attributeData;
 		this.setPrefHeight(prefHeight);
 		this.setPrefWidth(prefWidth);
@@ -32,6 +30,11 @@ public class AttributeCustomizerPane extends ScrollPane {
 		this.setMaxWidth(maxWidth);
 		instantiate();
 	}
+	
+	public AttributeCustomizerPane(AttributeData attributeData) {
+		this(attributeData,false);
+	}
+	
 
 	public AttributeData getAttribute() {
 		updateAttribute();
@@ -51,8 +54,8 @@ public class AttributeCustomizerPane extends ScrollPane {
 	private void instantiate() {
 		VBox myContents = new VBox();
 		subPanes = new ArrayList<>();
-		variableSetter = new VariableSetter(myAttribute.getVariables());
-		functionSetter = new FunctionSetter(myAttribute.getScripts());
+		variableSetter = new VariableSetter(myAttribute.getVariables(),customizableVariables);
+		functionSetter = new RestrictedFunctionSetter(myAttribute.getScripts());
 		nameSetter = new NameSetter(myAttribute.getName(), myAttribute.nameModifiable());
 		Button refresher = new Button("Refresh");
 		refresher.setOnAction((clickEvent) -> {
