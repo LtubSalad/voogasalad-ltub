@@ -59,7 +59,7 @@ public class AttributeBuilder {
 			Constructor <?> ctor = attributeClass.getConstructor(AttributeData.class);
 			Object obj = ctor.newInstance(dataToRead);
 			myAttribute = (Attribute) obj; 
-			System.out.println("object created!!!!!!");
+			//System.out.println("object created!!!!!!");
 		} 
 		catch (Exception e) {
 			throw new SpriteCreationException("Attribute class not found " + specificName);
@@ -69,7 +69,7 @@ public class AttributeBuilder {
 	
 	public void configSprite(Sprite s) {
 		String methodName = "set" + attributeType; 
-		System.out.println("method name is " + methodName);
+		//System.out.println("method name is " + methodName);
 		try {
 			Method setter = s.getClass().getMethod(methodName, Class.forName(ATTRIBUTE_BASE_PATH + attributeType.toLowerCase() + "." + attributeType));
 			setter.invoke(s, myAttribute);
