@@ -4,10 +4,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
-public class NameSetter extends HBox{
+public class FieldSetter extends HBox{
 	private String initialName;
 	private TextField nameStorer;
-	public NameSetter(String initialName, boolean modifiable){
+	public FieldSetter(String initialName, boolean modifiable){
 		this.initialName=initialName;
 		this.getChildren().add(new Label("Name:   "));
 		if(modifiable){
@@ -18,7 +18,7 @@ public class NameSetter extends HBox{
 		}
 	}
 	
-	public String getName(){
+	public String getString(){
 		if(nameStorer!=null){
 			return nameStorer.getText();
 		}

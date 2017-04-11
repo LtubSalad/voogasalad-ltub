@@ -65,6 +65,12 @@ public class MasterDeveloperInterface {
 		private void instantiate(){
 			Button spriteButton=new Button("Create new Sprite");
 			Button screenButton = new Button("Create new Screen");
+			Button groundUpButton=new Button("Create new basic attribute");
+			groundUpButton.setOnAction((clicked)->{
+				Tab groundTab=new Tab("Basic Attribute", new GroundUpAttributeCreator());
+				developerTabs.getTabs().add(groundTab);
+				
+			});
 			spriteButton.setOnAction((clicked)->{
 				Tab spriteTab=new Tab("Create Sprite", new AttributeHolderCreator(attributesModel));
 				developerTabs.getTabs().add(spriteTab);
@@ -73,7 +79,7 @@ public class MasterDeveloperInterface {
 				Tab screenTab=new Tab("Create new Screen", new ScreenModelCreator(attributesModel, myGeneralDataCreator));
 				developerTabs.getTabs().add(screenTab);
 			});
-			this.getChildren().addAll(spriteButton,screenButton);
+			this.getChildren().addAll(spriteButton,screenButton,groundUpButton);
 		}	
 	}
 }

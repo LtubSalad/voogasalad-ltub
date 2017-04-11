@@ -12,17 +12,19 @@ public class AttributeCustomizerPane extends ScrollPane {
 	private AttributeData myAttribute;
 	private List<AttributeCustomizerPane> subPanes;
 	private VariableSetter variableSetter;
-	private RestrictedFunctionSetter functionSetter;
+	private FunctionSetter functionSetter;
 	private boolean customizableVariables;
-	private NameSetter nameSetter;
+	private boolean customizableFunctions;
+	private FieldSetter nameSetter;
 	private final double prefHeight = 500;
 	private final double prefWidth = 500;
 	private final double maxHeight = 600;
 	private final double maxWidth = 600;
 
 
-	public AttributeCustomizerPane(AttributeData attributeData, boolean customizableVariables) {
+	public AttributeCustomizerPane(AttributeData attributeData, boolean customizableVariables,boolean customizableFunctions) {
 		this.customizableVariables=customizableVariables;
+		this.customizableFunctions=customizableFunctions;
 		myAttribute = attributeData;
 		this.setPrefHeight(prefHeight);
 		this.setPrefWidth(prefWidth);
@@ -32,7 +34,7 @@ public class AttributeCustomizerPane extends ScrollPane {
 	}
 	
 	public AttributeCustomizerPane(AttributeData attributeData) {
-		this(attributeData,false);
+		this(attributeData,false,false);
 	}
 	
 
@@ -44,19 +46,19 @@ public class AttributeCustomizerPane extends ScrollPane {
 	public void updateAttribute() {
 		myAttribute.setScripts(functionSetter.getFunctions());
 		myAttribute.setVariables(variableSetter.getVariables());
-		myAttribute.setName(nameSetter.getName());
+		myAttribute.setName(nameSetter.getString());
 		subPanes.forEach((subPane) -> {
 			subPane.updateAttribute();
 		});
 
 	}
 
-	private void instantiate() {
+	public void instantiate() {
 		VBox myContents = new VBox();
 		subPanes = new ArrayList<>();
 		variableSetter = new VariableSetter(myAttribute.getVariables(),customizableVariables);
-		functionSetter = new RestrictedFunctionSetter(myAttribute.getScripts());
-		nameSetter = new NameSetter(myAttribute.getName(), myAttribute.nameModifiable());
+		functionSetter = new FunctionSetter(myAttribute.getScripts(),customizableFunctions);
+		nameSetter = new FieldSetter(myAttribute.getName(), myAttribute.nameModifiable());
 		Button refresher = new Button("Refresh");
 		refresher.setOnAction((clickEvent) -> {
 			instantiate();

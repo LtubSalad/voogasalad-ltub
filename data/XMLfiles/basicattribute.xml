@@ -1,0 +1,20 @@
+<data.AttributeData>
+  <attributeType>choose name</attributeType>
+  <changeableName>true</changeableName>
+  <attributeScripts>
+    <entry>
+      <javafx.util.Pair>
+        <key class="string">dummy</key>
+        <value class="list"/>
+      </javafx.util.Pair>
+      <string>Put scripts here23</string>
+    </entry>
+  </attributeScripts>
+  <attributeVariables>
+    <entry>
+      <string>dummy_variable</string>
+      <string>3</string>
+    </entry>
+  </attributeVariables>
+  <subAttributes/>
+</data.AttributeData>

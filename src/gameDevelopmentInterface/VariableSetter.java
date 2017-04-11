@@ -18,18 +18,18 @@ import javafx.util.Pair;
  */
 public class VariableSetter extends VBox{
 	private final List<SingleVariableSetter> singleVariableSetters;
-	private boolean isRestricted=true;
+	private boolean customizableVariables=false;
 	
-	public VariableSetter(Map<String,String> variables, boolean isRestricted){
-		this.isRestricted=isRestricted;
+	public VariableSetter(Map<String,String> variables, boolean customizableVariables){
+		this.customizableVariables=customizableVariables;
 		singleVariableSetters= new ArrayList<>();
 		this.getChildren().add(new Label("Variables"));
 		variables.forEach((parameterName, value) -> {
 			SingleVariableSetter singleVariableSetter;
-			if(isRestricted){
-				singleVariableSetter=new RestrictedSingleVariableSetter(parameterName,value);
-			}else{
+			if(this.customizableVariables){
 				singleVariableSetter=new UnrestrictedSingleVariableSetter(parameterName,value);
+			}else{
+				singleVariableSetter=new RestrictedSingleVariableSetter(parameterName,value);
 			}
 			this.getChildren().add(singleVariableSetter);
 			singleVariableSetters.add(singleVariableSetter);

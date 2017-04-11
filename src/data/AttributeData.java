@@ -23,7 +23,6 @@ public class AttributeData implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String attributeType;
 	private boolean changeableName;
-	private boolean isConcrete;
 	private String implementationSpecifier;
 	private Map<Pair<String, List<String>>,String> attributeScripts;
 	private Map<String,String> attributeVariables;
@@ -32,25 +31,23 @@ public class AttributeData implements Serializable {
 	public AttributeData(AttributeData attrToCopy) {
 		this.attributeType = attrToCopy.attributeType;
 		this.changeableName = attrToCopy.changeableName;
-		this.isConcrete = attrToCopy.isConcrete;
 		this.implementationSpecifier = attrToCopy.implementationSpecifier;
 		this.attributeScripts = attrToCopy.attributeScripts;
 		this.attributeVariables = attrToCopy.attributeVariables;
 		this.subAttributes = attrToCopy.subAttributes;
 	}	
 	
-	public AttributeData(String name, boolean changeableName, boolean isConcrete, String implementationSpecifier){
+	public AttributeData(String name, boolean changeableName, String implementationSpecifier){
 		attributeVariables=new HashMap<>();
 		attributeScripts=new HashMap<>();
 		List<AttributeData> subAttributesUnobservable=new ArrayList<>();
 		subAttributes=subAttributesUnobservable;
 		attributeType=name;
-		this.isConcrete=isConcrete;
 		this.changeableName=changeableName;
 	}
 	
 	public AttributeData(String name){
-		this(name, false, false,null);
+		this(name, false,null);
 	}
 	
 	public Map<Pair<String, List<String>>,String> getScripts(){
@@ -99,6 +96,10 @@ public class AttributeData implements Serializable {
 			}
 		}
 		return null;
+	}
+	
+	public void setImplementation(String s){
+		implementationSpecifier=s;
 	}
 	
 	public String getImplementation(){
