@@ -28,12 +28,19 @@ public class AttributeBuilder {
 	}
 	
 	private void build() {
-		attributeType = dataToRead.getType(); 
+		attributeType = dataToRead.getName(); 
 		String specificName = dataToRead.getImplementation();
-		Class<?> attributeClass = Class.forName(ATTRIBUTE_FILEPATH + specificName);
-		Constructor <?> ctor = attributeClass.getConstructor(AttributeData.class);
-		Object obj = ctor.newInstance(dataToRead);
-		myAttribute = (Attribute) obj; 
+		
+		try {
+			Class <?> attributeClass = Class.forName(ATTRIBUTE_FILEPATH + specificName);
+			Constructor <?> ctor = attributeClass.getConstructor(AttributeData.class);
+			Object obj = ctor.newInstance(dataToRead);
+			myAttribute = (Attribute) obj; 
+		} 
+		catch (Exception e) {
+			throw new SpriteCreationException("Attribute class not found " + specificName);
+		}
+		
 	}
 	
 	public void configSprite(Sprite s) {
