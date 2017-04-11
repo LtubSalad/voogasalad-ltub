@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Reflection;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -86,23 +87,27 @@ public class PasswordManager{
 		bp.setCenter(gridPane); 
 		//Adding BorderPane to the scene and loading CSS
 		Scene scene = new Scene(bp);
-		scene.getStylesheets().add(getClass().getClassLoader().getResource("resources/login.css").toExternalForm());
+		scene.getStylesheets().setAll("/styleSheets/login.css");
 		primaryStage.setScene(scene);
 
 		primaryStage.show();
 		//Action for btnLogin
 		btnLogin.setOnAction(e -> buttonAction(primaryStage));
-
-
+		
+		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode(), primaryStage));
 	}
 
+	private void handleKeyInput(KeyCode code, Stage primaryStage) {
+		if(code == KeyCode.ENTER ){
+			buttonAction(primaryStage);
+		}
+		
+	}
 	private void buttonAction(Stage primaryStage) {
 
 		checkUser = txtUserName.getText().toString();
 		checkPw = pf.getText().toString();
 		if(checkUser.equals(user) && checkPw.equals(pw)){
-			lblMessage.setText("Congratulations!");
-			lblMessage.setTextFill(Color.GREEN);
 			primaryStage.hide();
 			 LevelManager levelManager = new LevelManager();
 			 levelManager.show();
