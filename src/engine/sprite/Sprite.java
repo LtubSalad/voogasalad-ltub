@@ -15,6 +15,7 @@ import engine.sprite.health.HealthHolder;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
 import engine.sprite.movable.Movable;
+import engine.sprite.nodeholder.NodeHolder;
 import engine.sprite.spritespawner.NonSpawningSpriteSpawner;
 import engine.sprite.spritespawner.SpriteSpawner;
 import engine.sprite.team.Team;
@@ -37,6 +38,7 @@ public class Sprite  {
 	private HealthHolder healthHolder;
 	private SpriteSpawner spriteSpawner;
 	private Team team;
+	private NodeHolder nodeHolder;
 
 
 	/**
@@ -212,4 +214,8 @@ public class Sprite  {
 	public void setTeam(Team team){
 		this.team = team;
 	}	
+	
+	public void setNodeHolder(NodeHolder nodeHolder){
+		this.nodeHolder = nodeHolder;
+	}
 }
