@@ -33,7 +33,12 @@ public class BasicModel implements Model {
 		bus.on(SpriteModelEvent.REMOVE, (e) -> {
 			removeSprite(e.getSprite());
 		});
-		
+		bus.on(TileModelEvent.ADD, (e) -> {
+			addTile(e.getSprite());
+		});
+		bus.on(TileModelEvent.REMOVE, (e) -> {
+			removeTile(e.getSprite());
+		});	
 	}
 
 	@Override
