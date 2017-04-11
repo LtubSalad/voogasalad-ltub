@@ -15,7 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import player.levelChoice.Loader;
-import player.levelChoice.Main;
+import player.levelChoice.LoaderTester;
 
 /**
  * The first stage of the Game Player to choose a game to play.
@@ -26,7 +26,7 @@ public class GameManager {
 	
 	private Stage primaryStage;
 	private int numberOfDefaultGames;
-	private  ResourceBundle myResources = ResourceBundle.getBundle(Main.RESOURCES_LOCATION);
+	private  ResourceBundle myResources = ResourceBundle.getBundle(LoaderTester.RESOURCES_LOCATION);
 	
 	private File gameFile;
 	private GameData gameData;
@@ -56,7 +56,7 @@ public class GameManager {
 	private void show() {
 		primaryStage.setTitle("LTUB Game Chooser");
 		BorderPane borderPane = new BorderPane();
-		Scene scene = new Scene(borderPane, Main.WIDTH, Main.HEIGHT);
+		Scene scene = new Scene(borderPane, LoaderTester.WIDTH, LoaderTester.HEIGHT);
 		primaryStage.setScene(scene);
 		
 		VBox gameButtonBox = initGameChooser();		
@@ -99,7 +99,7 @@ public class GameManager {
 			String fileName = myResources.getString("defaultGamePath" + (i+1));
 			Image gameImage = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
 			ImageView gameImageView = new ImageView(gameImage);
-			gameImageView.setFitWidth(Main.WIDTH/3);
+			gameImageView.setFitWidth(LoaderTester.WIDTH/3);
 			gameImageView.setPreserveRatio(true);
 			Button gameButton = new Button();
 			// TODO
