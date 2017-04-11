@@ -1,9 +1,9 @@
-package engine.sprite.spritefactory;
+package engine.sprite.spritespawner;
 
 import engine.sprite.Sprite;
 
-public class SpawningSpriteFactory extends SpriteFactory {
-	public SpawningSpriteFactory(Sprite childSprite, double time){
+public class SpawningSpriteSpawner extends SpriteSpawner {
+	public SpawningSpriteSpawner(Sprite childSprite, double time){
 		super(childSprite, time);
 	}
 
