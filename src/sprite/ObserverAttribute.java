@@ -11,7 +11,7 @@ public class ObserverAttribute implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		CompositionMap CM = (CompositionMap) o; 
-		Map<String, SpriteAttribute> attMap = CM.getMap();
+		Map<String, Attribute> attMap = CM.getMap();
 		String className = this.getClass().getName();
 		String interfaceType = getAttributeInterface(this.getClass().getInterfaces());
 		System.out.println(className);
