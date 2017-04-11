@@ -1,10 +1,13 @@
 package engine.sprite.range;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import bus.EventBus;
 import engine.camera.GamePoint;
 import engine.sprite.Sprite;
+import engine.sprite.team.Team;
 
 /**
  * Check if one sprite is in the detection range of another sprite.
@@ -26,6 +29,37 @@ public class InRangeChecker {
 	public void checkInRange(List<Sprite> sprites) {
 		for (Sprite detector: sprites) {
 			for (Sprite detectee: sprites) {
+				if (detector == detectee) { continue; }
+				if (inRange(detector, detectee)) {
+					bus.emit(new InRangeEvent(InRangeEvent.ANY, detector, detectee));
+				}
+			}
+		}
+	}
+	
+	public void checkInRange(List<Sprite> sprites, int a, int b){
+		List<Sprite> teamA = new ArrayList<>();
+		List<Sprite> teamB = new ArrayList<>();
+		for (Sprite s : sprites){
+			if (s.getTeam().isPresent()){
+				Team t = (Team) s.getTeam().get(); //TODO remove type-casting
+				if (t.getTeamNum() == a){
+					teamA.add(s);
+				} else if (t.getTeamNum() == b) {
+					teamB.add(s);
+				}
+			}
+		}
+		
+//		List<Sprite> teamA = sprites.stream().filter((s) -> {
+//			return s.getTeam().isPresent();
+//		}).collect(Collectors.toList());
+//		List<Sprite> teamB = sprites.stream().filter((s) -> {
+//			return s.getTeam().isPresent() &&
+//					s.getMonster().get().isAttribute();
+//		}).collect(Collectors.toList());
+		for (Sprite detector: teamA) {
+			for (Sprite detectee: teamB) {
 				if (detector == detectee) { continue; }
 				if (inRange(detector, detectee)) {
 					bus.emit(new InRangeEvent(InRangeEvent.ANY, detector, detectee));

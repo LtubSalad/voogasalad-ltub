@@ -11,6 +11,9 @@ public class BasicModel implements Model {
 	private EventBus bus;
 	private Player player;
 	private List<Sprite> sprites = new ArrayList<>();
+	private List<Sprite> monsterSprites = new ArrayList<>();
+	private List<Sprite> towerSprites = new ArrayList<>();
+	private List<Sprite> bulletSprites = new ArrayList<>();
 
 	public BasicModel(EventBus bus, Player player) {
 		this.bus = bus;
@@ -25,12 +28,9 @@ public class BasicModel implements Model {
 		bus.on(SpriteModelEvent.REMOVE, (e) -> {
 			removeSprite(e.getSprite());
 		});
+		
 	}
 
-	@Override
-	public List<Sprite> getSprites() {
-		return sprites;
-	}
 	@Override
 	public void addSprite(Sprite sprite) {
 		if (sprite == null && RunningMode.DEV_MODE) {
@@ -44,10 +44,17 @@ public class BasicModel implements Model {
 	public void removeSprite(Sprite sprite) {
 		sprites.remove(sprite);
 	}
+	
 	@Override
-	public void update(double dt) {
+	public List<Sprite> getSprites() {
+		return sprites;
+	}
+
+	
+	@Override
+	public void updatePositions(double dt) {
 		for (Sprite sprite : sprites) {
-			sprite.update(dt);
+			sprite.updatePos(dt);
 		}
 	}
 	@Override

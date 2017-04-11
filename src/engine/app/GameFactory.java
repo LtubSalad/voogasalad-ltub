@@ -21,6 +21,7 @@ import engine.sprite.collision.CollisionChecker;
 import engine.sprite.collision.CollisionManager;
 import engine.sprite.range.InRangeChecker;
 import engine.sprite.range.InRangeManager;
+import engine.spritecreation.SpriteBuildingManager;
 import engine.view.FXView;
 import engine.view.View;
 
@@ -100,5 +101,9 @@ public class GameFactory {
 	
 	public SkillManager createSkillManager() {
 		return new SkillManager(bus);
+	}
+	
+	public SpriteBuildingManager createSpriteBuildingManager(){
+		return new SpriteBuildingManager(bus);
 	}
 }

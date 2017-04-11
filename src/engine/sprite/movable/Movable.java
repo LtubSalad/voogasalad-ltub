@@ -1,20 +1,34 @@
-package engine.sprite;
+package engine.sprite.movable;
 
 import commons.MathUtils;
 import commons.RunningMode;
+import data.AttributeData;
 import engine.camera.GamePoint;
 import engine.skill.Target;
+import engine.sprite.Attribute;
+import engine.sprite.Sprite;
 
-public class Movable {
-
-	Sprite sprite;
-	private double speed = 300; // TODO: game data
-	private boolean moving = false;
+public class Movable implements Attribute {
+	
+	private Sprite sprite;
+	private double speed;
 	private GamePoint pDest;
+	private Boolean isMovable;
 
+	public Movable(AttributeData data){
+		this.speed = Double.parseDouble(data.getVariable("speed"));
+		
+	}
+	
+	public Movable(){
+		//TODO: delete this 
+	}
+	
 	public Movable(Sprite sprite) {
 		this.sprite = sprite;
+		isMovable = false;
 	}
+	
 	
 	public void setSpeed(double speed) {
 		this.speed = speed;
@@ -22,22 +36,10 @@ public class Movable {
 
 	public void moveTo(GamePoint pDest) {
 		this.pDest = pDest;
-		startMoving();
+		switchOn();
 	}
 	public void moveTo(Target target) {
 		// TODO
-	}
-
-	private void startMoving() {
-		moving = true;
-	}
-
-	private void stopMoving() {
-		moving = false;
-	}
-
-	public boolean isMoving() {
-		return moving;
 	}
 
 	public double update(double dt) {
@@ -46,7 +48,7 @@ public class Movable {
 				System.out.println("Sprite is not set for movable!");
 			}
 		}
-		if (!isMoving()) {
+		if (!isMovable) {
 			return dt;
 		}
 		if (sprite == null) {
@@ -59,7 +61,7 @@ public class Movable {
 		double x = pos.x();
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
-			stopMoving();
+			switchOff();
 			return dt;
 		}
 		double xDiff = xDest - x;
@@ -69,7 +71,7 @@ public class Movable {
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			sprite.setPos(new GamePoint(xDest, yDest));
-			stopMoving();
+			switchOff();
 			return dist - (speed * dt);
 		}
 
@@ -88,5 +90,14 @@ public class Movable {
 		return 0.0;
 
 	}
+
+	public void switchOn() {
+		isMovable = true;
+	}
+
+	public void switchOff() {
+		isMovable = false;
+	}
+
 
 }

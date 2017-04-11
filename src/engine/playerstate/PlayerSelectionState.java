@@ -9,12 +9,12 @@ import engine.camera.GamePoint;
 import engine.input.events.GameWorldMouseEvent;
 import engine.skill.PlayerCreateSpriteSkill;
 import engine.skill.Skill;
-import engine.sprite.Movable;
 import engine.sprite.Sprite;
 import engine.sprite.collision.Collidable;
 import engine.sprite.collision.CollisionBound;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
+import engine.sprite.movable.Movable;
 
 public class PlayerSelectionState {
 
@@ -57,8 +57,9 @@ public class PlayerSelectionState {
 		imageSet.setImage(image);
 		sprite.setImageSet(imageSet);
 		Movable movable = new Movable(sprite);
-		sprite.setMovable(movable);
-		sprite.setCollidable(new Collidable(new CollisionBound(image)));
+		// TODO: FIX
+	//	sprite.setMovable(movable);
+	//	sprite.setCollidable(new Collidable(new CollisionBound(image)));
 		availableSkills.add(new PlayerCreateSpriteSkill(bus, sprite));
 		return availableSkills;
 	}
