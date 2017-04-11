@@ -153,13 +153,13 @@ public class Sprite  {
 	}
 	
 	
-	public Movable getMovable(){
+/*	public Movable getMovable(){
 		return this.movable;
-	}
-	
-/*	public Optional<Attribute> getMovable() {
-		return Optional.ofNullable(attributeMap.get("movable"));
 	}*/
+	
+	public Optional<Attribute> getMovable() {
+		return Optional.ofNullable(attributeMap.get("movable"));
+	}
 	
 	public Optional<Attribute> getCollidable() {
 		return Optional.ofNullable(attributeMap.get("collidable"));
