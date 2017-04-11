@@ -1,0 +1,16 @@
+<data.AttributeData>
+  <attributeType>Weapon</attributeType>
+  <changeableName>true</changeableName>
+  <attributeScripts/>
+  <attributeVariables>
+    <entry>
+      <string>image</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>speed</string>
+      <string></string>
+    </entry>
+  </attributeVariables>
+  <subAttributes/>
+</data.AttributeData>
