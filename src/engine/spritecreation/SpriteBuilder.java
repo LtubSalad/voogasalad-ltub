@@ -22,8 +22,8 @@ import data.AttributeData;
  * @author Tahia Emran (tse5) Matthew Tribby (mrt28)
  */
 public class SpriteBuilder {
-	private DocumentBuilder docBuilder;
-	private Node rootNode;
+	//private DocumentBuilder docBuilder;
+	//private Node rootNode;
 	public static final String ATTRIBUTE_TAG = "Attribute";
 	public static final List<String> ATTRIBUTE_TITLES = Arrays.asList(new String[]{
 			"ConstantActor",
@@ -34,20 +34,32 @@ public class SpriteBuilder {
 			"Weapon"
 	});
 	
-	  public SpriteBuilder(DocumentBuilder docBuilder, Node item)  {
+	private AttributeData myData; 
+	private Sprite mySprite; 
+	/*  public SpriteBuilder(DocumentBuilder docBuilder, Node item)  {
 		  this.docBuilder = docBuilder;
 		  this.rootNode = item;
 		  createAttributes();
-	  }
+	  }*/
 	  
 
-	  public SpriteBuilder(String filePath){
-		  ;
+	  public SpriteBuilder(AttributeData spriteData){
+		  this.myData = spriteData; 
+		  mySprite = new Sprite(); 
+		  addSpriteToModel();
 	  }
 	  
+	  
 
-	  private void createAttributes() {
-		  if(rootNode.getNodeType() == Node.ELEMENT_NODE){
+	  private void addSpriteToModel() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	private void createAttributes() {
+/*		  if(rootNode.getNodeType() == Node.ELEMENT_NODE){
 			  Element element = (Element) rootNode;
 			  NodeList attributeList = element.getElementsByTagName(ATTRIBUTE_TAG);
 			  Sprite newSprite = new Sprite(); 
@@ -55,8 +67,19 @@ public class SpriteBuilder {
 				  AttributeData attributeData = new AttributeData(null);
 				  AttributeBuilder aBuilder = new AttributeBuilder(attributeData);
 				  aBuilder.configSprite(newSprite); // will want to hand this functionality to setter?
-			  }
+		
+			  
+			}*/
+		  
+		  	List<AttributeData> compositionAttributes = myData.getAttributes(); 
+		  	for (AttributeData att : compositionAttributes){
+		  		AttributeBuilder AB = new AttributeBuilder(myData);
+		  		AB.configSprite(mySprite);
+		  	}
 		  }
+	  
+	  
+	 
+	  
 	  }
 
-}
