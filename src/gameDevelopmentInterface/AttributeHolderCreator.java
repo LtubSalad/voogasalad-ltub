@@ -1,5 +1,11 @@
 package gameDevelopmentInterface;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import data.AttributeData;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -14,22 +20,30 @@ import javafx.scene.layout.BorderPane;
  */
 public class AttributeHolderCreator extends BorderPane {
 	// Put in attribute data from an attribute
-	private Node attributePane;
+	private AttributeSelectorPane attributeSelectorPane;
+	private AttributeCustomizerPane attributeCustomizerPane;
 	private AttributeData attributeHolder;
+	private final String userCreatedAttributesFile = "data/attributeSkeletons/userCreatedAttributes";
 
 	public AttributeHolderCreator() {
 		Button saveButton = new Button("Save attribute to file");
 		saveButton.setOnAction((c)->createClassData());
-		attributeHolder=new AttributeData("dummy");
-		attributePane = new AttributeSelectorPane(attributeHolder);
-		this.setRight(attributePane);
-		this.setCenter(new AttributeCustomizerPane(attributeHolder));
+		attributeHolder=new AttributeData("Choose attribute name",true,true,null);
+		attributeSelectorPane = new AttributeSelectorPane(attributeHolder);
+		attributeCustomizerPane=new AttributeCustomizerPane(attributeHolder);
+		this.setRight(attributeSelectorPane);
+		this.setCenter(attributeCustomizerPane);
 		this.setBottom(saveButton);
 	}
 	// Produce XML file for this class' data.
 	public void createClassData() {
-		/*
-		XStream xstream=new Xstream();
-		return null;*/
+		attributeCustomizerPane.updateAttribute();
+		XStream xstream = new XStream(new DomDriver());
+		try {
+            FileOutputStream fs = new FileOutputStream(userCreatedAttributesFile+"/"+attributeHolder.getName()+".xml");
+            xstream.toXML(attributeHolder, fs);
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        }
 	}
 }

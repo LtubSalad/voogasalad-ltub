@@ -1,25 +1,43 @@
 package sprite;
 
 import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Sprite {
-	private AttackerAttribute attacker;
-	private MoverAttribute mover;
-	
+import javafx.collections.ObservableMap;
+
+public class Sprite implements Observer{
+	private Attribute attacker;
+	private Attribute mover;
+	private CompositionMap CM; 
+	private Map<String,Attribute> attributeMap; 
 	//Just an example constructor, not the real one
+	
+	
 	public Sprite(){
-		mover = new StationaryMoverAttribute();
-		attacker = new MeleeAttackerAttribute();
-		
+		//mover = new StationaryMoverAttribute();
+		//attacker = new MeleeAttackerAttribute();
+		configureAttributeMap(); 
+		CM = new CompositionMap(attributeMap);
+		CM.addObserver(this);
+		// other way - use sprite constructor
 
 	}
 	
+	private void configureAttributeMap() {
+		attributeMap = new HashMap<String, Attribute>(); 
+		attributeMap.put("Attacker",this.attacker);
+		attributeMap.put("Mover", this.mover);
+	}
+
 	public void setMoverAttribute(String attributeClassName) throws ClassNotFoundException{
-		mover = (MoverAttribute) setAttribute(attributeClassName);
+		//mover = (MoverAttribute) setAttribute(attributeClassName);
 	}
 	
 	public void setAttackerAttribute(String attributeClassName) throws ClassNotFoundException{
-		attacker = (AttackerAttribute) setAttribute(attributeClassName);
+		//attacker = (AttackerAttribute) setAttribute(attributeClassName);
 	}
 	
 	public void setAnimatorAttribute(String attributeClassName) throws ClassNotFoundException{
@@ -30,9 +48,9 @@ public class Sprite {
 		//health = (HealthAttribute) setAttribute(attributeClassName);
 	}
 	
-	public MoverAttribute getMoverAttribute(){
-		return mover;
-	}
+	//public MoverAttribute getMoverAttribute(){
+		//return mover;
+	//}
 
 	private Object setAttribute(String attributeClassName) throws ClassNotFoundException{
 		//The success of this is dependent on the package the attribute is in
@@ -65,7 +83,17 @@ public class Sprite {
 	}
 	
 	public void move(){
-		mover.move();
+		//mover.move();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		CompositionMap currentMap = (CompositionMap) o; 
+		//Map<String, SpriteAttribute> newMap = currentMap.getMap();
+		// iterate through all the objects' class names
+		// set this.object = map.get(classname)
+	
+		
 	}
 	
 }

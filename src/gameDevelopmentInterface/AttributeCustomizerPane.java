@@ -1,7 +1,9 @@
 package gameDevelopmentInterface;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import data.AttributeData;
 import javafx.scene.control.Button;
@@ -14,10 +16,11 @@ public class AttributeCustomizerPane extends ScrollPane {
 	private List<AttributeCustomizerPane> subPanes;
 	private VariableSetter variableSetter;
 	private FunctionSetter functionSetter;
-	private final double prefHeight=500;
-	private final double prefWidth=500;
-	private final double maxHeight=600;
-	private final double maxWidth=600;
+	private NameSetter nameSetter;
+	private final double prefHeight = 500;
+	private final double prefWidth = 500;
+	private final double maxHeight = 600;
+	private final double maxWidth = 600;
 
 	public AttributeCustomizerPane(AttributeData attributeData) {
 		myAttribute = attributeData;
@@ -28,38 +31,39 @@ public class AttributeCustomizerPane extends ScrollPane {
 		instantiate();
 	}
 
-
 	public AttributeData getAttribute() {
 		updateAttribute();
 		return myAttribute;
 	}
-	
-	public void updateAttribute(){
+
+	public void updateAttribute() {
 		myAttribute.setScripts(functionSetter.getFunctions());
 		myAttribute.setVariables(variableSetter.getVariables());
-		subPanes.forEach((subPane)->{
+		myAttribute.setName(nameSetter.getName());
+		subPanes.forEach((subPane) -> {
 			subPane.updateAttribute();
 		});
-		
+
 	}
 
 	private void instantiate() {
-		VBox myContents=new VBox();
-		subPanes=new ArrayList<>();
+		VBox myContents = new VBox();
+		subPanes = new ArrayList<>();
 		variableSetter = new VariableSetter(myAttribute.getVariables());
 		functionSetter = new FunctionSetter(myAttribute.getScripts());
+		nameSetter = new NameSetter(myAttribute.getName(), myAttribute.nameModifiable());
 		Button refresher = new Button("Refresh");
 		refresher.setOnAction((clickEvent) -> {
 			instantiate();
 		});
-		myContents.getChildren().addAll(new Label("Attribute Name: " + myAttribute.getName()), variableSetter,
-				functionSetter);
+		myContents.getChildren().addAll(nameSetter, variableSetter, functionSetter);
 		myAttribute.getAttributes().forEach((subAttribute) -> {
-			AttributeCustomizerPane subPane=new AttributeCustomizerPane(subAttribute);
+			AttributeCustomizerPane subPane = new AttributeCustomizerPane(subAttribute);
 			myContents.getChildren().add(subPane);
 			subPanes.add(subPane);
 		});
 		myContents.getChildren().add(refresher);
 		this.setContent(myContents);
 	}
+
 }

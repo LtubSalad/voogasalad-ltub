@@ -11,10 +11,13 @@ import engine.player.Player;
 import engine.sprite.attack.Attacker;
 import engine.sprite.attack.Weapon;
 import engine.sprite.collision.Collidable;
+import engine.sprite.health.HealthHolder;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
+import engine.sprite.spritespawner.NonSpawningSpriteSpawner;
+import engine.sprite.spritespawner.SpriteSpawner;
 
-public class Sprite {
+public class Sprite  {
 
 	// initialize empty image.
 	private ImageSet imageSet;
@@ -26,13 +29,24 @@ public class Sprite {
 
 	private SelectionBound selectionBound = SelectionBound.IMAGE;
 	private List<GamePoint> selectionBoundVertices;
-	private double detectionRange;
+	// composition objects 
+		private Movable movable = null;
+		private Collidable collidable = null;
+		private HealthHolder healthHolder;
+		private SpriteSpawner spriteSpawner;
+		private Attacker attacker;
+		private Weapon weapon;
+		
+		
 	/**
 	 * The player that this sprite belongs to.
 	 */
 	private Player player = Player.DEFAULT;
 	private ActionQueue actionQueue = new ActionQueue();
 
+	/**
+	 * sprite constructor - sets all composition elements (movable, collidable, spritefactory, health, weapon, images to default values)
+	 */
 	public Sprite() {
 		initAttributes();
 	}
@@ -45,7 +59,6 @@ public class Sprite {
 		attributeMap.put("healthholder", null);
 		attributeMap.put("spawner", null);
 		attributeMap.put("team", null);
-		
 	}
 
 	public void setImageSet(ImageSet imageSet) {
@@ -104,11 +117,11 @@ public class Sprite {
 	}
 
 	public void setDetectionRange(double detectionRange) {
-		this.detectionRange = detectionRange;
+		attacker.setRange(detectionRange);
 	}
 
 	public double getDetectionRange() {
-		return detectionRange;
+		return attacker.getRange();
 	}
 
 	
@@ -116,6 +129,11 @@ public class Sprite {
 	public void setAttribute(String name, Attribute attribute){
 		attributeMap.put(name, attribute);
 	}
+	
+	
+/*	public Movable getMovable(){
+		return this.movable;
+	}*/
 	
 	public Optional<Attribute> getMovable() {
 		return Optional.ofNullable(attributeMap.get("movable"));
@@ -191,5 +209,14 @@ public class Sprite {
 		return false;
 	}
 
+
+	public void setFactory(SpriteSpawner spawner) {
+		this.spriteSpawner = spawner; 		
+	}
+	
+	public void setMovable(Attribute movable1){
+		this.movable = (Movable) movable1; 
+	}
+	
 
 }

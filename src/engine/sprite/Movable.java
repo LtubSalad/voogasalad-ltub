@@ -2,20 +2,30 @@ package engine.sprite;
 
 import commons.MathUtils;
 import commons.RunningMode;
+import data.AttributeData;
 import engine.camera.GamePoint;
 import engine.skill.Target;
 
 public class Movable implements Attribute {
-
-	Sprite sprite;
-	private double speed = 300; // TODO: game data
+	
+	private Sprite sprite;
+	private double speed;
 	private GamePoint pDest;
 	private Boolean isMovable;
 
+	public Movable(AttributeData data){
+		this.speed = Double.parseDouble(data.getVariable("speed"));
+	}
+	
+	public Movable(){
+		//TODO: delete this 
+	}
+	
 	public Movable(Sprite sprite) {
 		this.sprite = sprite;
 		isMovable = false;
 	}
+	
 	
 	public void setSpeed(double speed) {
 		this.speed = speed;
