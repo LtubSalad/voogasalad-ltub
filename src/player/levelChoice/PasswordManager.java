@@ -1,6 +1,5 @@
 package player.levelChoice;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,19 +18,22 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
-public class PasswordManager extends Application {
+public class PasswordManager{
 
 	public static final String TITLE = "Login";
 	String user = "LTUB";
 	String pw = "123456";
 	String checkUser, checkPw;
+	TextField txtUserName;
+	Label lblMessage;
+	PasswordField pf;
 
-	public static void main(String[] args) {
-		launch(args);
+	public PasswordManager(){
+		txtUserName = new TextField();
+		lblMessage = new Label();
+		pf = new PasswordField();
 	}
-
-	@Override
-	public void start(Stage primaryStage) {
+	public void show(Stage primaryStage) {
 		primaryStage.setTitle(TITLE);
 		BorderPane bp = new BorderPane();
 		bp.setPadding(new Insets(10,50,50,50));
@@ -43,12 +45,10 @@ public class PasswordManager extends Application {
 		gridPane.setHgap(5);
 		gridPane.setVgap(5);   
 		//Implementing Nodes for GridPane
-		Label lblUserName = new Label("Username");
-		final TextField txtUserName = new TextField();
-		Label lblPassword = new Label("Password");
-		final PasswordField pf = new PasswordField();
+		Label lblUserName = new Label("Username");		
+		Label lblPassword = new Label("Password");		
 		Button btnLogin = new Button("Login");
-		final Label lblMessage = new Label();
+
 		//Adding Nodes to GridPane layout
 
 		gridPane.add(lblUserName, 0, 0);
@@ -69,9 +69,7 @@ public class PasswordManager extends Application {
 		//Adding text and DropShadow effect to it
 
 		Text text = new Text("Game Login");
-
 		text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
-
 		text.setEffect(dropShadow);
 
 		//Adding text to HBox
@@ -83,36 +81,38 @@ public class PasswordManager extends Application {
 		btnLogin.setId("btnLogin");
 		text.setId("text");
 
-		//Action for btnLogin
-		btnLogin.setOnAction(e ->  {
-				checkUser = txtUserName.getText().toString();
-				checkPw = pf.getText().toString();
-				if(checkUser.equals(user) && checkPw.equals(pw)){
-					lblMessage.setText("Congratulations!");
-					lblMessage.setTextFill(Color.GREEN);
-				}
-				else{
-					lblMessage.setText("Incorrect user or pw.");
-					lblMessage.setTextFill(Color.RED);
-				}
-				txtUserName.setText("");
-				pf.setText("");
-			});
-
 		//Add HBox and GridPane layout to BorderPane Layout
 		bp.setTop(hb);
 		bp.setCenter(gridPane); 
 		//Adding BorderPane to the scene and loading CSS
 		Scene scene = new Scene(bp);
-		//scene.getStylesheets().add(getClass().getClassLoader().getResource("login.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getClassLoader().getResource("resources/login.css").toExternalForm());
 		primaryStage.setScene(scene);
-//		primaryStage.titleProperty().bind(
-//				scene.widthProperty().asString().
-//				concat(" : ").
-//				concat(scene.heightProperty().asString()));
-		//primaryStage.setResizable(false);
 
 		primaryStage.show();
-		
+		//Action for btnLogin
+		btnLogin.setOnAction(e -> buttonAction(primaryStage));
+
+
+	}
+
+	private void buttonAction(Stage primaryStage) {
+
+		checkUser = txtUserName.getText().toString();
+		checkPw = pf.getText().toString();
+		if(checkUser.equals(user) && checkPw.equals(pw)){
+			lblMessage.setText("Congratulations!");
+			lblMessage.setTextFill(Color.GREEN);
+			primaryStage.hide();
+			 LevelManager levelManager = new LevelManager();
+			 levelManager.show();
+		}
+		else{
+			lblMessage.setText("Incorrect user or pw.");
+			lblMessage.setTextFill(Color.RED);
+		}
+		txtUserName.setText("");
+		pf.setText("");
+
 	}
 }

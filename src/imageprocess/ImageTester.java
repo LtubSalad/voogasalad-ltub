@@ -4,6 +4,7 @@
 package imageprocess;
 
 import java.awt.image.BufferedImage;
+import java.util.HashSet;
 import java.util.Set;
 
 import javafx.application.Application;
@@ -18,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -44,9 +46,10 @@ public class ImageTester extends Application{
 		 primaryStage = new Stage();
 			primaryStage.setTitle("Test Image");
 			Group root = new Group();
-			Scene scene = new Scene(root, 400, 400);
+			Scene scene = new Scene(root, 800, 800);
 			
 			Image image = new Image("resources/bahamut_left.png");
+			System.out.println("The size of the image is :" + (image.getHeight() * image.getWidth()));
 //			System.out.println(image.getWidth() + ":"+ image.getHeight());
 //			ImageProcessor imageProcessor = new ImageTransformation();
 //			Set<Coordinate<Integer, Integer>> maskSet = imageProcessor.getMask(image);
@@ -61,33 +64,67 @@ public class ImageTester extends Application{
 			
 			Rectangle r = new Rectangle(image.getWidth(),image.getHeight());
 			r.setFill(new ImagePattern(image));
-	                WritableImage snapshot = r.snapshot(new SnapshotParameters(), null);
+			System.out.println("Rectangle1 x : " + r.getX() + "y:" + r.getY());
+			Rectangle r2 = new Rectangle(400, 400,image.getWidth(),image.getHeight());
+			System.out.println("Rectangle2 x : " + r2.getX() + "y:" + r2.getY());
 
 //			ImagePattern pattern = new ImagePattern(image);
 //			scene.setFill(pattern);
 
 
            BufferedImage buffImg1= SwingFXUtils.fromFXImage(image, null);
-           BufferedImage buffImg2= SwingFXUtils.fromFXImage(snapshot, null);
-           int sum =0;
-           for(int i =0; i < image.getWidth(); i++){
-        	   for(int j = 0; j < image.getHeight(); j++){
-        		   //after snapshot, the pixel value will change just at most 1
-        		   if(Math.abs(buffImg1.getRGB(i,j) - buffImg2.getRGB(i,j)) > 1 ){
-        			   System.out.println("not good");
-        			   sum++;
-        		   }
+           ImageTransformation it = new ImageTransformation();
+           Set<Coordinate<Integer,Integer>> set1 = it.getMask(image);
+           System.out.println("the size of set1 is :" + set1.size());
+           NodeProcessor np = new NodeProcessor();
+           System.out.println("the angle is : " + np.getAngle(r));
+           //r.setRotate(360);
+           BufferedImage buffImg2= np.getImage(r);
+           WritableImage i = SwingFXUtils.toFXImage(buffImg2, null);
+           //r.setFill(Color.WHITE);
+           r2.setFill(new ImagePattern(i));
+           System.out.println("the set1 is :");
+//           for( Coordinate<Integer,Integer> c : set1){
+//        	   System.out.println(c);
+//           }
+           Set<Coordinate<Integer,Integer>> set2 = it.getMask(i);
+           System.out.println("the set2 is :");
+           System.out.println("the size of set2 is :" + set2.size());
+//           for( Coordinate<Integer,Integer> c : set2){
+//        	   System.out.println(c);
+//           }
+//           System.out.println("the size of set2 is :" + set2.size());
+           
+           
+           Set<Coordinate<Integer,Integer>> intersection = new HashSet<>();
+           for(Coordinate<Integer,Integer> c : set1){
+        	   if(set2.contains(set1)){
+        		   intersection.add(c);
         	   }
            }
-           
-           System.out.println(buffImg1.getWidth());
-           System.out.println(buffImg1.getHeight());
-           
-           System.out.println(buffImg2.getWidth());
-           System.out.println(buffImg2.getHeight());
-           root.getChildren().add(r);
-           System.out.println("sum is : " + sum);
-           
+           System.out.println("The size of intersection is :" + intersection.size());
+//           int[][] pix = new int[(int) image.getWidth()][(int) image.getHeight()];
+//           
+//           int sum =0;
+//           for(int i =0; i < image.getWidth(); i++){
+//        	   for(int j = 0; j < image.getHeight(); j++){
+//        		   //after snapshot, the pixel value will change just at most 1
+//        		   if(Math.abs(buffImg1.getRGB(i,j) - buffImg2.getRGB(i,j)) > 5 ){
+//        			   System.out.println("not good");
+//        			   sum++;
+//        		   }
+//        	   }
+//           }
+//           
+//           System.out.println(buffImg1.getWidth());
+//           System.out.println(buffImg1.getHeight());
+//           
+//           System.out.println(buffImg2.getWidth());
+//           System.out.println(buffImg2.getHeight());
+             root.getChildren().addAll(r, r2);
+//           System.out.println("sum is : " + sum);
+//           System.out.println("the angle is : " + np.getAngle(r));
+//           
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	}

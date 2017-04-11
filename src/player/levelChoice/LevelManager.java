@@ -31,7 +31,6 @@ public class LevelManager {
 	
 	//TODO : add voice search like google
 	
-	//TODO: add password and username registration
 	
 	public LevelManager(){
 		numberOfLevel = 2;
