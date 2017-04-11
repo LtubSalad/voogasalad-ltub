@@ -1,14 +1,18 @@
 package engine.sprite.attack;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import engine.sprite.Attribute;
-import engine.sprite.Sprite;
-import engine.sprite.range.InRangeChecker;
 import bus.EventBus;
+import data.AttributeData;
 
 public class Attacker implements Attribute {
+	private double radius;
+	private int damage;
+	
+	public Attacker(AttributeData data){
+		this.radius = Double.parseDouble(data.getVariable("radius"));
+		this.damage = Integer.parseInt(data.getVariable("damage"));
+	}
 	
 	private Boolean isAttacker;
 	
@@ -41,6 +45,13 @@ public class Attacker implements Attribute {
 		return 0.0;
 	}
 	
-	
+	public double getRange(){
+		return this.radius;
+	}
+
+
+	public void setRange(double detectionRange) {
+		this.radius = detectionRange;
+	}
 	
 }

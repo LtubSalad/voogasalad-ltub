@@ -1,7 +1,7 @@
 package engine.sprite;
 
 import engine.sprite.collision.Collidable;
-import engine.sprite.spritefactory.SpriteFactory;
+import engine.sprite.spritespawner.SpriteSpawner;
 
 /**
  * @author tahiaemran 
@@ -13,6 +13,6 @@ public interface SpriteCreator {
 	public void setCollidable(Collidable collidable); 
 	//public void setAttacker(); 
 	//public void setHealth(); 
-	public void setFactory(SpriteFactory factory); 
+	public void setFactory(SpriteSpawner factory); 
 	//public void setWeapon(); 
 }

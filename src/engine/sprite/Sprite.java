@@ -11,10 +11,11 @@ import engine.player.Player;
 import engine.sprite.attack.Attacker;
 import engine.sprite.attack.Weapon;
 import engine.sprite.collision.Collidable;
+import engine.sprite.health.HealthHolder;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
-import engine.sprite.spritefactory.NonSpawningSpriteFactory;
-import engine.sprite.spritefactory.SpriteFactory;
+import engine.sprite.spritespawner.NonSpawningSpriteSpawner;
+import engine.sprite.spritespawner.SpriteSpawner;
 
 public class Sprite  {
 
@@ -29,16 +30,14 @@ public class Sprite  {
 
 	private SelectionBound selectionBound = SelectionBound.IMAGE;
 	private List<GamePoint> selectionBoundVertices;
-	private double detectionRange;
-	
 	// composition objects 
 		private Movable movable = null;
 		private Collidable collidable = null;
-		private SpriteFactory spriteFactory;
-		// need health 
-		// need weapon
-		// need images 
-	
+		private HealthHolder healthHolder;
+		private SpriteSpawner spriteSpawner;
+		private Attacker attacker;
+		private Weapon weapon;
+		
 		
 	/**
 	 * The player that this sprite belongs to.
@@ -127,11 +126,11 @@ public class Sprite  {
 	}
 
 	public void setDetectionRange(double detectionRange) {
-		this.detectionRange = detectionRange;
+		attacker.setRange(detectionRange);
 	}
 
 	public double getDetectionRange() {
-		return detectionRange;
+		return attacker.getRange();
 	}
 	
 	//setting identity
@@ -217,8 +216,8 @@ public class Sprite  {
 	}
 	
 
-	public void setFactory(SpriteFactory factory) {
-		this.spriteFactory = factory; 		
+	public void setFactory(SpriteSpawner spawner) {
+		this.spriteSpawner = spawner; 		
 	}
 
 }
