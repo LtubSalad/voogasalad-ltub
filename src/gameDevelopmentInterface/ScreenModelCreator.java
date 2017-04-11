@@ -20,7 +20,7 @@ public class ScreenModelCreator extends BorderPane {
 	private ObservableMap<String,String> myGeneralData;
 	private ScreenModelData myScreenData = new ScreenModelData();
 	private ScreenObjectHolder myObjectsToPlace;
-	private ScreenMap myScreen = new ScreenMap();
+	private ScreenMap myScreen = new ScreenMap(this);
 	private ButtonsPanel myButtonsPanel = new ButtonsPanel(this);
 	private AttributesForScreenUse myAttributesModel;
 	

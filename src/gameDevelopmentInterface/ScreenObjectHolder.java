@@ -111,7 +111,6 @@ public class ScreenObjectHolder extends HBox {
 			double spriteX = e.getScreenX();
 			double spriteY = e.getScreenY();
 			Pair<Integer, Integer> coords = target.getCoordOfMouseHover(spriteX, spriteY);
-			grid.add(toAdd, coords.getKey(), coords.getValue());
 			for (Pair<String, Image> p : myScreenObjects.keySet()) {
 				String iName = p.getKey();
 				if (imageName.equals(iName)) {
