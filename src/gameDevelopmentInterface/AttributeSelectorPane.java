@@ -8,13 +8,14 @@ import data.AttributeData;
 import data.AttributesForScreenUse;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
+import utilities.XStreamHandler;
 
 public class AttributeSelectorPane extends VBox {
 	private final double prefWidth = 250;
 	private final double prefHeight = 200;
-	private final String basicAttributesFile = "data/attributeSkeletons/basicAttributes";
-	private final String presetAttributesFile = "data/attributeSkeletons/presetAttributes";
-	private final String userCreatedAttributesFile = "data/attributeSkeletons/userCreatedAttributes";
+	private final String basicAttributesFile = "data/fundamentalAttributes";
+	//private final String presetAttributesFile = "data/attributeSkeletons/presetAttributes";
+	private final String userCreatedAttributesFile = "data/userCreatedAttributes";
 	private AttributeData attributeHolder;
 	private AttributesForScreenUse myAttributesModel;
 
@@ -23,23 +24,19 @@ public class AttributeSelectorPane extends VBox {
 		myAttributesModel = attributesModel;
 		Node customAttributesDisplay = new AttributeDisplay(myAttributesModel, "Add Custom Attributes",
 				getAttributesFromFolder(new File(basicAttributesFile)),this.attributeHolder);
-		Node presetAttributesDisplay = new AttributeDisplay(myAttributesModel, "Add Preset Attributes",
-				getAttributesFromFolder(new File(presetAttributesFile)),attributeHolder);
-//		Node userCreatedAttributesDisplay = new AttributeDisplay("Add User-Created Attributes",
-//				getAttributesFromFolder(new File(userCreatedAttributesFile)),attributeHolder);
-		Node thisClassesAttributes = new AttributeDisplay(myAttributesModel, "Edit This Class' Attributes", attributeHolder.getAttributes(),attributeHolder);
-
+		Node userAttributesDisplay=new AttributeDisplay(myAttributesModel, "Add Your Homemade Attributes",
+				getAttributesFromFolder(new File(userCreatedAttributesFile)),this.attributeHolder);
+	
 		this.setPrefSize(prefWidth, prefHeight);
-		this.getChildren().addAll(customAttributesDisplay, presetAttributesDisplay, //userCreatedAttributesDisplay,
-				thisClassesAttributes);
+		this.getChildren().addAll(customAttributesDisplay,userAttributesDisplay);
 	}
 	
 	private List<AttributeData> getAttributesFromFolder(File file){
-		AttributeDataFactory factory = new AttributeDataFactory();
+		XStreamHandler handler= new XStreamHandler();
 		File[] attributeFiles=file.listFiles();
 		List<AttributeData> attributes=new ArrayList<>();
 		for(File attributeFile:attributeFiles){
-			attributes.add(factory.produceAttribute(attributeFile));
+			attributes.add(handler.getObjectFromFile(new AttributeData("tets").getClass(),attributeFile));
 		}
 		return attributes;
 	}

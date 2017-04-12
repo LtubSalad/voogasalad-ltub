@@ -25,10 +25,8 @@ public class XStreamHandler {
 		return attribute;
 	}
 	
-	public <T> T getObjectFromFile(Class<T> clazz){
+	public <T> T getObjectFromFile(Class<T> clazz, File file){
 		XStream xstream = new XStream(new DomDriver());
-		FileChooser chooser = new FileChooser();
-		File file = chooser.showOpenDialog(new Stage());
 		T object = (T)xstream.fromXML(file);
 		return object;
 	}
