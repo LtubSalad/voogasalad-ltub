@@ -19,6 +19,10 @@ public class Movable implements Attribute {
 		this.speed = Double.parseDouble(data.getVariable("speed"));	
 	}
 	
+	public Movable(double speed){
+		this.speed = speed;
+	}
+	
 	public Movable(Sprite sprite) {
 		this.sprite = sprite;
 		isMovable = false;

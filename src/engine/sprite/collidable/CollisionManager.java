@@ -1,4 +1,4 @@
-package engine.sprite.collision;
+package engine.sprite.collidable;
 
 import bus.EventBus;
 import engine.sprite.Sprite;

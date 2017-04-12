@@ -1,4 +1,4 @@
-package engine.sprite.collision;
+package engine.sprite.collidable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,7 +7,7 @@ import bus.EventBus;
 import engine.camera.GamePoint;
 import engine.sprite.Attribute;
 import engine.sprite.Sprite;
-import engine.sprite.health.DecrementHealthEvent;
+import engine.sprite.healthholder.DecrementHealthEvent;
 import engine.sprite.weapon.Weapon;
 import javafx.scene.shape.Polygon;
 

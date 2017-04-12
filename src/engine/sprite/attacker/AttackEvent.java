@@ -1,4 +1,4 @@
-package engine.sprite.attack;
+package engine.sprite.attacker;
 
 import bus.BusEvent;
 import bus.BusEventType;

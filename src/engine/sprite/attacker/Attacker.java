@@ -1,4 +1,4 @@
-package engine.sprite.attack;
+package engine.sprite.attacker;
 
 
 import engine.sprite.Attribute;

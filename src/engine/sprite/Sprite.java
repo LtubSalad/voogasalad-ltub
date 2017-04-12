@@ -8,9 +8,9 @@ import java.util.Optional;
 import commons.MathUtils;
 import engine.camera.GamePoint;
 import engine.player.Player;
-import engine.sprite.attack.Attacker;
-import engine.sprite.collision.Collidable;
-import engine.sprite.health.HealthHolder;
+import engine.sprite.attacker.Attacker;
+import engine.sprite.collidable.Collidable;
+import engine.sprite.healthholder.HealthHolder;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
 import engine.sprite.movable.Movable;
@@ -156,7 +156,7 @@ public class Sprite  {
 		return Optional.ofNullable(spriteSpawner);
 	}
 
-	public Optional<Attribute> getTeam(){
+	public Optional<Attribute> getTeamMember(){
 		return Optional.ofNullable(team);
 	}
 
@@ -216,9 +216,13 @@ public class Sprite  {
 		this.weapon = weapon;
 	}
 	
-	public void setTeam(TeamMember team){
+	public void setTeamMember(TeamMember team){
 		this.team = team;
 	}	
+	
+	public void setHealthHolder(HealthHolder healthHolder){
+		this.healthHolder = healthHolder;
+	}
 	
 	public void setNodeHolder(NodeHolder nodeHolder){
 		this.nodeHolder = nodeHolder;

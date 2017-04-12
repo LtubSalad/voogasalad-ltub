@@ -26,25 +26,6 @@ public class AttributeBuilder {
 		build(); 
 	}
 	
-/*	public AttributeBuilder(String type){
-		this.attributeType = type; 
-		//this.implementation = implementation; 
-	}
-	
-	public void build(String implementation2) {		
-		try {
-			String attemptedName = ATTRIBUTE_BASE_PATH + implementation2; 
-			System.out.println("attempted filepath " + attemptedName);
-			Class <?> attributeClass = Class.forName(ATTRIBUTE_BASE_PATH + attributeType.toLowerCase() + "." + implementation2);
-			Constructor <?> ctor = attributeClass.getConstructor();
-			Object obj = ctor.newInstance();
-			myAttribute = (Attribute) obj; 
-		} 
-		catch (Exception e) {
-			throw new SpriteCreationException("Attribute class not found " + implementation);
-		}		
-	}
-*/
 	private void build() {
 		attributeType = dataToRead.getName(); 
 		String specificName = dataToRead.getImplementation();
@@ -52,15 +33,16 @@ public class AttributeBuilder {
 		String completePath = ATTRIBUTE_BASE_PATH + attributeType.toLowerCase() + "." + specificName;
 		
 		try {
+			System.out.println(completePath);
 			Class <?> attributeClass = Class.forName(completePath);
+			
 			Constructor <?> ctor = attributeClass.getConstructor(AttributeData.class);
 			Object obj = ctor.newInstance(dataToRead);
 			myAttribute = (Attribute) obj; 
 		} 
 		catch (Exception e) {
 			throw new SpriteCreationException("Attribute class not found " + specificName);
-		}
-		
+		}	
 	}
 	
 	public void configSprite(Sprite s) {

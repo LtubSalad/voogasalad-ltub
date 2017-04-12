@@ -41,8 +41,8 @@ public class InRangeChecker {
 		List<Sprite> teamA = new ArrayList<>();
 		List<Sprite> teamB = new ArrayList<>();
 		for (Sprite s : sprites){
-			if (s.getTeam().isPresent()){
-				TeamMember t = (TeamMember) s.getTeam().get(); //TODO remove type-casting
+			if (s.getTeamMember().isPresent()){
+				TeamMember t = (TeamMember) s.getTeamMember().get(); //TODO remove type-casting
 				if (t.getTeamNum() == a){
 					teamA.add(s);
 				} else if (t.getTeamNum() == b) {

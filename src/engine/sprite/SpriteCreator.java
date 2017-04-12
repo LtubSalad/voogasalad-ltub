@@ -1,6 +1,6 @@
 package engine.sprite;
 
-import engine.sprite.collision.Collidable;
+import engine.sprite.collidable.Collidable;
 import engine.sprite.movable.Movable;
 import engine.sprite.spritespawner.SpriteSpawner;
 

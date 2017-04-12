@@ -1,4 +1,4 @@
-package engine.sprite.health;
+package engine.sprite.healthholder;
 
 import bus.EventBus;
 import engine.model.SpriteModelEvent;
