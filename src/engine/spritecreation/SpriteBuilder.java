@@ -31,7 +31,8 @@ public class SpriteBuilder {
 				AttributeBuilder AB = new AttributeBuilder(att);
 				AB.configSprite(mySprite);
 			}else{ // TODO: temporary, need to better integrate
-				mySprite.setImageSet(new ImageSet(new LtubImage(att.getVariable("filepath"))));
+				System.out.println("image set");
+				mySprite.setImageSet(new ImageSet(new LtubImage("images/characters/" + att.getVariable("filepath"))));
 			}
 		}
 	}

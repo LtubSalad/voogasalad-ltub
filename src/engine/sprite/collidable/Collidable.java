@@ -8,14 +8,18 @@ public class Collidable implements Attribute{
 
 	private CollisionBound bound;
 	
-	public Collidable(AttributeData data){
-		this.bound = new CollisionBound(new LtubImage(data.getVariable("imagePath")));
-	}
+//	public Collidable(AttributeData data){
+//		this(data.getVariable("imagePath"));
+//	}
 	
 	public Collidable(CollisionBound bound) {
 		this.bound = bound;
 	}
 	
+	public Collidable(String imagePath) {
+		this.bound = new CollisionBound(new LtubImage("images/characters/" + imagePath));
+	}
+
 	public CollisionBound getCollisionBound() {
 		return bound;
 	}

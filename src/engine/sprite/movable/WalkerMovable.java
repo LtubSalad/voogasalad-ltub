@@ -1,10 +1,13 @@
 package engine.sprite.movable;
 
-import data.AttributeData;
 
 public class WalkerMovable extends Movable {
-	public WalkerMovable(AttributeData data){
-		super(data);
+//	public WalkerMovable(AttributeData data){
+//		super(data);
+//	}
+	
+	public WalkerMovable(double speed){
+		super(speed);
 	}
 	
 }
