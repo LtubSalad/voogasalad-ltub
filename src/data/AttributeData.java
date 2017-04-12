@@ -26,20 +26,13 @@ public class AttributeData implements Serializable {
 	private String implementationSpecifier;
 	private Map<Pair<String, List<String>>,String> attributeScripts;
 	private Map<String,String> attributeVariables;
+	private Map<String,List<String>> listVariables;
 	private List<AttributeData> subAttributes;
-	
-	public AttributeData(AttributeData attrToCopy) {
-		this.attributeType = attrToCopy.attributeType;
-		this.changeableName = attrToCopy.changeableName;
-		this.implementationSpecifier = attrToCopy.implementationSpecifier;
-		this.attributeScripts = attrToCopy.attributeScripts;
-		this.attributeVariables = attrToCopy.attributeVariables;
-		this.subAttributes = attrToCopy.subAttributes;
-	}	
 	
 	public AttributeData(String name, boolean changeableName, String implementationSpecifier){
 		attributeVariables=new HashMap<>();
 		attributeScripts=new HashMap<>();
+		listVariables=new HashMap<>();
 		List<AttributeData> subAttributesUnobservable=new ArrayList<>();
 		subAttributes=subAttributesUnobservable;
 		attributeType=name;
@@ -116,6 +109,10 @@ public class AttributeData implements Serializable {
 			}
 		}
 		return false;
+	}
+	
+	public Map<String,List<String>> getListVariables(){
+		return listVariables;
 	}
 	
 	public void setVariable(String variableName, String variableValue){
