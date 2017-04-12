@@ -56,7 +56,7 @@ public class PlayerSelectionState {
 		ImageSet imageSet = new ImageSet();
 		imageSet.setImage(image);
 		sprite.setImageSet(imageSet);
-		Movable movable = new Movable(sprite);
+		//Movable movable = new Movable(sprite);
 		// TODO: FIX
 	//	sprite.setMovable(movable);
 	//	sprite.setCollidable(new Collidable(new CollisionBound(image)));
