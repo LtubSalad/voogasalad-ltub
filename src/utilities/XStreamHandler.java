@@ -25,6 +25,12 @@ public class XStreamHandler {
 		return attribute;
 	}
 	
+	public AttributeData getAttributeFromFile(File file) {
+		XStream xstream = new XStream(new DomDriver());
+		AttributeData attribute = (AttributeData)xstream.fromXML(file);
+		return attribute;
+	}
+	
 	public <T> T getObjectFromFile(Class<T> clazz, File file){
 		XStream xstream = new XStream(new DomDriver());
 		T object = (T)xstream.fromXML(file);
@@ -36,6 +42,12 @@ public class XStreamHandler {
 		FileChooser chooser = new FileChooser();
 		File attributeFile = chooser.showOpenDialog(new Stage());
 		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(attributeFile);
+		return attribute;
+	}
+	
+	public List<AttributeData> getScreenModel(File file) {
+		XStream xstream = new XStream(new DomDriver());
+		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(file);
 		return attribute;
 	}
 
