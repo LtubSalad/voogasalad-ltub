@@ -21,7 +21,7 @@ public interface ImageProcessor extends Processor<Image>{
 	 * the guideline of: x,y where x is the absolute x position of 
 	 * the pixel and y is the absolute y position of the pixel
 	 */
-	Set<Coordinate<Integer, Integer>> getMask(Image image);
+	Set<Point> getMask(Image image);
 	
 
 }

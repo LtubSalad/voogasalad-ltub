@@ -7,10 +7,15 @@ package player.winnerorloser;
  * @author Zhiyong
  *
  */
-public interface ResultAccessor {
+public class ResultAccessor {
 	
-	double getHealth();
-	double getPoint();
-	
-
+	double getHealth() {
+		return 0;
+	}
+	double getPoint() {
+		return 0;
+	}
+	String getGameName() {
+		return null;
+	}
 }

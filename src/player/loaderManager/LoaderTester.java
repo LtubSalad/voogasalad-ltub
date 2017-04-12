@@ -46,15 +46,15 @@ public class LoaderTester extends Application {
 		primaryStage.setFullScreenExitKeyCombination(null);
 		primaryStage.show();
 		primaryStage.setFullScreen(true);
-        Animation myAnimation = makeAnimation(myActor, 100, 200, 20);
+        Animation myAnimation = makeAnimation(myActor, 100, 200, 100);
         // start animation
         myAnimation.play();
         
-        Animation myAnimation1 = makeAnimation(myActor1, 100, 200, 20);
+        Animation myAnimation1 = makeAnimation(myActor1, 100, 200, 100);
         // start animation
         myAnimation1.play();
         
-        Animation myAnimation2 = makeAnimation(myActor2,100,240,60);
+        Animation myAnimation2 = makeAnimation(myActor2,100,240,140);
         // start animation
         myAnimation2.play();
 

@@ -21,6 +21,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -48,8 +49,7 @@ public class ImageTester extends Application{
 			Group root = new Group();
 			Scene scene = new Scene(root, 800, 800);
 			
-			Image image = new Image("resources/bahamut_left.png");
-			System.out.println("The size of the image is :" + (image.getHeight() * image.getWidth()));
+			Image image = new Image("resources/home.png");
 //			System.out.println(image.getWidth() + ":"+ image.getHeight());
 //			ImageProcessor imageProcessor = new ImageTransformation();
 //			Set<Coordinate<Integer, Integer>> maskSet = imageProcessor.getMask(image);
@@ -64,45 +64,40 @@ public class ImageTester extends Application{
 			
 			Rectangle r = new Rectangle(image.getWidth(),image.getHeight());
 			r.setFill(new ImagePattern(image));
-			System.out.println("Rectangle1 x : " + r.getX() + "y:" + r.getY());
-			Rectangle r2 = new Rectangle(0, 0,image.getWidth(),image.getHeight());
-			System.out.println("Rectangle2 x : " + r2.getX() + "y:" + r2.getY());
-
-//			ImagePattern pattern = new ImagePattern(image);
-//			scene.setFill(pattern);
+//			Rectangle r2 = new Rectangle(0, 0,image.getWidth(),image.getHeight());
 
 
-           BufferedImage buffImg1= SwingFXUtils.fromFXImage(image, null);
+//           BufferedImage buffImg1= SwingFXUtils.fromFXImage(image, null);
            ImageTransformation it = new ImageTransformation();
-           Set<Coordinate<Integer,Integer>> set1 = it.getMask(image);
-           System.out.println("the size of set1 is :" + set1.size());
-           NodeProcessor np = new NodeProcessor();
-           System.out.println("the angle is : " + np.getAngle(r));
+           Set<Point> set1 = it.getMask(image);
+//           System.out.println("the size of set1 is :" + set1.size());
+ //          NodeProcessor np = new NodeProcessor();
+//           System.out.println("the angle is : " + np.getAngle(r));
            //r.setRotate(360);
-           BufferedImage buffImg2= np.getImage(r);
-           WritableImage i = SwingFXUtils.toFXImage(buffImg2, null);
+//           BufferedImage buffImg2= np.getImage(r);
+//           WritableImage i = SwingFXUtils.toFXImage(buffImg2, null);
            //r.setFill(Color.WHITE);
-           r2.setFill(new ImagePattern(i));
-           System.out.println("the set1 is :");
+//           r2.setFill(new ImagePattern(i));
+//           System.out.println("the set1 is :");
 //           for( Coordinate<Integer,Integer> c : set1){
 //        	   System.out.println(c);
 //           }
-           Set<Coordinate<Integer,Integer>> set2 = it.getMask(i);
-           System.out.println("the set2 is :");
-           System.out.println("the size of set2 is :" + set2.size());
+//           Set<Point> set2 = it.getMask(i);
+//           System.out.println("the set2 is :");
+//           System.out.println("the size of set2 is :" + set2.size());
 //           for( Coordinate<Integer,Integer> c : set2){
 //        	   System.out.println(c);
 //           }
 //           System.out.println("the size of set2 is :" + set2.size());
            
            
-           Set<Coordinate<Integer,Integer>> intersection = new HashSet<>();
-           for(Coordinate<Integer,Integer> c : set1){
-        	   if(set2.contains(set1)){
-        		   intersection.add(c);
-        	   }
-           }
-           System.out.println("The size of intersection is :" + intersection.size());
+//           Set<Point> intersection = new HashSet<>();
+//           for(Point c : set1){
+//        	   if(set2.contains(set1)){
+//        		   intersection.add(c);
+//        	   }
+//           }
+//           System.out.println("The size of intersection is :" + intersection.size());
 //           int[][] pix = new int[(int) image.getWidth()][(int) image.getHeight()];
 //           
 //           int sum =0;
@@ -116,15 +111,15 @@ public class ImageTester extends Application{
 //        	   }
 //           }
 //           
-//           System.out.println(buffImg1.getWidth());
-//           System.out.println(buffImg1.getHeight());
-//           
-//           System.out.println(buffImg2.getWidth());
-//           System.out.println(buffImg2.getHeight());
-             root.getChildren().addAll(r, r2);
-//           System.out.println("sum is : " + sum);
-//           System.out.println("the angle is : " + np.getAngle(r));
-//           
+
+             root.getChildren().addAll(r);
+             
+             ImageToPolygon im = new ImageToPolygon(image);
+             Polygon pol = im.getPolygon();
+             pol.setLayoutX(100);
+             pol.setLayoutY(100);
+             pol.setFill(Color.RED);
+         root.getChildren().add(pol);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	}
