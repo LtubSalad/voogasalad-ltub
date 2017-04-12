@@ -19,6 +19,7 @@ import engine.playerstate.PlayerSkillState;
 import engine.skill.SkillManager;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
+import engine.sprite.attacker.AttackManager;
 import engine.sprite.collidable.CollisionChecker;
 import engine.sprite.collidable.CollisionManager;
 import engine.sprite.range.InRangeChecker;
@@ -86,6 +87,10 @@ public class GameFactory {
 	public InRangeManager createInRangeManager() {
 		return new InRangeManager(bus);
 	}
+
+	public AttackManager createAttackManager() {
+		return new AttackManager(bus);
+	}
 	
 	private PlayerSelectionState createPlayerSelectionState() {
 		return new PlayerSelectionState(bus);
@@ -109,7 +114,12 @@ public class GameFactory {
 	public GameBuildingManager createGameBuildingManager(){
 		return new GameBuildingManager(bus);
 	}
-	
+
+	public EventBus getBus() {
+		return bus;
+	}
+
+		
 	public void loadGame(File file){
 		this.gameFile = file;  
 	}

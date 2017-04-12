@@ -86,6 +86,7 @@ public class MasterDeveloperInterface {
 				developerTabs.getTabs().add(screenTab);
 			});
 			this.getChildren().addAll(spriteButton, screenButton);
-		}
+		}	
+
 	}
 }

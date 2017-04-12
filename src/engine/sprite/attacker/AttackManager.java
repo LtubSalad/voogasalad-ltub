@@ -1,9 +1,9 @@
 package engine.sprite.attacker;
 
 import bus.EventBus;
-import engine.model.SpriteModelEvent;
 import engine.sprite.Sprite;
 import engine.sprite.attacker.AttackEvent;
+
 
 /**
  * Manage actions to do when an attack is launched
@@ -23,14 +23,8 @@ public class AttackManager {
 		bus.on(AttackEvent.ANY, e -> {
 			Sprite shooter = e.getShooter();
 			Sprite target = e.getTarget();
-			System.out.println("Attacker " + shooter.toString() + " will shoot target " + target.toString() 
-				+ ".");
 			
-			// TODO actions to fire a bullet at the target
-			Sprite weapon = new Sprite();
-			//TODO set weapon attribute, set movable attribute, and then set the weapon's target
-			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, weapon));
-			
+			shooter.getAttacker().get().createWeapon(shooter, target);
 			
 		});
 	}

@@ -28,8 +28,8 @@ public class FireProjectileSkill implements Skill {
 		ImageSet imageSet = new ImageSet();
 		imageSet.setImage(image);
 		sprite.setImageSet(imageSet);
-		Movable movable = new Movable(sprite);
-		sprite.setMovable(movable);
+		//Movable movable = new Movable(sprite);
+		//sprite.setMovable(movable);
 		sprite.setCollidable(new Collidable(new CollisionBound(image)));
 		sprite.setPlayer(Player.NATURE);
 		projectile = sprite;

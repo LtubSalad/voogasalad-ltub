@@ -23,12 +23,14 @@ public class AttributeData implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String attributeType;
 	private boolean changeableName;
+	private boolean isConcrete;
 	private String implementationSpecifier;
 	private Map<Pair<String, List<String>>,String> attributeScripts;
 	private Map<String,String> attributeVariables;
 	private Map<String,List<String>> listVariables;
 	private List<AttributeData> subAttributes;
 	
+
 	public AttributeData(String name, boolean isConcrete, String implementationSpecifier){
 		attributeVariables=new HashMap<>();
 		attributeScripts=new HashMap<>();
@@ -36,7 +38,10 @@ public class AttributeData implements Serializable {
 		List<AttributeData> subAttributesUnobservable=new ArrayList<>();
 		subAttributes=subAttributesUnobservable;
 		attributeType=name;
+		this.isConcrete=isConcrete;
+		this.changeableName=changeableName;
 	}
+
 	
 	public AttributeData(String name){
 		this(name,false,null);

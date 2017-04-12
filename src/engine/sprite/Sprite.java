@@ -1,13 +1,14 @@
 package engine.sprite;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import commons.MathUtils;
 import engine.camera.GamePoint;
 import engine.player.Player;
+import engine.sprite.ai.AI;
+import engine.sprite.ai.Callback;
 import engine.sprite.attacker.Attacker;
 import engine.sprite.collidable.Collidable;
 import engine.sprite.healthholder.HealthHolder;
@@ -15,7 +16,6 @@ import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
 import engine.sprite.movable.Movable;
 import engine.sprite.nodeholder.NodeHolder;
-import engine.sprite.spritespawner.NonSpawningSpriteSpawner;
 import engine.sprite.spritespawner.SpriteSpawner;
 import engine.sprite.teammember.TeamMember;
 import engine.sprite.weapon.Weapon;
@@ -28,6 +28,8 @@ public class Sprite  {
 	private GamePoint pos;
 	private int z;
 
+
+	private Callback onHitTarget;
 	private SelectionBound selectionBound = SelectionBound.IMAGE;
 	private List<GamePoint> selectionBoundVertices;
 	// composition objects 
@@ -37,6 +39,7 @@ public class Sprite  {
 	private Weapon weapon;
 	private HealthHolder healthHolder;
 	private SpriteSpawner spriteSpawner;
+	private AI ai;
 	private TeamMember team;
 	private NodeHolder nodeHolder;
 
@@ -62,6 +65,7 @@ public class Sprite  {
 		healthHolder = null;
 		spriteSpawner = null;
 		team = null;
+		ai = null;
 	}
 
 	public void setImageSet(ImageSet imageSet) {
@@ -124,7 +128,9 @@ public class Sprite  {
 	}
 
 	public double getDetectionRange() {
+
 		return attacker.getRange();
+		
 	}
 
 
@@ -132,32 +138,36 @@ public class Sprite  {
 //		return this.movable;
 //	}
 
-	public Optional<Attribute> getMovable() {
+	public Optional<Movable> getMovable() {
 		return Optional.ofNullable(movable);
 	}
 
-	public Optional<Attribute> getCollidable() {
+	public Optional<Collidable> getCollidable() {
 		return Optional.ofNullable(collidable);
 	}
 
-	public Optional<Attribute> getAttacker() {
+	public Optional<Attacker> getAttacker() {
 		return Optional.ofNullable(attacker);
 	}
 
-	public Optional<Attribute> getWeapon() {
+	public Optional<Weapon> getWeapon() {
 		return Optional.ofNullable(weapon);
 	}
 
-	public Optional<Attribute> getHealthHolder(){
+	public Optional<HealthHolder> getHealthHolder(){
 		return Optional.ofNullable(healthHolder);
 	}
 
-	public Optional<Attribute> getSpawner(){
+	public Optional<SpriteSpawner> getSpawner(){
 		return Optional.ofNullable(spriteSpawner);
 	}
 
-	public Optional<Attribute> getTeamMember(){
+	public Optional<TeamMember> getTeamMember(){
 		return Optional.ofNullable(team);
+	}
+	
+	public Optional<AI> getAI(){
+		return Optional.ofNullable(ai);
 	}
 
 	
@@ -178,21 +188,36 @@ public class Sprite  {
 	public void queueAction(Action action) {
 		actionQueue.addAction(action);
 	}
-
-	public void updatePos(double dt) {
+	
+	public void setHitsTarget(Callback callback) {
+		onHitTarget = callback;
+	}
+	
+	public void update(double dt) {
+		updatePos(dt);
+		if (attacker != null){
+			attacker.update(dt);
+		}
+	}
+	
+	private void updatePos(double dt) {
 		double tRemain = dt;
-		// TODO: this piece of actions queueing code has to be improved
-
-		//trigger Movable
-		if (movable != null && !actionQueue.isEmpty()){
-			actionQueue.executeNextAction();
-		}
-		while (!MathUtils.doubleEquals(tRemain, 0) && getMovable().isPresent()) {
-			tRemain = movable.update(dt);
-			if (!MathUtils.doubleEquals(tRemain, 0) && !actionQueue.isEmpty()) {
-				actionQueue.executeNextAction();
+		
+		while (movable != null && !MathUtils.doubleEquals(tRemain, 0)){
+			if (ai != null && ai.getFinalDest() != null && pos.approxEquals(ai.getFinalDest())) {
+				if (onHitTarget != null) {
+					onHitTarget.execute();
+				}
+				break;
 			}
+			if (ai != null && pos.approxEquals(ai.getCurrentDest())){
+				ai.updateCurrentDest();
+			}
+			movable.setDest(ai.getCurrentDest());
+			tRemain = movable.update(dt, pos);
+			this.pos = movable.getCurrPos();
 		}
+
 	}
 
 
@@ -220,8 +245,12 @@ public class Sprite  {
 		this.team = team;
 	}	
 	
-	public void setHealthHolder(HealthHolder healthHolder){
-		this.healthHolder = healthHolder;
+	public void setAI(AI ai){
+		this.ai = ai;
+	}
+	
+	public void setHealthHolder(HealthHolder healthholder){
+		this.healthHolder = healthholder;
 	}
 	
 	public void setNodeHolder(NodeHolder nodeHolder){

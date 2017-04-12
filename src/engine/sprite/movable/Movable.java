@@ -10,10 +10,10 @@ import engine.sprite.Sprite;
 
 public class Movable implements Attribute {
 	
-	private Sprite sprite;
+//	private Sprite sprite;
 	private double speed;
 	private GamePoint pDest;
-	private Boolean isMovable;
+	private GamePoint currPos;
 
 //	public Movable(AttributeData data){
 //		this.speed = Double.parseDouble(data.getVariable("speed"));	
@@ -23,53 +23,45 @@ public class Movable implements Attribute {
 		this.speed = speed;
 	}
 	
-	public Movable(Sprite sprite) {
-		this.sprite = sprite;
-		isMovable = false;
+	public Movable(){
+		
 	}
+//	
+//	public Movable(Sprite sprite) {
+//		this.sprite = sprite;
+//		isMovable = false;
+//	}
 	
 	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
 
-	public void moveTo(GamePoint pDest) {
+	public void setDest(GamePoint pDest) {
 		this.pDest = pDest;
-		switchOn();
 	}
 	public void moveTo(Target target) {
 		// TODO
 	}
 
-	public double update(double dt) {
-		if (RunningMode.DEV_MODE) {
-			if (sprite == null) {
-				System.out.println("Sprite is not set for movable!");
-			}
-		}
-		if (!isMovable) {
+	public double update(double dt, GamePoint initialPos) {
+		if (pDest == null){
 			return dt;
 		}
-		if (sprite == null) {
-			return dt;
-		}
-
 		double xDest = pDest.x();
 		double yDest = pDest.y();
-		GamePoint pos = sprite.getPos();
-		double x = pos.x();
-		double y = pos.y();
+		currPos = initialPos;
+		double x = initialPos.x();
+		double y = initialPos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
-			switchOff();
 			return dt;
 		}
 		double xDiff = xDest - x;
 		double yDiff = yDest - y;
-		double dist = pos.distFrom(pDest);
+		double dist = initialPos.distFrom(pDest);
 
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
-			sprite.setPos(new GamePoint(xDest, yDest));
-			switchOff();
+			currPos = new GamePoint(xDest, yDest);
 			return dist - (speed * dt);
 		}
 
@@ -84,18 +76,13 @@ public class Movable implements Attribute {
 			vx = speed / dist * xDiff;
 			vy = speed / dist * yDiff;
 		}
-		sprite.setPos(new GamePoint(x + vx * dt, y + vy * dt));
+		currPos = new GamePoint(x + vx * dt, y + vy * dt);
 		return 0.0;
 
 	}
-
-	public void switchOn() {
-		isMovable = true;
+	
+	public GamePoint getCurrPos(){
+		return currPos;
 	}
-
-	public void switchOff() {
-		isMovable = false;
-	}
-
 
 }

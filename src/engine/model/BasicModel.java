@@ -1,7 +1,8 @@
 package engine.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
 import bus.EventBus;
 import commons.RunningMode;
 import engine.player.Player;
@@ -15,6 +16,9 @@ public class BasicModel implements Model {
 	private ISpriteHandler spriteHandler; 
 	private TileModel tiles; 
 	
+	LinkedList<Sprite> spritesToAdd = new LinkedList<>();
+	LinkedList<Sprite> spritesToRemove = new LinkedList<>();
+	
 	public BasicModel(EventBus bus, Player player) {
 		this.bus = bus;
 		this.player = player;
@@ -24,7 +28,6 @@ public class BasicModel implements Model {
 		initHandlers();
 	}
 
-	
 
 	private void initHandlers() {
 		bus.on(SpriteModelEvent.ADD, (e) -> {
@@ -40,19 +43,30 @@ public class BasicModel implements Model {
 			removeTile(e.getSprite());
 		});	
 	}
-
+	
+	public void refreshSprites() {
+		for (Sprite s : spritesToAdd) {
+			spriteHandler.addSprite(s);
+		}
+		for (Sprite s : spritesToRemove) {
+			spriteHandler.removeSprite(s);
+		}
+		spritesToAdd.clear();
+		spritesToRemove.clear();
+	}
+	
 	@Override
 	public void addSprite(Sprite sprite) {
 		if (sprite == null && RunningMode.DEV_MODE) {
 			System.out.println("Model received null sprite: " + sprite);
 		}
 		if (sprite != null) {
-			spriteHandler.addSprite(sprite);
+			spritesToAdd.add(sprite);			
 		}
 	}
 	@Override
 	public void removeSprite(Sprite sprite) {
-		spriteHandler.removeSprite(sprite);
+		spritesToRemove.add(sprite);
 	}
 	
 	@Override
@@ -64,7 +78,7 @@ public class BasicModel implements Model {
 	@Override
 	public void updatePositions(double dt) {
 		for (Sprite sprite : spriteHandler.getSprites()) {
-			sprite.updatePos(dt);
+			sprite.update(dt);
 		}
 	}
 	@Override

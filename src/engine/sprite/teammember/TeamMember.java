@@ -17,5 +17,9 @@ public class TeamMember implements Attribute {
 	public int getTeamNum(){
 		return teamNum;
 	}
+	
+	public void setTeamNum(int t){
+		teamNum = t;
+	}
 
 }
