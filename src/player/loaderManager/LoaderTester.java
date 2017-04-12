@@ -46,15 +46,15 @@ public class LoaderTester extends Application {
 		primaryStage.setFullScreenExitKeyCombination(null);
 		primaryStage.show();
 		primaryStage.setFullScreen(true);
-        Animation myAnimation = makeAnimation(myActor, 100, 200);
+        Animation myAnimation = makeAnimation(myActor, 100, 200, 20);
         // start animation
         myAnimation.play();
         
-        Animation myAnimation1 = makeAnimation(myActor1, 100, 200);
+        Animation myAnimation1 = makeAnimation(myActor1, 100, 200, 20);
         // start animation
         myAnimation1.play();
         
-        Animation myAnimation2 = makeAnimation(myActor2,100,200);
+        Animation myAnimation2 = makeAnimation(myActor2,100,240,60);
         // start animation
         myAnimation2.play();
 
@@ -62,10 +62,10 @@ public class LoaderTester extends Application {
 
 	}
 	
-    private Animation makeAnimation (Node agent, int x, int y) {
+    private Animation makeAnimation (Node agent, int x, int y, int z) {
         // create something to follow
         Path path = new Path();
-        path.getElements().addAll(new MoveTo(x, y), new VLineTo(20));
+        path.getElements().addAll(new MoveTo(x, y), new VLineTo(z));
         // create an animation where the shape follows a path
         PathTransition pt = new PathTransition(Duration.millis(4000), path, agent);
 

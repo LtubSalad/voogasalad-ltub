@@ -5,6 +5,10 @@ package player.winnerorloser;
  *
  */
 public interface ResultPresentation {
-	public void show();
-
+	/**
+	 * @param result
+	 * show the result  to the user after the game 
+	 * Win or Lose?
+	 */
+	public void show(ResultAccessor result);
 }
