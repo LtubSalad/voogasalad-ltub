@@ -25,7 +25,7 @@ public class AttributeSelectorPane extends VBox {
 				getAttributesFromFolder(new File(basicAttributesFile)),this.attributeHolder);
 		Node presetAttributesDisplay = new AttributeDisplay(myAttributesModel, "Add Preset Attributes",
 				getAttributesFromFolder(new File(presetAttributesFile)),attributeHolder);
-//		Node userCreatedAttributesDisplay = new AttributeDisplay("Add User-Created Attributes",
+//		Node userCreatedAttributesDisplay = new AttributeDisplay(myAttributesModel, "Add User-Created Attributes",
 //				getAttributesFromFolder(new File(userCreatedAttributesFile)),attributeHolder);
 		Node thisClassesAttributes = new AttributeDisplay(myAttributesModel, "Edit This Class' Attributes", attributeHolder.getAttributes(),attributeHolder);
 
