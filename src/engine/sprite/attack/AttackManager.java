@@ -10,6 +10,8 @@ import engine.sprite.ai.AI;
 import engine.sprite.attack.AttackEvent;
 import engine.sprite.collision.Collidable;
 import engine.sprite.collision.CollisionBound;
+import engine.sprite.health.DecrementHealthEvent;
+import engine.sprite.health.HealthHolder;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
 import engine.sprite.movable.Movable;
@@ -58,8 +60,19 @@ public class AttackManager {
 			weaponSprite.setAI(new AI(path1));
 			weaponSprite.setCollidable(new Collidable(new CollisionBound(image1)));
 
-			weaponSprite.setToDoAfterHitsFinalDestination(() -> {
+			weaponSprite.setHitsTarget(() -> {
+				System.out.println("hit target");
 				bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, weaponSprite));
+				
+				HealthHolder hh = target.getHealthHolder().get();
+				double amt = weaponAttribute.getAttackPower();			
+				hh.decrementHealth(amt);
+				System.out.println("Health decremented");
+				
+				if (hh.getHealth() <= 0){
+					bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, target));
+				}
+				
 			});
 			
 			//TODO set weapon attribute, set movable attribute, and then set the weapon's target

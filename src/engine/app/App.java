@@ -92,7 +92,7 @@ public class App extends Application {
 		gameLoop.addLoopComponent((dt) -> model.refreshSprites());
 		gameLoop.addLoopComponent((dt) -> model.updatePositions(dt)); //updates any sprite with movable attribute including weapons
 		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites(), 1, 2)); //TODO which teams?
-		gameLoop.addLoopComponent((dt) -> collisionChecker.checkWeaponCollision(model.getSprites()));
+//		gameLoop.addLoopComponent((dt) -> collisionChecker.checkWeaponCollision(model.getSprites()));
 		
 		
 		gameLoop.addLoopComponent((dt) -> view.render(model));

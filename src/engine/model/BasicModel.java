@@ -16,6 +16,9 @@ public class BasicModel implements Model {
 	private ISpriteHandler spriteHandler; 
 	private TileModel tiles; 
 	
+	LinkedList<Sprite> spritesToAdd = new LinkedList<>();
+	LinkedList<Sprite> spritesToRemove = new LinkedList<>();
+	
 	public BasicModel(EventBus bus, Player player) {
 		this.bus = bus;
 		this.player = player;
@@ -40,9 +43,6 @@ public class BasicModel implements Model {
 			removeTile(e.getSprite());
 		});	
 	}
-
-	LinkedList<Sprite> spritesToAdd = new LinkedList<>();
-	LinkedList<Sprite> spritesToRemove = new LinkedList<>();
 	
 	public void refreshSprites() {
 		for (Sprite s : spritesToAdd) {

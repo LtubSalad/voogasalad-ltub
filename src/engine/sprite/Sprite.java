@@ -28,6 +28,8 @@ public class Sprite  {
 	private GamePoint pos;
 	private int z;
 
+
+	private Callback onHitTarget;
 	private SelectionBound selectionBound = SelectionBound.IMAGE;
 	private List<GamePoint> selectionBoundVertices;
 	// composition objects 
@@ -186,10 +188,9 @@ public class Sprite  {
 	public void queueAction(Action action) {
 		actionQueue.addAction(action);
 	}
-
-	private Callback toDoAfterHitsFinalDestination;
-	public void setToDoAfterHitsFinalDestination(Callback callback) {
-		toDoAfterHitsFinalDestination = callback;
+	
+	public void setHitsTarget(Callback callback) {
+		onHitTarget = callback;
 	}
 	
 	public void updatePos(double dt) {
@@ -197,13 +198,11 @@ public class Sprite  {
 		
 		while (movable != null && !MathUtils.doubleEquals(tRemain, 0)){
 			if (ai != null && ai.getFinalDest() != null && pos.approxEquals(ai.getFinalDest())) {
-				if (toDoAfterHitsFinalDestination != null) {
-					toDoAfterHitsFinalDestination.execute();
+				if (onHitTarget != null) {
+					onHitTarget.execute();
 				}
 				break;
 			}
-			System.out.println(ai);
-			System.out.println(pos);
 			if (ai != null && pos.approxEquals(ai.getCurrentDest())){
 				ai.updateCurrentDest();
 			}
