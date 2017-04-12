@@ -3,23 +3,23 @@ package engine.spritecreation.factory;
 import java.lang.reflect.Constructor;
 
 import data.AttributeData;
-import engine.sprite.movable.Movable;
+import engine.sprite.healthholder.HealthHolder;
 import engine.spritecreation.SpriteCreationException;
 
-public class MovableAttributeFactory implements AttributeFactory{
-	public static final String SPEED_VAR = "speed";
+public class HealthHolderAttributeFactory implements AttributeFactory{
+	public static final String HEALTH_VAR = "health";
 	public static final String BASE_PATH = "engine.sprite.";
-		
+	
 	@Override
-	public Movable createAttribute(AttributeData data) { 
+	public HealthHolder createAttribute(AttributeData data) {
 		try{
 			Class <?> clazz = Class.forName(BASE_PATH + data.getName().toLowerCase() + "." + data.getImplementation());
 			Constructor ctor = clazz.getConstructor(double.class);
-			return (Movable) ctor.newInstance(Double.parseDouble(data.getVariable(SPEED_VAR)));
+			return (HealthHolder) ctor.newInstance(Integer.parseInt(data.getVariable(HEALTH_VAR)));
 		}
 		catch(Exception e){
-			throw new SpriteCreationException("Movable object not found " + data.getImplementation());
+			throw new SpriteCreationException("HealthHolder object not found " + data.getImplementation());
 		}
 	}
-
+	
 }

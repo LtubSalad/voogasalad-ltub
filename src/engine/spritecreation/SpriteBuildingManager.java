@@ -25,6 +25,9 @@ public class SpriteBuildingManager {
 		if(checkIfTile(spriteData))
 			addTileToModel(s);
 		else{
+			System.out.println(s.getHealthHolder().isPresent() + " for HealthHolder");
+			System.out.println(s.getAttacker().isPresent() + " for Attacker");
+			System.out.println(s.getTeamMember().isPresent() + " for TeamMember");
 			addSpriteToModel(s);
 		}
 	}
