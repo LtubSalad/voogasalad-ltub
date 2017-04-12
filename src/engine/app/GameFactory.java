@@ -1,5 +1,7 @@
 package engine.app;
 
+import java.io.File;
+
 import bus.BasicEventBus;
 import bus.EventBus;
 import engine.action.ActionFilter;
@@ -28,6 +30,7 @@ import engine.view.View;
 public class GameFactory {
 
 	private final EventBus bus;
+	private File gameFile; 
 	
 	/**
 	 * Each {@link GameFactory} has a unique {@link EventBus}.
@@ -105,5 +108,13 @@ public class GameFactory {
 	
 	public GameBuildingManager createGameBuildingManager(){
 		return new GameBuildingManager(bus);
+	}
+	
+	public void loadGame(File file){
+		this.gameFile = file;  
+	}
+	
+	public File getFile(){
+		return gameFile; 
 	}
 }

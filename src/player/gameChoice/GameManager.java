@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import commons.FileLoader;
+import engine.app.GameFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,9 +15,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import player.App;
 import player.levelChoice.Loader;
-import player.levelChoice.LoaderTester;
-
 /**
  * The first stage of the Game Player to choose a game to play.
  * @author Yilin Gao
@@ -26,14 +26,17 @@ public class GameManager {
 	
 	private Stage primaryStage;
 	private int numberOfDefaultGames;
-	private  ResourceBundle myResources = ResourceBundle.getBundle(LoaderTester.RESOURCES_LOCATION);
+	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	
 	private File gameFile;
 	private GameData gameData;
 	
+	private GameFactory gameFactory;
+	
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		numberOfDefaultGames = Integer.parseInt(myResources.getString("numberOfDefaultGames"));
+		gameFactory = new GameFactory();
 		show();
 	}
 	
@@ -56,7 +59,7 @@ public class GameManager {
 	private void show() {
 		primaryStage.setTitle("LTUB Game Chooser");
 		BorderPane borderPane = new BorderPane();
-		Scene scene = new Scene(borderPane, LoaderTester.WIDTH, LoaderTester.HEIGHT);
+		Scene scene = new Scene(borderPane, App.WIDTH, App.HEIGHT);
 		primaryStage.setScene(scene);
 		
 		VBox gameButtonBox = initGameChooser();		
@@ -99,7 +102,7 @@ public class GameManager {
 			String fileName = myResources.getString("defaultGamePath" + (i+1));
 			Image gameImage = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
 			ImageView gameImageView = new ImageView(gameImage);
-			gameImageView.setFitWidth(LoaderTester.WIDTH/3);
+			gameImageView.setFitWidth(App.WIDTH/3);
 			gameImageView.setPreserveRatio(true);
 			Button gameButton = new Button();
 			// TODO
@@ -126,14 +129,16 @@ public class GameManager {
 			FileLoader fileLoader = new FileLoader(primaryStage);
 			gameFile = fileLoader.chooseFile();
 			if (gameFile != null) {
-				GameDataParser parser = new GameDataParser();
-				gameData = parser.parse(gameFile);
+				gameFactory.loadGame(gameFile);
 			}
 		}
 		else {
 			// TODO load the corresponding game file into gameFile
 			System.out.println("Game " + button.getTooltip().getText() + " is chosen.");			
 		}
-		// TODO initialize Loader, pass the game data into Loader
+		// TODO pass the game data into game engine
+		primaryStage.close();
+		Loader loader = new Loader();
+		loader.show();
 	}
 }

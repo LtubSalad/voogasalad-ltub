@@ -1,6 +1,8 @@
 package engine.app;
 
 
+import java.io.File;
+
 import engine.camera.Camera;
 import engine.gameloop.GameLoop;
 import engine.model.Model;
@@ -32,10 +34,12 @@ public class App extends Application {
 		
 		//sprite with attributes creator
 		GameBuildingManager gameBuildingManager = gameFactory.createGameBuildingManager();
+		gameBuildingManager.buildFromFile(new File("data/XMLfiles/test_setup.xml"));
 		
 		// game loop 
 		GameLoop gameLoop = gameFactory.createGameLoop();
 		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
+
 		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
 		
 		/*
@@ -49,7 +53,11 @@ public class App extends Application {
 		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites(), 1, 2)); //TODO which teams?
 		gameLoop.addLoopComponent((dt) -> collisionChecker.checkWeaponCollision(model.getSprites()));
 		
-		
+
+		gameLoop.addLoopComponent((dt) -> collisionChecker.checkCollision(model.getSprites()));
+//		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
+//		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites()));
+		//gameLoop.addLoopComponent((dt) -> model.update(dt));
 		gameLoop.addLoopComponent((dt) -> view.render(model));
 		gameLoop.addLoopComponent((dt) -> view.render(localModel));
 		
