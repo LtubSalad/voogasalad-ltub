@@ -28,6 +28,7 @@ public class InRangeManager {
 				+ " is in its range.");
 			// if detector is an attacker, launch weapon with target = detectee
 			if (detector.getAttacker().isPresent()){
+				System.out.println("emit AttackEvent");
 				bus.emit(new AttackEvent(AttackEvent.ANY, detector, detectee));
 				
 			}

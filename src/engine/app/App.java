@@ -52,7 +52,7 @@ public class App extends Application {
 		movable1.setSpeed(100);
 		sprite1.setMovable(movable1);
 		sprite1.setCollidable(new Collidable(new CollisionBound(image1)));
-		sprite1.setTeamMember(new TeamMember(1));
+		sprite1.setTeamMember(new TeamMember(2));
 		sprite1.setHealthHolder(new HealthHolder(100));
 //		sprite1.setImageOffset(new Point(30, 30));
 
@@ -64,7 +64,7 @@ public class App extends Application {
 		ImageSet imageSet2 = new ImageSet();
 		imageSet2.setImage(image2);
 		tower.setImageSet(imageSet2);
-		tower.setTeamMember(new TeamMember(2));
+		tower.setTeamMember(new TeamMember(1));
 		tower.setCollidable(new Collidable(new CollisionBound(image2)));
 		tower.setAttacker(new Attacker());
 		
@@ -88,13 +88,8 @@ public class App extends Application {
 		CollisionChecker collisionChecker = gameFactory.createCollisionChecker();
 		InRangeChecker inRangeChecker = gameFactory.createInRangeChecker();
 		
-		/*
-		 * move all the monsters forward
-		 * check each tower for monsters in its range (and fire weapons if necessary)
-		 * move all the bullets 
-		 * check if any bullets have hit its target (and decrement health)
-		 * remove any monsters that have 0 or negative health
-		 */
+		
+		gameLoop.addLoopComponent((dt) -> model.refreshSprites());
 		gameLoop.addLoopComponent((dt) -> model.updatePositions(dt)); //updates any sprite with movable attribute including weapons
 		gameLoop.addLoopComponent((dt) -> inRangeChecker.checkInRange(model.getSprites(), 1, 2)); //TODO which teams?
 		gameLoop.addLoopComponent((dt) -> collisionChecker.checkWeaponCollision(model.getSprites()));
@@ -112,6 +107,7 @@ public class App extends Application {
 		gameFactory.createActionFilter();
 		gameFactory.createActionManager();
 		gameFactory.createSkillManager();
+		gameFactory.createAttackManager();
 		
 		
 		// set scene, start loop, and show stage

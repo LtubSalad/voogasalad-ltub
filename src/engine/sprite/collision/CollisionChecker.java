@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import bus.EventBus;
 import engine.camera.GamePoint;
+import engine.model.SpriteModelEvent;
 import engine.sprite.Attribute;
 import engine.sprite.Sprite;
 import engine.sprite.health.DecrementHealthEvent;
@@ -53,15 +54,16 @@ public class CollisionChecker {
 	}
 	
 	public void checkWeaponCollision(List<Sprite> sprites){
-		List<Sprite> collidableWeapons = sprites.stream().filter((s) -> {
-			return s.getWeapon().isPresent();
-		}).collect(Collectors.toList());
-		for (Sprite s: collidableWeapons) {
-			Sprite target = s.getWeapon().get().getTarget();
-			if (collides(s, target)){
-				bus.emit(new DecrementHealthEvent(DecrementHealthEvent.ANY, s, target));
-			}
-		}
+//		List<Sprite> collidableWeapons = sprites.stream().filter((s) -> {
+//			return s.getWeapon().isPresent();
+//		}).collect(Collectors.toList());
+//		for (Sprite s: collidableWeapons) {
+//			Sprite target = s.getWeapon().get().getTarget();
+//			if (collides(s, target)){
+//				bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, s));
+//				bus.emit(new DecrementHealthEvent(DecrementHealthEvent.ANY, s, target));
+//			}
+//		}
 	}
 	
 	public void checkMonsterCollision(List<Sprite> sprites) {

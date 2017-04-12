@@ -13,7 +13,7 @@ public class Attacker implements Attribute {
 	}
 	
 	public Attacker(){
-		radius = 128;
+		radius = 300;
 
 	}
 	

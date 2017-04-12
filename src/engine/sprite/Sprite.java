@@ -1,7 +1,6 @@
 package engine.sprite;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +8,7 @@ import commons.MathUtils;
 import engine.camera.GamePoint;
 import engine.player.Player;
 import engine.sprite.ai.AI;
-import engine.sprite.ai.AI.AIType;
+import engine.sprite.ai.Callback;
 import engine.sprite.attack.Attacker;
 import engine.sprite.collision.Collidable;
 import engine.sprite.health.HealthHolder;
@@ -17,7 +16,6 @@ import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
 import engine.sprite.movable.Movable;
 import engine.sprite.nodeholder.NodeHolder;
-import engine.sprite.spritespawner.NonSpawningSpriteSpawner;
 import engine.sprite.spritespawner.SpriteSpawner;
 import engine.sprite.teammember.TeamMember;
 import engine.sprite.weapon.Weapon;
@@ -128,7 +126,9 @@ public class Sprite  {
 	}
 
 	public double getDetectionRange() {
+
 		return attacker.getRange();
+		
 	}
 
 
@@ -187,13 +187,23 @@ public class Sprite  {
 		actionQueue.addAction(action);
 	}
 
+	private Callback toDoAfterHitsFinalDestination;
+	public void setToDoAfterHitsFinalDestination(Callback callback) {
+		toDoAfterHitsFinalDestination = callback;
+	}
+	
 	public void updatePos(double dt) {
 		double tRemain = dt;
 		
 		while (movable != null && !MathUtils.doubleEquals(tRemain, 0)){
 			if (ai != null && ai.getFinalDest() != null && pos.approxEquals(ai.getFinalDest())) {
+				if (toDoAfterHitsFinalDestination != null) {
+					toDoAfterHitsFinalDestination.execute();
+				}
 				break;
 			}
+			System.out.println(ai);
+			System.out.println(pos);
 			if (ai != null && pos.approxEquals(ai.getCurrentDest())){
 				ai.updateCurrentDest();
 			}

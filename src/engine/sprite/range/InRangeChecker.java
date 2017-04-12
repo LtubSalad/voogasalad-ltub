@@ -11,6 +11,7 @@ import engine.sprite.teammember.TeamMember;
 
 /**
  * Check if one sprite is in the detection range of another sprite.
+ * 
  * @author Yilin Gao
  *
  */
@@ -23,13 +24,18 @@ public class InRangeChecker {
 	}
 
 	/**
-	 * Loop over all sprites in the game and detect any in-range between any two sprites.
-	 * @param sprites A list of sprites in the model
+	 * Loop over all sprites in the game and detect any in-range between any two
+	 * sprites.
+	 * 
+	 * @param sprites
+	 *            A list of sprites in the model
 	 */
 	public void checkInRange(List<Sprite> sprites) {
-		for (Sprite detector: sprites) {
-			for (Sprite detectee: sprites) {
-				if (detector == detectee) { continue; }
+		for (Sprite detector : sprites) {
+			for (Sprite detectee : sprites) {
+				if (detector == detectee) {
+					continue;
+				}
 				if (inRange(detector, detectee)) {
 					bus.emit(new InRangeEvent(InRangeEvent.ANY, detector, detectee));
 				}
@@ -37,24 +43,24 @@ public class InRangeChecker {
 		}
 	}
 
-	public void checkInRange(List<Sprite> sprites, int a, int b){
+	public void checkInRange(List<Sprite> sprites, int a, int b) {
 		List<Sprite> teamA = new ArrayList<>();
 		List<Sprite> teamB = new ArrayList<>();
-		for (Sprite s : sprites){
-			if (s.getTeamMember().isPresent()){
+		for (Sprite s : sprites) {
+			if (s.getTeamMember().isPresent()) {
 				int i = s.getTeamMember().get().getTeamNum();
-				if (i == a){
-					if (i == a){
-						teamA.add(s);
-					} else if (i == b) {
-						teamB.add(s);
-					}
+				if (i == a) {
+					teamA.add(s);
+				} else if (i == b) {
+					teamB.add(s);
 				}
 			}
 		}
-		for (Sprite detector: teamA) {
-			for (Sprite detectee: teamB) {
-				if (detector == detectee) { continue; }
+		for (Sprite detector : teamA) {
+			for (Sprite detectee : teamB) {
+				if (detector == detectee) {
+					continue;
+				}
 				if (inRange(detector, detectee)) {
 					bus.emit(new InRangeEvent(InRangeEvent.ANY, detector, detectee));
 				}
@@ -67,7 +73,7 @@ public class InRangeChecker {
 		GamePoint detectorPos = detector.getPos();
 		GamePoint detecteePos = detectee.getPos();
 		double distance = detectorPos.distFrom(detecteePos);
-		if (distance <= detector.getDetectionRange()) {
+		if (detector.getAttacker().isPresent() && distance <= detector.getDetectionRange()) {
 			return true;
 		}
 		return false;
