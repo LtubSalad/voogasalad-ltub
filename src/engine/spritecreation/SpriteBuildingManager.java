@@ -12,10 +12,6 @@ public class SpriteBuildingManager {
 	public SpriteBuildingManager(EventBus bus) {
 		this.bus = bus;
 	}
-	
-	public SpriteBuildingManager(){
-		; 
-	}
 
 	public void createSprite(AttributeData spriteData) {
 		SpriteBuilder SB = new SpriteBuilder(spriteData);
@@ -39,9 +35,4 @@ public class SpriteBuildingManager {
 	private void addSpriteToModel(Sprite sprite){
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprite));
 	}
-	
-	
-	
-	
-
 }

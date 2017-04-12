@@ -2,20 +2,13 @@ package engine.app;
 
 
 import engine.camera.Camera;
-import engine.camera.GamePoint;
 import engine.gameloop.GameLoop;
 import engine.model.Model;
 import engine.model.PlayerLocalModel;
 import engine.player.Player;
-import engine.sprite.Sprite;
-import engine.sprite.collision.Collidable;
-import engine.sprite.collision.CollisionBound;
 import engine.sprite.collision.CollisionChecker;
-import engine.sprite.images.ImageSet;
-import engine.sprite.images.LtubImage;
-import engine.sprite.movable.Movable;
 import engine.sprite.range.InRangeChecker;
-import engine.spritecreation.SpriteBuildingManager;
+import engine.spritecreation.GameBuildingManager;
 import engine.view.View;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -38,7 +31,7 @@ public class App extends Application {
 		View view = gameFactory.createView(camera);
 		
 		//sprite with attributes creator
-		SpriteBuildingManager spriteBuildingManager = gameFactory.createSpriteBuildingManager();
+		GameBuildingManager gameBuildingManager = gameFactory.createGameBuildingManager();
 		
 		// game loop 
 		GameLoop gameLoop = gameFactory.createGameLoop();
