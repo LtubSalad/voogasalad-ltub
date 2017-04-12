@@ -1,5 +1,6 @@
 package gameDevelopmentInterface;
 
+import data.AttributeData;
 import data.AttributesForScreenUse;
 import gameDevelopmentInterface.attributeCreator.AttributeHolderCreator;
 import gameDevelopmentInterface.attributeCreator.GroundUpAttributeCreator;

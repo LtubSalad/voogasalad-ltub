@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 import javafx.util.Pair;
 
 public class ScreenObjectHolder extends HBox {
-	private static final String IMAGE_HOLDER = "ImageHolder";
+	private static final String IMAGE_HOLDER = "filepath";
 	private static final String IMAGE = "image";
 	private static final String PATH_TO_IMAGE_FILES = "images/characters/";
 	private static final String PATH_TO_XML_FILES = "data/attributeSkeletons/";
@@ -37,31 +37,52 @@ public class ScreenObjectHolder extends HBox {
 		myScreenModel = smc;
 		myScreenData = smd;
 		myAttributesModel = attributesModel;
-		myAttributesModel.getScreenAttributes().addListener(new ListChangeListener<AttributeData>() {
+		myScreenModel.getPossibleSprites().addListener(new ListChangeListener<AttributeData>() {
 			@Override
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
-				myAttributesModel.getScreenAttributes().forEach(attr -> {
-					attr.getAttributes().forEach(att -> {
-						if (att.getName().equals(IMAGE_HOLDER)) {
-							String imageName = attr.getVariable(IMAGE);
-							if (myScreenObjects.size() == 0) {
-								addObject(attr);
-							} else {
-								boolean wasFound = false;
-								for (Pair<String, Image> p : myScreenObjects.keySet()) {
-									if (p.getKey().equals(imageName)) {
-										wasFound = true;
-									}
-								}
-								if (!wasFound) {
-									addObject(attr);
+				myScreenModel.getPossibleSprites().forEach(attr -> {
+					if (attr.hasVariable(IMAGE_HOLDER)) {
+						String imageName = attr.getVariable(IMAGE);
+						boolean wasFound = false;
+						if (myScreenObjects.size() == 0) {
+							addObject(attr);
+						} else {
+							for (Pair<String, Image> p : myScreenObjects.keySet()) {
+								if (p.getKey().equals(imageName)) {
+									wasFound = true;
 								}
 							}
+							if (!wasFound) {
+								addObject(attr);
+							}
 						}
-					});
+					}
 				});
 			}
 		});
+//		myAttributesModel.getScreenAttributes().addListener(new ListChangeListener<AttributeData>() {
+//			@Override
+//			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
+//				myAttributesModel.getScreenAttributes().forEach(attr -> {
+//					if (attr.hasVariable(IMAGE_HOLDER)) {
+//						String imageName = attr.getVariable(IMAGE);
+//						boolean wasFound = false;
+//						if (myScreenObjects.size() == 0) {
+//							addObject(attr);
+//						} else {
+//							for (Pair<String, Image> p : myScreenObjects.keySet()) {
+//								if (p.getKey().equals(imageName)) {
+//									wasFound = true;
+//								}
+//							}
+//							if (!wasFound) {
+//								addObject(attr);
+//							}
+//						}
+//					}
+//				});
+//			}
+//		});
 	}
 
 	/**
@@ -71,18 +92,30 @@ public class ScreenObjectHolder extends HBox {
 	 *            the sprite to add to the HBox
 	 */
 	public void addObject(AttributeData screenObject) {
-		screenObject.getAttributes().forEach(attr -> {
-			if (attr.getName().equals(IMAGE_HOLDER)) {
-				Map<String, String> varMap = attr.getVariables();
-				String imageName = varMap.get(IMAGE);
-				Image si = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES + imageName),
-						100, 100, false, false);
-				ImageView spriteImage = new ImageView(si);
-				spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
-				myScreenObjects.put(new Pair<String, Image>(imageName, si), screenObject);
-				this.getChildren().add(spriteImage);
-			}
-		});
+		System.out.println(screenObject.getName());
+		String imageName = screenObject.getVariable(IMAGE_HOLDER);
+		Image si = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES + imageName), 100, 100,
+				false, false);
+		ImageView spriteImage = new ImageView(si);
+		spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
+		myScreenObjects.put(new Pair<String, Image>(imageName, si), screenObject);
+		this.getChildren().add(spriteImage);
+
+		// screenObject.getAttributes().forEach(attr -> {
+		// if (attr.getName().equals(IMAGE_HOLDER)) {
+		// Map<String, String> varMap = attr.getVariables();
+		// String imageName = varMap.get(IMAGE);
+		// Image si = new
+		// Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES
+		// + imageName),
+		// 100, 100, false, false);
+		// ImageView spriteImage = new ImageView(si);
+		// spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
+		// myScreenObjects.put(new Pair<String, Image>(imageName, si),
+		// screenObject);
+		// this.getChildren().add(spriteImage);
+		// }
+		// });
 	}
 
 	public void addObject(File file) {
@@ -115,7 +148,9 @@ public class ScreenObjectHolder extends HBox {
 			for (Pair<String, Image> p : myScreenObjects.keySet()) {
 				String iName = p.getKey();
 				if (imageName.equals(iName)) {
-					AttributeData anActualPlacedScreenObject = (AttributeData) new UnoptimizedDeepCopy().copy(myScreenObjects.get(p));//new AttributeData(myScreenObjects.get(p));
+					AttributeData anActualPlacedScreenObject = (AttributeData) new UnoptimizedDeepCopy()
+							.copy(myScreenObjects.get(p));// new
+															// AttributeData(myScreenObjects.get(p));
 					anActualPlacedScreenObject.setVariable("xPosition", coords.getKey() + "");
 					anActualPlacedScreenObject.setVariable("yPosition", coords.getValue() + "");
 					myScreenData.addObjectData(anActualPlacedScreenObject);
@@ -159,7 +194,7 @@ public class ScreenObjectHolder extends HBox {
 		db.setContent(content);
 		e.consume();
 	}
-	
+
 	private String getImageName(Image image) {
 		String toReturn = "";
 		for (Pair<String, Image> p : myScreenObjects.keySet()) {
