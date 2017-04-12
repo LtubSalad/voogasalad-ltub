@@ -87,11 +87,11 @@ public class Path {
 	}
 	
 	private void makeDefaultPath() {
-		myPath.add(new GamePoint(0,0));
+		myPath.add(new GamePoint(500,200));
 		myPath.add(new GamePoint(100,0));
 		myPath.add(new GamePoint(100,100));
-		myPath.add(new GamePoint(0,100));
-		myPath.add(new GamePoint(0,200));
+		myPath.add(new GamePoint(0,300));
+		myPath.add(new GamePoint(300,300));
 	
 	}
 	

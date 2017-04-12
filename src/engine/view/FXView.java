@@ -49,13 +49,13 @@ public class FXView implements View {
 		bottomPane = new HBox();
 		root.getChildren().addAll(gameWorldCanvas, bottomPane);
 		Canvas selectionCanvas = new Canvas(WIDTH / 2, HEIGHT - CANVAS_HEIGHT);
-		bottomPane.getChildren().add(selectionCanvas);
+		//bottomPane.getChildren().add(selectionCanvas);
 		gc = gameWorldCanvas.getGraphicsContext2D();
 		gcSelected = selectionCanvas.getGraphicsContext2D();
 
 		// skill box
-		skillBox = new SkillBox(bus);
-		bottomPane.getChildren().add(skillBox.getBox());
+		//skillBox = new SkillBox(bus);
+		//bottomPane.getChildren().add(skillBox.getBox());
 
 		initHandlers();
 	}

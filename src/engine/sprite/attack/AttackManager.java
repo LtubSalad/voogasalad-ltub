@@ -37,45 +37,8 @@ public class AttackManager {
 		bus.on(AttackEvent.ANY, e -> {
 			Sprite shooter = e.getShooter();
 			Sprite target = e.getTarget();
-			System.out.println("Attacker " + shooter.toString() + " will shoot target " + target.toString() 
-				+ ".");
 			
-			// TODO actions to fire a bullet at the target
-			Sprite weaponSprite = new Sprite();
-			weaponSprite.setPos(shooter.getPos());
-			LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
-			ImageSet imageSet1 = new ImageSet();
-			imageSet1.setImage(image1);
-			weaponSprite.setImageSet(imageSet1);
-			Weapon weaponAttribute = new Weapon(shooter, target);
-			weaponAttribute.setAttackPower(60);
-			Movable movableAttribute = new Movable();
-			movableAttribute.setSpeed(600);
-			weaponSprite.setWeapon(weaponAttribute);
-			weaponSprite.setMovable(movableAttribute);
-			Path path1 = new Path();
-			Queue<GamePoint> q = new LinkedList<GamePoint>();
-			q.add(target.getPos());
-			path1.changePath(q);
-			weaponSprite.setAI(new AI(path1));
-			weaponSprite.setCollidable(new Collidable(new CollisionBound(image1)));
-
-			weaponSprite.setHitsTarget(() -> {
-				bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, weaponSprite));
-				
-				HealthHolder hh = target.getHealthHolder().get();
-				double amt = weaponAttribute.getAttackPower();			
-				hh.decrementHealth(amt);
-				
-				if (hh.getHealth() <= 0){
-					bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, target));
-				}
-				
-			});
-			
-			//TODO set weapon attribute, set movable attribute, and then set the weapon's target
-			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, weaponSprite));
-			
+			shooter.getAttacker().get().createWeapon(shooter, target);
 			
 		});
 	}

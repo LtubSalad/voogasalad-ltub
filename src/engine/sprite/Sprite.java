@@ -193,7 +193,14 @@ public class Sprite  {
 		onHitTarget = callback;
 	}
 	
-	public void updatePos(double dt) {
+	public void update(double dt) {
+		updatePos(dt);
+		if (attacker != null){
+			attacker.update(dt);
+		}
+	}
+	
+	private void updatePos(double dt) {
 		double tRemain = dt;
 		
 		while (movable != null && !MathUtils.doubleEquals(tRemain, 0)){

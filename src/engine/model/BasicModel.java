@@ -78,7 +78,7 @@ public class BasicModel implements Model {
 	@Override
 	public void updatePositions(double dt) {
 		for (Sprite sprite : spriteHandler.getSprites()) {
-			sprite.updatePos(dt);
+			sprite.update(dt);
 		}
 	}
 	@Override

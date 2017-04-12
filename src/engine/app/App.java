@@ -49,17 +49,17 @@ public class App extends Application {
 		Path path1 = new Path();
 		sprite1.setAI(new AI(path1));
 		Movable movable1 = new Movable();
-		movable1.setSpeed(100);
+		movable1.setSpeed(80);
 		sprite1.setMovable(movable1);
 		sprite1.setCollidable(new Collidable(new CollisionBound(image1)));
 		sprite1.setTeamMember(new TeamMember(2));
-		sprite1.setHealthHolder(new HealthHolder(100));
+		sprite1.setHealthHolder(new HealthHolder(150));
 //		sprite1.setImageOffset(new Point(30, 30));
 
 		
 		//tower1
 		Sprite tower = new Sprite();
-		tower.setPos(new GamePoint(50,100));
+		tower.setPos(new GamePoint(150,150));
 		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
 		ImageSet imageSet2 = new ImageSet();
 		imageSet2.setImage(image2);
@@ -67,6 +67,8 @@ public class App extends Application {
 		tower.setTeamMember(new TeamMember(1));
 		tower.setCollidable(new Collidable(new CollisionBound(image2)));
 		tower.setAttacker(new Attacker());
+		tower.getAttacker().get().setBus(gameFactory.getBus());
+		tower.getAttacker().get().setReloadPeriod(2);
 		
 		
 		
@@ -76,10 +78,7 @@ public class App extends Application {
 		PlayerLocalModel localModel = gameFactory.createPlayerLocalModel();
 		Camera camera = gameFactory.createCamera();
 		View view = gameFactory.createView(camera);
-		
-		//sprite with attributes creator
-		//GameBuildingManager gameBuildingManager = gameFactory.createGameBuildingManager();
-		
+				
 		model.addSprite(sprite1);
 		model.addSprite(tower);
 		

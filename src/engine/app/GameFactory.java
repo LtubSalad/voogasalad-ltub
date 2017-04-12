@@ -111,4 +111,8 @@ public class GameFactory {
 	public GameBuildingManager createGameBuildingManager(){
 		return new GameBuildingManager(bus);
 	}
+
+	public EventBus getBus() {
+		return bus;
+	}
 }

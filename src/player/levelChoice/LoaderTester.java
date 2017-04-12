@@ -18,9 +18,9 @@ public class LoaderTester extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-	    Loader loader = new Loader();
-		//GameManager gameManager = new GameManager(primaryStage);
-		loader.show();
+//	    Loader loader = new Loader();
+		GameManager gameManager = new GameManager(primaryStage);
+//		loader.show();
 		
 
 	}
