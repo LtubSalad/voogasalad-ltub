@@ -43,7 +43,7 @@ public class AttackManager {
 			// TODO actions to fire a bullet at the target
 			Sprite weaponSprite = new Sprite();
 			weaponSprite.setPos(shooter.getPos());
-			LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
+			LtubImage image1 = new LtubImage("images/characters/bullet.png");
 			ImageSet imageSet1 = new ImageSet();
 			imageSet1.setImage(image1);
 			weaponSprite.setImageSet(imageSet1);
