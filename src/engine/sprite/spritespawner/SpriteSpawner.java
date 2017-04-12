@@ -10,8 +10,8 @@ public abstract class SpriteSpawner implements Attribute {
 	public SpriteSpawner(AttributeData data){
 		
 	}
-	public SpriteSpawner(Sprite childType, double time){
-		this.child = childType;
+	public SpriteSpawner(Sprite childSprite, double time){
+		this.child = childSprite;
 		this.spawnTime = time; 
 	}
 	

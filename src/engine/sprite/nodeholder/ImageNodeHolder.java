@@ -7,8 +7,9 @@ public class ImageNodeHolder extends NodeHolder {
 	private LtubImage image; 
 	public ImageNodeHolder(AttributeData data) {
 		super(data);
-		String filePath = data.getVariable("filepath");
-		image = new LtubImage(filePath);
+		System.out.println("It worked");
+//		String filePath = data.getVariable("filepath");
+//		image = new LtubImage(filePath);
 	}
 	// need to set image = the one we get from data 
 	
