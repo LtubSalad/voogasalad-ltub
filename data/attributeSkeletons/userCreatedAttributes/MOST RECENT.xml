@@ -1,0 +1,25 @@
+<data.AttributeData>
+  <attributeType>Choose attribute dname</attributeType>
+  <changeableName>true</changeableName>
+  <isConcrete>true</isConcrete>
+  <attributeScripts/>
+  <attributeVariables/>
+  <subAttributes>
+    <data.AttributeData>
+      <attributeType>ConstantActor</attributeType>
+      <changeableName>false</changeableName>
+      <isConcrete>false</isConcrete>
+      <attributeScripts>
+        <entry>
+          <javafx.util.Pair>
+            <key class="string">run</key>
+            <value class="list"/>
+          </javafx.util.Pair>
+          <string>move(50) butt</string>
+        </entry>
+      </attributeScripts>
+      <attributeVariables/>
+      <subAttributes/>
+    </data.AttributeData>
+  </subAttributes>
+</data.AttributeData>

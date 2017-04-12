@@ -1,15 +1,11 @@
 package gameDevelopmentInterface;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-
 import data.AttributeData;
-import javafx.scene.Node;
+import data.AttributesForScreenUse;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import utilities.XStreamHandler;
 
 /**
  * 
@@ -19,31 +15,49 @@ import javafx.scene.layout.BorderPane;
  *         file producer when needed.
  */
 public class AttributeHolderCreator extends BorderPane {
-	// Put in attribute data from an attribute
+	private static final String LOAD_ATTRIBUTE_FROM_FILE = "Load attribute from file";
+	private static final String SAVE_ATTRIBUTE_TO_FILE = "Save attribute to file";
+	private static final String CHOOSE_ATTRIBUTE_NAME = "Choose attribute name";
 	private AttributeSelectorPane attributeSelectorPane;
 	private AttributeCustomizerPane attributeCustomizerPane;
 	private AttributeData attributeHolder;
-	private final String userCreatedAttributesFile = "data/attributeSkeletons/userCreatedAttributes";
+	private XStreamHandler dataHandler;
+	private AttributesForScreenUse myAttributesModel;
 
-	public AttributeHolderCreator() {
-		Button saveButton = new Button("Save attribute to file");
+	public AttributeHolderCreator(AttributesForScreenUse attributesModel) {
+		myAttributesModel = attributesModel;
+		attributeHolder=new AttributeData(CHOOSE_ATTRIBUTE_NAME,true,true,null);
+		instantiate();
+	}
+	
+	private void instantiate(){
+		dataHandler=new XStreamHandler();
+		HBox saveAndLoad=new HBox();
+		Button saveButton = new Button(SAVE_ATTRIBUTE_TO_FILE);
 		saveButton.setOnAction((c)->createClassData());
-		attributeHolder=new AttributeData("Choose attribute name",true,true,null);
-		attributeSelectorPane = new AttributeSelectorPane(attributeHolder);
+		Button loadButton= new Button(LOAD_ATTRIBUTE_FROM_FILE);
+		saveAndLoad.getChildren().addAll(saveButton,loadButton);
+		loadButton.setOnAction((click)->{
+			attributeHolder=dataHandler.getAttributeFromFile();
+			instantiate();
+			//System.out.print(attributeHolder.getName());
+			
+		});
+		attributeSelectorPane = new AttributeSelectorPane(myAttributesModel, attributeHolder);
 		attributeCustomizerPane=new AttributeCustomizerPane(attributeHolder);
+		this.getChildren().clear();
 		this.setRight(attributeSelectorPane);
 		this.setCenter(attributeCustomizerPane);
-		this.setBottom(saveButton);
+		this.setBottom(saveAndLoad);
+		
 	}
-	// Produce XML file for this class' data.
-	public void createClassData() {
+	
+	/**
+	 * Produce XML file for this class' data.
+	 */
+	private void createClassData() {
 		attributeCustomizerPane.updateAttribute();
-		XStream xstream = new XStream(new DomDriver());
-		try {
-            FileOutputStream fs = new FileOutputStream(userCreatedAttributesFile+"/"+attributeHolder.getName()+".xml");
-            xstream.toXML(attributeHolder, fs);
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        }
+		dataHandler.saveToFile(attributeHolder);
 	}
+	
 }

@@ -1,5 +1,6 @@
 package gameDevelopmentInterface;
 
+import data.AttributesForScreenUse;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,10 +21,17 @@ import javafx.scene.layout.HBox;
  *         No public methods because they most of its actions are event based.
  */
 public class MasterDeveloperInterface {
+	private static final String SCREEN_SETTING = "Screen Setting";
+	private static final String GENERAL_DATA = "General Data";
+	private static final String CREATE_ATTRIBUTE_HOLDER = "Create AttributeHolder";
 	private static final String PATH_TO_STYLE_SHEETS = "/styleSheets/MainStyle.css";
 	private Scene developerScene;
 	private BorderPane view;
 	private TabPane developerTabs;
+	private AttributesForScreenUse attributesModel = new AttributesForScreenUse();
+	private AttributeHolderCreator myAttributeHolderCreator = new AttributeHolderCreator(attributesModel);
+	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
+	private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(attributesModel, myGeneralDataCreator);
 
 	public MasterDeveloperInterface() {
 		instantiate();
@@ -33,42 +41,47 @@ public class MasterDeveloperInterface {
 
 	private void instantiateTabs() {
 		developerTabs = new TabPane();
-		Tab classCreatorTab = new Tab("Create AttributeHolder", new AttributeHolderCreator());
-		Tab GeneralDataTab = new Tab("General Data", new GeneralDataCreator());
-		Tab ScreenSettingView = new Tab("Screen Setting", new ScreenModelCreator());
+		Tab classCreatorTab = new Tab(CREATE_ATTRIBUTE_HOLDER, myAttributeHolderCreator);
+		Tab GeneralDataTab = new Tab(GENERAL_DATA, myGeneralDataCreator);
+		Tab ScreenSettingView = new Tab(SCREEN_SETTING, myScreenModelCreator);
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
 		myTabs.addAll(classCreatorTab, GeneralDataTab, ScreenSettingView);
 	}
-	
-	private void instantiate(){
-		view=new BorderPane();
+
+	private void instantiate() {
+		view = new BorderPane();
 		instantiateTabs();
 		view.setTop(new TabAdder());
 		view.setCenter(developerTabs);
-		
+
 	}
 
 	public Scene getScene() {
 		return developerScene;
 	}
-	
-	class TabAdder extends HBox{
-		private TabAdder(){
+
+	class TabAdder extends HBox {
+		private static final String CREATE_SPRITE = "Create Sprite";
+		private static final String CREATE_NEW_SCREEN = "Create new Screen";
+		private static final String CREATE_NEW_SPRITE = "Create new Sprite";
+
+		private TabAdder() {
 			instantiate();
 		}
-		
-		private void instantiate(){
-			Button spriteButton=new Button("Create new Sprite");
-			Button screenButton = new Button("Create new Screen");
-			spriteButton.setOnAction((clicked)->{
-				Tab spriteTab=new Tab("Create Sprite", new AttributeHolderCreator());
+
+		private void instantiate() {
+			Button spriteButton = new Button(CREATE_NEW_SPRITE);
+			Button screenButton = new Button(CREATE_NEW_SCREEN);
+			spriteButton.setOnAction((clicked) -> {
+				Tab spriteTab = new Tab(CREATE_SPRITE, new AttributeHolderCreator(attributesModel));
 				developerTabs.getTabs().add(spriteTab);
 			});
-			screenButton.setOnAction((clicked)->{
-				Tab screenTab=new Tab("Create new Screen", new ScreenModelCreator());
+			screenButton.setOnAction((clicked) -> {
+				Tab screenTab = new Tab(CREATE_NEW_SCREEN,
+						new ScreenModelCreator(attributesModel, myGeneralDataCreator));
 				developerTabs.getTabs().add(screenTab);
 			});
-			this.getChildren().addAll(spriteButton,screenButton);
-		}	
+			this.getChildren().addAll(spriteButton, screenButton);
+		}
 	}
 }

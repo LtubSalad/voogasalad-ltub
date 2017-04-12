@@ -1,5 +1,5 @@
 <data.AttributeData>
-  <attributeType>Choose attribute name</attributeType>
+  <attributeType>butt stallion</attributeType>
   <changeableName>true</changeableName>
   <isConcrete>true</isConcrete>
   <attributeScripts/>
@@ -22,7 +22,7 @@
                 <key class="string">run</key>
                 <value class="list"/>
               </javafx.util.Pair>
-              <string>move(50)</string>
+              <string></string>
             </entry>
           </attributeScripts>
           <attributeVariables/>
@@ -86,6 +86,5 @@
         </data.AttributeData>
       </subAttributes>
     </data.AttributeData>
-    <data.AttributeData reference="../data.AttributeData"/>
   </subAttributes>
 </data.AttributeData>
