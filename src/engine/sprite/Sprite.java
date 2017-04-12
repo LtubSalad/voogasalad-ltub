@@ -191,10 +191,10 @@ public class Sprite  {
 		double tRemain = dt;
 		
 		while (movable != null && !MathUtils.doubleEquals(tRemain, 0)){
-			if (ai != null && ai.getFinalDest() != null && pos.equals(ai.getFinalDest())) {
+			if (ai != null && ai.getFinalDest() != null && pos.approxEquals(ai.getFinalDest())) {
 				break;
 			}
-			if (ai != null && pos.equals(ai.getCurrentDest())){
+			if (ai != null && pos.approxEquals(ai.getCurrentDest())){
 				ai.updateCurrentDest();
 			}
 			movable.setDest(ai.getCurrentDest());

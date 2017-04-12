@@ -49,6 +49,7 @@ public class App extends Application {
 		Path path1 = new Path();
 		sprite1.setAI(new AI(path1));
 		Movable movable1 = new Movable();
+		movable1.setSpeed(100);
 		sprite1.setMovable(movable1);
 		sprite1.setCollidable(new Collidable(new CollisionBound(image1)));
 		sprite1.setTeamMember(new TeamMember(1));
