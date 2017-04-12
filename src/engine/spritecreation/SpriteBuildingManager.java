@@ -17,6 +17,7 @@ public class SpriteBuildingManager {
 		
 	}
 
+
 	public void createSprite(AttributeData spriteData) {
 		SpriteBuilder SB = new SpriteBuilder(spriteData);
 		Sprite s = SB.getSprite();
@@ -39,9 +40,4 @@ public class SpriteBuildingManager {
 	private void addSpriteToModel(Sprite sprite){
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprite));
 	}
-	
-	
-	
-	
-
 }

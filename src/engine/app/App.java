@@ -20,6 +20,9 @@ import engine.sprite.movable.Movable;
 import engine.sprite.range.InRangeChecker;
 import engine.sprite.teammember.TeamMember;
 import engine.spritecreation.SpriteBuildingManager;
+import engine.sprite.collision.CollisionChecker;
+import engine.sprite.range.InRangeChecker;
+import engine.spritecreation.GameBuildingManager;
 import engine.view.View;
 import gameDevelopmentInterface.Path;
 import javafx.application.Application;
@@ -74,7 +77,7 @@ public class App extends Application {
 		View view = gameFactory.createView(camera);
 		
 		//sprite with attributes creator
-		SpriteBuildingManager spriteBuildingManager = gameFactory.createSpriteBuildingManager();
+		//GameBuildingManager gameBuildingManager = gameFactory.createGameBuildingManager();
 		
 		model.addSprite(sprite1);
 		model.addSprite(tower);

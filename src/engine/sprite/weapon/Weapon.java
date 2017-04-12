@@ -11,7 +11,12 @@ public class Weapon implements Attribute {
 	protected GamePoint targetPos;
 	protected Sprite target;
 	private Boolean isWeapon;
+<<<<<<< HEAD
 	private double attackPower;
+=======
+	private double damageDealt;
+	
+>>>>>>> 958501f4351c517f30bf40061795e52b1dac9551
 
 	public Weapon(Sprite o, Sprite t){
 		originPos = o.getPos();

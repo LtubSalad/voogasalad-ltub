@@ -7,7 +7,6 @@ import data.AttributeData;
 
 import engine.sprite.Attribute;
 import engine.sprite.Sprite;
-import engine.sprite.nodeholder.ImageNodeHolder;
 
 /**
  * @authors Tahia Emran and Matthew Tribby 
@@ -19,7 +18,6 @@ public class AttributeBuilder {
 	private Attribute myAttribute; 
 	private String attributeType; 
 	private AttributeData dataToRead; 
-	//private String implementation; 
 	private static final String ATTRIBUTE_BASE_PATH = "engine.sprite.";
 	
 
@@ -50,7 +48,6 @@ public class AttributeBuilder {
 	private void build() {
 		attributeType = dataToRead.getName(); 
 		String specificName = dataToRead.getImplementation();
-		// TESTING ONLY String specificName = dataToRead.getAttributes().get(0).getName();
 		
 		String completePath = ATTRIBUTE_BASE_PATH + attributeType.toLowerCase() + "." + specificName;
 		
@@ -59,7 +56,6 @@ public class AttributeBuilder {
 			Constructor <?> ctor = attributeClass.getConstructor(AttributeData.class);
 			Object obj = ctor.newInstance(dataToRead);
 			myAttribute = (Attribute) obj; 
-			//System.out.println("object created!!!!!!");
 		} 
 		catch (Exception e) {
 			throw new SpriteCreationException("Attribute class not found " + specificName);
@@ -69,7 +65,6 @@ public class AttributeBuilder {
 	
 	public void configSprite(Sprite s) {
 		String methodName = "set" + attributeType; 
-		//System.out.println("method name is " + methodName);
 		try {
 			Method setter = s.getClass().getMethod(methodName, Class.forName(ATTRIBUTE_BASE_PATH + attributeType.toLowerCase() + "." + attributeType));
 			setter.invoke(s, myAttribute);
