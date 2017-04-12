@@ -9,13 +9,17 @@ import engine.sprite.Sprite;
  *
  */
 public interface Model {
+	
+	public void refreshSprites();
+	
 	public void addSprite(Sprite sprite);
 	
 	public void removeSprite(Sprite sprite);
 	
 	public List<Sprite> getSprites();
+	
 	public Player getPlayer();
 	
-	public void update(double dt);
+	public void updatePositions(double dt);
 	
 }

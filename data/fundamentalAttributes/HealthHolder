@@ -1,0 +1,12 @@
+<data.AttributeData>
+  <attributeType>HealthHolder</attributeType>
+  <changeableName>true</changeableName>
+  <attributeScripts/>
+  <attributeVariables>
+    <entry>
+      <string>health</string>
+      <string></string>
+    </entry>
+  </attributeVariables>
+  <subAttributes/>
+</data.AttributeData>

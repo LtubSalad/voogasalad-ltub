@@ -6,6 +6,8 @@ import java.util.List;
 
 import data.AttributeData;
 import data.AttributesForScreenUse;
+import gameDevelopmentInterface.attributeCreator.AttributeDataFactory;
+import gameDevelopmentInterface.attributeCreator.AttributeDisplay;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 

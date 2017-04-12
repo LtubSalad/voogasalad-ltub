@@ -1,0 +1,12 @@
+<data.AttributeData>
+  <attributeType>TeamMember</attributeType>
+  <changeableName>true</changeableName>
+  <attributeScripts/>
+  <attributeVariables>
+    <entry>
+      <string>number</string>
+      <string></string>
+    </entry>
+  </attributeVariables>
+  <subAttributes/>
+</data.AttributeData>

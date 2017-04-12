@@ -9,12 +9,14 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import data.AttributeData;
-import data.ScreenModelData;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class XStreamHandler {
 	//TODO: Remove duplicate code using generics
+
+
+	
 	public AttributeData getAttributeFromFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
@@ -23,11 +25,29 @@ public class XStreamHandler {
 		return attribute;
 	}
 	
+	public AttributeData getAttributeFromFile(File file) {
+		XStream xstream = new XStream(new DomDriver());
+		AttributeData attribute = (AttributeData)xstream.fromXML(file);
+		return attribute;
+	}
+	
+	public <T> T getObjectFromFile(Class<T> clazz, File file){
+		XStream xstream = new XStream(new DomDriver());
+		T object = (T)xstream.fromXML(file);
+		return object;
+	}
+	
 	public List<AttributeData> getScreenModelFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
 		File attributeFile = chooser.showOpenDialog(new Stage());
 		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(attributeFile);
+		return attribute;
+	}
+	
+	public List<AttributeData> getScreenModel(File file) {
+		XStream xstream = new XStream(new DomDriver());
+		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(file);
 		return attribute;
 	}
 
