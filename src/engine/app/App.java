@@ -1,6 +1,8 @@
 package engine.app;
 
 
+import java.io.File;
+
 import engine.camera.Camera;
 import engine.gameloop.GameLoop;
 import engine.model.Model;
@@ -32,7 +34,7 @@ public class App extends Application {
 		
 		//sprite with attributes creator
 		GameBuildingManager gameBuildingManager = gameFactory.createGameBuildingManager();
-		gameBuildingManager.buildFromFile(gameFactory.getFile());
+		gameBuildingManager.buildFromFile(new File("data/XMLfiles/test_setup.xml"));
 		
 		// game loop 
 		GameLoop gameLoop = gameFactory.createGameLoop();

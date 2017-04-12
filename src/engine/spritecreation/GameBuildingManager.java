@@ -35,6 +35,7 @@ public class GameBuildingManager {
 	}
 	
 	public void buildFromFile(File file){
+		System.out.println(file.getName());
 		this.fileAttributes = fileHandler.getScreenModel(file);
 	}
 	
