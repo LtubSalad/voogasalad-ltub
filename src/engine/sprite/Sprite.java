@@ -9,7 +9,6 @@ import commons.MathUtils;
 import engine.camera.GamePoint;
 import engine.player.Player;
 import engine.sprite.attack.Attacker;
-import engine.sprite.attack.Weapon;
 import engine.sprite.collision.Collidable;
 import engine.sprite.health.HealthHolder;
 import engine.sprite.images.ImageSet;
@@ -18,7 +17,8 @@ import engine.sprite.movable.Movable;
 import engine.sprite.nodeholder.NodeHolder;
 import engine.sprite.spritespawner.NonSpawningSpriteSpawner;
 import engine.sprite.spritespawner.SpriteSpawner;
-import engine.sprite.team.Team;
+import engine.sprite.teammember.TeamMember;
+import engine.sprite.weapon.Weapon;
 
 public class Sprite  {
 
@@ -37,7 +37,7 @@ public class Sprite  {
 	private Weapon weapon;
 	private HealthHolder healthHolder;
 	private SpriteSpawner spriteSpawner;
-	private Team team;
+	private TeamMember team;
 	private NodeHolder nodeHolder;
 
 
@@ -216,7 +216,7 @@ public class Sprite  {
 		this.weapon = weapon;
 	}
 	
-	public void setTeam(Team team){
+	public void setTeam(TeamMember team){
 		this.team = team;
 	}	
 	

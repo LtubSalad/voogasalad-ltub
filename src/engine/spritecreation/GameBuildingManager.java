@@ -2,6 +2,7 @@ package engine.spritecreation;
 
 import java.util.List;
 
+import bus.EventBus;
 import data.AttributeData;
 import utilities.XStreamHandler;
 
@@ -15,19 +16,24 @@ import utilities.XStreamHandler;
 public class GameBuildingManager {
 	private XStreamHandler fileHandler; 
 	private List<AttributeData> fileAttributes; 
-	public GameBuildingManager(){
+	private SpriteBuildingManager spriteBuilder;
+	private EventBus bus;
+	
+	public GameBuildingManager(EventBus bus){
 		this.fileHandler = new XStreamHandler();
-		fileAttributes = fileHandler.getScreenModelFile();
-		printTestFile();
+		this.fileAttributes = fileHandler.getScreenModelFile();
+		this.spriteBuilder = new SpriteBuildingManager(bus);
+		this.bus = bus;
 	}
 	public GameBuildingManager(XStreamHandler xSH) {
 		this.fileHandler = xSH; 
 	}
-	public void printTestFile() {
-		for (AttributeData a : fileAttributes){
-			System.out.println("attribute name is " + a.getName());
-		}
-	}
+	
+//	public void printTestFile() {
+//		for (AttributeData a : fileAttributes){
+//			System.out.println("attribute name is " + a.getName());
+//		}
+//	}
 	
 	
 	 
