@@ -6,7 +6,7 @@ import engine.gameloop.GameLoop;
 import engine.model.Model;
 import engine.model.PlayerLocalModel;
 import engine.player.Player;
-import engine.sprite.collision.CollisionChecker;
+import engine.sprite.collidable.CollisionChecker;
 import engine.sprite.range.InRangeChecker;
 import engine.spritecreation.GameBuildingManager;
 import engine.view.View;

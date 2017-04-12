@@ -1,4 +1,4 @@
-package engine.sprite.collision;
+package engine.sprite.collidable;
 
 import data.AttributeData;
 import engine.sprite.Attribute;

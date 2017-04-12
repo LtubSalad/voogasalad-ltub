@@ -2,7 +2,9 @@ package engine.spritecreation;
 
 import java.util.List;
 
-import engine.sprite.Sprite; 
+import engine.sprite.Sprite;
+import engine.sprite.images.ImageSet;
+import engine.sprite.images.LtubImage;
 import data.AttributeData;
 
 
@@ -23,9 +25,14 @@ public class SpriteBuilder {
 
 	private void createAttributes() {		  
 		List<AttributeData> compositionAttributes = myData.getAttributes(); 
+		
 		for (AttributeData att : compositionAttributes){
-			AttributeBuilder AB = new AttributeBuilder(myData);
-			AB.configSprite(mySprite);
+			if(!att.getName().equals("NodeHolder")){
+				AttributeBuilder AB = new AttributeBuilder(att);
+				AB.configSprite(mySprite);
+			}else{ // TODO: temporary, need to better integrate
+				mySprite.setImageSet(new ImageSet(new LtubImage(att.getVariable("filepath"))));
+			}
 		}
 	}
 	

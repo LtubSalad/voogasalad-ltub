@@ -1,5 +1,6 @@
 package engine.spritecreation;
 
+import bus.BasicEventBus;
 import bus.EventBus;
 import data.AttributeData;
 import engine.model.SpriteModelEvent;
@@ -12,15 +13,19 @@ public class SpriteBuildingManager {
 	public SpriteBuildingManager(EventBus bus) {
 		this.bus = bus;
 	}
+	
+	public SpriteBuildingManager(){
+		this.bus = new BasicEventBus();
+	}
 
 	public void createSprite(AttributeData spriteData) {
 		SpriteBuilder SB = new SpriteBuilder(spriteData);
 		Sprite s = SB.getSprite();
 		
 		if(checkIfTile(spriteData))
-			addSpriteToModel(s);
-		else{
 			addTileToModel(s);
+		else{
+			addSpriteToModel(s);
 		}
 	}
 	

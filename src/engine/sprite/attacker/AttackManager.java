@@ -1,9 +1,9 @@
-package engine.sprite.attack;
+package engine.sprite.attacker;
 
 import bus.EventBus;
 import engine.model.SpriteModelEvent;
 import engine.sprite.Sprite;
-import engine.sprite.attack.AttackEvent;
+import engine.sprite.attacker.AttackEvent;
 
 /**
  * Manage actions to do when an attack is launched
