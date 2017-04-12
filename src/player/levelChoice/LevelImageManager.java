@@ -3,17 +3,20 @@
  */
 package player.levelChoice;
 
+import java.util.ResourceBundle;
+
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import player.App;
 
 /**
  * @author Zhiyong
  *
  */
 public class LevelImageManager {
-	
-	public static final String IMAGE_NAME = "resources/select.png";
+
+	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	
 	private int width;
 	private int height;
@@ -26,7 +29,7 @@ public class LevelImageManager {
 	
 	public Rectangle getRectangle(){
 		Rectangle rec = new Rectangle(100,-10*height,width,height);
-		Image image = new Image(IMAGE_NAME);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString("selectImagePath")));
 		rec.setFill(new ImagePattern(image));
 		return rec;
 	}
