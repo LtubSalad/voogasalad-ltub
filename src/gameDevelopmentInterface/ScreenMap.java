@@ -1,6 +1,7 @@
 package gameDevelopmentInterface;
 
 import data.AttributeData;
+import engine.camera.GamePoint;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
@@ -11,7 +12,6 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Pair;
 
 /**
  * This class will hold the grid on which players can place sprites or tiles to set up their
@@ -21,11 +21,15 @@ import javafx.util.Pair;
  */
 
 public class ScreenMap extends StackPane {
+	private static final String Y_POSITION = "yPosition";
+	private static final String X_POSITION = "xPosition";
+	private static final String IMAGE = "image";
+	private static final String IMAGE_HOLDER = "ImageHolder";
 	private static final int SCREEN_SIZE = 350;
 	private GridPane myGrid;
 	private ScreenModelCreator mySMC;
 	private static final String PATH_TO_IMAGE_FILES = "images/characters/";
-	private int NUM_ROWS = 10; //make these two as parameters to the constructor, so the user can set them?
+	private int NUM_ROWS = 10;
 	private int NUM_COLS = 8;
 	
 	public ScreenMap(ScreenModelCreator smc) {
@@ -39,11 +43,16 @@ public class ScreenMap extends StackPane {
 		this.setHeight(SCREEN_SIZE);
 		this.setWidth(SCREEN_SIZE);
 		makeGrid();
-		this.getChildren().add(myGrid);
 	}
 	
-	public GridPane getGrid() {
-		return myGrid;
+	public void setNumRows(int numRows) {
+		NUM_ROWS = numRows;
+		makeGrid();
+	}
+	
+	public void setNumCols(int numCols) {
+		NUM_COLS = numCols;
+		makeGrid();
 	}
 	
 	public int getNumRows() {
@@ -53,20 +62,26 @@ public class ScreenMap extends StackPane {
 		return NUM_COLS;
 	}
 	
-	public Pair<Integer, Integer> getCoordOfMouseHover(double x, double y) {
+	public GridPane getGrid() {
+		return myGrid;
+	}
+	
+	public GamePoint getCoordOfMouseHover(double x, double y) {
 		Bounds boundsInScreen = myGrid.localToScreen(myGrid.getBoundsInLocal());
 		int colNum = getColOrRowPlacement(boundsInScreen.getMinX(), myGrid.getWidth(), myGrid.getWidth()/NUM_COLS, x, boundsInScreen);
 		int rowNum = getColOrRowPlacement(boundsInScreen.getMinY(), myGrid.getHeight(), myGrid.getHeight()/NUM_ROWS, y, boundsInScreen);
-		return new Pair<Integer, Integer>(colNum, rowNum);
+		return new GamePoint(colNum, rowNum);
 	}
 	
 	private void redrawGrid() {
 		for (AttributeData attr : mySMC.getScreenData().getAllObjectsOnScreen()) {
-			Integer xPos = Integer.parseInt(attr.getVariable("xPosition"));
-			Integer yPos = Integer.parseInt(attr.getVariable("yPosition"));
+			Double xPosDub = Double.parseDouble(attr.getVariable(X_POSITION));
+			Double yPosDub = Double.parseDouble(attr.getVariable(Y_POSITION));
+			Integer xPos = xPosDub.intValue();
+			Integer yPos = yPosDub.intValue();
 			attr.getAttributes().forEach(att -> {
-				if (att.getName().equals("ImageHolder")) {
-					String imageName = attr.getVariable("image");
+				if (att.getName().equals(IMAGE_HOLDER)) {
+					String imageName = attr.getVariable(IMAGE);
 					Image image = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES + imageName),
 							SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, false, false);
 					ImageView imageView = new ImageView(image);
@@ -107,6 +122,8 @@ public class ScreenMap extends StackPane {
 				myGrid.add(new Rectangle(SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, Color.WHITESMOKE), j, i);
 			}
 		}
+		this.getChildren().clear();
+		this.getChildren().add(myGrid);
 	}
 
 }

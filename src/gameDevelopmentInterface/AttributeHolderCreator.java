@@ -1,6 +1,5 @@
 package gameDevelopmentInterface;
 
-
 import data.AttributeData;
 import data.AttributesForScreenUse;
 import javafx.scene.control.Button;
@@ -16,31 +15,33 @@ import utilities.XStreamHandler;
  *         file producer when needed.
  */
 public class AttributeHolderCreator extends BorderPane {
-	// Put in attribute data from an attribute
+	private static final String LOAD_ATTRIBUTE_FROM_FILE = "Load attribute from file";
+	private static final String SAVE_ATTRIBUTE_TO_FILE = "Save attribute to file";
+	private static final String CHOOSE_ATTRIBUTE_NAME = "Choose attribute name";
 	private AttributeSelectorPane attributeSelectorPane;
 	private AttributeCustomizerPane attributeCustomizerPane;
 	private AttributeData attributeHolder;
 	private XStreamHandler dataHandler;
-	private final String userCreatedAttributesFile = "data/attributeSkeletons/userCreatedAttributes";
 	private AttributesForScreenUse myAttributesModel;
 
 	public AttributeHolderCreator(AttributesForScreenUse attributesModel) {
 		myAttributesModel = attributesModel;
-		attributeHolder=new AttributeData("Choose attribute name",true,null);
+
+		attributeHolder=new AttributeData(CHOOSE_ATTRIBUTE_NAME,true,true,null);
 		instantiate();
 	}
 	
-	public void instantiate(){
+	private void instantiate(){
 		dataHandler=new XStreamHandler();
 		HBox saveAndLoad=new HBox();
-		Button saveButton = new Button("Save attribute to file");
+		Button saveButton = new Button(SAVE_ATTRIBUTE_TO_FILE);
 		saveButton.setOnAction((c)->createClassData());
-		Button loadButton= new Button("Load attribute from file");
+		Button loadButton= new Button(LOAD_ATTRIBUTE_FROM_FILE);
 		saveAndLoad.getChildren().addAll(saveButton,loadButton);
 		loadButton.setOnAction((click)->{
 			attributeHolder=dataHandler.getAttributeFromFile();
 			instantiate();
-			System.out.print(attributeHolder.getName());
+			//System.out.print(attributeHolder.getName());
 			
 		});
 		attributeSelectorPane = new AttributeSelectorPane(myAttributesModel, attributeHolder);
@@ -51,8 +52,11 @@ public class AttributeHolderCreator extends BorderPane {
 		this.setBottom(saveAndLoad);
 		
 	}
-	// Produce XML file for this class' data.
-	public void createClassData() {
+	
+	/**
+	 * Produce XML file for this class' data.
+	 */
+	private void createClassData() {
 		attributeCustomizerPane.updateAttribute();
 		dataHandler.saveToFile(attributeHolder);
 	}

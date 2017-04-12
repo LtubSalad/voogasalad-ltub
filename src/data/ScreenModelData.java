@@ -49,10 +49,4 @@ public class ScreenModelData {
 		myScreenData.addAll(datas);
 	}
 	
-	public void printCoordsOfScreenObjects() {
-		myScreenData.forEach(attr -> {
-			System.out.println();
-			
-		});
-	}
 }

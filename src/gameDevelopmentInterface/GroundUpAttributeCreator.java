@@ -16,7 +16,7 @@ public class GroundUpAttributeCreator extends BorderPane{
 	
 	public GroundUpAttributeCreator(){
 		dataHandler=new XStreamHandler();
-		data=new AttributeData("choose name",true,null);
+		data=new AttributeData("choose name",true,true,null);
 		myPane=new AttributeCustomizerPane(data,true,true);
 		Button update=new Button("Update attribute");
 		update.setOnAction((click)->{

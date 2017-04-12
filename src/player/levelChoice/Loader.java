@@ -10,9 +10,14 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
@@ -22,7 +27,7 @@ import javafx.util.Duration;
 public class Loader {
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 300;
-	public static final Integer STARTTIME = 6;
+	public static final Integer STARTTIME = 11;
 	private Label timerLabel = new Label();
 	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME*100);
 
@@ -32,14 +37,20 @@ public class Loader {
 
 	public void show(){
 		Stage primaryStage = new Stage();
-		primaryStage.setTitle("Game Loading");
+		primaryStage.initStyle(StageStyle.UNDECORATED);
+		//primaryStage.setTitle("Game Loading");
 		Group root = new Group();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
+		scene.getStylesheets().setAll("/styleSheets/login.css");
+		Image backgroundImage = new Image("resources/loader.png");
+		scene.setFill(new ImagePattern(backgroundImage));
 
 		// Bind the timerLabel text property to the timeSeconds property
 		timerLabel.textProperty().bind(timeSeconds.divide(100).asString());
 		//timerLabel.setTextFill(Color.RED);
 		//timerLabel.setStyle("-fx-font-size: 4em;");
+
+		timerLabel.setId("label");
 
 		ProgressBar progressBar = new ProgressBar();
 		progressBar.progressProperty().bind(
@@ -51,6 +62,7 @@ public class Loader {
 		//loadingLabel.setTextFill(Color.RED);
 		//loadingLabel.setStyle("-fx-font-size: 4em;");
 		// gap between components is 20
+		loadingLabel.setId("label");
 		VBox vb = new VBox(20);     
 		// center the components within VBox
 		vb.setAlignment(Pos.CENTER);        
@@ -59,7 +71,7 @@ public class Loader {
 		vb.getChildren().addAll( timerLabel, progressBar, loadingLabel);
 		
 		root.getChildren().add(vb);
-		scene.getStylesheets().add(getClass().getClassLoader().getResource("resources/login.css").toExternalForm());
+		scene.getStylesheets().setAll("/styleSheets/login.css");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 

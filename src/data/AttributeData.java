@@ -29,7 +29,7 @@ public class AttributeData implements Serializable {
 	private Map<String,List<String>> listVariables;
 	private List<AttributeData> subAttributes;
 	
-	public AttributeData(String name, boolean changeableName, String implementationSpecifier){
+	public AttributeData(String name, boolean changeableName, boolean isConcrete, String implementationSpecifier){
 		attributeVariables=new HashMap<>();
 		attributeScripts=new HashMap<>();
 		listVariables=new HashMap<>();
@@ -40,7 +40,7 @@ public class AttributeData implements Serializable {
 	}
 	
 	public AttributeData(String name){
-		this(name, false,null);
+		this(name, false,false,null);
 	}
 	
 	public Map<Pair<String, List<String>>,String> getScripts(){
