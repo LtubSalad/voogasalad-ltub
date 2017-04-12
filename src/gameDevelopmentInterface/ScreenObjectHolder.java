@@ -40,9 +40,23 @@ public class ScreenObjectHolder extends HBox {
 			@Override
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
 				System.out.println("Heard a change in the model");
-				myAttributesModel.getScreenAttributes().forEach(Attr -> {
-					if(Attr.hasVariable(IMAGE_HOLDER)){
-						addObject(Attr);
+				myAttributesModel.getScreenAttributes().forEach(attr -> {
+					if (attr.hasVariable(IMAGE_HOLDER)){
+						String imageName = attr.getVariable(IMAGE_HOLDER);
+						boolean wasFound = false;
+						if (myScreenObjects.size() == 0) {
+							addObject(attr);
+						}
+						for (Pair<String, Image> p : myScreenObjects.keySet()) {
+							if (p.getKey().equals(imageName)) {
+								wasFound = true;
+							}
+							if (!wasFound) {
+								addObject(attr);
+							}
+						}
+						
+						//addObject(attr);
 					}
 				});
 			}
