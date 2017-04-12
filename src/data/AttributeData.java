@@ -32,7 +32,6 @@ public class AttributeData implements Serializable {
 	public AttributeData(AttributeData attrToCopy) {
 		this.attributeType = attrToCopy.attributeType;
 		this.changeableName = attrToCopy.changeableName;
-		this.isConcrete = attrToCopy.isConcrete;
 		this.implementationSpecifier = attrToCopy.implementationSpecifier;
 		this.attributeScripts = attrToCopy.attributeScripts;
 		this.attributeVariables = attrToCopy.attributeVariables;
@@ -99,6 +98,10 @@ public class AttributeData implements Serializable {
 			}
 		}
 		return null;
+	}
+	
+	public void setImplementation(String s){
+		implementationSpecifier=s;
 	}
 	
 	public String getImplementation(){

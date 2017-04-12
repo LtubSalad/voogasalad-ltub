@@ -1,4 +1,4 @@
-package engine.sprite.attack;
+package engine.sprite.weapon;
 
 import engine.camera.GamePoint;
 import engine.sprite.Attribute;
@@ -11,7 +11,7 @@ public class Weapon implements Attribute {
 	protected GamePoint targetPos;
 	protected Sprite target;
 	private Boolean isWeapon;
-	private double damageDealt;
+	private double attackPower;
 
 	public Weapon(Sprite o, Sprite t){
 		originPos = o.getPos();
@@ -19,6 +19,7 @@ public class Weapon implements Attribute {
 			target = t;
 		}
 		isWeapon = false;
+		
 	}
 
 	public GamePoint getThisPos(){
@@ -33,8 +34,12 @@ public class Weapon implements Attribute {
 		return target;
 	}
 
-	public double getDamageDealt(){
-		return damageDealt;
+	public void setAttackPower(double ap){
+		attackPower = ap;
+	}
+	
+	public double getAttackPower(){
+		return attackPower;
 	}
 
 }

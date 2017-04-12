@@ -11,15 +11,16 @@ import engine.player.Player;
 import engine.sprite.ai.AI;
 import engine.sprite.ai.AI.AIType;
 import engine.sprite.attack.Attacker;
-import engine.sprite.attack.Weapon;
 import engine.sprite.collision.Collidable;
 import engine.sprite.health.HealthHolder;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
 import engine.sprite.movable.Movable;
+import engine.sprite.nodeholder.NodeHolder;
 import engine.sprite.spritespawner.NonSpawningSpriteSpawner;
 import engine.sprite.spritespawner.SpriteSpawner;
-import engine.sprite.team.Team;
+import engine.sprite.teammember.TeamMember;
+import engine.sprite.weapon.Weapon;
 
 public class Sprite  {
 
@@ -38,8 +39,9 @@ public class Sprite  {
 	private Weapon weapon;
 	private HealthHolder healthHolder;
 	private SpriteSpawner spriteSpawner;
-	private Team team;
 	private AI ai;
+	private TeamMember team;
+	private NodeHolder nodeHolder;
 
 
 	/**
@@ -158,7 +160,7 @@ public class Sprite  {
 		return Optional.ofNullable(spriteSpawner);
 	}
 
-	public Optional<Team> getTeam(){
+	public Optional<TeamMember> getTeamMember(){
 		return Optional.ofNullable(team);
 	}
 	
@@ -166,6 +168,11 @@ public class Sprite  {
 		return Optional.ofNullable(ai);
 	}
 
+	
+	public Optional<Attribute> getNodeHolder(){
+		//System.out.println("it iz a thing " + this.nodeHolder.getClass().getName() );
+		return Optional.ofNullable(nodeHolder);
+	}
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
@@ -184,7 +191,7 @@ public class Sprite  {
 		double tRemain = dt;
 		
 		while (movable != null && !MathUtils.doubleEquals(tRemain, 0)){
-			if (ai != null && pos.equals(ai.getFinalDest())) {
+			if (ai != null && ai.getFinalDest() != null && pos.equals(ai.getFinalDest())) {
 				break;
 			}
 			if (ai != null && pos.equals(ai.getCurrentDest())){
@@ -195,17 +202,6 @@ public class Sprite  {
 			this.pos = movable.getCurrPos();
 		}
 
-		//TODO integrate click mover and path follower
-//		//trigger Movable
-//		if (movable != null && !actionQueue.isEmpty()){
-//			actionQueue.executeNextAction();
-//		}
-//		while (!MathUtils.doubleEquals(tRemain, 0) && getMovable().isPresent()) {
-//			tRemain = movable.update(dt);
-//			if (!MathUtils.doubleEquals(tRemain, 0) && !actionQueue.isEmpty()) {
-//				actionQueue.executeNextAction();
-//			}
-//		}
 	}
 
 
@@ -229,11 +225,20 @@ public class Sprite  {
 		this.weapon = weapon;
 	}
 	
-	public void setTeam(Team team){
+	public void setTeamMember(TeamMember team){
 		this.team = team;
 	}	
 	
 	public void setAI(AI ai){
 		this.ai = ai;
+	}
+	
+	public void setHealthHolder(HealthHolder healthholder){
+		this.healthHolder = healthholder;
+	}
+	
+	public void setNodeHolder(NodeHolder nodeHolder){
+		this.nodeHolder = nodeHolder;
+		System.out.println("TESTTTT: " + this.nodeHolder.getClass().getName());
 	}
 }

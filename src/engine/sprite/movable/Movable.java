@@ -16,19 +16,17 @@ public class Movable implements Attribute {
 	private GamePoint currPos;
 
 	public Movable(AttributeData data){
-		this.speed = Double.parseDouble(data.getVariable("speed"));
-		
+		this.speed = Double.parseDouble(data.getVariable("speed"));	
 	}
 	
 	public Movable(){
-		//TODO: delete this 
+		
 	}
 //	
 //	public Movable(Sprite sprite) {
 //		this.sprite = sprite;
 //		isMovable = false;
 //	}
-	
 	
 	public void setSpeed(double speed) {
 		this.speed = speed;
@@ -42,7 +40,9 @@ public class Movable implements Attribute {
 	}
 
 	public double update(double dt, GamePoint initialPos) {
-		
+		if (pDest == null){
+			return dt;
+		}
 		double xDest = pDest.x();
 		double yDest = pDest.y();
 		currPos = initialPos;

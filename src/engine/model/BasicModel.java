@@ -10,13 +10,21 @@ import engine.sprite.Sprite;
 public class BasicModel implements Model {
 	private EventBus bus;
 	private Player player;
-	private List<Sprite> sprites = new ArrayList<>();
-
+	
+	private SpriteModel sprites; 
+	private ISpriteHandler spriteHandler; 
+	private TileModel tiles; 
+	
 	public BasicModel(EventBus bus, Player player) {
 		this.bus = bus;
 		this.player = player;
+		sprites = new SpriteModel();
+		spriteHandler = sprites.getHandler();
+		tiles = new TileModel(); 
 		initHandlers();
 	}
+
+	
 
 	private void initHandlers() {
 		bus.on(SpriteModelEvent.ADD, (e) -> {
@@ -25,7 +33,12 @@ public class BasicModel implements Model {
 		bus.on(SpriteModelEvent.REMOVE, (e) -> {
 			removeSprite(e.getSprite());
 		});
-		
+		bus.on(TileModelEvent.ADD, (e) -> {
+			addTile(e.getSprite());
+		});
+		bus.on(TileModelEvent.REMOVE, (e) -> {
+			removeTile(e.getSprite());
+		});	
 	}
 
 	@Override
@@ -34,28 +47,40 @@ public class BasicModel implements Model {
 			System.out.println("Model received null sprite: " + sprite);
 		}
 		if (sprite != null) {
-			sprites.add(sprite);
+			spriteHandler.addSprite(sprite);
 		}
 	}
 	@Override
 	public void removeSprite(Sprite sprite) {
-		sprites.remove(sprite);
+		spriteHandler.removeSprite(sprite);
 	}
 	
 	@Override
 	public List<Sprite> getSprites() {
-		return sprites;
+		return spriteHandler.getSprites(); 
 	}
 
 	
 	@Override
 	public void updatePositions(double dt) {
-		for (Sprite sprite : sprites) {
+		for (Sprite sprite : spriteHandler.getSprites()) {
 			sprite.updatePos(dt);
 		}
 	}
 	@Override
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public void addTile(Sprite tile){
+		tiles.add(tile);
+	}
+	
+	public void removeTile(Sprite tile){
+		tiles.remove(tile);
+	}
+	
+	public List<Sprite> getTiles(){
+		return tiles.getTiles();
 	}
 }

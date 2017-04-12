@@ -27,6 +27,7 @@ public class AttributeHolderCreator extends BorderPane {
 	public AttributeHolderCreator(AttributesForScreenUse attributesModel) {
 		myAttributesModel = attributesModel;
 		attributeHolder=new AttributeData(CHOOSE_ATTRIBUTE_NAME,true,true,null);
+
 		instantiate();
 	}
 	

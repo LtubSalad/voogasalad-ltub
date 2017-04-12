@@ -19,15 +19,24 @@ public class AI implements Attribute {
 	private GamePoint currentDest;
 	private GamePoint finalDest = null;
 
-	public AI(AIType type, Path path) {
-		this.type = type; //TODO set AI type with AttributeData
-		this.path = path; //TODO set AI path
+	public AI(AttributeData data) {
+//		this.path = data.getVariable("path");
+//		this.type = type; //TODO set AI type with AttributeData
 		currentDest = path.getPath().poll(); //TODO make sure its GamePoint
 
 	}
 
+	public AI(Path path){
+		this.path = path;
+		currentDest = path.getPath().poll();
+	}
+	
 	public GamePoint getCurrentDest(){
 		return currentDest;
+	}
+	
+	public void setPath(Path path){
+		this.path = path;
 	}
 
 	public void updateCurrentDest(){

@@ -88,73 +88,13 @@ public class Path {
 	
 	private void makeDefaultPath() {
 		myPath.add(new GamePoint(0,0));
-		myPath.add(new GamePoint(1,0));
-		myPath.add(new GamePoint(1,1));
-		myPath.add(new GamePoint(0,1));
-		myPath.add(new GamePoint(0,2));
-		currCoord = myPath.poll();
-		nextCoord = myPath.poll();		
+		myPath.add(new GamePoint(100,0));
+		myPath.add(new GamePoint(100,100));
+		myPath.add(new GamePoint(0,100));
+		myPath.add(new GamePoint(0,200));
+	
 	}
 	
-//	public Queue<Pair<Integer, Integer>> getStartAndEndAndTurningPoints() {
-//		Queue<Pair<Integer, Integer>> startEndAndTurns = new LinkedList<Pair<Integer, Integer>>();
-//		Queue<Pair<Integer, Integer>> copyOfMyPath = new LinkedList<Pair<Integer, Integer>>(myPath);
-//		copyOfMyPath.poll(); //remove first element to offset the index
-//		int idx = 0;
-//		Integer currHeading = 0;
-//		Integer nextHeading = 0;
-//		for (Pair<Integer, Integer> currCoord : myPath) {
-//			Pair<Integer, Integer> nextCoord = copyOfMyPath.peek();
-//			//getNextHeading(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord)
-//			if (idx == 0 || idx == myPath.size()) {
-//				startEndAndTurns.add(currCoord);
-//			} else if (currHeading != nextHeading) {
-//				startEndAndTurns.add(currCoord);
-//			}
-//			idx += 1;
-//		}
-//		return myPath;
-//	}
-	
-//	private Integer getNextHeading(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord) {
-//		//next coord is above where the monster currently is
-//		if (isAbove(currCoord, nextCoord)) {
-//			updateCoords();
-//			return 0;
-//		} // next coord is left of where the monster currently is 
-//		else if (isLeft(currCoord, nextCoord)) {
-//			updateCoords();
-//			return 90;
-//		} // next coord is right of where the monster currently is 
-//		else if (isRight(currCoord, nextCoord)) {
-//			updateCoords();
-//			return 270;
-//		} // next coord is below where the monster currently is 
-//		else if (isBelow(currCoord, nextCoord)){
-//			updateCoords();
-//			return 180;
-//		}
-//		return 0;
-//	}
-//	
-//	private boolean isRight(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord) {
-//		return currCoord.getValue() == nextCoord.getValue() &&
-//				currCoord.getKey() < nextCoord.getKey();
-//	}
-//	
-//	private boolean isLeft(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord) {
-//		return currCoord.getValue() == nextCoord.getValue() &&
-//				currCoord.getKey() > nextCoord.getKey();
-//	}
-//	
-//	private boolean isAbove(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord) {
-//		return currCoord.getValue() > nextCoord.getValue() &&
-//				currCoord.getKey() == nextCoord.getKey();
-//	}
-//	
-//	private boolean isBelow(Pair<Integer, Integer> currCoord, Pair<Integer, Integer> nextCoord) {
-//		return currCoord.getValue() < nextCoord.getValue() &&
-//				currCoord.getKey() == nextCoord.getKey();
-//	}
+
 	
 }

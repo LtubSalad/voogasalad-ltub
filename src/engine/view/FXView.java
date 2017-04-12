@@ -103,27 +103,27 @@ public class FXView implements View {
 
 	@Override
 	public void render(PlayerLocalModel localModel) {
-		// TODO: filter the available stats and skills by the current player
-
-		// render selection graphics
-		gcSelected.clearRect(0, 0, WIDTH, HEIGHT - CANVAS_HEIGHT);
-		// gcSelected.fillOval(0, 0, 30, 40);
-		PlayerSelectionState selectionState = localModel.getPlayerSelectionState();
-		if (selectionState.getSelectionType() == SelectionType.SINGLE) {
-			Sprite selectedSprite = selectionState.getSelectedSprite();
-			gcSelected.drawImage(new Image(selectedSprite.getImage().getInputStream()), 20, 20);
-		}
-
-		// render selected skill
-		// TODO render mouse image from selected skill.
-		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
-		localModel.getPlayerSkillState().getSelectedSkill().ifPresent((skill) -> {
-			gc.drawImage(new Image(image2.getInputStream()), mousePos.x()-image2.getImagePivot().x(), 
-					mousePos.y() - image2.getImagePivot().y());
-		});
-		
-		// render skill box
-		skillBox.render(localModel.getPlayerSelectionState());
+//		// TODO: filter the available stats and skills by the current player
+//
+//		// render selection graphics
+//		gcSelected.clearRect(0, 0, WIDTH, HEIGHT - CANVAS_HEIGHT);
+//		// gcSelected.fillOval(0, 0, 30, 40);
+//		PlayerSelectionState selectionState = localModel.getPlayerSelectionState();
+//		if (selectionState.getSelectionType() == SelectionType.SINGLE) {
+//			Sprite selectedSprite = selectionState.getSelectedSprite();
+//			gcSelected.drawImage(new Image(selectedSprite.getImage().getInputStream()), 20, 20);
+//		}
+//
+//		// render selected skill
+//		// TODO render mouse image from selected skill.
+//		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
+//		localModel.getPlayerSkillState().getSelectedSkill().ifPresent((skill) -> {
+//			gc.drawImage(new Image(image2.getInputStream()), mousePos.x()-image2.getImagePivot().x(), 
+//					mousePos.y() - image2.getImagePivot().y());
+//		});
+//		
+//		// render skill box
+//		skillBox.render(localModel.getPlayerSelectionState());
 	}
 
 }

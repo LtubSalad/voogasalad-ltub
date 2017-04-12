@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import bus.EventBus;
 import engine.camera.GamePoint;
 import engine.sprite.Sprite;
-import engine.sprite.team.Team;
+import engine.sprite.teammember.TeamMember;
 
 /**
  * Check if one sprite is in the detection range of another sprite.
@@ -15,13 +15,13 @@ import engine.sprite.team.Team;
  *
  */
 public class InRangeChecker {
-	
+
 	private EventBus bus;
-	
+
 	public InRangeChecker(EventBus bus) {
 		this.bus = bus;
 	}
-	
+
 	/**
 	 * Loop over all sprites in the game and detect any in-range between any two sprites.
 	 * @param sprites A list of sprites in the model
@@ -36,21 +36,22 @@ public class InRangeChecker {
 			}
 		}
 	}
-	
+
 	public void checkInRange(List<Sprite> sprites, int a, int b){
 		List<Sprite> teamA = new ArrayList<>();
 		List<Sprite> teamB = new ArrayList<>();
 		for (Sprite s : sprites){
-			if (s.getTeam().isPresent()){
-				int i = s.getTeam().get().getTeamNum();
+			if (s.getTeamMember().isPresent()){
+				int i = s.getTeamMember().get().getTeamNum();
 				if (i == a){
-					teamA.add(s);
-				} else if (i == b) {
-					teamB.add(s);
+					if (i == a){
+						teamA.add(s);
+					} else if (i == b) {
+						teamB.add(s);
+					}
 				}
 			}
 		}
-
 		for (Sprite detector: teamA) {
 			for (Sprite detectee: teamB) {
 				if (detector == detectee) { continue; }
@@ -59,6 +60,7 @@ public class InRangeChecker {
 				}
 			}
 		}
+
 	}
 
 	private boolean inRange(Sprite detector, Sprite detectee) {

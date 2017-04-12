@@ -8,15 +8,20 @@ import engine.model.Model;
 import engine.model.PlayerLocalModel;
 import engine.player.Player;
 import engine.sprite.Sprite;
+import engine.sprite.ai.AI;
+import engine.sprite.attack.Attacker;
 import engine.sprite.collision.Collidable;
 import engine.sprite.collision.CollisionBound;
 import engine.sprite.collision.CollisionChecker;
+import engine.sprite.health.HealthHolder;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
 import engine.sprite.movable.Movable;
 import engine.sprite.range.InRangeChecker;
+import engine.sprite.teammember.TeamMember;
 import engine.spritecreation.SpriteBuildingManager;
 import engine.view.View;
+import gameDevelopmentInterface.Path;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -31,6 +36,37 @@ public class App extends Application {
 		// game player (user)
 		Player player = new Player("Player 1");
 		
+		// sprite1
+		Sprite sprite1 = new Sprite();
+		sprite1.setPos(new GamePoint(300, 100));
+		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
+		ImageSet imageSet1 = new ImageSet();
+		imageSet1.setImage(image1);
+		sprite1.setImageSet(imageSet1);
+		Path path1 = new Path();
+		sprite1.setAI(new AI(path1));
+		Movable movable1 = new Movable();
+		sprite1.setMovable(movable1);
+		sprite1.setCollidable(new Collidable(new CollisionBound(image1)));
+		sprite1.setTeamMember(new TeamMember(1));
+		sprite1.setHealthHolder(new HealthHolder(100));
+//		sprite1.setImageOffset(new Point(30, 30));
+
+		
+		//tower1
+		Sprite tower = new Sprite();
+		tower.setPos(new GamePoint(50,100));
+		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
+		ImageSet imageSet2 = new ImageSet();
+		imageSet2.setImage(image2);
+		tower.setImageSet(imageSet2);
+		tower.setTeamMember(new TeamMember(2));
+		tower.setCollidable(new Collidable(new CollisionBound(image2)));
+		tower.setAttacker(new Attacker());
+		
+		
+		
+		
 		// model and view
 		Model model = gameFactory.createModel(player);
 		PlayerLocalModel localModel = gameFactory.createPlayerLocalModel();
@@ -39,6 +75,9 @@ public class App extends Application {
 		
 		//sprite with attributes creator
 		SpriteBuildingManager spriteBuildingManager = gameFactory.createSpriteBuildingManager();
+		
+		model.addSprite(sprite1);
+		model.addSprite(tower);
 		
 		// game loop 
 		GameLoop gameLoop = gameFactory.createGameLoop();

@@ -3,7 +3,7 @@ package engine.sprite.health;
 import bus.EventBus;
 import engine.model.SpriteModelEvent;
 import engine.sprite.Sprite;
-import engine.sprite.attack.Weapon;
+import engine.sprite.weapon.Weapon;
 
 public class DecrementHealthManager {
 
@@ -22,7 +22,7 @@ public class DecrementHealthManager {
 			Weapon w = attacker.getWeapon().get();
 			HealthHolder hh = target.getHealthHolder().get();
 
-			double amt = w.getDamageDealt();			
+			double amt = w.getAttackPower();			
 			hh.decrementHealth(amt);
 			System.out.println("Health decremented");
 			
