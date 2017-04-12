@@ -1,0 +1,16 @@
+<data.AttributeData>
+  <attributeType>SpriteSpawner</attributeType>
+  <changeableName>true</changeableName>
+  <attributeScripts/>
+  <attributeVariables>
+    <entry>
+      <string>spriteChild</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>spawnTime</string>
+      <string></string>
+    </entry>
+  </attributeVariables>
+  <subAttributes/>
+</data.AttributeData>

@@ -49,6 +49,7 @@ public class Loader {
 		timerLabel.textProperty().bind(timeSeconds.divide(100).asString());
 		//timerLabel.setTextFill(Color.RED);
 		//timerLabel.setStyle("-fx-font-size: 4em;");
+
 		timerLabel.setId("label");
 
 		ProgressBar progressBar = new ProgressBar();

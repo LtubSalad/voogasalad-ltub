@@ -20,3 +20,7 @@
 #text {
  -fx-fill:  linear-gradient(orange , orangered);
 }
+
+#loadingLabel{
+	-fx-font-size: 4px;
+}

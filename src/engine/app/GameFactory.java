@@ -17,10 +17,11 @@ import engine.playerstate.PlayerSkillState;
 import engine.skill.SkillManager;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
-import engine.sprite.collision.CollisionChecker;
-import engine.sprite.collision.CollisionManager;
+import engine.sprite.collidable.CollisionChecker;
+import engine.sprite.collidable.CollisionManager;
 import engine.sprite.range.InRangeChecker;
 import engine.sprite.range.InRangeManager;
+import engine.spritecreation.GameBuildingManager;
 import engine.view.FXView;
 import engine.view.View;
 
@@ -100,5 +101,9 @@ public class GameFactory {
 	
 	public SkillManager createSkillManager() {
 		return new SkillManager(bus);
+	}
+	
+	public GameBuildingManager createGameBuildingManager(){
+		return new GameBuildingManager(bus);
 	}
 }
