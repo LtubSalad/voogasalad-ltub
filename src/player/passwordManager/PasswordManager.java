@@ -50,6 +50,7 @@ public class PasswordManager{
 		Label lblUserName = new Label("Username");		
 		Label lblPassword = new Label("Password");		
 		Button btnLogin = new Button("Login");
+		Button btnReset = new Button("Reset");
 
 		//Adding Nodes to GridPane layout
 
@@ -57,7 +58,8 @@ public class PasswordManager{
 		gridPane.add(txtUserName, 1, 0);
 		gridPane.add(lblPassword, 0, 1);
 		gridPane.add(pf, 1, 1);
-		gridPane.add(btnLogin, 2, 1);
+		gridPane.add(btnLogin, 2, 0);
+		gridPane.add(btnReset, 2, 1);
 		gridPane.add(lblMessage, 1, 2);
 
 		//Reflection for gridPane
@@ -81,6 +83,7 @@ public class PasswordManager{
 
 		gridPane.setId("root");
 		btnLogin.setId("btnLogin");
+		btnReset.setId("btnReset");
 		text.setId("text");
 
 		//Add HBox and GridPane layout to BorderPane Layout
@@ -93,18 +96,22 @@ public class PasswordManager{
 
 		primaryStage.show();
 		//Action for btnLogin
-		btnLogin.setOnAction(e -> buttonAction(primaryStage));
+		btnLogin.setOnAction(e -> buttonLoginAction(primaryStage));
 		
+		//Action for btnLogin
+		btnReset.setOnAction(e -> buttonResetAction(primaryStage));
+
 		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode(), primaryStage));
 	}
 
+
 	private void handleKeyInput(KeyCode code, Stage primaryStage) {
 		if(code == KeyCode.ENTER ){
-			buttonAction(primaryStage);
+			buttonLoginAction(primaryStage);
 		}
 		
 	}
-	private void buttonAction(Stage primaryStage) {
+	private void buttonLoginAction(Stage primaryStage) {
 
 		checkUser = txtUserName.getText().toString();
 		checkPw = pf.getText().toString();
@@ -121,4 +128,10 @@ public class PasswordManager{
 		pf.setText("");
 
 	}
+	
+	private void buttonResetAction(Stage primaryStage) {
+		txtUserName.clear();
+		pf.clear();
+	}
+	
 }
