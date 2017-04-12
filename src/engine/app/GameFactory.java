@@ -106,4 +106,8 @@ public class GameFactory {
 	public GameBuildingManager createGameBuildingManager(){
 		return new GameBuildingManager(bus);
 	}
+	
+	public void loadGame(String filepath){
+		;
+	}
 }
