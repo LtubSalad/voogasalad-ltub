@@ -30,10 +30,10 @@ public class CollisionChecker {
 	
 	private boolean collides(Sprite s1, Sprite s2) {
 		GamePoint pos1 = s1.getPos();
-		CollisionBound bound1 = ((Collidable) s1.getCollidable().get()).getCollisionBound();
+		CollisionBound bound1 = s1.getCollidable().get().getCollisionBound();
 		Polygon polygon1 = getFXPolygon(bound1.getBoundPoints(), pos1);
 		GamePoint pos2 = s2.getPos();
-		CollisionBound bound2 = ((Collidable) s2.getCollidable().get()).getCollisionBound();
+		CollisionBound bound2 = s2.getCollidable().get().getCollisionBound();
 		Polygon polygon2 = getFXPolygon(bound2.getBoundPoints(), pos2);
 		return polygon1.intersects(polygon2.getBoundsInLocal());
 	}
@@ -57,8 +57,7 @@ public class CollisionChecker {
 			return s.getWeapon().isPresent();
 		}).collect(Collectors.toList());
 		for (Sprite s: collidableWeapons) {
-			Weapon weapon = (Weapon) s.getWeapon().get(); //TODO remove type-casting
-			Sprite target = weapon.getTarget();
+			Sprite target = s.getWeapon().get().getTarget();
 			if (collides(s, target)){
 				bus.emit(new DecrementHealthEvent(DecrementHealthEvent.ANY, s, target));
 			}

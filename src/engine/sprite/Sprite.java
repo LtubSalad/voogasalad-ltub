@@ -8,6 +8,8 @@ import java.util.Optional;
 import commons.MathUtils;
 import engine.camera.GamePoint;
 import engine.player.Player;
+import engine.sprite.ai.AI;
+import engine.sprite.ai.AI.AIType;
 import engine.sprite.attack.Attacker;
 import engine.sprite.attack.Weapon;
 import engine.sprite.collision.Collidable;
@@ -37,6 +39,7 @@ public class Sprite  {
 	private HealthHolder healthHolder;
 	private SpriteSpawner spriteSpawner;
 	private Team team;
+	private AI ai;
 
 
 	/**
@@ -60,6 +63,7 @@ public class Sprite  {
 		healthHolder = null;
 		spriteSpawner = null;
 		team = null;
+		ai = null;
 	}
 
 	public void setImageSet(ImageSet imageSet) {
@@ -130,32 +134,36 @@ public class Sprite  {
 //		return this.movable;
 //	}
 
-	public Optional<Attribute> getMovable() {
+	public Optional<Movable> getMovable() {
 		return Optional.ofNullable(movable);
 	}
 
-	public Optional<Attribute> getCollidable() {
+	public Optional<Collidable> getCollidable() {
 		return Optional.ofNullable(collidable);
 	}
 
-	public Optional<Attribute> getAttacker() {
+	public Optional<Attacker> getAttacker() {
 		return Optional.ofNullable(attacker);
 	}
 
-	public Optional<Attribute> getWeapon() {
+	public Optional<Weapon> getWeapon() {
 		return Optional.ofNullable(weapon);
 	}
 
-	public Optional<Attribute> getHealthHolder(){
+	public Optional<HealthHolder> getHealthHolder(){
 		return Optional.ofNullable(healthHolder);
 	}
 
-	public Optional<Attribute> getSpawner(){
+	public Optional<SpriteSpawner> getSpawner(){
 		return Optional.ofNullable(spriteSpawner);
 	}
 
-	public Optional<Attribute> getTeam(){
+	public Optional<Team> getTeam(){
 		return Optional.ofNullable(team);
+	}
+	
+	public Optional<AI> getAI(){
+		return Optional.ofNullable(ai);
 	}
 
 	public void setPlayer(Player player) {
@@ -174,18 +182,30 @@ public class Sprite  {
 
 	public void updatePos(double dt) {
 		double tRemain = dt;
-		// TODO: this piece of actions queueing code has to be improved
-
-		//trigger Movable
-		if (movable != null && !actionQueue.isEmpty()){
-			actionQueue.executeNextAction();
-		}
-		while (!MathUtils.doubleEquals(tRemain, 0) && getMovable().isPresent()) {
-			tRemain = movable.update(dt);
-			if (!MathUtils.doubleEquals(tRemain, 0) && !actionQueue.isEmpty()) {
-				actionQueue.executeNextAction();
+		
+		while (movable != null && !MathUtils.doubleEquals(tRemain, 0)){
+			if (ai != null && pos.equals(ai.getFinalDest())) {
+				break;
 			}
+			if (ai != null && pos.equals(ai.getCurrentDest())){
+				ai.updateCurrentDest();
+			}
+			movable.setDest(ai.getCurrentDest());
+			tRemain = movable.update(dt, pos);
+			this.pos = movable.getCurrPos();
 		}
+
+		//TODO integrate click mover and path follower
+//		//trigger Movable
+//		if (movable != null && !actionQueue.isEmpty()){
+//			actionQueue.executeNextAction();
+//		}
+//		while (!MathUtils.doubleEquals(tRemain, 0) && getMovable().isPresent()) {
+//			tRemain = movable.update(dt);
+//			if (!MathUtils.doubleEquals(tRemain, 0) && !actionQueue.isEmpty()) {
+//				actionQueue.executeNextAction();
+//			}
+//		}
 	}
 
 
@@ -212,4 +232,8 @@ public class Sprite  {
 	public void setTeam(Team team){
 		this.team = team;
 	}	
+	
+	public void setAI(AI ai){
+		this.ai = ai;
+	}
 }

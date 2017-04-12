@@ -42,22 +42,15 @@ public class InRangeChecker {
 		List<Sprite> teamB = new ArrayList<>();
 		for (Sprite s : sprites){
 			if (s.getTeam().isPresent()){
-				Team t = (Team) s.getTeam().get(); //TODO remove type-casting
-				if (t.getTeamNum() == a){
+				int i = s.getTeam().get().getTeamNum();
+				if (i == a){
 					teamA.add(s);
-				} else if (t.getTeamNum() == b) {
+				} else if (i == b) {
 					teamB.add(s);
 				}
 			}
 		}
-		
-//		List<Sprite> teamA = sprites.stream().filter((s) -> {
-//			return s.getTeam().isPresent();
-//		}).collect(Collectors.toList());
-//		List<Sprite> teamB = sprites.stream().filter((s) -> {
-//			return s.getTeam().isPresent() &&
-//					s.getMonster().get().isAttribute();
-//		}).collect(Collectors.toList());
+
 		for (Sprite detector: teamA) {
 			for (Sprite detectee: teamB) {
 				if (detector == detectee) { continue; }

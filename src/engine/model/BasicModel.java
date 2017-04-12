@@ -11,9 +11,6 @@ public class BasicModel implements Model {
 	private EventBus bus;
 	private Player player;
 	private List<Sprite> sprites = new ArrayList<>();
-	private List<Sprite> monsterSprites = new ArrayList<>();
-	private List<Sprite> towerSprites = new ArrayList<>();
-	private List<Sprite> bulletSprites = new ArrayList<>();
 
 	public BasicModel(EventBus bus, Player player) {
 		this.bus = bus;

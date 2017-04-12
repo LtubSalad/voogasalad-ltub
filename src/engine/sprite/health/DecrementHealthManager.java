@@ -16,17 +16,18 @@ public class DecrementHealthManager {
 
 	private void initHandlers() {
 		bus.on(DecrementHealthEvent.ANY, (e) -> {
-			Sprite weapon = e.getWeapon();
+			Sprite attacker = e.getWeapon();
 			Sprite target = e.getTarget();
 
-			HealthHolder hh = (HealthHolder) target.getHealthHolder().get(); //TODO remove type-casting
+			Weapon w = attacker.getWeapon().get();
+			HealthHolder hh = target.getHealthHolder().get();
+
+			double amt = w.getDamageDealt();			
+			hh.decrementHealth(amt);
+			System.out.println("Health decremented");
+			
 			if (hh.getHealth() <= 0){
 				bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, target));
-			} else {
-				Weapon w = (Weapon) weapon.getWeapon().get(); //TODO remove type-casting
-				double amt = w.getDamageDealt();			
-				hh.decrementHealth(amt);
-				System.out.println("Health decremented");
 			}
 		});
 	}
