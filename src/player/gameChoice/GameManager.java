@@ -14,8 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import player.App;
 import player.loaderManager.Loader;
-import player.loaderManager.LoaderTester;
 
 /**
  * The first stage of the Game Player to choose a game to play.
@@ -26,7 +26,7 @@ public class GameManager {
 	
 	private Stage primaryStage;
 	private int numberOfDefaultGames;
-	private  ResourceBundle myResources = ResourceBundle.getBundle(LoaderTester.RESOURCES_LOCATION);
+	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	
 	private File gameFile;
 	private GameData gameData;
@@ -56,7 +56,7 @@ public class GameManager {
 	private void show() {
 		primaryStage.setTitle("LTUB Game Chooser");
 		BorderPane borderPane = new BorderPane();
-		Scene scene = new Scene(borderPane, LoaderTester.WIDTH, LoaderTester.HEIGHT);
+		Scene scene = new Scene(borderPane, App.WIDTH, App.HEIGHT);
 		primaryStage.setScene(scene);
 		
 		VBox gameButtonBox = initGameChooser();		
@@ -99,7 +99,7 @@ public class GameManager {
 			String fileName = myResources.getString("defaultGamePath" + (i+1));
 			Image gameImage = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
 			ImageView gameImageView = new ImageView(gameImage);
-			gameImageView.setFitWidth(LoaderTester.WIDTH/3);
+			gameImageView.setFitWidth(App.WIDTH/3);
 			gameImageView.setPreserveRatio(true);
 			Button gameButton = new Button();
 			// TODO
@@ -135,5 +135,8 @@ public class GameManager {
 			System.out.println("Game " + button.getTooltip().getText() + " is chosen.");			
 		}
 		// TODO initialize Loader, pass the game data into Loader
+		primaryStage.close();
+		Loader loader = new Loader();
+		loader.show();
 	}
 }

@@ -20,9 +20,6 @@ import player.gameChoice.GameManager;
 import player.levelChoice.LevelImageManager;
 
 public class LoaderTester extends Application {
-	public static final String RESOURCES_LOCATION = "resources/menu";
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 600;
 	private LevelImageManager lim = new LevelImageManager(230,460);
 	 private Node myActor;
 	 private Node myActor1;

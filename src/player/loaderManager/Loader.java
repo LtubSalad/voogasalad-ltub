@@ -1,5 +1,7 @@
 package player.loaderManager;
 
+import java.util.ResourceBundle;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -11,14 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import player.App;
 import player.passwordManager.PasswordManager;
 
 /**
@@ -29,6 +29,7 @@ public class Loader {
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 300;
 	public static final Integer STARTTIME = 11;
+	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	private Label timerLabel = new Label();
 	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME*100);
 
@@ -43,7 +44,7 @@ public class Loader {
 		Group root = new Group();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
 		scene.getStylesheets().setAll("/styleSheets/login.css");
-		Image backgroundImage = new Image("resources/loader.png");
+		Image backgroundImage = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString("loaderImagePath")));
 		scene.setFill(new ImagePattern(backgroundImage));
 
 		// Bind the timerLabel text property to the timeSeconds property
