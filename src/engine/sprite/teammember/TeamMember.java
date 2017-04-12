@@ -7,8 +7,7 @@ public class TeamMember implements Attribute {
 	private int teamNum;
 
 	public TeamMember(AttributeData data){
-		//this.teamNum = Integer.parseInt(data.getVariable("number"));
-		teamNum = 1;
+		this.teamNum = Integer.parseInt(data.getVariable("number"));
 	}
 	
 	public int getTeamNum(){
