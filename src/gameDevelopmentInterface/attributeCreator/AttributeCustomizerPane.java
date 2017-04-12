@@ -1,9 +1,10 @@
-package gameDevelopmentInterface;
+package gameDevelopmentInterface.attributeCreator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import data.AttributeData;
+import gameDevelopmentInterface.FieldSetter;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;

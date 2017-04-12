@@ -8,6 +8,7 @@ import data.AttributeData;
 import data.AttributesForScreenUse;
 import data.ScreenModelData;
 import engine.sprite.Sprite;
+import gameDevelopmentInterface.attributeCreator.AttributeDataFactory;
 import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener;
 import javafx.scene.image.Image;
