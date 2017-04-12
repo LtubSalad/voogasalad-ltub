@@ -129,7 +129,7 @@ public class GameManager {
 			FileLoader fileLoader = new FileLoader(primaryStage);
 			gameFile = fileLoader.chooseFile();
 			if (gameFile != null) {
-				
+				gameFactory.loadGame(gameFile);
 			}
 		}
 		else {

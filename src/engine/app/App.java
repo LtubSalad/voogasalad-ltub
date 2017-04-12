@@ -32,6 +32,7 @@ public class App extends Application {
 		
 		//sprite with attributes creator
 		GameBuildingManager gameBuildingManager = gameFactory.createGameBuildingManager();
+		gameBuildingManager.buildFromFile(gameFactory.getFile());
 		
 		// game loop 
 		GameLoop gameLoop = gameFactory.createGameLoop();
