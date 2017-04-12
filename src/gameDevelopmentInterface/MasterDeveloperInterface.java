@@ -1,6 +1,9 @@
 package gameDevelopmentInterface;
 
+import data.AttributeData;
 import data.AttributesForScreenUse;
+import gameDevelopmentInterface.attributeCreator.AttributeHolderCreator;
+import gameDevelopmentInterface.attributeCreator.GroundUpAttributeCreator;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -69,6 +72,7 @@ public class MasterDeveloperInterface {
 			instantiate();
 		}
 
+
 		private void instantiate() {
 			Button spriteButton = new Button(CREATE_NEW_SPRITE);
 			Button screenButton = new Button(CREATE_NEW_SCREEN);
@@ -83,5 +87,6 @@ public class MasterDeveloperInterface {
 			});
 			this.getChildren().addAll(spriteButton, screenButton);
 		}	
+
 	}
 }

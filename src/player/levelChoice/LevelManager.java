@@ -17,19 +17,17 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import player.App;
 
 /**
  * @author Zhiyong
  *
  */
 public class LevelManager {
-	public static final String RESOURCES_LOCATION = "resources/menu";
-	public static final String IMAGE_NAME = "resources/level_choice.jpg";
+	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 300;
 	
-	
-	private  ResourceBundle myResources = ResourceBundle.getBundle(RESOURCES_LOCATION);
 	private int numberOfLevel;
 	private MenuBar menuBar;
 	
@@ -55,7 +53,7 @@ public class LevelManager {
 		root.getChildren().add(menuBar);
 		Scene scene = new Scene(root);
 		
-		Image image = new Image(IMAGE_NAME);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString("levelChoiceImagePath")));
 		scene.setFill(new ImagePattern(image));
 
 		primaryStage.setScene(scene);

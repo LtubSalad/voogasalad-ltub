@@ -1,5 +1,6 @@
 package gameDevelopmentInterface;
 
+import data.AttributeData;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -19,6 +20,7 @@ public class ButtonsPanel extends VBox {
 	private Button loadButton;
 	private Button sendNumRows;
 	private Button sendNumCols;
+	private Button loadSpriteButton;
 	private XStreamHandler xstreamHandler=new XStreamHandler();
 	private PathCreator myPathCreator;
 	private ScreenModelCreator mySMC;
@@ -32,7 +34,7 @@ public class ButtonsPanel extends VBox {
 		myPathCreator = new PathCreator(smc);
 		makeButtons();
 		makeRowColSetters();
-		this.getChildren().addAll(drawPathButton, finishPathButton, saveSetupButton,loadButton, rowsBox, colsBox);		
+		this.getChildren().addAll(drawPathButton, finishPathButton, saveSetupButton,loadButton, loadSpriteButton, rowsBox, colsBox);		
 	}
 
 	private void makeRowColSetters() {
@@ -52,6 +54,11 @@ public class ButtonsPanel extends VBox {
 		sendNumCols = new Button(SET_NUMBER_OF_COLUMNS);
 		sendNumRows.setOnAction(e -> mySMC.getScreen().setNumRows(Integer.parseInt(myNumRowsInput.getText())));
 		sendNumCols.setOnAction(e -> mySMC.getScreen().setNumCols(Integer.parseInt(myNumColsInput.getText())));
+		loadSpriteButton = new Button("Load Sprite from file");
+		loadSpriteButton.setOnAction(e -> {
+			AttributeData sprite=xstreamHandler.getAttributeFromFile();
+			mySMC.addPossibleSprite(sprite);
+		});
 		drawPathButton.setOnAction(e -> {
 			myPathCreator.getReplacementPath().clear();
 			myPathCreator.makePath();
@@ -62,6 +69,15 @@ public class ButtonsPanel extends VBox {
 		});
 		saveSetupButton.setOnAction(e -> {
 			xstreamHandler.saveToFile(mySMC.getScreenData().getDataToSave());
+//			FileOutputStream fs = null;
+//			XStream xstream = new XStream(new DomDriver());
+			xstreamHandler.saveToFile(mySMC.getScreenData().getDataToSave());
+//			try {
+//				fs = new FileOutputStream(userCreatedAttributesFile+"/"+ "TEST_JAKE" +".xml");
+//				xstream.toXML(mySMC.getScreenData().getDataToSave(), fs);
+//			} catch (FileNotFoundException fnf) {
+//				//We are making the file ourselves so this will never trigger
+//			}
 		});
 		loadButton=new Button(LOAD_SCREEN_MODEL_FROM_FILE);
 		loadButton.setOnAction((click)->{

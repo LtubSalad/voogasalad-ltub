@@ -15,8 +15,12 @@ public class Movable implements Attribute {
 	private GamePoint pDest;
 	private GamePoint currPos;
 
-	public Movable(AttributeData data){
-		this.speed = Double.parseDouble(data.getVariable("speed"));	
+//	public Movable(AttributeData data){
+//		this.speed = Double.parseDouble(data.getVariable("speed"));	
+//	}
+//	
+	public Movable(double speed){
+		this.speed = speed;
 	}
 	
 	public Movable(){

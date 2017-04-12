@@ -1,5 +1,6 @@
 package engine.spritecreation;
 
+import java.io.File;
 import java.util.List;
 
 import bus.EventBus;
@@ -21,12 +22,21 @@ public class GameBuildingManager {
 	
 	public GameBuildingManager(EventBus bus){
 		this.fileHandler = new XStreamHandler();
-		this.fileAttributes = fileHandler.getScreenModelFile();
 		this.spriteBuilder = new SpriteBuildingManager(bus);
 		this.bus = bus;
 	}
+	
 	public GameBuildingManager(XStreamHandler xSH) {
 		this.fileHandler = xSH; 
+	}
+	
+	public GameBuildingManager(){
+		
+	}
+	
+	public void buildFromFile(File file){
+		System.out.println(file.getName());
+		this.fileAttributes = fileHandler.getScreenModel(file);
 	}
 	
 //	public void printTestFile() {

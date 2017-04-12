@@ -2,8 +2,8 @@ package engine.sprite.range;
 
 import bus.EventBus;
 import engine.sprite.Sprite;
-import engine.sprite.attack.AttackEvent;
-import engine.sprite.attack.Attacker;
+import engine.sprite.attacker.AttackEvent;
+import engine.sprite.attacker.Attacker;
 
 /**
  * Manage actions to do when one sprite is in the detection range of another sprite.

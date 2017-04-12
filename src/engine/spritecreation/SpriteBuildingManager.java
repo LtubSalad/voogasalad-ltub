@@ -1,5 +1,6 @@
 package engine.spritecreation;
 
+import bus.BasicEventBus;
 import bus.EventBus;
 import data.AttributeData;
 import engine.model.SpriteModelEvent;
@@ -14,18 +15,20 @@ public class SpriteBuildingManager {
 	}
 	
 	public SpriteBuildingManager(){
-		
+		this.bus = new BasicEventBus();
 	}
-
 
 	public void createSprite(AttributeData spriteData) {
 		SpriteBuilder SB = new SpriteBuilder(spriteData);
 		Sprite s = SB.getSprite();
 		
 		if(checkIfTile(spriteData))
-			addSpriteToModel(s);
-		else{
 			addTileToModel(s);
+		else{
+			System.out.println(s.getHealthHolder().isPresent() + " for HealthHolder");
+			System.out.println(s.getAttacker().isPresent() + " for Attacker");
+			System.out.println(s.getTeamMember().isPresent() + " for TeamMember");
+			addSpriteToModel(s);
 		}
 	}
 	
