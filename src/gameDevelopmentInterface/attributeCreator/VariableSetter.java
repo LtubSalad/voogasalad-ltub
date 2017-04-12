@@ -1,4 +1,4 @@
-package gameDevelopmentInterface;
+package gameDevelopmentInterface.attributeCreator;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package gameDevelopmentInterface;
+package gameDevelopmentInterface.attributeCreator;
 
 import data.AttributeData;
 

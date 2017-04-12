@@ -1,0 +1,30 @@
+<data.AttributeData>
+  <attributeType>Choose attribute name</attributeType>
+  <changeableName>true</changeableName>
+  <attributeScripts/>
+  <attributeVariables>
+    <entry>
+      <string>xPosition</string>
+      <string>0</string>
+    </entry>
+    <entry>
+      <string>yPosition</string>
+      <string>0</string>
+    </entry>
+  </attributeVariables>
+  <listVariables/>
+  <subAttributes>
+    <data.AttributeData>
+      <attributeType>NodeHolder</attributeType>
+      <changeableName>true</changeableName>
+      <attributeScripts/>
+      <attributeVariables>
+        <entry>
+          <string>filepath</string>
+          <string>Stone.jpg</string>
+        </entry>
+      </attributeVariables>
+      <subAttributes/>
+    </data.AttributeData>
+  </subAttributes>
+</data.AttributeData>

@@ -75,19 +75,33 @@ public class ScreenMap extends StackPane {
 	
 	private void redrawGrid() {
 		for (AttributeData attr : mySMC.getScreenData().getAllObjectsOnScreen()) {
-			Double xPosDub = Double.parseDouble(attr.getVariable(X_POSITION));
-			Double yPosDub = Double.parseDouble(attr.getVariable(Y_POSITION));
-			Integer xPos = xPosDub.intValue();
-			Integer yPos = yPosDub.intValue();
-			attr.getAttributes().forEach(att -> {
-				if (att.getName().equals(IMAGE_HOLDER)) {
-					String imageName = attr.getVariable(IMAGE);
-					Image image = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES + imageName),
-							SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, false, false);
-					ImageView imageView = new ImageView(image);
-					myGrid.add(imageView, xPos, yPos);
-				}
-			});
+			if (attr.hasVariable("filepath")) {
+				Integer xPos = Integer.parseInt(attr.getVariable("xPosition"));
+				Integer yPos = Integer.parseInt(attr.getVariable("yPosition"));
+				String imageName = attr.getVariable("filepath");
+				Image image = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES + imageName),
+						SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, false, false);
+				ImageView imageView = new ImageView(image);
+				myGrid.add(imageView, xPos, yPos);
+			}
+			
+			
+			
+//			attr.getVariables().forEach((k,v) -> {
+//				System.out.println("var name: " + k);
+//				System.out.println("var: " + v);
+//			});
+//			Integer xPos = Integer.parseInt(attr.getVariable("xPosition"));
+//			Integer yPos = Integer.parseInt(attr.getVariable("yPosition"));
+//			attr.getAttributes().forEach(att -> {
+//				if (att.getName().equals("filepath")) {
+//					String imageName = attr.getVariable("image");
+//					Image image = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES + imageName),
+//							SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, false, false);
+//					ImageView imageView = new ImageView(image);
+//					myGrid.add(imageView, xPos, yPos);
+//				}
+//			});
 		}
 	}
 

@@ -1,10 +1,11 @@
-package gameDevelopmentInterface;
+package gameDevelopmentInterface.attributeCreator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gameDevelopmentInterface.FieldSetter;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

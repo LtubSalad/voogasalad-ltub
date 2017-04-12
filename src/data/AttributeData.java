@@ -29,18 +29,17 @@ public class AttributeData implements Serializable {
 	private Map<String,List<String>> listVariables;
 	private List<AttributeData> subAttributes;
 	
-	public AttributeData(String name, boolean changeableName, boolean isConcrete, String implementationSpecifier){
+	public AttributeData(String name, boolean isConcrete, String implementationSpecifier){
 		attributeVariables=new HashMap<>();
 		attributeScripts=new HashMap<>();
 		listVariables=new HashMap<>();
 		List<AttributeData> subAttributesUnobservable=new ArrayList<>();
 		subAttributes=subAttributesUnobservable;
 		attributeType=name;
-		this.changeableName=changeableName;
 	}
 	
 	public AttributeData(String name){
-		this(name, false,false,null);
+		this(name,false,null);
 	}
 	
 	public Map<Pair<String, List<String>>,String> getScripts(){

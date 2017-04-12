@@ -1,4 +1,4 @@
-package gameDevelopmentInterface;
+package gameDevelopmentInterface.attributeCreator;
 
 import data.AttributeData;
 import data.AttributesForScreenUse;
@@ -26,15 +26,16 @@ public class AttributeHolderCreator extends BorderPane {
 
 	public AttributeHolderCreator(AttributesForScreenUse attributesModel) {
 		myAttributesModel = attributesModel;
-
-		attributeHolder=new AttributeData(CHOOSE_ATTRIBUTE_NAME,true,true,null);
 		instantiate();
 	}
 	
 	private void instantiate(){
 		dataHandler=new XStreamHandler();
 		HBox saveAndLoad=new HBox();
-		Button saveButton = new Button(SAVE_ATTRIBUTE_TO_FILE);
+		attributeHolder=new AttributeData("Choose attribute name",true,null);
+		attributeHolder.getVariables().put("xPosition", "0");
+		attributeHolder.getVariables().put("yPosition", "0");
+		Button saveButton = new Button("Save attribute to file");
 		saveButton.setOnAction((c)->createClassData());
 		Button loadButton= new Button(LOAD_ATTRIBUTE_FROM_FILE);
 		saveAndLoad.getChildren().addAll(saveButton,loadButton);

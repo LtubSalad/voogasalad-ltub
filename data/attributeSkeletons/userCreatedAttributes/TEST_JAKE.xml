@@ -1,703 +1,206 @@
 <list>
   <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_GRASS</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
+    <attributeType>Choose attribute name</attributeType>
+    <changeableName>true</changeableName>
     <attributeScripts/>
-    <attributeVariables/>
+    <attributeVariables>
+      <entry>
+        <string>xPosition</string>
+        <string>4</string>
+      </entry>
+      <entry>
+        <string>yPosition</string>
+        <string>6</string>
+      </entry>
+    </attributeVariables>
+    <listVariables/>
     <subAttributes>
       <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
+        <attributeType>NodeHolder</attributeType>
+        <changeableName>true</changeableName>
+        <implementationSpecifier>NodeHolder</implementationSpecifier>
+        <attributeScripts/>
         <attributeVariables>
           <entry>
-            <string>xPosition</string>
-            <string>0</string>
-          </entry>
-          <entry>
-            <string>image</string>
+            <string>filepath</string>
             <string>Grass.jpg</string>
           </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>9</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
         </attributeVariables>
         <subAttributes/>
       </data.AttributeData>
     </subAttributes>
   </data.AttributeData>
   <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_GRASS</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
+    <attributeType>Choose attribute name</attributeType>
+    <changeableName>true</changeableName>
     <attributeScripts/>
-    <attributeVariables/>
+    <attributeVariables>
+      <entry>
+        <string>xPosition</string>
+        <string>0</string>
+      </entry>
+      <entry>
+        <string>yPosition</string>
+        <string>4</string>
+      </entry>
+    </attributeVariables>
+    <listVariables/>
     <subAttributes>
       <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
+        <attributeType>NodeHolder</attributeType>
+        <changeableName>true</changeableName>
+        <implementationSpecifier>NodeHolder</implementationSpecifier>
+        <attributeScripts/>
         <attributeVariables>
           <entry>
-            <string>xPosition</string>
-            <string>0</string>
-          </entry>
-          <entry>
-            <string>image</string>
+            <string>filepath</string>
             <string>Grass.jpg</string>
           </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>8</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
         </attributeVariables>
         <subAttributes/>
       </data.AttributeData>
     </subAttributes>
   </data.AttributeData>
   <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_GRASS</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
+    <attributeType>Choose attribute name</attributeType>
+    <changeableName>true</changeableName>
     <attributeScripts/>
-    <attributeVariables/>
+    <attributeVariables>
+      <entry>
+        <string>xPosition</string>
+        <string>3</string>
+      </entry>
+      <entry>
+        <string>yPosition</string>
+        <string>3</string>
+      </entry>
+    </attributeVariables>
+    <listVariables/>
     <subAttributes>
       <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
+        <attributeType>NodeHolder</attributeType>
+        <changeableName>true</changeableName>
+        <implementationSpecifier>NodeHolder</implementationSpecifier>
+        <attributeScripts/>
         <attributeVariables>
           <entry>
-            <string>xPosition</string>
-            <string>0</string>
-          </entry>
-          <entry>
-            <string>image</string>
+            <string>filepath</string>
             <string>Grass.jpg</string>
           </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>7</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
         </attributeVariables>
         <subAttributes/>
       </data.AttributeData>
     </subAttributes>
   </data.AttributeData>
   <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_GRASS</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
+    <attributeType>Choose attribute name</attributeType>
+    <changeableName>true</changeableName>
     <attributeScripts/>
-    <attributeVariables/>
+    <attributeVariables>
+      <entry>
+        <string>xPosition</string>
+        <string>1</string>
+      </entry>
+      <entry>
+        <string>yPosition</string>
+        <string>7</string>
+      </entry>
+    </attributeVariables>
+    <listVariables/>
     <subAttributes>
       <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
+        <attributeType>Attacker</attributeType>
+        <changeableName>true</changeableName>
+        <attributeScripts/>
         <attributeVariables>
           <entry>
-            <string>xPosition</string>
-            <string>0</string>
+            <string>damage</string>
+            <string>10</string>
           </entry>
           <entry>
-            <string>image</string>
-            <string>Grass.jpg</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>6</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_GRASS</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>xPosition</string>
-            <string>0</string>
-          </entry>
-          <entry>
-            <string>image</string>
-            <string>Grass.jpg</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>5</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_STONE</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>xPosition</string>
-            <string>5</string>
-          </entry>
-          <entry>
-            <string>image</string>
-            <string>Stone.jpg</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>9</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_STONE</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>xPosition</string>
-            <string>5</string>
-          </entry>
-          <entry>
-            <string>image</string>
-            <string>Stone.jpg</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>8</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_STONE</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>xPosition</string>
-            <string>5</string>
-          </entry>
-          <entry>
-            <string>image</string>
-            <string>Stone.jpg</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>7</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_STONE</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>xPosition</string>
-            <string>5</string>
-          </entry>
-          <entry>
-            <string>image</string>
-            <string>Stone.jpg</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>6</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_STONE</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>xPosition</string>
-            <string>5</string>
-          </entry>
-          <entry>
-            <string>image</string>
-            <string>Stone.jpg</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>5</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_STONE</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>xPosition</string>
-            <string>6</string>
-          </entry>
-          <entry>
-            <string>image</string>
-            <string>Stone.jpg</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>5</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_STONE</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>xPosition</string>
-            <string>7</string>
-          </entry>
-          <entry>
-            <string>image</string>
-            <string>Stone.jpg</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>5</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>IMAGE_DEFAULT_GRASS</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>xPosition</string>
-            <string>1</string>
-          </entry>
-          <entry>
-            <string>image</string>
-            <string>Grass.jpg</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>9</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>Tower</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ObjectHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getObjects</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return secondaryObjects;</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>secondaryObjects</string>
-            <string>missile</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-      <data.AttributeData>
-        <attributeType>ConstantActor</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">run</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>move(50)</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables/>
-        <subAttributes/>
-      </data.AttributeData>
-      <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>xPosition</string>
-            <string>0</string>
-          </entry>
-          <entry>
-            <string>image</string>
-            <string>Tower_Image_1.gif</string>
-          </entry>
-          <entry>
-            <string>yPosition</string>
-            <string>7</string>
-          </entry>
-          <entry>
-            <string>displayPriority</string>
-            <string>1</string>
-          </entry>
-        </attributeVariables>
-        <subAttributes/>
-      </data.AttributeData>
-    </subAttributes>
-  </data.AttributeData>
-  <data.AttributeData>
-    <attributeType>Monster</attributeType>
-    <changeableName>false</changeableName>
-    <isConcrete>false</isConcrete>
-    <attributeScripts/>
-    <attributeVariables/>
-    <subAttributes>
-      <data.AttributeData>
-        <attributeType>ConstantActor</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">run</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>move(50)</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables/>
-        <subAttributes/>
-      </data.AttributeData>
-      <data.AttributeData>
-        <attributeType>HealthHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">adjustHealth</key>
-              <value class="list">
-                <string>value</string>
-              </value>
-            </javafx.util.Pair>
-            <string>health+=value;</string>
-          </entry>
-        </attributeScripts>
-        <attributeVariables>
-          <entry>
-            <string>health</string>
+            <string>radius</string>
             <string>100</string>
           </entry>
         </attributeVariables>
         <subAttributes/>
       </data.AttributeData>
       <data.AttributeData>
-        <attributeType>ImageHolder</attributeType>
-        <changeableName>false</changeableName>
-        <isConcrete>false</isConcrete>
-        <attributeScripts>
-          <entry>
-            <javafx.util.Pair>
-              <key class="string">getImage</key>
-              <value class="list"/>
-            </javafx.util.Pair>
-            <string>return image</string>
-          </entry>
-        </attributeScripts>
+        <attributeType>NodeHolder</attributeType>
+        <changeableName>true</changeableName>
+        <attributeScripts/>
         <attributeVariables>
           <entry>
-            <string>xPosition</string>
-            <string>0</string>
+            <string>filepath</string>
+            <string>Tower_Image_1.gif</string>
+          </entry>
+        </attributeVariables>
+        <subAttributes/>
+      </data.AttributeData>
+      <data.AttributeData>
+        <attributeType>TeamMember</attributeType>
+        <changeableName>true</changeableName>
+        <attributeScripts/>
+        <attributeVariables>
+          <entry>
+            <string>number</string>
+            <string>1</string>
+          </entry>
+        </attributeVariables>
+        <subAttributes/>
+      </data.AttributeData>
+    </subAttributes>
+  </data.AttributeData>
+  <data.AttributeData>
+    <attributeType>Choose attribute name</attributeType>
+    <changeableName>true</changeableName>
+    <attributeScripts/>
+    <attributeVariables>
+      <entry>
+        <string>xPosition</string>
+        <string>6</string>
+      </entry>
+      <entry>
+        <string>yPosition</string>
+        <string>6</string>
+      </entry>
+    </attributeVariables>
+    <listVariables/>
+    <subAttributes>
+      <data.AttributeData>
+        <attributeType>Attacker</attributeType>
+        <changeableName>true</changeableName>
+        <attributeScripts/>
+        <attributeVariables>
+          <entry>
+            <string>damage</string>
+            <string>10</string>
           </entry>
           <entry>
-            <string>image</string>
-            <string>Monster_Image_3.gif</string>
+            <string>radius</string>
+            <string>100</string>
           </entry>
+        </attributeVariables>
+        <subAttributes/>
+      </data.AttributeData>
+      <data.AttributeData>
+        <attributeType>NodeHolder</attributeType>
+        <changeableName>true</changeableName>
+        <attributeScripts/>
+        <attributeVariables>
           <entry>
-            <string>yPosition</string>
-            <string>5</string>
+            <string>filepath</string>
+            <string>Tower_Image_1.gif</string>
           </entry>
+        </attributeVariables>
+        <subAttributes/>
+      </data.AttributeData>
+      <data.AttributeData>
+        <attributeType>TeamMember</attributeType>
+        <changeableName>true</changeableName>
+        <attributeScripts/>
+        <attributeVariables>
           <entry>
-            <string>displayPriority</string>
+            <string>number</string>
             <string>1</string>
           </entry>
         </attributeVariables>
