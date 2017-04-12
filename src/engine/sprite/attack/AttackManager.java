@@ -43,7 +43,7 @@ public class AttackManager {
 			// TODO actions to fire a bullet at the target
 			Sprite weaponSprite = new Sprite();
 			weaponSprite.setPos(shooter.getPos());
-			LtubImage image1 = new LtubImage("images/characters/bullet.png");
+			LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
 			ImageSet imageSet1 = new ImageSet();
 			imageSet1.setImage(image1);
 			weaponSprite.setImageSet(imageSet1);
@@ -61,13 +61,11 @@ public class AttackManager {
 			weaponSprite.setCollidable(new Collidable(new CollisionBound(image1)));
 
 			weaponSprite.setHitsTarget(() -> {
-				System.out.println("hit target");
 				bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, weaponSprite));
 				
 				HealthHolder hh = target.getHealthHolder().get();
 				double amt = weaponAttribute.getAttackPower();			
 				hh.decrementHealth(amt);
-				System.out.println("Health decremented");
 				
 				if (hh.getHealth() <= 0){
 					bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, target));
