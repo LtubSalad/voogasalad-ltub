@@ -7,9 +7,18 @@ import data.AttributeData;
 import engine.sprite.Sprite;
 import utilities.XStreamHandler;
 
+/**
+ * Tester class for AttributeBuilder
+ * @author Matthew Tribby, Tahia Emran
+ * 
+ * TODO convert to JUnit test
+ */
 public class AttributeBuilderTester {
 
-	
+	/**
+	 * Tests to ensure that if a xml file is passed/saved from authoring environment that it correctly creates attributes
+	 * @param args
+	 */
 	public static void main (String[] args){
 //		AttributeBuilder AB = new AttributeBuilder("Movable");
 //		Sprite s = new Sprite(); 

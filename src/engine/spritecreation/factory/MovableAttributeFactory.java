@@ -6,10 +6,19 @@ import data.AttributeData;
 import engine.sprite.movable.Movable;
 import engine.spritecreation.SpriteCreationException;
 
+/**
+ * AttributeFactory which creates a MovableAttribute 
+ * @author Matthew Tribby
+ */
 public class MovableAttributeFactory implements AttributeFactory{
 	public static final String SPEED_VAR = "speed";
 	public static final String BASE_PATH = "engine.sprite.";
 		
+	/**
+	 * Creates Movable Attribute based on data
+	 * @param AttributeData
+	 * @return Movable Attribute based on data
+	 */
 	@Override
 	public Movable createAttribute(AttributeData data) { 
 		try{

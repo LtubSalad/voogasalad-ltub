@@ -22,6 +22,12 @@ import bus.EventBus;
 import commons.MathUtils;
 import data.AttributeData;
 
+/**
+ * The attacker class is an attribute of a sprite that defines a sprite's attacking characteristics if it has any. It's prime
+ * function is to be able to fire off the weapon for a sprite if it is found to be in the range of another sprite
+ * @author Matthew Tribby, Alison Huang, Yilin Gao
+ * ^ not exactly sure who helped write this class, feel free to add yourself
+ */
 public class Attacker implements Attribute {
 	private double radius = 150;
 	private int damage = 23498;
@@ -30,36 +36,72 @@ public class Attacker implements Attribute {
 	private double timeRemaining = 0;
 
 
-	
+	/**
+	 * Constructor which initializes the two main instance variables of the attribute
+	 * @param radius range of the attacker
+	 * @param damage Damage that the attacker can deal
+	 */
 	public Attacker(double radius, int damage){
 		this.radius = radius;
 		this.damage = damage;
 	}
 	
+	/**
+	 * Blank constructor
+	 */
 	public Attacker() {
 		
 	}
 	
+	/**
+	 * Sets the event bus of this attribute, necessary for firing events
+	 * @param bus
+	 */
 	public void setBus(EventBus bus){
 		this.bus = bus;
 	}
 	
+	/**
+	 * Returns the current radius of the sprite's attacking capabilities
+	 * @return double range
+	 */
 	public double getRange(){
 		return this.radius;
 	}
 
+	/**
+	 * Sets the range of the attacking capabilities of a sprite
+	 * @param detectionRange
+	 */
 	public void setRange(double detectionRange) {
 		this.radius = detectionRange;
 	}
 	
+	/**
+	 * Sets the time it takes to reload (the time needed between sprite attacks)
+	 * @param time
+	 */
 	public void setReloadPeriod(double time) {
 		reloadPeriod = time;
 	}
 	
+	/**
+	 * Updates the time. This is a useful method when working in  a set time, like in a game loop frame
+	 * @param dt Elapsed time
+	 */
 	public void update(double dt){
 		timeRemaining -= dt;
 	}
 	
+	/**
+	 * Creates a weapon to fire. A weapon is a sprite as well and this method creates a weapon that originates
+	 * from this sprite and goes to a target
+	 * @param shooter Originator of weapon
+	 * @param target Target of weapon
+	 * 
+	 * TODO hard-coded weapon
+	 * TODO this method is extremely long
+	 */
 	public void createWeapon(Sprite shooter, Sprite target){
 		if (!weaponReloaded()){
 			return;

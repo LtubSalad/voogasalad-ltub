@@ -10,19 +10,25 @@ import data.AttributeData;
 
 
 /**
- * CITE CODE
+ * This class is reponsible for building a singular sprite and assembling its components (Attribute classes)
  * @author Tahia Emran (tse5) Matthew Tribby (mrt28)
  */
 public class SpriteBuilder {
 	private AttributeData myData; 
 	private Sprite mySprite; 
 
+	/**
+	 * Constructor, builds a sprite based on AttributeData which contains all the sprites attributes as sub-attributes kept
+	 * in AttributeData
+	 * @param spriteData
+	 */
 	public SpriteBuilder(AttributeData spriteData){
 		this.myData = spriteData; 
 		mySprite = new Sprite(); 
 		createAttributes();
 	}
-
+	
+	
 	private void createAttributes() {		  
 		List<AttributeData> compositionAttributes = myData.getAttributes(); 
 		
@@ -37,6 +43,10 @@ public class SpriteBuilder {
 		}
 	}
 	
+	/**
+	 * Returns the sprite that is created 
+	 * @return Sprite
+	 */
 	public Sprite getSprite(){
 		return mySprite; 
 	}
