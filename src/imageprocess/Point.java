@@ -3,13 +3,15 @@
  */
 package imageprocess;
 
+import java.util.Comparator;
+
 /**
  * @author Zhiyong
  *
  */
 
-class Point implements Comparable<Point> {
-	double x, y;
+class Point implements Comparator<Point> , Comparable<Point>{
+	private double  x, y;
 	
 	public Point(double x,double y){
 		this.x = x;
@@ -17,7 +19,7 @@ class Point implements Comparable<Point> {
 	}
 
 	
-	@Override
+	
 	public int compareTo(Point p) {
 		if (Math.round(this.x - p.x) == 0) {
 			return (int) (this.y - p.y);
@@ -36,6 +38,17 @@ class Point implements Comparable<Point> {
 	}
 	public double getY(){
 		return y;
+	}
+	
+	public boolean equals(Point p){
+		return this.toString().equals(p.toString());
+	}
+
+
+	@Override
+	public int compare(Point p, Point q) {
+		
+		return this.compareTo(q);
 	}
 	
 

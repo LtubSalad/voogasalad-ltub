@@ -16,7 +16,6 @@ public class ImageToPolygon {
 	private Image image;
 	public ImageToPolygon(Image image){
 		this.image =image;
-		//TODO : change the default image
 	}
 
 	public Polygon getPolygon(){
@@ -30,7 +29,8 @@ public class ImageToPolygon {
 		}
 
 		Point[] convexHullPoint =  ConvexHull.convex_hull(points); 
-
+		
+		//Point[] convexHullPoint =  Hull.getHull(set); 
 		double[] pointsToDraw = new double[2 * convexHullPoint.length];
 		int k = 0;
 		for(Point p : convexHullPoint){

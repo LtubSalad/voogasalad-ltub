@@ -49,13 +49,10 @@ public class ImageTransformation implements ImageProcessor {
 				pixel = buffImg.getRGB(i,j);
 				//check the transparency of the pixel at (i,j)
 				transparency = (pixel >> 24) & 0xff;
-				transparency = transparency > 5? 0 : 1;
+				transparency = transparency > 100? 0 : 1;
 				if(transparency == 0){
 					Point p = new Point(i,j);
 					mask.add(p);
-					if(p == null){
-						System.out.println("This point is null" + i +" : " + j);
-					}
 				}
 			}
 		}

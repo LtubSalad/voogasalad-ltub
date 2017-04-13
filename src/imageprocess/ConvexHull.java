@@ -25,7 +25,7 @@ public class ConvexHull {
 				
 			}
 			
-			Collections.sort(pointsList);
+			Collections.sort( pointsList);
 			
 			// Build lower hull
 			for (int i = 0; i < n; ++i) {
