@@ -15,9 +15,9 @@ import utilities.XStreamHandler;
  *         file producer when needed.
  */
 public class AttributeHolderCreator extends BorderPane {
-	private static final String LOAD_ATTRIBUTE_FROM_FILE = "Load attribute from file";
-	private static final String SAVE_ATTRIBUTE_TO_FILE = "Save attribute to file";
-	private static final String CHOOSE_ATTRIBUTE_NAME = "Choose attribute name";
+	private static final String LOAD_ATTRIBUTE_FROM_FILE = "Load sprite from file";
+	private static final String SAVE_ATTRIBUTE_TO_FILE = "Save sprite to file";
+	private static final String CHOOSE_ATTRIBUTE_NAME = "Choose sprite name";
 	private AttributeSelectorPane attributeSelectorPane;
 	private AttributeCustomizerPane attributeCustomizerPane;
 	private AttributeData attributeHolder;
@@ -26,7 +26,7 @@ public class AttributeHolderCreator extends BorderPane {
 
 	public AttributeHolderCreator(AttributesForScreenUse attributesModel) {
 		myAttributesModel = attributesModel;
-		attributeHolder=new AttributeData("Choose attribute name",true,null);
+		attributeHolder=new AttributeData(CHOOSE_ATTRIBUTE_NAME,true,null);
 		attributeHolder.getVariables().put("xPosition", "0");
 		attributeHolder.getVariables().put("yPosition", "0");
 		instantiate();
@@ -35,7 +35,7 @@ public class AttributeHolderCreator extends BorderPane {
 	private void instantiate(){
 		dataHandler=new XStreamHandler();
 		HBox saveAndLoad=new HBox();
-		Button saveButton = new Button("Save attribute to file");
+		Button saveButton = new Button(SAVE_ATTRIBUTE_TO_FILE);
 		saveButton.setOnAction((c)->createClassData());
 		Button loadButton= new Button(LOAD_ATTRIBUTE_FROM_FILE);
 		saveAndLoad.getChildren().addAll(saveButton,loadButton);

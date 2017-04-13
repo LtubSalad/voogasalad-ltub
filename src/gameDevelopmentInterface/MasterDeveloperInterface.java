@@ -24,7 +24,7 @@ import javafx.scene.layout.HBox;
 public class MasterDeveloperInterface {
 	private static final String SCREEN_SETTING = "Screen Setting";
 	private static final String GENERAL_DATA = "General Data";
-	private static final String CREATE_ATTRIBUTE_HOLDER = "Create AttributeHolder";
+	private static final String CREATE_ATTRIBUTE_HOLDER = "Create Sprite";
 	private static final String PATH_TO_STYLE_SHEETS = "/styleSheets/MainStyle.css";
 	private Scene developerScene;
 	private BorderPane view;

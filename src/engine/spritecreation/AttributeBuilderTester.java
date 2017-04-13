@@ -2,9 +2,7 @@ package engine.spritecreation;
 
 import java.io.File;
 import java.util.List;
-
 import data.AttributeData;
-import engine.sprite.Sprite;
 import utilities.XStreamHandler;
 
 public class AttributeBuilderTester {

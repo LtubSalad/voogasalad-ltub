@@ -1,5 +1,5 @@
 <data.AttributeData>
-  <attributeType>Choose attribute name</attributeType>
+  <attributeType>Tower</attributeType>
   <changeableName>false</changeableName>
   <isConcrete>true</isConcrete>
   <attributeScripts/>

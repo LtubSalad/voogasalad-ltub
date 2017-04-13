@@ -1,5 +1,5 @@
 <data.AttributeData>
-  <attributeType>Choose attribute name</attributeType>
+  <attributeType>Monster</attributeType>
   <changeableName>false</changeableName>
   <isConcrete>true</isConcrete>
   <attributeScripts/>
@@ -16,18 +16,41 @@
   <listVariables/>
   <subAttributes>
     <data.AttributeData>
-      <attributeType>Attacker</attributeType>
+      <attributeType>Collidable</attributeType>
       <changeableName>true</changeableName>
       <isConcrete>false</isConcrete>
       <attributeScripts/>
       <attributeVariables>
         <entry>
-          <string>damage</string>
-          <string>10</string>
+          <string>collisionBoundsImage</string>
+          <string>Monster_Image_1.gif</string>
         </entry>
+      </attributeVariables>
+      <listVariables/>
+      <subAttributes/>
+    </data.AttributeData>
+    <data.AttributeData>
+      <attributeType>HealthHolder</attributeType>
+      <changeableName>true</changeableName>
+      <isConcrete>false</isConcrete>
+      <attributeScripts/>
+      <attributeVariables>
         <entry>
-          <string>radius</string>
+          <string>health</string>
           <string>100</string>
+        </entry>
+      </attributeVariables>
+      <subAttributes/>
+    </data.AttributeData>
+    <data.AttributeData>
+      <attributeType>Movable</attributeType>
+      <changeableName>true</changeableName>
+      <isConcrete>false</isConcrete>
+      <attributeScripts/>
+      <attributeVariables>
+        <entry>
+          <string>speed</string>
+          <string>10</string>
         </entry>
       </attributeVariables>
       <subAttributes/>
@@ -40,7 +63,7 @@
       <attributeVariables>
         <entry>
           <string>filepath</string>
-          <string>Tower_Image_3.gif</string>
+          <string>Monster_Image_1.gif</string>
         </entry>
       </attributeVariables>
       <subAttributes/>
@@ -53,7 +76,7 @@
       <attributeVariables>
         <entry>
           <string>number</string>
-          <string>1</string>
+          <string>2</string>
         </entry>
       </attributeVariables>
       <subAttributes/>
