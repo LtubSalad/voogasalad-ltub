@@ -1,0 +1,88 @@
+<data.AttributeData>
+  <attributeName>TowerExtension</attributeName>
+  <changeableName>true</changeableName>
+  <isConcrete>true</isConcrete>
+  <attributeScripts/>
+  <attributeVariables/>
+  <subAttributes>
+    <data.AttributeData>
+      <attributeName>Tower</attributeName>
+      <changeableName>false</changeableName>
+      <isConcrete>false</isConcrete>
+      <attributeScripts/>
+      <attributeVariables/>
+      <subAttributes>
+        <data.AttributeData>
+          <attributeName>ObjectHolder</attributeName>
+          <changeableName>false</changeableName>
+          <isConcrete>false</isConcrete>
+          <attributeScripts>
+            <entry>
+              <javafx.util.Pair>
+                <key class="string">getObjects</key>
+                <value class="list"/>
+              </javafx.util.Pair>
+              <string>return secondaryObjects;</string>
+            </entry>
+          </attributeScripts>
+          <attributeVariables>
+            <entry>
+              <string>secondaryObjects</string>
+              <string>fire</string>
+            </entry>
+          </attributeVariables>
+          <subAttributes/>
+        </data.AttributeData>
+        <data.AttributeData>
+          <attributeName>ConstantActor</attributeName>
+          <changeableName>false</changeableName>
+          <isConcrete>false</isConcrete>
+          <attributeScripts>
+            <entry>
+              <javafx.util.Pair>
+                <key class="string">run</key>
+                <value class="list"/>
+              </javafx.util.Pair>
+              <string>checkfor Monseters</string>
+            </entry>
+          </attributeScripts>
+          <attributeVariables/>
+          <subAttributes/>
+        </data.AttributeData>
+        <data.AttributeData>
+          <attributeName>ImageHolder</attributeName>
+          <changeableName>false</changeableName>
+          <isConcrete>false</isConcrete>
+          <attributeScripts>
+            <entry>
+              <javafx.util.Pair>
+                <key class="string">getImage</key>
+                <value class="list"/>
+              </javafx.util.Pair>
+              <string>return image</string>
+            </entry>
+          </attributeScripts>
+          <attributeVariables>
+            <entry>
+              <string>xPosition</string>
+              <string>0</string>
+            </entry>
+            <entry>
+              <string>image</string>
+              <string>bahumut_left.png</string>
+            </entry>
+            <entry>
+              <string>yPosition</string>
+              <string>0</string>
+            </entry>
+            <entry>
+              <string>displayPriority</string>
+              <string>1</string>
+            </entry>
+          </attributeVariables>
+          <subAttributes/>
+        </data.AttributeData>
+      </subAttributes>
+    </data.AttributeData>
+  </subAttributes>
+</data.AttributeData>

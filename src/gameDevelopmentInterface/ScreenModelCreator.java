@@ -1,7 +1,12 @@
 package gameDevelopmentInterface;
 
+import data.AttributeData;
+import data.AttributesForScreenUse;
+import data.ScreenModelData;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.scene.layout.BorderPane;
-
 /**
  * 
  * The job of the ScreenModelCreator is to provide an interface for the developer to set all the data for a 
@@ -15,14 +20,28 @@ import javafx.scene.layout.BorderPane;
  */
 
 public class ScreenModelCreator extends BorderPane {
-	private ScreenObjectHolder myObjectsToPlace = new ScreenObjectHolder(this);
-	private ScreenMap myScreen = new ScreenMap();
+	private ObservableMap<String,String> myGeneralData;
+	private ScreenModelData myScreenData = new ScreenModelData();
+	private ScreenObjectHolder myObjectsToPlace;
+	private ScreenMap myScreen = new ScreenMap(this);
 	private ButtonsPanel myButtonsPanel = new ButtonsPanel(this);
+	private AttributesForScreenUse myAttributesModel;
+	private ObservableList<AttributeData> possibleSprites = FXCollections.observableArrayList();
 	
-	public ScreenModelCreator() {
+	public ScreenModelCreator(AttributesForScreenUse attributesModel, GeneralDataCreator gdc) {
+		myAttributesModel = attributesModel;
+		myObjectsToPlace = new ScreenObjectHolder(this, myScreenData, myAttributesModel);
+		myGeneralData = gdc.getAllData();
+		this.setTop(new GeneralGameDataBar(myGeneralData));
 		this.setBottom(myObjectsToPlace);
 		this.setCenter(myScreen);
 		this.setRight(myButtonsPanel);
+	}
+	public void addPossibleSprite(AttributeData attr) {
+		possibleSprites.add(attr);
+	}
+	public ObservableList<AttributeData> getPossibleSprites() {
+		return possibleSprites;
 	}
 	/**
 	 * 
@@ -31,4 +50,9 @@ public class ScreenModelCreator extends BorderPane {
 	public ScreenMap getScreen() {
 		return myScreen;
 	}
+	
+	public ScreenModelData getScreenData() {
+		return myScreenData;
+	}
+	
 }

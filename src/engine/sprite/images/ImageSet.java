@@ -8,6 +8,11 @@ public class ImageSet {
 		
 	}
 	
+	public ImageSet(LtubImage ltubImage){
+		this();
+		setImage(ltubImage);
+	}
+	
 	public void setImage(LtubImage ltubImage) {
 		this.ltubImage = ltubImage;
 	}

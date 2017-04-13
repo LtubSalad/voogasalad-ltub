@@ -1,5 +1,7 @@
 package engine.camera;
 
+import commons.MathUtils;
+
 abstract class Point {
 
 	private double x;
@@ -21,6 +23,10 @@ abstract class Point {
 		double xDiff = x - other.x;
 		double yDiff = y - other.y;
 		return Math.sqrt(xDiff*xDiff + yDiff*yDiff);
+	}
+	
+	public boolean approxEquals(Point other) {
+		return (MathUtils.doubleEquals(distFrom(other), 0));
 	}
 	
 }

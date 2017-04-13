@@ -1,5 +1,7 @@
 package engine.app;
 
+import java.io.File;
+
 import bus.BasicEventBus;
 import bus.EventBus;
 import engine.action.ActionFilter;
@@ -17,16 +19,19 @@ import engine.playerstate.PlayerSkillState;
 import engine.skill.SkillManager;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
-import engine.sprite.collision.CollisionChecker;
-import engine.sprite.collision.CollisionManager;
+import engine.sprite.attacker.AttackManager;
+import engine.sprite.collidable.CollisionChecker;
+import engine.sprite.collidable.CollisionManager;
 import engine.sprite.range.InRangeChecker;
 import engine.sprite.range.InRangeManager;
+import engine.spritecreation.GameBuildingManager;
 import engine.view.FXView;
 import engine.view.View;
 
 public class GameFactory {
 
 	private final EventBus bus;
+	private File gameFile; 
 	
 	/**
 	 * Each {@link GameFactory} has a unique {@link EventBus}.
@@ -82,6 +87,10 @@ public class GameFactory {
 	public InRangeManager createInRangeManager() {
 		return new InRangeManager(bus);
 	}
+
+	public AttackManager createAttackManager() {
+		return new AttackManager(bus);
+	}
 	
 	private PlayerSelectionState createPlayerSelectionState() {
 		return new PlayerSelectionState(bus);
@@ -100,5 +109,22 @@ public class GameFactory {
 	
 	public SkillManager createSkillManager() {
 		return new SkillManager(bus);
+	}
+	
+	public GameBuildingManager createGameBuildingManager(){
+		return new GameBuildingManager(bus);
+	}
+
+	public EventBus getBus() {
+		return bus;
+	}
+
+		
+	public void loadGame(File file){
+		this.gameFile = file;  
+	}
+	
+	public File getFile(){
+		return gameFile; 
 	}
 }

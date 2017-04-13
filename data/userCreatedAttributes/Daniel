@@ -1,0 +1,37 @@
+<data.AttributeData>
+  <attributeType>Daniel&apos;s favorite sprite</attributeType>
+  <changeableName>true</changeableName>
+  <attributeScripts/>
+  <attributeVariables/>
+  <listVariables/>
+  <subAttributes>
+    <data.AttributeData>
+      <attributeType>Attacker</attributeType>
+      <changeableName>true</changeableName>
+      <attributeScripts/>
+      <attributeVariables>
+        <entry>
+          <string>damage</string>
+          <string>2</string>
+        </entry>
+        <entry>
+          <string>radius</string>
+          <string>2</string>
+        </entry>
+      </attributeVariables>
+      <subAttributes/>
+    </data.AttributeData>
+    <data.AttributeData>
+      <attributeType>Movable</attributeType>
+      <changeableName>true</changeableName>
+      <attributeScripts/>
+      <attributeVariables>
+        <entry>
+          <string>speed</string>
+          <string>2</string>
+        </entry>
+      </attributeVariables>
+      <subAttributes/>
+    </data.AttributeData>
+  </subAttributes>
+</data.AttributeData>
