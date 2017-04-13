@@ -28,7 +28,10 @@ public class GeneralModelData {
 	public void addData(Pair<String,String> data) {
 		myData.put(data.getKey(), data.getValue());
 	}
-	
+	/**
+	 * 
+	 * @return all of the data held in this model
+	 */
 	public ObservableMap<String,String> getAllData() {
 		return myData;
 	}

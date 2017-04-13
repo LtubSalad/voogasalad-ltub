@@ -6,7 +6,8 @@ import java.util.Queue;
 import engine.camera.GamePoint;
 import javafx.util.Pair;
 /**
- * 
+ * This is a path object that will be associated with all moster sprites
+ * so that they can know the points to which they are supposed to go.
  * @author Jake
  *
  */
@@ -47,20 +48,18 @@ public class Path {
 	}
 	
 	private Integer getNextHeading() {
-		//next coord is above where the monster currently is
 		if (isAbove()) {
 			updateCoords();
 			return 0;
-		} // next coord is left of where the monster currently is 
+		} 
 		else if (isLeft()) {
 			updateCoords();
 			return 90;
-		} // next coord is right of where the monster currently is 
+		}
 		else if (isRight()) {
 			updateCoords();
 			return 270;
-		} // next coord is below where the monster currently is 
-		else {
+		} else {
 			updateCoords();
 			return 180;
 		}
@@ -93,8 +92,5 @@ public class Path {
 		myPath.add(new GamePoint(0,300));
 		myPath.add(new GamePoint(300,300));
 	
-	}
-	
-
-	
+	}	
 }

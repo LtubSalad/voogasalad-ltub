@@ -1,6 +1,7 @@
 <data.AttributeData>
   <attributeType>Choose attribute name</attributeType>
-  <changeableName>true</changeableName>
+  <changeableName>false</changeableName>
+  <isConcrete>true</isConcrete>
   <attributeScripts/>
   <attributeVariables>
     <entry>
@@ -17,6 +18,8 @@
     <data.AttributeData>
       <attributeType>Attacker</attributeType>
       <changeableName>true</changeableName>
+      <isConcrete>false</isConcrete>
+      <implementationSpecifier>Attacker</implementationSpecifier>
       <attributeScripts/>
       <attributeVariables>
         <entry>
@@ -33,11 +36,13 @@
     <data.AttributeData>
       <attributeType>NodeHolder</attributeType>
       <changeableName>true</changeableName>
+      <isConcrete>false</isConcrete>
+      <implementationSpecifier>NodeHolder</implementationSpecifier>
       <attributeScripts/>
       <attributeVariables>
         <entry>
           <string>filepath</string>
-          <string>Tower_Image_1.gif</string>
+          <string>Tower_Image_2.gif</string>
         </entry>
       </attributeVariables>
       <subAttributes/>
@@ -45,6 +50,8 @@
     <data.AttributeData>
       <attributeType>TeamMember</attributeType>
       <changeableName>true</changeableName>
+      <isConcrete>false</isConcrete>
+      <implementationSpecifier>TeamMember</implementationSpecifier>
       <attributeScripts/>
       <attributeVariables>
         <entry>

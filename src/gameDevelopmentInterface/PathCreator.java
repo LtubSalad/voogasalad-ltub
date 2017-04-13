@@ -7,7 +7,8 @@ import engine.camera.GamePoint;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
 /**
- * 
+ * Starts the ability for the user to define a path by clicking
+ * on coordinates on the grid held in ScreenMap
  * @author Jake
  *
  */
