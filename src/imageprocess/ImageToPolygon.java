@@ -18,6 +18,11 @@ public class ImageToPolygon {
 		this.image =image;
 	}
 
+	/**
+	 * @return
+	 * Create a polygon hull of the given image by deleting the transparent pixels
+	 * There are two methods: convex_hull and hull
+	 */
 	public Polygon getPolygon(){
 		ImageTransformation transformation = new ImageTransformation();
 		Set<Point> set = transformation.getMask(image);
@@ -28,6 +33,7 @@ public class ImageToPolygon {
 			index++;
 		}
 
+		
 		Point[] convexHullPoint =  ConvexHull.convex_hull(points); 
 		
 		//Point[] convexHullPoint =  Hull.getHull(set); 

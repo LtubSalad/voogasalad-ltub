@@ -16,8 +16,13 @@ import javafx.stage.Stage;
 /**
  * @author Zhiyong
  *
+ *Test the convex_hull or Hull methods by providing an image
+ *
+ *Usage: please change the name of the image directory: "resources/bahamut_left.png"
  */
+
 public class ImageTester extends Application{
+	public static final String IMAGE_DIRECTORY = "resources/bahamut_left.png";
 	public static void main(String[] args){
 		launch(args);
 		}
@@ -30,13 +35,12 @@ public class ImageTester extends Application{
 			Group root = new Group();
 			Scene scene = new Scene(root, 800, 800);
 			
-			Image image = new Image("resources/bahamut_left.png");
+			Image image = new Image(IMAGE_DIRECTORY);
 			
 			Rectangle r = new Rectangle(image.getWidth(),image.getHeight());
 			r.setFill(new ImagePattern(image));
 
            ImageTransformation it = new ImageTransformation();
-           //Set<Point> set1 = it.getMask(image);
 
              root.getChildren().addAll(r);
              

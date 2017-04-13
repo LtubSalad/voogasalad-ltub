@@ -6,12 +6,28 @@ import java.util.Collections;
 import java.util.List;
 
 
+/**
+ * @author Zhiyong
+ *
+ */
 public class ConvexHull {
 
+	/**
+	 * @param O
+	 * @param A
+	 * @param B
+	 * @return
+	 * calculate the cross product the vector AO and BO
+	 */
 	public static double cross(Point O, Point A, Point B) {
 		return (A.getX() - O.getX()) * (B.getY() - O.getY()) - (A.getY() - O.getY()) * (B.getX() - O.getX());
 	}
 
+	/**
+	 * @param P
+	 * @return
+	 * create the convex hull from given point array
+	 */
 	public static Point[] convex_hull(Point[] P) {
 
 		if (P.length > 1) {

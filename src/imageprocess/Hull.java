@@ -14,7 +14,12 @@ import java.util.List;
 public class Hull {
 	
 	
-	public static Point[] getHull(Collection<Point> pointSet ){
+	/**
+	 * @param pointSet
+	 * @return
+	 * create the hull of the given points
+	 */
+	public static Point[] getHull(Collection<Point> pointSet){
 		List<Point> pointList = new ArrayList<>();
 		
 		for(Point point : pointSet){
@@ -22,6 +27,7 @@ public class Hull {
 			Point top = new Point(point.getX(), point.getY() - 1);
 			Point right = new Point(point.getX() + 1, point.getY());
 			Point bottom = new Point(point.getX(), point.getY() + 1);
+			//check whether the point is an interior point
 			if(pointSet.contains(left) && pointSet.contains(top) &&
 					pointSet.contains(right) && pointSet.contains(bottom)){
 				continue;
