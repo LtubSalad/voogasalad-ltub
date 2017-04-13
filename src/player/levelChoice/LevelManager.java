@@ -59,6 +59,8 @@ public class LevelManager {
 		primaryStage.setScene(scene);
 		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setFullScreen(true);
+		primaryStage.setFullScreenExitHint("");
+		primaryStage.setFullScreenExitKeyCombination(null);
 		primaryStage.show();
 	}
 
