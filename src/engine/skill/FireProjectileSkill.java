@@ -5,12 +5,12 @@ import java.util.Optional;
 import bus.EventBus;
 import engine.model.SpriteModelEvent;
 import engine.player.Player;
-import engine.sprite.Movable;
 import engine.sprite.Sprite;
-import engine.sprite.collision.Collidable;
-import engine.sprite.collision.CollisionBound;
+import engine.sprite.collidable.Collidable;
+import engine.sprite.collidable.CollisionBound;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
+import engine.sprite.movable.Movable;
 
 public class FireProjectileSkill implements Skill {
 
@@ -28,8 +28,8 @@ public class FireProjectileSkill implements Skill {
 		ImageSet imageSet = new ImageSet();
 		imageSet.setImage(image);
 		sprite.setImageSet(imageSet);
-		Movable movable = new Movable(sprite);
-		sprite.setMovable(movable);
+		//Movable movable = new Movable(sprite);
+		//sprite.setMovable(movable);
 		sprite.setCollidable(new Collidable(new CollisionBound(image)));
 		sprite.setPlayer(Player.NATURE);
 		projectile = sprite;
@@ -58,7 +58,7 @@ public class FireProjectileSkill implements Skill {
 	public void trigger() {
 		projectile.setPos(source.getPos());
 		projectile.executeAction(() -> {
-			projectile.getMovable().get().moveTo(target);
+			((Movable) projectile.getMovable().get()).moveTo(target);
 		});
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, projectile));
 	}

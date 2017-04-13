@@ -1,7 +1,6 @@
 package sprite;
 
-public class RunnerMoverAttribute implements MoverAttribute{
-
+public class RunnerMoverAttribute extends ObserverAttribute implements MoverAttribute{
 
 	
 	public void move() {

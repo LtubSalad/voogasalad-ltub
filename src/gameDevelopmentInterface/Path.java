@@ -2,59 +2,61 @@ package gameDevelopmentInterface;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import javafx.util.Pair;
 
+import engine.camera.GamePoint;
+import javafx.util.Pair;
+/**
+ * 
+ * @author Jake
+ *
+ */
 public class Path {
-	private Queue<Pair<Integer, Integer>> myPath = new LinkedList<Pair<Integer, Integer>>();
-	private Pair<Integer, Integer> currCoord;
-	private Pair<Integer, Integer> nextCoord;
+	private Queue<GamePoint> myPath = new LinkedList<GamePoint>();
+	private GamePoint currCoord;
+	private GamePoint nextCoord;
 	
 	public Path() {
 		makeDefaultPath();
-		//test();
-	}
-	
-	public Queue<Pair<Integer, Integer>> getStartAndEndAndTurningPoints() {
-		return myPath; //TODO change this to actual turning points
 	}
 	
 	/**
-	 * Not sure if the back end will actually need this anymore
+	 * Not sure if the back end will actually need 
+	 * this anymore but returns the actual path
 	 * @return the path
 	 */
-	public Queue<Pair<Integer, Integer>> getPath() {
+	public Queue<GamePoint> getPath() {
 		return myPath;
 	}
-	
-	public void changePath(Queue<Pair<Integer, Integer>> replacementPath) {
-		System.out.println("New path: " + replacementPath);
+	/**
+	 * Called when path is replaced by user clicking Save/Check path button
+	 * @param replacementPath
+	 */
+	public void changePath(Queue<GamePoint> replacementPath) {
 		myPath = replacementPath;
-		currCoord = myPath.poll();
-		nextCoord = myPath.poll();
+	}
+	/**
+	 * 
+	 * @return a pair of the next coordinate and the heading
+	 */
+	public Pair<GamePoint, Integer> getNextState() {
+		return new Pair<GamePoint, Integer>(getNextCoordinate(), getNextHeading());
 	}
 	
-	public Pair<Pair<Integer, Integer>, Integer> getNextState() {
-		return new Pair<Pair<Integer, Integer>, Integer>(getNextCoordinate(), getNextHeading());
-	}
-	
-	private Pair<Integer, Integer> getNextCoordinate() {
+	private GamePoint getNextCoordinate() {
 		return myPath.peek();
 	}
 	
 	private Integer getNextHeading() {
 		//next coord is above where the monster currently is
-		if (currCoord.getValue() > nextCoord.getValue() &&
-				currCoord.getKey() == nextCoord.getKey()) {
+		if (isAbove()) {
 			updateCoords();
 			return 0;
 		} // next coord is left of where the monster currently is 
-		else if (currCoord.getValue() == nextCoord.getValue() &&
-				currCoord.getKey() > nextCoord.getKey()) {
+		else if (isLeft()) {
 			updateCoords();
 			return 90;
 		} // next coord is right of where the monster currently is 
-		else if (currCoord.getValue() == nextCoord.getValue() &&
-				currCoord.getKey() < nextCoord.getKey()) {
+		else if (isRight()) {
 			updateCoords();
 			return 270;
 		} // next coord is below where the monster currently is 
@@ -63,6 +65,21 @@ public class Path {
 			return 180;
 		}
 	}
+
+	private boolean isRight() {
+		return currCoord.y() == nextCoord.y() &&
+				currCoord.x() < nextCoord.x();
+	}
+
+	private boolean isLeft() {
+		return currCoord.y() == nextCoord.y() &&
+				currCoord.x() > nextCoord.x();
+	}
+
+	private boolean isAbove() {
+		return currCoord.y() > nextCoord.y() &&
+				currCoord.x() == nextCoord.x();
+	}
 	
 	private void updateCoords() {
 		currCoord = nextCoord;
@@ -70,22 +87,14 @@ public class Path {
 	}
 	
 	private void makeDefaultPath() {
-		myPath.add(new Pair<Integer, Integer>(0,0));
-		myPath.add(new Pair<Integer, Integer>(1,0));
-		myPath.add(new Pair<Integer, Integer>(1,1));
-		myPath.add(new Pair<Integer, Integer>(0,1));
-		myPath.add(new Pair<Integer, Integer>(0,2));
-		currCoord = myPath.poll();
-		nextCoord = myPath.poll();		
+		myPath.add(new GamePoint(500,200));
+		myPath.add(new GamePoint(100,0));
+		myPath.add(new GamePoint(100,100));
+		myPath.add(new GamePoint(0,300));
+		myPath.add(new GamePoint(300,300));
+	
 	}
 	
-//	private void test() {
-//		for (int i = 0; i < 4; i++) {
-//			System.out.println("currCoord: " + currCoord);
-//			System.out.println("nextCoord: " + nextCoord);
-//			System.out.println("Heading: " + getNextHeading());
-//			System.out.println();
-//		}
-//	}
+
 	
 }

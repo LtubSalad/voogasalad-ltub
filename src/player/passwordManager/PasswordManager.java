@@ -101,6 +101,7 @@ public class PasswordManager{
 		//Action for btnLogin
 		btnReset.setOnAction(e -> buttonResetAction(primaryStage));
 
+
 		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode(), primaryStage));
 	}
 
@@ -116,6 +117,8 @@ public class PasswordManager{
 		checkUser = txtUserName.getText().toString();
 		checkPw = pf.getText().toString();
 		if(checkUser.equals(user) && checkPw.equals(pw)){
+			lblMessage.setText("Congratulations!");
+			lblMessage.setTextFill(Color.GREEN);
 			primaryStage.hide();
 			 LevelManager levelManager = new LevelManager();
 			 levelManager.show();

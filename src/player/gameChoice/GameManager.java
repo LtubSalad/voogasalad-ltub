@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import commons.FileLoader;
+import engine.app.GameFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import player.App;
+
 import player.loaderManager.Loader;
 
 /**
@@ -31,9 +33,12 @@ public class GameManager {
 	private File gameFile;
 	private GameData gameData;
 	
+	private GameFactory gameFactory;
+	
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		numberOfDefaultGames = Integer.parseInt(myResources.getString("numberOfDefaultGames"));
+		gameFactory = new GameFactory();
 		show();
 	}
 	
@@ -126,15 +131,14 @@ public class GameManager {
 			FileLoader fileLoader = new FileLoader(primaryStage);
 			gameFile = fileLoader.chooseFile();
 			if (gameFile != null) {
-				GameDataParser parser = new GameDataParser();
-				gameData = parser.parse(gameFile);
+				gameFactory.loadGame(gameFile);
 			}
 		}
 		else {
 			// TODO load the corresponding game file into gameFile
 			System.out.println("Game " + button.getTooltip().getText() + " is chosen.");			
 		}
-		// TODO initialize Loader, pass the game data into Loader
+		// TODO pass the game data into game engine
 		primaryStage.close();
 		Loader loader = new Loader();
 		loader.show();

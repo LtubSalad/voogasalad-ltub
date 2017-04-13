@@ -2,7 +2,6 @@ package player.loaderManager;
 
 import javafx.animation.Animation;
 import javafx.animation.PathTransition;
-import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -21,6 +20,7 @@ import player.gameChoice.GameManager;
 import player.levelChoice.LevelImageManager;
 
 public class LoaderTester extends Application {
+
 	private LevelImageManager lim = new LevelImageManager(230,460);
 	 private Node myActor;
 	 private Node myActor1;
@@ -35,10 +35,9 @@ public class LoaderTester extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-	    //Loader loader = new Loader();
-		//GameManager gameManager = new GameManager(primaryStage);
-		//loader.show();
-		primaryStage.setTitle("Game Level Choice");
+//	    Loader loader = new Loader();
+		GameManager gameManager = new GameManager(primaryStage);
+//		loader.show();
 		
 
 		primaryStage.setScene(makeScene());
@@ -88,4 +87,5 @@ public class LoaderTester extends Application {
         myActor2= btnQuit;
         return new Scene(root, 400, 700);
     }
+
 }

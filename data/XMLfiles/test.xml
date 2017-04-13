@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Data>
+<Sprite id = "1">
+	<DefaultAttribute title = "ConstantActor">
+		<name>StationaryConstantActor</name>
+		<variable title = "Speed">10</variable>
+	</DefaultAttribute>
+	<DefaultAttribute title = "HealthHolder">
+		<name>BasicHealthHolder</name>
+		<variable title = "StartingHealth">100</variable>
+	</DefaultAttribute>
+	<DefaultAttribute title = "Attacker">
+		<name>BasicAttacker</name>
+		<variable title = "DamageDealt">50</variable>
+		<variable title = "Radius">50</variable>
+	</DefaultAttribute>
+	<DefaultAttribute title = "SpriteFactory">
+		<name>NonProducingSpriteFactory</name>
+	</DefaultAttribute>
+</Sprite>
+</Data>

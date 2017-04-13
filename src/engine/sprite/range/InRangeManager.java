@@ -2,6 +2,8 @@ package engine.sprite.range;
 
 import bus.EventBus;
 import engine.sprite.Sprite;
+import engine.sprite.attacker.AttackEvent;
+import engine.sprite.attacker.Attacker;
 
 /**
  * Manage actions to do when one sprite is in the detection range of another sprite.
@@ -22,8 +24,11 @@ public class InRangeManager {
 			Sprite detector = e.getDetector();
 			Sprite detectee = e.getDetectee();
 			// TODO actions to do when one sprite gets into the range of another sprite
-			System.out.println("Sprite " + detector.toString() + " detects Sprite " + detectee.toString() 
-				+ " is in its range.");
+			// if detector is an attacker, launch weapon with target = detectee
+			if (detector.getAttacker().isPresent()){
+				bus.emit(new AttackEvent(AttackEvent.ANY, detector, detectee));
+				
+			}
 		});
 	}
 }
