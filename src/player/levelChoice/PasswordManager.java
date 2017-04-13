@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 public class PasswordManager{
 
 	public static final String TITLE = "Login";
+	private Stage primaryStage;
 	String user = "LTUB";
 	String pw = "123456";
 	String checkUser, checkPw;
@@ -29,12 +30,13 @@ public class PasswordManager{
 	Label lblMessage;
 	PasswordField pf;
 
-	public PasswordManager(){
+	public PasswordManager(Stage primaryStage){
+		this.primaryStage = primaryStage;
 		txtUserName = new TextField();
 		lblMessage = new Label();
 		pf = new PasswordField();
 	}
-	public void show(Stage primaryStage) {
+	public void show() {
 		primaryStage.setTitle(TITLE);
 		BorderPane bp = new BorderPane();
 		bp.setPadding(new Insets(10,50,50,50));
@@ -92,18 +94,18 @@ public class PasswordManager{
 
 		primaryStage.show();
 		//Action for btnLogin
-		btnLogin.setOnAction(e -> buttonAction(primaryStage));
+		btnLogin.setOnAction(e -> buttonAction());
 
-		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode(), primaryStage));
+		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 	}
 
-	private void handleKeyInput(KeyCode code, Stage primaryStage) {
+	private void handleKeyInput(KeyCode code) {
 		if(code == KeyCode.ENTER ){
-			buttonAction(primaryStage);
+			buttonAction();
 		}
 		
 	}
-	private void buttonAction(Stage primaryStage) {
+	private void buttonAction() {
 
 		checkUser = txtUserName.getText().toString();
 		checkPw = pf.getText().toString();
@@ -111,7 +113,7 @@ public class PasswordManager{
 			lblMessage.setText("Congratulations!");
 			lblMessage.setTextFill(Color.GREEN);
 			primaryStage.hide();
-			 LevelManager levelManager = new LevelManager();
+			 LevelManager levelManager = new LevelManager(primaryStage);
 			 levelManager.show();
 		}
 		else{

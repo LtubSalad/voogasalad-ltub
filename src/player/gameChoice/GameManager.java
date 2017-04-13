@@ -19,6 +19,9 @@ import player.App;
 import player.levelChoice.Loader;
 /**
  * The first stage of the Game Player to choose a game to play.
+ * After the user chooses the xml file representing the game,
+ * the class passes the file to {@code engine.app.GameFactory}.
+ * Depends on {@code engine.app.GameFactory}.
  * @author Yilin Gao
  *
  */
@@ -29,10 +32,13 @@ public class GameManager {
 	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	
 	private File gameFile;
-	private GameData gameData;
 	
 	private GameFactory gameFactory;
 	
+	/**
+	 * Constructor of the {@code player.gameChoice}
+	 * @param primaryStage
+	 */
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		numberOfDefaultGames = Integer.parseInt(myResources.getString("numberOfDefaultGames"));
@@ -46,14 +52,6 @@ public class GameManager {
 	 */
 	public Stage getStage() {
 		return primaryStage;
-	}
-	
-	/**
-	 * Get the chosen GameData
-	 * @return GameData
-	 */
-	public GameData getGameData() {
-		return gameData;
 	}
 	
 	private void show() {
@@ -129,6 +127,7 @@ public class GameManager {
 			FileLoader fileLoader = new FileLoader(primaryStage);
 			gameFile = fileLoader.chooseFile();
 			if (gameFile != null) {
+				// load the game file into the GameFactory
 				gameFactory.loadGame(gameFile);
 			}
 		}
@@ -136,9 +135,8 @@ public class GameManager {
 			// TODO load the corresponding game file into gameFile
 			System.out.println("Game " + button.getTooltip().getText() + " is chosen.");			
 		}
-		// TODO pass the game data into game engine
 		primaryStage.close();
-		Loader loader = new Loader();
+		Loader loader = new Loader(primaryStage);
 		loader.show();
 	}
 }

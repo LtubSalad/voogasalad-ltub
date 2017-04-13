@@ -31,17 +31,19 @@ public class Loader {
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 300;
 	public static final Integer STARTTIME = 11;
+	private Stage primaryStage;
 	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	private Label timerLabel = new Label();
 	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME*100);
 
-	public Loader(){
-		
+	public Loader(Stage primaryStage){
+		this.primaryStage = primaryStage;
 	}
 
 	public void show(){
-		Stage primaryStage = new Stage();
-		primaryStage.initStyle(StageStyle.UNDECORATED);
+		// TODO I commented here. - Yilin
+//		Stage primaryStage = new Stage();
+//		primaryStage.initStyle(StageStyle.UNDECORATED);
 		//primaryStage.setTitle("Game Loading");
 		Group root = new Group();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
@@ -61,7 +63,7 @@ public class Loader {
 				timeSeconds.divide(STARTTIME*100.0).subtract(1).multiply(-1));
 
 		timeSeconds.set((STARTTIME)*100);
-		timelineController(primaryStage);
+		timelineController();
 		Label loadingLabel =new Label("Game loading ...");
 		//loadingLabel.setTextFill(Color.RED);
 		//loadingLabel.setStyle("-fx-font-size: 4em;");
@@ -82,11 +84,11 @@ public class Loader {
 
 	}
 
-	private Timeline timelineController(Stage primaryStage){
+	private Timeline timelineController(){
 
 		Timeline timeline = new Timeline();
 
-		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME), e -> eventHandle(primaryStage)));
+		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME), e -> eventHandle()));
 
 		timeline.getKeyFrames().add(
 
@@ -98,11 +100,11 @@ public class Loader {
 
 	}
 	
-	private void eventHandle(Stage primaryStage){
-		 primaryStage.hide();
+	private void eventHandle(){
+		primaryStage.hide();
 		 
-		PasswordManager password = new PasswordManager();
-		password.show(primaryStage);
+		PasswordManager password = new PasswordManager(primaryStage);
+		password.show();
 		 
 		
 	}

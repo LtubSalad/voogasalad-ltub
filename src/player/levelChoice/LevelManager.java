@@ -27,16 +27,16 @@ public class LevelManager {
 	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 300;
-	
+	private Stage primaryStage;
 	private int numberOfLevel;
 	private MenuBar menuBar;
 	
 	//TODO : add voice search like google
 	
 	
-	public LevelManager(){
+	public LevelManager(Stage primaryStage){
 		numberOfLevel = 2;
-		
+		this.primaryStage = primaryStage;
 		
 		
 	}
