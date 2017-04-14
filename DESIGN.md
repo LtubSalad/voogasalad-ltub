@@ -1,4 +1,4 @@
-#Design
+# Design
 
 To represent your design at a reasonably high level and provide an organization to the plan document, break it into modules rather than all the classes you can think of. A module is a concept in your program that may be represented by a single class or a group of classes related in some standard way, such as set of subclasses, that has a purpose with regards to the program's functionality and collaborates with other modules.
 	
