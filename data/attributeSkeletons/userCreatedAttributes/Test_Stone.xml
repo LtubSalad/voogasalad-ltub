@@ -1,6 +1,7 @@
 <data.AttributeData>
   <attributeType>Choose attribute name</attributeType>
-  <changeableName>true</changeableName>
+  <changeableName>false</changeableName>
+  <isConcrete>true</isConcrete>
   <attributeScripts/>
   <attributeVariables>
     <entry>
@@ -17,6 +18,7 @@
     <data.AttributeData>
       <attributeType>NodeHolder</attributeType>
       <changeableName>true</changeableName>
+      <isConcrete>false</isConcrete>
       <attributeScripts/>
       <attributeVariables>
         <entry>

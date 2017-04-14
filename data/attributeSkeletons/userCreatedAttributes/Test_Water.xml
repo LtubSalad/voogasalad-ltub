@@ -1,6 +1,7 @@
 <data.AttributeData>
-  <attributeType>Grass</attributeType>
+  <attributeType>Choose attribute name</attributeType>
   <changeableName>false</changeableName>
+  <isConcrete>true</isConcrete>
   <attributeScripts/>
   <attributeVariables>
     <entry>
@@ -17,11 +18,12 @@
     <data.AttributeData>
       <attributeType>NodeHolder</attributeType>
       <changeableName>true</changeableName>
+      <isConcrete>false</isConcrete>
       <attributeScripts/>
       <attributeVariables>
         <entry>
           <string>filepath</string>
-          <string>Grass.jpg</string>
+          <string>Water.jpg</string>
         </entry>
       </attributeVariables>
       <subAttributes/>

@@ -1,5 +1,5 @@
 <data.AttributeData>
-  <attributeType>Choose sprite name</attributeType>
+  <attributeType>Tower</attributeType>
   <changeableName>false</changeableName>
   <isConcrete>true</isConcrete>
   <attributeScripts/>
@@ -40,7 +40,7 @@
       <attributeVariables>
         <entry>
           <string>filepath</string>
-          <string>Tower_Image_1.gif</string>
+          <string>Tower_Image_3.gif</string>
         </entry>
       </attributeVariables>
       <subAttributes/>
