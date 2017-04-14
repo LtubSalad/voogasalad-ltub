@@ -8,7 +8,7 @@ import utilities.XStreamHandler;
 public class AttributeBuilderTester {
 
 	public static void main (String[] args){
-		String fileName = "data/attributeSkeletons/userCreatedAttributes/Complete_Test_Setup.xml";
+		String fileName = "data/attributeSkeletons/userCreatedAttributes/Test_Demo.xml";
 		File file = new File(fileName);
 		XStreamHandler XSH = new XStreamHandler(); 
 		List<AttributeData> data = XSH.getScreenModel(file);	
