@@ -3,33 +3,66 @@ package newengine.sprite;
 import java.util.HashMap;
 import java.util.Map;
 
+import bus.BasicEventBus;
+import bus.EventBus;
+
 public class Sprite {
 	
+	public Sprite() {
+		
+	}
 	
+	private EventBus spriteBus = new BasicEventBus();
+	
+	public EventBus getSpriteBus() {
+		return spriteBus;
+	}
 
-	Map<AttributeType<? extends Attribute>, Attribute> map = new HashMap<>();
+	private Map<AttributeType<? extends Attribute>, Attribute> attributeMap = new HashMap<>();
 	
 	public void addAttribute(Attribute attribute) {
-		map.put(attribute.getType(), attribute);
+		attributeMap.put(attribute.getType(), attribute);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public <T extends Attribute> T getAttribute(AttributeType<T> type) {
-		return (T) map.get(type);
+		return (T) attributeMap.get(type);
 	}
 	
 	public <T extends Attribute> void removeAttribute(AttributeType<T> type) {
-		map.remove(type);
+		attributeMap.remove(type);
 	}
 	
 	public <T extends Attribute> boolean hasAttribute(AttributeType<T> type) {
-		return map.containsKey(type);
+		return attributeMap.containsKey(type);
 	}
 	
+	private Map<ControlType<? extends Control>, Control> controlMap = new HashMap<>();
 	
+	public void addControl(Control control) {
+		controlMap.put(control.getType(), control);
+		control.onAdded(this);
+	}
 	
-	public void update() {
-		
+	@SuppressWarnings("unchecked")
+	public <T extends Control> T getControl(ControlType<T> type) {
+		return (T) controlMap.get(type);
+	}
+	
+	public <T extends Control> void removeControl(ControlType<T> type) {
+		Control control = controlMap.get(type);
+		controlMap.remove(type);
+		control.onRemoved();
+	}
+	
+	public <T extends Control> boolean hasControl(ControlType<T> type) {
+		return controlMap.containsKey(type);
+	}
+	
+	public void update(double dt) {
+		for (Control control: controlMap.values()) {
+			control.onUpdated(dt);
+		}
 	}
 	
 }
