@@ -36,7 +36,6 @@ package bus;
  *
  */
 public class BusEvent {
-
 	public static final BusEventType<BusEvent> ANY = new BusEventType<>("ROOT");
 
 	private BusEventType<? extends BusEvent> busEventType;
@@ -44,9 +43,8 @@ public class BusEvent {
 	public BusEvent(BusEventType<? extends BusEvent> busEventType) {
 		this.busEventType = busEventType;
 	}
-
+	
 	public BusEventType<? extends BusEvent> getEventType() {
 		return busEventType;
 	}
-
 }

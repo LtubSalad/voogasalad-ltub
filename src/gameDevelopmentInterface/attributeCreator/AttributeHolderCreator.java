@@ -42,7 +42,6 @@ public class AttributeHolderCreator extends BorderPane {
 		loadButton.setOnAction((click)->{
 			attributeHolder=dataHandler.getAttributeFromFile();
 			instantiate();
-			//System.out.print(attributeHolder.getName());
 			
 		});
 		attributeSelectorPane = new AttributeSelectorPane(myAttributesModel, attributeHolder);
