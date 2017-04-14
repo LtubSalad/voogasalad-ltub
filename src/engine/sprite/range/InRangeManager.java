@@ -14,6 +14,10 @@ public class InRangeManager {
 
 	private EventBus bus;
 	
+	/**
+	 * Constructor of the {@code InRangeManager} class.
+	 * @param bus the {@code EventBus} instance on which to register for the {@code InRangeEvent}.
+	 */
 	public InRangeManager(EventBus bus) {
 		this.bus = bus;
 		initHandlers();
