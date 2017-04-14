@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import bus.BasicEventBus;
+import bus.BusEvent;
+import bus.BusEventHandler;
+import bus.BusEventType;
 import bus.EventBus;
 
 public class Sprite {
@@ -14,8 +17,12 @@ public class Sprite {
 	
 	private EventBus spriteBus = new BasicEventBus();
 	
-	public EventBus getSpriteBus() {
-		return spriteBus;
+	public <T extends BusEvent> void on(BusEventType<T> eventType, BusEventHandler<? super T> eventHandler) {
+		spriteBus.on(eventType, eventHandler);
+	}
+	
+	public void emit(BusEvent event) {
+		spriteBus.emit(event);
 	}
 
 	private Map<AttributeType<? extends Attribute>, Attribute> attributeMap = new HashMap<>();

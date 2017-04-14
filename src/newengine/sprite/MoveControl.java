@@ -16,6 +16,13 @@ public class MoveControl extends Control {
 		this.sprite = sprite;
 		positionAttribute = sprite.getAttribute(PositionAttribute.TYPE);
 		speedAttribute = sprite.getAttribute(SpeedAttribute.TYPE);
+		initHandlers();
+	}
+
+	private void initHandlers() {
+		sprite.on(MoveEvent.SPECIFIC, e -> {
+			moveTo(e.getTarget());
+		});
 	}
 
 	@Override
@@ -30,7 +37,7 @@ public class MoveControl extends Control {
 		
 	}
 
-	public void moveTo(Target target) {
+	private void moveTo(Target target) {
 		System.out.print("Sprite at (" + positionAttribute.getPos().x() + ", " + positionAttribute.getPos().y() + ")" );
 		if (target.getLocation().isPresent()) {
 			positionAttribute.setPos(target.getLocation().get());			

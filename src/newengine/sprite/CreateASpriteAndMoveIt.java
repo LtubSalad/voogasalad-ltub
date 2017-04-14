@@ -47,26 +47,21 @@ public class CreateASpriteAndMoveIt {
 		spriteList.add(sprite2);
 		
 		// sprite bus, move 1 sprite
-		System.out.println("Test emiting event to 1 sprite.");
+		System.out.println("Test emiting event to sprite1.");
 		bus.on(MoveEvent.SPECIFIC, (e) -> {
-			Sprite theSprite = e.getSprite();
-
-			theSprite.getSpriteBus().on(MoveEvent.SPECIFIC, e1 -> {
-				MoveControl theMoveControl = e1.getSprite().getControl(MoveControl.TYPE);
-				theMoveControl.moveTo(e1.getTarget());
-			});
-			
-			theSprite.getSpriteBus().emit(new MoveEvent(MoveEvent.SPECIFIC, theSprite, e.getTarget()));
+			e.getSprite().emit(new MoveEvent(MoveEvent.SPECIFIC, e.getSprite(), e.getTarget()));
 		});
 		bus.emit(new MoveEvent(MoveEvent.SPECIFIC, sprite1, new Target(new GamePoint(100,200))));
+		
+		System.out.println("Test emiting event to sprite2.");
+		bus.emit(new MoveEvent(MoveEvent.SPECIFIC, sprite2, new Target(new GamePoint(250,50))));
 		
 		// big bus, move all sprites to the same destination
 		System.out.println("Test emiting event to all sprites from the big bus.");
 		bus.on(MoveEvent.GENERAL, (e) -> {
 			List<Sprite> list = e.getSprites();
 			for (Sprite s: list) {
-				MoveControl theMoveControl = s.getControl(MoveControl.TYPE);
-				theMoveControl.moveTo(e.getTarget());
+				s.emit(new MoveEvent(MoveEvent.SPECIFIC, s, e.getTarget()));
 			}
 		});
 		bus.emit(new MoveEvent(MoveEvent.GENERAL, spriteList, new Target(new GamePoint(500,200))));
