@@ -1,5 +1,9 @@
 # Design
 
+## Design Update
+We’ll stick the idea of components over inheritance of sprite. But we want to make the sprites API to be closed. We’ll basically make sprite have a map of attributes containing mutable data (identified by type classes for compile time checking), and a map of controls to modify the data. We also intend to let each sprite have a list of high level skills, which are basically compositions of basic controls.
+
+## Original Design
 To represent your design at a reasonably high level and provide an organization to the plan document, break it into modules rather than all the classes you can think of. A module is a concept in your program that may be represented by a single class or a group of classes related in some standard way, such as set of subclasses, that has a purpose with regards to the program's functionality and collaborates with other modules.
 	
 Game Engine:
