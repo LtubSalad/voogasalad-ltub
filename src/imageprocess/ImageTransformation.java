@@ -40,18 +40,19 @@ public class ImageTransformation implements ImageProcessor {
 	// the pixels contained in the Set follow the guideline of:
 	// x,y where x is the x position of the pixel and y is the y position of the pixel
 	@Override
-	public Set<Coordinate<Integer,Integer>> getMask(Image image) {
+	public Set<Point> getMask(Image image) {
 		BufferedImage buffImg= SwingFXUtils.fromFXImage(image, null);
-		Set<Coordinate<Integer,Integer>> mask = new HashSet<>();
+		Set<Point> mask = new HashSet<>();
 		int pixel, transparency;
 		for(int i =0; i < image.getWidth(); i++){
 			for(int j = 0; j < image.getHeight(); j++){
 				pixel = buffImg.getRGB(i,j);
 				//check the transparency of the pixel at (i,j)
 				transparency = (pixel >> 24) & 0xff;
-				transparency = transparency > 5? 0 : 1;
+				transparency = transparency > 100? 0 : 1;
 				if(transparency == 0){
-					mask.add(new Coordinate<Integer, Integer>(i,j));
+					Point p = new Point(i,j);
+					mask.add(p);
 				}
 			}
 		}

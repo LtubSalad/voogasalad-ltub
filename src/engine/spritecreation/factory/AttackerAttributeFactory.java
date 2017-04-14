@@ -7,12 +7,20 @@ import engine.sprite.attacker.Attacker;
 import engine.sprite.movable.Movable;
 import engine.spritecreation.SpriteCreationException;
 
+/**
+ * Attribute factory which creates an Attacker Attribute based in an AttributeData class 
+ * @author Matthew Tribby
+ */
 public class AttackerAttributeFactory implements AttributeFactory {
 	public static final String RADIUS_VAR = "radius";
 	public static final String DAMAGE_VAR = "damage";
 	public static final String BASE_PATH = "engine.sprite.";
 
 	@Override
+	/**
+	 * Actually creates the attribute
+	 * @return configured attribute
+	 */
 	public Attacker createAttribute(AttributeData data) {
 		try{
 			Class <?> clazz = Class.forName(BASE_PATH + data.getName().toLowerCase() + "." + data.getImplementation());
