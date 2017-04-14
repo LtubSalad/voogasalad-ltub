@@ -4,6 +4,13 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import player.gameChoice.GameManager;
 
+/**
+ * The entering point for the game player is to ask the player
+ * to chose the game he wants to play.
+ * Depends on {@code player.gameChoice.GameManager}.
+ * @author Yilin Gao
+ *
+ */
 public class App extends Application {
 
 	public static final String RESOURCES_LOCATION = "resources/menu";
@@ -12,7 +19,7 @@ public class App extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		GameManager gameManager = new GameManager(primaryStage);
+		new GameManager(primaryStage);
 	}
 
 	public static void main(String[] args) {

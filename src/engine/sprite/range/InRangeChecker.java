@@ -27,8 +27,7 @@ public class InRangeChecker {
 	 * Loop over all sprites in the game and detect any in-range between any two
 	 * sprites.
 	 * 
-	 * @param sprites
-	 *            A list of sprites in the model
+	 * @param sprites a list of sprites in the model
 	 */
 	public void checkInRange(List<Sprite> sprites) {
 		for (Sprite detector : sprites) {
