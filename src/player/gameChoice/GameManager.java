@@ -16,7 +16,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import player.App;
-import player.levelChoice.Loader;
+
+import player.loaderManager.Loader;
+
 /**
  * The first stage of the Game Player to choose a game to play.
  * After the user chooses the xml file representing the game,

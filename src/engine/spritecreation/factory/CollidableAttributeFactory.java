@@ -7,10 +7,18 @@ import engine.sprite.collidable.Collidable;
 import engine.sprite.movable.Movable;
 import engine.spritecreation.SpriteCreationException;
 
+/**
+ * Attribute Factory instance that creates a Collidable Attribute. Creates a Collidable Attribute based on AttributeData
+ * @author Matthew Tribby
+ */
 public class CollidableAttributeFactory implements AttributeFactory{
 	public static final String IMAGE_VAR = "collisionBoundsImage";
 	public static final String BASE_PATH = "engine.sprite.";
 	
+	/**
+	 * Creates a Collidable Attribute based on AttributeData instance
+	 * @return Collidable Attribute
+	 */
 	@Override
 	public Collidable createAttribute(AttributeData data) {
 		try{

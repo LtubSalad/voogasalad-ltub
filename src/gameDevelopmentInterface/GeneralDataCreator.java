@@ -10,11 +10,12 @@ import javafx.scene.text.Text;
 import javafx.util.Pair;
 
 /**
- * @author Jake Provides a text input box allowing the user to set
+ * Provides a text input box allowing the user to set
  *         variables that are tracked regardless of which screen we are on, such
  *         as lives, score etc. No public methods, because its actions are
  *         event-based. Instantiates new GeneralModelData classes when the save
  *         button is pressed on the text input box.
+ * @author Jake
  */
 public class GeneralDataCreator extends GridPane {
 	private static final int INSETS = 50;

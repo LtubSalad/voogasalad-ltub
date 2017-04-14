@@ -7,9 +7,7 @@ import data.AttributeData;
 import data.AttributesForScreenUse;
 import data.ScreenModelData;
 import engine.camera.GamePoint;
-import engine.sprite.Sprite;
 import gameDevelopmentInterface.attributeCreator.AttributeDataFactory;
-//import gameDevelopmentInterface.attributeCreator.AttributeDataFactory;
 import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,7 +19,11 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Pair;
-
+/**
+ * This class holds all possible sprites that a user can place on the screen.
+ * @author Jake
+ *
+ */
 public class ScreenObjectHolder extends HBox {
 	private static final String IMAGE_HOLDER = "filepath";
 	private static final String IMAGE = "image";
@@ -29,12 +31,10 @@ public class ScreenObjectHolder extends HBox {
 	private ScreenModelCreator myScreenModel;
 	private ScreenModelData myScreenData;
 	private Map<Pair<String, Image>, AttributeData> myScreenObjects = new HashMap<Pair<String, Image>, AttributeData>();
-	private AttributesForScreenUse myAttributesModel;
-
+	
 	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd, AttributesForScreenUse attributesModel) {
 		myScreenModel = smc;
 		myScreenData = smd;
-		myAttributesModel = attributesModel;
 		myScreenModel.getPossibleSprites().addListener(new ListChangeListener<AttributeData>() {
 			@Override
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
@@ -58,29 +58,6 @@ public class ScreenObjectHolder extends HBox {
 				});
 			}
 		});
-//		myAttributesModel.getScreenAttributes().addListener(new ListChangeListener<AttributeData>() {
-//			@Override
-//			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
-//				myAttributesModel.getScreenAttributes().forEach(attr -> {
-//					if (attr.hasVariable(IMAGE_HOLDER)) {
-//						String imageName = attr.getVariable(IMAGE);
-//						boolean wasFound = false;
-//						if (myScreenObjects.size() == 0) {
-//							addObject(attr);
-//						} else {
-//							for (Pair<String, Image> p : myScreenObjects.keySet()) {
-//								if (p.getKey().equals(imageName)) {
-//									wasFound = true;
-//								}
-//							}
-//							if (!wasFound) {
-//								addObject(attr);
-//							}
-//						}
-//					}
-//				});
-//			}
-//		});
 	}
 
 	/**
@@ -98,23 +75,6 @@ public class ScreenObjectHolder extends HBox {
 		spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
 		myScreenObjects.put(new Pair<String, Image>(imageName, si), screenObject);
 		this.getChildren().add(spriteImage);
-
-
-		// screenObject.getAttributes().forEach(attr -> {
-		// if (attr.getName().equals(IMAGE_HOLDER)) {
-		// Map<String, String> varMap = attr.getVariables();
-		// String imageName = varMap.get(IMAGE);
-		// Image si = new
-		// Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES
-		// + imageName),
-		// 100, 100, false, false);
-		// ImageView spriteImage = new ImageView(si);
-		// spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
-		// myScreenObjects.put(new Pair<String, Image>(imageName, si),
-		// screenObject);
-		// this.getChildren().add(spriteImage);
-		// }
-		// });
 	}
 	/**
 	 * Make an attribute data object from a file
@@ -150,8 +110,7 @@ public class ScreenObjectHolder extends HBox {
 				String iName = p.getKey();
 				if (imageName.equals(iName)) {
 					AttributeData anActualPlacedScreenObject = (AttributeData) new UnoptimizedDeepCopy()
-							.copy(myScreenObjects.get(p));// new
-															// AttributeData(myScreenObjects.get(p));
+							.copy(myScreenObjects.get(p));
 					anActualPlacedScreenObject.setVariable("xPosition", coords.getKey() + "");
 					anActualPlacedScreenObject.setVariable("yPosition", coords.getValue() + "");
 					myScreenData.addObjectData(anActualPlacedScreenObject);

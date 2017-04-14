@@ -10,6 +10,8 @@ import engine.sprite.Sprite;
 import engine.spritecreation.factory.AttributeFactory;
 
 /**
+ * This class is used to build an attribute based on passed in AttributeData
+ * 
  * @authors Tahia Emran and Matthew Tribby 
  * 
  * COMMENTED SECTIONS ARE FOR TESTING 
@@ -23,6 +25,17 @@ public class AttributeBuilder {
 	public static final String ATTRIBUTE_BASE_PATH_2 = "engine.spritecreation.factory.";
 	
 
+	/**
+	 * Initializes an AttributeBuilder which builds an attribute based on the corresponding data passed in
+	 * Note this will only work if AttributeData's type and implementation correspond to existing attribute and follows
+	 * the naming convention
+	 * 
+	 * Naming Convention:
+	 * Attribute must be in class with path engine.sprite.attributetype.ImplementationName
+	 * @param data Data to be used to build
+	 * 
+	 * TODO exception handling / checking if attribute exists
+	 */
 	public AttributeBuilder(AttributeData data){
 		this.dataToRead = data; 
 		build(); 
@@ -51,6 +64,12 @@ public class AttributeBuilder {
 		}	
 	}
 	
+	/**
+	 * Configures a passed in sprite by setting its attribute to this newly created attribute
+	 * @param s Sprite to configure
+	 * 
+	 * TODO make this work without having to give reference to sprite to this class, definitely possible
+	 */
 	public void configSprite(Sprite s) {
 		String methodName = "set" + attributeType; 
 		try {

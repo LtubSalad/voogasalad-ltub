@@ -61,7 +61,7 @@ public class AttributeCustomizerPane extends ScrollPane {
 		subPanes = new ArrayList<>();
 		variableSetter = new VariableSetter(myAttribute.getVariables(),customizableVariables);
 		functionSetter = new FunctionSetter(myAttribute.getScripts(),customizableFunctions);
-		nameSetter = new FieldSetter("Name:",myAttribute.getName(), myAttribute.nameModifiable());
+		nameSetter = new FieldSetter("Name:",myAttribute.getName(), true);
 		implementationSetter=new FieldSetter("Implementation:",myAttribute.getImplementation(),true);
 		Button refresher = new Button("Refresh");
 		refresher.setOnAction((clickEvent) -> {

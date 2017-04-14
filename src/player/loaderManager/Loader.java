@@ -1,4 +1,4 @@
-package player.levelChoice;
+package player.loaderManager;
 
 import java.util.ResourceBundle;
 
@@ -13,15 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import player.App;
+import player.passwordManager.PasswordManager;
 
 /**
  * @author Zhiyong

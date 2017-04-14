@@ -1,4 +1,4 @@
-package player.levelChoice;
+package player.passwordManager;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import player.levelChoice.LevelManager;
 
 
 public class PasswordManager{
@@ -51,16 +52,15 @@ public class PasswordManager{
 		Label lblUserName = new Label("Username");		
 		Label lblPassword = new Label("Password");		
 		Button btnLogin = new Button("Login");
-
+		Button btnReset = new Button("Reset");
 		//Adding Nodes to GridPane layout
-
 		gridPane.add(lblUserName, 0, 0);
 		gridPane.add(txtUserName, 1, 0);
 		gridPane.add(lblPassword, 0, 1);
 		gridPane.add(pf, 1, 1);
-		gridPane.add(btnLogin, 2, 1);
+		gridPane.add(btnLogin, 2, 0);
+		gridPane.add(btnReset, 2, 1);
 		gridPane.add(lblMessage, 1, 2);
-
 		//Reflection for gridPane
 		Reflection r = new Reflection();
 		r.setFraction(0.7f);
@@ -70,20 +70,17 @@ public class PasswordManager{
 		dropShadow.setOffsetX(5);
 		dropShadow.setOffsetY(5);
 		//Adding text and DropShadow effect to it
-
 		Text text = new Text("Game Login");
 		text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
 		text.setEffect(dropShadow);
-
 		//Adding text to HBox
 		hb.getChildren().add(text);
 		//Add ID's to Nodes
 		bp.setId("bp");
-
 		gridPane.setId("root");
 		btnLogin.setId("btnLogin");
+		btnReset.setId("btnReset");
 		text.setId("text");
-
 		//Add HBox and GridPane layout to BorderPane Layout
 		bp.setTop(hb);
 		bp.setCenter(gridPane); 
@@ -91,22 +88,21 @@ public class PasswordManager{
 		Scene scene = new Scene(bp);
 		scene.getStylesheets().setAll("/styleSheets/login.css");
 		primaryStage.setScene(scene);
-
 		primaryStage.show();
 		//Action for btnLogin
-		btnLogin.setOnAction(e -> buttonAction());
-
-		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
+		btnLogin.setOnAction(e -> buttonLoginAction(primaryStage));
+		
+		//Action for btnLogin
+		btnReset.setOnAction(e -> buttonResetAction(primaryStage));
+		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode(), primaryStage));
 	}
-
-	private void handleKeyInput(KeyCode code) {
+	private void handleKeyInput(KeyCode code, Stage primaryStage) {
 		if(code == KeyCode.ENTER ){
-			buttonAction();
+			buttonLoginAction(primaryStage);
 		}
 		
 	}
-	private void buttonAction() {
-
+	private void buttonLoginAction(Stage primaryStage) {
 		checkUser = txtUserName.getText().toString();
 		checkPw = pf.getText().toString();
 		if(checkUser.equals(user) && checkPw.equals(pw)){
@@ -122,6 +118,11 @@ public class PasswordManager{
 		}
 		txtUserName.setText("");
 		pf.setText("");
-
 	}
+	
+	private void buttonResetAction(Stage primaryStage) {
+		txtUserName.clear();
+		pf.clear();
+	}
+	
 }
