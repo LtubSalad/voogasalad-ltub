@@ -14,7 +14,6 @@ import javafx.util.Pair;
  * Provides a user interface allowing the developer to adjust a list of preprovided variables and save the modified 
  * contents.
  * @author Daniel
- *
  */
 public class VariableSetter extends VBox{
 	private final List<SingleVariableSetter> singleVariableSetters;

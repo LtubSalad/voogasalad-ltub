@@ -9,6 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * 
+ * @author Daniel
+ * Create a pane based on an attribute that allows the parameters of an attribute to be set from the user interface side.
+ * Has a public method to get back the modified attribute.
+ */
+
 public class AttributeCustomizerPane extends ScrollPane {
 	private AttributeData myAttribute;
 	private List<AttributeCustomizerPane> subPanes;

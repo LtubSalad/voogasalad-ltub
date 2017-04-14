@@ -9,6 +9,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class AttributeCustomizerPopup extends Stage {
+	/**
+	 * Basically just a popup with an AttributeCustomizerPane, allowing you to set the variables of an attribute.
+	 * 
+	 * @param attributesModel
+	 * @param dataToAdd
+	 * @param targetData
+	 */
 	public AttributeCustomizerPopup(AttributesForScreenUse attributesModel, AttributeData dataToAdd, AttributeData targetData) {
 		Group root = new Group();
 		VBox box=new VBox();
