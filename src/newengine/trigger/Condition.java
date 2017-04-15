@@ -1,4 +1,4 @@
-package newengine.sprite;
+package newengine.trigger;
 
 public class Condition {
 

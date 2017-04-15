@@ -1,4 +1,4 @@
-package newengine.sprite;
+package newengine.attribute;
 
 import engine.camera.GamePoint;
 

@@ -1,4 +1,6 @@
-package newengine.sprite;
+package newengine.control;
+
+import newengine.sprite.Sprite;
 
 public abstract class Control {
 	

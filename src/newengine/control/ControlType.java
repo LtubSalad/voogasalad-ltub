@@ -1,4 +1,4 @@
-package newengine.sprite;
+package newengine.control;
 
 public class ControlType<T> {
 

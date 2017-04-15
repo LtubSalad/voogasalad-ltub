@@ -1,7 +1,10 @@
-package newengine.sprite;
+package newengine.control;
 
-import engine.camera.GamePoint;
 import engine.skill.Target;
+import newengine.attribute.PositionAttribute;
+import newengine.attribute.SpeedAttribute;
+import newengine.event.MoveEvent;
+import newengine.sprite.Sprite;
 
 public class MoveControl extends Control {
 	
@@ -14,8 +17,9 @@ public class MoveControl extends Control {
 	@Override
 	public void onAdded(Sprite sprite) {
 		this.sprite = sprite;
-		positionAttribute = sprite.getAttribute(PositionAttribute.TYPE);
-		speedAttribute = sprite.getAttribute(SpeedAttribute.TYPE);
+		// now there is no attribute in Sprite
+//		positionAttribute = sprite.getAttribute(PositionAttribute.TYPE);
+//		speedAttribute = sprite.getAttribute(SpeedAttribute.TYPE);
 		initHandlers();
 	}
 

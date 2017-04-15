@@ -8,6 +8,8 @@ import bus.BusEvent;
 import bus.BusEventHandler;
 import bus.BusEventType;
 import bus.EventBus;
+import newengine.component.Component;
+import newengine.component.ComponentType;
 
 public class Sprite {
 	
@@ -24,51 +26,32 @@ public class Sprite {
 	public void emit(BusEvent event) {
 		spriteBus.emit(event);
 	}
-
-	private Map<AttributeType<? extends Attribute>, Attribute> attributeMap = new HashMap<>();
 	
-	public void addAttribute(Attribute attribute) {
-		attributeMap.put(attribute.getType(), attribute);
-	}
+	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
 	
-	@SuppressWarnings("unchecked")
-	public <T extends Attribute> T getAttribute(AttributeType<T> type) {
-		return (T) attributeMap.get(type);
-	}
-	
-	public <T extends Attribute> void removeAttribute(AttributeType<T> type) {
-		attributeMap.remove(type);
-	}
-	
-	public <T extends Attribute> boolean hasAttribute(AttributeType<T> type) {
-		return attributeMap.containsKey(type);
-	}
-	
-	private Map<ControlType<? extends Control>, Control> controlMap = new HashMap<>();
-	
-	public void addControl(Control control) {
-		controlMap.put(control.getType(), control);
+	public void addComponent(Component control) {
+		components.put(control.getType(), control);
 		control.onAdded(this);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T extends Control> T getControl(ControlType<T> type) {
-		return (T) controlMap.get(type);
+	public <T extends Component> T getComponent(ComponentType<T> type) {
+		return (T) components.get(type);
 	}
 	
-	public <T extends Control> void removeControl(ControlType<T> type) {
-		Control control = controlMap.get(type);
-		controlMap.remove(type);
+	public <T extends Component> void removeComponent(ComponentType<T> type) {
+		Component control = components.get(type);
+		components.remove(type);
 		control.onRemoved();
 	}
 	
-	public <T extends Control> boolean hasControl(ControlType<T> type) {
-		return controlMap.containsKey(type);
+	public <T extends Component> boolean hasComponent(ComponentType<T> type) {
+		return components.containsKey(type);
 	}
 	
 	public void update(double dt) {
-		for (Control control: controlMap.values()) {
-			control.onUpdated(dt);
+		for (Component component: components.values()) {
+			component.onUpdated(dt);
 		}
 	}
 	

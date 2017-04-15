@@ -1,5 +1,8 @@
 package newengine.sprite;
 
+import newengine.attribute.Attribute;
+import newengine.attribute.AttributeType;
+
 public class PositionTestAttribute extends Attribute {
 	
 	public static final AttributeType<PositionTestAttribute> TYPE = new AttributeType<>();

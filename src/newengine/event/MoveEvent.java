@@ -1,10 +1,11 @@
-package newengine.sprite;
+package newengine.event;
 
 import java.util.List;
 
 import bus.BusEvent;
 import bus.BusEventType;
 import engine.skill.Target;
+import newengine.sprite.Sprite;
 
 public class MoveEvent extends BusEvent {
 	

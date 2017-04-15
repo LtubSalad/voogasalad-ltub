@@ -1,4 +1,4 @@
-package newengine.sprite;
+package newengine.attribute;
 
 /**
  * Attribute stores mutable data for the sprite.
