@@ -8,6 +8,7 @@ import java.util.Set;
 import bus.BusEvent;
 import bus.BusEventHandler;
 import bus.BusEventType;
+import newSprite.ComponentSprite.Component;
 
 
 public class HealthHolder extends Component<HealthEvent>{
@@ -27,7 +28,7 @@ public class HealthHolder extends Component<HealthEvent>{
 	private int health;
 
 	public HealthHolder(ComponentSprite sprite, int currentHealth, int maxHealth) {
-		super(sprite);
+		sprite.super();
 		this.health=currentHealth;
 		this.maxHealth=maxHealth;
 		// TODO Auto-generated constructor stub
