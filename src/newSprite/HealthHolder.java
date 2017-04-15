@@ -1,9 +1,16 @@
 package newSprite;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import bus.BusEvent;
+import bus.BusEventHandler;
 import bus.BusEventType;
 
-public class HealthHolder extends Component{
+
+public class HealthHolder extends Component<HealthEvent>{
 	/**
 	 * Internally tracks health of a single Sprite. Has an internal event bus to
 	 * Uses delegation design pattern so that the HealthHolder stores the handlers for how to respond to events
@@ -15,6 +22,7 @@ public class HealthHolder extends Component{
 	 */
 	public final BusEventType<HealthEvent> ADJUST_HEALTH=new BusEventType<>("ADJUST_HEALTH");
 	public final BusEventType<HealthEvent> NO_HEALTH=new BusEventType<>("NO_HEALTH");
+	private Map<BusEventType<HealthEvent>,BusEventHandler<HealthEvent>> eventHandlers;
 	private int maxHealth;
 	private int health;
 
@@ -36,25 +44,21 @@ public class HealthHolder extends Component{
 			this.getBus().emit(new HealthEvent(NO_HEALTH,health,value));
 		}
 	}
-	
-	public class HealthEvent extends BusEvent {
-		private int currentHealth;
-		private int healthChange;
 
-		//what if they have wrong Type? I could get instantiated with arbitrary type
-		public HealthEvent(BusEventType<? extends HealthEvent> busEventType, int currentHealth, int healthChange) {
-			super(busEventType);
-			this.currentHealth=currentHealth;
-			this.healthChange=healthChange;
-		}
+	/**
+	 * Lets people see what this events are listened for in this Component's bus.
+	 */
+	public Collection<BusEventType<HealthEvent>> getEvents() {
+		Set<BusEventType<HealthEvent>> myEvents= new HashSet<>();
+		myEvents.add(NO_HEALTH);
+		myEvents.add(ADJUST_HEALTH);
+		return myEvents;
+	}
 
-		public int getCurrentHealth(){
-			return currentHealth;
-		}
-		
-		public int getHealthChange(){
-			return healthChange;
-		}
+	@Override
+	public Map<HealthEvent, BusEventHandler<HealthEvent>> getHandlers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

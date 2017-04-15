@@ -1,20 +1,30 @@
 package newSprite;
 
 import java.util.Collection;
+import java.util.Map;
 
 import bus.BasicEventBus;
 import bus.BusEvent;
+import bus.BusEventHandler;
 import bus.BusEventType;
 
+/**
+ * 
+ * @author Daniel
+ * A new version of the Sprite (still in progress). Stores a bunch of components, (which are similar to attributes
+ * but for their ability to handle and fire events). Every ComponentSprite also handles events concerning 
+ * instantiation and removal.
+ *
+ */
 public abstract class ComponentSprite {
 	private final BusEventType<RemoveEvent> JUST_BEFORE_REMOVAL=new BusEventType<>("REMOVED");
 	private final BusEventType<InitializationEvent> JUST_AFTER_INITIALIZATION=new BusEventType<>("ADDED");
 	
-	private int ID;
+	private int ID; //I'm keeping a distinction between ID and type,
 	private String type;
 	private BasicEventBus myBus;
 	private BasicEventBus environmentBus;
-	private Collection<Component> myComponents;
+	private Collection<Component<? extends BusEvent>> myComponents;
 	
 	public ComponentSprite(){
 		myBus=new BasicEventBus();
@@ -29,7 +39,7 @@ public abstract class ComponentSprite {
 		return ID;
 	}
 	
-	public void addComponent(Component component){
+	public void addComponent(Component<? extends BusEvent> component){
 		myComponents.add(component);
 	}
 	
@@ -38,8 +48,8 @@ public abstract class ComponentSprite {
 	}
 	
 	public void removeMe(){
-		//TODO: tell environment bus to remove me
 		myBus.emit(new RemoveEvent(JUST_BEFORE_REMOVAL));
+		//TODO: tell environment bus to remove me
 	}
 	
 	public class InitializationEvent extends BusEvent {
@@ -52,5 +62,31 @@ public abstract class ComponentSprite {
 		public RemoveEvent(BusEventType<? extends BusEvent> busEventType) {
 			super(busEventType);
 		}
+	}
+	
+	public abstract class Component<T extends BusEvent> {
+		private BasicEventBus myBus;
+		private ComponentSprite mySprite;
+		
+		
+		public Component(){
+			myBus=new BasicEventBus();
+		}
+		
+		public Component(ComponentSprite sprite){
+			this();
+			mySprite=sprite;
+		}
+		
+		public ComponentSprite getSprite(){
+			return mySprite;
+		}
+		
+		public abstract Map<T,BusEventHandler<T>> getHandlers();
+		
+		protected BasicEventBus getBus(){
+			return myBus;
+		}
+		
 	}
 }
