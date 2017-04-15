@@ -14,6 +14,8 @@ import bus.BusEventType;
  * A new version of the Sprite (still in progress). Stores a bunch of components, (which are similar to attributes
  * but for their ability to handle and fire events). Every ComponentSprite also handles events concerning 
  * instantiation and removal.
+ * Note the nested classes. The ComponentSprite stores nested classes for events, but also the abstract Component class.
+ * Hence every component has access to the 
  *
  */
 public abstract class ComponentSprite {
@@ -66,27 +68,15 @@ public abstract class ComponentSprite {
 	
 	public abstract class Component<T extends BusEvent> {
 		private BasicEventBus myBus;
-		private ComponentSprite mySprite;
-		
-		
-		public Component(){
-			myBus=new BasicEventBus();
-		}
-		
-		public Component(ComponentSprite sprite){
-			this();
-			mySprite=sprite;
-		}
 		
 		public ComponentSprite getSprite(){
-			return mySprite;
+			return ComponentSprite.this;
 		}
 		
 		public abstract Map<T,BusEventHandler<T>> getHandlers();
 		
 		protected BasicEventBus getBus(){
 			return myBus;
-		}
-		
+		}		
 	}
 }
