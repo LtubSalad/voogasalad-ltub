@@ -23,6 +23,7 @@ import player.levelChoice.LevelManager;
 public class PasswordManager{
 
 	public static final String TITLE = "Login";
+	private Stage primaryStage;
 	String user = "LTUB";
 	String pw = "123456";
 	String checkUser, checkPw;
@@ -30,12 +31,13 @@ public class PasswordManager{
 	Label lblMessage;
 	PasswordField pf;
 
-	public PasswordManager(){
+	public PasswordManager(Stage primaryStage){
+		this.primaryStage = primaryStage;
 		txtUserName = new TextField();
 		lblMessage = new Label();
 		pf = new PasswordField();
 	}
-	public void show(Stage primaryStage) {
+	public void show() {
 		primaryStage.setTitle(TITLE);
 		BorderPane bp = new BorderPane();
 		bp.setPadding(new Insets(10,50,50,50));
@@ -51,9 +53,7 @@ public class PasswordManager{
 		Label lblPassword = new Label("Password");		
 		Button btnLogin = new Button("Login");
 		Button btnReset = new Button("Reset");
-
 		//Adding Nodes to GridPane layout
-
 		gridPane.add(lblUserName, 0, 0);
 		gridPane.add(txtUserName, 1, 0);
 		gridPane.add(lblPassword, 0, 1);
@@ -61,7 +61,6 @@ public class PasswordManager{
 		gridPane.add(btnLogin, 2, 0);
 		gridPane.add(btnReset, 2, 1);
 		gridPane.add(lblMessage, 1, 2);
-
 		//Reflection for gridPane
 		Reflection r = new Reflection();
 		r.setFraction(0.7f);
@@ -71,21 +70,17 @@ public class PasswordManager{
 		dropShadow.setOffsetX(5);
 		dropShadow.setOffsetY(5);
 		//Adding text and DropShadow effect to it
-
 		Text text = new Text("Game Login");
 		text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
 		text.setEffect(dropShadow);
-
 		//Adding text to HBox
 		hb.getChildren().add(text);
 		//Add ID's to Nodes
 		bp.setId("bp");
-
 		gridPane.setId("root");
 		btnLogin.setId("btnLogin");
 		btnReset.setId("btnReset");
 		text.setId("text");
-
 		//Add HBox and GridPane layout to BorderPane Layout
 		bp.setTop(hb);
 		bp.setCenter(gridPane); 
@@ -93,19 +88,14 @@ public class PasswordManager{
 		Scene scene = new Scene(bp);
 		scene.getStylesheets().setAll("/styleSheets/login.css");
 		primaryStage.setScene(scene);
-
 		primaryStage.show();
 		//Action for btnLogin
 		btnLogin.setOnAction(e -> buttonLoginAction(primaryStage));
 		
 		//Action for btnLogin
 		btnReset.setOnAction(e -> buttonResetAction(primaryStage));
-
-
 		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode(), primaryStage));
 	}
-
-
 	private void handleKeyInput(KeyCode code, Stage primaryStage) {
 		if(code == KeyCode.ENTER ){
 			buttonLoginAction(primaryStage);
@@ -113,14 +103,13 @@ public class PasswordManager{
 		
 	}
 	private void buttonLoginAction(Stage primaryStage) {
-
 		checkUser = txtUserName.getText().toString();
 		checkPw = pf.getText().toString();
 		if(checkUser.equals(user) && checkPw.equals(pw)){
 			lblMessage.setText("Congratulations!");
 			lblMessage.setTextFill(Color.GREEN);
 			primaryStage.hide();
-			 LevelManager levelManager = new LevelManager();
+			 LevelManager levelManager = new LevelManager(primaryStage);
 			 levelManager.show();
 		}
 		else{
@@ -129,7 +118,6 @@ public class PasswordManager{
 		}
 		txtUserName.setText("");
 		pf.setText("");
-
 	}
 	
 	private void buttonResetAction(Stage primaryStage) {

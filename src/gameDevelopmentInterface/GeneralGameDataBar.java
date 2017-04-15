@@ -4,7 +4,12 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-
+/**
+ * A simple status bar (that could also function as an HUD) to show the
+ * user their general game data such as number of lives left, etc.
+ * @author Jake
+ *
+ */
 public class GeneralGameDataBar extends HBox {
 	private static final int SPACING = 50;
 	private static final String NUM_BONUSES = "Number of Bonuses : ";

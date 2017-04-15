@@ -36,6 +36,10 @@ public class ScreenModelData {
 	public ObservableList<AttributeData> getAllObjectsOnScreen() {
 		return myScreenData;
 	}
+	/**
+	 * 
+	 * @return a list version of the observable list we have been using to store screen sprites
+	 */
 	public List<AttributeData> getDataToSave() {
 		List<AttributeData> toReturn = new ArrayList<AttributeData>();
 		myScreenData.forEach(Attr -> {
@@ -43,7 +47,10 @@ public class ScreenModelData {
 		});
 		return toReturn;
 	}
-	
+	/**
+	 * 
+	 * @param datas are from a file that contains a preset map
+	 */
 	public void setObjectsOnScreen(List<AttributeData> datas){
 		myScreenData.clear();
 		myScreenData.addAll(datas);

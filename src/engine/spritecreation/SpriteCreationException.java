@@ -1,6 +1,7 @@
 package engine.spritecreation;
 /**
  * This class represents what might go wrong when using XML files in sprite creation.
+ * Framework taken from example_xml project 
  * @author Robert C. Duvall, Matthew Tribby, Tahia Emran, Alison Huang
  */
 public class SpriteCreationException extends RuntimeException {

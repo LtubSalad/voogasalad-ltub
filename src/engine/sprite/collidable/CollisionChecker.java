@@ -5,11 +5,7 @@ import java.util.stream.Collectors;
 
 import bus.EventBus;
 import engine.camera.GamePoint;
-import engine.model.SpriteModelEvent;
-import engine.sprite.Attribute;
 import engine.sprite.Sprite;
-import engine.sprite.healthholder.DecrementHealthEvent;
-import engine.sprite.weapon.Weapon;
 import javafx.scene.shape.Polygon;
 
 public class CollisionChecker {

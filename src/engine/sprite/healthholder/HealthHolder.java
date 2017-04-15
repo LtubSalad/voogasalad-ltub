@@ -1,6 +1,5 @@
 package engine.sprite.healthholder;
 
-import data.AttributeData;
 import engine.sprite.Attribute;
 
 public class HealthHolder implements Attribute {
