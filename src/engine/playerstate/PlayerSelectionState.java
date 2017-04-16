@@ -10,11 +10,11 @@ import engine.input.events.GameWorldMouseEvent;
 import engine.skill.PlayerCreateSpriteSkill;
 import engine.skill.Skill;
 import engine.sprite.Sprite;
-import engine.sprite.collidable.Collidable;
-import engine.sprite.collidable.CollisionBound;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
-import engine.sprite.movable.Movable;
+import newengine.gamevariable.GameVariableKey;
+import newengine.gamevariable.GameVariableMap;
+import newengine.observer.Var;
 
 public class PlayerSelectionState {
 
@@ -23,12 +23,22 @@ public class PlayerSelectionState {
 	}
 	
 	private EventBus bus;
-	private Sprite sprite;
+	private GameVariableMap gameVariableMap;
+	private Var<Sprite> spriteVar;
+//	private Sprite sprite;
 	private List<Sprite> sprites;
 	private SelectionType selectionType = SelectionType.EMPTY;
 	
 	public PlayerSelectionState(EventBus bus) {
 		this.bus = bus;
+		initHandlers();
+	}
+	
+	public PlayerSelectionState(EventBus bus, GameVariableMap gameVariableMap) {
+		this.bus = bus;
+		this.gameVariableMap = gameVariableMap;
+		spriteVar = new Var<Sprite>();
+		gameVariableMap.put(GameVariableKey.SELECTED_SPRITE, spriteVar);
 		initHandlers();
 	}
 	
@@ -41,7 +51,7 @@ public class PlayerSelectionState {
 		bus.on(GameWorldMouseEvent.CANCEL_SKILL_AND_MOVE_SPRITE, (e) -> {
 			if (selectionType == SelectionType.SINGLE) {
 				// TODO: where comes the current player
-				bus.emit(new MoveSpriteEvent(MoveSpriteEvent.RAW, e.getActionMode(), e.getPlayer(), sprite, e.getTarget()));
+				bus.emit(new MoveSpriteEvent(MoveSpriteEvent.RAW, e.getActionMode(), e.getPlayer(), spriteVar.get(), e.getTarget()));
 			}
 			// TODO group selection
 		});
@@ -65,11 +75,11 @@ public class PlayerSelectionState {
 	}
 	
 	private void setSelectedSprite(Sprite sprite) {
-		this.sprite = sprite;
+		spriteVar.set(sprite);
 		selectionType = SelectionType.SINGLE;
 	}
 	public Sprite getSelectedSprite() {
-		return sprite;
+		return spriteVar.get();
 	}
 	public void setSelectedSprites(List<Sprite> sprites) {
 		sprites = new ArrayList<>(sprites);
