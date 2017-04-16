@@ -17,7 +17,7 @@ public class Speed extends Component {
 	}
 	
 	@Override
-	protected void initHandlers() { }
+	public void afterAdded() { }
 	
 	public double speed() {
 		return speedVar.get();

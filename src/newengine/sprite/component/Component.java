@@ -8,15 +8,10 @@ public abstract class Component {
 	
 	public final void onAdded(Sprite sprite) {
 		this.sprite = sprite;
-		initSettings();
-		initHandlers();
+		afterAdded();
 	}
 	
-	protected void initSettings() {
-		
-	}
-	
-	protected void initHandlers() {
+	public void afterAdded() {
 		
 	}
 	
@@ -24,7 +19,7 @@ public abstract class Component {
 		
 	}
 	
-	public void onRemoved() {
+	public void beforeRemoved() {
 		
 	}
 

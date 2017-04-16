@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commons.point.GamePoint;
-import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.image.LtubImage;
@@ -24,7 +23,7 @@ public class Collidable extends Component {
 	}
 	
 	@Override
-	protected void initSettings() {
+	public void afterAdded() {
 		List<GamePoint> bound = new ArrayList<>(); // TODO bound for multiple images
 		LtubImage image = sprite.getComponent(Images.TYPE).get().image();
 		double w = image.width();

@@ -35,7 +35,7 @@ public class Position extends Component {
 	}
 	
 	@Override
-	protected void initHandlers() {
+	public void afterAdded() {
 		sprite.on(MoveEvent.SPECIFIC, e -> {
 			moveTo(e.getTarget());
 		});

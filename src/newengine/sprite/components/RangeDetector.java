@@ -19,7 +19,7 @@ public class RangeDetector extends Component {
 		return rangeVar.get();
 	}
 
-	protected void initHandlers() {
+	public void afterAdded() {
 		sprite.on(InRangeEvent.ANY, (e) -> {
 			// TODO
 			System.out.println(sprite+" detected "+e.getDetectees());

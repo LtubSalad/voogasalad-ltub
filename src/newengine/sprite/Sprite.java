@@ -44,7 +44,7 @@ public class Sprite {
 	}
 	public <T extends Component> void removeComponent(ComponentType<T> type) {
 		Component component = components.get(type);
-		component.onRemoved();
+		component.beforeRemoved();
 		components.remove(type);		
 	}
 	public <T extends Component> boolean hasComponent(ComponentType<T> type) {
