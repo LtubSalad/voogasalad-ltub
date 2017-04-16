@@ -3,9 +3,8 @@ package gameDevelopmentInterface;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import engine.camera.GamePoint;
+import commons.point.GamePoint;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Pair;
 /**
  * 
  * @author Jake
@@ -21,7 +20,7 @@ public class PathCreator {
 		myPath = new Path();
 	}
 	/**
-	 * 
+	 * x
 	 * @return the replacement path
 	 */
 	public Queue<GamePoint> getReplacementPath() {

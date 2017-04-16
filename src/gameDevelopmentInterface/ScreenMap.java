@@ -1,7 +1,7 @@
 package gameDevelopmentInterface;
 
+import commons.point.GamePoint;
 import data.AttributeData;
-import engine.camera.GamePoint;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;

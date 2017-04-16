@@ -3,16 +3,18 @@ package newengine.gameloop;
 import java.util.ArrayList;
 import java.util.List;
 
+import bus.EventBus;
 import javafx.animation.AnimationTimer;
 
 public class FXGameLoop implements GameLoop {
 
-	
-	List<LoopComponent> loopComponents;
+	private EventBus bus; 
+	private List<LoopComponent> loopComponents;
 	private AnimationTimer timer;
 	private long prevNanos;
 	
-	public FXGameLoop() {
+	public FXGameLoop(EventBus bus) {
+		this.bus = bus;
 		prevNanos = 0;
 		loopComponents = new ArrayList<>();
 		timer = new AnimationTimer() {

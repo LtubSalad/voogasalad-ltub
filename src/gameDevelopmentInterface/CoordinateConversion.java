@@ -1,6 +1,6 @@
 package gameDevelopmentInterface;
 
-import engine.camera.GamePoint;
+import commons.point.GamePoint;
 import javafx.util.Pair;
 
 public class CoordinateConversion {

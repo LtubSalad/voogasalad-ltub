@@ -3,8 +3,8 @@ package newengine.utils;
 
 import java.util.Optional;
 
+import commons.point.GamePoint;
 import newengine.sprite.Sprite;
-import newengine.utils.point.GamePoint;
 
 public class Target {
 	

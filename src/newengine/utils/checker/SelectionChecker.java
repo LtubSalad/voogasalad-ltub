@@ -1,16 +1,20 @@
 package newengine.utils.checker;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import commons.point.GamePoint;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import newengine.sprite.Sprite;
-import newengine.sprite.bound.SelectionBound;
-import newengine.utils.point.GamePoint;
+import newengine.sprite.components.Images;
+import newengine.sprite.components.Position;
+import newengine.sprite.components.Selectable;
+import newengine.sprite.components.Selectable.SelectionBoundType;
+import newengine.utils.image.LtubImage;
 
 public class SelectionChecker {
 	
+	private SelectionChecker() { }
 	
 	/**
 	 * Get the corresponding sprite at the clicked point.
@@ -21,25 +25,32 @@ public class SelectionChecker {
 	 */
 	public static Sprite getSelection(List<Sprite> sprites, GamePoint pos) {
 		for (Sprite sprite: sprites) {
-			if (sprite.getSelectionBound() == SelectionBound.IMAGE) {
-				GamePoint adjustedPos = new GamePoint(sprite.getPos().x() - sprite.getImage().getImagePivot().x(),
-						sprite.getPos().y() - sprite.getImage().getImagePivot().y());
-				if (checkPointOnImage(sprite.getImage().getFXImage(), pos.x() - adjustedPos.x(), pos.y()-adjustedPos.y())) {
+			if (!sprite.getComponent(Selectable.TYPE).isPresent()) { continue; }
+			if (sprite.getComponent(Selectable.TYPE).get().boundType() == SelectionBoundType.IMAGE) {
+				if (!sprite.getComponent(Position.TYPE).isPresent() ||
+						!sprite.getComponent(Images.TYPE).isPresent()) {
+					continue;
+				}
+				GamePoint spritePos = sprite.getComponent(Position.TYPE).get().pos();
+				LtubImage image = sprite.getComponent(Images.TYPE).get().image();
+				GamePoint adjustedPos = new GamePoint(spritePos.x() - image.getImagePivot().x(),
+						spritePos.y() - image.getImagePivot().y());
+				if (checkPointOnImage(image.getFXImage(), pos.x() - adjustedPos.x(), pos.y()-adjustedPos.y())) {
 					return sprite;
 				}
 			}
-			else if (sprite.getSelectionBound() == SelectionBound.POLYGON) {
-				List<Double> xList = new ArrayList<>(); 
-				List<Double> yList = new ArrayList<>();
-				for (GamePoint point: sprite.getSelectionBoundVertices()) {
-					xList.add(point.x());
-					yList.add(point.y());
-				}
-				if (checkPointInPolygon(sprite.getSelectionBoundVertices().size(), xList, yList, pos.x(), pos.y())) {
-					System.out.println("Sprite polygon " + sprite.toString() + " is selected in polygon.");
-					return sprite;
-				}
-			}
+//			else if (sprite.getSelectionBound() == SelectionBound.POLYGON) {
+//				List<Double> xList = new ArrayList<>(); 
+//				List<Double> yList = new ArrayList<>();
+//				for (GamePoint point: sprite.getSelectionBoundVertices()) {
+//					xList.add(point.x());
+//					yList.add(point.y());
+//				}
+//				if (checkPointInPolygon(sprite.getSelectionBoundVertices().size(), xList, yList, pos.x(), pos.y())) {
+//					System.out.println("Sprite polygon " + sprite.toString() + " is selected in polygon.");
+//					return sprite;
+//				}
+//			}
 		}
 		// TODO if nothing is selected, return the background "sprite"
 		return null;

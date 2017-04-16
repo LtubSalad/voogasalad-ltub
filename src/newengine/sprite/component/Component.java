@@ -4,7 +4,14 @@ import newengine.sprite.Sprite;
 
 public abstract class Component {
 
-	public void onAdded(Sprite sprite) {
+	protected Sprite sprite;
+	
+	public final void onAdded(Sprite sprite) {
+		this.sprite = sprite;
+		initHandlers();
+	}
+	
+	protected void initHandlers() {
 		
 	}
 	
@@ -17,4 +24,5 @@ public abstract class Component {
 	}
 
 	public abstract ComponentType<? extends Component> getType();
+	
 }

@@ -1,7 +1,8 @@
 package newengine.view.camera;
 
-import newengine.utils.point.GamePoint;
-import newengine.utils.point.ViewPoint;
+import bus.EventBus;
+import commons.point.GamePoint;
+import commons.point.ViewPoint;
 
 /**
  * Convert between Point in the game and Point on the view
@@ -10,8 +11,10 @@ import newengine.utils.point.ViewPoint;
  */
 public class Camera {
 
-	public Camera() {
-		
+	private EventBus bus;
+	
+	public Camera(EventBus bus) {
+		this.bus = bus;
 	}
 	
 	// TODO now it is a 1-1 camera, without any scaling

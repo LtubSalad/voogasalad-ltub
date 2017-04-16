@@ -8,8 +8,8 @@ import bus.BusEvent;
 import bus.BusEventHandler;
 import bus.BusEventType;
 import bus.EventBus;
-import newengine.event.game.GameSaveEvent;
-import newengine.event.sprite.MoveEvent;
+import newengine.events.game.GameSaveEvent;
+import newengine.events.sprite.MoveEvent;
 import newengine.model.SpriteModel;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
@@ -45,7 +45,7 @@ public class TriggerManager {
 		List<EventBus> busList = new ArrayList<>();
 		if (busEventType == MoveEvent.SPECIFIC) {
 			if (spriteID.isPresent()) {
-				busList.add(model.getByID(spriteID.get()).getSpriteBus());
+				busList.add(model.getByID(spriteID.get()).get().getSpriteBus());
 			} 
 		} else if (busEventType == GameSaveEvent.ANY) {
 			busList.add(bus);
@@ -74,7 +74,7 @@ public class TriggerManager {
 							sprite.emit(getAction(action));
 						}
 					} else if (action.equals("specific sprite action")) {
-						model.getByID(new SpriteID("spriteID")).emit(getAction(action));
+						model.getByID(new SpriteID("spriteID")).get().emit(getAction(action));
 					}
 				}
 			}

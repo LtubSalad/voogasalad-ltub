@@ -1,6 +1,8 @@
 package newengine.view;
 
 import bus.EventBus;
+import commons.point.GamePoint;
+import commons.point.ViewPoint;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,12 +12,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import newengine.event.input.KeyEvent;
-import newengine.event.input.MouseEvent;
+import newengine.events.input.KeyEvent;
+import newengine.events.input.MouseEvent;
+import newengine.model.PlayerStatsModel;
+import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
 import newengine.sprite.Sprite;
-import newengine.utils.point.GamePoint;
-import newengine.utils.point.ViewPoint;
+import newengine.sprite.components.Images;
+import newengine.sprite.components.Position;
+import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
 
@@ -87,13 +92,27 @@ public class View {
 		// render game cast
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
-			GamePoint gamePos = new GamePoint(sprite.getPos().x() - sprite.getImage().getImagePivot().x(), 
-					sprite.getPos().y() - sprite.getImage().getImagePivot().y());
+			if (!sprite.getComponent(Position.TYPE).isPresent() ||
+					!sprite.getComponent(Images.TYPE).isPresent()) {
+				continue;
+			}
+			GamePoint spritePos = sprite.getComponent(Position.TYPE).get().pos();
+			LtubImage image = sprite.getComponent(Images.TYPE).get().image();
+			
+			GamePoint gamePos = new GamePoint(spritePos.x() - image.getImagePivot().x(), 
+					spritePos.y() - image.getImagePivot().y());
 			ViewPoint viewPos = camera.gameToView(gamePos);
-			gc.drawImage(new Image(sprite.getImage().getInputStream()), viewPos.x(),
+			gc.drawImage(new Image(image.getInputStream()), viewPos.x(),
 					viewPos.y());
 		}
 
+	}
+	
+	public void render(PlayerStatsModel playerStatsModel) {
+		// TODO
+	}
+	public void render(SelectionModel selectionModel) {
+		// TODO
 	}
 
 //	public void render(PlayerLocalModel localModel) {

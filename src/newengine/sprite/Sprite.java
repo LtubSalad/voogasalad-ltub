@@ -2,6 +2,7 @@ package newengine.sprite;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import bus.BasicEventBus;
 import bus.BusEvent;
@@ -13,11 +14,10 @@ import newengine.sprite.component.ComponentType;
 
 public class Sprite {
 	
-	public Sprite() {
-		
-	}
-	
 	private EventBus spriteBus = new BasicEventBus();
+	private SpriteID spriteID = IDGenerator.generateID();
+	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
+
 	
 	public EventBus getSpriteBus() {
 		return spriteBus;
@@ -30,32 +30,40 @@ public class Sprite {
 		spriteBus.emit(event);
 	}
 	
-	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
-	
-	public void addComponent(Component control) {
-		components.put(control.getType(), control);
-		control.onAdded(this);
+	public SpriteID getID() {
+		return spriteID;
 	}
 	
+	public void addComponent(Component component) {
+		components.put(component.getType(), component);
+		component.onAdded(this);
+	}
 	@SuppressWarnings("unchecked")
-	public <T extends Component> T getComponent(ComponentType<T> type) {
-		return (T) components.get(type);
+	public <T extends Component> Optional<T> getComponent(ComponentType<T> type) {
+		return Optional.ofNullable((T) components.get(type));
 	}
-	
 	public <T extends Component> void removeComponent(ComponentType<T> type) {
-		Component control = components.get(type);
-		components.remove(type);
-		control.onRemoved();
+		Component component = components.get(type);
+		component.onRemoved();
+		components.remove(type);		
 	}
-	
 	public <T extends Component> boolean hasComponent(ComponentType<T> type) {
 		return components.containsKey(type);
 	}
 	
+	/**
+	 * To be called in each frame.
+	 * @param dt
+	 */
 	public void update(double dt) {
 		for (Component component: components.values()) {
 			component.onUpdated(dt);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "sprite("+spriteID+")";
 	}
 
 }
