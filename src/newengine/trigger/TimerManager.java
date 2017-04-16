@@ -9,7 +9,8 @@ import bus.EventBus;
 public class TimerManager {
 
 	private EventBus bus;
-	private List<GameTimer> gameTimers = new ArrayList<>();
+	private List<DelayedTimer> delayedTimers = new ArrayList<>();
+	private List<PeriodicTimer> periodicTimers = new ArrayList<>();
 	
 	public TimerManager(EventBus bus) {
 		this.bus = bus;
@@ -18,21 +19,31 @@ public class TimerManager {
 	
 	private void initHandlers() {
 		bus.on(DelayedEvent.ANY, (e) -> {
-			gameTimers.add(new GameTimer(e.getDelayedTime(), e.getCallback()));
+			delayedTimers.add(new DelayedTimer(bus, e.getDelayedTime(), e.getCallback()));
+		});
+		bus.on(PeriodicEvent.ANY, (e) -> {
+			periodicTimers.add(new PeriodicTimer(bus, e.getRepeatingTimes(), e.getInterval(), e.getCallback()));
 		});
 	}
 	
 	private void removeFinishedTimers() {
-		List<GameTimer> finished = gameTimers.stream()
+		List<DelayedTimer> finishedDelayedTimers = delayedTimers.stream()
 					.filter((timer) -> timer.isFinished())
 					.collect(Collectors.toList());
-		gameTimers.removeAll(finished);
+		delayedTimers.removeAll(finishedDelayedTimers);
+		List<PeriodicTimer> finishedPeriodicTimers = periodicTimers.stream()
+				.filter((timer) -> timer.isFinished())
+				.collect(Collectors.toList());
+		delayedTimers.removeAll(finishedPeriodicTimers);
 	}
 	
 	public void update(double dt) {
 		removeFinishedTimers();
-		for (GameTimer gameTimer : gameTimers) {
-			gameTimer.update(dt);
+		for (DelayedTimer delayedTimer : delayedTimers) {
+			delayedTimer.update(dt);
+		}
+		for (PeriodicTimer periodicTimer : periodicTimers) {
+			periodicTimer.update(dt);
 		}
 	}
 	

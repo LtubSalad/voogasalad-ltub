@@ -1,14 +1,17 @@
 package newengine.trigger;
 
+import bus.EventBus;
 import engine.sprite.ai.Callback;
 
-public class GameTimer { // one timer for one delayed event
+public class DelayedTimer { // one timer for one delayed event
 	
+	private EventBus bus;
 	private double timeRemained;
 	private Callback callback;
 	private boolean finished = false;
 	
-	public GameTimer(double delayedTime, Callback callback) {
+	public DelayedTimer(EventBus bus, double delayedTime, Callback callback) {
+		this.bus = bus;
 		timeRemained = delayedTime;
 		this.callback = callback;
 	}

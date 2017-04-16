@@ -23,7 +23,11 @@ public class GameTimerTest extends Application {
 		gameLoop.addLoopComponent((dt) -> timerManager.update(dt));
 		
 		
-		bus.emit(new DelayedEvent(10, () -> {
+//		bus.emit(new DelayedEvent(10, () -> {
+//			bus.emit(new SysPrintEvent("Hello Sandy!"));
+//		}));
+		
+		bus.emit(new PeriodicEvent(10,1,() -> {
 			bus.emit(new SysPrintEvent("Hello Sandy!"));
 		}));
 		
