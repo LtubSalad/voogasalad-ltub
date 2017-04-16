@@ -32,10 +32,10 @@ public class SpriteModel {
 			removeSprite(e.getSprites());
 		});
 	}
-	private void addSprite(List<Sprite> spritesToBeAdded) {
-		for (Sprite sprite: spritesToBeAdded) {
-			if (!(sprites.contains(sprite))) {
-				sprites.add(sprite);
+	private void addSprite(List<Sprite> sprites) {
+		for (Sprite sprite: sprites) {
+			if (!(this.sprites.contains(sprite))) {
+				this.sprites.add(sprite);
 			}
 		}
 	}
