@@ -15,7 +15,7 @@ import javafx.scene.image.WritableImage;
  *
  */
 public class NodeProcessor {
-	
+
 	/**
 	 * @param node
 	 * @return
@@ -25,18 +25,18 @@ public class NodeProcessor {
 		WritableImage snapshot = node.snapshot(new SnapshotParameters(), null);
 		BufferedImage buffImg= SwingFXUtils.fromFXImage(snapshot, null);
 		return buffImg;
-		
+
 	}
-	
+
 	double getAngle(Node node){
 		double xx = node.getLocalToSceneTransform().getMxx();
 		double xy = node.getLocalToSceneTransform().getMxy();
 		double angle = Math.atan2(-xy, xx);
-		
+
 		angle = Math.toDegrees(angle);
 		//angle = angle < 0 ? angle +360 : angle;
 		return angle;
-		
+
 	}
 
 }

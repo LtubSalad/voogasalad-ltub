@@ -5,9 +5,12 @@ package imageprocess;
 
 import java.util.Set;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 /**
+ * Process Images, like resize, get the Mask of the binary representation
+ * of a colorful image
  * @author Zhiyong
  *
  */
@@ -21,7 +24,7 @@ public interface ImageProcessor extends Processor<Image>{
 	 * the guideline of: x,y where x is the absolute x position of 
 	 * the pixel and y is the absolute y position of the pixel
 	 */
-	Set<Point> getMask(Image image);
+	Set<Point2D> getMask(Image image);
 	
 
 }
