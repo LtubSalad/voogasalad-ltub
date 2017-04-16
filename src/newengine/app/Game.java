@@ -3,6 +3,7 @@ package newengine.app;
 import bus.BasicEventBus;
 import bus.EventBus;
 import javafx.scene.Scene;
+import newengine.events.MapInitializationEvent;
 import newengine.gameloop.FXGameLoop;
 import newengine.gameloop.GameLoop;
 import newengine.managers.collision.CollisionManager;
@@ -21,9 +22,9 @@ public class Game {
 	private EventBus bus = new BasicEventBus();
 	private GameLoop gameLoop;
 	private View view;
+	private boolean mapInitialized = false;
 	
 	public Game() {
-		
 		SpriteModel spriteModel = new SpriteModel(bus);
 		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus);
 		SelectionModel selectionModel = new SelectionModel(bus);
@@ -48,8 +49,15 @@ public class Game {
 		DebugManager debugManager = new DebugManager(bus);
 	}
 	
+	public EventBus getBus() {
+		return bus;
+	}
 	
 	public void start() {
+		if (!mapInitialized) {
+			bus.emit(new MapInitializationEvent());
+			mapInitialized = true;
+		}
 		gameLoop.start();
 	}
 	public void pause() {

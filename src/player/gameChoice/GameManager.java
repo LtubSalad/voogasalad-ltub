@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import commons.FileLoader;
-import engine.app.GameFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,12 +31,13 @@ public class GameManager {
 	private File gameFile;
 	private GameData gameData;
 	
-	private GameFactory gameFactory;
+//	private GameFactory gameFactory;
+	// TODO: I commented out gameFactory to prevent compile error.
 	
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		numberOfDefaultGames = Integer.parseInt(myResources.getString("numberOfDefaultGames"));
-		gameFactory = new GameFactory();
+//		gameFactory = new GameFactory();
 		show();
 	}
 	
@@ -130,7 +130,7 @@ public class GameManager {
 			FileLoader fileLoader = new FileLoader(primaryStage);
 			gameFile = fileLoader.chooseFile();
 			if (gameFile != null) {
-				gameFactory.loadGame(gameFile);
+//				gameFactory.loadGame(gameFile);
 			}
 		}
 		else {

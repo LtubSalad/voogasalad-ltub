@@ -1,8 +1,14 @@
 package newengine.app;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import bus.EventBus;
 import commons.point.GamePoint;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import newengine.events.MapInitializationEvent;
+import newengine.events.SpriteModelEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
@@ -19,6 +25,8 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		
+		Game game = new Game();
 
 		Player player1 = new Player("Player 1");
 		
@@ -32,8 +40,17 @@ public class App extends Application {
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new RangeDetector(128));
 		
-
+		List<Sprite> spritesToAdd = new ArrayList<>();
+		spritesToAdd.add(sprite1);
 		
+		EventBus bus = game.getBus();
+		bus.on(MapInitializationEvent.ANY, (e) -> {
+			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD_LIST, spritesToAdd));
+		});
+		
+		stage.setScene(game.getScene());
+		game.start();
+		stage.show();
 	}
 	
 	public static void main(String[] args) {
