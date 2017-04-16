@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import bus.EventBus;
 import engine.model.SpriteModelEvent;
-import engine.sprite.Sprite;
+import newengine.sprite.Sprite;
 import newengine.utils.Target;
 
 public class PlayerCreateSpriteSkill implements Skill {

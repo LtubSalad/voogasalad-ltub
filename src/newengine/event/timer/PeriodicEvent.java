@@ -1,8 +1,9 @@
 package newengine.event.timer;
 
+
 import bus.BusEvent;
 import bus.BusEventType;
-import engine.sprite.ai.Callback;
+import newengine.utils.Callback;
 
 public class PeriodicEvent extends BusEvent {
 	

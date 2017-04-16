@@ -1,8 +1,8 @@
 package newengine.collision;
 
 import bus.EventBus;
-import engine.sprite.Sprite;
 import newengine.event.collision.CollisionEvent;
+import newengine.sprite.Sprite;
 
 public class CollisionManager {
 

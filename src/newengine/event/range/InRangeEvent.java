@@ -2,7 +2,7 @@ package newengine.event.range;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import engine.sprite.Sprite;
+import newengine.sprite.Sprite;
 
 /**
  * Event for sprite-in-range.

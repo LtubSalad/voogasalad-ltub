@@ -2,7 +2,7 @@ package newengine.skill;
 
 import java.util.Optional;
 
-import engine.sprite.Sprite;
+import newengine.sprite.Sprite;
 import newengine.utils.Target;
 
 public interface Skill {

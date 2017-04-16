@@ -1,9 +1,8 @@
 package newengine.range;
 
 import bus.EventBus;
-import engine.sprite.Sprite;
-import engine.sprite.attacker.AttackEvent;
 import newengine.event.range.InRangeEvent;
+import newengine.sprite.Sprite;
 
 /**
  * Manage actions to do when one sprite is in the detection range of another sprite.
@@ -25,10 +24,6 @@ public class InRangeManager {
 			Sprite detectee = e.getDetectee();
 			// TODO actions to do when one sprite gets into the range of another sprite
 			// if detector is an attacker, launch weapon with target = detectee
-			if (detector.getAttacker().isPresent()){
-				bus.emit(new AttackEvent(AttackEvent.ANY, detector, detectee));
-				
-			}
 		});
 	}
 }

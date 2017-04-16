@@ -1,12 +1,12 @@
 package newengine.sprite.position;
 
-import engine.camera.GamePoint;
-import engine.skill.Target;
 import newengine.event.sprite.MoveEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.sprite.speed.SpeedComponent;
+import newengine.utils.Target;
+import newengine.utils.point.GamePoint;
 
 public class PositionComponent extends Component {
 

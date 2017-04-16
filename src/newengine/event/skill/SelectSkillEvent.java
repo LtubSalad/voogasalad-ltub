@@ -2,7 +2,7 @@ package newengine.event.skill;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import engine.skill.Skill;
+import newengine.skill.Skill;
 
 public class SelectSkillEvent extends BusEvent {
 

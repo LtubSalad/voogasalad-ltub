@@ -3,9 +3,8 @@ package newengine.utils.image;
 import java.io.InputStream;
 
 import commons.RunningMode;
-import engine.camera.GamePoint;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import newengine.utils.point.GamePoint;
 
 public class LtubImage {
 

@@ -1,28 +1,29 @@
 package newengine.input;
 
 import bus.EventBus;
-import engine.action.ActionMode;
-import engine.camera.Camera;
-import engine.camera.GamePoint;
-import engine.camera.ViewPoint;
-import engine.input.events.GameWorldMouseEvent;
-import engine.input.events.KeyEvent;
-import engine.input.events.MouseEvent;
 import engine.model.Model;
-import engine.player.Player;
-import engine.skill.Target;
-import engine.sprite.Sprite;
 import javafx.scene.input.KeyCode;
+import newengine.event.input.GameWorldMouseEvent;
+import newengine.event.input.KeyEvent;
+import newengine.event.input.MouseEvent;
+import newengine.model.SpriteModel;
+import newengine.player.Player;
+import newengine.sprite.Sprite;
+import newengine.utils.ActionMode;
+import newengine.utils.Target;
 import newengine.utils.checker.SelectionChecker;
+import newengine.utils.point.GamePoint;
+import newengine.utils.point.ViewPoint;
+import newengine.view.camera.Camera;
 
 public class InputManager {
 
 	private EventBus bus;
-	private Model model;
+	private SpriteModel model;
 	private Camera camera;
 	private KeyInputState keyInputState;
 	
-	public InputManager(EventBus bus, Model model, Camera camera) {
+	public InputManager(EventBus bus, SpriteModel model, Camera camera) {
 		this.bus = bus;
 		this.model = model;
 		this.camera = camera;
@@ -39,9 +40,6 @@ public class InputManager {
 		ActionMode actionMode = keyInputState.isKeyPressed(KeyCode.SHIFT) ? ActionMode.QUEUE
 				: ActionMode.INSTANT;
 		return actionMode;
-	}
-	private Player player() {
-		return model.getPlayer();
 	}
 
 	private void initHandlers() {

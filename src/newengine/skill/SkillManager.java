@@ -1,7 +1,7 @@
 package newengine.skill;
 
 import bus.EventBus;
-import engine.skill.events.ConfirmSkillEvent;
+import newengine.event.skill.ConfirmSkillEvent;
 
 public class SkillManager {
 

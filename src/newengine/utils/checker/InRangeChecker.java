@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bus.EventBus;
-import engine.camera.GamePoint;
-import engine.sprite.Sprite;
 import newengine.event.range.InRangeEvent;
+import newengine.sprite.Sprite;
+import newengine.utils.point.GamePoint;
 
 /**
  * Check if one sprite is in the detection range of another sprite.

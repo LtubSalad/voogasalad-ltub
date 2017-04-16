@@ -4,14 +4,13 @@ import java.util.Optional;
 
 import bus.EventBus;
 import engine.model.SpriteModelEvent;
-import engine.player.Player;
-import engine.sprite.Sprite;
 import engine.sprite.collidable.Collidable;
-import engine.sprite.collidable.CollisionBound;
-import engine.sprite.images.ImageSet;
-import engine.sprite.images.LtubImage;
-import engine.sprite.movable.Movable;
+import newengine.player.Player;
+import newengine.sprite.Sprite;
+import newengine.sprite.bound.CollisionBound;
+import newengine.sprite.image.ImageSet;
 import newengine.utils.Target;
+import newengine.utils.image.LtubImage;
 
 public class FireProjectileSkill implements Skill {
 

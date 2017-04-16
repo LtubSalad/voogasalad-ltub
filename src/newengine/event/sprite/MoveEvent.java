@@ -4,8 +4,8 @@ import java.util.List;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import engine.skill.Target;
 import newengine.sprite.Sprite;
+import newengine.utils.Target;
 
 public class MoveEvent extends BusEvent {
 	

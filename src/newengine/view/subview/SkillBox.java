@@ -1,14 +1,14 @@
 package newengine.view.subview;
 
 import bus.EventBus;
-import engine.playerstate.PlayerSelectionState;
-import engine.playerstate.PlayerSelectionState.SelectionType;
-import engine.skill.FireProjectileSkill;
-import engine.skill.events.SelectSkillEvent;
-import engine.sprite.Sprite;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import newengine.event.skill.SelectSkillEvent;
+import newengine.model.PlayerSelectionState;
+import newengine.model.PlayerSelectionState.SelectionType;
+import newengine.skill.FireProjectileSkill;
+import newengine.sprite.Sprite;
 
 public class SkillBox {
 

@@ -1,13 +1,14 @@
 package newengine.timer;
 
+import bus.BasicEventBus;
 import bus.EventBus;
-import engine.app.GameFactory;
-import engine.gameloop.GameLoop;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import newengine.debug.DebugManager;
 import newengine.event.debug.SysPrintEvent;
 import newengine.event.timer.PeriodicEvent;
+import newengine.gameloop.FXGameLoop;
+import newengine.gameloop.GameLoop;
 
 public class GameTimerTest extends Application {
 
@@ -15,10 +16,9 @@ public class GameTimerTest extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		GameFactory gameFactory = new GameFactory();
-		EventBus bus = gameFactory.getBus();
+		EventBus bus = new BasicEventBus();
 		
-		GameLoop gameLoop = gameFactory.createGameLoop();
+		GameLoop gameLoop = new FXGameLoop();
 		
 		TimerManager timerManager = new TimerManager(bus);
 		new DebugManager(bus);

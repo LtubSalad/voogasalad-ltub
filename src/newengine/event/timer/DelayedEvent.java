@@ -2,7 +2,7 @@ package newengine.event.timer;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import engine.sprite.ai.Callback;
+import newengine.utils.Callback;
 
 public class DelayedEvent extends BusEvent {
 	public static final BusEventType<DelayedEvent> ANY = new BusEventType<>();

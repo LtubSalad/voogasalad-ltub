@@ -1,15 +1,6 @@
 package newengine.view;
 
 import bus.EventBus;
-import engine.camera.Camera;
-import engine.camera.GamePoint;
-import engine.camera.ViewPoint;
-import engine.input.events.KeyEvent;
-import engine.input.events.MouseEvent;
-import engine.model.Model;
-import engine.model.PlayerLocalModel;
-import engine.sprite.Sprite;
-import engine.view.SkillBox;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -19,6 +10,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import newengine.event.input.KeyEvent;
+import newengine.event.input.MouseEvent;
+import newengine.model.SpriteModel;
+import newengine.sprite.Sprite;
+import newengine.utils.point.GamePoint;
+import newengine.utils.point.ViewPoint;
+import newengine.view.camera.Camera;
+import newengine.view.subview.SkillBox;
 
 public class View {
 	public static final int WIDTH = 600;
@@ -84,7 +83,7 @@ public class View {
 		return scene;
 	}
 
-	public void render(Model model) {
+	public void render(SpriteModel model) {
 		// render game cast
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
@@ -97,7 +96,7 @@ public class View {
 
 	}
 
-	public void render(PlayerLocalModel localModel) {
+//	public void render(PlayerLocalModel localModel) {
 //		// TODO: filter the available stats and skills by the current player
 //
 //		// render selection graphics
@@ -119,6 +118,6 @@ public class View {
 //		
 //		// render skill box
 //		skillBox.render(localModel.getPlayerSelectionState());
-	}
+//	}
 
 }

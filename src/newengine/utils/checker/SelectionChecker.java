@@ -3,11 +3,11 @@ package newengine.utils.checker;
 import java.util.ArrayList;
 import java.util.List;
 
-import engine.camera.GamePoint;
-import engine.sprite.SelectionBound;
-import engine.sprite.Sprite;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import newengine.sprite.Sprite;
+import newengine.sprite.bound.SelectionBound;
+import newengine.utils.point.GamePoint;
 
 public class SelectionChecker {
 	

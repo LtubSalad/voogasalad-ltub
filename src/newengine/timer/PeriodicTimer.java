@@ -1,7 +1,7 @@
 package newengine.timer;
 
 import bus.EventBus;
-import engine.sprite.ai.Callback;
+import newengine.utils.Callback;
 
 public class PeriodicTimer {
 	

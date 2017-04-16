@@ -2,7 +2,7 @@ package newengine.event.collision;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import engine.sprite.Sprite;
+import newengine.sprite.Sprite;
 
 public class CollisionEvent extends BusEvent {
 

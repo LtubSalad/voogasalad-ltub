@@ -4,15 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import bus.EventBus;
-import engine.camera.GamePoint;
-import engine.model.SpriteModelEvent;
-import engine.sprite.Attribute;
-import engine.sprite.Sprite;
-import engine.sprite.collidable.CollisionBound;
-import engine.sprite.collidable.CollisionEvent;
-import engine.sprite.healthholder.DecrementHealthEvent;
-import engine.sprite.weapon.Weapon;
 import javafx.scene.shape.Polygon;
+import newengine.event.collision.CollisionEvent;
+import newengine.sprite.Sprite;
+import newengine.sprite.bound.CollisionBound;
+import newengine.utils.point.GamePoint;
 
 public class CollisionChecker {
 

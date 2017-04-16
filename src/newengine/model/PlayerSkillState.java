@@ -3,11 +3,11 @@ package newengine.model;
 import java.util.Optional;
 
 import bus.EventBus;
-import engine.input.events.GameWorldMouseEvent;
-import engine.skill.Skill;
-import engine.skill.events.ConfirmSkillEvent;
-import engine.skill.events.SelectSkillEvent;
-import engine.sprite.images.LtubImage;
+import newengine.event.input.GameWorldMouseEvent;
+import newengine.event.skill.ConfirmSkillEvent;
+import newengine.event.skill.SelectSkillEvent;
+import newengine.skill.Skill;
+import newengine.utils.image.LtubImage;
 
 /**
  * Indicating the current selected skill. Left click to confirm the skill.

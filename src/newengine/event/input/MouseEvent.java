@@ -2,7 +2,7 @@ package newengine.event.input;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import engine.camera.ViewPoint;
+import newengine.utils.point.ViewPoint;
 
 public class MouseEvent extends BusEvent {	
 	

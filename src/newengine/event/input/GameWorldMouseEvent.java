@@ -2,9 +2,9 @@ package newengine.event.input;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import engine.action.ActionMode;
-import engine.player.Player;
-import engine.skill.Target;
+import newengine.player.Player;
+import newengine.utils.ActionMode;
+import newengine.utils.Target;
 
 public class GameWorldMouseEvent extends BusEvent {
 
