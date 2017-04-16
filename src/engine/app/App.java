@@ -14,7 +14,6 @@ import engine.sprite.ai.AI;
 import engine.sprite.attacker.Attacker;
 import engine.sprite.collidable.Collidable;
 import engine.sprite.collidable.CollisionBound;
-import engine.sprite.collidable.CollisionChecker;
 import engine.sprite.healthholder.HealthHolder;
 import engine.sprite.images.ImageSet;
 import engine.sprite.images.LtubImage;
@@ -27,6 +26,7 @@ import gameDevelopmentInterface.Path;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import newengine.utils.checker.CollisionChecker;
 
 public class App extends Application {
 	

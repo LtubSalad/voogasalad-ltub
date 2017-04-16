@@ -1,4 +1,4 @@
-package engine.sprite.collidable;
+package newengine.utils.checker;
 
 import java.util.List;
 import java.util.stream.Collectors;

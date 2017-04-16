@@ -20,13 +20,13 @@ import engine.skill.SkillManager;
 import engine.sound.FXSoundManager;
 import engine.sound.SoundManager;
 import engine.sprite.attacker.AttackManager;
-import engine.sprite.collidable.CollisionChecker;
 import engine.sprite.collidable.CollisionManager;
 import engine.sprite.range.InRangeChecker;
 import engine.sprite.range.InRangeManager;
 import engine.spritecreation.GameBuildingManager;
 import engine.view.FXView;
 import engine.view.View;
+import newengine.utils.checker.CollisionChecker;
 
 public class GameFactory {
 

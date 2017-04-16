@@ -1,4 +1,4 @@
-package engine.view;
+package newengine.view;
 
 import bus.EventBus;
 import engine.camera.Camera;
@@ -9,6 +9,7 @@ import engine.input.events.MouseEvent;
 import engine.model.Model;
 import engine.model.PlayerLocalModel;
 import engine.sprite.Sprite;
+import engine.view.SkillBox;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -19,7 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
-public class FXView implements View {
+public class View {
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 400;
 	public static final int CANVAS_HEIGHT = 300;
@@ -37,7 +38,7 @@ public class FXView implements View {
 	// TODO: mouse location should belong to player input state
 	private ViewPoint mousePos;
 
-	public FXView(EventBus bus, Camera camera) {
+	public View(EventBus bus, Camera camera) {
 		this.bus = bus;
 		this.camera = camera;
 		VBox root = new VBox();
@@ -79,12 +80,10 @@ public class FXView implements View {
 		});
 	}
 
-	@Override
 	public Scene getScene() {
 		return scene;
 	}
 
-	@Override
 	public void render(Model model) {
 		// render game cast
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
@@ -98,7 +97,6 @@ public class FXView implements View {
 
 	}
 
-	@Override
 	public void render(PlayerLocalModel localModel) {
 //		// TODO: filter the available stats and skills by the current player
 //

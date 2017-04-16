@@ -1,23 +1,23 @@
 package newengine.trigger;
 
-import newengine.gamevariable.GameVariableComparisonOperator;
-import newengine.gamevariable.GameVariableKey;
-import newengine.gamevariable.GameVariableMap;
-import newengine.gamevariable.GameVariableValue;
+import newengine.utils.variable.VarComparisonOperator;
+import newengine.utils.variable.VarKey;
+import newengine.utils.variable.VarMap;
+import newengine.utils.variable.VarValue;
 
 public class Condition {
 
-	private GameVariableKey key;
-	private GameVariableComparisonOperator operator;
-	private GameVariableValue value;
+	private VarKey key;
+	private VarComparisonOperator operator;
+	private VarValue value;
 	
-	public Condition(GameVariableKey key, GameVariableComparisonOperator operator, GameVariableValue value) {
+	public Condition(VarKey key, VarComparisonOperator operator, VarValue value) {
 		this.key = key;
 		this.operator = operator;
 		this.value = value;
 	}
 	
-	public boolean isTrue(GameVariableMap map) {
+	public boolean isTrue(VarMap map) {
 		return map.get(key).isTrue(operator, value);
 	}
 	

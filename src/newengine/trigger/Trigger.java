@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import bus.BusEvent;
+import newengine.sprite.SpriteID;
 
 public class Trigger {
 

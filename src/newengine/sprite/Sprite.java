@@ -8,8 +8,8 @@ import bus.BusEvent;
 import bus.BusEventHandler;
 import bus.BusEventType;
 import bus.EventBus;
-import newengine.component.Component;
-import newengine.component.ComponentType;
+import newengine.sprite.component.Component;
+import newengine.sprite.component.ComponentType;
 
 public class Sprite {
 	
