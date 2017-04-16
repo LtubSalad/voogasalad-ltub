@@ -45,7 +45,7 @@ public class App extends Application {
 		
 		EventBus bus = game.getBus();
 		bus.on(MapInitializationEvent.ANY, (e) -> {
-			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD_LIST, spritesToAdd));
+			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
 		});
 		
 		stage.setScene(game.getScene());

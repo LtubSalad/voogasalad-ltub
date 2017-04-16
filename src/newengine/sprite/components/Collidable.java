@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commons.point.GamePoint;
+import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.image.LtubImage;
@@ -20,9 +21,10 @@ public class Collidable extends Component {
 	
 	public Collidable(CollisionBoundType boundType) {
 		boundTypeVar.set(boundType); // TODO different kinds of points
-		initBoundPoints();
 	}
-	private void initBoundPoints() {
+	
+	@Override
+	protected void initSettings() {
 		List<GamePoint> bound = new ArrayList<>(); // TODO bound for multiple images
 		LtubImage image = sprite.getComponent(Images.TYPE).get().image();
 		double w = image.width();

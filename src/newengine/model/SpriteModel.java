@@ -1,5 +1,6 @@
 package newengine.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ import newengine.sprite.SpriteID;
 public class SpriteModel {
 
 	private EventBus bus;
-	private List<Sprite> sprites;
+	private List<Sprite> sprites = new ArrayList<>();
 	
 	public SpriteModel(EventBus bus) {
 		this.bus = bus;
@@ -25,19 +26,21 @@ public class SpriteModel {
 	
 	private void initHandlers() {
 		bus.on(SpriteModelEvent.ADD, (e) -> {
-			addSprite(e.getSprite());
+			addSprite(e.getSprites());
 		});
 		bus.on(SpriteModelEvent.REMOVE, (e) -> {
-			removeSprite(e.getSprite());
+			removeSprite(e.getSprites());
 		});
 	}
-	private void addSprite(Sprite sprite) {
-		if (!sprites.contains(sprite)) {
-			sprites.add(sprite);
+	private void addSprite(List<Sprite> spritesToBeAdded) {
+		for (Sprite sprite: spritesToBeAdded) {
+			if (!(sprites.contains(sprite))) {
+				sprites.add(sprite);
+			}
 		}
 	}
-	private void removeSprite(Sprite sprite) {
-		sprites.remove(sprite);
+	private void removeSprite(List<Sprite> sprites) {
+		sprites.removeAll(sprites);
 	}
 	
 	

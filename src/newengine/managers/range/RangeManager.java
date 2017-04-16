@@ -28,6 +28,7 @@ public class RangeManager {
 				detector.emit(new InRangeEvent(InRangeEvent.ANY, detector, detectees));
 			}
 		}
+
 	}
 	
 }

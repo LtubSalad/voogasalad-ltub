@@ -8,7 +8,12 @@ public abstract class Component {
 	
 	public final void onAdded(Sprite sprite) {
 		this.sprite = sprite;
+		initSettings();
 		initHandlers();
+	}
+	
+	protected void initSettings() {
+		
 	}
 	
 	protected void initHandlers() {
