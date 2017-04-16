@@ -32,8 +32,8 @@ public class Trigger {
 	public String getEvent() {
 		return null;
 	}
-	public List<String> getConditions() {
-		return null;
+	public List<Condition> getConditions() {
+		return conditions;
 	}
 	public List<String> getActions() {
 		return null;

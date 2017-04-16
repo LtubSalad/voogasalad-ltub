@@ -10,10 +10,12 @@ import bus.BusEventType;
 import bus.EventBus;
 import newengine.Model;
 import newengine.event.MoveEvent;
+import newengine.gamevariable.GameVariableMap;
 import newengine.sprite.Sprite;
 
 public class TriggerManager {
 
+	GameVariableMap map;
 	Model model;
 	EventBus bus;
 
@@ -27,16 +29,13 @@ public class TriggerManager {
 	
 	public void processTrigger(Trigger trigger) {
 		String eventName = trigger.getEvent();
+		BusEventType<BusEvent> eventType = getEventType(eventName); // TODO
 		Optional<SpriteID> spriteID = trigger.getSpriteID();
-		List<String> conditions = trigger.getConditions(); // TODO
+		List<Condition> conditions = trigger.getConditions(); // TODO
 		List<String> actions = trigger.getActions();
-		processTrigger(getEventType(eventName), spriteID, actions);
-	}
-	
-	private <T extends BusEvent> void processTrigger(BusEventType<T> eventType, Optional<SpriteID> spriteID, List<String> actions) {
 		List<EventBus> receivers = getReceivers(eventType, spriteID);
 		for (EventBus receiverBus : receivers) {
-			receiverBus.on(eventType, genHandler(eventType, actions));
+			receiverBus.on(eventType, genHandler(eventType, conditions, actions));
 		}
 	}
 	
@@ -56,10 +55,15 @@ public class TriggerManager {
 		return busList;
 	}
 	
-	public <T extends BusEvent> BusEventHandler<T> genHandler(BusEventType<T> eventType, List<String> actions) {
+	public <T extends BusEvent> BusEventHandler<T> genHandler(BusEventType<T> eventType, List<Condition> conditions, List<String> actions) {
 		return new BusEventHandler<T>() { // ??? TODO
 			@Override
 			public void handle(BusEvent event) {
+				for (Condition condition : conditions) {
+					if (!condition.isTrue(map)) {
+						return;
+					}
+				}
 				for (String action : actions) {
 					if (action.equals("should be given to bus")) {
 						bus.emit(getAction(action));
