@@ -19,6 +19,9 @@ public class Sprite {
 	
 	private EventBus spriteBus = new BasicEventBus();
 	
+	public EventBus getSpriteBus() {
+		return spriteBus;
+	}
 	public <T extends BusEvent> void on(BusEventType<T> eventType, BusEventHandler<? super T> eventHandler) {
 		spriteBus.on(eventType, eventHandler);
 	}
@@ -54,5 +57,5 @@ public class Sprite {
 			component.onUpdated(dt);
 		}
 	}
-	
+
 }

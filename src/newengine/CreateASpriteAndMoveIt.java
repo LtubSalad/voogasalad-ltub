@@ -56,12 +56,12 @@ public class CreateASpriteAndMoveIt {
 		
 		// emit global event to modify all sprites
 		System.out.println("test emiting global event to modify all sprites");
-		bus.on(MoveEvent.GENERAL, e -> {
+		bus.on(MoveEvent.ALL, e -> {
 			for(Sprite s: e.getSprites()) {
 				s.emit(new MoveEvent(MoveEvent.SPECIFIC, s, e.getTarget()));
 			}
 		});
-		bus.emit(new MoveEvent(MoveEvent.GENERAL, sprites, new Target(new GamePoint(300,200))));
+		bus.emit(new MoveEvent(MoveEvent.ALL, sprites, new Target(new GamePoint(300,200))));
 		
 		
 		// manually call sprite to attack another

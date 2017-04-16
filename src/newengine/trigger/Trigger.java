@@ -1,6 +1,7 @@
 package newengine.trigger;
 
 import java.util.List;
+import java.util.Optional;
 
 import bus.BusEvent;
 
@@ -27,4 +28,19 @@ public class Trigger {
 	public void addAction(String action) {
 		
 	}
+	
+	public String getEvent() {
+		return null;
+	}
+	public List<String> getConditions() {
+		return null;
+	}
+	public List<String> getActions() {
+		return null;
+	}
+	public Optional<SpriteID> getSpriteID() {// OPTIONAL
+		return null;
+	}
+	
+	
 }

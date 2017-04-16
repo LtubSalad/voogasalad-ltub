@@ -10,7 +10,7 @@ import newengine.sprite.Sprite;
 public class MoveEvent extends BusEvent {
 	
 	public static final BusEventType<MoveEvent> GAME = new BusEventType<>();
-	public static final BusEventType<MoveEvent> GENERAL = new BusEventType<>();
+	public static final BusEventType<MoveEvent> ALL = new BusEventType<>();
 	public static final BusEventType<MoveEvent> SPECIFIC = new BusEventType<>();
 	
 	private Sprite sprite;
