@@ -15,7 +15,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javafx.util.Pair;
-
+/**
+ * Produces AttributeDatas from XML files.
+ * Use XStream instead.
+ * @author Daniel
+ *
+ */
 public class AttributeDataFactory {
 	public AttributeData produceAttribute(File file){
 		try{	
@@ -31,6 +36,8 @@ public class AttributeDataFactory {
 		}
 	}
 	
+	//Xstream does this better.
+	@Deprecated
 	private AttributeData produceAttributeHelper(Node element){
 		String name=element.getNodeName();
 		AttributeData fullAttribute=new AttributeData(name);

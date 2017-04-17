@@ -18,54 +18,54 @@ import player.App;
 import player.loaderManager.Loader;
 
 /**
- * The first stage of the Game Player to choose a game to play.
+ * The first stage of the Game Player to choose a game to play. After the user
+ * chooses the xml file representing the game, the class passes the file to
+ * {@code engine.app.GameFactory}. Depends on {@code engine.app.GameFactory}.
+ * 
  * @author Yilin Gao
  *
  */
 public class GameManager {
-	
+
 	private Stage primaryStage;
 	private int numberOfDefaultGames;
-	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
-	
+	private ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
+
 	private File gameFile;
-	private GameData gameData;
-	
-//	private GameFactory gameFactory;
+
+	// private GameFactory gameFactory;
 	// TODO: I commented out gameFactory to prevent compile error.
-	
+
+	/**
+	 * Constructor of the {@code player.gameChoice}
+	 * 
+	 * @param primaryStage
+	 */
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		numberOfDefaultGames = Integer.parseInt(myResources.getString("numberOfDefaultGames"));
-//		gameFactory = new GameFactory();
+		// gameFactory = new GameFactory();
 		show();
 	}
-	
+
 	/**
 	 * Get the Stage of the JavaFX app
+	 * 
 	 * @return Stage
 	 */
 	public Stage getStage() {
 		return primaryStage;
 	}
-	
-	/**
-	 * Get the chosen GameData
-	 * @return GameData
-	 */
-	public GameData getGameData() {
-		return gameData;
-	}
-	
+
 	private void show() {
 		primaryStage.setTitle("LTUB Game Chooser");
 		BorderPane borderPane = new BorderPane();
 		Scene scene = new Scene(borderPane, App.WIDTH, App.HEIGHT);
 		primaryStage.setScene(scene);
-		
-		VBox gameButtonBox = initGameChooser();		
+
+		VBox gameButtonBox = initGameChooser();
 		HBox settingBox = initSystemSettings();
-		
+
 		borderPane.setCenter(gameButtonBox);
 		borderPane.setBottom(settingBox);
 		primaryStage.show();
@@ -75,9 +75,10 @@ public class GameManager {
 		HBox settingBox = new HBox();
 		settingBox.setAlignment(Pos.TOP_RIGHT);
 		settingBox.setSpacing(15);
-		
+
 		Button musicButton = new Button();
-		ImageView musicImageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString("music"))));
+		ImageView musicImageView = new ImageView(
+				new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString("music"))));
 		musicImageView.setFitWidth(20);
 		musicImageView.setPreserveRatio(true);
 		musicButton.setGraphic(musicImageView);
@@ -100,14 +101,14 @@ public class GameManager {
 
 	private void addDefaultChoices(VBox gameButtonBox) {
 		for (int i = 0; i < numberOfDefaultGames; i++) {
-			String fileName = myResources.getString("defaultGamePath" + (i+1));
+			String fileName = myResources.getString("defaultGamePath" + (i + 1));
 			Image gameImage = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
 			ImageView gameImageView = new ImageView(gameImage);
-			gameImageView.setFitWidth(App.WIDTH/3);
+			gameImageView.setFitWidth(App.WIDTH / 3);
 			gameImageView.setPreserveRatio(true);
 			Button gameButton = new Button();
 			// TODO
-			gameButton.setTooltip(new Tooltip(myResources.getString("defaultGameName" + (i+1))));
+			gameButton.setTooltip(new Tooltip(myResources.getString("defaultGameName" + (i + 1))));
 			gameButton.setOnMousePressed(e -> {
 				loadGameFile(false, gameButton);
 			});
@@ -124,22 +125,21 @@ public class GameManager {
 		customGameButton.setWrapText(true);
 		gameButtonBox.getChildren().add(customGameButton);
 	}
-	
+
 	private void loadGameFile(boolean custom, Button button) {
 		if (custom) {
 			FileLoader fileLoader = new FileLoader(primaryStage);
 			gameFile = fileLoader.chooseFile();
 			if (gameFile != null) {
-//				gameFactory.loadGame(gameFile);
+				// gameFactory.loadGame(gameFile);
+				// load the game file into the GameFactory
 			}
-		}
-		else {
+		} else {
 			// TODO load the corresponding game file into gameFile
-			System.out.println("Game " + button.getTooltip().getText() + " is chosen.");			
+			System.out.println("Game " + button.getTooltip().getText() + " is chosen.");
 		}
-		// TODO pass the game data into game engine
 		primaryStage.close();
-		Loader loader = new Loader();
+		Loader loader = new Loader(primaryStage);
 		loader.show();
 	}
 }

@@ -7,7 +7,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import utilities.XStreamHandler;
 
+/**
+ * This class is intended to hold all of the clickable items that a user
+ * might need to use on the game authoring environment where they wish
+ * to set on the screen different sprites.
+ * @author Jake
+ *
+ */
+
 public class ButtonsPanel extends VBox {
+	private static final int MAX_WIDTH = 100;
+	private static final int MAX_HEIGHT = 50;
+	private static final String LOAD_SPRITE_FROM_FILE = "Load Sprite from file";
 	private static final String SET_NUMBER_OF_COLUMNS = "Set Number of Columns";
 	private static final String SET_NUMBER_OF_ROWS = "Set Number of Rows";
 	private static final String SAVE_THIS_SETUP = "Save this setup";
@@ -34,14 +45,20 @@ public class ButtonsPanel extends VBox {
 		myPathCreator = new PathCreator(smc);
 		makeButtons();
 		makeRowColSetters();
-		this.getChildren().addAll(drawPathButton, finishPathButton, saveSetupButton,loadButton, loadSpriteButton, rowsBox, colsBox);		
+		this.getChildren().addAll(drawPathButton, 
+				finishPathButton, 
+				saveSetupButton,
+				loadButton, 
+				loadSpriteButton, 
+				rowsBox, 
+				colsBox);		
 	}
 
 	private void makeRowColSetters() {
-		myNumRowsInput.setMaxHeight(50);
-		myNumRowsInput.setMaxWidth(100);
-		myNumColsInput.setMaxHeight(50);
-		myNumColsInput.setMaxWidth(100);
+		myNumRowsInput.setMaxHeight(MAX_HEIGHT);
+		myNumRowsInput.setMaxWidth(MAX_WIDTH);
+		myNumColsInput.setMaxHeight(MAX_HEIGHT);
+		myNumColsInput.setMaxWidth(MAX_WIDTH);
 		rowsBox.getChildren().addAll(myNumRowsInput, sendNumRows);
 		colsBox.getChildren().addAll(myNumColsInput, sendNumCols);
 	}
@@ -54,7 +71,7 @@ public class ButtonsPanel extends VBox {
 		sendNumCols = new Button(SET_NUMBER_OF_COLUMNS);
 		sendNumRows.setOnAction(e -> mySMC.getScreen().setNumRows(Integer.parseInt(myNumRowsInput.getText())));
 		sendNumCols.setOnAction(e -> mySMC.getScreen().setNumCols(Integer.parseInt(myNumColsInput.getText())));
-		loadSpriteButton = new Button("Load Sprite from file");
+		loadSpriteButton = new Button(LOAD_SPRITE_FROM_FILE);
 		loadSpriteButton.setOnAction(e -> {
 			AttributeData sprite=xstreamHandler.getAttributeFromFile();
 			mySMC.addPossibleSprite(sprite);
@@ -69,15 +86,6 @@ public class ButtonsPanel extends VBox {
 		});
 		saveSetupButton.setOnAction(e -> {
 			xstreamHandler.saveToFile(mySMC.getScreenData().getDataToSave());
-//			FileOutputStream fs = null;
-//			XStream xstream = new XStream(new DomDriver());
-			xstreamHandler.saveToFile(mySMC.getScreenData().getDataToSave());
-//			try {
-//				fs = new FileOutputStream(userCreatedAttributesFile+"/"+ "TEST_JAKE" +".xml");
-//				xstream.toXML(mySMC.getScreenData().getDataToSave(), fs);
-//			} catch (FileNotFoundException fnf) {
-//				//We are making the file ourselves so this will never trigger
-//			}
 		});
 		loadButton=new Button(LOAD_SCREEN_MODEL_FROM_FILE);
 		loadButton.setOnAction((click)->{

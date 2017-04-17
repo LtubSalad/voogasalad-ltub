@@ -6,7 +6,8 @@ import java.util.Queue;
 import commons.point.GamePoint;
 import javafx.scene.input.MouseEvent;
 /**
- * 
+ * Starts the ability for the user to define a path by clicking
+ * on coordinates on the grid held in ScreenMap
  * @author Jake
  *
  */

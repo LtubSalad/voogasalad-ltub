@@ -14,7 +14,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
-
+/**
+ * 
+ * @author Daniel
+ * Displays a listview of AttributeDatas based on a list that it receives.
+ * Clicking elements of the listview opens up a customizer box.
+ */
 public class AttributeDisplay extends VBox{
 	private final double prefWidth=200;
 	private AttributeData targetData;

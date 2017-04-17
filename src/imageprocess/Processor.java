@@ -8,15 +8,15 @@ package imageprocess;
  *
  */
 public interface Processor<T> {
-	
-	 /**
+
+	/**
 	 * @param t
 	 * @param scale
 	 * resize the element t by given the scale of the second argument
 	 */
 	T resize(T t, double scale);
-	
-	
+
+
 	/**
 	 * @param t
 	 * @param targetWidth
@@ -29,6 +29,6 @@ public interface Processor<T> {
 	 * and height ratio
 	 */
 	T resize(T t, double targetWidth, double targetHeight, boolean preserveRatio);
-	 	 
+
 
 }

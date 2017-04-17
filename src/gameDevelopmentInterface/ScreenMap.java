@@ -23,8 +23,7 @@ import javafx.scene.shape.Rectangle;
 public class ScreenMap extends StackPane {
 	private static final String Y_POSITION = "yPosition";
 	private static final String X_POSITION = "xPosition";
-	private static final String IMAGE = "image";
-	private static final String IMAGE_HOLDER = "ImageHolder";
+	private static final String IMAGE_HOLDER = "filepath";
 	private static final int SCREEN_SIZE = 350;
 	private GridPane myGrid;
 	private ScreenModelCreator mySMC;
@@ -44,28 +43,49 @@ public class ScreenMap extends StackPane {
 		this.setWidth(SCREEN_SIZE);
 		makeGrid();
 	}
-	
+	/**
+	 * Can change number of rows on screen
+	 * @param numRows
+	 */
 	public void setNumRows(int numRows) {
 		NUM_ROWS = numRows;
 		makeGrid();
 	}
-	
+	/**
+	 * Can change number of columns on screen
+	 * @param numCols
+	 */
 	public void setNumCols(int numCols) {
 		NUM_COLS = numCols;
 		makeGrid();
 	}
-	
+	/**
+	 * 
+	 * @return number of rows on screen
+	 */
 	public int getNumRows() {
 		return NUM_ROWS;
 	}
+	/**
+	 * 
+	 * @return number of columns on screen
+	 */
 	public int getNumCols() {
 		return NUM_COLS;
 	}
-	
+	/**
+	 * 
+	 * @return the grid object
+	 */
 	public GridPane getGrid() {
 		return myGrid;
 	}
-	
+	/**
+	 * 
+	 * @param x the actual x position of the mouse on the screen
+	 * @param y the actual y position of the mouse on the screen
+	 * @return the mapped coordinate value of the (x,y) to the grid object
+	 */
 	public GamePoint getCoordOfMouseHover(double x, double y) {
 		Bounds boundsInScreen = myGrid.localToScreen(myGrid.getBoundsInLocal());
 		int colNum = getColOrRowPlacement(boundsInScreen.getMinX(), myGrid.getWidth(), myGrid.getWidth()/NUM_COLS, x, boundsInScreen);
@@ -75,33 +95,15 @@ public class ScreenMap extends StackPane {
 	
 	private void redrawGrid() {
 		for (AttributeData attr : mySMC.getScreenData().getAllObjectsOnScreen()) {
-			if (attr.hasVariable("filepath")) {
-				Integer xPos = Integer.parseInt(attr.getVariable("xPosition"));
-				Integer yPos = Integer.parseInt(attr.getVariable("yPosition"));
-				String imageName = attr.getVariable("filepath");
+			if (attr.hasVariable(IMAGE_HOLDER)) {
+				Integer xPos = Integer.parseInt(attr.getVariable(X_POSITION));
+				Integer yPos = Integer.parseInt(attr.getVariable(Y_POSITION));
+				String imageName = attr.getVariable(IMAGE_HOLDER);
 				Image image = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES + imageName),
 						SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, false, false);
 				ImageView imageView = new ImageView(image);
 				myGrid.add(imageView, xPos, yPos);
 			}
-			
-			
-			
-//			attr.getVariables().forEach((k,v) -> {
-//				System.out.println("var name: " + k);
-//				System.out.println("var: " + v);
-//			});
-//			Integer xPos = Integer.parseInt(attr.getVariable("xPosition"));
-//			Integer yPos = Integer.parseInt(attr.getVariable("yPosition"));
-//			attr.getAttributes().forEach(att -> {
-//				if (att.getName().equals("filepath")) {
-//					String imageName = attr.getVariable("image");
-//					Image image = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES + imageName),
-//							SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, false, false);
-//					ImageView imageView = new ImageView(image);
-//					myGrid.add(imageView, xPos, yPos);
-//				}
-//			});
 		}
 	}
 
