@@ -1,7 +1,6 @@
 package newengine.trigger;
 
-import java.util.Optional;
-
+import bus.BusEvent;
 import bus.BusEventType;
 import newengine.sprite.SpriteID;
 
@@ -9,28 +8,30 @@ public class TriggerEvent {
 	public enum TriggerEventType {
 		GAME, SPRITE_ALL, SPRITE_SPECIFIC
 	}
-	
-	private TriggerEventType type;
+
+	private TriggerEventType triggerEventType;
 	private BusEventType<?> busEventType;
-	private SpriteID spriteID = null;
+	private SpriteID spriteID;
 	
-	public TriggerEvent(TriggerEventType type, BusEventType<?> busEventType) {
-		this.type = type;
-		this.busEventType = busEventType;
+	
+	public TriggerEvent(TriggerEventType triggerEventType, BusEventType<?> busEventType) {
+		this(triggerEventType, busEventType, null);
 	}
-	
-	public void setSpriteID(SpriteID spriteID) {
+	public TriggerEvent(TriggerEventType triggerEventType, BusEventType<?> busEventType, SpriteID spriteID) {
+		this.triggerEventType = triggerEventType;
+		this.busEventType = busEventType;
 		this.spriteID = spriteID;
 	}
-	public Optional<SpriteID> getSpriteID() {
-		return Optional.ofNullable(spriteID);
-	}
 	
-	public TriggerEventType getTriggerEventType() {
-		return type;
+		
+	public TriggerEventType getType() {
+		return triggerEventType;
 	}
-	public BusEventType<?> getBusEventType() {
+	public BusEventType<? extends BusEvent> getBusEventType() {
 		return busEventType;
+	}
+	public SpriteID getSpriteID() {
+		return spriteID;
 	}
 	
 }

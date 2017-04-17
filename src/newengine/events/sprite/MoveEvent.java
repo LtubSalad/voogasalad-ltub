@@ -4,10 +4,11 @@ import java.util.List;
 
 import bus.BusEvent;
 import bus.BusEventType;
+import newengine.events.HasTriggeringSprite;
 import newengine.sprite.Sprite;
 import newengine.utils.Target;
 
-public class MoveEvent extends BusEvent {
+public class MoveEvent extends BusEvent implements HasTriggeringSprite {
 
 	public static final BusEventType<MoveEvent> GAME = new BusEventType<>(MoveEvent.class.getName() + "GAME");
 	public static final BusEventType<MoveEvent> ALL = new BusEventType<>(MoveEvent.class.getName() + "ALL");
@@ -29,6 +30,7 @@ public class MoveEvent extends BusEvent {
 		this.target = target;
 	}
 
+	@Override
 	public Sprite getSprite() {
 		return sprite;
 	}
