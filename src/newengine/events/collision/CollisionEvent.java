@@ -6,7 +6,7 @@ import newengine.sprite.Sprite;
 
 public class CollisionEvent extends BusEvent {
 
-	public static final BusEventType<CollisionEvent> ANY = new BusEventType<>("COLLISION_EVENT");
+	public static final BusEventType<CollisionEvent> ANY = new BusEventType<>(CollisionEvent.class.getName()+"ANY");
 
 	private Sprite sprite1;
 	private Sprite sprite2;

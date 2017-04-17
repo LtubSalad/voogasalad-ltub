@@ -7,8 +7,10 @@ import newengine.utils.variable.VarValue;
 
 public class VarMapEvent extends BusEvent{
 
-	public static final BusEventType<VarMapEvent> ADD = new BusEventType<>();
-	public static final BusEventType<VarMapEvent> REMOVE = new BusEventType<>();
+	public static final BusEventType<VarMapEvent> ADD = new BusEventType<>(
+			VarMapEvent.class.getName() + "ADD");
+	public static final BusEventType<VarMapEvent> REMOVE = new BusEventType<>(
+			VarMapEvent.class.getName() + "REMOVE");
 	
 	private VarKey key; 
 	private VarValue value;	

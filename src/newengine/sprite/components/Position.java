@@ -23,7 +23,7 @@ public class Position extends Component {
 		double x = pos().x() + dt * speed * Math.cos(Math.toRadians(heading));
 		double y = pos().y() - dt * speed * Math.sin(Math.toRadians(heading));
 		posVar.set(new GamePoint(x, y));
-		System.out.println("x: " + x + ", y: " + y);
+//		System.out.println("x: " + x + ", y: " + y);
 	}
 	@Override
 	public ComponentType<? extends Component> getType() {
@@ -42,7 +42,7 @@ public class Position extends Component {
 	}
 
 	private void moveTo(Target target) {
-		System.out.print("Sprite at (" + pos().x() + ", " + pos().y() + ")" );
+//		System.out.print("Sprite at (" + pos().x() + ", " + pos().y() + ")" );
 		// needs speed data
 		if (target.getLocation().isPresent()) {
 			posVar.set(target.getLocation().get());			
@@ -50,7 +50,7 @@ public class Position extends Component {
 		else {
 			
 		}
-		System.out.println(" has been moved to (" + pos().x() + ", " + pos().y() + ")");
+//		System.out.println(" has been moved to (" + pos().x() + ", " + pos().y() + ")");
 	}
 	
 	

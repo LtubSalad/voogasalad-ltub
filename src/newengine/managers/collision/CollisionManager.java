@@ -18,7 +18,6 @@ public class CollisionManager {
 	}
 	
 	public void checkCollisions(List<Sprite> sprites) {
-		System.out.println(sprites);
 		List<Sprite> collidableSprites = sprites.stream().filter((s) -> {
 			return s.getComponent(Collidable.TYPE).isPresent();
 		}).collect(Collectors.toList());
