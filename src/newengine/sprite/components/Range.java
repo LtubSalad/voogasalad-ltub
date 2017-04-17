@@ -1,17 +1,20 @@
 package newengine.sprite.components;
 
 import newengine.events.range.InRangeEvent;
+import newengine.events.sprite.AttackEvent;
+import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
+import newengine.utils.Target;
 import newengine.utils.variable.Var;
 
-public class RangeDetector extends Component {
+public class Range extends Component {
 
-	public static final ComponentType<RangeDetector> TYPE = new ComponentType<>(RangeDetector.class.getName());
+	public static final ComponentType<Range> TYPE = new ComponentType<>(Range.class.getName());
 	private final Var<Double> rangeVar = new Var<>();
 	// TODO: use pairs of (InRangeEvent type, rangeVar) to denote different kinds of range events.
 	
-	public RangeDetector(double range) {
+	public Range(double range) {
 		rangeVar.set(range);
 	}
 	
@@ -21,8 +24,10 @@ public class RangeDetector extends Component {
 
 	public void afterAdded() {
 		sprite.on(InRangeEvent.ANY, (e) -> {
-			// TODO
-			System.out.println(sprite+" detected "+e.getDetectees());
+			for (Sprite detectee: e.getDetectees()) {
+				System.out.println(sprite + " fires at sprite " + detectee);
+				sprite.emit(new AttackEvent(AttackEvent.FIRE, new Target(detectee)));
+			}
 		});
 	}
 	

@@ -30,7 +30,7 @@ public class Game {
 	
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
-		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus);
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO
 		SelectionModel selectionModel = new SelectionModel(bus);
 		
 		Camera camera = new Camera(bus);
@@ -38,8 +38,8 @@ public class Game {
 		
 		gameLoop = new FXGameLoop(bus);
 		
-		CollisionManager collisionManager = new CollisionManager(bus);
-		RangeManager rangeManager = new RangeManager(bus);
+		CollisionManager collisionManager = new CollisionManager(bus); // TODO
+		RangeManager rangeManager = new RangeManager(bus); // TODO
 		
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
@@ -48,7 +48,7 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> view.render(playerStatsModel));
 		gameLoop.addLoopComponent((dt) -> view.render(selectionModel));
 		
-		InputManager inputManager = new InputManager(bus, camera, spriteModel, playerStatsModel, selectionModel);
+		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
 		SoundManager soundManager = new SoundManager(bus);
 		DebugManager debugManager = new DebugManager(bus);
 		TriggerManager triggerManager = new TriggerManager(bus);

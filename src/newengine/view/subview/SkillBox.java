@@ -1,46 +1,53 @@
 package newengine.view.subview;
 
+import java.util.List;
+
 import bus.EventBus;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import newengine.events.selection.SelectSkillEvent;
+import newengine.skill.Skill;
 
 public class SkillBox {
 
 	private EventBus bus;
 	private HBox box;
-	private Button btn1 = new Button("Build");
-	private Button btn2 = new Button("Fire");
-	private boolean rendered = false;
+	private List<Skill> oldSkills;
 		
 	public SkillBox(EventBus bus) { 
 		this.bus = bus;
 		box = new HBox();
-		box.getChildren().add(btn1);
-		// TODO: add btn2 to the box
 	}
 	
-//	public void render(SpriteSelectionState spriteSelectionState) {
-//		//		if (rendered) { return; }
-//		// TODO refresh the skill box only when the availableSkills change
-//		btn1.setOnAction((e) -> {
-//			bus.emit(new SelectSkillEvent(SelectSkillEvent.SELECT, spriteSelectionState.getAvailableSkills().get(0)));
-//		});
-//		if (spriteSelectionState.getSelectionType() == SelectionType.SINGLE) {
-//			Sprite source = spriteSelectionState.getSelectedSprite();
-//			btn2.setOnAction((e) -> {
-//				FireProjectileSkill fire = new FireProjectileSkill(bus);
-//				fire.getSource();
-//				bus.emit(new SelectSkillEvent(SelectSkillEvent.SELECT, fire));
-//			});	
-//		} else {
-//			btn2.setOnAction((e) -> { });
-//		}
-//		
-////		rendered = true;
-//	}
-//	
-//	public Node getBox() {
-//		return box;
-//	}
-//	
+	public void render(List<Skill> newSkills) {
+		if (sameSkills(oldSkills, newSkills)) {return;}
+		oldSkills = newSkills;
+		box.getChildren().clear();
+		for (Skill skill: newSkills) {
+			if (skill.getIcon().isPresent()) {
+				ImageView skillImageView = new ImageView(skill.getIcon().get().getFXImage());
+				skillImageView.setOnMouseClicked(e -> {
+					bus.emit(new SelectSkillEvent(SelectSkillEvent.SELECT, skill));
+				});
+				box.getChildren().add(skillImageView);
+			}			
+		}
+	}
+	
+	public Node getBox() {
+		return box;
+	}
+	
+	private boolean sameSkills(List<Skill> oldSkills, List<Skill> newSkills) {
+		if (oldSkills == null && newSkills == null) {return true;}
+		if (oldSkills == null || newSkills == null) {return false;}
+		if (oldSkills.size() != newSkills.size()) {return false;}
+		for (int i = 0; i < oldSkills.size(); i++) {
+			if (!oldSkills.get(i).getType().equals(newSkills.get(i).getType())) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

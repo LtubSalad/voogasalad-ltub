@@ -3,6 +3,8 @@ package newengine.view;
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,9 +19,11 @@ import newengine.events.input.MouseEvent;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
+import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Position;
+import newengine.sprite.components.SkillSet;
 import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
@@ -50,24 +54,25 @@ public class View {
 		gameWorldCanvas = new Canvas(WIDTH, CANVAS_HEIGHT);
 		bottomPane = new HBox();
 		root.getChildren().addAll(gameWorldCanvas, bottomPane);
+		// selected sprite
 		Canvas selectionCanvas = new Canvas(WIDTH / 2, HEIGHT - CANVAS_HEIGHT);
-		//bottomPane.getChildren().add(selectionCanvas);
+		bottomPane.getChildren().add(selectionCanvas);
 		gc = gameWorldCanvas.getGraphicsContext2D();
 		gcSelected = selectionCanvas.getGraphicsContext2D();
-
 		// skill box
-		//skillBox = new SkillBox(bus);
-		//bottomPane.getChildren().add(skillBox.getBox());
+		skillBox = new SkillBox(bus);
+		bottomPane.getChildren().add(skillBox.getBox());
 
 		initHandlers();
 	}
 
 	private void initHandlers() {
 		gameWorldCanvas.setOnMouseClicked(e -> {
+			ViewPoint viewPos = new ViewPoint(e.getX(), e.getY());
 			if (e.getButton() == MouseButton.PRIMARY) {
-				bus.emit(new MouseEvent(MouseEvent.LEFT, new ViewPoint(e.getX(), e.getY())));
+				bus.emit(new MouseEvent(MouseEvent.LEFT, camera.viewToGame(viewPos)));
 			} else if (e.getButton() == MouseButton.SECONDARY) {
-				bus.emit(new MouseEvent(MouseEvent.RIGHT, new ViewPoint(e.getX(), e.getY())));
+				bus.emit(new MouseEvent(MouseEvent.RIGHT, camera.viewToGame(viewPos)));
 			}
 		});
 		gameWorldCanvas.setOnMouseMoved(e -> {
@@ -111,32 +116,30 @@ public class View {
 	public void render(PlayerStatsModel playerStatsModel) {
 		// TODO
 	}
+	
 	public void render(SelectionModel selectionModel) {
-		// TODO
+		// render the selected sprite and its skill box
+		if (selectionModel.getSelectedSprite().isPresent()) {
+			Sprite sprite = selectionModel.getSelectedSprite().get();
+			if (sprite.getComponent(Images.TYPE).isPresent()) {
+				gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
+			}
+			if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
+				skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
+			}
+		}
+		// render the selected skill
+		if (selectionModel.getSelectedSkill().isPresent()) {
+			Skill skill = selectionModel.getSelectedSkill().get();
+			if (skill.getIcon().isPresent()) {
+				Image skillImage = skill.getIcon().get().getFXImage();
+				scene.setCursor(new ImageCursor(skillImage));
+			}
+		}
+		else {
+			scene.setCursor(Cursor.DEFAULT);
+		}
 	}
-
-//	public void render(PlayerLocalModel localModel) {
-//		// TODO: filter the available stats and skills by the current player
-//
-//		// render selection graphics
-//		gcSelected.clearRect(0, 0, WIDTH, HEIGHT - CANVAS_HEIGHT);
-//		// gcSelected.fillOval(0, 0, 30, 40);
-//		PlayerSelectionState selectionState = localModel.getPlayerSelectionState();
-//		if (selectionState.getSelectionType() == SelectionType.SINGLE) {
-//			Sprite selectedSprite = selectionState.getSelectedSprite();
-//			gcSelected.drawImage(new Image(selectedSprite.getImage().getInputStream()), 20, 20);
-//		}
-//
-//		// render selected skill
-//		// TODO render mouse image from selected skill.
-//		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
-//		localModel.getPlayerSkillState().getSelectedSkill().ifPresent((skill) -> {
-//			gc.drawImage(new Image(image2.getInputStream()), mousePos.x()-image2.getImagePivot().x(), 
-//					mousePos.y() - image2.getImagePivot().y());
-//		});
-//		
-//		// render skill box
-//		skillBox.render(localModel.getPlayerSelectionState());
-//	}
 
 }

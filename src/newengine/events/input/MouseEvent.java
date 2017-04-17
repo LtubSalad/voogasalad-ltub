@@ -2,7 +2,7 @@ package newengine.events.input;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import commons.point.ViewPoint;
+import commons.point.GamePoint;
 
 public class MouseEvent extends BusEvent {	
 	
@@ -13,14 +13,14 @@ public class MouseEvent extends BusEvent {
 	public static final BusEventType<MouseEvent> MIDDLE = new BusEventType<>("MIDDLE_CLICK");
 	public static final BusEventType<MouseEvent> SCROLL =  new BusEventType<>("MIDDL_SCROLL"); // TODO related to camera
 	
-	private ViewPoint pos;
+	private GamePoint pos;
 	
-	public MouseEvent(BusEventType<? extends BusEvent> busEventType, ViewPoint pos) {
+	public MouseEvent(BusEventType<? extends BusEvent> busEventType, GamePoint pos) {
 		super(busEventType);
 		this.pos = pos;
 	}
 	
-	public ViewPoint getPos() {
+	public GamePoint getPos() {
 		return pos;
 	}
 

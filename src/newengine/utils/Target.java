@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import commons.point.GamePoint;
 import newengine.sprite.Sprite;
+import newengine.sprite.components.Position;
 
 public class Target {
 	
@@ -13,6 +14,7 @@ public class Target {
 	
 	public Target(Sprite sprite) {
 		this.sprite = sprite;
+		this.location = sprite.getComponent(Position.TYPE).get().pos();
 	}
 	public Target(GamePoint location) {
 		this.location = location;
@@ -25,7 +27,7 @@ public class Target {
 	public Optional<Sprite> getSprite() {
 		return Optional.ofNullable(sprite);
 	}
-	public Optional<GamePoint> getLocation() {
-		return Optional.ofNullable(location);
+	public GamePoint getLocation() {
+		return location;
 	}
 }

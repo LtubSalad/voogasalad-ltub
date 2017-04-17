@@ -9,11 +9,9 @@ public class Speed extends Component {
 	public static final ComponentType<Speed> TYPE = new ComponentType<>(Speed.class.getName());
 	
 	private final Var<Double> speedVar = new Var<>();
-	private final Var<Double> headingVar = new Var<>();
 	
 	public Speed(double speed) {
 		speedVar.set(speed);
-		headingVar.set(0.0); // TODO
 	}
 	
 	@Override
@@ -21,12 +19,7 @@ public class Speed extends Component {
 	
 	public double speed() {
 		return speedVar.get();
-	}
-	
-	public double heading() {
-		return headingVar.get();
-	}
-	
+	}	
 
 	@Override
 	public void onUpdated(double dt) {
