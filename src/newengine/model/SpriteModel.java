@@ -30,7 +30,7 @@ public class SpriteModel {
 		initHandlers();
 	}
 	
-	private List<SpriteTriggerRegisterEvent> spriteTriggerRegisterEvents;
+	private List<SpriteTriggerRegisterEvent> spriteTriggerRegisterEvents = new ArrayList<>();
 	private void initHandlers() {
 		bus.on(SpriteModelEvent.ADD, (e) -> {
 			addSprite(e.getSprites());
