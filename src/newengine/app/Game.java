@@ -52,7 +52,7 @@ public class Game {
 		SoundManager soundManager = new SoundManager(bus);
 		DebugManager debugManager = new DebugManager(bus);
 		
-		TriggerManager triggerManager = new TriggerManager(bus, spriteModel);
+//		TriggerManager triggerManager = new TriggerManager(bus, spriteModel);
 	}
 	
 	public EventBus getBus() {

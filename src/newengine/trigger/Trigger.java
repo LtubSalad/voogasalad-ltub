@@ -1,48 +1,33 @@
 package newengine.trigger;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import bus.BusEvent;
-import bus.BusEventType;
-import newengine.sprite.SpriteID;
 
 public class Trigger {
 
-	private BusEventType eventType;
-	private List<Condition> conditions;
-	private List<Action> actions;
+	private TriggerEvent triggerEvent;
+	private List<TriggerCondition> triggerConditions = new ArrayList<>();
+	private List<TriggerAction> triggerActions = new ArrayList<>();
 	
-	public Trigger() {
-		
+	public Trigger(TriggerEvent eventType) {
+		this.triggerEvent = eventType;
 	}
-	
-	public void setEvent(String event) {
-		if (event.equals("GameSave")) {
-			
-		}
+	public void addCondition(TriggerCondition triggerCondition) {
+		triggerConditions.add(triggerCondition);
 	}
-	
-	public void addCondition(String condition) {
-		
+	public void addAction(TriggerAction triggerAction) {
+		triggerActions.add(triggerAction);
 	}
 	
-	public void addAction(String action) {
-		
+	public TriggerEvent getEvent() {
+		return triggerEvent;
 	}
-	
-	public BusEventType getEvent() {
-		return eventType;
+	public List<TriggerCondition> getConditions() {
+		return triggerConditions;
 	}
-	public List<Condition> getConditions() {
-		return conditions;
+	public List<TriggerAction> getActions() {
+		return triggerActions;
 	}
-	public List<Action> getActions() {
-		return actions;
-	}
-	public Optional<SpriteID> getSpriteID() {// TODO OPTIONAL
-		return null;
-	}
-	
+
 	
 }
