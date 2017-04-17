@@ -52,7 +52,6 @@ public class SelectionChecker {
 //				}
 //			}
 		}
-		// TODO if nothing is selected, return the background "sprite"
 		return null;
 	}
 

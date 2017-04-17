@@ -1,5 +1,7 @@
 package newengine.model;
 
+import java.util.Optional;
+
 import bus.EventBus;
 import newengine.events.selection.SelectSkillEvent;
 import newengine.events.selection.SelectSpriteEvent;
@@ -40,12 +42,11 @@ public class SelectionModel {
 		selectedSkillVar.set(null);
 	}
 	
-	
-	public Sprite getSelectedSprite() {
-		return selectedSpriteVar.get();
+	public Optional<Sprite> getSelectedSprite() {
+		return Optional.ofNullable(selectedSpriteVar.get());
 	}
-	public Skill getSelectedSkill() {
-		return selectedSkillVar.get();
+	public Optional<Skill> getSelectedSkill() {
+		return Optional.ofNullable(selectedSkillVar.get());
 	}
 	
 	

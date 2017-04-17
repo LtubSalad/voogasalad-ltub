@@ -12,8 +12,6 @@ public class GameWorldMouseEvent extends BusEvent {
 	public static final BusEventType<GameWorldMouseEvent> CANCEL_SKILL_AND_MOVE_SPRITE = new BusEventType<>("CANCEL_SKILL_AND_MOVE_SPRITE");
 	public static final BusEventType<GameWorldMouseEvent> SELECT_SPRITE = new BusEventType<>("SELECT_SPRITE");
 	
-
-	
 	private Target target;
 	private ActionMode actionMode;
 	private Player player;

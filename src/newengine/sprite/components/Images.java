@@ -19,7 +19,7 @@ public class Images extends Component {
 		double heading = 0;
 		double dist = 100;
 		if (sprite.getComponent(Speed.TYPE).isPresent()) {
-			heading = sprite.getComponent(Speed.TYPE).get().heading();
+			heading = sprite.getComponent(Position.TYPE).get().heading();
 		}
 		return imageSetVar.get().getImage(heading, dist);
 	}

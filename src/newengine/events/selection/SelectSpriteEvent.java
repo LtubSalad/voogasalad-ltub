@@ -2,6 +2,7 @@ package newengine.events.selection;
 
 import bus.BusEvent;
 import bus.BusEventType;
+import commons.point.GamePoint;
 import newengine.sprite.Sprite;
 
 public class SelectSpriteEvent extends BusEvent {

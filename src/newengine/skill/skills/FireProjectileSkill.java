@@ -1,8 +1,21 @@
 package newengine.skill.skills;
 
 import newengine.skill.Skill;
+import newengine.skill.SkillType;
 
-public class FireProjectileSkill implements Skill {
+public class FireProjectileSkill extends Skill {
+
+	@Override
+	public SkillType<? extends Skill> getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void trigger() {
+		// TODO Auto-generated method stub
+		
+	}
 
 //	private EventBus bus;
 //	private boolean isInstant = false;
