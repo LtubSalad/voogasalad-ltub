@@ -8,7 +8,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Pair;
 import utilities.XStreamHandler;
-
+/**
+ * 
+ * Provides an interface for creating basic attributes
+ * @author Daniel
+ * 
+ */
 public class GroundUpAttributeCreator extends BorderPane{
 	AttributeData data;
 	AttributeCustomizerPane myPane;

@@ -51,7 +51,8 @@ public class Game {
 		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
 		SoundManager soundManager = new SoundManager(bus);
 		DebugManager debugManager = new DebugManager(bus);
-		TriggerManager triggerManager = new TriggerManager(bus, spriteModel);
+		
+//		TriggerManager triggerManager = new TriggerManager(bus, spriteModel);
 	}
 	
 	public EventBus getBus() {

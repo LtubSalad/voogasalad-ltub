@@ -13,7 +13,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
-
+/**
+ * 
+ * @author Daniel
+ * Describe a function using this javafx node. Saves parameters, function name, and function implementation.
+ */
 public class FunctionSetter extends VBox{
 	List<SingleFunctionSetter> singleFunctionSetters;
 	private boolean modifiableFunctions;

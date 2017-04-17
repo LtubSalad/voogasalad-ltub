@@ -37,9 +37,17 @@ public class ScreenModelCreator extends BorderPane {
 		this.setCenter(myScreen);
 		this.setRight(myButtonsPanel);
 	}
+	/**
+	 * Adds a new sprite to the screen
+	 * @param attr
+	 */
 	public void addPossibleSprite(AttributeData attr) {
 		possibleSprites.add(attr);
 	}
+	/**
+	 * 
+	 * @return All sprites currently supposed to be on the screen
+	 */
 	public ObservableList<AttributeData> getPossibleSprites() {
 		return possibleSprites;
 	}
@@ -50,7 +58,10 @@ public class ScreenModelCreator extends BorderPane {
 	public ScreenMap getScreen() {
 		return myScreen;
 	}
-	
+	/**
+	 * 
+	 * @return all the data currently held on the screen
+	 */
 	public ScreenModelData getScreenData() {
 		return myScreenData;
 	}

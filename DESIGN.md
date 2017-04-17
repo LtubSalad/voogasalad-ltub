@@ -1,5 +1,27 @@
-#Design
+# Design
 
+## Design Updat
+###Changing sprite design
+
+We’ll stick the idea of components over inheritance of sprite. But we want to make the sprites API to be closed. We’ll basically make sprite have a map of attributes containing mutable data (identified by type classes for compile time checking), and a map of controls to modify the data. We also intend to let each sprite have a list of high level skills, which are basically compositions of basic controls.
+
+Sprite design is changed so that each sprite has its own "SpriteBus", and video game designers can have some degree of control over a sprite's response to events. This works as follows:
+
+Aside from storing private variables and preset functions they can perform, a sprite's subattributes(we used "components" to describe them in the meeting) should now also specify what kind of (preset) events the Sprite wants to listen to. For example, a Collidable attribute allows the Sprite holding it to handle a "Collision" event, which is fired whenever the CollisionManager figures out that a Collidable has bumped into another Collidable. 
+(All sprites, regardless of how few attributes they have, can handle "instantiation" and "death" events, which would be fired when a sprite is added/removed.)
+Depending on which attributes(components) a Sprite possesses, it can listen for a variety of events, and the video game designer can set actions to perform on these events dynamically. Other examples of events Sprites should dynamically respond to include a constantly fired event that corresponds to the constant "update" function and the "SpriteInRangeEvent" for the RangeChecker attribute.
+
+The idea of this is that this makes it easy for the video game designer to define more complex functionalities using basic features, and requiring less hard code. (i.e. instead of having the Tower implement a preset, tower-specific Attacker attribute, we can ask the Tower to check for monsters in range with a RangeChecker, then fire a bullet with SpriteSpawner if it finds something and it's been more than 3 seconds since the last shot.)
+
+### Passing Data
+The AttributeDatas that are currently passed to sprites will now allow for the storage of variables aside from strings so that typecasting is reduced.
+
+The data passed to the game engine will consist of an AuthoredGame class that tracks GeneralModelData, ScreenModelData, and PathData.
+
+## Utility: Image Processor
+This should allow the game to take images and trim out the transparent regions. Zhiyong is working on this.
+
+## Original Design
 To represent your design at a reasonably high level and provide an organization to the plan document, break it into modules rather than all the classes you can think of. A module is a concept in your program that may be represented by a single class or a group of classes related in some standard way, such as set of subclasses, that has a purpose with regards to the program's functionality and collaborates with other modules.
 	
 Game Engine:
