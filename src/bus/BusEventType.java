@@ -77,6 +77,7 @@ public final class BusEventType<T extends BusEvent> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		@SuppressWarnings("rawtypes")
 		BusEventType other = (BusEventType) obj;
 		if (name == null) {
 			if (other.name != null)

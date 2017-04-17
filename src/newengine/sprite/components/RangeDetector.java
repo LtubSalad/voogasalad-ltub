@@ -7,7 +7,7 @@ import newengine.utils.variable.Var;
 
 public class RangeDetector extends Component {
 
-	public static final ComponentType<RangeDetector> TYPE = new ComponentType<>();
+	public static final ComponentType<RangeDetector> TYPE = new ComponentType<>(RangeDetector.class.getName());
 	private final Var<Double> rangeVar = new Var<>();
 	// TODO: use pairs of (InRangeEvent type, rangeVar) to denote different kinds of range events.
 	

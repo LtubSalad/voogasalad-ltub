@@ -14,7 +14,7 @@ public class Collidable extends Component {
 		POLYGON, IMAGE
 	}
 
-	public static final ComponentType<Collidable> TYPE = new ComponentType<>();
+	public static final ComponentType<Collidable> TYPE = new ComponentType<>(Collidable.class.getName());
 	private final Var<CollisionBoundType> boundTypeVar = new Var<>();
 	private final Var<List<GamePoint>> boundVar = new Var<>();
 	

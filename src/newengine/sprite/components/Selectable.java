@@ -9,7 +9,7 @@ public class Selectable extends Component {
 		POLYGON, IMAGE		
 	}
 	
-	public static final ComponentType<Selectable> TYPE = new ComponentType<>();
+	public static final ComponentType<Selectable> TYPE = new ComponentType<>(Selectable.class.getName());
 	private final Var<SelectionBoundType> boundTypeVar = new Var<>();
 
 	public Selectable(SelectionBoundType boundType) {

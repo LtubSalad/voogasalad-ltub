@@ -9,7 +9,7 @@ import newengine.utils.variable.Var;
 
 public class Position extends Component {
 
-	public static final ComponentType<Position> TYPE = new ComponentType<>();
+	public static final ComponentType<Position> TYPE = new ComponentType<>(Position.class.getName());
 	private final Var<GamePoint> posVar = new Var<>();
 	
 	public Position(GamePoint pos) {

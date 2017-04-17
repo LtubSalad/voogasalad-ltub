@@ -8,7 +8,7 @@ import newengine.utils.variable.Var;
 
 public class Images extends Component {
 
-	public static final ComponentType<Images> TYPE = new ComponentType<>();
+	public static final ComponentType<Images> TYPE = new ComponentType<>(Images.class.getName());
 	private final Var<ImageSet> imageSetVar = new Var<>();
 	
 	public Images(ImageSet imageSet) {

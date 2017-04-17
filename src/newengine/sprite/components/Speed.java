@@ -6,7 +6,7 @@ import newengine.utils.variable.Var;
 
 public class Speed extends Component {
 	
-	public static final ComponentType<Speed> TYPE = new ComponentType<>();
+	public static final ComponentType<Speed> TYPE = new ComponentType<>(Speed.class.getName());
 	
 	private final Var<Double> speedVar = new Var<>();
 	private final Var<Double> headingVar = new Var<>();

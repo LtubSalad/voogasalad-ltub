@@ -9,7 +9,7 @@ import newengine.utils.variable.Var;
 
 public class SkillSet extends Component {
 
-	public static final ComponentType<SkillSet> TYPE = new ComponentType<>();
+	public static final ComponentType<SkillSet> TYPE = new ComponentType<>(SkillSet.class.getName());
 	private final Var<List<Skill>> skillsVar = new Var<>();
 	
 	public SkillSet(List<Skill> skills) {
