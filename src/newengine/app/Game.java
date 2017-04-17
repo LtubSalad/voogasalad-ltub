@@ -14,6 +14,10 @@ import newengine.managers.sound.SoundManager;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
+import newengine.trigger.TriggerManager;
+import newengine.utils.variable.VarKey;
+import newengine.utils.variable.VarMap;
+import newengine.utils.variable.VarValue;
 import newengine.view.View;
 import newengine.view.camera.Camera;
 
@@ -47,6 +51,8 @@ public class Game {
 		InputManager inputManager = new InputManager(bus, camera, spriteModel, playerStatsModel, selectionModel);
 		SoundManager soundManager = new SoundManager(bus);
 		DebugManager debugManager = new DebugManager(bus);
+		
+		TriggerManager triggerManager = new TriggerManager(bus, spriteModel);
 	}
 	
 	public EventBus getBus() {

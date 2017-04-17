@@ -17,28 +17,36 @@ import newengine.utils.variable.VarMap;
 
 public class TriggerManager {
 
-	VarMap map;
+	/**
+	 * A map for true key-value pairs for conditions in triggers.
+	 */
+	VarMap map; 
 	SpriteModel model;
 	EventBus bus;
+	
+	public TriggerManager(EventBus bus, SpriteModel model) {
+		this.bus = bus;
+		this.model = model;
+	}
 
 	private BusEvent getAction(String actionName) {
 		return null;
 	}
 
-	private <T extends BusEvent> BusEventType<T> getEventType(String eventName) {
-		return null;
-	}
+//	private <T extends BusEvent> BusEventType<T> getEventType(BusEvent event) {
+//		return event.getEventType();
+//	}
 	
 	public void processTrigger(Trigger trigger) {
-		String eventName = trigger.getEvent();
-		BusEventType<BusEvent> eventType = getEventType(eventName); // TODO
-		Optional<SpriteID> spriteID = trigger.getSpriteID();
+//		BusEvent event = trigger.getEvent();
+//		BusEventType<BusEvent> eventType = getEventType(event);
+		Optional<SpriteID> spriteID = trigger.getSpriteID(); // TODO 
 		List<Condition> conditions = trigger.getConditions(); // TODO
-		List<String> actions = trigger.getActions();
-		List<EventBus> receivers = getReceivers(eventType, spriteID);
-		for (EventBus receiverBus : receivers) {
-			receiverBus.on(eventType, genHandler(eventType, conditions, actions));
-		}
+//		List<String> actions = trigger.getActions();
+//		List<EventBus> receivers = getReceivers(eventType, spriteID);
+//		for (EventBus receiverBus : receivers) {
+//			receiverBus.on(eventType, genHandler(eventType, conditions, actions));
+//		}
 	}
 	
 	private <T extends BusEvent> List<EventBus> getReceivers(BusEventType<T> busEventType, Optional<SpriteID> spriteID) {

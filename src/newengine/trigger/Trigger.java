@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import bus.BusEvent;
+import bus.BusEventType;
 import newengine.sprite.SpriteID;
 
 public class Trigger {
 
-	private BusEvent event;
+	private BusEventType eventType;
 	private List<Condition> conditions;
 	private List<Action> actions;
 	
@@ -30,16 +31,16 @@ public class Trigger {
 		
 	}
 	
-	public String getEvent() {
-		return null;
+	public BusEventType getEvent() {
+		return eventType;
 	}
 	public List<Condition> getConditions() {
 		return conditions;
 	}
-	public List<String> getActions() {
-		return null;
+	public List<Action> getActions() {
+		return actions;
 	}
-	public Optional<SpriteID> getSpriteID() {// OPTIONAL
+	public Optional<SpriteID> getSpriteID() {// TODO OPTIONAL
 		return null;
 	}
 	

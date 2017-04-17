@@ -12,7 +12,7 @@ public class VarValue {
 	}
 	
 	public boolean isTrue(VarComparisonOperator oper, VarValue other) {
-		
+		// TODO different types
 		return false;
 	}
 	

@@ -6,8 +6,11 @@ import java.util.Optional;
 
 import bus.EventBus;
 import newengine.events.SpriteModelEvent;
+import newengine.events.VarMapEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
+import newengine.utils.variable.VarKey;
+import newengine.utils.variable.VarValue;
 
 /**
  * A container for sprites.
@@ -36,11 +39,17 @@ public class SpriteModel {
 		for (Sprite sprite: sprites) {
 			if (!(this.sprites.contains(sprite))) {
 				this.sprites.add(sprite);
+				bus.emit(new VarMapEvent(VarMapEvent.ADD, new VarKey("sprite"), new VarValue(sprite)));
 			}
 		}
 	}
 	private void removeSprite(List<Sprite> sprites) {
-		sprites.removeAll(sprites);
+		for (Sprite sprite: sprites) {
+			if (this.sprites.contains(sprite)) {
+				this.sprites.remove(sprite);
+				bus.emit(new VarMapEvent(VarMapEvent.REMOVE, new VarKey("sprite"), new VarValue(sprite)));
+			}
+		}
 	}
 	
 	
