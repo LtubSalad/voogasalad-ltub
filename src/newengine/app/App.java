@@ -7,7 +7,7 @@ import bus.EventBus;
 import commons.point.GamePoint;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import newengine.events.MapInitializationEvent;
+import newengine.events.GameInitializationEvent;
 import newengine.events.SpriteModelEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Collidable;
@@ -44,7 +44,7 @@ public class App extends Application {
 		spritesToAdd.add(sprite1);
 		
 		EventBus bus = game.getBus();
-		bus.on(MapInitializationEvent.ANY, (e) -> {
+		bus.on(GameInitializationEvent.ANY, (e) -> {
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
 		});
 		

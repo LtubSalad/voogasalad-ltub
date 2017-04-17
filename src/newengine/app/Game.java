@@ -3,7 +3,7 @@ package newengine.app;
 import bus.BasicEventBus;
 import bus.EventBus;
 import javafx.scene.Scene;
-import newengine.events.MapInitializationEvent;
+import newengine.events.GameInitializationEvent;
 import newengine.gameloop.FXGameLoop;
 import newengine.gameloop.GameLoop;
 import newengine.managers.collision.CollisionManager;
@@ -55,7 +55,7 @@ public class Game {
 	
 	public void start() {
 		if (!mapInitialized) {
-			bus.emit(new MapInitializationEvent());
+			bus.emit(new GameInitializationEvent());
 			mapInitialized = true;
 		}
 		gameLoop.start();
