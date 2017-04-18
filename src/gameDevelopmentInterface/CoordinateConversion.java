@@ -1,6 +1,6 @@
 package gameDevelopmentInterface;
 
-import engine.camera.GamePoint;
+import commons.point.GamePoint;
 import javafx.util.Pair;
 /**
  * A utility that allows the front end with a coordinate system to talk to the back

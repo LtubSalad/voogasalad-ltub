@@ -3,7 +3,7 @@ package gameDevelopmentInterface;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import engine.camera.GamePoint;
+import commons.point.GamePoint;
 import javafx.util.Pair;
 /**
  * This is a path object that will be associated with all moster sprites

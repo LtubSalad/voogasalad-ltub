@@ -33,11 +33,11 @@ final class Subscriber<T extends BusEvent> {
 	@SuppressWarnings("unchecked")
 	void handle(BusEvent busEvent) {
 		BusEventType<? extends BusEvent> specifiedEventType = busEvent.getEventType();
-		while (registeredEventType != specifiedEventType && 
-				specifiedEventType != BusEventType.ROOT) {
+		while (!registeredEventType.equals(specifiedEventType) && 
+				!specifiedEventType.equals(BusEventType.ROOT)) {
 			specifiedEventType = specifiedEventType.getSuperType();
 		}
-		if (registeredEventType == specifiedEventType) {
+		if (registeredEventType.equals(specifiedEventType)) {
 			try { // TODO: a better way to check whether busEvent could be cast to T
 				registeredHandler.handle((T) busEvent);
 			} catch(ClassCastException e) {

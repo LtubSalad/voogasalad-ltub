@@ -3,10 +3,11 @@ package gameDevelopmentInterface;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
+import commons.point.GamePoint;
 import data.AttributeData;
 import data.AttributesForScreenUse;
 import data.ScreenModelData;
-import engine.camera.GamePoint;
 import gameDevelopmentInterface.attributeCreator.AttributeDataFactory;
 import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;
