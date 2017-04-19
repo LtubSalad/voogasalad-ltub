@@ -1,7 +1,7 @@
 package newengine.managers.conditions;
 
 import newengine.model.PlayerStatsModel;
-import newengine.model.SpriteModel;
+import newengine.model.SpriteModel; 
 
 public abstract class Condition implements ICondition {
 	private SpriteModel spriteModel;

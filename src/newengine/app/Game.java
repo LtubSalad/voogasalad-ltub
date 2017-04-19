@@ -28,7 +28,7 @@ public class Game {
 	private GameLoop gameLoop;
 	private View view;
 	private boolean mapInitialized = false;
-	
+	 
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
 		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO

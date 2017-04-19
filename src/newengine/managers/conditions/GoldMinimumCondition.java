@@ -10,7 +10,7 @@ public class GoldMinimumCondition extends Condition{
 	@Override
 	public boolean check() {
 		return (getPlayerStatsModel().getGold() > goldMin);
-	}
+	} 
 	
 	public void setMinimumGold(int minimumGold){
 		this.goldMin = minimumGold;

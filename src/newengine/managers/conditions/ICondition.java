@@ -14,7 +14,7 @@ public interface ICondition {
 	 * Returns true if condition is met, false if not met
 	 * @return boolean representing if condition is met
 	 */
-	public boolean check();
+	public boolean check(); 
 	
 	/**
 	 * Allows the user of this class to switch between different sprite models if desired

@@ -15,7 +15,7 @@ public class ConditionManager {
 		this.bus = bus;
 		this.spriteModel = spriteModel;
 		this.playerStatsModel = playerStatsModel;
-	}
+	} 
 	
 	public void checkConditions() {
 		checkWinningCondition();

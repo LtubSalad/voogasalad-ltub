@@ -12,3 +12,4 @@ public class NoLivesCondition extends Condition {
 		return 0 == playerStatsModel.getLives();
 	}
 }
+ 
