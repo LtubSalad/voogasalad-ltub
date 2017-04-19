@@ -1,7 +1,10 @@
 package gameDevelopmentInterface;
 
-import commons.point.GamePoint;
+import java.util.Map;
+import java.util.ResourceBundle;
+
 import data.AttributeData;
+import commons.point.GamePoint;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
@@ -12,6 +15,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Pair;
 
 /**
  * This class will hold the grid on which players can place sprites or tiles to set up their
@@ -21,13 +25,16 @@ import javafx.scene.shape.Rectangle;
  */
 
 public class ScreenMap extends StackPane {
-	private static final String Y_POSITION = "yPosition";
-	private static final String X_POSITION = "xPosition";
-	private static final String IMAGE_HOLDER = "filepath";
+	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
+	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
+	private static final String Y_POSITION = "Y_POSITION";
+	private static final String X_POSITION = "X_POSITION";
+	private static final String IMAGE_HOLDER = "IMAGE_HOLDER";
 	private static final int SCREEN_SIZE = 350;
 	private GridPane myGrid;
 	private ScreenModelCreator mySMC;
-	private static final String PATH_TO_IMAGE_FILES = "images/characters/";
+	private static final String PATH_TO_IMAGE_FILES = "PATH_TO_IMAGE_FILES";
 	private int NUM_ROWS = 10;
 	private int NUM_COLS = 8;
 	
@@ -93,18 +100,37 @@ public class ScreenMap extends StackPane {
 		return new GamePoint(colNum, rowNum);
 	}
 	
+	public GamePoint getActualLocationOfSprite(GamePoint gp) {
+		double actualX = (gp.x()*(getGrid().getWidth()/NUM_COLS)) + ((getGrid().getWidth()/NUM_COLS)/2);
+		double actualY = (gp.y()*(getGrid().getHeight()/NUM_ROWS)) + ((getGrid().getHeight()/NUM_ROWS)/2);
+		return new GamePoint(actualX, actualY);
+	}
+	
 	private void redrawGrid() {
-		for (AttributeData attr : mySMC.getScreenData().getAllObjectsOnScreen()) {
-			if (attr.hasVariable(IMAGE_HOLDER)) {
-				Integer xPos = Integer.parseInt(attr.getVariable(X_POSITION));
-				Integer yPos = Integer.parseInt(attr.getVariable(Y_POSITION));
-				String imageName = attr.getVariable(IMAGE_HOLDER);
-				Image image = new Image(getClass().getClassLoader().getResourceAsStream(PATH_TO_IMAGE_FILES + imageName),
-						SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, false, false);
-				ImageView imageView = new ImageView(image);
-				myGrid.add(imageView, xPos, yPos);
-			}
+		Map<AttributeData,Boolean> onScreenOrNot = mySMC.getScreenData().getIfOnScreen();
+		for (AttributeData attr : onScreenOrNot.keySet()) {
+			if (onScreenOrNot.get(attr) == false) {
+				onScreenOrNot.put(attr, true);
+				if (attr.hasVariable(myResources.getString(IMAGE_HOLDER))) {
+					Integer xPos = Integer.parseInt(attr.getVariable(myResources.getString(X_POSITION)));
+					Integer yPos = Integer.parseInt(attr.getVariable(myResources.getString(Y_POSITION)));
+					String imageName = attr.getVariable(myResources.getString(IMAGE_HOLDER));
+					Image image = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString(PATH_TO_IMAGE_FILES) + imageName),
+							SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, false, false);
+					ImageView imageView = new ImageView(image);
+					myGrid.add(imageView, xPos, yPos);
+				}
+			}			
 		}
+	}
+	
+	public void addBorderToCoordinate(GamePoint coord) {
+		CoordinateConversion cc = new CoordinateConversion();
+		Pair<Integer, Integer> gridCoord = cc.fromGamePointToPair(coord);
+		Rectangle border = new Rectangle(myGrid.getWidth()/getNumCols(), myGrid.getHeight()/getNumRows());
+		border.setFill(Color.TRANSPARENT);
+		border.setStroke(Color.BLACK);
+		myGrid.add(border, gridCoord.getKey(), gridCoord.getValue());
 	}
 
 	private int getColOrRowPlacement(double offset, double bounds, double step, double x, Bounds boundsInScreen) {

@@ -8,6 +8,7 @@ import bus.BusEvent;
 import bus.EventBus;
 import newengine.events.SpriteModelEvent;
 import newengine.events.VarMapEvent;
+import newengine.events.sprite.SetGameBusEvent;
 import newengine.events.trigger.SpriteTriggerActionEvent;
 import newengine.events.trigger.SpriteTriggerRegisterEvent;
 import newengine.sprite.Sprite;
@@ -72,6 +73,7 @@ public class SpriteModel {
 					sprite.on(e.getTriggerBusEventType(), e.getTriggerHandler());
 				}
 				bus.emit(new VarMapEvent(VarMapEvent.ADD, new VarKey("sprite"), new VarValue(sprite)));
+				sprite.emit(new SetGameBusEvent(bus));
 			}
 		}
 	}
