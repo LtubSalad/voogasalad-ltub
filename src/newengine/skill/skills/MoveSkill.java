@@ -19,7 +19,7 @@ public class MoveSkill extends Skill{
 	public void trigger() {
 		Sprite source = this.getSource().get();
 		Target target = this.getTarget().get();
-		source.emit(new MoveEvent(MoveEvent.SPECIFIC, source, target));
+		source.emit(new MoveEvent(MoveEvent.TYPE, source, target));
 	}
 	
 	@Override

@@ -10,8 +10,10 @@ import commons.point.GamePoint;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
+import newengine.events.QueueEvent;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sound.SoundEvent;
+import newengine.events.sprite.MoveEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.BuildSkill;
@@ -24,13 +26,13 @@ import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
-import newengine.sprite.components.Range;
 import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
 import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
 import newengine.sprite.player.Player;
+import newengine.utils.Target;
 import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
 
@@ -100,6 +102,18 @@ public class App extends Application {
 		stage.setScene(game.getScene());
 		game.start();
 		stage.show();
+		
+		// TODO add method to generate path
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.TYPE, sprite1, 
+				new Target(new GamePoint(300,100)))));
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.TYPE, sprite1, 
+				new Target(new GamePoint(250,200)))));
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.TYPE, sprite1, 
+				new Target(new GamePoint(100,150)))));
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.TYPE, sprite1, 
+				new Target(new GamePoint(500,300)))));
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.TYPE, sprite1, 
+				new Target(new GamePoint(400,200)))));
 	}
 	
 	public static void main(String[] args) {

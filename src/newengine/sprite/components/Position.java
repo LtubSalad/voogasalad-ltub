@@ -26,7 +26,7 @@ public class Position extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.SPECIFIC, e -> {
+		sprite.on(MoveEvent.TYPE, e -> {
 			moveTo(e.getTarget());
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
 				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
