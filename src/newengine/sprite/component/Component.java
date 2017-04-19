@@ -7,7 +7,7 @@ public abstract class Component {
 	protected Sprite sprite;
 	
 	public final void onAdded(Sprite sprite) {
-		this.sprite = sprite;
+		this.sprite = sprite;  
 		afterAdded();
 	}
 	
