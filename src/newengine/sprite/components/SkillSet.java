@@ -22,7 +22,7 @@ public class SkillSet extends Component {
 	}
 	
 	public List<Skill> skills() {
-		return (List<Skill>) skills.values();
+		return new ArrayList<Skill>(skills.values());
 	}
 	
 	private void addSkill(Skill skill) {

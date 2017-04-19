@@ -128,6 +128,9 @@ public class View {
 			if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
 				skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
 			}
+			else {
+				skillBox.clear();
+			}
 		}
 		// render the selected skill
 		if (selectionModel.getSelectedSkill().isPresent()) {

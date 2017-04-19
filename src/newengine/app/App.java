@@ -14,6 +14,7 @@ import newengine.events.SpriteModelEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
+import newengine.skill.skills.BuildSkill;
 import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Collidable;
@@ -42,12 +43,20 @@ public class App extends Application {
 
 		Player player1 = new Player("Player 1");
 		
+		// building
+		Sprite building = new Sprite();
+		LtubImage buildingImage = new LtubImage("images/skills/build.png");
+		ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
+		building.addComponent(new Images(imageSetBuildSkill));
+		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		
 		// sprite 1
 		Sprite sprite1 = new Sprite();
 		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
 		ImageSet imageSet1 = new ImageSet(image1);
 		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 		skillMap.put(MoveSkill.TYPE, new MoveSkill());
+		skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
 		sprite1.addComponent(new GameBus());
 		sprite1.addComponent(new SkillSet(skillMap));
 		sprite1.addComponent(new Owner(player1));
@@ -57,7 +66,7 @@ public class App extends Application {
 		sprite1.addComponent(new Speed(200));
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		sprite1.addComponent(new Range(128));
+//		sprite1.addComponent(new Range(128));
 		sprite1.addComponent(new EventQueue());
 			
 		// sprite 2
