@@ -50,8 +50,9 @@ public class PathCreator {
 		double mouseX = e.getScreenX();
 		double mouseY = e.getScreenY();
 		GamePoint coords = target.getCoordOfMouseHover(mouseX, mouseY);
-		if (!coordAlreadyInPath(coords)) {
-			replacementPath.add(coords);
+		GamePoint actualGameLocation = target.getActualLocationOfSprite(coords);
+		if (!coordAlreadyInPath(actualGameLocation)) {
+			replacementPath.add(actualGameLocation);
 			target.addBorderToCoordinate(coords);
 		}
 		e.consume();
