@@ -22,4 +22,8 @@ public class SoundEffect extends Component {
 		return TYPE;
 	}
 	
+	@Override
+	public SoundEffect clone() {
+		return new SoundEffect(moveSoundFile);
+	}
 }

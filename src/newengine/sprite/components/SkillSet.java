@@ -51,5 +51,10 @@ public class SkillSet extends Component {
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
 	}
+	
+	@Override
+	public SkillSet clone() {
+		return new SkillSet(skills);
+	}
 
 }

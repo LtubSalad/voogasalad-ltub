@@ -34,6 +34,11 @@ public class Range extends Component {
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
 	}
+	
+	@Override
+	public Range clone() {
+		return new Range(range);
+	}
 
 	
 }

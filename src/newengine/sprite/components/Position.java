@@ -75,6 +75,11 @@ public class Position extends Component {
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
 	}
+	
+	@Override
+	public Position clone() {
+		return new Position(pos, heading);
+	}
 
 	public GamePoint pos() {
 		return pos;

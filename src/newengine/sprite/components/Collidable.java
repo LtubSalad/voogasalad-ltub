@@ -48,5 +48,10 @@ public class Collidable extends Component {
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
 	}
+	
+	@Override
+	public Collidable clone() {
+		return new Collidable(boundType);		
+	}
 
 }

@@ -58,4 +58,9 @@ public class EventQueue extends Component {
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
 	}
+	
+	@Override
+	public EventQueue clone() {
+		return new EventQueue();
+	}
 }

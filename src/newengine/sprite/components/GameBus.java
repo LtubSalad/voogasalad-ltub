@@ -30,4 +30,8 @@ public class GameBus extends Component {
 		return TYPE;
 	}
 
+	@Override
+	public GameBus clone() {
+		return new GameBus();
+	}
 }

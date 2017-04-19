@@ -8,7 +8,7 @@ import newengine.utils.image.LtubImage;
 public class Images extends Component {
 
 	public static final ComponentType<Images> TYPE = new ComponentType<>(Images.class.getName());
-	private final ImageSet imageSet;
+	private ImageSet imageSet;
 	
 	public Images(ImageSet imageSet) {
 		this.imageSet = imageSet;
@@ -28,4 +28,8 @@ public class Images extends Component {
 		return TYPE;
 	}
 
+	@Override
+	public Images clone() {
+		return new Images(imageSet);
+	}
 }

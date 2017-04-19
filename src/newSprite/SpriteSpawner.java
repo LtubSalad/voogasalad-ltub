@@ -19,4 +19,10 @@ public class SpriteSpawner<T extends ComponentSprite> extends Component {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Component clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

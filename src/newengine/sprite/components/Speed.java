@@ -25,4 +25,8 @@ public class Speed extends Component {
 		return TYPE;
 	}
 
+	@Override
+	public Speed clone() {
+		return new Speed(speed);
+	}
 }
