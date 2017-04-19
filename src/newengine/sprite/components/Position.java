@@ -25,7 +25,7 @@ public class Position extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(  MoveEvent.SPECIFIC, e -> {
+		sprite.on(MoveEvent.SPECIFIC, e -> {
 			moveTo(e.getTarget());
 		});
 	}
