@@ -3,6 +3,7 @@ package newengine.managers.input;
 import bus.EventBus;
 import commons.point.GamePoint;
 import javafx.scene.input.KeyCode;
+import newengine.events.QueueEvent;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
 import newengine.events.selection.SelectSkillEvent;
@@ -62,8 +63,14 @@ public class InputManager {
 			if (selectionModel.getSelectedSkill().isPresent()) {
 				Sprite sprite = selectionModel.getSelectedSprite().get();
 				Skill skill = selectionModel.getSelectedSkill().get();
-				sprite.emit(new TriggerSkillEvent(skill.getType(), new Target(e.getPos())));
-				bus.emit(new SelectSkillEvent(SelectSkillEvent.CANCEL, skill));
+				TriggerSkillEvent event = new TriggerSkillEvent(skill.getType(), new Target(e.getPos()));
+				if (actionMode() == ActionMode.INSTANT) {
+					sprite.emit(event);
+					bus.emit(new SelectSkillEvent(SelectSkillEvent.CANCEL, skill));
+				}
+				else {
+					sprite.emit(new QueueEvent(QueueEvent.ADD, event));
+				}
 			}
 			else if (target(e.getPos()).getSprite().isPresent()) {
 				bus.emit(new SelectSpriteEvent(SelectSpriteEvent.SINGLE, target(e.getPos()).getSprite().get()));
@@ -76,7 +83,13 @@ public class InputManager {
 			}
 			else if (selectionModel.getSelectedSprite().isPresent()){
 				Sprite sprite = selectionModel.getSelectedSprite().get();
-				sprite.emit(new TriggerSkillEvent(MoveSkill.TYPE, new Target(e.getPos())));
+				TriggerSkillEvent event = new TriggerSkillEvent(MoveSkill.TYPE, new Target(e.getPos()));
+				if (actionMode() == ActionMode.INSTANT) {
+					sprite.emit(event);					
+				}
+				else {
+					sprite.emit(new QueueEvent(QueueEvent.ADD, event));
+				}
 			}
 		});
 	}

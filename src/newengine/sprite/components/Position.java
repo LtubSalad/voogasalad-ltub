@@ -1,7 +1,9 @@
 package newengine.sprite.components;
 
+import bus.BusEvent;
 import commons.MathUtils;
 import commons.point.GamePoint;
+import newengine.events.QueueEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.sprite.component.Component;
@@ -24,7 +26,7 @@ public class Position extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.SPECIFIC, e -> {
+		sprite.on(  MoveEvent.SPECIFIC, e -> {
 			moveTo(e.getTarget());
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
 				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
@@ -54,6 +56,7 @@ public class Position extends Component {
 			// arrives at destination at this frame.
 			posVar.set(new GamePoint(xDest, yDest));
 			stopMoving();
+			sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
 		}
 		// not arrived at destination, move by time and speed.
 		double vx = 0;
