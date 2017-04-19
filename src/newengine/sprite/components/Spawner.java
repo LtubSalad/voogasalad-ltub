@@ -45,7 +45,7 @@ public class Spawner extends Component {
 			weapon.addComponent(new Speed(200));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
 			
-			sprite.emit(new SpriteModelEvent(SpriteModelEvent.ADDITEM, weapon));
+			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.ADD, weapon));
 
 
 			System.out.println("created weapon for " + e.getTarget().getSprite().get().getID());

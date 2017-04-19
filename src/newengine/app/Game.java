@@ -11,7 +11,6 @@ import newengine.managers.debug.DebugManager;
 import newengine.managers.input.InputManager;
 import newengine.managers.range.RangeManager;
 import newengine.managers.sound.SoundManager;
-import newengine.model.ItemModel;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;

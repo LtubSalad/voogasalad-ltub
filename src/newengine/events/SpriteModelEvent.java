@@ -8,13 +8,9 @@ import newengine.sprite.Sprite;
 
 public class SpriteModelEvent extends BusEvent {
 
-	public static final BusEventType<SpriteModelEvent> ADDSPRITE = new BusEventType<>(
+	public static final BusEventType<SpriteModelEvent> ADD = new BusEventType<>(
 			SpriteModelEvent.class.getName() + "ADD");
-	public static final BusEventType<SpriteModelEvent> REMOVESPRITE = new BusEventType<>(
-			SpriteModelEvent.class.getName() + "REMOVE");
-	public static final BusEventType<SpriteModelEvent> ADDITEM = new BusEventType<>(
-			SpriteModelEvent.class.getName() + "ADD");
-	public static final BusEventType<SpriteModelEvent> REMOVEITEM = new BusEventType<>(
+	public static final BusEventType<SpriteModelEvent> REMOVE = new BusEventType<>(
 			SpriteModelEvent.class.getName() + "REMOVE");
 
 	private List<Sprite> sprites;

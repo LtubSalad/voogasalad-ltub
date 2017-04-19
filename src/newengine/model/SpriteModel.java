@@ -8,6 +8,7 @@ import bus.BusEvent;
 import bus.EventBus;
 import newengine.events.SpriteModelEvent;
 import newengine.events.VarMapEvent;
+import newengine.events.sprite.SetGameBusEvent;
 import newengine.events.trigger.SpriteTriggerActionEvent;
 import newengine.events.trigger.SpriteTriggerRegisterEvent;
 import newengine.sprite.Sprite;
@@ -24,7 +25,6 @@ public class SpriteModel {
 
 	private EventBus bus;
 	private List<Sprite> sprites = new ArrayList<>();
-	private ItemModel itemModel = new ItemModel();
 	
 	public SpriteModel(EventBus bus) {
 		this.bus = bus;
@@ -33,10 +33,10 @@ public class SpriteModel {
 	
 	private List<SpriteTriggerRegisterEvent> spriteTriggerRegisterEvents = new ArrayList<>();
 	private void initHandlers() {
-		bus.on(SpriteModelEvent.ADDSPRITE, (e) -> {
+		bus.on(SpriteModelEvent.ADD, (e) -> {
 			addSprite(e.getSprites());
 		});
-		bus.on(SpriteModelEvent.REMOVESPRITE, (e) -> {
+		bus.on(SpriteModelEvent.REMOVE, (e) -> {
 			removeSprite(e.getSprites());
 		});
 		bus.on(SpriteTriggerRegisterEvent.SPRITE_ALL, (e) -> {
@@ -69,11 +69,11 @@ public class SpriteModel {
 		for (Sprite sprite: sprites) {
 			if (!(this.sprites.contains(sprite))) {
 				this.sprites.add(sprite);
-				itemModel.addBus(sprite.getSpriteBus());
 				for (SpriteTriggerRegisterEvent e : spriteTriggerRegisterEvents) {
 					sprite.on(e.getTriggerBusEventType(), e.getTriggerHandler());
 				}
 				bus.emit(new VarMapEvent(VarMapEvent.ADD, new VarKey("sprite"), new VarValue(sprite)));
+				sprite.emit(new SetGameBusEvent(bus));
 			}
 		}
 	}
@@ -98,10 +98,7 @@ public class SpriteModel {
 	}
 	
 	public List<Sprite> getSprites() {
-		List<Sprite> allSprites = new ArrayList<Sprite>();
-		allSprites.addAll(sprites);
-		allSprites.addAll(itemModel.getSprites());
-		return allSprites;
+		return sprites;
 	}
 	
 	public void update(double dt) {

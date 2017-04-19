@@ -16,7 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
-import newengine.model.ItemModel;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
@@ -115,10 +114,6 @@ public class View {
 					viewPos.y());
 		}
 
-	}
-	
-	public void render(ItemModel model) {
-		
 	}
 	
 	public void render(PlayerStatsModel playerStatsModel) {
