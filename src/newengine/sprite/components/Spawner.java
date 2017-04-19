@@ -15,47 +15,53 @@ import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.sprite.components.Collidable.CollisionBoundType;
-import newengine.sprite.components.Selectable.SelectionBoundType;
 import newengine.sprite.player.Player;
+import newengine.utils.Target;
 import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
 
 public class Spawner extends Component {
 
 	public static final ComponentType<Spawner> TYPE = new ComponentType<>(Spawner.class.getName());
-
-	public Spawner() {
-
-	}
+	private double reloadPeriod = 1;
+	private double timeRemaining = 0;
 
 	@Override
 	public void afterAdded() {
 		sprite.on(FireProjectileEvent.SPECIFIC, e -> {
+//			if (!weaponReloaded()){
+//				return;
+//			}
+//			resetTimeRemaining();
+			Sprite source = e.getSprite();
+			Target target = e.getTarget();
+			
 			System.out.println("emit FireProjectileEvent");
 			Player weapons = new Player("weapons");
 
 			Sprite weapon = new Sprite();
-			LtubImage image1 = new LtubImage("images/skills/crosshairs.png");
+			LtubImage image1 = new LtubImage("images/skills/walk.png");
 			ImageSet imageSet1 = new ImageSet(image1);
 			Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 			MoveSkill moveSkill = new MoveSkill();
 			skillMap.put(MoveSkill.TYPE, moveSkill);
 			weapon.addComponent(new SkillSet(skillMap));
 			weapon.addComponent(new Owner(weapons));
-			weapon.addComponent(new Position(sprite.getComponent(Position.TYPE).get().pos(), sprite.getComponent(Position.TYPE).get().heading()));
+			weapon.addComponent(new Position(source.getComponent(Position.TYPE).get().pos(), source.getComponent(Position.TYPE).get().heading()));
 			weapon.addComponent(new Images(imageSet1));
-			weapon.addComponent(new Speed(200));
+			weapon.addComponent(new Speed(50));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
+			weapon.addComponent(new DamageStrength(-25));
+			weapon.addComponent(new GameBus());
+			
 			
 			List<Sprite> spritesToAdd = new ArrayList<Sprite>();
 			spritesToAdd.add(weapon);
 			
-			System.out.println("before add weapon " + weapon.getID());
 			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
 
-			System.out.println("created weapon for " + e.getTarget().getSprite().get().getID());
 			if (e.getTarget().getSprite().isPresent()) {
-				moveSkill.setTarget(e.getTarget());
+				moveSkill.setTarget(target);
 				moveSkill.trigger();
 			}
 		});
@@ -66,6 +72,21 @@ public class Spawner extends Component {
 		return TYPE;
 	}
 
+	private boolean weaponReloaded() {
+		return (timeRemaining < 0);
+	}
+	
+	private void resetTimeRemaining(){
+		timeRemaining = reloadPeriod;
+	}
+	
+	public void setReSpawnPeriod(double time) {
+		reloadPeriod = time;
+	}
+	
+	public void onUpdate(double dt){
+		timeRemaining -= dt;
+	}
 
 
 }

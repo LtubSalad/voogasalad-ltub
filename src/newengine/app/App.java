@@ -21,6 +21,7 @@ import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
 import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.GameBus;
+import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
@@ -63,6 +64,7 @@ public class App extends Application {
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite1.addComponent(new Range(128));
 		sprite1.addComponent(new Spawner());
+		sprite1.addComponent(new Health(200));
 
 		sprite1.addComponent(new EventQueue());
 			
@@ -84,6 +86,9 @@ public class App extends Application {
 		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite2.addComponent(new EventQueue());
 		sprite2.addComponent(new Spawner());
+		sprite2.addComponent(new Health(60));
+
+		
 
 		
 		List<Sprite> spritesToAdd = new ArrayList<>();
