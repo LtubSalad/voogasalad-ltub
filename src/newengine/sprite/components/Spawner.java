@@ -1,6 +1,8 @@
 package newengine.sprite.components;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import commons.point.GamePoint;
@@ -20,7 +22,7 @@ import newengine.utils.image.LtubImage;
 
 public class Spawner extends Component {
 
-	public static final ComponentType<Position> TYPE = new ComponentType<>(Position.class.getName());
+	public static final ComponentType<Spawner> TYPE = new ComponentType<>(Spawner.class.getName());
 
 	public Spawner() {
 
@@ -33,7 +35,7 @@ public class Spawner extends Component {
 			Player weapons = new Player("weapons");
 
 			Sprite weapon = new Sprite();
-			LtubImage image1 = new LtubImage("images/characters/crosshairs.png");
+			LtubImage image1 = new LtubImage("images/skills/crosshairs.png");
 			ImageSet imageSet1 = new ImageSet(image1);
 			Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 			MoveSkill moveSkill = new MoveSkill();
@@ -45,8 +47,11 @@ public class Spawner extends Component {
 			weapon.addComponent(new Speed(200));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
 			
-			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.ADD, weapon));
-
+			List<Sprite> spritesToAdd = new ArrayList<Sprite>();
+			spritesToAdd.add(weapon);
+			
+			System.out.println("before add weapon " + weapon.getID());
+			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
 
 			System.out.println("created weapon for " + e.getTarget().getSprite().get().getID());
 			if (e.getTarget().getSprite().isPresent()) {
