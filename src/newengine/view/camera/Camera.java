@@ -6,15 +6,27 @@ import commons.point.ViewPoint;
 
 /**
  * Convert between {@code GamePoint} and {@code ViewPoint}.
- * @author Yilin
+ * @author Yilin, Zhiyong
  *
  */
 public class Camera {
 
 	private EventBus bus;
+	//the default GamePoint for a camera
+	private GamePoint gameP;
+	//The default ViewPoint for a camera
+	private ViewPoint viewP;
 	
-	public Camera(EventBus bus) {
+	public Camera(EventBus bus){
 		this.bus = bus;
+		gameP = new GamePoint(0,0);
+		viewP = new ViewPoint(0,0);
+	}
+	
+	public Camera(EventBus bus, GamePoint gamePoint, ViewPoint viewPoint) {
+		this.bus = bus;
+		this.gameP = gamePoint;
+		this.viewP = viewPoint;
 	}
 	
 	// TODO now it is a 1-1 camera, without any scaling
@@ -24,7 +36,7 @@ public class Camera {
 	 * @return GamePoint
 	 */
 	public GamePoint viewToGame(ViewPoint viewPoint) {
-		return new GamePoint(viewPoint.x(), viewPoint.y());
+		return new GamePoint(viewPoint.x() + gameP.x() - viewP.x(), viewPoint.y()+ gameP.y() - viewP.y());
 	}
 	
 	/**
@@ -33,6 +45,23 @@ public class Camera {
 	 * @return ViewPoint
 	 */
 	public ViewPoint gameToView(GamePoint gamePoint) {
-		return new ViewPoint(gamePoint.x(), gamePoint.y());
+		return new ViewPoint(gamePoint.x() + viewP.x() - gameP.x(), gamePoint.y() + viewP.y() - gameP.y());
+	}
+	
+	public GamePoint getGamePoint(){
+		return gameP;
+	}
+	
+	public ViewPoint getViewPoint(){
+		return viewP;
+	}
+	
+	/**
+	 * @param viewPoint the chosen viewPoint
+	 * @param rationToZoom  the ration to zoom in or out according to the size to ratio
+	 * if ratio > 1, the result is "zoom in"; otherwise, it is "zoom out"
+	 */
+	//TODO : Zoom around the selection area by the mouse
+	public void zoom(ViewPoint viewPoint, double ratioToZoom){
 	}
 }
