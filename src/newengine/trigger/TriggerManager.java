@@ -1,98 +1,74 @@
 package newengine.trigger;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import bus.BasicEventBus;
 import bus.BusEvent;
 import bus.BusEventHandler;
 import bus.BusEventType;
 import bus.EventBus;
-import newengine.events.game.GameSaveEvent;
-import newengine.events.sprite.MoveEvent;
-import newengine.model.SpriteModel;
-import newengine.sprite.Sprite;
+import newengine.events.HasTriggeringSprite;
+import newengine.events.trigger.SpriteTriggerActionEvent;
+import newengine.events.trigger.SpriteTriggerRegisterEvent;
 import newengine.sprite.SpriteID;
+import newengine.trigger.TriggerAction.TriggerActionType;
+import newengine.trigger.TriggerEvent.TriggerEventType;
 import newengine.utils.variable.VarMap;
 
 public class TriggerManager {
 
-//	/**
-//	 * A map for true key-value pairs for conditions in triggers.
-//	 */
-//	VarMap map; 
-//	SpriteModel model;
-//	EventBus bus;
-//	
-//	public TriggerManager(EventBus bus, SpriteModel model) {
-//		this.bus = bus;
-//		this.model = model;
-//	}
-//
-////	private <T extends BusEvent> BusEventType<T> getEventType(BusEvent event) {
-////		return event.getEventType();
-////	}
-//	
-//	public void processTrigger(Trigger trigger) {
-//		BusEventType<?> triggerEventType = trigger.getEventType();
-//		
-//		Optional<SpriteID> spriteID = trigger.getSpriteID(); // TODO 
-//		List<Condition> conditions = trigger.getConditions(); // TODO
-////		List<String> actions = trigger.getActions();
-////		List<EventBus> receivers = getReceivers(eventType, spriteID);
-////		for (EventBus receiverBus : receivers) {
-////			receiverBus.on(eventType, genHandler(eventType, conditions, actions));
-////		}
-//		BusEventType<BusEvent> type1 = new BusEventType<>("type1");
-//		EventBus triggerBus = new BasicEventBus();
-//		getReceivers.on(MoveEvent.ALL, (e) -> {
-//			triggerBus.emit(new UserDefinedEvent(type1, ...));
-//		});
-//		
-//		triggerBus.on(type1, (e) -> {
-//			actions...
-//		});
-//	}
-//	
-//	private <T extends BusEvent> List<EventBus> getReceivers(BusEventType<T> busEventType, Optional<SpriteID> spriteID) {
-//		List<EventBus> busList = new ArrayList<>();
-//		if (busEventType == MoveEvent.SPECIFIC) {
-//			if (spriteID.isPresent()) {
-//				busList.add(model.getByID(spriteID.get()).get().getSpriteBus());
-//			} 
-//		} else if (busEventType == GameSaveEvent.ANY) {
-//			busList.add(bus);
-//		} else if (busEventType == MoveEvent.ALL) {
-//			for (Sprite sprite : model.getSprites()) {
-//				busList.add(sprite.getSpriteBus());
-//			}
-//		}
-//		return busList;
-//	}
-//	
-//	public <T extends BusEvent> BusEventHandler<T> genHandler(BusEventType<T> eventType, List<Condition> conditions, List<String> actions) {
-//		return new BusEventHandler<T>() { // ??? TODO
-//			@Override
-//			public void handle(BusEvent event) {
-//				for (Condition condition : conditions) {
-//					if (!condition.isTrue(map)) {
-//						return;
-//					}
-//				}
-//				for (String action : actions) {
-//					if (action.equals("should be given to bus")) {
-//						bus.emit(getAction(action));
-//					} else if (action.equals("should be given to each sprite")) {
-//						for (Sprite sprite : model.getSprites()) {
-//							sprite.emit(getAction(action));
-//						}
-//					} else if (action.equals("specific sprite action")) {
-//						model.getByID(new SpriteID("spriteID")).get().emit(getAction(action));
-//					}
-//				}
-//			}
-//		};
-//	}
+	private VarMap map; // TODO
+	private EventBus bus;
+
+	public TriggerManager(EventBus bus) {
+		this.bus = bus;
+	}
+
+	public void registerTrigger(Trigger trigger) {
+		TriggerEvent triggerEvent = trigger.getEvent();
+		List<TriggerCondition> conditions = trigger.getConditions();
+		List<TriggerAction> actions = trigger.getActions();
+
+		BusEventType<? extends BusEvent> triggerBusEventType = triggerEvent.getBusEventType();
+		BusEventHandler<BusEvent> handler = genHandler(conditions, actions);
+
+		if (triggerEvent.getType() == TriggerEventType.GAME) {
+			bus.on(triggerBusEventType, handler);
+		} else if (triggerEvent.getType() == TriggerEventType.SPRITE_ALL) {
+			bus.emit(SpriteTriggerRegisterEvent.spriteAllRegisterEvent(triggerBusEventType, handler));
+		} else if (triggerEvent.getType() == TriggerEventType.SPRITE_SPECIFIC) {
+			SpriteID spriteID = triggerEvent.getSpriteID();
+			if (spriteID != null) {
+				bus.emit(SpriteTriggerRegisterEvent.spriteSpecificRegisterEvent(triggerBusEventType, handler, spriteID));
+			}
+		}
+	}
+
+	public BusEventHandler<BusEvent> genHandler(List<TriggerCondition> conditions, List<TriggerAction> actions) {
+		return new BusEventHandler<BusEvent>() {
+			@Override
+			public void handle(BusEvent event) {
+				for (TriggerCondition condition : conditions) {
+					if (!condition.isTrue(map)) {
+						return;
+					}
+				}
+				for (TriggerAction action : actions) {
+					if (action.getType() == TriggerActionType.GAME) {
+						bus.emit(action.getBusEvent());
+					} else if (action.getType() == TriggerActionType.SPRITE_BROADCAST) {
+						bus.emit(SpriteTriggerActionEvent.createBroadcastEvent(action.getBusEvent()));
+					} else if (action.getType() == TriggerActionType.SPRITE_SPECIFIC) {
+						bus.emit(SpriteTriggerActionEvent.createSpecificEvent(action.getBusEvent(), action.getSpriteID()));
+					} else if (action.getType() == TriggerActionType.SPRITE_TRIGGERING_UNIT) {
+						if (event instanceof HasTriggeringSprite) {
+							SpriteID spriteID = ((HasTriggeringSprite) event).getSprite().getID();
+							bus.emit(SpriteTriggerActionEvent.createSpecificEvent(action.getBusEvent(), spriteID));
+						}
+
+					}
+				}
+			}
+		};
+	}
 
 }
