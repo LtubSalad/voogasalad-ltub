@@ -6,20 +6,19 @@ import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.Target;
-import newengine.utils.variable.Var;
 
 public class Range extends Component {
 
 	public static final ComponentType<Range> TYPE = new ComponentType<>(Range.class.getName());
-	private final Var<Double> rangeVar = new Var<>();
+	private final double range;
 	// TODO: use pairs of (InRangeEvent type, rangeVar) to denote different kinds of range events.
 	
 	public Range(double range) {
-		rangeVar.set(range);
+		this.range = range;
 	}
 	
 	public double range() {
-		return rangeVar.get();
+		return range;
 	}
 
 	public void afterAdded() {

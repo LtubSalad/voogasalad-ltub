@@ -2,7 +2,6 @@ package newengine.sprite.components;
 
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-import newengine.utils.variable.Var;
 
 public class Selectable extends Component {
 	public enum SelectionBoundType {
@@ -10,14 +9,14 @@ public class Selectable extends Component {
 	}
 	
 	public static final ComponentType<Selectable> TYPE = new ComponentType<>(Selectable.class.getName());
-	private final Var<SelectionBoundType> boundTypeVar = new Var<>();
+	private final SelectionBoundType boundType;
 
 	public Selectable(SelectionBoundType boundType) {
-		boundTypeVar.set(boundType);
+		this.boundType = boundType;
 	}
 	
 	public SelectionBoundType boundType() {
-		return boundTypeVar.get();
+		return boundType;
 	}
 	
 	@Override

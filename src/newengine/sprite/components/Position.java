@@ -14,14 +14,14 @@ import newengine.utils.variable.Var;
 public class Position extends Component {
 
 	public static final ComponentType<Position> TYPE = new ComponentType<>(Position.class.getName());
-	private final Var<GamePoint> posVar = new Var<>();
-	private final Var<Double> headingVar = new Var<>();
+	private GamePoint pos;
+	private double heading;
 	private Target target;
 	private boolean isMoving = false;
 	
 	public Position(GamePoint pos, double heading) {
-		posVar.set(pos);
-		headingVar.set(heading);
+		this.pos = pos;
+		this.heading = heading;
 	}
 	
 	@Override
@@ -42,7 +42,6 @@ public class Position extends Component {
 		GamePoint pDest = target.getLocation();
 		double xDest = pDest.x();
 		double yDest = pDest.y();
-		GamePoint pos = posVar.get();
 		double x = pos.x();
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
@@ -54,7 +53,7 @@ public class Position extends Component {
 		double speed = sprite.getComponent(Speed.TYPE).get().speed();
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
-			posVar.set(new GamePoint(xDest, yDest));
+			pos = new GamePoint(xDest, yDest);
 			stopMoving();
 			sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
 		}
@@ -69,7 +68,7 @@ public class Position extends Component {
 			vx = speed / dist * xDiff;
 			vy = speed / dist * yDiff;
 		}
-		posVar.set(new GamePoint(x + vx * dt, y + vy * dt));
+		pos = new GamePoint(x + vx * dt, y + vy * dt);
 	}
 	
 	@Override
@@ -78,11 +77,11 @@ public class Position extends Component {
 	}
 
 	public GamePoint pos() {
-		return posVar.get();
+		return pos;
 	}
 
 	public double heading() {
-		return headingVar.get();
+		return heading;
 	}
 
 	private void moveTo(Target target) {

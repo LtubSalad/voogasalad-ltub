@@ -4,15 +4,14 @@ import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
-import newengine.utils.variable.Var;
 
 public class Images extends Component {
 
 	public static final ComponentType<Images> TYPE = new ComponentType<>(Images.class.getName());
-	private final Var<ImageSet> imageSetVar = new Var<>();
+	private final ImageSet imageSet;
 	
 	public Images(ImageSet imageSet) {
-		imageSetVar.set(imageSet);
+		this.imageSet = imageSet;
 	}
 	
 	public LtubImage image() {
@@ -21,7 +20,7 @@ public class Images extends Component {
 		if (sprite.getComponent(Speed.TYPE).isPresent()) {
 			heading = sprite.getComponent(Position.TYPE).get().heading();
 		}
-		return imageSetVar.get().getImage(heading, dist);
+		return imageSet.getImage(heading, dist);
 	}
 	
 	@Override
