@@ -28,10 +28,11 @@ public class Game {
 	private GameLoop gameLoop;
 	private View view;
 	private boolean mapInitialized = false;
+	private int numPlayers = 0;
 	 
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
-		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, ""); // TODO FIX NAME
 		SelectionModel selectionModel = new SelectionModel(bus);
 		
 		Camera camera = new Camera(bus);
