@@ -2,6 +2,7 @@ package newengine.sprite.components;
 
 import commons.MathUtils;
 import commons.point.GamePoint;
+import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -25,6 +26,11 @@ public class Position extends Component {
 	public void afterAdded() {
 		sprite.on(MoveEvent.SPECIFIC, e -> {
 			moveTo(e.getTarget());
+			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
+				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
+					bus.getGameBus().emit(new SoundEvent(SoundEvent.SOUND_EFFECT, sound.getMoveSoundFile()));
+				});
+			});
 		});
 	}
 
