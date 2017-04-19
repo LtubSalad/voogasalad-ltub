@@ -24,6 +24,10 @@ public class SkillSet extends Component {
 		return new ArrayList<Skill>(skillsVar.get().values());
 	}
 	
+	public Skill getSkill(SkillType<? extends Skill> type){
+		return skillsVar.get().get(type);
+	}
+	
 	@Override
 	public void afterAdded() {
 		for (Skill skill: skillsVar.get().values()) {

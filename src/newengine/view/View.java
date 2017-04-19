@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
+import newengine.model.ItemModel;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
@@ -93,9 +94,12 @@ public class View {
 		return scene;
 	}
 
+	public void clear(){
+		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+	}
+	
 	public void render(SpriteModel model) {
 		// render game cast
-		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
 			if (!sprite.getComponent(Position.TYPE).isPresent() ||
 					!sprite.getComponent(Images.TYPE).isPresent()) {
@@ -111,6 +115,10 @@ public class View {
 					viewPos.y());
 		}
 
+	}
+	
+	public void render(ItemModel model) {
+		
 	}
 	
 	public void render(PlayerStatsModel playerStatsModel) {

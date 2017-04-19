@@ -62,7 +62,13 @@ public class InputManager {
 			if (selectionModel.getSelectedSkill().isPresent()) {
 				Sprite sprite = selectionModel.getSelectedSprite().get();
 				Skill skill = selectionModel.getSelectedSkill().get();
-				sprite.emit(new TriggerSkillEvent(skill.getType(), new Target(e.getPos())));
+				if (target(e.getPos()).getSprite().isPresent()) { 
+					System.out.println("sprite here");
+					sprite.emit(new TriggerSkillEvent(skill.getType(), new Target(target(e.getPos()).getSprite().get())));
+				} else {
+					System.out.println("no sprite here");
+					sprite.emit(new TriggerSkillEvent(skill.getType(), new Target(e.getPos())));
+				}
 				bus.emit(new SelectSkillEvent(SelectSkillEvent.CANCEL, skill));
 			}
 			else if (target(e.getPos()).getSprite().isPresent()) {
