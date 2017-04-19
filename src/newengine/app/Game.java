@@ -7,6 +7,7 @@ import newengine.events.GameInitializationEvent;
 import newengine.gameloop.FXGameLoop;
 import newengine.gameloop.GameLoop;
 import newengine.managers.collision.CollisionManager;
+import newengine.managers.conditions.ConditionManager;
 import newengine.managers.debug.DebugManager;
 import newengine.managers.input.InputManager;
 import newengine.managers.range.RangeManager;
@@ -40,6 +41,12 @@ public class Game {
 		
 		CollisionManager collisionManager = new CollisionManager(bus); // TODO
 		RangeManager rangeManager = new RangeManager(bus); // TODO
+
+		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
+		SoundManager soundManager = new SoundManager(bus);
+		DebugManager debugManager = new DebugManager(bus);
+		TriggerManager triggerManager = new TriggerManager(bus);
+		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel);
 		
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
@@ -47,11 +54,9 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> view.render(spriteModel));
 		gameLoop.addLoopComponent((dt) -> view.render(playerStatsModel));
 		gameLoop.addLoopComponent((dt) -> view.render(selectionModel));
+		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 		
-		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
-		SoundManager soundManager = new SoundManager(bus);
-		DebugManager debugManager = new DebugManager(bus);
-		TriggerManager triggerManager = new TriggerManager(bus);
+		
 	}
 	
 	public EventBus getBus() {

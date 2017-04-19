@@ -35,15 +35,17 @@ public class App extends Application {
 	public void start(Stage stage) throws Exception {
 		
 		Game game = new Game();
-
+		EventBus bus = game.getBus();
+		
 		Player player1 = new Player("Player 1");
 		
 		// sprite 1
-		Sprite sprite1 = new Sprite();
+		Sprite sprite1 = new Sprite(bus);
 		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
 		ImageSet imageSet1 = new ImageSet(image1);
 		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 		skillMap.put(MoveSkill.TYPE, new MoveSkill());
+		//skillMap.put(HealNearbySkill.TYPE, new HealNearbySkill());
 		sprite1.addComponent(new SkillSet(skillMap));
 		sprite1.addComponent(new Owner(player1));
 		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
@@ -54,11 +56,12 @@ public class App extends Application {
 		sprite1.addComponent(new Range(128));
 			
 		// sprite 2
-		Sprite sprite2 = new Sprite();
+		Sprite sprite2 = new Sprite(bus);
 		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
 		ImageSet imageSet2 = new ImageSet(image2);
 		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
 		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
+		//skillMap2.put(HealNearbySkill.TYPE, new HealNearbySkill());
 		sprite2.addComponent(new SkillSet(skillMap2));
 		sprite2.addComponent(new Owner(player1));
 		sprite2.addComponent(new Position(new GamePoint(300, 250), 0));
@@ -71,7 +74,7 @@ public class App extends Application {
 		spritesToAdd.add(sprite1);
 		spritesToAdd.add(sprite2);
 		
-		EventBus bus = game.getBus();
+		
 		bus.on(GameInitializationEvent.ANY, (e) -> {
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
 			// TODO add other map elements to the game (like stats, buttons)
