@@ -40,26 +40,24 @@ public class HealthHolder extends Component<HealthEvent>{
 	 */
 	public void adjustHealth(int value){
 		health+=value;
-		this.getBus().emit(new HealthEvent(ADJUST_HEALTH,health,value));
+		bus.emit(new HealthEvent(ADJUST_HEALTH,health,value));
 		if(health<=0){
-			this.getBus().emit(new HealthEvent(NO_HEALTH,health,value));
+			bus.emit(new HealthEvent(NO_HEALTH,health,value));
+		}
+		if(health>maxHealth){
+			health=maxHealth;
 		}
 	}
 
 	/**
 	 * Lets people see what this events are listened for in this Component's bus.
 	 */
-	public Collection<BusEventType<HealthEvent>> getEvents() {
-		Set<BusEventType<HealthEvent>> myEvents= new HashSet<>();
+	@Override
+	public Collection<BusEventType<HealthEvent>> getListenedEvents() {
+		Collection<BusEventType<HealthEvent>> myEvents= new HashSet<>();
 		myEvents.add(NO_HEALTH);
 		myEvents.add(ADJUST_HEALTH);
 		return myEvents;
-	}
-
-	@Override
-	public Map<HealthEvent, BusEventHandler<HealthEvent>> getHandlers() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

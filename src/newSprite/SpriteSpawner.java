@@ -1,22 +1,28 @@
 package newSprite;
 
-import newengine.sprite.component.Component;
-import newengine.sprite.component.ComponentType;
+import java.util.Collection;
+import java.util.Map;
 
-public class SpriteSpawner<T extends ComponentSprite> extends Component {
+import bus.BusEvent;
+import bus.BusEventType;
+import newSprite.ComponentSprite.Component;
+
+public class SpriteSpawner extends Component<BusEvent> {
 
 	public SpriteSpawner(ComponentSprite sprite) {
-//		super(sprite);
-		// TODO Auto-generated constructor stub
+		sprite.super();
 	}
 
-	public static void spawnSprite(double xDisplacement, double yDisplacement) {
-
+	public void spawnSprite(double xDisplacement, double yDisplacement, String spriteType) {
+		//Tell the environment bus to construct a sprite with the given string type
+		eBus.emit(new BusEvent(null));
+		System.out.println("tried to spawn sprite!");
 	}
 
 	@Override
-	public ComponentType<? extends Component> getType() {
+	public Collection<BusEventType<BusEvent>> getListenedEvents() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
