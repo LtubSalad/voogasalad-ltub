@@ -17,6 +17,7 @@ import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
+import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
@@ -52,6 +53,7 @@ public class App extends Application {
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite1.addComponent(new Range(128));
+		sprite1.addComponent(new EventQueue());
 			
 		// sprite 2
 		Sprite sprite2 = new Sprite();
@@ -66,6 +68,7 @@ public class App extends Application {
 		sprite2.addComponent(new Speed(100));
 		sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		sprite2.addComponent(new EventQueue());
 		
 		List<Sprite> spritesToAdd = new ArrayList<>();
 		spritesToAdd.add(sprite1);
