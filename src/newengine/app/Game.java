@@ -29,10 +29,30 @@ public class Game {
 	private boolean mapInitialized = false;
 	
 	public Game() {
+		
+		// if reading in data from an XML file, will be passed the sprite model + player stats model 
 		SpriteModel spriteModel = new SpriteModel(bus);
 		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO
 		SelectionModel selectionModel = new SelectionModel(bus);
+		initializeGame(spriteModel, playerStatsModel, selectionModel);
 		
+	}
+	
+	
+	/**
+	 * @param spriteModel - model of sprites read in from XML file
+	 * @param playerModel - model of players instantiated by XML file
+	 * 	  
+	 * constructor allowing the game to be instantiated with sprite/player data from an XML file
+	 * 
+	 */
+	public Game(SpriteModel spriteModel, PlayerStatsModel playerModel){
+		SelectionModel selectionModel = new SelectionModel(bus); // TODO: (tahia)  remove duplicate line 
+		initializeGame(spriteModel, playerModel, selectionModel);
+		
+	}
+	
+	private void initializeGame(SpriteModel spriteModel, PlayerStatsModel playerStatsModel, SelectionModel selectionModel){
 		Camera camera = new Camera(bus);
 		view = new View(bus, camera);
 		

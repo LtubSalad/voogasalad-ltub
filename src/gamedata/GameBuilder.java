@@ -7,10 +7,23 @@ public class GameBuilder {
 	
 	public GameBuilder(){
 		game = new Game(); // replace this 
+		buildGame(); 
 	}
 	
+	
+	
+	
+	private void buildGame() {
+		// TODO 
+		
+	}
+
+
+
+
 	public Game getGame(){
 		return game; 
 	}
+
 
 }
