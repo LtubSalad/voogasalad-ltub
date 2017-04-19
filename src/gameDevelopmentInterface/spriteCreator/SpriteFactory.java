@@ -18,5 +18,5 @@ public class SpriteFactory {
 	private Sprite produceSprite(){
 		
 	}
-
+	
 }

@@ -1,5 +1,5 @@
 package gameDevelopmentInterface.spriteCreator;
 
-public @interface Changeable {
+public @interface VariableName {
 
 }

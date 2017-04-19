@@ -1,5 +1,6 @@
 package newengine.sprite.components;
 
+import gameDevelopmentInterface.spriteCreator.ConstructorForDeveloper;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
@@ -9,6 +10,7 @@ public class SoundEffect extends Component {
 	
 	private String moveSoundFile;
 	
+	@ConstructorForDeveloper(variableNames = { "soundFile" }) 
 	public SoundEffect(String moveSoundFile) {
 		this.moveSoundFile = moveSoundFile;
 	}

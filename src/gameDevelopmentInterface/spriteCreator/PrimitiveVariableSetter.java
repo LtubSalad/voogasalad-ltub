@@ -7,19 +7,19 @@ import javafx.scene.layout.HBox;
 /**
  * 
  * @author Daniel
- * Only works for very simple variables.
+ * Only works for primitive variables.
  * @param <T>
  */
-public class SimpleFieldSetter<T> extends HBox{
+public class PrimitiveVariableSetter<T> extends HBox{
 	private TextField value;
-	public SimpleFieldSetter(Class<T> type,String descriptor){
-		this.getChildren().addAll(new Label(type.getName()),new Label(descriptor));
+	public PrimitiveVariableSetter(Class<T> type,String descriptor){
 		value=new TextField();
+		this.getChildren().addAll(new Label(type.getName()),new Label(descriptor), value);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public T getValue(){
-		return (T)value.getText();
+		return (T) value.getText();
 	}
 
 }
