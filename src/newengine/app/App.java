@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sound.SoundEvent;
+import newengine.model.PlayerStatsModel;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.MoveSkill;
@@ -42,6 +43,7 @@ public class App extends Application {
 		EventBus bus = game.getBus();
 		
 		Player player1 = new Player("Player 1");
+		
 		
 		// sprite 1
 		Sprite sprite1 = new Sprite();

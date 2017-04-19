@@ -32,7 +32,7 @@ public class Game {
 	 
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
-		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, ""); // TODO FIX NAME
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, "Player 1"); // TODO FIX NAME
 		SelectionModel selectionModel = new SelectionModel(bus);
 		
 		Camera camera = new Camera(bus);

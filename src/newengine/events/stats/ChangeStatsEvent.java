@@ -5,17 +5,23 @@ import bus.BusEventType;
 import newengine.sprite.player.Player;
 
 public class ChangeStatsEvent extends BusEvent{
-	private Player player;
+	private String playerName;
 	private int change;
 
 	public ChangeStatsEvent(BusEventType<? extends BusEvent> busEventType, Player player, int amountChanged) {
 		super(busEventType);
-		this.player = player;
+		this.playerName = player.getName();
+		this.change = amountChanged;
+	}
+	
+	public ChangeStatsEvent(BusEventType<? extends BusEvent> busEventType, String playerName, int amountChanged) {
+		super(busEventType);
+		this.playerName = playerName;
 		this.change = amountChanged;
 	}
 	
 	public String getPlayerName(){
-		return player.getName();
+		return playerName;
 	}
 	
 	public int getAmountChanged(){

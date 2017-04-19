@@ -64,6 +64,7 @@ public class InputManager {
 				Sprite sprite = selectionModel.getSelectedSprite().get();
 				Skill skill = selectionModel.getSelectedSkill().get();
 				TriggerSkillEvent event = new TriggerSkillEvent(skill.getType(), new Target(e.getPos()));
+				
 				if (actionMode() == ActionMode.INSTANT) {
 					sprite.emit(event);
 					bus.emit(new SelectSkillEvent(SelectSkillEvent.CANCEL, skill));

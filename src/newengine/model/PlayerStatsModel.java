@@ -1,5 +1,6 @@
 package newengine.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import bus.EventBus;
@@ -16,10 +17,18 @@ public class PlayerStatsModel {
 	private final Var<Integer> livesVar = new Var<>();
 	private final Var<Integer> scoreVar = new Var<>();
 	
+	//TODO ALLOW INITIAL SETTING OF VALUES
 	public PlayerStatsModel(EventBus bus, String name) {
 		this.bus = bus;
 		this.name = name;
 		initHandlers();
+		
+		//FIX THESE BELOW
+		livesVar.set(3);
+		scoreVar.set(0);
+		Map<String, Integer> wealthTester = new HashMap<>();
+		wealthTester.put("gold", 100);
+		wealthVar.set(wealthTester);
 	}
 	
 	private void initHandlers() {
@@ -39,8 +48,11 @@ public class PlayerStatsModel {
 		});
 	}
 
-	public int getWealth(String wealthType) {
+	public int getWealthValue(String wealthType) {
 		return wealthVar.get().get(wealthType);
+	}
+	public Map<String, Integer> getWealth(){
+		return wealthVar.get();
 	}
 	public int getLives() {
 		return livesVar.get();

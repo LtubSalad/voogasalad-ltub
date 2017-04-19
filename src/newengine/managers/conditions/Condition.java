@@ -7,6 +7,18 @@ public abstract class Condition implements ICondition {
 	private SpriteModel spriteModel;
 	private PlayerStatsModel playerStatsModel;
 	
+	/**
+	 * This blank constructor is built in to allow users to initialize a Condition without having to worry about the models
+	 */
+	public Condition(){
+		
+	}
+	
+	public Condition(SpriteModel spriteModel, PlayerStatsModel playerStatsModel){
+		this.spriteModel = spriteModel;
+		this.playerStatsModel = playerStatsModel;
+	}
+	
 	public void setSpriteModel(SpriteModel model){
 		this.spriteModel = model;
 	}
