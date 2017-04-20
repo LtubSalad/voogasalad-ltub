@@ -50,6 +50,10 @@ public class Position extends Component {
 	public void onUpdated(double dt) {
 		if (!isMoving()) {return;}
 		GamePoint pDest = getFollowingPoint();
+		updateMovePosition(dt, pDest);
+	}
+
+	private void updateMovePosition(double dt, GamePoint pDest) {
 		double xDest = pDest.x();
 		double yDest = pDest.y();
 		double x = pos.x();
