@@ -53,8 +53,6 @@ public class AttributeDisplay extends VBox{
 			}
 			Button attributeCustomizer = new Button(item.getName());
 			attributeCustomizer.setOnAction((c) -> {
-				FileChooser fc = new FileChooser();
-				fc.setInitialDirectory(new File(System.getProperty("user.dir")));
 				new AttributeCustomizerPopup(myAttributesModel, item,
 						targetData);
 			});
