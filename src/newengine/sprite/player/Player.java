@@ -9,6 +9,8 @@ public class Player {
 	 */
 	public static final Player NATURE = new Player("NATURE"); 
 	
+	public static final String MAIN_PLAYER = "Player 1";
+	
 	private String name;
 	
 	public Player(String name) {

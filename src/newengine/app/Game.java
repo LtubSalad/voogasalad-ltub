@@ -7,6 +7,7 @@ import newengine.events.GameInitializationEvent;
 import newengine.gameloop.FXGameLoop;
 import newengine.gameloop.GameLoop;
 import newengine.managers.collision.CollisionManager;
+import newengine.managers.conditions.ConditionManager;
 import newengine.managers.debug.DebugManager;
 import newengine.managers.input.InputManager;
 import newengine.managers.range.RangeManager;
@@ -14,6 +15,7 @@ import newengine.managers.sound.SoundManager;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
+import newengine.sprite.player.Player;
 import newengine.trigger.TriggerManager;
 import newengine.utils.variable.VarKey;
 import newengine.utils.variable.VarMap;
@@ -27,10 +29,10 @@ public class Game {
 	private GameLoop gameLoop;
 	private View view;
 	private boolean mapInitialized = false;
-	
+	 
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
-		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, Player.MAIN_PLAYER); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
 		SelectionModel selectionModel = new SelectionModel(bus);
 		
 		Camera camera = new Camera(bus);
@@ -40,6 +42,12 @@ public class Game {
 		
 		CollisionManager collisionManager = new CollisionManager(bus); // TODO
 		RangeManager rangeManager = new RangeManager(bus); // TODO
+
+		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
+		SoundManager soundManager = new SoundManager(bus);
+		DebugManager debugManager = new DebugManager(bus);
+		TriggerManager triggerManager = new TriggerManager(bus);
+		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel);
 		
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
@@ -47,11 +55,9 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> view.render(spriteModel));
 		gameLoop.addLoopComponent((dt) -> view.render(playerStatsModel));
 		gameLoop.addLoopComponent((dt) -> view.render(selectionModel));
+		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 		
-		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
-		SoundManager soundManager = new SoundManager(bus);
-		DebugManager debugManager = new DebugManager(bus);
-		TriggerManager triggerManager = new TriggerManager(bus);
+		
 	}
 	
 	public EventBus getBus() {

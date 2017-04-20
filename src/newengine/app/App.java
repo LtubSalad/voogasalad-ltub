@@ -12,6 +12,12 @@ import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sound.SoundEvent;
+import newengine.events.stats.ChangeLivesEvent;
+import newengine.events.stats.ChangeWealthEvent;
+import newengine.managers.conditions.GoldMinimumCondition;
+import newengine.managers.conditions.NoLivesCondition;
+import newengine.managers.conditions.SetEndConditionEvent;
+import newengine.model.PlayerStatsModel;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.MoveSkill;
@@ -39,8 +45,10 @@ public class App extends Application {
 	public void start(Stage stage) throws Exception {
 		
 		Game game = new Game();
-
-		Player player1 = new Player("Player 1");
+		EventBus bus = game.getBus();
+		
+		Player player1 = new Player(Player.MAIN_PLAYER);
+		
 		
 		// sprite 1
 		Sprite sprite1 = new Sprite();
@@ -81,11 +89,14 @@ public class App extends Application {
 		spritesToAdd.add(sprite1);
 		spritesToAdd.add(sprite2);
 		
-		EventBus bus = game.getBus();
+		
 		bus.on(GameInitializationEvent.ANY, (e) -> {
 			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
-			// TODO add other map elements to the game (like stats, buttons)
+			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, Player.MAIN_PLAYER, 3));
+			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, "gold", 100));
+			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
+			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 		});
 		
 		stage.setScene(game.getScene());
