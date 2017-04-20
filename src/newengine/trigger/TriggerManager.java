@@ -7,23 +7,32 @@ import bus.BusEventHandler;
 import bus.BusEventType;
 import bus.EventBus;
 import newengine.events.HasTriggeringSprite;
+import newengine.events.trigger.AddTriggerEvent;
 import newengine.events.trigger.SpriteTriggerActionEvent;
 import newengine.events.trigger.SpriteTriggerRegisterEvent;
+import newengine.model.Models;
 import newengine.sprite.SpriteID;
 import newengine.trigger.TriggerAction.TriggerActionType;
 import newengine.trigger.TriggerEvent.TriggerEventType;
-import newengine.utils.variable.VarMap;
 
 public class TriggerManager {
 
-	private VarMap map; // TODO
+	private Models models;
 	private EventBus bus;
 
-	public TriggerManager(EventBus bus) {
+	public TriggerManager(EventBus bus, Models models) {
 		this.bus = bus;
+		this.models = models;
+		initHandlers();
 	}
 
-	public void registerTrigger(Trigger trigger) {
+	private void initHandlers() {
+		bus.on(AddTriggerEvent.ADD, (e) -> {
+			registerTrigger(e.getTrigger());
+		});
+	}
+	
+	private void registerTrigger(Trigger trigger) {
 		TriggerEvent triggerEvent = trigger.getEvent();
 		List<TriggerCondition> conditions = trigger.getConditions();
 		List<TriggerAction> actions = trigger.getActions();
@@ -43,14 +52,21 @@ public class TriggerManager {
 		}
 	}
 
-	public BusEventHandler<BusEvent> genHandler(List<TriggerCondition> conditions, List<TriggerAction> actions) {
+	private BusEventHandler<BusEvent> genHandler(List<TriggerCondition> conditions, List<TriggerAction> actions) {
 		return new BusEventHandler<BusEvent>() {
 			@Override
 			public void handle(BusEvent event) {
 				for (TriggerCondition condition : conditions) {
-					if (!condition.isTrue(map)) {
-						return;
+					if (event instanceof HasTriggeringSprite) {
+						if (!condition.isTrue(models, ((HasTriggeringSprite) event).getSprite())) {
+							return;
+						}
+					} else {
+						if (!condition.isTrue(models, null)) {
+							return;
+						}
 					}
+
 				}
 				for (TriggerAction action : actions) {
 					if (action.getType() == TriggerActionType.GAME) {

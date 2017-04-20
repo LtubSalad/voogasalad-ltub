@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
 import newengine.events.QueueEvent;
 import newengine.events.SpriteModelEvent;
+import newengine.events.debug.SysPrintEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.player.Player;
@@ -32,6 +33,11 @@ import newengine.sprite.components.Selectable.SelectionBoundType;
 import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
+import newengine.trigger.Trigger;
+import newengine.trigger.TriggerAction;
+import newengine.trigger.TriggerEvent;
+import newengine.trigger.TriggerAction.TriggerActionType;
+import newengine.trigger.TriggerEvent.TriggerEventType;
 import newengine.utils.Target;
 import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
@@ -98,6 +104,11 @@ public class App extends Application {
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
 			// TODO add other map elements to the game (like stats, buttons)
 		});
+		
+		// Triggers
+		for (Trigger trigger : (new TestTriggers()).getTriggers()) {
+			game.addTrigger(trigger);
+		}
 		
 		stage.setScene(game.getScene());
 		game.start();
