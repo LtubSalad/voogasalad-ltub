@@ -8,9 +8,12 @@ import newengine.utils.Target;
 
 public class MoveEvent extends BusEvent implements HasTriggeringSprite {
 	
-	public static final BusEventType<MoveEvent> POSITION = new BusEventType<>(MoveEvent.class.getName() + "SPECIFIC");
-	public static final BusEventType<MoveEvent> SPRITE = new BusEventType<>(
+	public static final BusEventType<MoveEvent> START_POSITION = new BusEventType<>(
+			MoveEvent.class.getName() + "SPECIFIC");
+	public static final BusEventType<MoveEvent> START_SPRITE = new BusEventType<>(
 			MoveEvent.class.getName() + "SPRITE");
+	public static final BusEventType<MoveEvent> FINISH = new BusEventType<>(
+			MoveEvent.class.getName() + "FINISH");
 	
 	private Sprite sprite;
 	private Target target;

@@ -135,6 +135,10 @@ public class View {
 				skillBox.clear();
 			}
 		}
+		else {
+			gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+			skillBox.clear();
+		}
 		// render the selected skill
 		if (selectionModel.getSelectedSkill().isPresent()) {
 			Skill skill = selectionModel.getSelectedSkill().get();

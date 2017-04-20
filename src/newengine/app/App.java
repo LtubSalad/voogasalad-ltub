@@ -80,7 +80,6 @@ public class App extends Application {
 		sprite1.addComponent(new Speed(200));
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
-
 		sprite1.addComponent(new Range(128));
 		sprite1.addComponent(new Attacker());
 		sprite1.addComponent(new Health(200));
@@ -105,9 +104,6 @@ public class App extends Application {
 		sprite2.addComponent(new EventQueue());
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(60));
-
-		
-
 		
 		List<Sprite> spritesToAdd = new ArrayList<>();
 		spritesToAdd.add(sprite1);
@@ -130,15 +126,15 @@ public class App extends Application {
 		stage.show();
 		
 		// TODO add method to generate path
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(300,100)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(250,200)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(100,150)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(500,300)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(400,200)))));
 	}
 	

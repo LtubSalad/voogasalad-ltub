@@ -27,7 +27,7 @@ public class Position extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.POSITION, (e) -> {
+		sprite.on(MoveEvent.START_POSITION, (e) -> {
 			moveTo(e.getTarget());
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
 				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
@@ -35,7 +35,7 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.SPRITE, (e) -> {
+		sprite.on(MoveEvent.START_SPRITE, (e) -> {
 			moveTo(e.getTarget());
 			followingSprite();
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
@@ -60,6 +60,7 @@ public class Position extends Component {
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
 			stopMoving();
+			return;
 		}
 		double xDiff = xDest - x;
 		double yDiff = yDest - y;
@@ -70,6 +71,8 @@ public class Position extends Component {
 			pos = new GamePoint(xDest, yDest);
 			stopMoving();
 			sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
+			sprite.emit(new MoveEvent(MoveEvent.FINISH, sprite, target));
+			return;
 		}
 		// not arrived at destination, move by time and speed.
 		double vx = 0;
@@ -83,6 +86,7 @@ public class Position extends Component {
 			vy = speed / dist * yDiff;
 		}
 		pos = new GamePoint(x + vx * dt, y + vy * dt);
+		return;
 	}
 	
 	@Override

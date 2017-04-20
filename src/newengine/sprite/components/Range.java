@@ -1,8 +1,6 @@
 package newengine.sprite.components;
 
 import newengine.events.range.InRangeEvent;
-import newengine.events.sprite.AttackEvent;
-import newengine.events.sprite.FireProjectileEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;

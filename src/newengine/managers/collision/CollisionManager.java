@@ -26,36 +26,13 @@ public class CollisionManager {
 			for (Sprite s2 : collidableSprites) {
 				if (s1 == s2) { continue; }
 				if (CollisionChecker.collides(s1, s2)) {
-					// NOTE: both sprites will receive this collision event. 
-					System.out.println("collision");
+					// both sprites will receive this collision event. 
+//					System.out.println("Collision between " + s1.toString() + " and " + s2.toString());
 					s1.emit(new CollisionEvent(CollisionEvent.ANY, s1, s2));
 					s2.emit(new CollisionEvent(CollisionEvent.ANY, s2, s1));
 				}
 			}
 		}
 	}
-
-//	public void checkWeaponCollisions(List<Sprite> sprites) {
-//		List<Sprite> collidableWeaponSprites = sprites.stream().filter((s) -> {
-//			return (s.getComponent(Collidable.TYPE).isPresent() && s.getComponent(DamageStrength.TYPE).isPresent()
-//					&& s.getComponent(Position.TYPE).isPresent()
-//					&& s.getComponent(SkillSet.TYPE).get().getSkill(MoveSkill.TYPE).getTarget().get().getSprite().isPresent());
-//		}).collect(Collectors.toList());
-//		for (Sprite weapon : collidableWeaponSprites) {
-//			Sprite target = weapon.getComponent(SkillSet.TYPE).get().getSkill(MoveSkill.TYPE).getTarget().get().getSprite().get();
-//			if (!weapon.getComponent(Position.TYPE).get().isMoving()){
-//				List<Sprite> remove = new ArrayList<Sprite>();
-//				remove.add(weapon);
-//				bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, remove));
-//			}
-//			if (CollisionChecker.collidesOnTarget(weapon, target)) {
-//				System.out.println("weapon strength: " + weapon.getComponent(DamageStrength.TYPE).get().getStrength());
-//				System.out.println("health before hit: " + target.getComponent(Health.TYPE).get().getHealth());
-//				target.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, weapon.getComponent(DamageStrength.TYPE).get().getStrength()));
-//				System.out.println("health after hit: " + target.getComponent(Health.TYPE).get().getHealth());
-//			}
-//		}
-//	}
-
 
 }

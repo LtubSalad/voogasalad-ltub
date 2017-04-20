@@ -1,13 +1,14 @@
 package newengine.sprite.components;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import newengine.events.SpriteModelEvent;
 import newengine.events.collision.CollisionEvent;
-import newengine.events.sprite.ChangeHealthEvent;
-import newengine.events.sprite.WeaponCollisionEvent;
+import newengine.player.Player;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-import newengine.utils.variable.Var;
 
 public class DamageStrength extends Component {
 	
@@ -22,9 +23,15 @@ public class DamageStrength extends Component {
 	@Override
 	public void afterAdded() {
 		sprite.on(CollisionEvent.ANY, (e) -> {
-			sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
-				gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
-			});
+			Player owner = sprite.getComponent(Owner.TYPE).get().player();
+			Player anotherOwner = e.getSprite2().getComponent(Owner.TYPE).get().player();
+			if (owner != anotherOwner) {
+				List<Sprite> spritesToRemove = new ArrayList<>();
+				spritesToRemove.add(sprite);
+				sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
+					gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spritesToRemove));
+				});				
+			}
 		});
 	}
 	

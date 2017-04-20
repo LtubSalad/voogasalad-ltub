@@ -7,7 +7,6 @@ import java.util.Map;
 
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.FireProjectileEvent;
-import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.MoveSkill;
@@ -36,21 +35,20 @@ public class Attacker extends Component {
 			Target target = e.getTarget();
 			
 			System.out.println("emit FireProjectileEvent");
-			Player weapons = new Player("weapons");
 
 			Sprite weapon = new Sprite();
-			LtubImage image1 = new LtubImage("images/skills/crosshairs.png");
+			LtubImage image1 = new LtubImage("images/skills/bullet.png");
 			ImageSet imageSet1 = new ImageSet(image1);
 			Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 			MoveSkill moveSkill = new MoveSkill();
 			skillMap.put(MoveSkill.TYPE, moveSkill);
 			weapon.addComponent(new SkillSet(skillMap));
-			weapon.addComponent(new Owner(weapons));
+			weapon.addComponent(new Owner(source.getComponent(Owner.TYPE).get().player()));
 			weapon.addComponent(new Position(source.getComponent(Position.TYPE).get().pos(), source.getComponent(Position.TYPE).get().heading()));
 			weapon.addComponent(new Images(imageSet1));
 			weapon.addComponent(new Speed(50));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
-			weapon.addComponent(new DamageStrength(-25));
+			weapon.addComponent(new DamageStrength(25));
 			weapon.addComponent(new GameBus());
 			
 			
