@@ -30,7 +30,7 @@ import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
 import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
-import newengine.sprite.components.Spawner;
+import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Speed;
 import newengine.sprite.player.Player;
 import newengine.utils.image.ImageSet;
@@ -63,7 +63,7 @@ public class App extends Application {
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite1.addComponent(new Range(128));
-		sprite1.addComponent(new Spawner());
+		sprite1.addComponent(new Attacker());
 		sprite1.addComponent(new Health(200));
 
 		sprite1.addComponent(new EventQueue());
@@ -85,7 +85,7 @@ public class App extends Application {
 		sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite2.addComponent(new EventQueue());
-		sprite2.addComponent(new Spawner());
+		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(60));
 
 		

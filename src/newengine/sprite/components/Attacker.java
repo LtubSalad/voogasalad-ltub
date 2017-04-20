@@ -20,11 +20,11 @@ import newengine.utils.Target;
 import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
 
-public class Spawner extends Component {
+public class Attacker extends Component {
 
-	public static final ComponentType<Spawner> TYPE = new ComponentType<>(Spawner.class.getName());
+	public static final ComponentType<Attacker> TYPE = new ComponentType<>(Attacker.class.getName());
 	private double reloadPeriod = 1;
-	private double timeRemaining = 0;
+	private double timeRemaining = 1;
 
 	@Override
 	public void afterAdded() {
@@ -40,7 +40,7 @@ public class Spawner extends Component {
 			Player weapons = new Player("weapons");
 
 			Sprite weapon = new Sprite();
-			LtubImage image1 = new LtubImage("images/skills/walk.png");
+			LtubImage image1 = new LtubImage("images/skills/crosshairs.png");
 			ImageSet imageSet1 = new ImageSet(image1);
 			Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 			MoveSkill moveSkill = new MoveSkill();
@@ -80,9 +80,6 @@ public class Spawner extends Component {
 		timeRemaining = reloadPeriod;
 	}
 	
-	public void setReSpawnPeriod(double time) {
-		reloadPeriod = time;
-	}
 	
 	public void onUpdate(double dt){
 		timeRemaining -= dt;

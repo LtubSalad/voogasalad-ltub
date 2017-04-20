@@ -12,7 +12,7 @@ public class FireProjectileSkill extends Skill {
 	public static final SkillType<FireProjectileSkill> TYPE = new SkillType<>(FireProjectileSkill.class.getName()); 
 
 	public FireProjectileSkill() {
-		icon = new LtubImage("images/skills/walk.png");
+		icon = new LtubImage("images/skills/crosshairs.png");
 	}
 
 	@Override
