@@ -23,6 +23,8 @@ import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Position;
+import newengine.utils.image.ImageSet;
+import newengine.utils.image.LtubImage;
 /**
  * This class holds all possible sprites that a user can place on the screen.
  * @author Jake
@@ -44,34 +46,40 @@ public class ScreenObjectHolder extends HBox {
 	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd, SpritesForScreenUse attributesModel) {
 		myScreenModel = smc;
 		myScreenData = smd;
-		myScreenModel.getPossibleSprites().addListener(new ListChangeListener<SpriteMakerModel>() {
-			@Override
-			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
-				myScreenModel.getPossibleSprites().forEach(spriteMakerModel -> {
-					List<Component> screenObjectComponents = spriteMakerModel.getComponents();
-					for (Component c : screenObjectComponents) {
-						ComponentType<?> type = c.getType();
-						if (type.equals(Images.TYPE)) {
-							Images imageComponent = (Images) c;
-							String imageName = imageComponent.image().getFileName();
-							boolean wasFound = false;
-							if (myScreenObjects.size() == 0) {
-								addObject(spriteMakerModel);
-							} else {
-								for (Pair<String, Image> pair : myScreenObjects.keySet()) {
-									if (pair.getKey().equals(imageName)) {
-										wasFound = true;
-									}
-								}
-								if (!wasFound) {
-									addObject(spriteMakerModel);
-								}	
-							}
-						}
-					}
-				});
-			}
-		});
+//		myScreenModel.getPossibleSprites().addListener(new ListChangeListener<SpriteMakerModel>() {
+//			@Override
+//			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
+//				myScreenModel.getPossibleSprites().forEach(spriteMakerModel -> {
+//					List<Component> screenObjectComponents = spriteMakerModel.getComponents();
+//					for (Component c : screenObjectComponents) {
+//						ComponentType<?> type = c.getType();
+//						if (type.equals(Images.TYPE)) {
+//							Images imageComponent = (Images) c;
+//							String imageName = imageComponent.image().getFileName();
+//							boolean wasFound = false;
+//							if (myScreenObjects.size() == 0) {
+//								addObject(spriteMakerModel);
+//							} else {
+//								for (Pair<String, Image> pair : myScreenObjects.keySet()) {
+//									if (pair.getKey().equals(imageName)) {
+//										wasFound = true;
+//									}
+//								}
+//								if (!wasFound) {
+//									addObject(spriteMakerModel);
+//								}	
+//							}
+//						}
+//					}
+//				});
+//			}
+//		});
+		SpriteMakerModel dummySprite = new SpriteMakerModel();
+		ImageSet iSet = new ImageSet();
+		LtubImage lImage = new LtubImage("images/characters/Grass.jpg");
+		iSet.setImage(lImage);
+		dummySprite.addComponent(new Images(iSet));
+		addObject(dummySprite);
 	}
 	/**
 	 * Add a created sprite to the screen object selector
@@ -87,6 +95,8 @@ public class ScreenObjectHolder extends HBox {
 				Images imageComponent = (Images) c;
 				Image spriteImage = imageComponent.image().getFXImage();
 				ImageView spriteImageView = new ImageView(spriteImage);
+				spriteImageView.setFitHeight(100);
+				spriteImageView.setFitWidth(100);
 				spriteImageView.setOnMousePressed(e -> dragAndDrop(spriteImageView));
 				myScreenObjects.put(new Pair<String, Image>(imageComponent.image().getFileName(), spriteImage), screenObject);
 				this.getChildren().add(spriteImageView);
