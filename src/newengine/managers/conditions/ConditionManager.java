@@ -15,8 +15,14 @@ public class ConditionManager {
 		this.bus = bus;
 		this.spriteModel = spriteModel;
 		this.playerStatsModel = playerStatsModel;
+		initHandlers();
 	} 
 	
+	private void initHandlers() {
+		bus.on(SetEndConditionEvent.SETWIN, (e) -> {this.winning = setModels(e.getCondition());});
+		bus.on(SetEndConditionEvent.SETLOSE, (e) -> {this.losing = setModels(e.getCondition());});
+	}
+
 	public void checkConditions() {
 		checkWinningCondition();
 		checkLosingCondition();
@@ -25,24 +31,15 @@ public class ConditionManager {
 	private void checkWinningCondition(){
 		if(winning != null && winning.check()){
 			//TODO Have game player to be set to subscribe to this event
-			bus.emit(new EndPlayEvent(EndPlayEvent.WIN));
+			bus.emit(new EndConditionTriggeredEvent(EndConditionTriggeredEvent.WIN));
 		}
 	}
 	
 	private void checkLosingCondition(){
 		if(losing != null && losing.check()){
 			//TODO Have game player be set to subscribe to this event
-			bus.emit(new EndPlayEvent(EndPlayEvent.LOSE));
+			bus.emit(new EndConditionTriggeredEvent(EndConditionTriggeredEvent.LOSE));
 		}
-	}
-	
-	public void setWinningCondition(ICondition condition){
-		winning = setModels(condition);
-	}
-	
-	public void setLosingCondition(ICondition condition){
-		losing = setModels(condition);
-		
 	}
 	
 	private ICondition setModels(ICondition condition) {

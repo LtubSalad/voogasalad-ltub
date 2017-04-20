@@ -17,35 +17,48 @@ public class PlayerStatsModel {
 	private final Var<Integer> livesVar = new Var<>();
 	private final Var<Integer> scoreVar = new Var<>();
 	
-	//TODO ALLOW INITIAL SETTING OF VALUES
 	public PlayerStatsModel(EventBus bus, String name) {
 		this.bus = bus;
 		this.name = name;
-		initHandlers();
 		
-		//FIX THESE BELOW
-		livesVar.set(3);
+		//Initial setting
+		wealthVar.set(new HashMap<String, Integer>());
+		livesVar.set(0);
 		scoreVar.set(0);
-		Map<String, Integer> wealthTester = new HashMap<>();
-		wealthTester.put("gold", 100);
-		wealthVar.set(wealthTester);
+		initHandlers();
 	}
 	
 	private void initHandlers() {
-		bus.on(ChangeWealthEvent.SPECIFIC, (e) ->{
+		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
 			if(name.equals(e.getPlayerName())){
 				String wealthType = e.getWealthType();
-				wealthVar.get().put(wealthType, wealthVar.get().get(wealthType) + e.getAmountChanged());
+				if(wealthVar.get().containsKey(wealthType)){
+					wealthVar.get().put(wealthType, wealthVar.get().get(wealthType) + e.getAmountChanged());}
+				else{
+					wealthVar.get().put(wealthType, e.getAmountChanged());
+				}
 			}
 		});
-		bus.on(ChangeLivesEvent.SPECIFIC, (e) ->{
+		bus.on(ChangeLivesEvent.CHANGE, (e) ->{
 			if(name.equals(e.getPlayerName()))
-			livesVar.set(livesVar.get() + e.getAmountChanged());
+				updateVar(livesVar, livesVar.get(), e.getAmountChanged());
 		});
-		bus.on(ChangeScoreEvent.SPECIFIC, (e) ->{
+		bus.on(ChangeLivesEvent.SET, (e) ->{
 			if(name.equals(e.getPlayerName()))
-			scoreVar.set(scoreVar.get() + e.getAmountChanged());
+				updateVar(livesVar, 0, e.getAmountChanged());
 		});
+		bus.on(ChangeScoreEvent.CHANGE, (e) ->{
+			if(name.equals(e.getPlayerName()))
+				updateVar(scoreVar, scoreVar.get(), e.getAmountChanged());
+		});
+		bus.on(ChangeScoreEvent.SET, (e) ->{
+			if(name.equals(e.getPlayerName()))
+				updateVar(scoreVar, 0, e.getAmountChanged());
+		});
+	}
+	
+	private void updateVar(Var<Integer> var, int initial, int change){
+		var.set(initial + change);
 	}
 
 	public int getWealthValue(String wealthType) {

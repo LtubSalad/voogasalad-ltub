@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
 import newengine.events.stats.ChangeLivesEvent;
+import newengine.events.stats.ChangeScoreEvent;
 import newengine.events.stats.ChangeWealthEvent;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
@@ -32,6 +33,7 @@ import newengine.sprite.Sprite;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.SkillSet;
+import newengine.sprite.player.Player;
 import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
@@ -129,8 +131,11 @@ public class View {
 		statsPanel.setSpacing(10);
 		statsPanel.maxHeight(100);
 		createText(playerStatsModel).stream().forEach(e -> statsPanel.getChildren().add(e));
-//		bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SPECIFIC,"Player 1", -1));
-//		bus.emit(new ChangeWealthEvent(ChangeWealthEvent.SPECIFIC,"Player 1", 1000, "gold"));
+		
+		//TODO if done with testing playerstatsmodel, delete
+		//bus.emit(new ChangeLivesEvent(ChangeLivesEvent.CHANGE,Player.MAIN_PLAYER, -1));
+		//bus.emit(new ChangeScoreEvent(ChangeScoreEvent.CHANGE, Player.MAIN_PLAYER, 1));
+		//bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE,Player.MAIN_PLAYER,"gold", 1));
 	}
 	
 	private List<Text> createText(PlayerStatsModel playerStatsModel) {

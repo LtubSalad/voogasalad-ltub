@@ -15,6 +15,7 @@ import newengine.managers.sound.SoundManager;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
+import newengine.sprite.player.Player;
 import newengine.trigger.TriggerManager;
 import newengine.utils.variable.VarKey;
 import newengine.utils.variable.VarMap;
@@ -28,11 +29,10 @@ public class Game {
 	private GameLoop gameLoop;
 	private View view;
 	private boolean mapInitialized = false;
-	private int numPlayers = 0;
 	 
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
-		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, "Player 1"); // TODO FIX NAME
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, Player.MAIN_PLAYER); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
 		SelectionModel selectionModel = new SelectionModel(bus);
 		
 		Camera camera = new Camera(bus);
