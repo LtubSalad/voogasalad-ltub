@@ -6,7 +6,7 @@ import java.util.Queue;
 import commons.point.GamePoint;
 import javafx.util.Pair;
 /**
- * This is a path object that will be associated with all moster sprites
+ * This is a path object that will be associated with all monster sprites
  * so that they can know the points to which they are supposed to go.
  * @author Jake
  *

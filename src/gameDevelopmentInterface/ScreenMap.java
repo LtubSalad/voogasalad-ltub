@@ -100,6 +100,12 @@ public class ScreenMap extends StackPane {
 		return new GamePoint(colNum, rowNum);
 	}
 	
+	public GamePoint getActualLocationOfSprite(GamePoint gp) {
+		double actualX = (gp.x()*(getGrid().getWidth()/NUM_COLS)) + ((getGrid().getWidth()/NUM_COLS)/2);
+		double actualY = (gp.y()*(getGrid().getHeight()/NUM_ROWS)) + ((getGrid().getHeight()/NUM_ROWS)/2);
+		return new GamePoint(actualX, actualY);
+	}
+	
 	private void redrawGrid() {
 		Map<AttributeData,Boolean> onScreenOrNot = mySMC.getScreenData().getIfOnScreen();
 		for (AttributeData attr : onScreenOrNot.keySet()) {
