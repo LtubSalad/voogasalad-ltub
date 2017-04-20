@@ -9,12 +9,15 @@ import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import newengine.sprite.component.Component;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
+import utilities.XStreamHandler;
 
 public class SpriteCreationScreen extends BorderPane{
 	private SpriteMakerModel spriteData;
@@ -36,6 +39,8 @@ public class SpriteCreationScreen extends BorderPane{
 		this.setRight(selector);
 		this.setCenter(infoPane);
 		this.setTop(new Label("NEW SPRITE"));
+		this.setBottom(new BottomPanel());
+		
 	}
 	
 	private Class getClassFromFile(String fullClassName) throws Exception {
@@ -44,6 +49,17 @@ public class SpriteCreationScreen extends BorderPane{
 	            
 	    });
 	    return loader.loadClass(fullClassName);
+	}
+
+	private class BottomPanel extends HBox{
+		XStreamHandler dataHandler;
+		private BottomPanel(){
+			Button saveButton= new Button("Save SpriteMakerModel to File");
+			saveButton.setOnMouseClicked((click)->{
+				dataHandler.saveToFile(infoPane.getSpriteData());
+			});
+			this.getChildren().add(saveButton);
+		}
 	}
 
 

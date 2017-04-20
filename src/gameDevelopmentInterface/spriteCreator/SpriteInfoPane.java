@@ -45,7 +45,9 @@ public class SpriteInfoPane extends BorderPane{
 		}	
 	}
 	
-	private void saveSprite(){
+	public SpriteMakerModel getSpriteData(){
+		lister.updateSpriteModel();
+		return spriteData;
 		
 	}
 	
