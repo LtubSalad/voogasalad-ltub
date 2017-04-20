@@ -15,8 +15,4 @@ public class SpriteFactory {
 	private Map<BusEvent, String> eventResponses;
 	
 	
-	private Sprite produceSprite(){
-		
-	}
-	
 }
