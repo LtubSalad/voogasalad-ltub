@@ -1,6 +1,11 @@
 package gameDevelopmentInterface.spriteCreator;
 
 import exception.UnsupportedTypeException;
+/**
+ * Hide that code smell
+ * @author Daniel
+ *
+ */
 
 public class PrimitiveConverter {
 	public <T> Object convertString(Class<T> convertableType, String data) throws UnsupportedTypeException {

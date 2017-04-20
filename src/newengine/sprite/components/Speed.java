@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import gameDevelopmentInterface.spriteCreator.helperAnnotations.ConstructorForDeveloper;
+import gameDevelopmentInterface.spriteCreator.helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.variable.Var;
@@ -10,7 +12,8 @@ public class Speed extends Component {
 	
 	private final Var<Double> speedVar = new Var<>();
 	
-	public Speed(double speed) {
+	@ConstructorForDeveloper
+	public Speed(@VariableName(name = "speed") double speed) {
 		speedVar.set(speed);
 	}
 	

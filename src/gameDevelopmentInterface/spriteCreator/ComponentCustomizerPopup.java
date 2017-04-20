@@ -1,6 +1,7 @@
 package gameDevelopmentInterface.spriteCreator;
 
 
+import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -19,12 +20,12 @@ public class ComponentCustomizerPopup extends Stage {
 	 * @param targetData
 	 * @throws UnsupportedTypeException 
 	 */
-	public ComponentCustomizerPopup(Component component, Sprite targetSprite) {
+	public ComponentCustomizerPopup(Class<? extends Component> clazz, SpriteMakerModel targetSprite) {
 		Group root = new Group();
 		VBox box=new VBox();
 		ComponentSetter<? extends Component> customizer;
 		try {
-			customizer = new ComponentSetter<>(component.getClass());
+			customizer = new ComponentSetter<>(clazz);
 			Button saveButton= new Button("Add Component");
 			saveButton.setOnAction((c)->{
 				try {
@@ -38,7 +39,7 @@ public class ComponentCustomizerPopup extends Stage {
 			root.getChildren().add(box);
 	
 			Scene myScene = new Scene(root);
-			this.setTitle("Set properties of " + targetSprite.getID());
+			this.setTitle("Set properties of new sprite");
 			this.setScene(myScene);
 			this.show();
 		}

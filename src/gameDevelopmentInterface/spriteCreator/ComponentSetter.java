@@ -51,9 +51,5 @@ public class ComponentSetter<T extends Component> extends VBox{
 		}
 		
 		return null;
-		
 	}
-	
-	
-
 }
