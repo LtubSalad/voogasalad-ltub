@@ -18,15 +18,19 @@ import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.BuildSkill;
+import newengine.skill.skills.FireProjectileSkill;
 import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
+import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
 import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.GameBus;
+import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
+import newengine.sprite.components.Range;
 import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
 import newengine.sprite.components.SkillSet;
@@ -44,6 +48,7 @@ public class App extends Application {
 		Game game = new Game();
 
 		Player player1 = new Player("Player 1");
+		Player player2 = new Player("Player 2");
 		
 		// building
 		Sprite building = new Sprite();
@@ -59,6 +64,7 @@ public class App extends Application {
 		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 		skillMap.put(MoveSkill.TYPE, new MoveSkill());
 		skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
+		skillMap.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
 		sprite1.addComponent(new GameBus());
 		sprite1.addComponent(new SkillSet(skillMap));
 		sprite1.addComponent(new Owner(player1));
@@ -68,7 +74,10 @@ public class App extends Application {
 		sprite1.addComponent(new Speed(200));
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
-//		sprite1.addComponent(new Range(128));
+
+		sprite1.addComponent(new Range(128));
+		sprite1.addComponent(new Attacker());
+		sprite1.addComponent(new Health(200));
 		sprite1.addComponent(new EventQueue());
 			
 		// sprite 2
@@ -77,9 +86,10 @@ public class App extends Application {
 		ImageSet imageSet2 = new ImageSet(image2);
 		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
 		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
+		skillMap2.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
 		sprite2.addComponent(new GameBus());
 		sprite2.addComponent(new SkillSet(skillMap2));
-		sprite2.addComponent(new Owner(player1));
+		sprite2.addComponent(new Owner(player2));
 		sprite2.addComponent(new Position(new GamePoint(300, 250), 0));
 		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite2.addComponent(new Images(imageSet2));
@@ -87,6 +97,11 @@ public class App extends Application {
 		sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite2.addComponent(new EventQueue());
+		sprite2.addComponent(new Attacker());
+		sprite2.addComponent(new Health(60));
+
+		
+
 		
 		List<Sprite> spritesToAdd = new ArrayList<>();
 		spritesToAdd.add(sprite1);
@@ -98,6 +113,8 @@ public class App extends Application {
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
 			// TODO add other map elements to the game (like stats, buttons)
 		});
+		
+		
 		
 		stage.setScene(game.getScene());
 		game.start();

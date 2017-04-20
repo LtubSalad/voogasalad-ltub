@@ -2,6 +2,7 @@ package newengine.utils.checker;
 
 import java.util.List;
 
+import commons.MathUtils;
 import commons.point.GamePoint;
 import javafx.scene.shape.Polygon;
 import newengine.sprite.Sprite;
@@ -36,6 +37,20 @@ public class CollisionChecker {
 		Polygon polygon2 = getFXPolygon(bound2, pos2);
 		return polygon1.intersects(polygon2.getBoundsInLocal());
 	}
+	
+	public static boolean collidesOnTarget(Sprite s1, Sprite s2){
+		if (!s1.getComponent(Position.TYPE).isPresent() ||
+				!s2.getComponent(Position.TYPE).isPresent() ||
+				!s1.getComponent(Collidable.TYPE).isPresent() ||
+				!s2.getComponent(Collidable.TYPE).isPresent()) {
+			return false;
+		}
+		GamePoint g1 = s1.getComponent(Position.TYPE).get().pos();
+		GamePoint g2 = s2.getComponent(Position.TYPE).get().pos();
+		return g1.distFrom(g2) < 0.5;
+	}
+	
+	
 
 	
 }

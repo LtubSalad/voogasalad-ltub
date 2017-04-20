@@ -29,6 +29,10 @@ public class SkillSet extends Component {
 		skills.put(skill.getType(), skill);
 	}
 	
+	public Skill getSkill(SkillType<? extends Skill> type){
+		return skills.get(type);
+	}
+	
 	@Override
 	public void afterAdded() {
 		for (Skill skill: skills.values()) {

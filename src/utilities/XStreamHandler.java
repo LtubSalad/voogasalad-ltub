@@ -62,8 +62,8 @@ public class XStreamHandler {
 			FileWriter fileWriter = new FileWriter(location);
 			fileWriter.write(content);
 			fileWriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			// user clicked cancel. No need to exclaim anything went wrong
 		}
 	}
 }

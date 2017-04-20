@@ -14,14 +14,24 @@ public class SpriteModelEvent extends BusEvent {
 			SpriteModelEvent.class.getName() + "REMOVE");
 
 	private List<Sprite> sprites;
+	private Sprite sprite;
 
 	public SpriteModelEvent(BusEventType<? extends BusEvent> busEventType, List<Sprite> sprites) {
 		super(busEventType);
 		this.sprites = sprites;
 	}
 	
+	public SpriteModelEvent(BusEventType<? extends BusEvent> busEventType, Sprite sprite) {
+		super(busEventType);
+		this.sprite = sprite;
+	}
+	
 	public List<Sprite> getSprites() {
 		return sprites;
+	}
+	
+	public Sprite getSprite() {
+		return sprite;
 	}
 
 }

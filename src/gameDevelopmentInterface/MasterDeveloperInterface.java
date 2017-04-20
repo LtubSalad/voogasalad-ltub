@@ -1,5 +1,6 @@
 package gameDevelopmentInterface;
 
+import java.util.ResourceBundle;
 import data.AttributesForScreenUse;
 import gameDevelopmentInterface.attributeCreator.AttributeHolderCreator;
 import gameDevelopmentInterface.attributeCreator.GroundUpAttributeCreator;
@@ -23,9 +24,12 @@ import javafx.scene.layout.HBox;
  *         No public methods because they most of its actions are event based.
  */
 public class MasterDeveloperInterface {
-	private static final String SCREEN_SETTING = "Screen Setting";
-	private static final String GENERAL_DATA = "General Data";
-	private static final String CREATE_ATTRIBUTE_HOLDER = "Create Sprite";
+	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
+	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
+	private static final String SCREEN_SETTING = "SCREEN_SETTING";
+	private static final String GENERAL_DATA = "GENERAL_DATA";
+	private static final String CREATE_ATTRIBUTE_HOLDER = "CREATE_ATTRIBUTE_HOLDER";
 	private static final String PATH_TO_STYLE_SHEETS = "/styleSheets/MainStyle.css";
 	private Scene developerScene;
 	private BorderPane view;
@@ -38,14 +42,14 @@ public class MasterDeveloperInterface {
 	public MasterDeveloperInterface() {
 		instantiate();
 		developerScene = new Scene(view);
-	//	developerScene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
+		developerScene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 	}
 
 	private void instantiateTabs() {
 		developerTabs = new TabPane();
-		Tab classCreatorTab = new Tab(CREATE_ATTRIBUTE_HOLDER, myAttributeHolderCreator);
-		Tab GeneralDataTab = new Tab(GENERAL_DATA, myGeneralDataCreator);
-		Tab ScreenSettingView = new Tab(SCREEN_SETTING, myScreenModelCreator);
+		Tab classCreatorTab = new Tab(myResources.getString(CREATE_ATTRIBUTE_HOLDER), myAttributeHolderCreator);
+		Tab GeneralDataTab = new Tab(myResources.getString(GENERAL_DATA), myGeneralDataCreator);
+		Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), myScreenModelCreator);
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
 		myTabs.addAll(classCreatorTab, GeneralDataTab, ScreenSettingView);
 	}
@@ -55,7 +59,6 @@ public class MasterDeveloperInterface {
 		instantiateTabs();
 		view.setTop(new TabAdder());
 		view.setCenter(developerTabs);
-
 	}
 
 	public Scene getScene() {
@@ -63,36 +66,37 @@ public class MasterDeveloperInterface {
 	}
 
 	class TabAdder extends HBox {
-		private static final String CREATE_SPRITE = "Create Sprite";
-		private static final String CREATE_NEW_SCREEN = "Create new Screen";
-		private static final String CREATE_NEW_SPRITE = "Create new Sprite";
-		private static final String CREATE_NEW_ATTRIBUTE= "Create new Attribute";
+		private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+		private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
+		private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
+		private static final String CREATE_SPRITE = "CREATE_SPRITE";
+		private static final String CREATE_NEW_SCREEN = "CREATE_NEW_SCREEN";
+		private static final String CREATE_NEW_SPRITE = "CREATE_NEW_SPRITE";
+		private static final String CREATE_NEW_ATTRIBUTE = "CREATE_NEW_ATTRIBUTE";
 
 		private TabAdder() {
 			instantiate();
 		}
 
-
 		private void instantiate() {
-			Button spriteButton = new Button(CREATE_NEW_SPRITE);
-			Button screenButton = new Button(CREATE_NEW_SCREEN);
-			Button attributeButton= new Button(CREATE_NEW_ATTRIBUTE);
+			Button spriteButton = new Button(myResources.getString(CREATE_NEW_SPRITE));
+			Button screenButton = new Button(myResources.getString(CREATE_NEW_SCREEN));
+			Button attributeButton = new Button(myResources.getString(CREATE_NEW_ATTRIBUTE));
 			spriteButton.setOnAction((clicked) -> {
-				Tab spriteTab = new Tab(CREATE_SPRITE, new AttributeHolderCreator(attributesModel));
+				Tab spriteTab = new Tab(myResources.getString(CREATE_NEW_SPRITE),
+						new AttributeHolderCreator(attributesModel));
 				developerTabs.getTabs().add(spriteTab);
 			});
 			screenButton.setOnAction((clicked) -> {
-				Tab screenTab = new Tab(CREATE_NEW_SCREEN,
+				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
 						new ScreenModelCreator(attributesModel, myGeneralDataCreator));
 				developerTabs.getTabs().add(screenTab);
 			});
-			attributeButton.setOnAction((clicked)->{
-				Tab attributeTab=new Tab(CREATE_NEW_ATTRIBUTE,
-						new GroundUpAttributeCreator());
+			attributeButton.setOnAction((clicked) -> {
+				Tab attributeTab = new Tab(myResources.getString(CREATE_NEW_ATTRIBUTE), new GroundUpAttributeCreator());
 				developerTabs.getTabs().add(attributeTab);
 			});
-			this.getChildren().addAll(spriteButton, screenButton,attributeButton);
-		}	
-
+			this.getChildren().addAll(spriteButton, screenButton, attributeButton);
+		}
 	}
 }

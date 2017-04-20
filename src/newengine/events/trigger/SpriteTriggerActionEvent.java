@@ -19,7 +19,7 @@ public class SpriteTriggerActionEvent extends BusEvent {
 		this.event = event;
 		this.spriteID = spriteID;
 	}
-	public static SpriteTriggerActionEvent createBroadcastEvent(BusEvent event) {
+	public static SpriteTriggerActionEvent createBroadcastEvent(BusEvent event) { //TODO remove public static method?
 		return new SpriteTriggerActionEvent(BROADCAST, event, null);
 	}
 	public static SpriteTriggerActionEvent createSpecificEvent(BusEvent event, SpriteID spriteID) {

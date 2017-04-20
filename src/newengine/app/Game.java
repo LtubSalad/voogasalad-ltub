@@ -41,7 +41,8 @@ public class Game {
 		CollisionManager collisionManager = new CollisionManager(bus); // TODO
 		RangeManager rangeManager = new RangeManager(bus); // TODO
 		
-		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
+		gameLoop.addLoopComponent((dt) -> view.clear());
+		gameLoop.addLoopComponent((dt) -> collisionManager.checkWeaponCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
 		gameLoop.addLoopComponent((dt) -> view.render(spriteModel));
