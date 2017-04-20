@@ -18,7 +18,6 @@ public class Sprite {
 	private SpriteID spriteID = IDGenerator.generateID();
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
 
-	
 	public EventBus getSpriteBus() {
 		return spriteBus;
 	}
@@ -49,7 +48,7 @@ public class Sprite {
 	}
 	public <T extends Component> boolean hasComponent(ComponentType<T> type) {
 		return components.containsKey(type);
-	}
+	}	
 	
 	/**
 	 * To be called in each frame.

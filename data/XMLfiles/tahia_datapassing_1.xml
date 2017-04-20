@@ -14,4 +14,8 @@
 		<Variable> ImageSet </Variable>
 		</ComponentVariables>
 	</Component>
+	<Component>
+	<ComponentType> EventQueue </ComponentType>
+	<ComponentVariables> events we want it to take </ComponentVariables>
+	</Component>
 </Sprite>

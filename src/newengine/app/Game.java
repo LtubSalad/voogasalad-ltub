@@ -39,6 +39,8 @@ public class Game {
 	}
 	
 	
+	
+	
 	/**
 	 * @param spriteModel - model of sprites read in from XML file
 	 * @param playerModel - model of players instantiated by XML file
@@ -52,6 +54,22 @@ public class Game {
 		
 	}
 	
+	/**
+	 * constructor used by data processors to instantiate a game based on authoring environment data 
+	 * 
+	 * @param gameSprites
+	 * @param bus2
+	 */
+	public Game(SpriteModel gameSprites, BasicEventBus bus2) {
+		bus = bus2; 
+		SelectionModel selectionModel = new SelectionModel(bus);
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus);
+		initializeGame(gameSprites, playerStatsModel, selectionModel); 
+	}
+
+
+
+
 	private void initializeGame(SpriteModel spriteModel, PlayerStatsModel playerStatsModel, SelectionModel selectionModel){
 		Camera camera = new Camera(bus);
 		view = new View(bus, camera);
