@@ -121,15 +121,15 @@ public class App extends Application {
 		stage.show();
 		
 		// TODO add method to generate path
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.TYPE, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
 				new Target(new GamePoint(300,100)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.TYPE, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
 				new Target(new GamePoint(250,200)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.TYPE, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
 				new Target(new GamePoint(100,150)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.TYPE, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
 				new Target(new GamePoint(500,300)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.TYPE, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
 				new Target(new GamePoint(400,200)))));
 	}
 	

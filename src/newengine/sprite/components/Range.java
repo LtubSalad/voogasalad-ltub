@@ -27,7 +27,7 @@ public class Range extends Component {
 			for (Sprite detectee: e.getDetectees()) {
 				//System.out.println(sprite.getID() + " fires projectile at " + detectee.getID());
 				Target target = new Target(detectee);
-				sprite.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, sprite, target));
+//				sprite.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, sprite, target));
 			}
 		});
 	}
