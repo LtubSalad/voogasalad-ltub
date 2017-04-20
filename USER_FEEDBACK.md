@@ -8,7 +8,7 @@
 
 * If file chooser is closed, then a stacktrace is printed
 
-* Visual recognition of which tab you're currently on
+* Visual recognition of which tab you're currently on (like tab numbers)
 
 * General data sends to all different screen creation classes
 
@@ -21,3 +21,21 @@
 * Cannot re-open the general data tab. No button for this
 
 * Implementation in all the attributes; no one knows what this is
+
+* Maybe accordion windows for the different attributes
+
+* Need cohesive GUI look
+
+* The "sprite creation tab" has the same name as the "new sprite creation tab"
+
+* Visually see sprite during creation
+
+* Path does not work for some spots when you are clicking and not dragging
+
+* The path squares are not extremely distinctly outlined
+
+* Use more common sense naming (like what is implementation), resource file
+* 
+* Authoring environment GUI should be more centralized - sprite creation/ all the other things we could edit should be centered around the grid so you can 
+* visually see things as you create them. For example, if we create a sprite that should pop up a window that allows us to create the sprite and then saving that sprite
+* should have it show up in the central GUI. 
