@@ -1,13 +1,13 @@
 package gameDevelopmentInterface;
-import java.io.File;
+//import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
-import data.AttributeData;
-import data.AttributesForScreenUse;
+//import java.util.ResourceBundle;
+import data.SpriteMakerModel;
+import data.SpritesForScreenUse;
 import data.ScreenModelData;
 import commons.point.GamePoint;
-import gameDevelopmentInterface.attributeCreator.AttributeDataFactory;
 import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,44 +19,53 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Pair;
+import newengine.sprite.component.Component;
+import newengine.sprite.component.ComponentType;
+import newengine.sprite.components.Images;
+import newengine.sprite.components.Position;
 /**
  * This class holds all possible sprites that a user can place on the screen.
  * @author Jake
  *
  */
 public class ScreenObjectHolder extends HBox {
-	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
-	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
-	private static final String IMAGE_HOLDER = "IMAGE_HOLDER";
-	private static final String IMAGE = "IMAGE";
-	private static final String Y_POSITION = "Y_POSITION";
-	private static final String X_POSITION = "X_POSITION";
-	private static final String PATH_TO_IMAGE_FILES = "PATH_TO_IMAGE_FILES";
+//	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+//	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
+//	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
+//	private static final String IMAGE_HOLDER = "IMAGE_HOLDER";
+//	private static final String IMAGE = "IMAGE";
+//	private static final String Y_POSITION = "Y_POSITION";
+//	private static final String X_POSITION = "X_POSITION";
+//	private static final String PATH_TO_IMAGE_FILES = "PATH_TO_IMAGE_FILES";
 	private ScreenModelCreator myScreenModel;
 	private ScreenModelData myScreenData;
-	private Map<Pair<String, Image>, AttributeData> myScreenObjects = new HashMap<Pair<String, Image>, AttributeData>();
+	private Map<Pair<String, Image>, SpriteMakerModel> myScreenObjects = new HashMap<Pair<String, Image>, SpriteMakerModel>();
 	
-	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd, AttributesForScreenUse attributesModel) {
+	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd, SpritesForScreenUse attributesModel) {
 		myScreenModel = smc;
 		myScreenData = smd;
-		myScreenModel.getPossibleSprites().addListener(new ListChangeListener<AttributeData>() {
+		myScreenModel.getPossibleSprites().addListener(new ListChangeListener<SpriteMakerModel>() {
 			@Override
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
-				myScreenModel.getPossibleSprites().forEach(attr -> {
-					if (attr.hasVariable(myResources.getString(IMAGE_HOLDER))) {
-						String imageName = attr.getVariable(myResources.getString(IMAGE_HOLDER));
-						boolean wasFound = false;
-						if (myScreenObjects.size() == 0) {
-							addObject(attr);
-						} else {
-							for (Pair<String, Image> p : myScreenObjects.keySet()) {
-								if (p.getKey().equals(imageName)) {
-									wasFound = true;
+				myScreenModel.getPossibleSprites().forEach(spriteMakerModel -> {
+					List<Component> screenObjectComponents = spriteMakerModel.getComponents();
+					for (Component c : screenObjectComponents) {
+						ComponentType<?> type = c.getType();
+						if (type.equals(Images.TYPE)) {
+							Images imageComponent = (Images) c;
+							String imageName = imageComponent.image().getFileName();
+							boolean wasFound = false;
+							if (myScreenObjects.size() == 0) {
+								addObject(spriteMakerModel);
+							} else {
+								for (Pair<String, Image> pair : myScreenObjects.keySet()) {
+									if (pair.getKey().equals(imageName)) {
+										wasFound = true;
+									}
 								}
-							}
-							if (!wasFound) {
-								addObject(attr);
+								if (!wasFound) {
+									addObject(spriteMakerModel);
+								}	
 							}
 						}
 					}
@@ -70,22 +79,27 @@ public class ScreenObjectHolder extends HBox {
 	 * @param screenObject
 	 *            the sprite to add to the HBox
 	 */
-	public void addObject(AttributeData screenObject) {
-		String imageName = screenObject.getVariable(myResources.getString(IMAGE_HOLDER));
-		Image si = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString(PATH_TO_IMAGE_FILES) + imageName), 100, 100,
-				false, false);
-		ImageView spriteImage = new ImageView(si);
-		spriteImage.setOnMousePressed(e -> dragAndDrop(spriteImage));
-		myScreenObjects.put(new Pair<String, Image>(imageName, si), screenObject);
-		this.getChildren().add(spriteImage);
+	public void addObject(SpriteMakerModel screenObject) {
+		List<Component> screenObjectComponents = screenObject.getComponents();
+		for (Component c : screenObjectComponents) {
+			ComponentType<?> type = c.getType();
+			if (type.equals(Images.TYPE)) {
+				Images imageComponent = (Images) c;
+				Image spriteImage = imageComponent.image().getFXImage();
+				ImageView spriteImageView = new ImageView(spriteImage);
+				spriteImageView.setOnMousePressed(e -> dragAndDrop(spriteImageView));
+				myScreenObjects.put(new Pair<String, Image>(imageComponent.image().getFileName(), spriteImage), screenObject);
+				this.getChildren().add(spriteImageView);
+			}
+		}
 	}
 	/**
 	 * Make an attribute data object from a file
 	 * @param file
 	 */
-	public void addObject(File file) {
-		addObject(new AttributeDataFactory().produceAttribute(file));
-	}
+//	public void addObject(File file) {
+//		addObject(new SpriteMakerModelFactory().produceAttribute(file));
+//	}
 	
 	private void dragAndDrop(ImageView source) {
 		ScreenMap target = myScreenModel.getScreen();
@@ -111,9 +125,8 @@ public class ScreenObjectHolder extends HBox {
 			for (Pair<String, Image> p : myScreenObjects.keySet()) {
 				String iName = p.getKey();
 				if (imageName.equals(iName)) {
-					AttributeData anActualPlacedScreenObject = (AttributeData) new UnoptimizedDeepCopy().copy(myScreenObjects.get(p));
-					anActualPlacedScreenObject.setVariable(myResources.getString(X_POSITION), coords.getKey() + "");
-					anActualPlacedScreenObject.setVariable(myResources.getString(Y_POSITION), coords.getValue() + "");
+					SpriteMakerModel anActualPlacedScreenObject = (SpriteMakerModel) new UnoptimizedDeepCopy().copy(myScreenObjects.get(p));
+					anActualPlacedScreenObject.addComponent(new Position(gameCoords, 0)); //heading 0 because all sprites default to this
 					myScreenData.addObjectData(anActualPlacedScreenObject);
 					break;
 				}

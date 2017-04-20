@@ -8,24 +8,24 @@ import javafx.collections.ObservableList;
  * @author Jake
  *
  */
-public class AttributesForScreenUse {
-	private ObservableList<AttributeData> allPossibleScreenAttributes = FXCollections.observableArrayList();
+public class SpritesForScreenUse {
+	private ObservableList<SpriteMakerModel> allPossibleScreenAttributes = FXCollections.observableArrayList();
 	
-	public AttributesForScreenUse() {
+	public SpritesForScreenUse() {
 		
 	}
 	/**
 	 * 
 	 * @param newData a possible new sprite the user can place on the screen
 	 */
-	public void addAttribute(AttributeData newData) {
-		allPossibleScreenAttributes.add(newData);
+	public void addComponent(SpriteMakerModel newSprite) {
+		allPossibleScreenAttributes.add(newSprite);
 	}
 	/**
 	 * 
 	 * @return all sprites that have been placed on the bottom of the screen for clicking and dragging
 	 */
-	public ObservableList<AttributeData> getScreenAttributes() {
+	public ObservableList<SpriteMakerModel> getScreenAttributes() {
 		return allPossibleScreenAttributes;
 	}
 
