@@ -3,6 +3,7 @@ package newengine.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import newengine.events.SpriteModelEvent;
 import newengine.events.debug.SysPrintEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.ChangeHealthEvent;
@@ -19,14 +20,15 @@ public class TestTriggers {
 	private List<Trigger> triggers = new ArrayList<>();
 	
 	public TestTriggers() {
-		triggers.add(spriteMovePrintTrigger());
+		triggers.add(printWhenSpriteMoves());
 		triggers.add(playSoundWhenFireProjectile());
 		triggers.add(playSoundWhenHealthChanges());
+		triggers.add(playSoundWhenNewSpriteAdded());
 	}
 	
-	private Trigger spriteMovePrintTrigger() {
-		TriggerEvent triggerEvent = new TriggerEvent(TriggerEventType.SPRITE_ALL, MoveEvent.SPRITE);
-		TriggerAction triggerAction = new TriggerAction(TriggerActionType.GAME, 
+	private Trigger printWhenSpriteMoves() {
+		TriggerEvent triggerEvent = TriggerEvent.createGameTriggerEvent(MoveEvent.SPRITE);
+		TriggerAction triggerAction = TriggerAction.createGameTriggerAction(
 				new SysPrintEvent("all sprite trigger action is printed"));
 		Trigger trigger = new Trigger(triggerEvent);
 		trigger.addAction(triggerAction);
@@ -34,8 +36,8 @@ public class TestTriggers {
 	}
 	
 	private Trigger playSoundWhenFireProjectile() {
-		TriggerEvent triggerEvent = new TriggerEvent(TriggerEventType.SPRITE_ALL, FireProjectileEvent.SPECIFIC);
-		TriggerAction triggerAction = new TriggerAction(TriggerActionType.GAME,
+		TriggerEvent triggerEvent = TriggerEvent.createGameTriggerEvent(FireProjectileEvent.SPECIFIC);
+		TriggerAction triggerAction = TriggerAction.createGameTriggerAction(
 				new SoundEvent(SoundEvent.SOUND_EFFECT, "data/sounds/Thunder.wav"));
 		Trigger trigger = new Trigger(triggerEvent);
 		trigger.addAction(triggerAction);
@@ -43,9 +45,18 @@ public class TestTriggers {
 	}
 	
 	private Trigger playSoundWhenHealthChanges() {
-		TriggerEvent triggerEvent = new TriggerEvent(TriggerEventType.SPRITE_ALL, ChangeHealthEvent.ANY);
-		TriggerAction triggerAction = new TriggerAction(TriggerActionType.GAME,
+		TriggerEvent triggerEvent = TriggerEvent.createGameTriggerEvent(ChangeHealthEvent.ANY);
+		TriggerAction triggerAction = TriggerAction.createGameTriggerAction(
 				new SoundEvent(SoundEvent.SOUND_EFFECT, "data/sounds/Bowhit.wav"));
+		Trigger trigger = new Trigger(triggerEvent);
+		trigger.addAction(triggerAction);
+		return trigger;
+	}
+	
+	private Trigger playSoundWhenNewSpriteAdded() {
+		TriggerEvent triggerEvent = TriggerEvent.createGameTriggerEvent(SpriteModelEvent.ADD);
+		TriggerAction triggerAction = TriggerAction.createGameTriggerAction(
+				new SoundEvent(SoundEvent.SOUND_EFFECT, "data/sounds/Dnpisd1.wav"));
 		Trigger trigger = new Trigger(triggerEvent);
 		trigger.addAction(triggerAction);
 		return trigger;

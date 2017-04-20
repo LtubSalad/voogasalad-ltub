@@ -39,7 +39,7 @@ public class CollisionManager {
 					// NOTE: both sprites will receive this collision event. 
 					System.out.println("collision");
 					s1.emit(new CollisionEvent(CollisionEvent.ANY, s1, s2));
-					s2.emit(new CollisionEvent(CollisionEvent.ANY, s1, s2));
+					s2.emit(new CollisionEvent(CollisionEvent.ANY, s2, s1));
 				}
 			}
 		}
