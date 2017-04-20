@@ -1,7 +1,7 @@
 package newengine.sprite.components;
 
-import gameDevelopmentInterface.spriteCreator.helperAnnotations.ConstructorForDeveloper;
-import gameDevelopmentInterface.spriteCreator.helperAnnotations.VariableName;
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 

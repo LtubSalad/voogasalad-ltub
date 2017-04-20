@@ -3,6 +3,8 @@ package newengine.sprite.components;
 import bus.BusEvent;
 import commons.MathUtils;
 import commons.point.GamePoint;
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.MoveEvent;
@@ -22,6 +24,12 @@ public class Position extends Component {
 	public Position(GamePoint pos, double heading) {
 		posVar.set(pos);
 		headingVar.set(heading);
+	}
+	
+	@ConstructorForDeveloper
+	public Position(@VariableName(name = "xPosition") double xPos,
+			@VariableName(name = "yPosition") double yPos,@VariableName(name = "heading") double heading){
+		this(new GamePoint(xPos,yPos),heading);
 	}
 	
 	@Override

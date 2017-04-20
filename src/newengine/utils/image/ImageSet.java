@@ -13,6 +13,10 @@ public class ImageSet {
 		setImage(ltubImage);
 	}
 	
+	public ImageSet(String filename){
+		setImage(new LtubImage(filename));
+	}
+	
 	public void setImage(LtubImage ltubImage) {
 		this.ltubImage = ltubImage;
 	}

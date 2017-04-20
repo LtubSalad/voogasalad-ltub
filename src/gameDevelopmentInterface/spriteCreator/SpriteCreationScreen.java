@@ -14,9 +14,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.Images;
+import newengine.sprite.components.Owner;
+import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
+import newengine.utils.image.ImageSet;
 import utilities.XStreamHandler;
 
 public class SpriteCreationScreen extends BorderPane{
@@ -35,6 +39,9 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Range.class);
 		observableComponents.add(SoundEffect.class);
 		observableComponents.add(Speed.class);
+		observableComponents.add(Owner.class);
+		observableComponents.add(Position.class);
+		observableComponents.add(Images.class);
 		ComponentSelectorPane selector=new ComponentSelectorPane("Add components with simple parameters", observableComponents,infoPane);
 		this.setRight(selector);
 		this.setCenter(infoPane);

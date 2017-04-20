@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.image.ImageSet;
@@ -13,6 +15,11 @@ public class Images extends Component {
 	
 	public Images(ImageSet imageSet) {
 		imageSetVar.set(imageSet);
+	}
+	
+	@ConstructorForDeveloper
+	public Images(@VariableName(name = "filepath") String filepath){
+		imageSetVar.set(new ImageSet(filepath));
 	}
 	
 	public LtubImage image() {
