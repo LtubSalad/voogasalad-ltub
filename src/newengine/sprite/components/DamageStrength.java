@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import newengine.events.SpriteModelEvent;
+import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.WeaponCollisionEvent;
 import newengine.sprite.Sprite;
@@ -10,16 +12,20 @@ import newengine.utils.variable.Var;
 public class DamageStrength extends Component {
 	
 	public static final ComponentType<DamageStrength> TYPE = new ComponentType<>(DamageStrength.class.getName());
-	private final Var<Integer> strengthVar = new Var<>();
+	private int strength;
 
 
-	public DamageStrength(int value){
-		strengthVar.set(value);
+	public DamageStrength(int strength){
+		this.strength = strength;
 	}
 	
 	@Override
 	public void afterAdded() {
-		
+		sprite.on(CollisionEvent.ANY, (e) -> {
+			sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
+				gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
+			});
+		});
 	}
 	
 	@Override
@@ -28,7 +34,7 @@ public class DamageStrength extends Component {
 	}
 	
 	public int getStrength(){
-		return strengthVar.get();
+		return strength;
 	}
 
 	@Override
