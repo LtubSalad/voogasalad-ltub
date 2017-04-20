@@ -36,8 +36,4 @@
 
 * Use more common sense naming (like what is implementation), resource file
 
-* Authoring environment GUI should be more centralized - sprite creation/ all the other things we could edit should be centered around the grid so you can 
-
-* visually see things as you create them. For example, if we create a sprite that should pop up a window that allows us to create the sprite and then saving that sprite
-
-* should have it show up in the central GUI. 
+* Authoring environment GUI should be more centralized - sprite creation/ all the other things we could edit should be centered around the grid so you can visually see things as you create them. For example, if we create a sprite that should pop up a window that allows us to create the sprite and then saving that sprite should have it show up in the central GUI. 
