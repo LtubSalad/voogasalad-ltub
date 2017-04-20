@@ -27,7 +27,7 @@ public class InputManager {
 	private PlayerStatsModel playerStatsModel;
 	private SelectionModel selectionModel;
 	private KeyInputState keyInputState;
-	
+
 	public InputManager(EventBus bus, SpriteModel spriteModel,
 			PlayerStatsModel playerStatsModel, SelectionModel selectionModel) {
 		this.bus = bus;
@@ -47,7 +47,7 @@ public class InputManager {
 				: ActionMode.INSTANT;
 		return actionMode;
 	}
-	
+
 	private Player player() { // TODO
 		return Player.DEFAULT;
 	}
@@ -63,13 +63,19 @@ public class InputManager {
 			if (selectionModel.getSelectedSkill().isPresent()) {
 				Sprite sprite = selectionModel.getSelectedSprite().get();
 				Skill skill = selectionModel.getSelectedSkill().get();
-				TriggerSkillEvent event = new TriggerSkillEvent(skill.getType(), new Target(e.getPos()));
+
 				if (actionMode() == ActionMode.INSTANT) {
-					sprite.emit(event);
+					if (target(e.getPos()).getSprite().isPresent()) { 
+						System.out.println("sprite here");
+						sprite.emit(new TriggerSkillEvent(skill.getType(), new Target(target(e.getPos()).getSprite().get())));
+					} else {
+						System.out.println("no sprite here");
+						sprite.emit(new TriggerSkillEvent(skill.getType(), new Target(e.getPos())));
+					}
 					bus.emit(new SelectSkillEvent(SelectSkillEvent.CANCEL, skill));
 				}
 				else {
-					sprite.emit(new QueueEvent(QueueEvent.ADD, event));
+					sprite.emit(new QueueEvent(QueueEvent.ADD, new TriggerSkillEvent(skill.getType(), new Target(e.getPos()))));
 				}
 			}
 			else if (target(e.getPos()).getSprite().isPresent()) {

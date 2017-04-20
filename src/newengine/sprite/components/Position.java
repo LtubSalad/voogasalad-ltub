@@ -6,10 +6,10 @@ import commons.point.GamePoint;
 import newengine.events.QueueEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.Target;
-import newengine.utils.variable.Var;
 
 public class Position extends Component {
 
@@ -18,6 +18,7 @@ public class Position extends Component {
 	private double heading;
 	private Target target;
 	private boolean isMoving = false;
+	private boolean followingSprite = false;
 	
 	public Position(GamePoint pos, double heading) {
 		this.pos = pos;
@@ -26,8 +27,17 @@ public class Position extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.TYPE, e -> {
+		sprite.on(MoveEvent.POSITION, (e) -> {
 			moveTo(e.getTarget());
+			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
+				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
+					bus.getGameBus().emit(new SoundEvent(SoundEvent.SOUND_EFFECT, sound.getMoveSoundFile()));
+				});
+			});
+		});
+		sprite.on(MoveEvent.SPRITE, (e) -> {
+			moveTo(e.getTarget());
+			followingSprite();
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
 				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
 					bus.getGameBus().emit(new SoundEvent(SoundEvent.SOUND_EFFECT, sound.getMoveSoundFile()));
@@ -39,7 +49,7 @@ public class Position extends Component {
 	@Override
 	public void onUpdated(double dt) {
 		if (!isMoving()) {return;}
-		GamePoint pDest = target.getLocation();
+		GamePoint pDest = getFollowingPoint();
 		double xDest = pDest.x();
 		double yDest = pDest.y();
 		double x = pos.x();
@@ -104,5 +114,29 @@ public class Position extends Component {
 	
 	public boolean isMoving() {
 		return isMoving;
+	}
+	
+	private void followingSprite() {
+		followingSprite = true;
+	}
+	
+	private void followingPosition() {
+		followingSprite = false;
+	}
+	
+	private boolean isFollowingSprite() {
+		return followingSprite;
+	}
+	
+	private GamePoint getFollowingPoint() {
+		if (isFollowingSprite()) {
+			if (target.getSprite().isPresent()) {
+				Sprite followedSprite = target.getSprite().get();
+				if (followedSprite.getComponent(Position.TYPE).isPresent()) {
+					return followedSprite.getComponent(Position.TYPE).get().pos();
+				}
+			}
+		}
+		return target.getLocation();
 	}
 }

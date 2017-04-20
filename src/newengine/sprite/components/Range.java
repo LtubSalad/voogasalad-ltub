@@ -2,6 +2,7 @@ package newengine.sprite.components;
 
 import newengine.events.range.InRangeEvent;
 import newengine.events.sprite.AttackEvent;
+import newengine.events.sprite.FireProjectileEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -24,8 +25,9 @@ public class Range extends Component {
 	public void afterAdded() {
 		sprite.on(InRangeEvent.ANY, (e) -> {
 			for (Sprite detectee: e.getDetectees()) {
-				System.out.println(sprite + " fires at sprite " + detectee);
-				sprite.emit(new AttackEvent(AttackEvent.FIRE, new Target(detectee)));
+				//System.out.println(sprite.getID() + " fires projectile at " + detectee.getID());
+				Target target = new Target(detectee);
+//				sprite.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, sprite, target));
 			}
 		});
 	}

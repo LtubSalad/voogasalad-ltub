@@ -93,9 +93,12 @@ public class View {
 		return scene;
 	}
 
+	public void clear(){
+		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+	}
+	
 	public void render(SpriteModel model) {
 		// render game cast
-		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 		for (Sprite sprite : model.getSprites()) {
 			if (!sprite.getComponent(Position.TYPE).isPresent() ||
 					!sprite.getComponent(Images.TYPE).isPresent()) {

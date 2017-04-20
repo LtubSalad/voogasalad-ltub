@@ -1,5 +1,7 @@
 package commons;
 
+import commons.point.GamePoint;
+
 public class MathUtils {
 
 	private static final double DOUBLE_EQUAL_DELTA = 1e-6;
@@ -10,5 +12,7 @@ public class MathUtils {
 		double diff = num1 - num2;
 		return (- DOUBLE_EQUAL_DELTA) < diff && diff < DOUBLE_EQUAL_DELTA;
 	}
+	
+	
 	
 }

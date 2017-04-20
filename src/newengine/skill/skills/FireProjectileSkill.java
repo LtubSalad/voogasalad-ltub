@@ -1,21 +1,38 @@
 package newengine.skill.skills;
 
+import newengine.events.sprite.FireProjectileEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
+import newengine.sprite.Sprite;
+import newengine.utils.Target;
+import newengine.utils.image.LtubImage;
 
 public class FireProjectileSkill extends Skill {
 
-	@Override
-	public SkillType<? extends Skill> getType() {
-		// TODO Auto-generated method stub
-		return null;
+	public static final SkillType<FireProjectileSkill> TYPE = new SkillType<>(FireProjectileSkill.class.getName()); 
+
+	public FireProjectileSkill() {
+		icon = new LtubImage("images/skills/crosshairs.png");
 	}
 
 	@Override
 	public void trigger() {
-		// TODO Auto-generated method stub
-		
+		Sprite source = this.getSource().get();
+		Target target = this.getTarget().get();
+		if (target.getSprite().isPresent()){
+			System.out.println("shoot at this thing " + target.getSprite().get().getID());
+			source.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, source, target));//this is handled in the sprite spawner component
+		}
 	}
+
+	@Override
+	public SkillType<? extends Skill> getType() {
+		return TYPE;
+	}
+
+}
+
+
 
 //	private EventBus bus;
 //	private boolean isInstant = false;
@@ -78,5 +95,5 @@ public class FireProjectileSkill extends Skill {
 //	}
 //
 //	
-	
-}
+
+
