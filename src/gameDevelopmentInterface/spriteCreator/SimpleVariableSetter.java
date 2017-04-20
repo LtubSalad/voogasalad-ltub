@@ -19,6 +19,7 @@ public class SimpleVariableSetter extends HBox{
 		this.type=type;
 		value=new TextField();
 		this.getChildren().addAll(new Label(type.getName()),new Label(descriptor), value);
+		this.setSpacing(20);
 	}
 	
 	public Object getValue() throws UnsupportedTypeException{

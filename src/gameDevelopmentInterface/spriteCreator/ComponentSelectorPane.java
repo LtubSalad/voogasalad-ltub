@@ -15,14 +15,13 @@ import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 
 public class ComponentSelectorPane extends VBox{
-	private SpriteMakerModel targetSprite;
+	private SpriteInfoPane infoPane;
 	private double prefWidth=300;
 	
-	public ComponentSelectorPane(String listTitle, List<Class<? extends Component>> displayedData, SpriteMakerModel targetSprite) {
-		this.targetSprite=targetSprite;
-		ObservableList<Class<? extends Component>> listedComponents = FXCollections.observableList(displayedData);
+	public ComponentSelectorPane(String listTitle, ObservableList<Class<? extends Component>> displayedData, SpriteInfoPane infoPane) {
+		this.infoPane=infoPane;
 		ListView<Class<? extends Component>> componentDisplay = new ListView<>();
-		componentDisplay.setItems(listedComponents);
+		componentDisplay.setItems(displayedData);
 
 		componentDisplay.setCellFactory(new Callback<ListView<Class<? extends Component>>, ListCell<Class<? extends Component>>>() {
 			@Override
@@ -45,7 +44,7 @@ public class ComponentSelectorPane extends VBox{
 			}
 			Button componentCustomizer = new Button(item.toString());
 			componentCustomizer.setOnAction((c) -> {
-				new ComponentCustomizerPopup(item,targetSprite);
+				infoPane.addComponent(item);
 			});
 			componentCustomizer.setPrefWidth(prefWidth);
 			setGraphic(componentCustomizer);

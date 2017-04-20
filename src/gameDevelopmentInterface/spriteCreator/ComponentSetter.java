@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exception.UnsupportedTypeException;
-import gameDevelopmentInterface.spriteCreator.helperAnnotations.ConstructorForDeveloper;
-import gameDevelopmentInterface.spriteCreator.helperAnnotations.VariableName;
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import newengine.sprite.component.Component;
 
@@ -36,6 +37,7 @@ public class ComponentSetter<T extends Component> extends VBox{
 			System.out.println(types[i].getName());
 			fieldSetters.add(new SimpleVariableSetter(types[i],name));
 		}
+		this.getChildren().add(new Label(clazz.getName()));
 		fieldSetters.forEach((fieldSetter)->this.getChildren().add(fieldSetter));
 	}
 	

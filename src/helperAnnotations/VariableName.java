@@ -1,4 +1,4 @@
-package gameDevelopmentInterface.spriteCreator.helperAnnotations;
+package helperAnnotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
