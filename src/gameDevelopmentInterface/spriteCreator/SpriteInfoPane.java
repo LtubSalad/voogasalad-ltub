@@ -1,5 +1,6 @@
 package gameDevelopmentInterface.spriteCreator;
 
+import java.awt.ScrollPane;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +13,14 @@ import javafx.scene.layout.VBox;
 import newengine.sprite.component.Component;
 
 public class SpriteInfoPane extends BorderPane{
+	private ScrollPane scrollView;
+	private final double WIDTH=400;
+	private final double HEIGHT=400;
 	private SpriteMakerModel spriteData;
 	private SpriteDescriptor descriptor;
 	private ComponentLister lister;
 	public SpriteInfoPane(SpriteMakerModel spriteData){
+		scrollView=new ScrollPane();
 		this.spriteData=spriteData;
 		descriptor=new SpriteDescriptor();
 		lister=new ComponentLister();

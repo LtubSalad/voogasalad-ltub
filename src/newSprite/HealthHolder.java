@@ -53,7 +53,7 @@ public class HealthHolder extends Component<HealthEvent>{
 	 * Lets people see what this events are listened for in this Component's bus.
 	 */
 	@Override
-	public Collection<BusEventType<HealthEvent>> getListenedEvents() {
+	private Collection<BusEventType<HealthEvent>> getListenedEvents() {
 		Collection<BusEventType<HealthEvent>> myEvents= new HashSet<>();
 		myEvents.add(NO_HEALTH);
 		myEvents.add(ADJUST_HEALTH);
