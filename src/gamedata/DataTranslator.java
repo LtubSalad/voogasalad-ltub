@@ -40,7 +40,7 @@ public class DataTranslator implements DataHandling {
 		return bus; 
 	}
 	
-	private Sprite assembleSprite(List<newSprite.ComponentSprite.Component<?>> components) {
+	private Sprite assembleSprite(List<Component> components) {
 		Sprite newSprite = new Sprite(); 
 		components.stream().forEach(e -> newSprite.addComponent(e));
 		return newSprite; 
@@ -49,13 +49,12 @@ public class DataTranslator implements DataHandling {
 
 	@Override
 	public void toModel(Sprite sprite) {
-		// TODO Auto-generated method stub
+		// TODO implement this, clean this + controller up 
 		
 	}
 
 	public SpriteModel getGameSprites() {
-		// TODO Auto-generated method stub
-		return null;
+		return gameModel;
 	}
 
 }

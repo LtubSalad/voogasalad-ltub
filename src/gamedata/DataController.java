@@ -28,6 +28,7 @@ public class DataController {
 	
 	
 	public void handleSprites(){
+		// TODO: implement translation this way from sprite --> model
 		;
 	}
 	
