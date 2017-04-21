@@ -49,8 +49,7 @@ public class SpriteCreationScreen extends BorderPane{
 		this.setLeft(new EventHandlerPane(spriteData));
 		this.setCenter(infoPane);
 		this.setTop(new Label("NEW SPRITE"));
-		this.setBottom(new BottomPanel());
-		
+		this.setBottom(new BottomPanel());	
 	}
 	
 	private Class getClassFromFile(String fullClassName) throws Exception {

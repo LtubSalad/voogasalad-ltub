@@ -1,6 +1,7 @@
 package gameDevelopmentInterface.spriteCreator;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import newengine.sprite.Sprite;
@@ -61,10 +63,10 @@ public class EventHandlerPane extends ScrollPane{
 	
 	private class SingleEventHandler extends VBox{
 		private BusEvent myEvent;
-		private TextField scriptField;
+		private TextArea scriptField;
 		private SingleEventHandler(BusEvent event, String currentScript){
 			Label eventLabel=new Label(event.getEventType().toString());
-			scriptField=new TextField();
+			scriptField=new TextArea();
 			this.getChildren().addAll(eventLabel,scriptField,new MethodDisplay());
 		}
 		
@@ -97,14 +99,33 @@ public class EventHandlerPane extends ScrollPane{
 			private void updateMethods(){
 				methods.clear();
 				for(Method method: Sprite.class.getMethods()){
-					methods.add(method);
+					System.out.println(methodToString(method));
 				}
 				mySprite.getComponents().forEach((type,component)->{
 					Class<?> clazz=component.getClass();
 					for(Method method:clazz.getDeclaredMethods()){
 						methods.add(method);
+						//System.out.println(method.toGenericString());
 					}
 				});
+			}
+			
+			private String methodToString(Method method){
+				String s= method.getName();
+				Parameter[] parameters=method.getParameters();
+				if(parameters.length==0){
+					return s+"()";
+				}
+				s+="(";
+				for (int i=0;i<parameters.length;i++){
+					s+="variable"+i;
+					if(i<parameters.length-1){
+						s+=",";
+					}
+				}
+				s+=")";
+				return s;
+
 			}
 		}
 	}
