@@ -1,7 +1,7 @@
 package gameDevelopmentInterface;
 
 import java.util.ResourceBundle;
-import data.AttributeData;
+import data.SpriteMakerModel;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -72,7 +72,7 @@ public class ButtonsPanel extends VBox {
 		sendNumCols.setOnAction(e -> mySMC.getScreen().setNumCols(Integer.parseInt(myNumColsInput.getText())));
 		loadSpriteButton = new Button(myResources.getString(LOAD_SPRITE_FROM_FILE));
 		loadSpriteButton.setOnAction(e -> {
-			AttributeData sprite = xstreamHandler.getAttributeFromFile();
+			SpriteMakerModel sprite = xstreamHandler.getAttributeFromFile();
 			mySMC.addPossibleSprite(sprite);
 		});
 		drawPathButton.setOnAction(e -> {
