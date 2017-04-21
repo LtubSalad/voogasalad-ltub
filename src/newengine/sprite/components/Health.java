@@ -1,11 +1,14 @@
 package newengine.sprite.components;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import bus.BusEventHandler;
 import newengine.events.SpriteModelEvent;
 import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.ChangeHealthEvent;
+import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.player.Player;
 import newengine.sprite.Sprite;
@@ -34,10 +37,10 @@ public class Health extends Component {
 	
 	@Override
 	public void afterAdded(){
-		sprite.on(ChangeHealthEvent.ANY, e -> {
+		sprite.on(ChangeHealthEvent.ANY, (Serializable & BusEventHandler<ChangeHealthEvent>)e -> {
 			changeHealth(e.getChange());
 		});
-		sprite.on(MoveEvent.STOP, (e) -> {
+		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
 			Sprite another = e.getSprite();
 			Player owner = sprite.getComponent(Owner.TYPE).get().player();
 			another.getComponent(Owner.TYPE).ifPresent((anotherOwner) -> {
