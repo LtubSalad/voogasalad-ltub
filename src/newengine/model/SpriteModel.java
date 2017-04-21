@@ -1,7 +1,6 @@
 package newengine.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,14 +9,11 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import bus.BusEvent;
 import bus.EventBus;
 import newengine.events.SpriteModelEvent;
-import newengine.events.VarMapEvent;
 import newengine.events.sprite.SetGameBusEvent;
 import newengine.events.trigger.SpriteTriggerActionEvent;
 import newengine.events.trigger.SpriteTriggerRegisterEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
-import newengine.utils.variable.VarKey;
-import newengine.utils.variable.VarValue;
 
 /**
  * A container for sprites.
@@ -83,6 +79,7 @@ public class SpriteModel {
 			}
 		}
 	}
+
 	private void removeSprite(List<Sprite> sprites) {
 		for (Sprite sprite : sprites) {
 			spritesToRemove.add(sprite);
@@ -94,6 +91,7 @@ public class SpriteModel {
 		this.bus = bus;
 	}
 	
+
 	public Optional<Sprite> getByID(SpriteID spriteID) {
 		// TODO: a map for faster query? not really necessary
 		for (Sprite sprite : sprites) {
