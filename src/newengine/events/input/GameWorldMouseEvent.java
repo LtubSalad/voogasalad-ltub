@@ -2,7 +2,7 @@ package newengine.events.input;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import newengine.sprite.player.Player;
+import newengine.player.Player;
 import newengine.utils.ActionMode;
 import newengine.utils.Target;
 
