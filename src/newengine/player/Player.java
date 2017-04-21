@@ -1,4 +1,4 @@
-package newengine.sprite.player;
+package newengine.player;
 
 public class Player {
 
@@ -8,6 +8,8 @@ public class Player {
 	 * Those things cannot be controlled by either the user or the AI.
 	 */
 	public static final Player NATURE = new Player("NATURE"); 
+	
+	public static final String MAIN_PLAYER = "Player 1";
 	
 	private String name;
 	

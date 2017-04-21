@@ -19,7 +19,7 @@ public class SpriteModelEvent extends BusEvent {
 		super(busEventType);
 		this.sprites = sprites;
 	}
-	
+
 	public List<Sprite> getSprites() {
 		return sprites;
 	}

@@ -3,6 +3,7 @@ package newengine.sprite.components;
 import java.util.LinkedList;
 
 import bus.BusEvent;
+import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.QueueEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -57,5 +58,10 @@ public class EventQueue extends Component {
 	@Override
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
+	}
+	
+	@Override
+	public EventQueue clone() {
+		return new EventQueue();
 	}
 }

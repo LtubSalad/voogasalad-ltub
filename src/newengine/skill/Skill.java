@@ -12,7 +12,6 @@ public abstract class Skill {
 	private Sprite source;
 	private Target target;
 	
-
 	public void setSource(Sprite source) {
 		this.source = source;
 	}

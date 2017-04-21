@@ -1,5 +1,6 @@
 package newengine.sprite;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -12,8 +13,7 @@ import bus.EventBus;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
-public class Sprite {
-	
+public class Sprite {	
 	private EventBus spriteBus = new BasicEventBus();
 	private SpriteID spriteID = IDGenerator.generateID();
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
@@ -41,6 +41,7 @@ public class Sprite {
 	public <T extends Component> Optional<T> getComponent(ComponentType<T> type) {
 		return Optional.ofNullable((T) components.get(type));
 	}
+	
 	public <T extends Component> void removeComponent(ComponentType<T> type) {
 		Component component = components.get(type);
 		component.beforeRemoved();
@@ -59,10 +60,20 @@ public class Sprite {
 			component.onUpdated(dt);
 		}
 	}
-	
+
+	@Override
+	public Sprite clone() {
+		Sprite newSprite = new Sprite();
+		for (Component component: new ArrayList<Component>(components.values())) {
+			Component newComponent = component.clone();
+			newSprite.addComponent(newComponent);
+		}
+		return newSprite;
+	}
 	@Override
 	public String toString() {
 		return "sprite("+spriteID+")";
 	}
+	
 
 }
