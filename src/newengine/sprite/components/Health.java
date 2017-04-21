@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newengine.events.SpriteModelEvent;
+import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.player.Player;
@@ -36,22 +37,24 @@ public class Health extends Component {
 		sprite.on(ChangeHealthEvent.ANY, e -> {
 			changeHealth(e.getChange());
 		});
-		sprite.on(MoveEvent.FINISH, (e) -> {
-			Target target = e.getTarget();
+		sprite.on(MoveEvent.STOP, (e) -> {
+			Sprite another = e.getSprite();
 			Player owner = sprite.getComponent(Owner.TYPE).get().player();
-			Player anotherOwner = target.getComponent(Owner.TYPE).get().player();
-			if (owner != anotherOwner) {
-				target.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
-					int damage = damageStrength.getStrength();
-					sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, -damage));
-				});				
-			}
+			another.getComponent(Owner.TYPE).ifPresent((anotherOwner) -> {
+					if (owner != anotherOwner.player()) {
+						another.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
+							int damage = damageStrength.getStrength();
+							sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, -damage));
+						});				
+					}
+				});	
 			// TODO check collision with other monster-type sprites
 		});	
 	}
 
 	private void changeHealth(int change) {
 		health += change;
+		System.out.println(health);
 		checkForDeath();
 	}
 	

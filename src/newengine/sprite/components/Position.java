@@ -44,6 +44,9 @@ public class Position extends Component {
 				});
 			});
 		});
+		sprite.on(MoveEvent.STOP,  (e) -> {
+			stopMoving();
+		});
 	}
 
 	@Override
@@ -66,12 +69,16 @@ public class Position extends Component {
 		double yDiff = yDest - y;
 		double dist = pos.distFrom(pDest);
 		double speed = sprite.getComponent(Speed.TYPE).get().speed();
+
+		
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
-			stopMoving();
+			sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+			target.getSprite().ifPresent((targetSprite) -> {
+				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+			});
 			sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
-			sprite.emit(new MoveEvent(MoveEvent.FINISH, sprite, target));
 			return;
 		}
 		// not arrived at destination, move by time and speed.

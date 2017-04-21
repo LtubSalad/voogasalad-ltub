@@ -12,8 +12,8 @@ public class MoveEvent extends BusEvent implements HasTriggeringSprite {
 			MoveEvent.class.getName() + "SPECIFIC");
 	public static final BusEventType<MoveEvent> START_SPRITE = new BusEventType<>(
 			MoveEvent.class.getName() + "SPRITE");
-	public static final BusEventType<MoveEvent> FINISH = new BusEventType<>(
-			MoveEvent.class.getName() + "FINISH");
+	public static final BusEventType<MoveEvent> STOP = new BusEventType<>(
+			MoveEvent.class.getName() + "STOP");
 	
 	private Sprite sprite;
 	private Target target;

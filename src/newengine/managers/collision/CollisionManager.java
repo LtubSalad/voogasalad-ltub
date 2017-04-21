@@ -27,7 +27,6 @@ public class CollisionManager {
 				if (s1 == s2) { continue; }
 				if (CollisionChecker.collides(s1, s2)) {
 					// both sprites will receive this collision event. 
-//					System.out.println("Collision between " + s1.toString() + " and " + s2.toString());
 					s1.emit(new CollisionEvent(CollisionEvent.ANY, s1, s2));
 					s2.emit(new CollisionEvent(CollisionEvent.ANY, s2, s1));
 				}

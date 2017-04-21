@@ -32,7 +32,8 @@ public class Attacker extends Component {
 //			}
 //			resetTimeRemaining();
 			Sprite source = e.getSprite();
-			Target target = e.getTarget();
+			Sprite target = e.getTarget();
+//			Target target = e.getTarget();
 			
 			System.out.println("emit FireProjectileEvent");
 
@@ -46,21 +47,23 @@ public class Attacker extends Component {
 			weapon.addComponent(new Owner(source.getComponent(Owner.TYPE).get().player()));
 			weapon.addComponent(new Position(source.getComponent(Position.TYPE).get().pos(), source.getComponent(Position.TYPE).get().heading()));
 			weapon.addComponent(new Images(imageSet1));
-			weapon.addComponent(new Speed(50));
+			weapon.addComponent(new Speed(100));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
 			weapon.addComponent(new DamageStrength(25));
-			weapon.addComponent(new GameBus());
-			
+			weapon.addComponent(new GameBus());			
 			
 			List<Sprite> spritesToAdd = new ArrayList<Sprite>();
 			spritesToAdd.add(weapon);
 			
-			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
+			sprite.getComponent(GameBus.TYPE).get().getGameBus()
+				.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
 
-			if (e.getTarget().getSprite().isPresent()) {
-				moveSkill.setTarget(target);
-				moveSkill.trigger();
-			}
+			moveSkill.setTarget(new Target(target));
+			moveSkill.trigger();
+//			if (target.getSprite().isPresent()) {
+//				moveSkill.setTarget(target);
+//				moveSkill.trigger();
+//			}
 		});
 	}
 

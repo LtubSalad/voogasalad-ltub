@@ -45,7 +45,7 @@ public class SkillSet extends Component {
 		sprite.on(TriggerSkillEvent.ANY, (e) -> {
 			Skill skill = skills.get(e.getType());
 			if (skill != null) {
-				e.getTarget().ifPresent((e1) -> skill.setTarget(e.getTarget().get()));
+				e.getTarget().ifPresent((target) -> skill.setTarget(target));
 				skill.trigger();
 			}
 		});

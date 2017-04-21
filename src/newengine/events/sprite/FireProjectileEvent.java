@@ -15,9 +15,9 @@ public class FireProjectileEvent extends BusEvent implements HasTriggeringSprite
 	public static final BusEventType<FireProjectileEvent> SPECIFIC = new BusEventType<>(FireProjectileEvent.class.getName() + "SPECIFIC");
 
 	private Sprite sprite;
-	private Target target;
+	private Sprite target;
 	
-	public FireProjectileEvent(BusEventType<? extends BusEvent> busEventType, Sprite source, Target target) {
+	public FireProjectileEvent(BusEventType<? extends BusEvent> busEventType, Sprite source, Sprite target) {
 		super(busEventType);
 		this.sprite = source;
 		this.target = target;
@@ -28,7 +28,7 @@ public class FireProjectileEvent extends BusEvent implements HasTriggeringSprite
 		return sprite;
 	}
 	
-	public Target getTarget() {
+	public Sprite getTarget() {
 		return target;
 	}
 	

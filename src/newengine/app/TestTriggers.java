@@ -11,9 +11,7 @@ import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.trigger.Trigger;
 import newengine.trigger.TriggerAction;
-import newengine.trigger.TriggerAction.TriggerActionType;
 import newengine.trigger.TriggerEvent;
-import newengine.trigger.TriggerEvent.TriggerEventType;
 
 public class TestTriggers {
 
