@@ -21,7 +21,6 @@ import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
-import newengine.utils.image.ImageSet;
 import utilities.XStreamHandler;
 
 public class SpriteCreationScreen extends BorderPane{

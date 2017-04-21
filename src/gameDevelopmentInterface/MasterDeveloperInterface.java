@@ -1,13 +1,8 @@
 package gameDevelopmentInterface;
 
 import java.util.ResourceBundle;
-<<<<<<< HEAD
-import data.AttributesForScreenUse;
 import data.DeveloperData;
-import gameDevelopmentInterface.attributeCreator.AttributeHolderCreator;
-=======
 import data.SpritesForScreenUse;
->>>>>>> f53993ab8323f4c2ba96a0a9685f7b52677dff74
 import gameDevelopmentInterface.attributeCreator.GroundUpAttributeCreator;
 import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import javafx.collections.ObservableList;
@@ -55,20 +50,11 @@ public class MasterDeveloperInterface {
 
 	private void instantiateTabs() {
 		developerTabs = new TabPane();
-<<<<<<< HEAD
 		Tab spriteCreation = new Tab("Sprite creation",new SpriteCreationScreen(myModelData));
 		Tab GeneralDataTab = new Tab(myResources.getString(GENERAL_DATA), myGeneralDataCreator);
 		Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), myScreenModelCreator);
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
-		myTabs.addAll(GeneralDataTab, ScreenSettingView);
-=======
-		//Tab classCreatorTab = new Tab(myResources.getString(CREATE_ATTRIBUTE_HOLDER), myAttributeHolderCreator);
-		Tab GeneralDataTab = new Tab(myResources.getString(GENERAL_DATA), myGeneralDataCreator);
-		Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), myScreenModelCreator);
-		ObservableList<Tab> myTabs = developerTabs.getTabs();
-		myTabs.addAll(//classCreatorTab, 
-				GeneralDataTab, ScreenSettingView);
->>>>>>> f53993ab8323f4c2ba96a0a9685f7b52677dff74
+		myTabs.addAll(spriteCreation,GeneralDataTab, ScreenSettingView);
 	}
 
 	private void instantiate() {
@@ -96,7 +82,7 @@ public class MasterDeveloperInterface {
 		}
 
 		private void instantiate() {
-			//Button spriteButton = new Button(myResources.getString(CREATE_NEW_SPRITE));
+			Button spriteButton = new Button(myResources.getString(CREATE_NEW_SPRITE));
 			Button screenButton = new Button(myResources.getString(CREATE_NEW_SCREEN));
 			Button attributeButton = new Button(myResources.getString(CREATE_NEW_ATTRIBUTE));
 			spriteButton.setOnAction((clicked) -> {
