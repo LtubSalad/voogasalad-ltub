@@ -74,10 +74,10 @@ public class ScreenObjectHolder extends HBox {
 //		});
 		SpriteMakerModel dummySprite = new SpriteMakerModel();
 		ImageSet iSet = new ImageSet();
-		LtubImage lImage = new LtubImage("images/characters/Grass.jpg");
-		iSet.setImage(lImage);
-		dummySprite.addComponent(new Images(iSet));
-		addObject(dummySprite);
+		//LtubImage lImage = new LtubImage("data/images/characters/Grass.jpg");
+		//iSet.setImage(lImage);
+		//dummySprite.addComponent(new Images(iSet));
+		//addObject(dummySprite);
 	}
 	/**
 	 * Add a created sprite to the screen object selector
@@ -86,8 +86,7 @@ public class ScreenObjectHolder extends HBox {
 	 *            the sprite to add to the HBox
 	 */
 	public void addObject(SpriteMakerModel screenObject) {
-		List<Component> screenObjectComponents = screenObject.getComponents();
-		for (Component c : screenObjectComponents) {
+		for (Component c : screenObject.getComponents().values()) {
 			ComponentType<?> type = c.getType();
 			if (type.equals(Images.TYPE)) {
 				Images imageComponent = (Images) c;

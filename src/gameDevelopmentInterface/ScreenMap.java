@@ -116,8 +116,8 @@ public class ScreenMap extends StackPane {
 		for (SpriteMakerModel sprite : onScreenOrNot.keySet()) {
 			if (onScreenOrNot.get(sprite) == false) {
 				onScreenOrNot.put(sprite, true);
-				List<Component> components = sprite.getComponents();
-				for (Component c : components) {
+				//List<Component> components = sprite.getComponents();
+				for (Component c : sprite.getComponents().values()) {
 					if (c.getType().equals(Images.TYPE)) {
 						Images imageComponent = (Images) c;
 						Image image = imageComponent.image().getFXImage();
