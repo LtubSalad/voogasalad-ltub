@@ -2,12 +2,16 @@ package data;
 
 
 public class EventHandleData {
-	private String myEventType = "Test";
+	private String myEventType;
 	private String myActionType;
-	//private Sprite sprite1;
+	//List<Something> myEventParams;
+	//List<Something> myActionParams;
 	
 	public EventHandleData() {
 
 	}	
 	
+	
+	
+
 }

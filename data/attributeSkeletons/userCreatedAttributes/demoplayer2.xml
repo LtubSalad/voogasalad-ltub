@@ -1,0 +1,46 @@
+<data.AttributeData>
+  <attributeType>Myplayer</attributeType>
+  <changeableName>false</changeableName>
+  <isConcrete>true</isConcrete>
+  <attributeScripts/>
+  <attributeVariables>
+    <entry>
+      <string>xPosition</string>
+      <string>420</string>
+    </entry>
+    <entry>
+      <string>yPosition</string>
+      <string>420</string>
+    </entry>
+  </attributeVariables>
+  <listVariables/>
+  <subAttributes>
+    <data.AttributeData>
+      <attributeType>NodeHolder</attributeType>
+      <changeableName>true</changeableName>
+      <isConcrete>false</isConcrete>
+      <attributeScripts/>
+      <attributeVariables>
+        <entry>
+          <string>filepath</string>
+          <string>Grass.jpg</string>
+        </entry>
+      </attributeVariables>
+      <subAttributes/>
+    </data.AttributeData>
+    <data.AttributeData>
+      <attributeType>Movable</attributeType>
+      <changeableName>true</changeableName>
+      <isConcrete>false</isConcrete>
+      <attributeScripts/>
+      <attributeVariables>
+        <entry>
+          <string>speed</string>
+          <string>20</string>
+        </entry>
+      </attributeVariables>
+      <subAttributes/>
+    </data.AttributeData>
+    <data.AttributeData reference="../data.AttributeData[2]"/>
+  </subAttributes>
+</data.AttributeData>

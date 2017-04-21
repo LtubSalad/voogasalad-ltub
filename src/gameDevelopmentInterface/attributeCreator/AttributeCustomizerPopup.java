@@ -1,7 +1,7 @@
 package gameDevelopmentInterface.attributeCreator;
 
 import data.AttributeData;
-import data.AttributesForScreenUse;
+import data.SpritesForScreenUse;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,14 +16,14 @@ public class AttributeCustomizerPopup extends Stage {
 	 * @param dataToAdd
 	 * @param targetData
 	 */
-	public AttributeCustomizerPopup(AttributesForScreenUse attributesModel, AttributeData dataToAdd, AttributeData targetData) {
+	public AttributeCustomizerPopup(SpritesForScreenUse attributesModel, AttributeData dataToAdd, AttributeData targetData) {
 		Group root = new Group();
 		VBox box=new VBox();
 		AttributeCustomizerPane customizer=new AttributeCustomizerPane(dataToAdd);
 		Button saveButton= new Button("Add Attribute");
 		saveButton.setOnAction((c)->{
 			targetData.addAttributeData(customizer.getAttribute());
-			attributesModel.addAttribute(customizer.getAttribute());
+			//attributesModel.addAttribute(customizer.getAttribute());
 		});
 		box.getChildren().addAll(customizer,saveButton);
 		root.getChildren().add(box);

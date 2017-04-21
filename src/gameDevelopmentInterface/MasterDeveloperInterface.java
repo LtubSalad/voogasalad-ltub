@@ -1,8 +1,7 @@
 package gameDevelopmentInterface;
 
 import java.util.ResourceBundle;
-import data.AttributesForScreenUse;
-import gameDevelopmentInterface.attributeCreator.AttributeHolderCreator;
+import data.SpritesForScreenUse;
 import gameDevelopmentInterface.attributeCreator.GroundUpAttributeCreator;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -34,10 +33,10 @@ public class MasterDeveloperInterface {
 	private Scene developerScene;
 	private BorderPane view;
 	private TabPane developerTabs;
-	private AttributesForScreenUse attributesModel = new AttributesForScreenUse();
-	private AttributeHolderCreator myAttributeHolderCreator = new AttributeHolderCreator(attributesModel);
+	private SpritesForScreenUse attributesModel = new SpritesForScreenUse();
+	//private AttributeHolderCreator myAttributeHolderCreator = new AttributeHolderCreator(attributesModel);
 	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
-	private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(attributesModel, myGeneralDataCreator);
+	//private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(attributesModel, myGeneralDataCreator);
 
 	public MasterDeveloperInterface() {
 		instantiate();
@@ -47,11 +46,12 @@ public class MasterDeveloperInterface {
 
 	private void instantiateTabs() {
 		developerTabs = new TabPane();
-		Tab classCreatorTab = new Tab(myResources.getString(CREATE_ATTRIBUTE_HOLDER), myAttributeHolderCreator);
+		//Tab classCreatorTab = new Tab(myResources.getString(CREATE_ATTRIBUTE_HOLDER), myAttributeHolderCreator);
 		Tab GeneralDataTab = new Tab(myResources.getString(GENERAL_DATA), myGeneralDataCreator);
-		Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), myScreenModelCreator);
+		//Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), myScreenModelCreator);
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
-		myTabs.addAll(classCreatorTab, GeneralDataTab, ScreenSettingView);
+		myTabs.addAll(//classCreatorTab, 
+				GeneralDataTab);//, //ScreenSettingView);
 	}
 
 	private void instantiate() {
@@ -79,24 +79,25 @@ public class MasterDeveloperInterface {
 		}
 
 		private void instantiate() {
-			Button spriteButton = new Button(myResources.getString(CREATE_NEW_SPRITE));
+			//Button spriteButton = new Button(myResources.getString(CREATE_NEW_SPRITE));
 			Button screenButton = new Button(myResources.getString(CREATE_NEW_SCREEN));
-			Button attributeButton = new Button(myResources.getString(CREATE_NEW_ATTRIBUTE));
-			spriteButton.setOnAction((clicked) -> {
-				Tab spriteTab = new Tab(myResources.getString(CREATE_NEW_SPRITE),
-						new AttributeHolderCreator(attributesModel));
-				developerTabs.getTabs().add(spriteTab);
-			});
-			screenButton.setOnAction((clicked) -> {
-				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
-						new ScreenModelCreator(attributesModel, myGeneralDataCreator));
-				developerTabs.getTabs().add(screenTab);
-			});
-			attributeButton.setOnAction((clicked) -> {
-				Tab attributeTab = new Tab(myResources.getString(CREATE_NEW_ATTRIBUTE), new GroundUpAttributeCreator());
-				developerTabs.getTabs().add(attributeTab);
-			});
-			this.getChildren().addAll(spriteButton, screenButton, attributeButton);
+			//Button attributeButton = new Button(myResources.getString(CREATE_NEW_ATTRIBUTE));
+//			spriteButton.setOnAction((clicked) -> {
+//				Tab spriteTab = new Tab(myResources.getString(CREATE_NEW_SPRITE),
+//						new AttributeHolderCreator(attributesModel));
+//				developerTabs.getTabs().add(spriteTab);
+//			});
+//			screenButton.setOnAction((clicked) -> {
+//				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
+//						new ScreenModelCreator(attributesModel, myGeneralDataCreator));
+//				developerTabs.getTabs().add(screenTab);
+//			});
+//			attributeButton.setOnAction((clicked) -> {
+//				Tab attributeTab = new Tab(myResources.getString(CREATE_NEW_ATTRIBUTE), new GroundUpAttributeCreator());
+//				developerTabs.getTabs().add(attributeTab);
+//			});
+			this.getChildren().addAll(//spriteButton, 
+					screenButton);//, attributeButton);
 		}
 	}
 }

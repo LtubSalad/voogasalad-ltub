@@ -1,18 +1,25 @@
 package gameDevelopmentInterface;
 
+import data.ScreenModelData;
+import data.SpritesForScreenUse;
 import javafx.scene.layout.BorderPane;
 
 public class TowerDefenseGUI extends BorderPane {
 	
 	public TowerDefenseGUI() {
-//		ScreenMap sm = new ScreenMap();
-//		ScreenObjectHolder soh = new ScreenObjectHolder();
-//		TowerDefenseControlPanel tdcp = new TowerDefenseControlPanel();
-//		GeneralGameDataBar ggdb = new GeneralGameDataBar();
-//		this.setTop(ggdb);
-//		this.setBottom(soh);
-//		this.setCenter(sm);
-//		this.setRight(tdcp);
+		SpritesForScreenUse spritesOnScreen = new SpritesForScreenUse(); //done
+		GeneralDataCreator gdc = new GeneralDataCreator();
+		ScreenModelCreator smc = new ScreenModelCreator(); //done
+		ScreenModelData smd = new ScreenModelData();
+		ScreenMap sm = smc.getScreen();
+		ScreenObjectHolder soh = new ScreenObjectHolder(smc, smd, spritesOnScreen);
+		TowerDefenseControlPanel tdcp = new TowerDefenseControlPanel(smc);
+		GeneralGameDataBar ggdb = new GeneralGameDataBar(gdc.getAllData());
+		this.setTop(ggdb);
+		this.setBottom(soh);
+		this.setCenter(sm);
+		this.setRight(tdcp);
 	}
+	
 
 }
