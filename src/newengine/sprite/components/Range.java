@@ -1,8 +1,8 @@
 package newengine.sprite.components;
 
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.events.range.InRangeEvent;
-import newengine.events.sprite.AttackEvent;
-import newengine.events.sprite.FireProjectileEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -14,7 +14,12 @@ public class Range extends Component {
 	private final double range;
 	// TODO: use pairs of (InRangeEvent type, rangeVar) to denote different kinds of range events.
 	
-	public Range(double range) {
+//	public Range(double range) {
+//		this.range = range;
+//	}
+	
+	@ConstructorForDeveloper
+	public Range(@VariableName(name = "range") double range) {
 		this.range = range;
 	}
 	
@@ -25,9 +30,8 @@ public class Range extends Component {
 	public void afterAdded() {
 		sprite.on(InRangeEvent.ANY, (e) -> {
 			for (Sprite detectee: e.getDetectees()) {
-				//System.out.println(sprite.getID() + " fires projectile at " + detectee.getID());
 				Target target = new Target(detectee);
-//				sprite.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, sprite, target));
+				// TODO
 			}
 		});
 	}

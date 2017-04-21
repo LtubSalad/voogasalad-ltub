@@ -1,25 +1,45 @@
 package newengine.sprite.components;
 
-import newengine.events.sprite.ChangeHealthEvent;
-import newengine.events.sprite.WeaponCollisionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import newengine.events.SpriteModelEvent;
+import newengine.events.collision.CollisionEvent;
+import newengine.events.sprite.MoveEvent;
+import newengine.player.Player;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-import newengine.utils.variable.Var;
+import newengine.utils.Target;
 
 public class DamageStrength extends Component {
 	
 	public static final ComponentType<DamageStrength> TYPE = new ComponentType<>(DamageStrength.class.getName());
-	private final Var<Integer> strengthVar = new Var<>();
+	private int strength;
 
 
-	public DamageStrength(int value){
-		strengthVar.set(value);
+	public DamageStrength(int strength){
+		this.strength = strength;
 	}
 	
 	@Override
 	public void afterAdded() {
-		
+		sprite.on(MoveEvent.STOP, (e) -> {
+			Player owner = sprite.getComponent(Owner.TYPE).get().player();			
+			Player anotherOwner = e.getTarget().getSprite().get().getComponent(Owner.TYPE).get().player();
+			if (owner != anotherOwner) {
+				sprite.getComponent(Position.TYPE).ifPresent((position) -> {
+					if (position.isMoving() == false) {
+						List<Sprite> spritesToRemove = new ArrayList<>();
+						spritesToRemove.add(sprite);
+						sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
+							gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spritesToRemove));
+						});		
+					}
+				});
+						
+			}
+		});
 	}
 	
 	@Override
@@ -28,7 +48,7 @@ public class DamageStrength extends Component {
 	}
 	
 	public int getStrength(){
-		return strengthVar.get();
+		return strength;
 	}
 
 	@Override

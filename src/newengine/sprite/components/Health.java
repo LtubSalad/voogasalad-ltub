@@ -3,23 +3,24 @@ package newengine.sprite.components;
 import java.util.ArrayList;
 import java.util.List;
 
-import commons.point.GamePoint;
 import newengine.events.SpriteModelEvent;
+import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.ChangeHealthEvent;
-import newengine.events.sprite.WeaponCollisionEvent;
+import newengine.events.sprite.MoveEvent;
+import newengine.player.Player;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-import newengine.utils.variable.Var;
+import newengine.utils.Target;
 
 public class Health extends Component {
 
 	public static final ComponentType<Health> TYPE = new ComponentType<>(Health.class.getName());
-	private final Var<Integer> healthVar = new Var<>();
+	private int health;
 
 
-	public Health(int initial){
-		healthVar.set(initial);
+	public Health(int health){
+		this.health = health;
 	}
 	
 	@Override
@@ -28,28 +29,48 @@ public class Health extends Component {
 	}
 	
 	public int getHealth(){
-		return healthVar.get();
+		return health;
 	}
 	
 	@Override
 	public void afterAdded(){
 		sprite.on(ChangeHealthEvent.ANY, e -> {
-			System.out.println("Current health: "+healthVar.get());
-			healthVar.set(healthVar.get() + e.getValue());
-			if (healthVar.get() <= 0) {
-				List<Sprite> remove = new ArrayList<Sprite>(); //TODO CHANGE THIS!!!!! ADD A METHOD FOR JUST ONE SPRITE
-				remove.add(sprite);
-				System.out.println("DEATH TO SPRITE " + sprite.getID());
-				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, remove));
-			}
+			changeHealth(e.getChange());
 		});
-		
+		sprite.on(MoveEvent.STOP, (e) -> {
+			Sprite another = e.getSprite();
+			Player owner = sprite.getComponent(Owner.TYPE).get().player();
+			another.getComponent(Owner.TYPE).ifPresent((anotherOwner) -> {
+					if (owner != anotherOwner.player()) {
+						another.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
+							int damage = damageStrength.getStrength();
+							sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, -damage));
+						});				
+					}
+				});	
+			// TODO check collision with other monster-type sprites
+		});	
 	}
 
+	private void changeHealth(int change) {
+		health += change;
+		System.out.println(health);
+		checkForDeath();
+	}
+	
+	private void checkForDeath() {
+		if (health <= 0) {
+			List<Sprite> spritesToRemove = new ArrayList<>();
+			spritesToRemove.add(sprite);
+			sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
+				gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spritesToRemove));
+			});
+		}
+	}
+	
 	@Override
 	public Component clone() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Health(health);
 	}
 
 }

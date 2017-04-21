@@ -3,6 +3,8 @@ package newengine.sprite.components;
 import bus.BusEvent;
 import commons.MathUtils;
 import commons.point.GamePoint;
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.MoveEvent;
@@ -25,9 +27,15 @@ public class Position extends Component {
 		this.heading = heading;
 	}
 	
+	@ConstructorForDeveloper
+	public Position(@VariableName(name = "xPosition") double xPos,
+			@VariableName(name = "yPosition") double yPos,@VariableName(name = "heading") double heading){
+		this(new GamePoint(xPos,yPos),heading);
+	}
+	
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.POSITION, (e) -> {
+		sprite.on(MoveEvent.START_POSITION, (e) -> {
 			moveTo(e.getTarget());
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
 				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
@@ -35,7 +43,7 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.SPRITE, (e) -> {
+		sprite.on(MoveEvent.START_SPRITE, (e) -> {
 			moveTo(e.getTarget());
 			followingSprite();
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
@@ -43,6 +51,9 @@ public class Position extends Component {
 					bus.getGameBus().emit(new SoundEvent(SoundEvent.SOUND_EFFECT, sound.getMoveSoundFile()));
 				});
 			});
+		});
+		sprite.on(MoveEvent.STOP,  (e) -> {
+			stopMoving();
 		});
 	}
 
@@ -60,16 +71,23 @@ public class Position extends Component {
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
 			stopMoving();
+			return;
 		}
 		double xDiff = xDest - x;
 		double yDiff = yDest - y;
 		double dist = pos.distFrom(pDest);
 		double speed = sprite.getComponent(Speed.TYPE).get().speed();
+
+		
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
-			stopMoving();
+			sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+			target.getSprite().ifPresent((targetSprite) -> {
+				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+			});
 			sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
+			return;
 		}
 		// not arrived at destination, move by time and speed.
 		double vx = 0;
@@ -83,6 +101,7 @@ public class Position extends Component {
 			vy = speed / dist * yDiff;
 		}
 		pos = new GamePoint(x + vx * dt, y + vy * dt);
+		return;
 	}
 	
 	@Override

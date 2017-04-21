@@ -4,13 +4,17 @@ import bus.BusEvent;
 import bus.BusEventType;
 import newengine.events.HasTriggeringSprite;
 import newengine.sprite.Sprite;
+import newengine.sprite.components.Owner;
 import newengine.utils.Target;
 
 public class MoveEvent extends BusEvent implements HasTriggeringSprite {
 	
-	public static final BusEventType<MoveEvent> POSITION = new BusEventType<>(MoveEvent.class.getName() + "SPECIFIC");
-	public static final BusEventType<MoveEvent> SPRITE = new BusEventType<>(
+	public static final BusEventType<MoveEvent> START_POSITION = new BusEventType<>(
+			MoveEvent.class.getName() + "SPECIFIC");
+	public static final BusEventType<MoveEvent> START_SPRITE = new BusEventType<>(
 			MoveEvent.class.getName() + "SPRITE");
+	public static final BusEventType<MoveEvent> STOP = new BusEventType<>(
+			MoveEvent.class.getName() + "STOP");
 	
 	private Sprite sprite;
 	private Target target;

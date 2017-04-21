@@ -1,10 +1,9 @@
 package gameDevelopmentInterface.attributeCreator;
 
-import java.io.File;
 import java.util.List;
 
 import data.AttributeData;
-import data.AttributesForScreenUse;
+import data.SpritesForScreenUse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -12,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.util.Callback;
 /**
  * 
@@ -23,9 +21,9 @@ import javafx.util.Callback;
 public class AttributeDisplay extends VBox{
 	private final double prefWidth=200;
 	private AttributeData targetData;
-	private AttributesForScreenUse myAttributesModel;
+	private SpritesForScreenUse myAttributesModel;
 	
-	public AttributeDisplay(AttributesForScreenUse attributesModel, String listTitle, List<AttributeData> displayedData, AttributeData targetData) {
+	public AttributeDisplay(SpritesForScreenUse attributesModel, String listTitle, List<AttributeData> displayedData, AttributeData targetData) {
 		this.targetData=targetData;
 		this.myAttributesModel = attributesModel;
 		ObservableList<AttributeData> observableAttributeNames = FXCollections.observableList(displayedData);
@@ -53,8 +51,6 @@ public class AttributeDisplay extends VBox{
 			}
 			Button attributeCustomizer = new Button(item.getName());
 			attributeCustomizer.setOnAction((c) -> {
-				FileChooser fc = new FileChooser();
-				fc.setInitialDirectory(new File(System.getProperty("user.dir")));
 				new AttributeCustomizerPopup(myAttributesModel, item,
 						targetData);
 			});

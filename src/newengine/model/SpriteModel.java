@@ -1,6 +1,7 @@
 package newengine.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,7 @@ public class SpriteModel {
 
 	private EventBus bus;
 	private List<Sprite> sprites = new ArrayList<>();
+	private List<Sprite> spritesToRemove = new ArrayList<>();
 	
 	public SpriteModel(EventBus bus) {
 		this.bus = bus;
@@ -72,18 +74,12 @@ public class SpriteModel {
 				for (SpriteTriggerRegisterEvent e : spriteTriggerRegisterEvents) {
 					sprite.on(e.getTriggerBusEventType(), e.getTriggerHandler());
 				}
-				bus.emit(new VarMapEvent(VarMapEvent.ADD, new VarKey("sprite"), new VarValue(sprite)));
 				sprite.emit(new SetGameBusEvent(bus));
 			}
 		}
 	}
 	private void removeSprite(List<Sprite> sprites) {
-		for (Sprite sprite: sprites) {
-			if (this.sprites.contains(sprite)) {
-				this.sprites.remove(sprite);
-				bus.emit(new VarMapEvent(VarMapEvent.REMOVE, new VarKey("sprite"), new VarValue(sprite)));
-			}
-		}
+		spritesToRemove = sprites;
 	}
 	
 	
@@ -102,6 +98,7 @@ public class SpriteModel {
 	}
 	
 	public void update(double dt) {
+		sprites.removeAll(spritesToRemove);
 		for (Sprite sprite : sprites) {
 			sprite.update(dt);
 		}

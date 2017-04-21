@@ -1,5 +1,8 @@
 package newengine.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
@@ -14,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
 import newengine.model.PlayerStatsModel;
@@ -30,8 +34,9 @@ import newengine.view.subview.SkillBox;
 
 public class View {
 	public static final int WIDTH = 600;
-	public static final int HEIGHT = 400;
+	public static final int HEIGHT = 500;
 	public static final int CANVAS_HEIGHT = 300;
+	public static final int STATS_HEIGHT = 100;
 	public static final Paint BACKGROUND = Color.BISQUE;
 
 	private EventBus bus;
@@ -40,6 +45,7 @@ public class View {
 	private Canvas gameWorldCanvas;
 	private GraphicsContext gc;
 	private HBox bottomPane;
+	private HBox statsPanel;
 	private GraphicsContext gcSelected;
 	private SkillBox skillBox;
 	
@@ -51,11 +57,12 @@ public class View {
 		this.camera = camera;
 		VBox root = new VBox();
 		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
+		statsPanel = new HBox();
 		gameWorldCanvas = new Canvas(WIDTH, CANVAS_HEIGHT);
 		bottomPane = new HBox();
-		root.getChildren().addAll(gameWorldCanvas, bottomPane);
+		root.getChildren().addAll(statsPanel, gameWorldCanvas, bottomPane);
 		// selected sprite
-		Canvas selectionCanvas = new Canvas(WIDTH / 2, HEIGHT - CANVAS_HEIGHT);
+		Canvas selectionCanvas = new Canvas(WIDTH / 2, HEIGHT - CANVAS_HEIGHT - STATS_HEIGHT);
 		bottomPane.getChildren().add(selectionCanvas);
 		gc = gameWorldCanvas.getGraphicsContext2D();
 		gcSelected = selectionCanvas.getGraphicsContext2D();
@@ -117,9 +124,28 @@ public class View {
 	}
 	
 	public void render(PlayerStatsModel playerStatsModel) {
-		// TODO
+		this.statsPanel.getChildren().clear();
+		statsPanel.setSpacing(10);
+		statsPanel.maxHeight(100);
+		createText(playerStatsModel).stream().forEach(e -> statsPanel.getChildren().add(e));
+		
+		//TODO if done with testing playerstatsmodel, delete
+		//bus.emit(new ChangeLivesEvent(ChangeLivesEvent.CHANGE,Player.MAIN_PLAYER, -1));
+		//bus.emit(new ChangeScoreEvent(ChangeScoreEvent.CHANGE, Player.MAIN_PLAYER, 1));
+		//bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE,Player.MAIN_PLAYER,"gold", 1));
 	}
 	
+	private List<Text> createText(PlayerStatsModel playerStatsModel) {
+		List<Text> statsLabels = new ArrayList<Text>();
+		for(String wealthName : playerStatsModel.getWealth().keySet()){
+			statsLabels.add(new Text(wealthName + ":" + playerStatsModel.getWealth().get(wealthName)));
+		}
+		//TODO map to resource file
+		statsLabels.add(new Text("Lives:" + playerStatsModel.getLives()));
+		statsLabels.add(new Text("Score:" + playerStatsModel.getScore()));
+		return statsLabels;
+	}
+
 	public void render(SelectionModel selectionModel) {
 		// render the selected sprite and its skill box
 		if (selectionModel.getSelectedSprite().isPresent()) {
@@ -134,6 +160,10 @@ public class View {
 			else {
 				skillBox.clear();
 			}
+		}
+		else {
+			gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+			skillBox.clear();
 		}
 		// render the selected skill
 		if (selectionModel.getSelectedSkill().isPresent()) {

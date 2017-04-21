@@ -9,23 +9,24 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import data.AttributeData;
+import data.SpriteMakerModel;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class XStreamHandler {
 	//TODO: Remove duplicate code using generics
 	
-	public AttributeData getAttributeFromFile() {
+	public SpriteMakerModel getAttributeFromFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
 		File attributeFile = chooser.showOpenDialog(new Stage());
-		AttributeData attribute = (AttributeData)xstream.fromXML(attributeFile);
+		SpriteMakerModel attribute = (SpriteMakerModel)xstream.fromXML(attributeFile);
 		return attribute;
 	}
 	
-	public AttributeData getAttributeFromFile(File file) {
+	public SpriteMakerModel getAttributeFromFile(File file) {
 		XStream xstream = new XStream(new DomDriver());
-		AttributeData attribute = (AttributeData)xstream.fromXML(file);
+		SpriteMakerModel attribute = (SpriteMakerModel)xstream.fromXML(file);
 		return attribute;
 	}
 	
@@ -35,17 +36,17 @@ public class XStreamHandler {
 		return object;
 	}
 	
-	public List<AttributeData> getScreenModelFile() {
+	public List<SpriteMakerModel> getScreenModelFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
 		File attributeFile = chooser.showOpenDialog(new Stage());
-		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(attributeFile);
+		List<SpriteMakerModel> attribute = (List<SpriteMakerModel>)xstream.fromXML(attributeFile);
 		return attribute;
 	}
 	
-	public List<AttributeData> getScreenModel(File file) {
+	public List<SpriteMakerModel> getScreenModel(File file) {
 		XStream xstream = new XStream(new DomDriver());
-		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(file);
+		List<SpriteMakerModel> attribute = (List<SpriteMakerModel>)xstream.fromXML(file);
 		return attribute;
 	}
 

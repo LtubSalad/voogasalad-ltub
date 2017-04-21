@@ -20,10 +20,10 @@ public class MoveSkill extends Skill{
 		Sprite source = this.getSource().get();
 		Target target = this.getTarget().get();
 		if (target.getSprite().isPresent()) {
-			source.emit(new MoveEvent(MoveEvent.SPRITE, source, target));
+			source.emit(new MoveEvent(MoveEvent.START_SPRITE, source, target));
 		}
 		else {
-			source.emit(new MoveEvent(MoveEvent.POSITION, source, target));
+			source.emit(new MoveEvent(MoveEvent.START_POSITION, source, target));
 		}	
 	}
 	

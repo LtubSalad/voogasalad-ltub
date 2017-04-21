@@ -12,9 +12,13 @@ import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
 import newengine.events.QueueEvent;
 import newengine.events.SpriteModelEvent;
-import newengine.events.debug.SysPrintEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.stats.ChangeLivesEvent;
+import newengine.events.stats.ChangeWealthEvent;
+import newengine.managers.conditions.GoldMinimumCondition;
+import newengine.managers.conditions.NoLivesCondition;
+import newengine.managers.conditions.SetEndConditionEvent;
 import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
@@ -38,10 +42,6 @@ import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
 import newengine.trigger.Trigger;
-import newengine.trigger.TriggerAction;
-import newengine.trigger.TriggerEvent;
-import newengine.trigger.TriggerAction.TriggerActionType;
-import newengine.trigger.TriggerEvent.TriggerEventType;
 import newengine.utils.Target;
 import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
@@ -52,7 +52,6 @@ public class App extends Application {
 	public void start(Stage stage) throws Exception {
 		
 		Game game = new Game();
-
 		Player player1 = new Player("Player 1");
 		Player player2 = new Player("Player 2");
 		
@@ -62,6 +61,8 @@ public class App extends Application {
 		ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
 		building.addComponent(new Images(imageSetBuildSkill));
 		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		
+		EventBus bus = game.getBus();
 		
 		// sprite 1
 		Sprite sprite1 = new Sprite();
@@ -80,7 +81,6 @@ public class App extends Application {
 		sprite1.addComponent(new Speed(200));
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
-
 		sprite1.addComponent(new Range(128));
 		sprite1.addComponent(new Attacker());
 		sprite1.addComponent(new Health(200));
@@ -105,19 +105,19 @@ public class App extends Application {
 		sprite2.addComponent(new EventQueue());
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(60));
-
-		
-
 		
 		List<Sprite> spritesToAdd = new ArrayList<>();
 		spritesToAdd.add(sprite1);
 		spritesToAdd.add(sprite2);
 		
-		EventBus bus = game.getBus();
+		
 		bus.on(GameInitializationEvent.ANY, (e) -> {
 			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
-			// TODO add other map elements to the game (like stats, buttons)
+			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, Player.MAIN_PLAYER, 3));
+			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, "gold", 100));
+			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
+			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 		});
 		
 		// Triggers
@@ -130,15 +130,15 @@ public class App extends Application {
 		stage.show();
 		
 		// TODO add method to generate path
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(300,100)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(250,200)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(100,150)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(500,300)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.POSITION, sprite1, 
+		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(400,200)))));
 	}
 	

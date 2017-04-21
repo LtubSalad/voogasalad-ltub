@@ -1,9 +1,11 @@
 package gameDevelopmentInterface;
 
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 import data.AttributeData;
+import data.SpriteMakerModel;
 import commons.point.GamePoint;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Bounds;
@@ -16,6 +18,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
+import newengine.sprite.component.Component;
+import newengine.sprite.components.Images;
+import newengine.sprite.components.Position;
 
 /**
  * This class will hold the grid on which players can place sprites or tiles to set up their
@@ -40,7 +45,7 @@ public class ScreenMap extends StackPane {
 	
 	public ScreenMap(ScreenModelCreator smc) {
 		mySMC = smc;
-		mySMC.getScreenData().getAllObjectsOnScreen().addListener(new ListChangeListener<AttributeData>() {
+		mySMC.getScreenData().getAllObjectsOnScreen().addListener(new ListChangeListener<SpriteMakerModel>() {
 			@Override
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
 				redrawGrid();
@@ -100,19 +105,33 @@ public class ScreenMap extends StackPane {
 		return new GamePoint(colNum, rowNum);
 	}
 	
+	public GamePoint getActualLocationOfSprite(GamePoint gp) {
+		double actualX = (gp.x()*(getGrid().getWidth()/NUM_COLS)) + ((getGrid().getWidth()/NUM_COLS)/2);
+		double actualY = (gp.y()*(getGrid().getHeight()/NUM_ROWS)) + ((getGrid().getHeight()/NUM_ROWS)/2);
+		return new GamePoint(actualX, actualY);
+	}
+	
 	private void redrawGrid() {
-		Map<AttributeData,Boolean> onScreenOrNot = mySMC.getScreenData().getIfOnScreen();
-		for (AttributeData attr : onScreenOrNot.keySet()) {
-			if (onScreenOrNot.get(attr) == false) {
-				onScreenOrNot.put(attr, true);
-				if (attr.hasVariable(myResources.getString(IMAGE_HOLDER))) {
-					Integer xPos = Integer.parseInt(attr.getVariable(myResources.getString(X_POSITION)));
-					Integer yPos = Integer.parseInt(attr.getVariable(myResources.getString(Y_POSITION)));
-					String imageName = attr.getVariable(myResources.getString(IMAGE_HOLDER));
-					Image image = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString(PATH_TO_IMAGE_FILES) + imageName),
-							SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, false, false);
-					ImageView imageView = new ImageView(image);
-					myGrid.add(imageView, xPos, yPos);
+		Map<SpriteMakerModel, Boolean> onScreenOrNot = mySMC.getScreenData().getIfOnScreen();
+		for (SpriteMakerModel sprite : onScreenOrNot.keySet()) {
+			if (onScreenOrNot.get(sprite) == false) {
+				onScreenOrNot.put(sprite, true);
+				List<Component> components = sprite.getComponents();
+				for (Component c : components) {
+					if (c.getType().equals(Images.TYPE)) {
+						Images imageComponent = (Images) c;
+						Image image = imageComponent.image().getFXImage();
+						ImageView imageView = new ImageView(image);
+						Component possiblePosition = sprite.getComponentByType(Position.TYPE);
+						if (possiblePosition != null) {
+							Position pos = (Position) possiblePosition;
+							GamePoint screenPoint = pos.pos();
+							GamePoint gridPoint = getCoordOfMouseHover(screenPoint.x(), screenPoint.y());
+							Integer xPos = (int) gridPoint.x();
+							Integer yPos = (int) gridPoint.y();
+							myGrid.add(imageView, xPos, yPos);
+						}
+					}
 				}
 			}			
 		}
