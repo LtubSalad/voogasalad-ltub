@@ -5,6 +5,10 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 import data.DeveloperData;
 import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
@@ -61,7 +65,7 @@ public class SpriteCreationScreen extends BorderPane{
 	}
 
 	private class BottomPanel extends HBox{
-		XStreamHandler dataHandler;
+		XStreamHandler dataHandler=new XStreamHandler();
 		private BottomPanel(){
 			Button saveButton= new Button("Save SpriteMakerModel to File");
 			saveButton.setOnMouseClicked((click)->{
@@ -70,6 +74,16 @@ public class SpriteCreationScreen extends BorderPane{
 			Button listSaveButton=new Button("Save SpriteMakerModel to THIS GAME's list of SpritemakerModels");
 			listSaveButton.setOnMouseClicked((click)->{
 				model.addSprite(infoPane.getSpriteData());
+				infoPane.getSpriteData().getScriptMap().forEach((event,script)->{
+					ScriptEngine engine = new ScriptEngineManager().getEngineByName("groovy");
+					try {
+						engine.eval(script);
+					} catch (ScriptException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				});
 				System.out.println("trying to add...");
 				
 			});

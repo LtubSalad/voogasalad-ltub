@@ -74,10 +74,10 @@ public class ScreenObjectHolder extends HBox {
 //		});
 		SpriteMakerModel dummySprite = new SpriteMakerModel();
 		ImageSet iSet = new ImageSet();
-		LtubImage lImage = new LtubImage("images/characters/Grass.jpg");
-		iSet.setImage(lImage);
-		dummySprite.addComponent(new Images(iSet));
-		addObject(dummySprite);
+		//LtubImage lImage = new LtubImage("data/images/characters/Grass.jpg");
+		//iSet.setImage(lImage);
+		//dummySprite.addComponent(new Images(iSet));
+		//addObject(dummySprite);
 	}
 	/**
 	 * Add a created sprite to the screen object selector
