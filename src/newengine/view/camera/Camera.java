@@ -20,7 +20,7 @@ public class Camera {
 	public Camera(EventBus bus){
 		this.bus = bus;
 		gameP = new GamePoint(0,0);
-		viewP = new ViewPoint(0,0);
+		viewP = new ViewPoint(100,100);
 	}
 	
 	public Camera(EventBus bus, GamePoint gamePoint, ViewPoint viewPoint) {
@@ -63,5 +63,6 @@ public class Camera {
 	 */
 	//TODO : Zoom around the selection area by the mouse
 	public void zoom(ViewPoint viewPoint, double ratioToZoom){
+		
 	}
 }
