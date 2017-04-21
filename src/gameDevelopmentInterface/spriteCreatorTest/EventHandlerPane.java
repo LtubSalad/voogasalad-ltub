@@ -24,5 +24,4 @@ public class EventHandlerPane extends VBox {
 	public Map<BusEvent, String> getAddedEventHandlers() {
 		return null;
 	}
-
 }

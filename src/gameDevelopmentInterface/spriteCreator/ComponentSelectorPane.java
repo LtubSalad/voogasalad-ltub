@@ -1,9 +1,5 @@
 package gameDevelopmentInterface.spriteCreator;
 
-import java.util.List;
-
-import data.SpriteMakerModel;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,7 +7,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 
 public class ComponentSelectorPane extends VBox{

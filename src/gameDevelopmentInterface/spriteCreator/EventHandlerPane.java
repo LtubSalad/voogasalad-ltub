@@ -15,13 +15,10 @@ public class EventHandlerPane extends VBox{
 		/**
 		 * add a new gui component within the vbox
 		 * with a scripting interface
-		 */
-		
+		 */		
 	}
-
 	
 	public Map<BusEvent,String> getHandlers(){
 		return null;
 	}
-
 }
