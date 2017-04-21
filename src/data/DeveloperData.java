@@ -36,6 +36,7 @@ public class DeveloperData {
 	
 	public void addSprite(SpriteMakerModel sprite){
 		sprites.add(sprite);
+		System.out.println("reached end");
 	}
 	
 	public void addPath(Path path){

@@ -70,6 +70,7 @@ public class SpriteCreationScreen extends BorderPane{
 			Button listSaveButton=new Button("Save SpriteMakerModel to THIS GAME's list of SpritemakerModels");
 			listSaveButton.setOnMouseClicked((click)->{
 				model.addSprite(infoPane.getSpriteData());
+				System.out.println("trying to add...");
 				
 			});
 			this.getChildren().addAll(saveButton,listSaveButton);
