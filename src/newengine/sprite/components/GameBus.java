@@ -7,7 +7,7 @@ import newengine.sprite.component.ComponentType;
 
 public class GameBus extends Component {
 
-	public static ComponentType<GameBus> TYPE = new ComponentType<>(GameBus.class.getName());
+	public final static ComponentType<GameBus> TYPE = new ComponentType<>(GameBus.class.getName());
 	
 	private EventBus gameBus;
 	
@@ -30,4 +30,8 @@ public class GameBus extends Component {
 		return TYPE;
 	}
 
+	@Override
+	public GameBus clone() {
+		return new GameBus();
+	}
 }

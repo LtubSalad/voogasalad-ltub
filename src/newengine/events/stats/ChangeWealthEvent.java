@@ -2,7 +2,7 @@ package newengine.events.stats;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import newengine.sprite.player.Player;
+import newengine.player.Player;
 
 public class ChangeWealthEvent extends ChangeStatsEvent {
 	public static final BusEventType<ChangeWealthEvent> CHANGE = new BusEventType<>(ChangeWealthEvent.class.getName() + "CHANGE");

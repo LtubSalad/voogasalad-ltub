@@ -3,6 +3,7 @@ package newengine.model;
 import java.util.Optional;
 
 import bus.EventBus;
+import newengine.events.SpriteModelEvent;
 import newengine.events.selection.SelectSkillEvent;
 import newengine.events.selection.SelectSpriteEvent;
 import newengine.skill.Skill;
@@ -12,8 +13,8 @@ import newengine.utils.variable.Var;
 public class SelectionModel {
 
 	private EventBus bus;
-	private final Var<Sprite> selectedSpriteVar = new Var<>();
-	private final Var<Skill> selectedSkillVar = new Var<>();
+	private Sprite selectedSprite;
+	private Skill selectedSkill;
 	
 	public SelectionModel(EventBus bus) {
 		this.bus = bus;
@@ -28,25 +29,33 @@ public class SelectionModel {
 			selectSkill(e.getSkill());
 		});
 		bus.on(SelectSkillEvent.CANCEL, (e) -> {
-			cancelSkill(e.getSkill());
+			cancelSkill();
+		});
+		bus.on(SpriteModelEvent.REMOVE, (e) -> {
+			if (e.getSprites().contains(selectedSprite)) {
+				removeSprite();				
+			}
 		});
 	}
 	
 	private void selectSprite(Sprite sprite) {
-		selectedSpriteVar.set(sprite);
+		selectedSprite = sprite;
+	}
+	private void removeSprite() {
+		selectedSprite = null;
 	}
 	private void selectSkill(Skill skill) {
-		selectedSkillVar.set(skill);
+		selectedSkill = skill;
 	}
-	private void cancelSkill(Skill skill) {
-		selectedSkillVar.set(null);
+	private void cancelSkill() {
+		selectedSkill = null;
 	}
 	
 	public Optional<Sprite> getSelectedSprite() {
-		return Optional.ofNullable(selectedSpriteVar.get());
+		return Optional.ofNullable(selectedSprite);
 	}
 	public Optional<Skill> getSelectedSkill() {
-		return Optional.ofNullable(selectedSkillVar.get());
+		return Optional.ofNullable(selectedSkill);
 	}
 	
 	

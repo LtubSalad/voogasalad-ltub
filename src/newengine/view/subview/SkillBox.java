@@ -1,5 +1,6 @@
 package newengine.view.subview;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bus.EventBus;
@@ -13,11 +14,16 @@ public class SkillBox {
 
 	private EventBus bus;
 	private HBox box;
-	private List<Skill> oldSkills;
+	private List<Skill> oldSkills = new ArrayList<>();
 		
 	public SkillBox(EventBus bus) { 
 		this.bus = bus;
 		box = new HBox();
+	}
+	
+	public void clear() {
+		oldSkills.clear();
+		box.getChildren().clear();
 	}
 	
 	public void render(List<Skill> newSkills) {

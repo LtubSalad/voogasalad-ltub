@@ -2,7 +2,7 @@ package newengine.events.stats;
 
 import bus.BusEvent;
 import bus.BusEventType;
-import newengine.sprite.player.Player;
+import newengine.player.Player;
 
 public class ChangeStatsEvent extends BusEvent{
 	private String playerName;

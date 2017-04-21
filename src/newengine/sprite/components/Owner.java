@@ -2,18 +2,17 @@ package newengine.sprite.components;
 
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
+import newengine.player.Player;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-import newengine.sprite.player.Player;
-import newengine.utils.variable.Var;
 
 public class Owner extends Component {
 
 	public static final ComponentType<Owner> TYPE = new ComponentType<>(Owner.class.getName());
-	private final Var<Player> ownerVar = new Var<>();
+	private Player owner;
 	
 	public Owner(Player player) {
-		ownerVar.set(player);
+		this.owner = player;
 	}
 	
 	@ConstructorForDeveloper
@@ -22,7 +21,7 @@ public class Owner extends Component {
 	}
 	
 	public Player player() {
-		return ownerVar.get();
+		return owner;
 	}
 	
 	@Override
@@ -30,5 +29,9 @@ public class Owner extends Component {
 		return TYPE;
 	}
 
+	@Override
+	public Owner clone() {
+		return new Owner(owner);
+	}
 	
 }
