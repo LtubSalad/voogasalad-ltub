@@ -14,10 +14,10 @@ import newengine.managers.input.InputManager;
 import newengine.managers.range.RangeManager;
 import newengine.managers.sound.SoundManager;
 import newengine.model.Models;
+import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
-import newengine.player.Player;
 import newengine.trigger.Trigger;
 import newengine.trigger.TriggerManager;
 import newengine.view.View;
@@ -32,9 +32,10 @@ public class Game {
 	 
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
-		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, Player.MAIN_PLAYER); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
+		PlayerRelationModel playerRelationModel = new PlayerRelationModel(bus);
 		SelectionModel selectionModel = new SelectionModel(bus);
-		Models models = new Models(spriteModel, playerStatsModel, selectionModel);
+		Models models = new Models(spriteModel, playerStatsModel, playerRelationModel, selectionModel);
 		
 		Camera camera = new Camera(bus);
 		view = new View(bus, camera);
@@ -55,8 +56,8 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
 		gameLoop.addLoopComponent((dt) -> view.render(spriteModel));
-		gameLoop.addLoopComponent((dt) -> view.render(playerStatsModel));
-		gameLoop.addLoopComponent((dt) -> view.render(selectionModel));
+		gameLoop.addLoopComponent((dt) -> view.render(playerStatsModel, playerRelationModel, selectionModel));
+		gameLoop.addLoopComponent((dt) -> view.render(selectionModel, playerRelationModel));
 		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 	}
 	

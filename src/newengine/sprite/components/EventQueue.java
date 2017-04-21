@@ -15,8 +15,8 @@ public class EventQueue extends Component {
 	private boolean eventFinished = true;
 	
 	@ConstructorForDeveloper
-	public EventQueue() {
-		
+	public EventQueue(LinkedList<BusEvent> events) {
+		this.events = events;
 	}
 	
 	@Override
@@ -63,6 +63,6 @@ public class EventQueue extends Component {
 	
 	@Override
 	public EventQueue clone() {
-		return new EventQueue();
+		return new EventQueue(this.events);
 	}
 }

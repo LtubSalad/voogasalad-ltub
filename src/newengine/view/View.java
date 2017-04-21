@@ -20,12 +20,16 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
+import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
+import newengine.model.PlayerStatsModel.WealthType;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
+import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Images;
+import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.SkillSet;
 import newengine.utils.image.LtubImage;
@@ -123,47 +127,55 @@ public class View {
 
 	}
 	
-	public void render(PlayerStatsModel playerStatsModel) {
+	public void render(PlayerStatsModel playerStatsModel, 
+			PlayerRelationModel playerRelationModel, SelectionModel selectionModel) {
 		this.statsPanel.getChildren().clear();
 		statsPanel.setSpacing(10);
 		statsPanel.maxHeight(100);
-		createText(playerStatsModel).stream().forEach(e -> statsPanel.getChildren().add(e));
-		
-		//TODO if done with testing playerstatsmodel, delete
-		//bus.emit(new ChangeLivesEvent(ChangeLivesEvent.CHANGE,Player.MAIN_PLAYER, -1));
-		//bus.emit(new ChangeScoreEvent(ChangeScoreEvent.CHANGE, Player.MAIN_PLAYER, 1));
-		//bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE,Player.MAIN_PLAYER,"gold", 1));
+		selectionModel.getSelectedSprite().ifPresent((sprite) -> {
+			sprite.getComponent(Owner.TYPE).ifPresent((owner) -> {
+				Player player = owner.player();
+				Player mainPlayer = playerRelationModel.getMainPlayer();
+				if (player == mainPlayer) {
+					createText(playerStatsModel, player).stream().forEach(e -> statsPanel.getChildren().add(e));
+				}
+			});			
+		});
 	}
 	
-	private List<Text> createText(PlayerStatsModel playerStatsModel) {
+	private List<Text> createText(PlayerStatsModel playerStatsModel, Player player) {
 		List<Text> statsLabels = new ArrayList<Text>();
-		for(String wealthName : playerStatsModel.getWealth().keySet()){
-			statsLabels.add(new Text(wealthName + ":" + playerStatsModel.getWealth().get(wealthName)));
-		}
+		playerStatsModel.getWealth(player).ifPresent((wealthMap) -> {
+			for (WealthType type: wealthMap.keySet()) {
+				statsLabels.add(new Text(type + ":" + wealthMap.get(type)));
+			}
+		});
 		//TODO map to resource file
-		statsLabels.add(new Text("Lives:" + playerStatsModel.getLives()));
-		statsLabels.add(new Text("Score:" + playerStatsModel.getScore()));
+		playerStatsModel.getLives(player).ifPresent((life) -> {
+			statsLabels.add(new Text("Lives:" + life));
+		});
+		playerStatsModel.getScore(player).ifPresent((score) -> {
+			statsLabels.add(new Text("Scores:" + score));
+		});
 		return statsLabels;
 	}
 
-	public void render(SelectionModel selectionModel) {
+	public void render(SelectionModel selectionModel, PlayerRelationModel playerRelationModel) {
 		// render the selected sprite and its skill box
+		gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+		skillBox.clear();
 		if (selectionModel.getSelectedSprite().isPresent()) {
 			Sprite sprite = selectionModel.getSelectedSprite().get();
+			Player player = sprite.getComponent(Owner.TYPE).get().player();
+			Player mainPlayer = playerRelationModel.getMainPlayer();
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
-				gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
 			}
-			if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
-				skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
+			if (player == mainPlayer) {				
+				if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
+					skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
+				}
 			}
-			else {
-				skillBox.clear();
-			}
-		}
-		else {
-			gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
-			skillBox.clear();
 		}
 		// render the selected skill
 		if (selectionModel.getSelectedSkill().isPresent()) {

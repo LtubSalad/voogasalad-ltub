@@ -2,79 +2,79 @@ package newengine.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import bus.EventBus;
-import newengine.events.stats.ChangeWealthEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeScoreEvent;
-import newengine.utils.variable.Var;
+import newengine.events.stats.ChangeWealthEvent;
+import newengine.player.Player;
 
 public class PlayerStatsModel {
+	
+	public enum WealthType {
+		GOLD
+	}
 
 	private EventBus bus;
-	private String name;
-	private final Var<Map<String, Integer>> wealthVar = new Var<>();
-	private final Var<Integer> livesVar = new Var<>();
-	private final Var<Integer> scoreVar = new Var<>();
+	private Map<Player, Map<WealthType, Integer>> wealth = new HashMap<>();
+	private Map<Player, Integer> lives = new HashMap<>();
+	private Map<Player, Integer> scores = new HashMap<>();
 	
-	public PlayerStatsModel(EventBus bus, String name) {
+	public PlayerStatsModel(EventBus bus) {
 		this.bus = bus;
-		this.name = name;
-		
-		//Initial setting
-		wealthVar.set(new HashMap<String, Integer>());
-		livesVar.set(0);
-		scoreVar.set(0);
 		initHandlers();
 	}
 	
 	private void initHandlers() {
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
-			if(name.equals(e.getPlayerName())){
-				String wealthType = e.getWealthType();
-				if(wealthVar.get().containsKey(wealthType)){
-					wealthVar.get().put(wealthType, wealthVar.get().get(wealthType) + e.getAmountChanged());}
-				else{
-					wealthVar.get().put(wealthType, e.getAmountChanged());
+			Player player = e.getPlayer();
+			WealthType type = e.getWealthType();
+			if (wealth.containsKey(player)) {
+				Map<WealthType, Integer> wealths = wealth.get(player);
+				if (wealths.containsKey(type)) {
+					wealths.put(type, wealths.get(type) + e.getAmountChanged());
 				}
+				else {
+					wealths.put(type, e.getAmountChanged());
+				}
+			}
+			else {
+				Map<WealthType, Integer> wealths = new HashMap<>();
+				wealths.put(e.getWealthType(), e.getAmountChanged());
+				wealth.put(e.getPlayer(), wealths);
 			}
 		});
 		bus.on(ChangeLivesEvent.CHANGE, (e) ->{
-			if(name.equals(e.getPlayerName()))
-				updateVar(livesVar, livesVar.get(), e.getAmountChanged());
+			Player player = e.getPlayer();
+			if (lives.containsKey(player)) {
+				lives.put(player, lives.get(player) + e.getAmountChanged());
+			}
 		});
 		bus.on(ChangeLivesEvent.SET, (e) ->{
-			if(name.equals(e.getPlayerName()))
-				updateVar(livesVar, 0, e.getAmountChanged());
+			Player player = e.getPlayer();
+			lives.put(player, e.getAmountChanged()); // TODO if this is an appropriate way
 		});
 		bus.on(ChangeScoreEvent.CHANGE, (e) ->{
-			if(name.equals(e.getPlayerName()))
-				updateVar(scoreVar, scoreVar.get(), e.getAmountChanged());
+			Player player = e.getPlayer();
+			if (scores.containsKey(player)) {
+				scores.put(player, scores.get(player) + e.getAmountChanged());
+			}
 		});
 		bus.on(ChangeScoreEvent.SET, (e) ->{
-			if(name.equals(e.getPlayerName()))
-				updateVar(scoreVar, 0, e.getAmountChanged());
+			Player player = e.getPlayer();
+			scores.put(player, e.getAmountChanged());  // TODO
 		});
 	}
-	
-	private void updateVar(Var<Integer> var, int initial, int change){
-		var.set(initial + change);
-	}
 
-	public int getWealthValue(String wealthType) {
-		return wealthVar.get().get(wealthType);
+	public Optional<Map<WealthType, Integer>> getWealth(Player player){
+		return Optional.ofNullable(wealth.get(player));
 	}
-	public Map<String, Integer> getWealth(){
-		return wealthVar.get();
+	public Optional<Integer> getLives(Player player) {
+		return Optional.ofNullable(lives.get(player));
 	}
-	public int getLives() {
-		return livesVar.get();
-	}
-	public int getScore(){
-		return scoreVar.get();
-	}
-	public String getName(){
-		return name;
+	public Optional<Integer> getScore(Player player){
+		return Optional.ofNullable(scores.get(player));
 	}
 
 }

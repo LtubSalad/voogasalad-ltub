@@ -21,7 +21,17 @@ public class Player {
 		return name;
 	}
 	
+	/**
+	 * Test if this sprite can control the other player
+	 * @param other
+	 * @return
+	 */
 	public boolean canControl(Player other) {
-		return true;
+		return other == this;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 }

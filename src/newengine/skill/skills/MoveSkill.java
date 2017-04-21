@@ -17,14 +17,16 @@ public class MoveSkill extends Skill{
 	
 	@Override
 	public void trigger() {
-		Sprite source = this.getSource().get();
-		Target target = this.getTarget().get();
-		if (target.getSprite().isPresent()) {
-			source.emit(new MoveEvent(MoveEvent.START_SPRITE, source, target));
+		if (canControl()) {
+			Sprite source = this.getSource().get();
+			Target target = this.getTarget().get();
+			if (target.getSprite().isPresent()) {
+				source.emit(new MoveEvent(MoveEvent.START_SPRITE, source, target));
+			}
+			else {
+				source.emit(new MoveEvent(MoveEvent.START_POSITION, source, target));
+			}	
 		}
-		else {
-			source.emit(new MoveEvent(MoveEvent.START_POSITION, source, target));
-		}	
 	}
 	
 	@Override

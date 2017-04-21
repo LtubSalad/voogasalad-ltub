@@ -17,15 +17,13 @@ public class FireProjectileSkill extends Skill {
 
 	@Override
 	public void trigger() {
-		Sprite source = this.getSource().get();
-		Target target = this.getTarget().get();
-		target.getSprite().ifPresent((targetSprite) -> {
-			source.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, source, targetSprite));
-		});
-//		if (target.getSprite().isPresent()){
-//			System.out.println("shoot at this thing " + target.getSprite().get().getID());
-//			source.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, source, target));//this is handled in the sprite spawner component
-//		}
+		if (canControl()) {
+			Sprite source = this.getSource().get();
+			Target target = this.getTarget().get();
+			target.getSprite().ifPresent((targetSprite) -> {
+				source.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, source, targetSprite));
+			});
+		}
 	}
 
 	@Override
