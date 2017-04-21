@@ -46,6 +46,7 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Images.class);
 		ComponentSelectorPane selector=new ComponentSelectorPane("Add components with simple parameters", observableComponents,infoPane);
 		this.setRight(selector);
+		this.setLeft(new EventHandlerPane(spriteData));
 		this.setCenter(infoPane);
 		this.setTop(new Label("NEW SPRITE"));
 		this.setBottom(new BottomPanel());
