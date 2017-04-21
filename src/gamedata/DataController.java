@@ -15,17 +15,23 @@ public class DataController {
 	
 	BasicEventBus bus; 
 	
+	Game game; 
+	
 	public DataController(){
 		translator = new DataTranslator(); 
 	}
 	
-	public Game createGame(List<SpriteMakerModel> spriteModels){
+	public void createGame(List<SpriteMakerModel> spriteModels){
 		translator.toSprites(spriteModels);
 		this.gameSprites = translator.getGameSprites();
 		this.bus = translator.getModelBus();  
-		return new Game(gameSprites, bus);
+		game =  new Game(gameSprites, bus);
 	}
 	
+	
+	public Game getGame(){
+		return game; 
+	}
 	
 	public void handleSprites(){
 		// TODO: implement translation this way from sprite --> model

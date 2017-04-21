@@ -41,7 +41,12 @@ public class DataTranslator implements DataHandling {
 	}
 	
 	private Sprite assembleSprite(List<Component> components) {
+		
+		// make this instantiate a component of its type ???
 		Sprite newSprite = new Sprite(); 
+		// for each component
+		// instantiate a new damn component
+		// give it to the sprite 
 		components.stream().forEach(e -> newSprite.addComponent(e));
 		return newSprite; 
 		
