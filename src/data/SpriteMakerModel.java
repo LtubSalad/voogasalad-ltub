@@ -8,9 +8,10 @@ public class SpriteMakerModel {
 	private List<Component> myComponents;
 	private List<EventHandleData> myEventHandlers;
 	
+	
 	public SpriteMakerModel() {
-		myComponents = new ArrayList<Component>();
 		myEventHandlers = new ArrayList<EventHandleData>();
+		myComponents = new ArrayList<Component>();
 	}
 	
 	public void addComponent(Component comp) {

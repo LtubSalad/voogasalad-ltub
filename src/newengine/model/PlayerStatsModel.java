@@ -28,6 +28,10 @@ public class PlayerStatsModel {
 		initHandlers();
 	}
 	
+	public PlayerStatsModel(EventBus bus2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	private void initHandlers() {
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
 			if(name.equals(e.getPlayerName())){
