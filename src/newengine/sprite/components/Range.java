@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.events.range.InRangeEvent;
 import newengine.events.sprite.AttackEvent;
 import newengine.sprite.Sprite;
@@ -14,7 +16,8 @@ public class Range extends Component {
 	private final Var<Double> rangeVar = new Var<>();
 	// TODO: use pairs of (InRangeEvent type, rangeVar) to denote different kinds of range events.
 	
-	public Range(double range) {
+	@ConstructorForDeveloper
+	public Range(@VariableName(name = "range") double range) {
 		rangeVar.set(range);
 	}
 	

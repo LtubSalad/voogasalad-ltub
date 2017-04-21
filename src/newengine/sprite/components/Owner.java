@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.sprite.player.Player;
@@ -12,6 +14,11 @@ public class Owner extends Component {
 	
 	public Owner(Player player) {
 		ownerVar.set(player);
+	}
+	
+	@ConstructorForDeveloper
+	public Owner(@VariableName(name = "player name") String playerName){
+		this(new Player(playerName));
 	}
 	
 	public Player player() {

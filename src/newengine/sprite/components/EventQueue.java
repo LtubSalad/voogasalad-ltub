@@ -3,6 +3,7 @@ package newengine.sprite.components;
 import java.util.LinkedList;
 
 import bus.BusEvent;
+import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.QueueEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -13,6 +14,7 @@ public class EventQueue extends Component {
 	private LinkedList<BusEvent> events = new LinkedList<>();
 	private boolean eventFinished = true;
 	
+	@ConstructorForDeveloper
 	public EventQueue() {
 		
 	}

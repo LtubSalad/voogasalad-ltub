@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.image.ImageSet;
@@ -15,12 +17,17 @@ public class Images extends Component {
 		imageSetVar.set(imageSet);
 	}
 	
+	@ConstructorForDeveloper
+	public Images(@VariableName(name = "filepath") String filepath){
+		imageSetVar.set(new ImageSet(filepath));
+	}
+	
 	public LtubImage image() {
 		double heading = 0;
 		double dist = 100;
-		if (sprite.getComponent(Speed.TYPE).isPresent()) {
-			heading = sprite.getComponent(Position.TYPE).get().heading();
-		}
+//		if (sprite.getComponent(Speed.TYPE).isPresent()) {
+//			heading = sprite.getComponent(Position.TYPE).get().heading();
+//		}
 		return imageSetVar.get().getImage(heading, dist);
 	}
 	
