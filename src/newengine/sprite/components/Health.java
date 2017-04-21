@@ -34,6 +34,7 @@ public class Health extends Component {
 	@Override
 	public void afterAdded(){
 		sprite.on(ChangeHealthEvent.ANY, e -> {
+			System.out.println("Current health: "+healthVar.get());
 			healthVar.set(healthVar.get() + e.getValue());
 			if (healthVar.get() <= 0) {
 				List<Sprite> remove = new ArrayList<Sprite>(); //TODO CHANGE THIS!!!!! ADD A METHOD FOR JUST ONE SPRITE
