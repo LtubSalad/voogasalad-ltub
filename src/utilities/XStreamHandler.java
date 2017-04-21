@@ -35,6 +35,14 @@ public class XStreamHandler {
 		return object;
 	}
 	
+	public <T> T getObjectFromFile(){
+		XStream xstream = new XStream(new DomDriver());
+		FileChooser chooser = new FileChooser();
+		File file = chooser.showOpenDialog(new Stage());
+		T object = (T)xstream.fromXML(file);
+		return object;
+	}
+	
 	public List<AttributeData> getScreenModelFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();

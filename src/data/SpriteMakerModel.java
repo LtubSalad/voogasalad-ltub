@@ -1,37 +1,34 @@
 package data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import bus.BusEvent;
-import newSprite.ComponentSprite.Component;
+import newengine.sprite.component.Component;
 
 public class SpriteMakerModel {
-	private Map<BusEvent,String> myScriptMap;
-	private List<Component<?>> myComponents;
+	private List<Component> myComponents;
+	private List<EventHandleData> myEventHandlers;
 	
 	public SpriteMakerModel() {
-		myScriptMap = new HashMap<BusEvent,String>();
-		myComponents = new ArrayList<Component<?>>();
+		myComponents = new ArrayList<Component>();
+		myEventHandlers = new ArrayList<EventHandleData>();
 	}
 	
-	public void addComponent(Component<?> comp) {
+	public void addComponent(Component comp) {
 		if (!myComponents.contains(comp)) {
 			myComponents.add(comp);
 		}
 	}
 	
-	public void addScript(BusEvent event, String script) {
-		myScriptMap.put(event, script);
+	public void addEventHandler(EventHandleData eventHandler) {
+		myEventHandlers.add(eventHandler);
 	}
 	
-	public Map<BusEvent,String> getScriptMap() {
-		return myScriptMap;
-	}
-	
-	public List<Component<?>> getComponents() {
+	public List<Component> getComponents() {
 		return myComponents;
+	}
+	
+	public List<EventHandleData> getEventHandlers() {
+		return myEventHandlers;
 	}
 
 }
