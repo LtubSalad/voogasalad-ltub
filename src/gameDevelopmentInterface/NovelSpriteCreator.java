@@ -25,7 +25,7 @@ public class NovelSpriteCreator extends VBox {
 		myResources.keySet().forEach(e -> {
 			Button b = new Button(e);
 			b.setOnAction(f -> {
-				//pop up box with correct layout for this "e" component
+				//TODO pop up box with correct layout for this "e" component
 			});
 			myComponents.getItems().add(b);
 		});

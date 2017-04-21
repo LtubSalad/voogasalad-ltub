@@ -23,7 +23,6 @@ public class TowerDefenseControlPanel extends VBox {
 		myPathCreator = new PathCreator(myScreenModel);
 		myPathRow.getChildren().addAll(pathStart, pathEnd);
 		makeButtons();
-
 		this.getChildren().addAll(newSprite, myPathRow, load, save);
 	}
 
