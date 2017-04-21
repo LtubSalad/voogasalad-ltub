@@ -7,6 +7,7 @@ import java.util.List;
 import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -29,9 +30,10 @@ public class SpriteInfoPane extends ScrollPane{
 		this.setContent(myPane);
 	}
 	
-	private class SpriteDescriptor extends HBox{
+	private class SpriteDescriptor extends VBox{
 		private SpriteDescriptor(){
 			try {
+				this.getChildren().add(new Label("Add Sprite Components"));
 				this.getChildren().add(new SimpleVariableSetter(String.class, "Sprite name:"));
 				this.getChildren().add(new SimpleVariableSetter(String.class, "Sprite description:"));
 			} catch (UnsupportedTypeException e) {

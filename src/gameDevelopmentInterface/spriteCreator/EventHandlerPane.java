@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import bus.BusEvent;
 import data.SpriteMakerModel;
@@ -16,7 +15,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
@@ -31,6 +29,7 @@ public class EventHandlerPane extends ScrollPane{
 	private VBox myContents;
 	private SpriteMakerModel mySprite;
 	private List<SingleEventHandler> handlerSetters;
+	private double prefWidth=400;
 	
 	public EventHandlerPane(SpriteMakerModel sprite){
 		myContents=new VBox();
@@ -38,6 +37,7 @@ public class EventHandlerPane extends ScrollPane{
 		handlerSetters=new ArrayList<>();
 		refreshNodes();
 		this.setContent(myContents);
+		this.setPrefWidth(prefWidth);
 	}
 	
 	private void refreshNodes(){
@@ -49,7 +49,7 @@ public class EventHandlerPane extends ScrollPane{
 		saveHandlers.setOnAction((click)->{
 			updateSprite();
 		});
-		
+		myContents.getChildren().add(new Label("Event Handlers"));
 		myContents.getChildren().addAll(handlerSetters);
 		myContents.getChildren().add(saveHandlers);
 	}
@@ -65,13 +65,18 @@ public class EventHandlerPane extends ScrollPane{
 		private BusEvent myEvent;
 		private TextArea scriptField;
 		private SingleEventHandler(BusEvent event, String currentScript){
-			Label eventLabel=new Label(event.getEventType().toString());
+			Label eventLabel=new Label(event.getClass().getSimpleName());
 			scriptField=new TextArea();
+			scriptField.setPrefWidth(prefWidth);
 			this.getChildren().addAll(eventLabel,scriptField,new MethodDisplay());
 		}
 		
 		private SingleEventHandler(BusEvent event){
 			this(event, "");
+		}
+		
+		private void addScript(String script){
+			scriptField.setText(scriptField.getText()+script+"\\n");
 		}
 		
 		private void updateSprite(){
@@ -125,7 +130,6 @@ public class EventHandlerPane extends ScrollPane{
 				}
 				s+=")";
 				return s;
-
 			}
 		}
 	}
