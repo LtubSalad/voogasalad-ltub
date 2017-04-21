@@ -2,8 +2,10 @@ package gameDevelopmentInterface;
 
 import java.util.ResourceBundle;
 import data.AttributesForScreenUse;
+import data.DeveloperData;
 import gameDevelopmentInterface.attributeCreator.AttributeHolderCreator;
 import gameDevelopmentInterface.attributeCreator.GroundUpAttributeCreator;
+import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,8 +40,10 @@ public class MasterDeveloperInterface {
 	private AttributeHolderCreator myAttributeHolderCreator = new AttributeHolderCreator(attributesModel);
 	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
 	private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(attributesModel, myGeneralDataCreator);
+	private DeveloperData myModelData;
 
 	public MasterDeveloperInterface() {
+		myModelData=new DeveloperData();
 		instantiate();
 		developerScene = new Scene(view);
 		developerScene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
@@ -47,11 +51,11 @@ public class MasterDeveloperInterface {
 
 	private void instantiateTabs() {
 		developerTabs = new TabPane();
-		Tab classCreatorTab = new Tab(myResources.getString(CREATE_ATTRIBUTE_HOLDER), myAttributeHolderCreator);
+		Tab spriteCreation = new Tab("Sprite creation",new SpriteCreationScreen(myModelData));
 		Tab GeneralDataTab = new Tab(myResources.getString(GENERAL_DATA), myGeneralDataCreator);
 		Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), myScreenModelCreator);
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
-		myTabs.addAll(classCreatorTab, GeneralDataTab, ScreenSettingView);
+		myTabs.addAll(GeneralDataTab, ScreenSettingView);
 	}
 
 	private void instantiate() {
@@ -84,7 +88,7 @@ public class MasterDeveloperInterface {
 			Button attributeButton = new Button(myResources.getString(CREATE_NEW_ATTRIBUTE));
 			spriteButton.setOnAction((clicked) -> {
 				Tab spriteTab = new Tab(myResources.getString(CREATE_NEW_SPRITE),
-						new AttributeHolderCreator(attributesModel));
+						new SpriteCreationScreen(myModelData));
 				developerTabs.getTabs().add(spriteTab);
 			});
 			screenButton.setOnAction((clicked) -> {

@@ -1,5 +1,6 @@
 package gameDevelopmentInterface.spriteCreator;
 
+import data.DeveloperData;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,7 +11,7 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle(DEVELOPER_GUI);
 		primaryStage.show();
-		Scene scene = new Scene(new SpriteCreationScreen());
+		Scene scene = new Scene(new SpriteCreationScreen(new DeveloperData()));
 		primaryStage.setScene(scene);
 	}
 

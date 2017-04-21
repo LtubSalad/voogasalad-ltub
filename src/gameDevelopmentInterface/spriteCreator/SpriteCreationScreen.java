@@ -5,6 +5,7 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.DeveloperData;
 import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
 import javafx.collections.FXCollections;
@@ -26,8 +27,10 @@ import utilities.XStreamHandler;
 public class SpriteCreationScreen extends BorderPane{
 	private SpriteMakerModel spriteData;
 	private SpriteInfoPane infoPane;
+	private DeveloperData model;
 	
-	public SpriteCreationScreen(){
+	public SpriteCreationScreen(DeveloperData model){
+		this.model=model;
 		instantiate();
 	}
 	
@@ -64,6 +67,10 @@ public class SpriteCreationScreen extends BorderPane{
 			Button saveButton= new Button("Save SpriteMakerModel to File");
 			saveButton.setOnMouseClicked((click)->{
 				dataHandler.saveToFile(infoPane.getSpriteData());
+			});
+			Button listSaveButton=new Button("Save SpriteMakerModel to THIS GAME's list of SpritemakerModels");
+			listSaveButton.setOnMouseClicked((click)->{
+				model.addSprite(infoPane.getSpriteData());
 			});
 			this.getChildren().add(saveButton);
 		}
