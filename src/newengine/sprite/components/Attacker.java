@@ -34,8 +34,6 @@ public class Attacker extends Component {
 			Sprite source = e.getSprite();
 			Sprite target = e.getTarget();
 //			Target target = e.getTarget();
-			
-			System.out.println("emit FireProjectileEvent");
 
 			Sprite weapon = new Sprite();
 			LtubImage image1 = new LtubImage("images/skills/bullet.png");
@@ -60,10 +58,6 @@ public class Attacker extends Component {
 
 			moveSkill.setTarget(new Target(target));
 			moveSkill.trigger();
-//			if (target.getSprite().isPresent()) {
-//				moveSkill.setTarget(target);
-//				moveSkill.trigger();
-//			}
 		});
 	}
 
