@@ -2,13 +2,11 @@ package utilities;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import data.AttributeData;
 import data.SpriteMakerModel;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
