@@ -1,6 +1,5 @@
 package data;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,17 +7,15 @@ import java.util.Map;
 import bus.BusEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
+import newengine.sprite.components.Position;
 
-public class SpriteMakerModel implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Map<BusEvent,String> myScriptMap;
+public class SpriteMakerModel {
+	// Key Event.TYPE Value Action.TYPE
+	private Map<String, String> myCustomEventHandlers;
 	private List<Component> myComponents;
 	
 	public SpriteMakerModel() {
-		myScriptMap = new HashMap<BusEvent,String>();
+		//myScriptMap = new HashMap<BusEvent,String>();
 		myComponents = new ArrayList<Component>();
 	}
 	
@@ -29,20 +26,21 @@ public class SpriteMakerModel implements Serializable {
 	}
 	
 	public void addScript(BusEvent event, String script) {
-		myScriptMap.put(event, script);
+		//myScriptMap.put(event, script);
 	}
 	
-	public Map<BusEvent,String> getScriptMap() {
-		return myScriptMap;
-	}
+//	public Map<BusEvent,String> getScriptMap() {
+//		return myScriptMap;
+//	}
 	
 	public List<Component> getComponents() {
 		return myComponents;
 	}
 	
-	public Component getComponentByType(ComponentType ct) {
+
+	public Component getComponentByType(ComponentType<?> type) {
 		for (Component c : myComponents) {
-			if (c.getType().equals(ct)) {
+			if (c.getType().equals(type)) {
 				return c;
 			}
 		}
