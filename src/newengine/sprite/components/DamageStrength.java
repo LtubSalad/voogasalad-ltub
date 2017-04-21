@@ -1,16 +1,16 @@
 package newengine.sprite.components;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import bus.BusEventHandler;
 import newengine.events.SpriteModelEvent;
-import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.player.Player;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-import newengine.utils.Target;
 
 public class DamageStrength extends Component {
 	
@@ -24,7 +24,7 @@ public class DamageStrength extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.STOP, (e) -> {
+		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
 			Player owner = sprite.getComponent(Owner.TYPE).get().player();			
 			Player anotherOwner = e.getTarget().getSprite().get().getComponent(Owner.TYPE).get().player();
 			if (owner != anotherOwner) {
@@ -53,8 +53,8 @@ public class DamageStrength extends Component {
 
 	@Override
 	public Component clone() {
-		// TODO Auto-generated method stub
-		return null;
+		DamageStrength clone = new DamageStrength(this.strength);
+		return clone;
 	}
 
 }

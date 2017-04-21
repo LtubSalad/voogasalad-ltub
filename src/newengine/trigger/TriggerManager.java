@@ -31,7 +31,7 @@ public class TriggerManager {
 			registerTrigger(e.getTrigger());
 		});
 	}
-	
+
 	private void registerTrigger(Trigger trigger) {
 		TriggerEvent triggerEvent = trigger.getEvent();
 		List<TriggerCondition> conditions = trigger.getConditions();
@@ -47,7 +47,8 @@ public class TriggerManager {
 		} else if (triggerEvent.getType() == TriggerEventType.SPRITE_SPECIFIC) {
 			SpriteID spriteID = triggerEvent.getSpriteID();
 			if (spriteID != null) {
-				bus.emit(SpriteTriggerRegisterEvent.spriteSpecificRegisterEvent(triggerBusEventType, handler, spriteID));
+				bus.emit(
+						SpriteTriggerRegisterEvent.spriteSpecificRegisterEvent(triggerBusEventType, handler, spriteID));
 			}
 		}
 	}
@@ -57,16 +58,9 @@ public class TriggerManager {
 			@Override
 			public void handle(BusEvent event) {
 				for (TriggerCondition condition : conditions) {
-					if (event instanceof HasTriggeringSprite) {
-						if (!condition.isTrue(models, ((HasTriggeringSprite) event).getSprite())) {
-							return;
-						}
-					} else {
-						if (!condition.isTrue(models, null)) {
-							return;
-						}
+					if (!condition.isTrue(models, event)) {
+						return;
 					}
-
 				}
 				for (TriggerAction action : actions) {
 					if (action.getType() == TriggerActionType.GAME) {
@@ -74,7 +68,8 @@ public class TriggerManager {
 					} else if (action.getType() == TriggerActionType.SPRITE_BROADCAST) {
 						bus.emit(SpriteTriggerActionEvent.createBroadcastEvent(action.getBusEvent()));
 					} else if (action.getType() == TriggerActionType.SPRITE_SPECIFIC) {
-						bus.emit(SpriteTriggerActionEvent.createSpecificEvent(action.getBusEvent(), action.getSpriteID()));
+						bus.emit(SpriteTriggerActionEvent.createSpecificEvent(action.getBusEvent(),
+								action.getSpriteID()));
 					} else if (action.getType() == TriggerActionType.SPRITE_TRIGGERING_UNIT) {
 						if (event instanceof HasTriggeringSprite) {
 							SpriteID spriteID = ((HasTriggeringSprite) event).getSprite().getID();
