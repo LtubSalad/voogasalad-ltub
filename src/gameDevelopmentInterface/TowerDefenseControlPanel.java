@@ -1,12 +1,14 @@
 package gameDevelopmentInterface;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import utilities.XStreamHandler;
 
 public class TowerDefenseControlPanel extends VBox {
-	private NovelSpriteCreator mySpriteCreator = new NovelSpriteCreator();
+	private Button newSprite = new Button("Make new sprite!");
 	private HBox myPathRow = new HBox();
 	private Button pathStart = new Button("Start Path");
 	private Button pathEnd = new Button("End/Save Path");
@@ -22,10 +24,17 @@ public class TowerDefenseControlPanel extends VBox {
 		myPathRow.getChildren().addAll(pathStart, pathEnd);
 		makeButtons();
 
-		this.getChildren().addAll(mySpriteCreator, myPathRow, load, save);
+		this.getChildren().addAll(newSprite, myPathRow, load, save);
 	}
 
 	private void makeButtons() {
+		newSprite.setOnAction(e -> {
+			Stage popup = new Stage();
+			NovelSpriteCreator spriteCreator = new NovelSpriteCreator();
+			Scene popupScene = new Scene(spriteCreator);
+			popup.setScene(popupScene);
+			popup.show();
+		});
 		pathStart.setOnAction(e -> {
 			myPathCreator.getReplacementPath().clear();
 			myPathCreator.makePath();

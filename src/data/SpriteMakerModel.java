@@ -1,25 +1,25 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import newengine.sprite.component.Component;
-import newengine.sprite.component.ComponentType;
+import javafx.util.Pair;
 
 public class SpriteMakerModel {
-	private List<Component> myComponents;
+	private Map<String,List<String>> myComponents;
 	private List<EventHandleData> myEventHandlers;
 
 	
 	public SpriteMakerModel() {
-		//myScriptMap = new HashMap<BusEvent,String>();
-		myComponents = new ArrayList<Component>();
+		myComponents = new HashMap<String, List<String>>();
 		myEventHandlers = new ArrayList<EventHandleData>();
 	}
 	
-	public void addComponent(Component comp) {
-		if (!myComponents.contains(comp)) {
-			myComponents.add(comp);
+	public void addComponent(String componentName, List<String> params) {
+		if (!myComponents.keySet().contains(componentName)) {
+			myComponents.put(componentName, params);
 		}
 	}
 	
@@ -35,26 +35,26 @@ public class SpriteMakerModel {
 		return myEventHandlers;
 	}
 	
-	public void printComponents() {
-		for (Component c : myComponents) {
-			System.out.println(c.getType());
-		}
-	}
+//	public void printComponents() {
+//		for (Component c : myComponents) {
+//			System.out.println(c.getType());
+//		}
+//	}
 
 	
 //	public Map<BusEvent,String> getScriptMap() {
 //		return myScriptMap;
 //	}
 	
-	public List<Component> getComponents() {
+	public Map<String,List<String>> getComponents() {
 		return myComponents;
 	}
 	
 
-	public Component getComponentByType(ComponentType<?> type) {
-		for (Component c : myComponents) {
-			if (c.getType().equals(type)) {
-				return c;
+	public Pair<String, List<String>> getComponentByType(String componentName) {
+		for (String c : myComponents.keySet()) {
+			if (c.equals(componentName)) {
+				return new Pair<String, List<String>>(c, myComponents.get(c));
 			}
 		}
 		return null;

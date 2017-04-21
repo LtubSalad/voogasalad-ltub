@@ -3,6 +3,7 @@ package gamedata;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import bus.BasicEventBus;
 import data.SpriteMakerModel;
@@ -49,11 +50,11 @@ public class DataTranslator implements DataHandling {
 		return bus; 
 	}
 	
-	private Sprite assembleSprite(List<Component> components) {
+	private Sprite assembleSprite(Map<String, List<String>> map) {
 		Sprite newSprite = new Sprite(); 
-		for (Component c : components) {
+		for (String cName : map.keySet()) {
 			//System.out.println(c.getType().getType());
-			String className = c.getClass().getName();
+			String className = cName.getClass().getName();
 			Class<?> clazz;
 			try {
 				clazz = Class.forName(className);
@@ -63,7 +64,7 @@ public class DataTranslator implements DataHandling {
 				//System.out.println(newComp.getType().getType());
 				newSprite.addComponent(newComp);
 			} catch (Exception e) {
-				System.out.println("Didn't work for " + c.getType().getType());
+				System.out.println("Didn't work for " + cName);
 			}
 		}
 		return newSprite; 

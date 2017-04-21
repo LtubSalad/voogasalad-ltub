@@ -50,7 +50,7 @@ public class MainForTestingGUI extends Application {
 		SpriteMakerModel sprite1 = new SpriteMakerModel();
 		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
 		ImageSet imageSet1 = new ImageSet(image1);
-		sprite1.addComponent(new TestPosition());
+		//sprite1.addComponent(new TestPosition());
 		
 //		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 //		skillMap.put(MoveSkill.TYPE, new MoveSkill());
