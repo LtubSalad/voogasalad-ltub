@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import data.SpriteMakerModel;
@@ -23,6 +24,10 @@ public class DeveloperData {
 	private ObservableList<SpriteMakerModel> sprites;
 	
 	public DeveloperData() {
+		List<SpriteMakerModel> dummyList=new ArrayList<>();
+		sprites=FXCollections.observableList(dummyList);
+		List<Path> dummyPaths=new ArrayList<>();
+		myPaths=FXCollections.observableList(dummyPaths);
 		myData.put(NUMBER_OF_STARTING_BONUSES, "");
 		myData.put(NUMBER_OF_STARTING_GOLD, "");	
 		myData.put(NUMBER_OF_LEVELS, "");
