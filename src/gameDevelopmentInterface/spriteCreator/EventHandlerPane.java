@@ -66,10 +66,12 @@ public class EventHandlerPane extends ScrollPane {
 	private class SingleEventHandler extends VBox {
 		private BusEvent myEvent;
 		private TextArea scriptField;
+		private final double SCRIPT_HEIGHT=100;
 
 		private SingleEventHandler(BusEvent event, String currentScript) {
 			Label eventLabel = new Label(event.getClass().getSimpleName());
 			scriptField = new TextArea();
+			scriptField.setPrefHeight(SCRIPT_HEIGHT);
 			scriptField.setPrefWidth(prefWidth);
 			this.getChildren().addAll(eventLabel, scriptField, new MethodDisplay());
 		}
