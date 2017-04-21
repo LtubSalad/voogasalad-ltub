@@ -21,8 +21,13 @@ import newengine.utils.image.LtubImage;
 public class Attacker extends Component {
 
 	public static final ComponentType<Attacker> TYPE = new ComponentType<>(Attacker.class.getName());
+	private Sprite weapon;
 	private double reloadPeriod = 1;
 	private double timeRemaining = 1;
+	
+//	public Attacker(Sprite weapon) {
+//		this.weapon = weapon;
+//	}
 
 	@Override
 	public void afterAdded() {
