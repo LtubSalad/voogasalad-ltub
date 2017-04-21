@@ -6,6 +6,7 @@ import bus.BusEvent;
 import bus.BusEventType;
 import newengine.events.HasTriggeringSprite;
 import newengine.sprite.Sprite;
+import newengine.sprite.components.Owner;
 import newengine.utils.Target;
 
 public class MoveEvent extends BusEvent implements HasTriggeringSprite {
