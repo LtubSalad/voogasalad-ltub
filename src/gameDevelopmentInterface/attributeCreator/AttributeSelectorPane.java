@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.AttributeData;
-import data.AttributesForScreenUse;
+import data.SpritesForScreenUse;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import utilities.XStreamHandler;
@@ -23,9 +23,9 @@ public class AttributeSelectorPane extends VBox {
 	private final String userCreatedAttributesFile = "data/userCreatedAttributes";
 	private final String presetSpritesFile="data/presetSprites";
 	private AttributeData attributeHolder;
-	private AttributesForScreenUse myAttributesModel;
+	private SpritesForScreenUse myAttributesModel;
 
-	public AttributeSelectorPane(AttributesForScreenUse attributesModel, AttributeData attributeHolder) {
+	public AttributeSelectorPane(SpritesForScreenUse attributesModel, AttributeData attributeHolder) {
 		this.attributeHolder = attributeHolder;
 		myAttributesModel = attributesModel;
 		Node customAttributesDisplay = new AttributeDisplay(myAttributesModel, "Add Custom Attributes",

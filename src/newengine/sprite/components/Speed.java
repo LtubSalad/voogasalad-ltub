@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
@@ -9,7 +11,12 @@ public class Speed extends Component {
 	
 	private final double speed;
 	
-	public Speed(double speed) {
+//	public Speed(double speed) {
+//		this.speed = speed;
+//	}
+	
+	@ConstructorForDeveloper
+	public Speed(@VariableName(name = "speed") double speed) {
 		this.speed = speed;
 	}
 	
