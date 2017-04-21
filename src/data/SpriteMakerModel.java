@@ -31,5 +31,11 @@ public class SpriteMakerModel {
 	public List<EventHandleData> getEventHandlers() {
 		return myEventHandlers;
 	}
+	
+	public void printComponents() {
+		for (Component c : myComponents) {
+			System.out.println(c.getType());
+		}
+	}
 
 }

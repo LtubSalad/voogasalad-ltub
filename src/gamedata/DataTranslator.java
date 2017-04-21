@@ -1,5 +1,6 @@
 package gamedata;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import newengine.events.SpriteModelEvent;
 import newengine.model.SpriteModel;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
+import newengine.sprite.component.ComponentType;
+import newengine.sprite.components.Position;
 
 public class DataTranslator implements DataHandling {
 	SpriteModel gameModel; 
@@ -35,6 +38,12 @@ public class DataTranslator implements DataHandling {
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesList));		
 	}
 	
+	public void printSpritesList() {
+		for (Sprite s : spritesList) {
+			System.out.println(s.getComponent(Position.TYPE).get());
+		}
+	}
+	
 	
 	public BasicEventBus getModelBus(){
 		return bus; 
@@ -42,9 +51,22 @@ public class DataTranslator implements DataHandling {
 	
 	private Sprite assembleSprite(List<Component> components) {
 		Sprite newSprite = new Sprite(); 
-		components.stream().forEach(e -> newSprite.addComponent(e));
+		for (Component c : components) {
+			//System.out.println(c.getType().getType());
+			String className = c.getClass().getName();
+			Class<?> clazz;
+			try {
+				clazz = Class.forName(className);
+				System.out.println(clazz);
+				Component newComp = (Component) clazz.newInstance(); //this line is the one that breaks it
+				System.out.println(newComp);
+				//System.out.println(newComp.getType().getType());
+				newSprite.addComponent(newComp);
+			} catch (Exception e) {
+				System.out.println("Didn't work for " + c.getType().getType());
+			}
+		}
 		return newSprite; 
-		
 	}
 
 	@Override
