@@ -1,8 +1,12 @@
 package newengine.sprite.components;
 
+import java.io.Serializable;
+
+import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.range.InRangeEvent;
+import newengine.events.sprite.FireProjectileEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -11,7 +15,7 @@ import newengine.utils.Target;
 public class Range extends Component {
 
 	public static final ComponentType<Range> TYPE = new ComponentType<>(Range.class.getName());
-	private final double range;
+	private double range;
 	// TODO: use pairs of (InRangeEvent type, rangeVar) to denote different kinds of range events.
 	
 //	public Range(double range) {
@@ -27,11 +31,12 @@ public class Range extends Component {
 		return range;
 	}
 
+	@Override
 	public void afterAdded() {
-		sprite.on(InRangeEvent.ANY, (e) -> {
+		sprite.on(InRangeEvent.ANY, (Serializable & BusEventHandler<InRangeEvent>) (e) -> {
 			for (Sprite detectee: e.getDetectees()) {
 				Target target = new Target(detectee);
-				// TODO
+//				System.out.println("In range received?");
 			}
 		});
 	}

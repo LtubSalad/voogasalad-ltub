@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import bus.BusEvent;
 import bus.EventBus;
 import newengine.events.SpriteModelEvent;
@@ -24,13 +26,14 @@ public class SpriteModel {
 	private List<Sprite> sprites = new ArrayList<>();
 	private List<Sprite> spritesToAdd = new ArrayList<>();
 	private List<Sprite> spritesToRemove = new ArrayList<>();
+	private List<SpriteTriggerRegisterEvent> spriteTriggerRegisterEvents = new ArrayList<>();
+	
 	
 	public SpriteModel(EventBus bus) {
 		this.bus = bus;
 		initHandlers();
 	}
 	
-	private List<SpriteTriggerRegisterEvent> spriteTriggerRegisterEvents = new ArrayList<>();
 	private void initHandlers() {
 		bus.on(SpriteModelEvent.ADD, (e) -> {
 			addSprite(e.getSprites());
@@ -65,15 +68,10 @@ public class SpriteModel {
 		});
 	}
 	private void addSprite(List<Sprite> sprites) {
-		spritesToAdd = sprites;
-	}
-	private void removeSprite(List<Sprite> sprites) {
-		spritesToRemove = sprites;
-	}
-	private void updateAddSprite() {
-		for (Sprite sprite: spritesToAdd) {
+		for (Sprite sprite : sprites) {
 			if (!(this.sprites.contains(sprite))) {
-				this.sprites.add(sprite);
+				System.out.println("sprite added to sprite model");
+				this.spritesToAdd.add(sprite);
 				for (SpriteTriggerRegisterEvent e : spriteTriggerRegisterEvents) {
 					sprite.on(e.getTriggerBusEventType(), e.getTriggerHandler());
 				}
@@ -81,10 +79,19 @@ public class SpriteModel {
 			}
 		}
 	}
-	private void updateRemoveSprite() {
-		sprites.removeAll(spritesToRemove);
+
+	private void removeSprite(List<Sprite> sprites) {
+		for (Sprite sprite : sprites) {
+			spritesToRemove.add(sprite);
+		}
 	}
 	
+	// TODO added only for loading the model
+	public void setBus(EventBus bus) {
+		this.bus = bus;
+	}
+	
+
 	public Optional<Sprite> getByID(SpriteID spriteID) {
 		// TODO: a map for faster query? not really necessary
 		for (Sprite sprite : sprites) {
@@ -100,8 +107,10 @@ public class SpriteModel {
 	}
 	
 	public void update(double dt) {
-		updateAddSprite();
-		updateRemoveSprite();
+		sprites.removeAll(spritesToRemove);
+		spritesToRemove.clear();
+		sprites.addAll(spritesToAdd);
+		spritesToAdd.clear();
 		for (Sprite sprite : sprites) {
 			sprite.update(dt);
 		}

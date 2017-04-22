@@ -1,12 +1,17 @@
 package newengine.sprite.components;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+import bus.BusEventHandler;
 import newengine.events.skill.AddSkillEvent;
 import newengine.events.skill.TriggerSkillEvent;
+import newengine.events.sprite.FireProjectileEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.sprite.component.Component;
@@ -38,13 +43,14 @@ public class SkillSet extends Component {
 		for (Skill skill: skills.values()) {
 			skill.setSource(sprite);
 		}
-		sprite.on(AddSkillEvent.TYPE, (e) -> {
+		sprite.on(AddSkillEvent.TYPE, (Serializable & BusEventHandler<AddSkillEvent>) (e) -> {
 			addSkill(e.getSkill());
 			e.getSkill().setSource(sprite);
 		});
-		sprite.on(TriggerSkillEvent.ANY, (e) -> {
+		sprite.on(TriggerSkillEvent.ANY, (Serializable & BusEventHandler<TriggerSkillEvent>) (e) -> {
 			Skill skill = skills.get(e.getType());
 			if (skill != null) {
+				skill.setSource(sprite);
 				e.getTarget().ifPresent((target) -> skill.setTarget(target));
 				skill.trigger();
 			}

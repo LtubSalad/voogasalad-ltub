@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.player.MainPlayerEvent;

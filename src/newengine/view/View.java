@@ -21,6 +21,7 @@ import javafx.scene.text.Text;
 import newengine.events.camera.CameraEvent;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
+import newengine.model.Models;
 import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
 import newengine.model.PlayerStatsModel.WealthType;
@@ -40,10 +41,8 @@ import newengine.view.subview.SkillBox;
 public class View {
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 500;
-	public static final int CANVAS_WIDTH_TOTAL = 1000;
-	public static final int CANVAS_HEIGHT_TOTAL = 500;
-	public static final int CANVAS_WIDTH_DISPLAY = 600;
-	public static final int CANVAS_HEIGHT_DISPLAY = 300;
+	public static final int CANVAS_WIDTH = 600;
+	public static final int CANVAS_HEIGHT = 300;
 	public static final int STATS_HEIGHT = 100;
 	public static final Paint BACKGROUND = Color.BISQUE;
 
@@ -65,19 +64,11 @@ public class View {
 		VBox root = new VBox();
 		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
 		statsPanel = new HBox();
-		gameWorldCanvas = new Canvas(CANVAS_WIDTH_DISPLAY, CANVAS_HEIGHT_DISPLAY);
-		gameWorldCanvas.toBack();
+		gameWorldCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		bottomPane = new HBox();
-		bottomPane.toFront();
-		bottomPane.setStyle("-fx-padding: 10;" + 
-                "-fx-border-style: solid inside;" + 
-                "-fx-border-width: 2;" +
-                "-fx-border-insets: 5;" + 
-                "-fx-border-radius: 5;" + 
-                "-fx-border-color: black;");
 		root.getChildren().addAll(statsPanel, gameWorldCanvas, bottomPane);
 		// selected sprite
-		Canvas selectionCanvas = new Canvas(WIDTH / 2, HEIGHT - CANVAS_HEIGHT_DISPLAY - STATS_HEIGHT);
+		Canvas selectionCanvas = new Canvas(WIDTH / 2, HEIGHT - CANVAS_HEIGHT - STATS_HEIGHT);
 		bottomPane.getChildren().add(selectionCanvas);
 		gc = gameWorldCanvas.getGraphicsContext2D();
 		gcSelected = selectionCanvas.getGraphicsContext2D();
@@ -103,20 +94,20 @@ public class View {
 			mousePos = new ViewPoint(e.getX(), e.getY());
 			
 		});
-		gameWorldCanvas.setOnMouseExited(e -> {
-			if (e.getX() > WIDTH) {
-				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 40 , 0));
-			}
-			else if (e.getX() < 0) {
-				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), -40 , 0));
-			}
-			else if (e.getY() > CANVAS_HEIGHT_DISPLAY) {
-				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 0 , 40));
-			}
-			else if (e.getY() < 0) {
-				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 0 , -40));
-			}
-		});
+//		gameWorldCanvas.setOnMouseExited(e -> {
+//			if (e.getX() > WIDTH) {
+//				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 40 , 0));
+//			}
+//			else if (e.getX() < 0) {
+//				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), -40 , 0));
+//			}
+//			else if (e.getY() > CANVAS_HEIGHT_DISPLAY) {
+//				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 0 , 40));
+//			}
+//			else if (e.getY() < 0) {
+//				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 0 , -40));
+//			}
+//		});
 		gameWorldCanvas.setOnScroll((e) -> {
 			// for my mouse, each scroll is 40 pixels
 			// e.getDeltaY() is negative when scorll down (zoom in, increase zoom factor)
@@ -138,10 +129,16 @@ public class View {
 	}
 
 	public void clear(){
-		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT_TOTAL);
+		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 	}
 	
-	public void render(SpriteModel model) {
+	public void render(Models models) {
+		render(models.spriteModel());
+		render(models.playerStatsModel(), models.playerRelationModel(), models.selectionModel());
+		render(models.selectionModel(), models.playerRelationModel());
+	}
+	
+	private void render(SpriteModel model) {
 		// render game cast
 		for (Sprite sprite : model.getSprites()) {
 			if (!sprite.getComponent(Position.TYPE).isPresent() ||
@@ -160,7 +157,7 @@ public class View {
 
 	}
 	
-	public void render(PlayerStatsModel playerStatsModel, 
+	private void render(PlayerStatsModel playerStatsModel, 
 			PlayerRelationModel playerRelationModel, SelectionModel selectionModel) {
 		this.statsPanel.getChildren().clear();
 		statsPanel.setSpacing(10);
@@ -195,20 +192,35 @@ public class View {
 
 	public void render(SelectionModel selectionModel, PlayerRelationModel playerRelationModel) {
 		// render the selected sprite and its skill box
-		gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT_TOTAL);
-		skillBox.clear();
 		if (selectionModel.getSelectedSprite().isPresent()) {
 			Sprite sprite = selectionModel.getSelectedSprite().get();
-			Player player = sprite.getComponent(Owner.TYPE).get().player();
-			Player mainPlayer = playerRelationModel.getMainPlayer();
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
+				gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
 			}
-			if (player == mainPlayer) {				
-				if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
-					skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
+			if (sprite.getComponent(Owner.TYPE).isPresent()) {
+				Player player = sprite.getComponent(Owner.TYPE).get().player();
+				Player mainPlayer = playerRelationModel.getMainPlayer();
+				if (player == mainPlayer) {				
+					if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
+						skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
+					}
+					else {
+						skillBox.clear();
+					}
+				}
+				else {
+					gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+					skillBox.clear();
 				}
 			}
+			else {
+				skillBox.clear();
+			}
+		}
+		else {
+			gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+			skillBox.clear();
 		}
 		// render the selected skill
 		if (selectionModel.getSelectedSkill().isPresent()) {
