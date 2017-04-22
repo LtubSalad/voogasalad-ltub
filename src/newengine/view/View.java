@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -94,27 +95,25 @@ public class View {
 			mousePos = new ViewPoint(e.getX(), e.getY());
 			
 		});
-//		gameWorldCanvas.setOnMouseExited(e -> {
-//			if (e.getX() > WIDTH) {
-//				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 40 , 0));
-//			}
-//			else if (e.getX() < 0) {
-//				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), -40 , 0));
-//			}
-//			else if (e.getY() > CANVAS_HEIGHT_DISPLAY) {
-//				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 0 , 40));
-//			}
-//			else if (e.getY() < 0) {
-//				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 0 , -40));
-//			}
-//		});
 		gameWorldCanvas.setOnScroll((e) -> {
 			// for my mouse, each scroll is 40 pixels
 			// e.getDeltaY() is negative when scorll down (zoom in, increase zoom factor)
-			bus.emit(CameraEvent.createScaleCameraEvent(e.getX(), e.getY(), e.getDeltaY() / 400));
+			bus.emit(new CameraEvent(e.getDeltaY() / 400));
 		});
 		scene.setOnKeyPressed(e -> {
 			bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
+			if (e.getCode() == KeyCode.LEFT) {
+				bus.emit(new CameraEvent(-10, 0));
+			}
+			else if (e.getCode() == KeyCode.RIGHT) {
+				bus.emit(new CameraEvent(10, 0));
+			}
+			else if (e.getCode() == KeyCode.UP) {
+				bus.emit(new CameraEvent(0, -10));
+			}
+			else if (e.getCode() == KeyCode.DOWN) {
+				bus.emit(new CameraEvent(0, 10));
+			}
 		});
 		scene.setOnKeyReleased(e -> {
 			bus.emit(new KeyEvent(KeyEvent.RELEASE, e.getCode()));
