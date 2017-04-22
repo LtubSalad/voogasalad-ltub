@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import newengine.events.camera.CameraEvent;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
 import newengine.model.PlayerRelationModel;
@@ -39,7 +40,10 @@ import newengine.view.subview.SkillBox;
 public class View {
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 500;
-	public static final int CANVAS_HEIGHT = 300;
+	public static final int CANVAS_WIDTH_TOTAL = 1000;
+	public static final int CANVAS_HEIGHT_TOTAL = 500;
+	public static final int CANVAS_WIDTH_DISPLAY = 600;
+	public static final int CANVAS_HEIGHT_DISPLAY = 300;
 	public static final int STATS_HEIGHT = 100;
 	public static final Paint BACKGROUND = Color.BISQUE;
 
@@ -56,17 +60,24 @@ public class View {
 	// TODO: mouse location should belong to player input state
 	private ViewPoint mousePos;
 
-	public View(EventBus bus, Camera camera) {
+	public View(EventBus bus) {
 		this.bus = bus;
-		this.camera = camera;
 		VBox root = new VBox();
 		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
 		statsPanel = new HBox();
-		gameWorldCanvas = new Canvas(WIDTH, CANVAS_HEIGHT);
+		gameWorldCanvas = new Canvas(CANVAS_WIDTH_DISPLAY, CANVAS_HEIGHT_DISPLAY);
+		gameWorldCanvas.toBack();
 		bottomPane = new HBox();
+		bottomPane.toFront();
+		bottomPane.setStyle("-fx-padding: 10;" + 
+                "-fx-border-style: solid inside;" + 
+                "-fx-border-width: 2;" +
+                "-fx-border-insets: 5;" + 
+                "-fx-border-radius: 5;" + 
+                "-fx-border-color: black;");
 		root.getChildren().addAll(statsPanel, gameWorldCanvas, bottomPane);
 		// selected sprite
-		Canvas selectionCanvas = new Canvas(WIDTH / 2, HEIGHT - CANVAS_HEIGHT - STATS_HEIGHT);
+		Canvas selectionCanvas = new Canvas(WIDTH / 2, HEIGHT - CANVAS_HEIGHT_DISPLAY - STATS_HEIGHT);
 		bottomPane.getChildren().add(selectionCanvas);
 		gc = gameWorldCanvas.getGraphicsContext2D();
 		gcSelected = selectionCanvas.getGraphicsContext2D();
@@ -74,6 +85,8 @@ public class View {
 		skillBox = new SkillBox(bus);
 		bottomPane.getChildren().add(skillBox.getBox());
 
+		this.camera = new Camera(bus, gameWorldCanvas, 1);
+		
 		initHandlers();
 	}
 
@@ -88,6 +101,26 @@ public class View {
 		});
 		gameWorldCanvas.setOnMouseMoved(e -> {
 			mousePos = new ViewPoint(e.getX(), e.getY());
+			
+		});
+		gameWorldCanvas.setOnMouseExited(e -> {
+			if (e.getX() > WIDTH) {
+				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 40 , 0));
+			}
+			else if (e.getX() < 0) {
+				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), -40 , 0));
+			}
+			else if (e.getY() > CANVAS_HEIGHT_DISPLAY) {
+				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 0 , 40));
+			}
+			else if (e.getY() < 0) {
+				bus.emit(CameraEvent.createTranslateCameraEvent(e.getX(), e.getY(), 0 , -40));
+			}
+		});
+		gameWorldCanvas.setOnScroll((e) -> {
+			// for my mouse, each scroll is 40 pixels
+			// e.getDeltaY() is negative when scorll down (zoom in, increase zoom factor)
+			bus.emit(CameraEvent.createScaleCameraEvent(e.getX(), e.getY(), e.getDeltaY() / 400));
 		});
 		scene.setOnKeyPressed(e -> {
 			bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
@@ -105,7 +138,7 @@ public class View {
 	}
 
 	public void clear(){
-		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT_TOTAL);
 	}
 	
 	public void render(SpriteModel model) {
@@ -162,7 +195,7 @@ public class View {
 
 	public void render(SelectionModel selectionModel, PlayerRelationModel playerRelationModel) {
 		// render the selected sprite and its skill box
-		gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+		gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT_TOTAL);
 		skillBox.clear();
 		if (selectionModel.getSelectedSprite().isPresent()) {
 			Sprite sprite = selectionModel.getSelectedSprite().get();

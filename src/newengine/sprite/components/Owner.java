@@ -24,12 +24,12 @@ public class Owner extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
-			System.out.println(bus.getGameBus());
-			bus.getGameBus().on(MainPlayerEvent.ANY, (e) -> {
-				mainPlayer = e.getPlayer();
-			});
-		});
+//		sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
+//			System.out.println(bus.getGameBus());
+//			bus.getGameBus().on(MainPlayerEvent.ANY, (e) -> {
+//				mainPlayer = e.getPlayer();
+//			});
+//		});
 	}
 	
 	public Player player() {

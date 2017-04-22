@@ -26,7 +26,7 @@ public class BuildSkill extends Skill{
 	
 	@Override
 	public void trigger() {
-		if (canControl()) {
+//		if (canControl()) {
 			Target target = this.getTarget().get();
 			// can override previous Position component
 			spriteToCreate.addComponent(new Position(target.getLocation(), 0));
@@ -36,7 +36,7 @@ public class BuildSkill extends Skill{
 				this.getSource().get().getComponent(GameBus.TYPE).get().getGameBus()
 				.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToCreate));
 			}
-		}
+//		}
 	}
 
 	@Override

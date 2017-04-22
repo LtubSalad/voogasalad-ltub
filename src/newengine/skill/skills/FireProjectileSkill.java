@@ -17,13 +17,13 @@ public class FireProjectileSkill extends Skill {
 
 	@Override
 	public void trigger() {
-		if (canControl()) {
+//		if (canControl()) {
 			Sprite source = this.getSource().get();
 			Target target = this.getTarget().get();
 			target.getSprite().ifPresent((targetSprite) -> {
 				source.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, source, targetSprite));
 			});
-		}
+//		}
 	}
 
 	@Override

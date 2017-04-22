@@ -17,7 +17,7 @@ public class MoveSkill extends Skill{
 	
 	@Override
 	public void trigger() {
-		if (canControl()) {
+//		if (canControl()) {
 			Sprite source = this.getSource().get();
 			Target target = this.getTarget().get();
 			if (target.getSprite().isPresent()) {
@@ -26,7 +26,7 @@ public class MoveSkill extends Skill{
 			else {
 				source.emit(new MoveEvent(MoveEvent.START_POSITION, source, target));
 			}	
-		}
+//		}
 	}
 	
 	@Override

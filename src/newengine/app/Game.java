@@ -21,7 +21,6 @@ import newengine.model.SpriteModel;
 import newengine.trigger.Trigger;
 import newengine.trigger.TriggerManager;
 import newengine.view.View;
-import newengine.view.camera.Camera;
 
 public class Game {
 
@@ -37,8 +36,7 @@ public class Game {
 		SelectionModel selectionModel = new SelectionModel(bus);
 		Models models = new Models(spriteModel, playerStatsModel, playerRelationModel, selectionModel);
 		
-		Camera camera = new Camera(bus);
-		view = new View(bus, camera);
+		view = new View(bus);
 		
 		gameLoop = new FXGameLoop(bus);
 		
