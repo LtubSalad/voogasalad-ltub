@@ -1,5 +1,7 @@
 package newengine.managers.input;
 
+import java.util.List;
+
 import bus.EventBus;
 import commons.point.GamePoint;
 import javafx.scene.input.KeyCode;
@@ -16,6 +18,8 @@ import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
+import newengine.sprite.component.ComponentType;
+import newengine.sprite.components.Position;
 import newengine.utils.ActionMode;
 import newengine.utils.Target;
 import newengine.utils.checker.SelectionChecker;
@@ -55,9 +59,25 @@ public class InputManager {
 	private void initHandlers() {
 		bus.on(KeyEvent.PRESS, e -> {
 			keyInputState.pressKey(e.getCode());
+			List<Sprite> sprites = spriteModel.getSprites();
+			for(Sprite sprite : sprites){
+				sprite.getComponent(Position.TYPE).ifPresent((position) -> {
+					position.
+				});
+				(sprite.getComponent(Position.TYPE)).updateMovePosition(0, new GamePoint(0,0));
+			}
+			
+			
+			
+			
 		});
 		bus.on(KeyEvent.RELEASE, e -> {
 			keyInputState.releaseKey(e.getCode());
+			
+			
+			
+			
+			
 		});
 		bus.on(MouseEvent.LEFT, e -> {
 			if (selectionModel.getSelectedSkill().isPresent()) {

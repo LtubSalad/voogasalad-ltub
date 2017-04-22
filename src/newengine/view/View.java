@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -53,8 +54,9 @@ public class View {
 	private ViewPoint mousePos;
 
 	public View(EventBus bus, Camera camera) {
-		this.bus = bus;
+		
 		this.camera = camera;
+		this.bus = bus;
 		VBox root = new VBox();
 		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
 		statsPanel = new HBox();
@@ -86,7 +88,12 @@ public class View {
 			mousePos = new ViewPoint(e.getX(), e.getY());
 		});
 		scene.setOnKeyPressed(e -> {
-			bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
+			ViewPoint viewPos = new ViewPoint(0, 0);
+			if(e.getCode() == KeyCode.L){
+				System.out.println("left key is pressed");
+			   bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
+			}
+			//bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
 		});
 		scene.setOnKeyReleased(e -> {
 			bus.emit(new KeyEvent(KeyEvent.RELEASE, e.getCode()));
@@ -176,6 +183,10 @@ public class View {
 		else {
 			scene.setCursor(Cursor.DEFAULT);
 		}
+	}
+	
+	public Canvas getCanvas(){
+		return gameWorldCanvas;
 	}
 
 }
