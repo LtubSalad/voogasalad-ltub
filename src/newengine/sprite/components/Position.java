@@ -1,12 +1,18 @@
 package newengine.sprite.components;
 
+import java.io.Serializable;
+
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import bus.BusEvent;
+import bus.BusEventHandler;
 import commons.MathUtils;
 import commons.point.GamePoint;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
 import newengine.events.sound.SoundEvent;
+import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
@@ -18,6 +24,7 @@ public class Position extends Component {
 	public static final ComponentType<Position> TYPE = new ComponentType<>(Position.class.getName());
 	private GamePoint pos;
 	private double heading;
+	@XStreamOmitField
 	private Target target;
 	private boolean isMoving = false;
 	private boolean followingSprite = false;
@@ -35,15 +42,18 @@ public class Position extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.START_POSITION, (e) -> {
+		sprite.on(MoveEvent.START_POSITION, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
 			moveTo(e.getTarget());
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
 				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
+					if (bus.getGameBus() == null) {
+						System.out.println("main bus is null");
+					}
 					bus.getGameBus().emit(new SoundEvent(SoundEvent.SOUND_EFFECT, sound.getMoveSoundFile()));
 				});
 			});
 		});
-		sprite.on(MoveEvent.START_SPRITE, (e) -> {
+		sprite.on(MoveEvent.START_SPRITE, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
 			moveTo(e.getTarget());
 			followingSprite();
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
@@ -52,7 +62,7 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.STOP,  (e) -> {
+		sprite.on(MoveEvent.STOP,  (Serializable & BusEventHandler<MoveEvent>) (e) -> {
 			stopMoving();
 		});
 	}

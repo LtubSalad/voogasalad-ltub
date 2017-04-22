@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import bus.BasicEventBus;
 import bus.BusEvent;
@@ -40,6 +41,9 @@ public class Sprite {
 	}
 
 	public void addComponent(Component component) {
+		if (component == null) {
+			System.out.println("component is null");
+		}
 		components.put(component.getType(), component);
 		component.onAdded(this);
 	}

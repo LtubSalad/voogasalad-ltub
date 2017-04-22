@@ -7,6 +7,8 @@ import java.util.List;
 
 import bus.BusEvent;
 import data.SpriteMakerModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
@@ -81,32 +83,38 @@ public class EventHandlerPane extends ScrollPane {
 		}
 
 		private void addScript(String script) {
-			scriptField.setText("EW");
+			scriptField.setText(scriptField.getText()+script+";"+"\n");
 		}
 
 		private void updateSprite() {
 			mySprite.getScriptMap().put(myEvent, scriptField.getText());
 		}
 
-		private class MethodDisplay extends ComboBox<Method> {
-			private ObservableList<Method> methods;
+		private class MethodDisplay extends ComboBox<String> {
+			private ObservableList<String> methods;
 			private final int ROW_COUNT = 5;
 
 			private MethodDisplay() {
 				this.setVisibleRowCount(ROW_COUNT);
 				this.setPromptText("Available commands");
 
-				List<Method> dumMethods = new ArrayList<>();
+				List<String> dumMethods = new ArrayList<>();
 				methods = FXCollections.observableList(dumMethods);
 				registerSprite();
 				updateMethods();
 				this.setItems(methods);
+				this.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue,newValue)->{
+					SingleEventHandler.this.addScript(getSelectionModel().getSelectedItem());
+					});
+	
+		        
+				/*
 				this.setCellFactory(new Callback<ListView<Method>, ListCell<Method>>() {
 					@Override
 					public ListCell<Method> call(ListView<Method> list) {
 						return new SingleMethodCell();
 					}
-				});
+				});*/
 			}
 
 			class SingleMethodCell extends ListCell<Method> {
@@ -138,12 +146,12 @@ public class EventHandlerPane extends ScrollPane {
 			private void updateMethods() {
 				methods.clear();
 				for (Method method : Sprite.class.getDeclaredMethods()) {
-					methods.add(method);
+					methods.add(methodToString(method));
 				}
 				mySprite.getComponents().forEach((type, component) -> {
 					Class<?> clazz = component.getClass();
 					for (Method method : clazz.getDeclaredMethods()) {
-						methods.add(method);
+						methods.add(methodToString(method));
 					}
 				});
 			}

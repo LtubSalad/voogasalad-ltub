@@ -1,7 +1,11 @@
 package newengine.managers.sound;
 
-import java.io.File;
 import static commons.RunningMode.DEV_MODE;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import bus.EventBus;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
@@ -15,6 +19,7 @@ public class SoundManager {
 	private double bgmVolume = 0.5;
 	private MediaPlayer soundEffect;
 	private double soundEffectVolumn = 1.0;
+	private List<MediaPlayer> soundPlayers = new ArrayList<>(); 
 	
 	
 	public SoundManager(EventBus bus) {
@@ -47,9 +52,10 @@ public class SoundManager {
 	private void playSoundEffect(String soundFileName) {
 		Media sound = new Media(new File(soundFileName).toURI().toString());
 		try {
-			soundEffect = new MediaPlayer(sound);
+			MediaPlayer soundEffect = new MediaPlayer(sound);
 			soundEffect.setVolume(soundEffectVolumn);
 			soundEffect.play();
+			soundPlayers.add(soundEffect);
 		}catch (MediaException e) {
 			if (DEV_MODE) {
 				e.printStackTrace();

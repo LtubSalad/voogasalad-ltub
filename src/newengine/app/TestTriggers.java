@@ -3,8 +3,11 @@ package newengine.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.input.KeyCode;
 import newengine.events.SpriteModelEvent;
-import newengine.events.debug.SysPrintEvent;
+import newengine.events.game.GameLoadEvent;
+import newengine.events.game.GameSaveEvent;
+import newengine.events.input.KeyEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
@@ -18,6 +21,8 @@ public class TestTriggers {
 	private List<Trigger> triggers = new ArrayList<>();
 	
 	public TestTriggers() {
+		triggers.add(gameSave());
+		triggers.add(gameLoad());
 		triggers.add(printWhenSpriteMoves());
 		triggers.add(playSoundWhenFireProjectile());
 		triggers.add(playSoundWhenHealthChanges());
@@ -25,10 +30,42 @@ public class TestTriggers {
 		triggers.add(loseHealthWhenMove());
 	}
 	
-	private Trigger printWhenSpriteMoves() {
-		TriggerEvent triggerEvent = TriggerEvent.createSpriteAllTriggerEvent(MoveEvent.START_SPRITE);
+	private Trigger gameSave() {
+		TriggerEvent triggerEvent = TriggerEvent.createGameTriggerEvent(KeyEvent.PRESS);
 		TriggerAction triggerAction = TriggerAction.createGameTriggerAction(
-				new SysPrintEvent("all sprite trigger action is printed"));
+				new GameSaveEvent());
+		Trigger trigger = new Trigger(triggerEvent);
+		trigger.addAction(triggerAction);
+		trigger.addCondition((models, event) -> {
+			if (event instanceof KeyEvent) {
+				return ((KeyEvent) event).getCode().equals(KeyCode.S);
+			} else {
+				return false;
+			}
+		});
+		return trigger;
+	}
+	
+	private Trigger gameLoad() {
+		TriggerEvent triggerEvent = TriggerEvent.createGameTriggerEvent(KeyEvent.PRESS);
+		TriggerAction triggerAction = TriggerAction.createGameTriggerAction(
+				new GameLoadEvent());
+		Trigger trigger = new Trigger(triggerEvent);
+		trigger.addAction(triggerAction);
+		trigger.addCondition((models, event) -> {
+			if (event instanceof KeyEvent) {
+				return ((KeyEvent) event).getCode().equals(KeyCode.L);
+			} else {
+				return false;
+			}
+		});
+		return trigger;
+	}
+	
+	private Trigger printWhenSpriteMoves() {
+		TriggerEvent triggerEvent = TriggerEvent.createSpriteAllTriggerEvent(MoveEvent.START_POSITION);
+		TriggerAction triggerAction = TriggerAction.createSpriteTriggeringUnitTriggerAction(
+				new ChangeHealthEvent(ChangeHealthEvent.ANY, -20));
 		Trigger trigger = new Trigger(triggerEvent);
 		trigger.addAction(triggerAction);
 		return trigger;
