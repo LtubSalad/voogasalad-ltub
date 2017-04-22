@@ -66,7 +66,7 @@ public class Game {
 	public Game(SpriteModel gameSprites, BasicEventBus bus2) {
 		bus = bus2; 
 		SelectionModel selectionModel = new SelectionModel(bus);
-		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus);
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel();
 		initializeGame(gameSprites, playerStatsModel, selectionModel); 
 	}
 
