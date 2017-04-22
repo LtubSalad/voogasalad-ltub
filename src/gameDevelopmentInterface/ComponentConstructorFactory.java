@@ -6,11 +6,13 @@ import java.util.ResourceBundle;
 
 import data.SpriteMakerModel;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * Look through the resource file for any component and return the parameters that this
@@ -30,7 +32,6 @@ public class ComponentConstructorFactory extends VBox {
 	private SpriteMakerModel mySpriteModel;
 	private ParamVBox myParamVBox = new ParamVBox();
 	private Text title = new Text();
-	
 	
 	public ComponentConstructorFactory(String componentName, SpriteMakerModel spriteModel) {
 		title.setText(componentName);
@@ -60,4 +61,5 @@ public class ComponentConstructorFactory extends VBox {
 		});
 		this.getChildren().add(addComponent);
 	}
+	
 }

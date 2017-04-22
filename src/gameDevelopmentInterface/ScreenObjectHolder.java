@@ -4,18 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-<<<<<<< HEAD
-import data.SpriteMakerModel;
-import data.SpritesForScreenUse;
-import data.ScreenModelData;
-import commons.point.GamePoint;
-=======
-
 import data.ScreenModelData;
 //import java.util.ResourceBundle;
 import data.SpriteMakerModel;
 import data.SpritesForScreenUse;
->>>>>>> 3444c45a757ca8714dc44be9085e2287033097b4
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;

@@ -9,7 +9,6 @@ import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
 import newengine.events.sound.SoundEvent;
-import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
