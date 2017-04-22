@@ -57,9 +57,14 @@ public class ComponentConstructorFactory extends VBox {
 			for (ConstructorNameAndEntry cInfo : myParamVBox.getConstructorInfo()) {
 				myParams.add(cInfo.getEntry());
 			}
+			System.out.println("Adding to model!!");
 			mySpriteModel.addComponent(myComponentName, myParams);
 		});
 		this.getChildren().add(addComponent);
+	}
+	
+	public SpriteMakerModel getUpdatedModel(){
+		return mySpriteModel;
 	}
 	
 }
