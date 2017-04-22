@@ -15,6 +15,7 @@ import bus.BusEvent;
 import bus.BusEventHandler;
 import bus.BusEventType;
 import bus.EventBus;
+import helperAnnotations.DeveloperMethod;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
@@ -31,7 +32,8 @@ public class Sprite {
 	public <T extends BusEvent> void on(BusEventType<T> eventType, BusEventHandler<? super T> eventHandler) {
 		spriteBus.on(eventType, eventHandler);
 	}
-
+	
+	@DeveloperMethod
 	public void emit(BusEvent event) {
 		spriteBus.emit(event);
 	}

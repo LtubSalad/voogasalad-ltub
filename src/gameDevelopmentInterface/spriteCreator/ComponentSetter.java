@@ -7,5 +7,4 @@ import newengine.sprite.component.Component;
 
 public abstract class ComponentSetter<T extends Component> extends VBox{
 	public abstract T makeComponent() throws UnsupportedTypeException;
-
 }
