@@ -2,8 +2,10 @@ package gameDevelopmentInterface;
 
 import java.util.LinkedList;
 import java.util.Queue;
+
 import commons.point.GamePoint;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Pair;
 
 /**
  * Starts the ability for the user to define a path by clicking
@@ -49,11 +51,11 @@ public class PathCreator {
 	private void targetSetOnMouseDragged(ScreenMap target, MouseEvent e) {
 		double mouseX = e.getScreenX();
 		double mouseY = e.getScreenY();
-		GamePoint coords = target.getCoordOfMouseHover(mouseX, mouseY);
-		GamePoint actualGameLocation = target.getActualLocationOfSprite(coords);
+		Pair<Integer, Integer> gridCoords = target.getCoordOfMouseHover(mouseX, mouseY);
+		GamePoint actualGameLocation = target.getActualLocationOfSprite(gridCoords);
 		if (!coordAlreadyInPath(actualGameLocation)) {
 			replacementPath.add(actualGameLocation);
-			target.addBorderToCoordinate(coords);
+			target.addBorderToCoordinate(gridCoords);
 		}
 		e.consume();
 	}

@@ -1,12 +1,21 @@
 package gameDevelopmentInterface;
+import java.util.ArrayList;
 //import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+<<<<<<< HEAD
 import data.SpriteMakerModel;
 import data.SpritesForScreenUse;
 import data.ScreenModelData;
 import commons.point.GamePoint;
+=======
+
+import data.ScreenModelData;
+//import java.util.ResourceBundle;
+import data.SpriteMakerModel;
+import data.SpritesForScreenUse;
+>>>>>>> 3444c45a757ca8714dc44be9085e2287033097b4
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -17,12 +26,6 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Pair;
-import newengine.sprite.component.Component;
-import newengine.sprite.component.ComponentType;
-import newengine.sprite.components.Images;
-import newengine.sprite.components.Position;
-import newengine.utils.image.ImageSet;
-import newengine.utils.image.LtubImage;
 /**
  * This class holds all possible sprites that a user can place on the screen.
  * @author Jake
@@ -72,12 +75,12 @@ public class ScreenObjectHolder extends HBox {
 //				});
 //			}
 //		});
-		SpriteMakerModel dummySprite = new SpriteMakerModel();
-		ImageSet iSet = new ImageSet();
-		LtubImage lImage = new LtubImage("images/characters/Grass.jpg");
-		iSet.setImage(lImage);
-		dummySprite.addComponent(new Images(iSet));
-		addObject(dummySprite);
+//		SpriteMakerModel dummySprite = new SpriteMakerModel();
+//		ImageSet iSet = new ImageSet();
+//		LtubImage lImage = new LtubImage("images/characters/Grass.jpg");
+//		iSet.setImage(lImage);
+//		dummySprite.addComponent(new Images(iSet));
+//		addObject(dummySprite);
 	}
 	/**
 	 * Add a created sprite to the screen object selector
@@ -86,20 +89,12 @@ public class ScreenObjectHolder extends HBox {
 	 *            the sprite to add to the HBox
 	 */
 	public void addObject(SpriteMakerModel screenObject) {
-		List<Component> screenObjectComponents = screenObject.getComponents();
-		for (Component c : screenObjectComponents) {
-			ComponentType<?> type = c.getType();
-			if (type.equals(Images.TYPE)) {
-				Images imageComponent = (Images) c;
-				Image spriteImage = imageComponent.image().getFXImage();
-				ImageView spriteImageView = new ImageView(spriteImage);
-				spriteImageView.setFitHeight(100);
-				spriteImageView.setFitWidth(100);
-				spriteImageView.setOnMousePressed(e -> dragAndDrop(spriteImageView));
-				myScreenObjects.put(new Pair<String, Image>(imageComponent.image().getFileName(), spriteImage), screenObject);
-				this.getChildren().add(spriteImageView);
-			}
-		}
+		Map<String, List<String>> screenObjectComponents = screenObject.getComponents();
+		String imageFileName = screenObjectComponents.get("Images").get(0);
+		Image image = new Image(getClass().getResourceAsStream(imageFileName));
+		ImageView iView = new ImageView(image);
+		iView.setOnDragDetected(e -> dragAndDrop(iView));
+		this.getChildren().add(iView);
 	}
 	/**
 	 * Make an attribute data object from a file
@@ -127,18 +122,34 @@ public class ScreenObjectHolder extends HBox {
 			ImageView toAdd = new ImageView(db.getImage());
 			toAdd.setFitHeight(grid.getHeight() / target.getNumRows());
 			toAdd.setFitWidth(grid.getWidth() / target.getNumCols());
-			GamePoint gameCoords = target.getCoordOfMouseHover(e.getScreenX(), e.getScreenY());
-			CoordinateConversion changeCoords = new CoordinateConversion();
-			Pair<Integer, Integer> coords = changeCoords.fromGamePointToPair(gameCoords);
+			Pair<Integer, Integer> gridCoords = target.getCoordOfMouseHover(e.getScreenX(), e.getScreenY());
+			String xPos = e.getScreenX() + "";
+			String yPos = e.getScreenY() + "";
+			String heading = 0 + "";
+			List<String> positionParams = new ArrayList<String>();
+			positionParams.add(xPos);
+			positionParams.add(yPos);
+			positionParams.add(heading);
 			for (Pair<String, Image> p : myScreenObjects.keySet()) {
-				String iName = p.getKey();
-				if (imageName.equals(iName)) {
-					SpriteMakerModel anActualPlacedScreenObject = (SpriteMakerModel) new UnoptimizedDeepCopy().copy(myScreenObjects.get(p));
-					anActualPlacedScreenObject.addComponent(new Position(gameCoords, 0)); //heading 0 because all sprites default to this
-					myScreenData.addObjectData(anActualPlacedScreenObject);
-					break;
+				if (p.getKey().equals(imageName)) {
+					SpriteMakerModel sprite = (SpriteMakerModel) new UnoptimizedDeepCopy().copy(myScreenObjects.get(p));
+					sprite.addComponent("Position", positionParams);
+					myScreenData.addObjectData(sprite);
 				}
 			}
+			
+//			
+//			
+//			
+//			for (Pair<String, Image> p : myScreenObjects.keySet()) {
+//				String iName = p.getKey();
+//				if (imageName.equals(iName)) {
+//					SpriteMakerModel anActualPlacedScreenObject = (SpriteMakerModel) new UnoptimizedDeepCopy().copy(myScreenObjects.get(p));
+//		//			anActualPlacedScreenObject.addComponent(); //heading 0 because all sprites default to this
+//					myScreenData.addObjectData(anActualPlacedScreenObject);
+//					break;
+//				}
+//			}
 			success = true;
 		}
 		e.setDropCompleted(success);

@@ -20,23 +20,13 @@ import javafx.scene.layout.BorderPane;
  *
  */
 
-public class ScreenModelCreator extends BorderPane {
-	private ObservableMap<String,String> myGeneralData;
+public class ScreenModelCreator {
 	private ScreenModelData myScreenData = new ScreenModelData();
-	private ScreenObjectHolder myObjectsToPlace;
 	private ScreenMap myScreen = new ScreenMap(this);
-	private ButtonsPanel myButtonsPanel = new ButtonsPanel(this);
-	private SpritesForScreenUse myAttributesModel;
 	private ObservableList<SpriteMakerModel> possibleSprites = FXCollections.observableArrayList();
 	
-	public ScreenModelCreator(SpritesForScreenUse attributesModel, GeneralDataCreator gdc) {
-		myAttributesModel = attributesModel;
-		myObjectsToPlace = new ScreenObjectHolder(this, myScreenData, myAttributesModel);
-		myGeneralData = gdc.getAllData();
-		this.setTop(new GeneralGameDataBar(myGeneralData));
-		this.setBottom(myObjectsToPlace);
-		this.setCenter(myScreen);
-		this.setRight(myButtonsPanel);
+	public ScreenModelCreator() {
+		
 	}
 	/**
 	 * Adds a new sprite to the screen
