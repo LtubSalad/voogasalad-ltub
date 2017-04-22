@@ -9,6 +9,8 @@ public class CameraEvent extends BusEvent{
 			CameraEvent.class.getName() + "ZOOM");
 	public static final BusEventType<CameraEvent> MOVE = new BusEventType<>(
 			CameraEvent.class.getName() + "MOVE");
+	public static final BusEventType<CameraEvent> RESET = new BusEventType<>(
+			CameraEvent.class.getName() + "RESET");
 	
 	private double scaleFactor;
 	private double translateXValue;
@@ -21,12 +23,31 @@ public class CameraEvent extends BusEvent{
 		this.translateYValue = translateYValue;
 	}
 	
-	public CameraEvent(double translateXValue, double translateYValue) {
-		this(MOVE, 0, translateXValue, translateYValue);
+	/**
+	 * Constructor for {@code CameraEvent.MOVE}
+	 * @param busEventType
+	 * @param translateXValue
+	 * @param translateYValue
+	 */
+	public CameraEvent(BusEventType<? extends BusEvent> busEventType, double translateXValue, double translateYValue) {
+		this(busEventType, 1, translateXValue, translateYValue);
 	}
 	
-	public CameraEvent(double scaleFactor) {
-		this(ZOOM, scaleFactor, 0, 0);
+	/**
+	 * Constructor for {@code CameraEvent.ZOOM}
+	 * @param busEventType
+	 * @param scaleFactor
+	 */
+	public CameraEvent(BusEventType<? extends BusEvent> busEventType, double scaleFactor) {
+		this(busEventType, scaleFactor, 0, 0);
+	}
+	
+	/**
+	 * Constructor for {@code CameraEvent.RESET}
+	 * @param busEventType
+	 */
+	public CameraEvent(BusEventType<? extends BusEvent> busEventType) {
+		this(busEventType, 1, 0, 0);
 	}
 	
 	public double getZoomFactor() {

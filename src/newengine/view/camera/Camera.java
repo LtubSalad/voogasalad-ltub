@@ -34,6 +34,9 @@ public class Camera {
 		bus.on(CameraEvent.MOVE, (e) -> {
 			move(e);
 		});
+		bus.on(CameraEvent.RESET, (e) -> {
+			reset();
+		});
 	}
 
 	private void zoom(CameraEvent e) {
@@ -51,6 +54,14 @@ public class Camera {
 	private void move(CameraEvent e) {
 		root.setTranslateX(root.getTranslateX() + e.getTranslateXValue());
 		root.setTranslateY(root.getTranslateY() + e.getTranslateYValue());
+	}
+	
+	private void reset() {
+		scaleFactor = 1;
+		root.setScaleX(scaleFactor);
+		root.setScaleY(scaleFactor);
+		root.setTranslateX(0);
+		root.setTranslateY(0);
 	}
 	
 	/**
