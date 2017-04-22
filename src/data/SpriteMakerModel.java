@@ -9,6 +9,7 @@ import bus.BusEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import newengine.events.sprite.SpriteKilledEvent;
+import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
@@ -54,6 +55,10 @@ public class SpriteMakerModel {
 				return c;
 			}
 		}
+		return null;
+	}
+	
+	public Sprite produceSprite(){
 		return null;
 	}
 
