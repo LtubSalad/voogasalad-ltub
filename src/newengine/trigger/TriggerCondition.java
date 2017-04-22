@@ -1,10 +1,10 @@
 package newengine.trigger;
 
+import bus.BusEvent;
 import newengine.model.Models;
-import newengine.sprite.Sprite;
 
 public interface TriggerCondition {
 	
-	public boolean isTrue(Models models, Sprite triggeringSprite);
+	public boolean isTrue(Models models, BusEvent event);
 
 }

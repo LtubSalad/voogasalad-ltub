@@ -21,6 +21,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
+import newengine.model.Models;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
@@ -109,6 +110,12 @@ public class View {
 
 	public void clear(){
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+	}
+	
+	public void render(Models models) {
+		render(models.spriteModel());
+		render(models.playerStatsModel());
+		render(models.selectionModel());
 	}
 	
 	public void render(SpriteModel model) {

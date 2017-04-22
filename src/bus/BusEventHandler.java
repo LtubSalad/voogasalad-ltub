@@ -10,7 +10,7 @@ import java.util.EventListener;
  *            the event class this handler can handle
  */
 @FunctionalInterface
-public interface BusEventHandler<T extends BusEvent> extends EventListener {
+public interface BusEventHandler<T extends BusEvent> extends EventListener{
 	/**
 	 * Invoked when a specific event of the type for which this handler is
 	 * registered happens.

@@ -34,7 +34,7 @@ public class Game {
 		SpriteModel spriteModel = new SpriteModel(bus);
 		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, Player.MAIN_PLAYER); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
 		SelectionModel selectionModel = new SelectionModel(bus);
-		Models models = new Models(spriteModel, playerStatsModel, selectionModel);
+		Models models = new Models(bus, spriteModel, playerStatsModel, selectionModel);
 		
 		Camera camera = new Camera(bus);
 		view = new View(bus, camera);
@@ -54,9 +54,7 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
-		gameLoop.addLoopComponent((dt) -> view.render(spriteModel));
-		gameLoop.addLoopComponent((dt) -> view.render(playerStatsModel));
-		gameLoop.addLoopComponent((dt) -> view.render(selectionModel));
+		gameLoop.addLoopComponent((dt) -> view.render(models));
 		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 	}
 	

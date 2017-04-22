@@ -38,6 +38,9 @@ final class Subscriber<T extends BusEvent> {
 			specifiedEventType = specifiedEventType.getSuperType();
 		}
 		if (registeredEventType.equals(specifiedEventType)) {
+			if (registeredHandler == null) {
+				System.out.println("registered handler is null");
+			}
 			try { // TODO: a better way to check whether busEvent could be cast to T
 				registeredHandler.handle((T) busEvent);
 			} catch(ClassCastException e) {
