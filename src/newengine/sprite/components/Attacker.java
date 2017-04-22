@@ -1,10 +1,12 @@
 package newengine.sprite.components;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import bus.BusEventHandler;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.skill.Skill;
@@ -21,12 +23,17 @@ import newengine.utils.image.LtubImage;
 public class Attacker extends Component {
 
 	public static final ComponentType<Attacker> TYPE = new ComponentType<>(Attacker.class.getName());
+	private Sprite weapon;
 	private double reloadPeriod = 1;
 	private double timeRemaining = 1;
+	
+//	public Attacker(Sprite weapon) {
+//		this.weapon = weapon;
+//	}
 
 	@Override
 	public void afterAdded() {
-		sprite.on(FireProjectileEvent.SPECIFIC, e -> {
+		sprite.on(FireProjectileEvent.SPECIFIC, (Serializable & BusEventHandler<FireProjectileEvent>) e -> {
 //			if (!weaponReloaded()){
 //				return;
 //			}
@@ -81,8 +88,10 @@ public class Attacker extends Component {
 
 	@Override
 	public Component clone() {
-		// TODO Auto-generated method stub
-		return null;
+		Attacker clone = new Attacker();
+		clone.reloadPeriod = this.reloadPeriod;
+		clone.timeRemaining = this.timeRemaining;
+		return clone;
 	}
 
 

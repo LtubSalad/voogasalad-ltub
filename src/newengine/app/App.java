@@ -62,6 +62,7 @@ public class App extends Application {
 		building.addComponent(new Images(imageSetBuildSkill));
 		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		
+		
 		EventBus bus = game.getBus();
 		
 		// sprite 1

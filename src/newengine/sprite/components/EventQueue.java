@@ -1,10 +1,15 @@
 package newengine.sprite.components;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import bus.BusEvent;
+import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.QueueEvent;
+import newengine.events.sprite.FireProjectileEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
@@ -20,10 +25,10 @@ public class EventQueue extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(QueueEvent.ADD, (e) -> {
+		sprite.on(QueueEvent.ADD, (Serializable & BusEventHandler<QueueEvent>)(e) -> {
 			addEvent(e.getEvent());
 		});
-		sprite.on(QueueEvent.NEXT, (e) -> {
+		sprite.on(QueueEvent.NEXT, (Serializable & BusEventHandler<QueueEvent>)(e) -> {
 			eventFinished = true;
 		});
 	}

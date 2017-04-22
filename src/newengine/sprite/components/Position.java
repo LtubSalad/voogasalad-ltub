@@ -1,6 +1,14 @@
 package newengine.sprite.components;
+<<<<<<< HEAD
 import java.io.Serializable;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+=======
+
+import java.io.Serializable;
+
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+>>>>>>> 157ea3eb7683d7be51a248f9dfa949141c3d11fa
 import bus.BusEvent;
 import bus.BusEventHandler;
 import commons.MathUtils;
@@ -9,6 +17,7 @@ import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
 import newengine.events.sound.SoundEvent;
+import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;

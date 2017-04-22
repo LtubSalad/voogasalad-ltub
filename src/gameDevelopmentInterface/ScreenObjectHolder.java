@@ -73,6 +73,12 @@ public class ScreenObjectHolder extends HBox {
 //		iSet.setImage(lImage);
 //		dummySprite.addComponent(new Images(iSet));
 //		addObject(dummySprite);
+		SpriteMakerModel dummySprite = new SpriteMakerModel();
+		ImageSet iSet = new ImageSet();
+		//LtubImage lImage = new LtubImage("data/images/characters/Grass.jpg");
+		//iSet.setImage(lImage);
+		//dummySprite.addComponent(new Images(iSet));
+		//addObject(dummySprite);
 	}
 	/**
 	 * Add a created sprite to the screen object selector
@@ -87,6 +93,19 @@ public class ScreenObjectHolder extends HBox {
 		ImageView iView = new ImageView(image);
 		iView.setOnDragDetected(e -> dragAndDrop(iView));
 		this.getChildren().add(iView);
+		for (Component c : screenObject.getComponents().values()) {
+			ComponentType<?> type = c.getType();
+			if (type.equals(Images.TYPE)) {
+				Images imageComponent = (Images) c;
+				Image spriteImage = imageComponent.image().getFXImage();
+				ImageView spriteImageView = new ImageView(spriteImage);
+				spriteImageView.setFitHeight(100);
+				spriteImageView.setFitWidth(100);
+				spriteImageView.setOnMousePressed(e -> dragAndDrop(spriteImageView));
+				myScreenObjects.put(new Pair<String, Image>(imageComponent.image().getFileName(), spriteImage), screenObject);
+				this.getChildren().add(spriteImageView);
+			}
+		}
 	}
 	/**
 	 * Make an attribute data object from a file

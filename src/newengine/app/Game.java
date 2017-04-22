@@ -36,6 +36,7 @@ public class Game {
 		SpriteModel spriteModel = new SpriteModel(bus);
 		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, Player.MAIN_PLAYER); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
 		SelectionModel selectionModel = new SelectionModel(bus);
+<<<<<<< HEAD
 		initializeGame(spriteModel, playerStatsModel, selectionModel);
 		
 	}
@@ -54,6 +55,9 @@ public class Game {
 		SelectionModel selectionModel = new SelectionModel(bus); // TODO: (tahia)  remove duplicate line 
 		initializeGame(spriteModel, playerModel, selectionModel);
 		Models models = new Models(spriteModel, playerStatsModel, selectionModel);
+=======
+		Models models = new Models(bus, spriteModel, playerStatsModel, selectionModel);
+>>>>>>> 157ea3eb7683d7be51a248f9dfa949141c3d11fa
 		
 	}
 	
@@ -92,9 +96,7 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
-		gameLoop.addLoopComponent((dt) -> view.render(spriteModel));
-		gameLoop.addLoopComponent((dt) -> view.render(playerStatsModel));
-		gameLoop.addLoopComponent((dt) -> view.render(selectionModel));
+		gameLoop.addLoopComponent((dt) -> view.render(models));
 		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 	}
 	
