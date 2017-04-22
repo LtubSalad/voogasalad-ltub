@@ -102,46 +102,9 @@ public class EventHandlerPane extends ScrollPane {
 				registerSprite();
 				updateMethods();
 				this.setItems(methods);
-				/*
-				this.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue,newValue)->{
-					SingleEventHandler.this.addScript(getSelectionModel().getSelectedItem());
-					});*/
-				/*
-				setCellFactory((c) -> {
-				    ListCell<String> cell = new ListCell<>();
-				    cell.setOnMouseClicked(event -> {
-				    	SingleEventHandler.this.addScript(getSelectionModel().getSelectedItem());
-				    });
-				    return cell;
-				});*/
-				
-				setCellFactory(
-			            new Callback<ListView<String>, ListCell<String>>() {
-			                @Override public ListCell<String> call(ListView<String> param) {
-			                    final ListCell<String> cell = new ListCell<String>() {
-			                        {
-			                            super.setPrefWidth(100);
-			                        }    
-			                        @Override public void updateItem(String item, 
-			                            boolean empty) {
-			                                super.updateItem(item, empty);
-			                                if (item != null) {
-			                                    setText(item);
-			                                    
-			                                }
-			                                else {
-			                                    setText(null);
-			                                }
-			                                System.out.println("update");
-			                                setOnMouseClicked(event -> {
-			                                	System.out.println("wer");
-			            				    	SingleEventHandler.this.addScript(getSelectionModel().getSelectedItem());
-			            				    });
-			                            }
-			                };
-			                return cell;
-			            }
-			        });
+				this.getSelectionModel().selectedIndexProperty().addListener((observableValue,oldVal,newVal)->{
+						SingleEventHandler.this.addScript(getSelectionModel().getSelectedItem());	
+					});
 			}
 
 			private void registerSprite() {

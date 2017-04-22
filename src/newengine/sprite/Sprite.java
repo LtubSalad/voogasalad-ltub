@@ -70,6 +70,7 @@ public class Sprite {
 	 * 
 	 * @param dt
 	 */
+	@DeveloperMethod
 	public void update(double dt) {
 		for (Component component : components.values()) {
 			component.onUpdated(dt);
