@@ -6,6 +6,7 @@ import java.util.List;
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
@@ -135,6 +136,7 @@ public class View {
 		statsPanel.setSpacing(10);
 		statsPanel.maxHeight(100);
 		createText(playerStatsModel).stream().forEach(e -> statsPanel.getChildren().add(e));
+		statsPanel.setAlignment(Pos.CENTER);
 		
 		//TODO if done with testing playerstatsmodel, delete
 		//bus.emit(new ChangeLivesEvent(ChangeLivesEvent.CHANGE,Player.MAIN_PLAYER, -1));
