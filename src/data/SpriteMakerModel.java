@@ -26,7 +26,17 @@ public class SpriteMakerModel {
 		myScriptMap=FXCollections.observableMap(handlers);
 	}
 	
+	/**
+	 * This code means that the sprite only has one component for each type... though
+	 * you can possibly have two components of the same class with different "type".
+	 * @param comp
+	 */
 	public void addComponent(Component comp) {
+		myComponents.forEach((type,component)->{
+			if(comp.getType().equals(type)){
+				myComponents.remove(type,component);
+			}
+		});
 		myComponents.put(comp.getType(), comp);
 	}
 	
@@ -58,8 +68,19 @@ public class SpriteMakerModel {
 		return null;
 	}
 	
+	/**
+	 * Call this AFTER unserialization to avoid the bus issues
+	 * @return
+	 */
 	public Sprite produceSprite(){
-		return null;
+		Sprite sprite=new Sprite();
+		myComponents.forEach((componentType, component)->{
+			sprite.addComponent(component);
+		});
+		myScriptMap.forEach((event, script)->{
+			sprite.produceHandler(event.getEventType(), script);
+		});
+		return sprite;
 	}
 
 }

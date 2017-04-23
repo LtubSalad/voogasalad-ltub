@@ -28,6 +28,7 @@ public class DeveloperData {
 		sprites=FXCollections.observableList(dummyList);
 		List<Path> dummyPaths=new ArrayList<>();
 		myPaths=FXCollections.observableList(dummyPaths);
+		myPaths.add(new Path());
 		myData.put(NUMBER_OF_STARTING_BONUSES, "");
 		myData.put(NUMBER_OF_STARTING_GOLD, "");	
 		myData.put(NUMBER_OF_LEVELS, "");

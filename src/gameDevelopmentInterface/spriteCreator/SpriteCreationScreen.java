@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import newengine.sprite.component.Component;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
+import newengine.sprite.components.PathFollower;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.SoundEffect;
@@ -39,7 +40,7 @@ public class SpriteCreationScreen extends BorderPane{
 	
 	public void instantiate(){
 		spriteData=new SpriteMakerModel();
-		infoPane=new SpriteInfoPane(spriteData);
+		infoPane=new SpriteInfoPane(spriteData,model);
 		List<Class<? extends Component>> basicComponents= new ArrayList<>();
 		ObservableList<Class<? extends Component>> observableComponents=FXCollections.observableList(basicComponents);
 		observableComponents.add(Range.class);
@@ -48,6 +49,7 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Owner.class);
 		observableComponents.add(Position.class);
 		observableComponents.add(Images.class);
+		observableComponents.add(PathFollower.class);
 		ComponentSelectorPane selector=new ComponentSelectorPane("Add components with simple parameters", observableComponents,infoPane);
 		this.setRight(selector);
 		this.setLeft(new EventHandlerPane(spriteData));
@@ -69,23 +71,19 @@ public class SpriteCreationScreen extends BorderPane{
 		private BottomPanel(){
 			Button saveButton= new Button("Save SpriteMakerModel to File");
 			saveButton.setOnMouseClicked((click)->{
-				dataHandler.saveToFile(infoPane.getSpriteData());
+				try {
+					dataHandler.saveToFile(infoPane.getSpriteData());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			});
 			Button listSaveButton=new Button("Save SpriteMakerModel to THIS GAME's list of SpritemakerModels");
 			listSaveButton.setOnMouseClicked((click)->{
-				model.addSprite(infoPane.getSpriteData());
-				infoPane.getSpriteData().getScriptMap().forEach((event,script)->{
-					ScriptEngine engine = new ScriptEngineManager().getEngineByName("groovy");
-					try {
-						engine.eval(script);
-					} catch (ScriptException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				try {
+					model.addSprite(infoPane.getSpriteData());
+				} catch (Exception e) {
 					
-				});
-				System.out.println("trying to add...");
-				
+				}				
 			});
 			this.getChildren().addAll(saveButton,listSaveButton);
 		}
