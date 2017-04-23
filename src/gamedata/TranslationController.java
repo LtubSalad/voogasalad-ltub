@@ -15,40 +15,44 @@ import utilities.XStreamHandler;
  */
 public class TranslationController {
 	private Translator translator;
-	private Translatable dataToTranslate; 
-	
+
 	private File fileToTranslate; 
 	private XStreamHandler handler; 
-	
+
 
 	// TODO: using ScreenModelData --> Sprites 
 	// TODO: using XML file of SpriteMakerModels --> Sprites 
 	// TODO: using XML file of current game state (Sprites)  --> sprite maker models 
 	// TODO: using SpriteModel of current game state --> sprite maker models
-	
+
 	public TranslationController(ScreenModelData screenModel){
-		//this.dataToTranslate = screenModel; 
-		translator = new AuthDataTranslator(screenModel.getData());
+		translator = new AuthDataTranslator(screenModel.getData()); 
 	}
-	
+
 	public TranslationController(SpriteModel spriteModel){
-		//this.dataToTranslate = spriteModel; 
-		translator = new EngineDataTranslator(spriteModel.getData());
+		translator = new EngineDataTranslator(spriteModel.getData()); 
 	}
-	
+
 	public TranslationController(String filepath){
-		// in this case, the translator is instantiated based on the public method called by the querying class 
 		fileToTranslate = new File(filepath);	
 	}
-	
+
+//	public void setTranslatorForAuthData(){
+//		translator = new AuthDataTranslator(dataToTranslate.getTranslatableData());
+//	}
+//
+//	public void setTranslatorForGameData(){
+//		translator = new EngineDataTranslator(dataToTranslate.getTranslatableData());
+//	}
+
 	public void setTranslatorForAuthFile(){
 		translator = new AuthDataTranslator(handler.getScreenModel(fileToTranslate));
 	}
-	
+
 	public void setTranslatorForGameFile(){
 		translator = new EngineDataTranslator(handler.getSpriteModel(fileToTranslate));
 	}
-	
+
 	public void translateData(){
 		translator.translate();
 	}
