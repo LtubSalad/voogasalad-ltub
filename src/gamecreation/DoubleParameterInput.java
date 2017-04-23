@@ -32,5 +32,10 @@ public class DoubleParameterInput implements ParameterInput{
 		return slide.getValue();
 	}
 
+	@Override
+	public String getType() {
+		return TYPE;
+	}
+
 	
 }

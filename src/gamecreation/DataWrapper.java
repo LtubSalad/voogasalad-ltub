@@ -6,5 +6,5 @@ public interface DataWrapper {
 	
 	public Object get();
 
-	public boolean checkType();
+	public Class<?> checkType();
 }

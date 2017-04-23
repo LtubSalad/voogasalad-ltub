@@ -33,5 +33,10 @@ public class IntegerParameterInput implements ParameterInput{
 		return (int) slide.getValue();
 	}
 
+	@Override
+	public String getType() {
+		return TYPE;
+	}
+
 	
 }
