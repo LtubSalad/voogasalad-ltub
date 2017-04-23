@@ -38,7 +38,7 @@ public class Position extends Component {
 
 	@Override
 	public void onUpdated(double dt) {
-		if (!isMoving()) {return;}
+		if (!isMoving() || !sprite.getComponent(Speed.TYPE).isPresent()) {return;}
 		GamePoint pDest = target.getLocation();
 		double xDest = pDest.x();
 		double yDest = pDest.y();
