@@ -8,6 +8,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import bus.BusEvent;
 import bus.EventBus;
+import gamedata.Translatable;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.SetGameBusEvent;
 import newengine.events.trigger.SpriteTriggerActionEvent;
@@ -20,7 +21,7 @@ import newengine.sprite.SpriteID;
  * @author keping
  *
  */
-public class SpriteModel {
+public class SpriteModel{
 
 	private EventBus bus;
 	private List<Sprite> sprites = new ArrayList<>();
@@ -102,8 +103,8 @@ public class SpriteModel {
 		return Optional.empty();
 	}
 	
-	public List<Sprite> getSprites() {
-		return sprites;
+private List<Sprite> getSprites() {
+	return sprites; 
 	}
 	
 	public void update(double dt) {
@@ -114,6 +115,11 @@ public class SpriteModel {
 		for (Sprite sprite : sprites) {
 			sprite.update(dt);
 		}
+	}
+
+	//@Override
+	public List<Sprite> getData() {
+		return sprites; 
 	}
 	
 }

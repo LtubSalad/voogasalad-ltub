@@ -15,23 +15,25 @@ import utilities.XStreamHandler;
  */
 public class TranslationController {
 	private Translator translator;
+	private Translatable dataToTranslate; 
 	
 	private File fileToTranslate; 
 	private XStreamHandler handler; 
 	
+
 	// TODO: using ScreenModelData --> Sprites 
 	// TODO: using XML file of SpriteMakerModels --> Sprites 
 	// TODO: using XML file of current game state (Sprites)  --> sprite maker models 
 	// TODO: using SpriteModel of current game state --> sprite maker models
 	
 	public TranslationController(ScreenModelData screenModel){
-		// in this case, the data fed instantiates the translator 
-		translator = new AuthDataTranslator(screenModel.getAllObjectsOnScreen());
+		//this.dataToTranslate = screenModel; 
+		translator = new AuthDataTranslator(screenModel.getData());
 	}
 	
 	public TranslationController(SpriteModel spriteModel){
-		// in this case, the data fed instantiates the translator 
-		translator = new EngineDataTranslator(spriteModel.getSprites());
+		//this.dataToTranslate = spriteModel; 
+		translator = new EngineDataTranslator(spriteModel.getData());
 	}
 	
 	public TranslationController(String filepath){
