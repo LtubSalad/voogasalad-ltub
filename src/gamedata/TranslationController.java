@@ -13,12 +13,11 @@ import utilities.XStreamHandler;
  * 
  *
  */
-public class TranslationController {
+public class TranslationController implements FileTranslator, Translator {
 	private Translator translator;
 
 	private File fileToTranslate; 
 	private XStreamHandler handler; 
-
 
 	// TODO: using ScreenModelData --> Sprites 
 	// TODO: using XML file of SpriteMakerModels --> Sprites 
@@ -37,14 +36,6 @@ public class TranslationController {
 		fileToTranslate = new File(filepath);	
 	}
 
-//	public void setTranslatorForAuthData(){
-//		translator = new AuthDataTranslator(dataToTranslate.getTranslatableData());
-//	}
-//
-//	public void setTranslatorForGameData(){
-//		translator = new EngineDataTranslator(dataToTranslate.getTranslatableData());
-//	}
-
 	public void setTranslatorForAuthFile(){
 		translator = new AuthDataTranslator(handler.getScreenModel(fileToTranslate));
 	}
@@ -53,7 +44,7 @@ public class TranslationController {
 		translator = new EngineDataTranslator(handler.getSpriteModel(fileToTranslate));
 	}
 
-	public void translateData(){
+	public void translate(){
 		translator.translate();
 	}
 
