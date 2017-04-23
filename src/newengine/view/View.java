@@ -12,7 +12,6 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
@@ -20,12 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
-import newengine.events.stats.ChangeLivesEvent;
-import newengine.events.stats.ChangeScoreEvent;
-import newengine.events.stats.ChangeWealthEvent;
+import newengine.model.Models;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
@@ -34,7 +30,6 @@ import newengine.sprite.Sprite;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.SkillSet;
-import newengine.sprite.player.Player;
 import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
@@ -107,10 +102,19 @@ public class View {
 		return scene;
 	}
 
+	public void clear(){
+		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+	}
+	
+	public void render(Models models) {
+		render(models.spriteModel());
+		render(models.playerStatsModel());
+		render(models.selectionModel());
+	}
+	
 	public void render(SpriteModel model) {
 		// render game cast
-		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
-		for (Sprite sprite : model.getSprites()) {
+		for (Sprite sprite : model.getData()) {
 			if (!sprite.getComponent(Position.TYPE).isPresent() ||
 					!sprite.getComponent(Images.TYPE).isPresent()) {
 				continue;
@@ -162,6 +166,13 @@ public class View {
 			if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
 				skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
 			}
+			else {
+				skillBox.clear();
+			}
+		}
+		else {
+			gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+			skillBox.clear();
 		}
 		// render the selected skill
 		if (selectionModel.getSelectedSkill().isPresent()) {

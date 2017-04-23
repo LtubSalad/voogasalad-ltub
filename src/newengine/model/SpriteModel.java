@@ -4,34 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import bus.BusEvent;
 import bus.EventBus;
+import gamedata.Translatable;
 import newengine.events.SpriteModelEvent;
-import newengine.events.VarMapEvent;
 import newengine.events.sprite.SetGameBusEvent;
 import newengine.events.trigger.SpriteTriggerActionEvent;
 import newengine.events.trigger.SpriteTriggerRegisterEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
-import newengine.utils.variable.VarKey;
-import newengine.utils.variable.VarValue;
 
 /**
  * A container for sprites.
  * @author keping
  *
  */
-public class SpriteModel {
+public class SpriteModel{
 
 	private EventBus bus;
 	private List<Sprite> sprites = new ArrayList<>();
+	private List<Sprite> spritesToAdd = new ArrayList<>();
+	private List<Sprite> spritesToRemove = new ArrayList<>();
+	private List<SpriteTriggerRegisterEvent> spriteTriggerRegisterEvents = new ArrayList<>();
+	
 	
 	public SpriteModel(EventBus bus) {
 		this.bus = bus;
 		initHandlers();
 	}
 	
-	private List<SpriteTriggerRegisterEvent> spriteTriggerRegisterEvents = new ArrayList<>();
 	private void initHandlers() {
 		bus.on(SpriteModelEvent.ADD, (e) -> {
 			addSprite(e.getSprites());
@@ -66,27 +69,30 @@ public class SpriteModel {
 		});
 	}
 	private void addSprite(List<Sprite> sprites) {
-		for (Sprite sprite: sprites) {
+		for (Sprite sprite : sprites) {
 			if (!(this.sprites.contains(sprite))) {
-				this.sprites.add(sprite);
+				System.out.println("sprite added to sprite model");
+				this.spritesToAdd.add(sprite);
 				for (SpriteTriggerRegisterEvent e : spriteTriggerRegisterEvents) {
 					sprite.on(e.getTriggerBusEventType(), e.getTriggerHandler());
 				}
-				bus.emit(new VarMapEvent(VarMapEvent.ADD, new VarKey("sprite"), new VarValue(sprite)));
 				sprite.emit(new SetGameBusEvent(bus));
 			}
 		}
 	}
+
 	private void removeSprite(List<Sprite> sprites) {
-		for (Sprite sprite: sprites) {
-			if (this.sprites.contains(sprite)) {
-				this.sprites.remove(sprite);
-				bus.emit(new VarMapEvent(VarMapEvent.REMOVE, new VarKey("sprite"), new VarValue(sprite)));
-			}
+		for (Sprite sprite : sprites) {
+			spritesToRemove.add(sprite);
 		}
 	}
 	
+	// TODO added only for loading the model
+	public void setBus(EventBus bus) {
+		this.bus = bus;
+	}
 	
+
 	public Optional<Sprite> getByID(SpriteID spriteID) {
 		// TODO: a map for faster query? not really necessary
 		for (Sprite sprite : sprites) {
@@ -97,14 +103,23 @@ public class SpriteModel {
 		return Optional.empty();
 	}
 	
-	public List<Sprite> getSprites() {
-		return sprites;
+private List<Sprite> getSprites() {
+	return sprites; 
 	}
 	
 	public void update(double dt) {
+		sprites.removeAll(spritesToRemove);
+		spritesToRemove.clear();
+		sprites.addAll(spritesToAdd);
+		spritesToAdd.clear();
 		for (Sprite sprite : sprites) {
 			sprite.update(dt);
 		}
+	}
+
+	//@Override
+	public List<Sprite> getData() {
+		return sprites; 
 	}
 	
 }

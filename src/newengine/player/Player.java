@@ -1,4 +1,4 @@
-package newengine.sprite.player;
+package newengine.player;
 
 public class Player {
 

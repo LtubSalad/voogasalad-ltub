@@ -1,7 +1,5 @@
 package newengine.events.sprite;
 
-import java.util.List;
-
 import bus.BusEvent;
 import bus.BusEventType;
 import newengine.events.HasTriggeringSprite;
@@ -10,13 +8,15 @@ import newengine.sprite.components.Owner;
 import newengine.utils.Target;
 
 public class MoveEvent extends BusEvent implements HasTriggeringSprite {
-
-	public static final BusEventType<MoveEvent> GAME = new BusEventType<>(MoveEvent.class.getName() + "GAME");
-	public static final BusEventType<MoveEvent> ALL = new BusEventType<>(MoveEvent.class.getName() + "ALL");
-	public static final BusEventType<MoveEvent> SPECIFIC = new BusEventType<>(MoveEvent.class.getName() + "SPECIFIC");
-
+	
+	public static final BusEventType<MoveEvent> START_POSITION = new BusEventType<>(
+			MoveEvent.class.getName() + "SPECIFIC");
+	public static final BusEventType<MoveEvent> START_SPRITE = new BusEventType<>(
+			MoveEvent.class.getName() + "SPRITE");
+	public static final BusEventType<MoveEvent> STOP = new BusEventType<>(
+			MoveEvent.class.getName() + "STOP");
+	
 	private Sprite sprite;
-	private List<Sprite> sprites;
 	private Target target;
 
 	public MoveEvent(BusEventType<? extends BusEvent> busEventType, Sprite sprite, Target target) {
@@ -25,19 +25,9 @@ public class MoveEvent extends BusEvent implements HasTriggeringSprite {
 		this.target = target;
 	}
 
-	public MoveEvent(BusEventType<? extends BusEvent> busEventType, List<Sprite> sprites, Target target) {
-		super(busEventType);
-		this.sprites = sprites;
-		this.target = target;
-	}
-
 	@Override
 	public Sprite getSprite() {
 		return sprite;
-	}
-
-	public List<Sprite> getSprites() {
-		return sprites;
 	}
 
 	public Target getTarget() {

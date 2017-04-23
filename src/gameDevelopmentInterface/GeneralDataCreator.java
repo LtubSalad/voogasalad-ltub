@@ -1,7 +1,7 @@
 package gameDevelopmentInterface;
 
 import java.util.ResourceBundle;
-import data.GeneralModelData;
+import data.DeveloperData;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -19,7 +19,7 @@ import javafx.util.Pair;
  * 
  * @author Jake
  */
-public class GeneralDataCreator extends GridPane {
+public class GeneralDataCreator extends GridPane{
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
 	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
@@ -40,8 +40,9 @@ public class GeneralDataCreator extends GridPane {
 	private Button sendStartingGoldInput = new Button(myResources.getString(SEND));
 	private Button sendStartingBonusesInput = new Button(myResources.getString(SEND));
 	private Button saveAll = new Button(myResources.getString(SAVE_ALL_VALUES));
-	private GeneralModelData myGeneralModel = new GeneralModelData();
+	private DeveloperData myGeneralModel = new DeveloperData();
 	private ObservableMap<String, String> myData = myGeneralModel.getAllData();
+	private GeneralGameDataBar myBar = new GeneralGameDataBar(myData);
 
 	public GeneralDataCreator() {
 		this.setMaxSize(MAX_SCREEN_SIZE, MAX_SCREEN_SIZE);
@@ -53,6 +54,10 @@ public class GeneralDataCreator extends GridPane {
 
 	public ObservableMap<String, String> getAllData() {
 		return myData;
+	}
+	
+	public GeneralGameDataBar getBar() {
+		return myBar;
 	}
 
 	private void placeTiles() {

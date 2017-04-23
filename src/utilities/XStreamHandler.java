@@ -2,30 +2,30 @@ package utilities;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import data.AttributeData;
+import data.SpriteMakerModel;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import newengine.sprite.Sprite;
 
 public class XStreamHandler {
 	//TODO: Remove duplicate code using generics
 	
-	public AttributeData getAttributeFromFile() {
+	public SpriteMakerModel getAttributeFromFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
 		File attributeFile = chooser.showOpenDialog(new Stage());
-		AttributeData attribute = (AttributeData)xstream.fromXML(attributeFile);
+		SpriteMakerModel attribute = (SpriteMakerModel)xstream.fromXML(attributeFile);
 		return attribute;
 	}
 	
-	public AttributeData getAttributeFromFile(File file) {
+	public SpriteMakerModel getAttributeFromFile(File file) {
 		XStream xstream = new XStream(new DomDriver());
-		AttributeData attribute = (AttributeData)xstream.fromXML(file);
+		SpriteMakerModel attribute = (SpriteMakerModel)xstream.fromXML(file);
 		return attribute;
 	}
 	
@@ -35,19 +35,29 @@ public class XStreamHandler {
 		return object;
 	}
 	
-	public List<AttributeData> getScreenModelFile() {
+	public <T> T getObjectFromFile(){
+		XStream xstream = new XStream(new DomDriver());
+		FileChooser chooser = new FileChooser();
+		File file = chooser.showOpenDialog(new Stage());
+		T object = (T)xstream.fromXML(file);
+		return object;
+	}
+	
+
+	public List<SpriteMakerModel> getScreenModelFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
 		File attributeFile = chooser.showOpenDialog(new Stage());
-		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(attributeFile);
+		List<SpriteMakerModel> attribute = (List<SpriteMakerModel>)xstream.fromXML(attributeFile);
 		return attribute;
 	}
 	
-	public List<AttributeData> getScreenModel(File file) {
+	public List<SpriteMakerModel> getScreenModel(File file) {
 		XStream xstream = new XStream(new DomDriver());
-		List<AttributeData> attribute = (List<AttributeData>)xstream.fromXML(file);
+		List<SpriteMakerModel> attribute = (List<SpriteMakerModel>)xstream.fromXML(file);
 		return attribute;
 	}
+	
 
 	public void saveToFile(Object data) {
 		FileChooser chooser = new FileChooser();
@@ -66,4 +76,14 @@ public class XStreamHandler {
 			// user clicked cancel. No need to exclaim anything went wrong
 		}
 	}
+	
+	public List<Sprite> getSpriteModel(File file){
+		XStream xstream = new XStream(new DomDriver());
+		List<Sprite> sprites = (List<Sprite>)xstream.fromXML(file);
+		return sprites;
+	}
+	
+
+	
+	
 }

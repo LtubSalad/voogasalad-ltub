@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import gamedata.Translatable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 /**
@@ -13,8 +15,9 @@ import javafx.collections.ObservableList;
  *
  */
 public class ScreenModelData {
-	private ObservableList<AttributeData> myScreenData = FXCollections.observableArrayList();
-	private Map<AttributeData, Boolean> onScreenOrNot = new HashMap<AttributeData, Boolean>();
+	private ObservableList<SpriteMakerModel> myScreenData = FXCollections.observableArrayList();
+	private Map<SpriteMakerModel, Boolean> onScreenOrNot = new HashMap<SpriteMakerModel, Boolean>();
+	
 	public ScreenModelData() {
 		
 	}	
@@ -22,9 +25,9 @@ public class ScreenModelData {
 	 * Will put this object into the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
 	 */
-	public void addObjectData(AttributeData newSprite) {
-		onScreenOrNot.put(newSprite, false);
-		myScreenData.add(newSprite);
+	public void addObjectData(SpriteMakerModel anActualPlacedScreenObject) {
+		onScreenOrNot.put(anActualPlacedScreenObject, false);
+		myScreenData.add(anActualPlacedScreenObject);
 	}
 //	/**
 //	 * Will remove this object from the collection of objects for the screen
@@ -37,18 +40,18 @@ public class ScreenModelData {
 	 * 
 	 * @return all the objects on the screen
 	 */
-	public ObservableList<AttributeData> getAllObjectsOnScreen() {
+	public ObservableList<SpriteMakerModel> getAllObjectsOnScreen() {
 		return myScreenData;
 	}
-	public Map<AttributeData, Boolean> getIfOnScreen() {
+	public Map<SpriteMakerModel, Boolean> getIfOnScreen() {
 		return onScreenOrNot;
 	}
 	/**
 	 * 
 	 * @return a list version of the observable list we have been using to store screen sprites
 	 */
-	public List<AttributeData> getDataToSave() {
-		List<AttributeData> toReturn = new ArrayList<AttributeData>();
+	public List<SpriteMakerModel> getDataToSave() {
+		List<SpriteMakerModel> toReturn = new ArrayList<SpriteMakerModel>();
 		myScreenData.forEach(Attr -> {
 			toReturn.add(Attr);
 		});
@@ -58,11 +61,20 @@ public class ScreenModelData {
 	 * 
 	 * @param datas are from a file that contains a preset map
 	 */
-	public void setObjectsOnScreen(List<AttributeData> datas){
+	public void setObjectsOnScreen(List<SpriteMakerModel> datas){
 		onScreenOrNot.clear();
 		datas.forEach(d -> onScreenOrNot.put(d, false));
 		myScreenData.clear();
 		myScreenData.addAll(datas);
+	}
+	// TODO: GET RID OF DUPLICATE
+	//@Override
+	public List<SpriteMakerModel> getData() {
+		List<SpriteMakerModel> toReturn = new ArrayList<SpriteMakerModel>();
+		myScreenData.forEach(Attr -> {
+			toReturn.add(Attr);
+		});
+		return toReturn;
 	}
 	
 }

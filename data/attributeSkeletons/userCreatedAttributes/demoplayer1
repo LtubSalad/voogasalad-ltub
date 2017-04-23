@@ -1,0 +1,18 @@
+<data.AttributeData>
+  <attributeType>Myplayer</attributeType>
+  <changeableName>false</changeableName>
+  <isConcrete>true</isConcrete>
+  <attributeScripts/>
+  <attributeVariables>
+    <entry>
+      <string>xPosition</string>
+      <string>420</string>
+    </entry>
+    <entry>
+      <string>yPosition</string>
+      <string>420</string>
+    </entry>
+  </attributeVariables>
+  <listVariables/>
+  <subAttributes/>
+</data.AttributeData>

@@ -1,8 +1,9 @@
 package gameDevelopmentInterface;
 
 import data.AttributeData;
-import data.AttributesForScreenUse;
+import data.SpritesForScreenUse;
 import data.ScreenModelData;
+import data.SpriteMakerModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -19,36 +20,26 @@ import javafx.scene.layout.BorderPane;
  *
  */
 
-public class ScreenModelCreator extends BorderPane {
-	private ObservableMap<String,String> myGeneralData;
+public class ScreenModelCreator {
 	private ScreenModelData myScreenData = new ScreenModelData();
-	private ScreenObjectHolder myObjectsToPlace;
 	private ScreenMap myScreen = new ScreenMap(this);
-	private ButtonsPanel myButtonsPanel = new ButtonsPanel(this);
-	private AttributesForScreenUse myAttributesModel;
-	private ObservableList<AttributeData> possibleSprites = FXCollections.observableArrayList();
+	private ObservableList<SpriteMakerModel> possibleSprites = FXCollections.observableArrayList();
 	
-	public ScreenModelCreator(AttributesForScreenUse attributesModel, GeneralDataCreator gdc) {
-		myAttributesModel = attributesModel;
-		myObjectsToPlace = new ScreenObjectHolder(this, myScreenData, myAttributesModel);
-		myGeneralData = gdc.getAllData();
-		this.setTop(new GeneralGameDataBar(myGeneralData));
-		this.setBottom(myObjectsToPlace);
-		this.setCenter(myScreen);
-		this.setRight(myButtonsPanel);
+	public ScreenModelCreator() {
+		
 	}
 	/**
 	 * Adds a new sprite to the screen
 	 * @param attr
 	 */
-	public void addPossibleSprite(AttributeData attr) {
+	public void addPossibleSprite(SpriteMakerModel attr) {
 		possibleSprites.add(attr);
 	}
 	/**
 	 * 
 	 * @return All sprites currently supposed to be on the screen
 	 */
-	public ObservableList<AttributeData> getPossibleSprites() {
+	public ObservableList<SpriteMakerModel> getPossibleSprites() {
 		return possibleSprites;
 	}
 	/**

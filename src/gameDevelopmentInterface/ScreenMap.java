@@ -1,10 +1,12 @@
 package gameDevelopmentInterface;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import data.AttributeData;
 import commons.point.GamePoint;
+import data.SpriteMakerModel;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
@@ -16,6 +18,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
+import newengine.sprite.component.Component;
+import newengine.sprite.components.Images;
+import newengine.sprite.components.Position;
 
 /**
  * This class will hold the grid on which players can place sprites or tiles to set up their
@@ -40,7 +45,7 @@ public class ScreenMap extends StackPane {
 	
 	public ScreenMap(ScreenModelCreator smc) {
 		mySMC = smc;
-		mySMC.getScreenData().getAllObjectsOnScreen().addListener(new ListChangeListener<AttributeData>() {
+		mySMC.getScreenData().getAllObjectsOnScreen().addListener(new ListChangeListener<SpriteMakerModel>() {
 			@Override
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
 				redrawGrid();
@@ -93,44 +98,77 @@ public class ScreenMap extends StackPane {
 	 * @param y the actual y position of the mouse on the screen
 	 * @return the mapped coordinate value of the (x,y) to the grid object
 	 */
-	public GamePoint getCoordOfMouseHover(double x, double y) {
+	public Pair<Integer, Integer> getCoordOfMouseHover(double x, double y) {
 		Bounds boundsInScreen = myGrid.localToScreen(myGrid.getBoundsInLocal());
 		int colNum = getColOrRowPlacement(boundsInScreen.getMinX(), myGrid.getWidth(), myGrid.getWidth()/NUM_COLS, x, boundsInScreen);
 		int rowNum = getColOrRowPlacement(boundsInScreen.getMinY(), myGrid.getHeight(), myGrid.getHeight()/NUM_ROWS, y, boundsInScreen);
-		return new GamePoint(colNum, rowNum);
+		return new Pair<Integer, Integer>(colNum, rowNum);
 	}
 	
-	public GamePoint getActualLocationOfSprite(GamePoint gp) {
-		double actualX = (gp.x()*(getGrid().getWidth()/NUM_COLS)) + ((getGrid().getWidth()/NUM_COLS)/2);
-		double actualY = (gp.y()*(getGrid().getHeight()/NUM_ROWS)) + ((getGrid().getHeight()/NUM_ROWS)/2);
+	public GamePoint getActualLocationOfSprite(Pair<Integer, Integer> gp) {
+		double actualX = (gp.getKey()*(getGrid().getWidth()/NUM_COLS)) + ((getGrid().getWidth()/NUM_COLS)/2);
+		double actualY = (gp.getValue()*(getGrid().getHeight()/NUM_ROWS)) + ((getGrid().getHeight()/NUM_ROWS)/2);
 		return new GamePoint(actualX, actualY);
 	}
 	
 	private void redrawGrid() {
-		Map<AttributeData,Boolean> onScreenOrNot = mySMC.getScreenData().getIfOnScreen();
-		for (AttributeData attr : onScreenOrNot.keySet()) {
-			if (onScreenOrNot.get(attr) == false) {
-				onScreenOrNot.put(attr, true);
-				if (attr.hasVariable(myResources.getString(IMAGE_HOLDER))) {
-					Integer xPos = Integer.parseInt(attr.getVariable(myResources.getString(X_POSITION)));
-					Integer yPos = Integer.parseInt(attr.getVariable(myResources.getString(Y_POSITION)));
-					String imageName = attr.getVariable(myResources.getString(IMAGE_HOLDER));
-					Image image = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString(PATH_TO_IMAGE_FILES) + imageName),
-							SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, false, false);
-					ImageView imageView = new ImageView(image);
-					myGrid.add(imageView, xPos, yPos);
+		Map<SpriteMakerModel, Boolean> onScreenOrNot = mySMC.getScreenData().getIfOnScreen();
+		for (SpriteMakerModel sprite : onScreenOrNot.keySet()) {
+			if (onScreenOrNot.get(sprite) == false) {
+				onScreenOrNot.put(sprite, true);
+
+				Map<String, List<String>> components = sprite.getTransferComponents();
+				String imageFileName = components.get("Images").get(0);
+				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageFileName));
+				ImageView iView = new ImageView(image);
+				List<String> positionParams = components.get("Position");
+				Integer xPos = Integer.parseInt(positionParams.get(0));
+				Integer yPos = Integer.parseInt(positionParams.get(1));
+				myGrid.add(iView, xPos, yPos);
+
+//				for (String c : components.keySet()) {
+//					if (c.getType().equals(Images.TYPE)) {
+//						Images imageComponent = (Images) c;
+//						Image image = imageComponent.image().getFXImage();
+//						ImageView imageView = new ImageView(image);
+//						Component possiblePosition = sprite.getComponentByType(Position.TYPE);
+//						if (possiblePosition != null) {
+//							Position pos = (Position) possiblePosition;
+//							GamePoint screenPoint = pos.pos();
+//							GamePoint gridPoint = getCoordOfMouseHover(screenPoint.x(), screenPoint.y());
+//							Integer xPos = (int) gridPoint.x();
+//							Integer yPos = (int) gridPoint.y();
+//							myGrid.add(imageView, xPos, yPos);
+//						}
+//					}
+//				}
+
+				//List<Component> components = sprite.getComponents();
+				for (Component c : sprite.getComponents().values()) {
+					if (c.getType().equals(Images.TYPE)) {
+						Images imageComponent = (Images) c;
+						Image image1 = imageComponent.image().getFXImage();
+						ImageView imageView = new ImageView(image1);
+						Component possiblePosition = sprite.getComponentByType(Position.TYPE);
+						if (possiblePosition != null) {
+							Position pos = (Position) possiblePosition;
+							GamePoint screenPoint = pos.pos();
+							//GamePoint gridPoint = getCoordOfMouseHover(screenPoint.x(), screenPoint.y());
+							//Integer xPos = (int) gridPoint.x();
+							//Integer yPos = (int) gridPoint.y();
+							//myGrid.add(imageView, xPos, yPos);
+						}
+					}
 				}
 			}			
 		}
 	}
 	
-	public void addBorderToCoordinate(GamePoint coord) {
-		CoordinateConversion cc = new CoordinateConversion();
-		Pair<Integer, Integer> gridCoord = cc.fromGamePointToPair(coord);
+	public void addBorderToCoordinate(Pair<Integer, Integer> coord) {
 		Rectangle border = new Rectangle(myGrid.getWidth()/getNumCols(), myGrid.getHeight()/getNumRows());
 		border.setFill(Color.TRANSPARENT);
 		border.setStroke(Color.BLACK);
-		myGrid.add(border, gridCoord.getKey(), gridCoord.getValue());
+		myGrid.add(border, coord.getKey(), coord.getValue());
 	}
 
 	private int getColOrRowPlacement(double offset, double bounds, double step, double x, Bounds boundsInScreen) {

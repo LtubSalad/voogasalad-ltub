@@ -1,20 +1,20 @@
 package gameDevelopmentInterface;
 
-import data.GeneralModelData;
+import data.DeveloperData;
 import data.ScreenModelData;
 
 public class AuthoredGame {
-	private GeneralModelData myGeneralData;
+	private DeveloperData myGeneralData;
 	private ScreenModelData myScreenData;
 	private PathCreator myPaths;
 
 	public AuthoredGame() {
-		myGeneralData = new GeneralModelData();
+		myGeneralData = new DeveloperData();
 		myScreenData = new ScreenModelData();
 		myPaths = new PathCreator(null);
 	}
 
-	public GeneralModelData getGeneralData() {
+	public DeveloperData getGeneralData() {
 		return myGeneralData;
 	}
 

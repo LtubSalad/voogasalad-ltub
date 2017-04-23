@@ -34,6 +34,8 @@ public class ComponentType<T> {
 		return true;
 	}
 	
-	
+	public String getType() {
+		return typename;
+	}
 	
 }
