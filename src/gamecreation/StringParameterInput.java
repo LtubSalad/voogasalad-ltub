@@ -29,6 +29,11 @@ public class StringParameterInput implements ParameterInput{
 	public String getValue(){
 		return input.getText();
 	}
+
+	@Override
+	public String getType() {
+		return TYPE;
+	}
 	
 	
 }
