@@ -33,7 +33,7 @@ public class Attacker extends Component {
 
 	@Override
 	public void afterAdded() {
-		sprite.on(FireProjectileEvent.SPECIFIC, (Serializable & BusEventHandler<FireProjectileEvent>) e -> {
+		sprite.on(FireProjectileEvent.SPECIFIC,  e -> {
 //			if (!weaponReloaded()){
 //				return;
 //			}

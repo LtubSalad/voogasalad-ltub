@@ -43,11 +43,11 @@ public class SkillSet extends Component {
 		for (Skill skill: skills.values()) {
 			skill.setSource(sprite);
 		}
-		sprite.on(AddSkillEvent.TYPE, (Serializable & BusEventHandler<AddSkillEvent>) (e) -> {
+		sprite.on(AddSkillEvent.TYPE,  (e) -> {
 			addSkill(e.getSkill());
 			e.getSkill().setSource(sprite);
 		});
-		sprite.on(TriggerSkillEvent.ANY, (Serializable & BusEventHandler<TriggerSkillEvent>) (e) -> {
+		sprite.on(TriggerSkillEvent.ANY,  (e) -> {
 			Skill skill = skills.get(e.getType());
 			if (skill != null) {
 				skill.setSource(sprite);

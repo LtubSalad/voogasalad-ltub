@@ -24,7 +24,7 @@ public class DamageStrength extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.STOP, (e) -> {
 			Player owner = sprite.getComponent(Owner.TYPE).get().player();			
 			Player anotherOwner = e.getTarget().getSprite().get().getComponent(Owner.TYPE).get().player();
 			if (owner != anotherOwner) {
