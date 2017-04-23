@@ -15,8 +15,14 @@ public class Path {
 	private Queue<GamePoint> myPath = new LinkedList<GamePoint>();
 	private GamePoint currCoord;
 	private GamePoint nextCoord;
+	private String pathName;
 	
 	public Path() {
+		this("A Nameless Path");
+	}
+	
+	public Path(String name) {
+		this.pathName=name;
 		makeDefaultPath();
 	}
 	
@@ -93,4 +99,8 @@ public class Path {
 		myPath.add(new GamePoint(300,300));
 	
 	}	
+	
+	public String getName(){
+		return pathName;
+	}
 }
