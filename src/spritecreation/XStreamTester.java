@@ -60,7 +60,6 @@ public class XStreamTester {
 		System.out.println(newSprite.hasComponent(Position.TYPE));
 		Position p =  newSprite.getComponent(Position.TYPE).get();
 		newSprite.emit(new MoveEvent(MoveEvent.START_SPRITE, newSprite,new Target( new GamePoint(0,0))));
-		
 	}
 
 	

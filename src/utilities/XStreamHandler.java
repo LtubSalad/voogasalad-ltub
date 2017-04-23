@@ -10,6 +10,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import data.SpriteMakerModel;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import newengine.sprite.Sprite;
 
 public class XStreamHandler {
 	//TODO: Remove duplicate code using generics
@@ -56,6 +57,7 @@ public class XStreamHandler {
 		List<SpriteMakerModel> attribute = (List<SpriteMakerModel>)xstream.fromXML(file);
 		return attribute;
 	}
+	
 
 	public void saveToFile(Object data) {
 		FileChooser chooser = new FileChooser();
@@ -75,6 +77,11 @@ public class XStreamHandler {
 		}
 	}
 	
+	public List<Sprite> getSpriteModel(File file){
+		XStream xstream = new XStream(new DomDriver());
+		List<Sprite> sprites = (List<Sprite>)xstream.fromXML(file);
+		return sprites;
+	}
 	
 
 	

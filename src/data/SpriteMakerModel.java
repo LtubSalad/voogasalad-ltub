@@ -19,6 +19,11 @@ public class SpriteMakerModel {
 	private ObservableMap<ComponentType<?>,Component> myComponents;
 	private ObservableMap<BusEvent, String> myScriptMap;
 	
+	
+	// Jake and Tahia's DO NOT TOUCH
+	private Map<String, List<String>> componentsForTransfer; 
+	private List<EventHandleData> myEventHandlers; 
+	
 	public SpriteMakerModel() {
 		Map<ComponentType<?>, Component >componentMap=new HashMap<>();
 		myComponents=FXCollections.observableMap(componentMap);
@@ -28,8 +33,8 @@ public class SpriteMakerModel {
 
 	
 	public void addComponent(String componentName, List<String> params) {
-		if (!myComponents.keySet().contains(componentName)) {
-			myComponents.put(componentName, params);
+		if (!componentsForTransfer.keySet().contains(componentName)) {
+			componentsForTransfer.put(componentName, params);
 		}
 	}
 	
@@ -56,7 +61,10 @@ public class SpriteMakerModel {
 //		return myScriptMap;
 //	}
 	
-	public Map<String,List<String>> getComponents() {
+	public Map<String,List<String>> getTransferComponents() {
+		return componentsForTransfer; 
+	}
+	
 	public void addComponent(Component comp) {
 		myComponents.put(comp.getType(), comp);
 	}
@@ -81,9 +89,14 @@ public class SpriteMakerModel {
 	
 
 	public Pair<String, List<String>> getComponentByType(String componentName) {
-		for (String c : myComponents.keySet()) {
+		for (String c : componentsForTransfer.keySet()) {
 			if (c.equals(componentName)) {
-				return new Pair<String, List<String>>(c, myComponents.get(c));
+				return new Pair<String, List<String>>(c, componentsForTransfer.get(c));
+			}
+		}
+		return null; 
+	}
+	
 	public Component getComponentByType(ComponentType<?> type) {
 		for (Component c : myComponents.values()) {
 			if (c.getType().equals(type)) {

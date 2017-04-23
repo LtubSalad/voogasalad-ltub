@@ -32,8 +32,8 @@ public class DataTranslator implements DataHandling {
 		gameModel = new SpriteModel(bus); 
 		spritesList = new ArrayList<Sprite>(); 		
 		for (SpriteMakerModel spriteData : data){
-				Sprite newSprite = assembleSprite(spriteData.getComponents());
-				spritesList.add(newSprite);
+				//Sprite newSprite = assembleSprite(spriteData.getComponents());
+				//spritesList.add(newSprite);
 		}
 		
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesList));		
