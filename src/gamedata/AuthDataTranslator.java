@@ -35,7 +35,6 @@ public class AuthDataTranslator implements Translator {
 	public AuthDataTranslator(List<SpriteMakerModel> spriteData){
 		spritesToMake = spriteData;
 	}
-
 	
 	
 	@Override
@@ -52,7 +51,13 @@ public class AuthDataTranslator implements Translator {
 		return newSprite; 
 		
 	}
+	
+	// again would 
+	public SpriteModel getSprites(){
+		return constructedModel;
+	}
 
+	
 	private Sprite handleComponents(Map<String, List<String>> transferComponents) {
 		Sprite sprite = new Sprite(); 
 		// loop through each component in the map 
