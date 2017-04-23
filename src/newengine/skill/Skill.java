@@ -2,8 +2,8 @@ package newengine.skill;
 
 import java.util.Optional;
 
+import newengine.model.PlayerRelationModel;
 import newengine.sprite.Sprite;
-import newengine.sprite.components.Owner;
 import newengine.utils.Target;
 import newengine.utils.image.LtubImage;
 
@@ -27,12 +27,6 @@ public abstract class Skill {
 	}
 	public Optional<LtubImage> getIcon() {
 		return Optional.ofNullable(icon);
-	}
-	public boolean canControl() {
-		if (source.getComponent(Owner.TYPE).isPresent()) {
-			return source.getComponent(Owner.TYPE).get().canControl();
-		}
-		return true;
 	}
 	public abstract void trigger();
 	public abstract SkillType<? extends Skill> getType();
