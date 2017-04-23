@@ -21,7 +21,7 @@ import newengine.sprite.SpriteID;
  * @author keping
  *
  */
-public class SpriteModel{
+public class SpriteModel {
 
 	private EventBus bus;
 	private List<Sprite> sprites = new ArrayList<>();
@@ -117,7 +117,7 @@ private List<Sprite> getSprites() {
 		}
 	}
 
-	//@Override
+
 	public List<Sprite> getData() {
 		return sprites; 
 	}
