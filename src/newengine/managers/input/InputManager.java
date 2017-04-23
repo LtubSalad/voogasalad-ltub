@@ -39,7 +39,7 @@ public class InputManager {
 	}
 
 	private Target target(GamePoint gamePoint) {
-		Sprite selected = SelectionChecker.getSelection(spriteModel.getSprites(), gamePoint);
+		Sprite selected = SelectionChecker.getSelection(spriteModel.getData(), gamePoint);
 		return new Target(gamePoint, selected);
 	}
 	private ActionMode actionMode() {

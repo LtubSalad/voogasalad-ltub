@@ -113,7 +113,7 @@ public class View {
 	
 	public void render(SpriteModel model) {
 		// render game cast
-		for (Sprite sprite : model.getSprites()) {
+		for (Sprite sprite : model.getData()) {
 			if (!sprite.getComponent(Position.TYPE).isPresent() ||
 					!sprite.getComponent(Images.TYPE).isPresent()) {
 				continue;

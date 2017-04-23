@@ -35,7 +35,7 @@ public class TestPosition extends Component {
 	public void afterAdded() {
 		System.out.println("Did it!");
 		positionEventHandler = new TestPositionHandler(sprite, this);
-		sprite.on(MoveEvent.SPECIFIC, positionEventHandler);
+		//sprite.on(MoveEvent.SPECIFIC, positionEventHandler);
 	}
 
 	@Override
@@ -102,5 +102,11 @@ public class TestPosition extends Component {
 	
 	public boolean isMoving() {
 		return isMoving;
+	}
+
+	@Override
+	public Component clone() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

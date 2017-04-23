@@ -18,6 +18,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Pair;
+import newengine.sprite.component.Component;
 /**
  * This class holds all possible sprites that a user can place on the screen.
  * @author Jake
@@ -74,7 +75,7 @@ public class ScreenObjectHolder extends HBox {
 //		dummySprite.addComponent(new Images(iSet));
 //		addObject(dummySprite);
 		SpriteMakerModel dummySprite = new SpriteMakerModel();
-		ImageSet iSet = new ImageSet();
+		//ImageSet iSet = new ImageSet();
 		//LtubImage lImage = new LtubImage("data/images/characters/Grass.jpg");
 		//iSet.setImage(lImage);
 		//dummySprite.addComponent(new Images(iSet));
@@ -87,24 +88,24 @@ public class ScreenObjectHolder extends HBox {
 	 *            the sprite to add to the HBox
 	 */
 	public void addObject(SpriteMakerModel screenObject) {
-		Map<String, List<String>> screenObjectComponents = screenObject.getComponents();
+		Map<String, List<String>> screenObjectComponents = screenObject.getTransferComponents();
 		String imageFileName = screenObjectComponents.get("Images").get(0);
 		Image image = new Image(getClass().getResourceAsStream(imageFileName));
 		ImageView iView = new ImageView(image);
 		iView.setOnDragDetected(e -> dragAndDrop(iView));
 		this.getChildren().add(iView);
-		for (Component c : screenObject.getComponents().values()) {
-			ComponentType<?> type = c.getType();
-			if (type.equals(Images.TYPE)) {
-				Images imageComponent = (Images) c;
-				Image spriteImage = imageComponent.image().getFXImage();
-				ImageView spriteImageView = new ImageView(spriteImage);
-				spriteImageView.setFitHeight(100);
-				spriteImageView.setFitWidth(100);
-				spriteImageView.setOnMousePressed(e -> dragAndDrop(spriteImageView));
-				myScreenObjects.put(new Pair<String, Image>(imageComponent.image().getFileName(), spriteImage), screenObject);
-				this.getChildren().add(spriteImageView);
-			}
+		for (List<String> c : screenObject.getTransferComponents().values()) {
+			///ComponentType<?> type = c.getType();
+			//if (type.equals(Images.TYPE)) {
+			//	Images imageComponent = (Images) c;
+//				Image spriteImage = imageComponent.image().getFXImage();
+//				ImageView spriteImageView = new ImageView(spriteImage);
+//				spriteImageView.setFitHeight(100);
+//				spriteImageView.setFitWidth(100);
+//				spriteImageView.setOnMousePressed(e -> dragAndDrop(spriteImageView));
+//				myScreenObjects.put(new Pair<String, Image>(imageComponent.image().getFileName(), spriteImage), screenObject);
+//				this.getChildren().add(spriteImageView);
+//			}
 		}
 	}
 	/**

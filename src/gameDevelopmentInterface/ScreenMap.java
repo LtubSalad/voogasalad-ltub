@@ -117,7 +117,7 @@ public class ScreenMap extends StackPane {
 			if (onScreenOrNot.get(sprite) == false) {
 				onScreenOrNot.put(sprite, true);
 
-				Map<String, List<String>> components = sprite.getComponents();
+				Map<String, List<String>> components = sprite.getTransferComponents();
 				String imageFileName = components.get("Images").get(0);
 				Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageFileName));
 				ImageView iView = new ImageView(image);
@@ -147,16 +147,16 @@ public class ScreenMap extends StackPane {
 				for (Component c : sprite.getComponents().values()) {
 					if (c.getType().equals(Images.TYPE)) {
 						Images imageComponent = (Images) c;
-						Image image = imageComponent.image().getFXImage();
-						ImageView imageView = new ImageView(image);
+						Image image1 = imageComponent.image().getFXImage();
+						ImageView imageView = new ImageView(image1);
 						Component possiblePosition = sprite.getComponentByType(Position.TYPE);
 						if (possiblePosition != null) {
 							Position pos = (Position) possiblePosition;
 							GamePoint screenPoint = pos.pos();
-							GamePoint gridPoint = getCoordOfMouseHover(screenPoint.x(), screenPoint.y());
-							Integer xPos = (int) gridPoint.x();
-							Integer yPos = (int) gridPoint.y();
-							myGrid.add(imageView, xPos, yPos);
+							//GamePoint gridPoint = getCoordOfMouseHover(screenPoint.x(), screenPoint.y());
+							//Integer xPos = (int) gridPoint.x();
+							//Integer yPos = (int) gridPoint.y();
+							//myGrid.add(imageView, xPos, yPos);
 						}
 					}
 				}

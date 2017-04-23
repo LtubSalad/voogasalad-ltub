@@ -29,6 +29,7 @@ public class Game {
 	private GameLoop gameLoop;
 	private View view;
 	private boolean mapInitialized = false;
+	private Models models; 
 	 
 	public Game() {
 		
@@ -36,7 +37,6 @@ public class Game {
 		SpriteModel spriteModel = new SpriteModel(bus);
 		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, Player.MAIN_PLAYER); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
 		SelectionModel selectionModel = new SelectionModel(bus);
-<<<<<<< HEAD
 		initializeGame(spriteModel, playerStatsModel, selectionModel);
 		
 	}
@@ -54,10 +54,7 @@ public class Game {
 	public Game(SpriteModel spriteModel, PlayerStatsModel playerModel){
 		SelectionModel selectionModel = new SelectionModel(bus); // TODO: (tahia)  remove duplicate line 
 		initializeGame(spriteModel, playerModel, selectionModel);
-		Models models = new Models(spriteModel, playerStatsModel, selectionModel);
-=======
-		Models models = new Models(bus, spriteModel, playerStatsModel, selectionModel);
->>>>>>> 157ea3eb7683d7be51a248f9dfa949141c3d11fa
+		models = new Models(bus, spriteModel, playerModel, selectionModel);
 		
 	}
 	
@@ -70,7 +67,7 @@ public class Game {
 	public Game(SpriteModel gameSprites, BasicEventBus bus2) {
 		bus = bus2; 
 		SelectionModel selectionModel = new SelectionModel(bus);
-		PlayerStatsModel playerStatsModel = new PlayerStatsModel();
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus);
 		initializeGame(gameSprites, playerStatsModel, selectionModel); 
 	}
 
@@ -93,8 +90,8 @@ public class Game {
 		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel);
 		
 		gameLoop.addLoopComponent((dt) -> view.clear());
-		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
-		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
+		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getData()));
+		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getData()));
 		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
 		gameLoop.addLoopComponent((dt) -> view.render(models));
 		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());

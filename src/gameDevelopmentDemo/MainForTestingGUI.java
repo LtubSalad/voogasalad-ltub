@@ -5,7 +5,6 @@ import java.util.List;
 
 import commons.point.GamePoint;
 import data.SpriteMakerModel;
-import gamedata.DataTranslator;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import newengine.events.sprite.MoveEvent;
@@ -53,10 +52,10 @@ public class MainForTestingGUI extends Application {
 		
 		List<SpriteMakerModel> myList = new ArrayList<SpriteMakerModel>();
 		myList.add(isItTheSame);
-		DataTranslator dt = new DataTranslator();
-		dt.toSprites(myList);
-		Sprite sprite = dt.getGameSprites().getSprites().get(0);
-		sprite.emit(new MoveEvent(MoveEvent.SPECIFIC, sprite, new Target(new GamePoint(100,0))));
+//		DataTranslator dt = new DataTranslator();
+//		dt.toSprites(myList);
+//		Sprite sprite = dt.getGameSprites().getSprites().get(0);
+//		sprite.emit(new MoveEvent(MoveEvent.SPECIFIC, sprite, new Target(new GamePoint(100,0))));
 		
 		
 		
