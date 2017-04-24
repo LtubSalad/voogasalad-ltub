@@ -153,8 +153,9 @@ public class View {
 			GamePoint gamePos = new GamePoint(spritePos.x() - image.getImagePivot().x(), 
 					spritePos.y() - image.getImagePivot().y());
 			ViewPoint viewPos = camera.gameToView(gamePos);
-			gc.drawImage(new Image(image.getInputStream()), viewPos.x(),
-					viewPos.y());
+			gc.drawImage(image.getFXImage(), viewPos.x(), viewPos.y(), 
+					image.getFXImage().getWidth() * camera.getScaleFactor(), 
+					image.getFXImage().getHeight() * camera.getScaleFactor());
 		}
 
 	}
