@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
 import newengine.events.QueueEvent;
 import newengine.events.SpriteModelEvent;
-import newengine.events.skill.TriggerSkillEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
@@ -65,21 +64,22 @@ public class App extends Application {
 		XStreamHandler xHandler = new XStreamHandler();
 		XStream xStream = new XStream(new DomDriver());
 		SpriteMakerModel spriteToSave = new SpriteMakerModel();
-		
+
 		Player player1 = new Player("Player 1");
 		Player player2 = new Player("Player 2");
-		
+
 		// building
 		Sprite building = new Sprite();
 		LtubImage buildingImage = new LtubImage("images/skills/build.png");
 		ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
 		building.addComponent(new Images(imageSetBuildSkill));
 		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		
-		
+
+
+
 
 		EventBus bus = game.getBus();
-		
+
 		// sprite 1
 		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
 		ImageSet imageSet1 = new ImageSet(image1);
@@ -105,6 +105,7 @@ public class App extends Application {
 		File file = new File("data/attributeSkeletons/userCreatedAttributes/USETHIS.xml");
 		SpriteMakerModel fromXML = (SpriteMakerModel) xStream.fromXML(new FileReader(file));
 		
+
 		Sprite sprite1 = new Sprite();
 		for (ComponentType<?> c : fromXML.getComponents().keySet()) {
 			System.out.println("Component type: " + c);
@@ -155,6 +156,51 @@ public class App extends Application {
 //		sprite1.addComponent(new Health(200));
 //		sprite1.addComponent(new EventQueue());
 			
+
+
+
+
+
+
+
+
+
+		//	Game game = new Game();
+		//	Player player1 = new Player("Player 1");
+		//	Player player2 = new Player("Player 2");
+		//	
+		//	// building
+		//	Sprite building = new Sprite();
+		//	LtubImage buildingImage = new LtubImage("images/skills/build.png");
+		//	ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
+		//	building.addComponent(new Images(imageSetBuildSkill));
+		//	building.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		//	
+		//	
+		//	EventBus bus = game.getBus();
+		//	
+		//	// sprite 1
+		//	Sprite sprite1 = new Sprite();
+		//	LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
+		//	ImageSet imageSet1 = new ImageSet(image1);
+		//	Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
+		//	skillMap.put(MoveSkill.TYPE, new MoveSkill());
+		//	skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
+		//	skillMap.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
+		//	sprite1.addComponent(new GameBus());
+		//	sprite1.addComponent(new SkillSet(skillMap));
+		//	sprite1.addComponent(new Owner(player1));
+		//	sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
+		//	sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
+		//	sprite1.addComponent(new Images(imageSet1));
+		//	sprite1.addComponent(new Speed(200));
+		//	sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		//	sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		//	sprite1.addComponent(new Range(128));
+		//	sprite1.addComponent(new Attacker());
+		//	sprite1.addComponent(new Health(200));
+		//	sprite1.addComponent(new EventQueue());
+
 		// sprite 2
 		Sprite sprite2 = new Sprite();
 		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
@@ -174,12 +220,12 @@ public class App extends Application {
 		sprite2.addComponent(new EventQueue());
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(60));
-		
+
 		List<Sprite> spritesToAdd = new ArrayList<>();
 		spritesToAdd.add(sprite1);
 		spritesToAdd.add(sprite2);
-		
-		
+
+
 		bus.on(GameInitializationEvent.ANY, (e) -> {
 			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
@@ -188,12 +234,12 @@ public class App extends Application {
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 		});
-		
+
 		// Triggers
 		for (Trigger trigger : (new TestTriggers()).getTriggers()) {
 			game.addTrigger(trigger);
 		}
-		
+
 		stage.setScene(game.getScene());
 		game.start();
 		stage.show();
@@ -210,8 +256,20 @@ public class App extends Application {
 		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(400,200)))));
 		sprite1.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, sprite1, sprite2));
+
+		//	// TODO add method to generate path
+		//	sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
+		//	new Target(new GamePoint(300,100)))));
+		//	sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
+		//	new Target(new GamePoint(250,200)))));
+		//	sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
+		//	new Target(new GamePoint(100,150)))));
+		//	sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
+		//	new Target(new GamePoint(500,300)))));
+		//	sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
+		//	new Target(new GamePoint(400,200)))));
 	}
-	
+
 	public static void main(String[] args) {
 		Application.launch(args);
 	}

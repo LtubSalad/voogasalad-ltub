@@ -2,7 +2,6 @@ package gamedata;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import bus.BasicEventBus;
 import data.EventHandleData;
@@ -11,6 +10,7 @@ import javafx.collections.ObservableList;
 import newengine.events.SpriteModelEvent;
 import newengine.model.SpriteModel;
 import newengine.sprite.Sprite;
+import newengine.sprite.component.Component;
 
 /**
  * @author tahiaemran
@@ -37,12 +37,17 @@ public class AuthDataTranslator implements Translator {
 	}
 
 
-
+	public AuthDataTranslator(SpriteMakerModel spriteToMake){
+		spritesToMake = new ArrayList<SpriteMakerModel>();
+		spritesToMake.add(spriteToMake);
+	}
 
 	@Override
 	public void translate() {
 		spritesToMake.stream().forEach(model -> {
-			Sprite newSprite = handleComponents(model.getTransferComponents());
+			Sprite newSprite = handleComponents(model.getActualComponents());
+			// skills
+			/// triggers 
 			constructedSprites.add(handleEventHandlers(newSprite, model.getEventHandlers()));				
 		});
 		gameBus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, constructedSprites));
@@ -60,11 +65,11 @@ public class AuthDataTranslator implements Translator {
 	}
 
 
-	private Sprite handleComponents(Map<String, List<String>> transferComponents) {
+	private Sprite handleComponents(List<Component>transferComponents) {
 		Sprite sprite = new Sprite(); 
-		// loop through each component in the map 
-		// send the component and the parameters through parsing + factories 
-		// add the component from the factory to the sprite 
+		for (Component comp: transferComponents){
+			sprite.addComponent(comp);
+		}
 		return sprite; 
 	}
 
