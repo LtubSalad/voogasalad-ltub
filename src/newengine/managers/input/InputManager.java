@@ -98,16 +98,16 @@ public class InputManager {
 
 	public void update(double dt) {
 		if (keyInputState.isKeyPressed(KeyCode.LEFT)) {
-			bus.emit(new CameraEvent(CameraEvent.MOVE, -Camera.MOVE_SPEED_PER_FRAME * dt, 0));
-		}
-		else if (keyInputState.isKeyPressed(KeyCode.RIGHT)) {
 			bus.emit(new CameraEvent(CameraEvent.MOVE, Camera.MOVE_SPEED_PER_FRAME * dt, 0));
 		}
+		else if (keyInputState.isKeyPressed(KeyCode.RIGHT)) {
+			bus.emit(new CameraEvent(CameraEvent.MOVE, -Camera.MOVE_SPEED_PER_FRAME * dt, 0));
+		}
 		else if (keyInputState.isKeyPressed(KeyCode.UP)) {
-			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, -Camera.MOVE_SPEED_PER_FRAME * dt));
+			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, Camera.MOVE_SPEED_PER_FRAME * dt));
 		}
 		else if (keyInputState.isKeyPressed(KeyCode.DOWN)) {
-			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, Camera.MOVE_SPEED_PER_FRAME * dt));
+			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, -Camera.MOVE_SPEED_PER_FRAME * dt));
 		}
 		else if (keyInputState.isKeyPressed(KeyCode.R)) {
 			bus.emit(new CameraEvent(CameraEvent.RESET));

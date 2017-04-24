@@ -185,6 +185,7 @@ public class App extends Application {
 		}
 		
 		stage.setScene(game.getScene());
+		stage.setFullScreen(true);
 		game.start();
 		stage.show();
 		

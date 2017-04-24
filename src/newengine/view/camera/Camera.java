@@ -3,7 +3,6 @@ package newengine.view.camera;
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
-import javafx.scene.Node;
 import newengine.events.camera.CameraEvent;
 
 /**

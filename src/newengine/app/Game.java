@@ -51,7 +51,7 @@ public class Game {
 		TimerManager timerManager = new TimerManager(bus);
 		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel);
 		
-		gameLoop.addLoopComponent((dt) -> view.clear());
+//		gameLoop.addLoopComponent((dt) -> view.clearGameWorldCanvas());
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));

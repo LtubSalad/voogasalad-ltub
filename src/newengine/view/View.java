@@ -6,26 +6,26 @@ import java.util.List;
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import newengine.events.camera.CameraEvent;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
 import newengine.model.Models;
 import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
-import newengine.model.PlayerStatsModel.WealthType;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
 import newengine.player.Player;
@@ -40,11 +40,12 @@ import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
 
 public class View {
-	public static final int WIDTH = 600;
-	public static final int HEIGHT = 500;
-	public static final int CANVAS_WIDTH = 600;
-	public static final int CANVAS_HEIGHT = 300;
-	public static final int STATS_HEIGHT = 100;
+	private double WIDTH = 600;
+	private double HEIGHT = 500;
+	private double CANVAS_WIDTH = 600;
+	private double CANVAS_HEIGHT = 300;
+	private double STATS_HEIGHT = 100;
+	private double SELECTION_HEIGHT = 200;
 	public static final Paint BACKGROUND = Color.BISQUE;
 
 	private EventBus bus;
@@ -63,20 +64,27 @@ public class View {
 	public View(EventBus bus) {
 		this.bus = bus;
 		VBox root = new VBox();
+		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+		WIDTH = screenBounds.getWidth();
+		CANVAS_WIDTH = WIDTH;
+		HEIGHT = screenBounds.getHeight();
+		SELECTION_HEIGHT = HEIGHT / 5;
+		CANVAS_HEIGHT = HEIGHT - SELECTION_HEIGHT - STATS_HEIGHT;
+		
 		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
 		statsPanel = new HBox();
 		gameWorldCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		bottomPane = new HBox();
 		root.getChildren().addAll(statsPanel, gameWorldCanvas, bottomPane);
 		// selected sprite
-		Canvas selectionCanvas = new Canvas(WIDTH / 2, HEIGHT - CANVAS_HEIGHT - STATS_HEIGHT);
-		bottomPane.getChildren().add(selectionCanvas);
-		gc = gameWorldCanvas.getGraphicsContext2D();
-		gcSelected = selectionCanvas.getGraphicsContext2D();
+		Canvas selectionCanvas = new Canvas(WIDTH / 2, SELECTION_HEIGHT);
 		// skill box
 		skillBox = new SkillBox(bus);
-		bottomPane.getChildren().add(skillBox.getBox());
+		bottomPane.getChildren().addAll(selectionCanvas, skillBox.getBox());
 
+		gc = gameWorldCanvas.getGraphicsContext2D();
+		gcSelected = selectionCanvas.getGraphicsContext2D();
+		
 		this.camera = new Camera(bus);
 		
 		initHandlers();
@@ -114,10 +122,6 @@ public class View {
 	public Scene getScene() {
 		return scene;
 	}
-
-	public void clear(){
-		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
-	}
 	
 	public void render(Models models) {
 		render(models.spriteModel());
@@ -127,6 +131,7 @@ public class View {
 	
 	private void render(SpriteModel model) {
 		// render game cast
+		clearGameWorldCanvas();
 		for (Sprite sprite : model.getSprites()) {
 			if (!sprite.getComponent(Position.TYPE).isPresent() ||
 					!sprite.getComponent(Images.TYPE).isPresent()) {
@@ -150,6 +155,7 @@ public class View {
 		this.statsPanel.getChildren().clear();
 		statsPanel.setSpacing(10);
 		statsPanel.maxHeight(100);
+		statsPanel.getChildren().add(new Text("Game Stats: "));
 		selectionModel.getSelectedSprite().ifPresent((sprite) -> {
 			sprite.getComponent(Owner.TYPE).ifPresent((owner) -> {
 				Player player = owner.player();
@@ -183,7 +189,7 @@ public class View {
 		if (selectionModel.getSelectedSprite().isPresent()) {
 			Sprite sprite = selectionModel.getSelectedSprite().get();
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
-				gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+				clearSelectionCanvas();
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
 			}
 			if (sprite.getComponent(Owner.TYPE).isPresent()) {
@@ -206,7 +212,7 @@ public class View {
 			}
 		}
 		else {
-			gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+			clearSelectionCanvas();
 			skillBox.clear();
 		}
 		// render the selected skill
@@ -222,4 +228,11 @@ public class View {
 		}
 	}
 
+	private void clearGameWorldCanvas(){
+		gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+	}
+	
+	private void clearSelectionCanvas() {
+		gcSelected.clearRect(0, 0, WIDTH / 2, SELECTION_HEIGHT);
+	}
 }
