@@ -31,6 +31,13 @@ public abstract class Skill {
 	public abstract void trigger();
 	public abstract SkillType<? extends Skill> getType();
 	
-	
+	/**
+	 * Return the cooldown time of the skill. Negative number
+	 * means no cooldown time.
+	 * @return
+	 */
+	public double getCooldown() {
+		return -1;
+	}
 
 }

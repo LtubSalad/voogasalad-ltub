@@ -31,6 +31,7 @@ import newengine.sprite.Sprite;
 import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
+import newengine.sprite.components.Cooldown;
 import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Health;
@@ -38,6 +39,7 @@ import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
+import newengine.sprite.components.RangeShootingAI;
 import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
 import newengine.sprite.components.SkillSet;
@@ -67,16 +69,19 @@ public class App extends Application {
 		
 		EventBus bus = game.getBus();
 		
-		// sprite 1
+		// sprite 1: the tower
 		Sprite sprite1 = new Sprite();
-		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
+		LtubImage image1 = new LtubImage("images/characters/tower2_resized.gif");
 		ImageSet imageSet1 = new ImageSet(image1);
-		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
-		skillMap.put(MoveSkill.TYPE, new MoveSkill());
-		skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
-		skillMap.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
+		Map<SkillType<? extends Skill>, Skill> skillMap1 = new HashMap<>();
+		skillMap1.put(MoveSkill.TYPE, new MoveSkill());
+		skillMap1.put(BuildSkill.TYPE, new BuildSkill(building));
+		FireProjectileSkill fireSkill1 = new FireProjectileSkill();
+		fireSkill1.setCooldown(3); // add cooldown to the fireProjectilSkill
+		sprite1.addComponent(new Cooldown());
+		skillMap1.put(FireProjectileSkill.TYPE, fireSkill1);
 		sprite1.addComponent(new GameBus());
-		sprite1.addComponent(new SkillSet(skillMap));
+		sprite1.addComponent(new SkillSet(skillMap1));
 		sprite1.addComponent(new Owner(player1));
 		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
 		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
@@ -84,10 +89,11 @@ public class App extends Application {
 		sprite1.addComponent(new Speed(200));
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		sprite1.addComponent(new Range(128));
+		sprite1.addComponent(new Range(200));
 		sprite1.addComponent(new Attacker());
 		sprite1.addComponent(new Health(200));
 		sprite1.addComponent(new EventQueue(new LinkedList<>()));
+		sprite1.addComponent(new RangeShootingAI());
 			
 		// sprite 2
 		Sprite sprite2 = new Sprite();
@@ -109,6 +115,8 @@ public class App extends Application {
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(60));
 		
+		
+		
 		// spawned sprite
 		Sprite child = new Sprite();
 		LtubImage childImage = new LtubImage("images/characters/bahamut_left.png");
@@ -116,7 +124,7 @@ public class App extends Application {
 		Map<SkillType<? extends Skill>, Skill> childSkillMap = new HashMap<>();
 		child.addComponent(new GameBus());
 		child.addComponent(new SkillSet(childSkillMap));
-		child.addComponent(new Owner(player1));
+		child.addComponent(new Owner(player2));
 		child.addComponent(new Position(new GamePoint(300, 50), 0));
 		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		child.addComponent(new Images(childImageSet));
@@ -137,7 +145,7 @@ public class App extends Application {
 		spawner.addComponent(new GameBus());
 		spawner.addComponent(new SkillSet(spawnerSkillMap));
 		spawner.addComponent(new Owner(player1));
-		spawner.addComponent(new Position(new GamePoint(200, 100), 0));
+		spawner.addComponent(new Position(new GamePoint(-100, -100), 0));
 		spawner.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		spawner.addComponent(new Images(imageSet1));
 		spawner.addComponent(new Speed(200));
@@ -164,6 +172,11 @@ public class App extends Application {
 			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, WealthType.GOLD, 100));
 //			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 //			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
+			// call the spawner to spawn
+			GamePoint targetSpawnPos = new GamePoint(10, 20);
+			bus.emit(new PeriodicEvent(5, 3.0, () -> {
+				spawner.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
+			}));
 		});
 		
 		// Triggers
@@ -175,24 +188,7 @@ public class App extends Application {
 		game.start();
 		stage.show();
 		
-		// TODO add method to generate path
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
-				new Target(new GamePoint(300,100)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
-				new Target(new GamePoint(250,200)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
-				new Target(new GamePoint(100,150)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
-				new Target(new GamePoint(500,300)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
-				new Target(new GamePoint(400,200)))));
-		
 
-		GamePoint targetSpawnPos = new GamePoint(10, 20);
-		
-		bus.emit(new PeriodicEvent(5, 3.0, () -> {
-			spawner.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
-		}));
 	}
 	
 	public static void main(String[] args) {

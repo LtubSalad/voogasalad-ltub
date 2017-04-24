@@ -10,9 +10,18 @@ import newengine.utils.image.LtubImage;
 public class FireProjectileSkill extends Skill {
 
 	public static final SkillType<FireProjectileSkill> TYPE = new SkillType<>(FireProjectileSkill.class.getName()); 
-
+	private double cooldown = 1;
+	
 	public FireProjectileSkill() {
 		icon = new LtubImage("images/skills/crosshairs.png");
+	}
+	
+	public void setCooldown(double cooldown) { // TODO: it's better if there is no setter API? 
+		this.cooldown = cooldown;
+	}
+	@Override
+	public double getCooldown() {
+		return cooldown;
 	}
 
 	@Override
