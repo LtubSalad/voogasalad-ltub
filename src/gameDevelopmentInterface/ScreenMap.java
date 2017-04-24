@@ -1,5 +1,8 @@
 package gameDevelopmentInterface;
 
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -107,6 +110,7 @@ public class ScreenMap extends StackPane {
 		double actualY = (gp.y()*(getGrid().getHeight()/NUM_ROWS)) + ((getGrid().getHeight()/NUM_ROWS)/2);
 		return new GamePoint(actualX, actualY);
 	}
+
 	
 	private void redrawGrid() {
 		Map<SpriteMakerModel, Boolean> onScreenOrNot = mySMC.getScreenData().getIfOnScreen();

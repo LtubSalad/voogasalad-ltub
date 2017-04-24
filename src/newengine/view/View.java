@@ -1,8 +1,6 @@
 package newengine.view;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
@@ -38,7 +36,6 @@ import newengine.sprite.components.SkillSet;
 import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
-
 public class View {
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 500;
@@ -46,7 +43,6 @@ public class View {
 	public static final int CANVAS_HEIGHT = 300;
 	public static final int STATS_HEIGHT = 100;
 	public static final Paint BACKGROUND = Color.BISQUE;
-
 	private EventBus bus;
 	private Camera camera;
 	private Scene scene;
@@ -77,11 +73,8 @@ public class View {
 		skillBox = new SkillBox(bus);
 		bottomPane.getChildren().add(skillBox.getBox());
 
-		this.camera = new Camera(bus);
-		
 		initHandlers();
 	}
-
 	private void initHandlers() {
 		gameWorldCanvas.setOnMouseClicked(e -> {
 			ViewPoint viewPos = new ViewPoint(e.getX(), e.getY());
@@ -110,11 +103,9 @@ public class View {
 			bus.emit(new KeyEvent(KeyEvent.TYPE, e.getCode()));
 		});
 	}
-
 	public Scene getScene() {
 		return scene;
 	}
-
 	public void clear(){
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 	}
@@ -142,7 +133,6 @@ public class View {
 					image.getFXImage().getWidth() * camera.getScaleFactor(), 
 					image.getFXImage().getHeight() * camera.getScaleFactor());
 		}
-
 	}
 	
 	private void render(PlayerStatsModel playerStatsModel, 
@@ -221,5 +211,4 @@ public class View {
 			scene.setCursor(Cursor.DEFAULT);
 		}
 	}
-
 }

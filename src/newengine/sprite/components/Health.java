@@ -38,10 +38,10 @@ public class Health extends Component {
 	
 	@Override
 	public void afterAdded(){
-		sprite.on(ChangeHealthEvent.ANY, (Serializable & BusEventHandler<ChangeHealthEvent>)e -> {
+		sprite.on(ChangeHealthEvent.ANY,e -> {
 			changeHealth(e.getChange());
 		});
-		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.STOP,  (e) -> {
 			Sprite another = e.getSprite();
 			Player owner = sprite.getComponent(Owner.TYPE).get().player();
 			another.getComponent(Owner.TYPE).ifPresent((anotherOwner) -> {

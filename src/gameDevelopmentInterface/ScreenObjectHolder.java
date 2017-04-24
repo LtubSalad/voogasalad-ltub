@@ -1,13 +1,10 @@
 package gameDevelopmentInterface;
 import java.io.File;
-import java.util.ArrayList;
 //import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
-import bus.EventBus;
 import commons.point.GamePoint;
 import data.ScreenModelData;
 import data.SpriteMakerModel;
@@ -21,39 +18,33 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.util.Pair;
-import newengine.events.QueueEvent;
-import newengine.events.sprite.MoveEvent;
 import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.BuildSkill;
 import newengine.skill.skills.FireProjectileSkill;
 import newengine.skill.skills.MoveSkill;
-import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
 import newengine.sprite.components.Cooldown;
-import newengine.sprite.components.DamageStrength;
 import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
-import newengine.sprite.components.PathFollower;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.RangeShootingAI;
 import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
-import newengine.utils.Target;
-import newengine.utils.image.ImageSet;
-import newengine.utils.image.LtubImage;
 import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
+import newengine.utils.image.ImageSet;
+import newengine.utils.image.LtubImage;
 import utilities.XStreamHandler;
 /**
  * This class holds all possible sprites that a user can place on the screen.
@@ -251,7 +242,6 @@ public class ScreenObjectHolder extends HBox {
 		spawner.addComponent(new Attacker());
 		spawner.addComponent(new Health(200));
 		spawner.addComponent(new EventQueue(new LinkedList<>()));
-
 		addObject(sprite1);
 		addObject(sprite2);
 		addObject(spawner);

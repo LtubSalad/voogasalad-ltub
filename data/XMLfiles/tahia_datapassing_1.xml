@@ -1,0 +1,21 @@
+<Sprite>
+	<Component>
+		<ComponentType> Collidable </ComponentType>
+		<ComponentVariables>
+		<Variable> CollisionBoundType </Variable>
+		</ComponentVariables>
+	</Component>
+	<Skill>
+		<SkillType> FireProjectileSkill</SkillType>
+	</Skill>
+	<Component>
+		<ComponentType> Images </ComponentType>
+		<ComponentVariables>
+		<Variable> ImageSet </Variable>
+		</ComponentVariables>
+	</Component>
+	<Component>
+	<ComponentType> EventQueue </ComponentType>
+	<ComponentVariables> events we want it to take </ComponentVariables>
+	</Component>
+</Sprite>
