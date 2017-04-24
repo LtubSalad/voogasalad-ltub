@@ -59,13 +59,6 @@ public class InputManager {
 	private void initHandlers() {
 		bus.on(KeyEvent.PRESS, e -> {
 			keyInputState.pressKey(e.getCode());
-			List<Sprite> sprites = spriteModel.getSprites();
-			for(Sprite sprite : sprites){
-				sprite.getComponent(Position.TYPE).ifPresent((position) -> {
-					position.
-				});
-				(sprite.getComponent(Position.TYPE)).updateMovePosition(0, new GamePoint(0,0));
-			}
 			
 			
 			
