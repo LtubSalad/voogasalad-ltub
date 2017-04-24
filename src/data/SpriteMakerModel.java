@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.util.Pair;
 import newengine.events.sprite.SpriteKilledEvent;
+import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -27,7 +28,8 @@ public class SpriteMakerModel {
 	private Map<String, List<String>> componentsForTransfer; 
 	private List<Component> actualComponents; 
 	private List<EventHandleData> myEventHandlers; 
-	private Map<String, List<DataWrapper>> skills; 
+	//private Map<String, List<DataWrapper>> skills; 
+	List<Skill> skills; 
 
 	
 	
@@ -37,15 +39,13 @@ public class SpriteMakerModel {
 		Map<BusEvent, String> handlers=new HashMap<>();
 		myScriptMap=FXCollections.observableMap(handlers);
 		actualComponents = new ArrayList<Component>(); 
-		skills = new HashMap<String, List<DataWrapper>>(); 
+		skills = new ArrayList<Skill>(); 
 		
 	}
 
 	
-	public void addSkill(String name, List<DataWrapper> parameters){
-		if (!skills.containsKey(name)){
-			skills.put(name, parameters);
-		}
+	public void addSkill(Skill skill){
+		skills.add(skill);
 	}
 	
 	
@@ -151,7 +151,7 @@ public class SpriteMakerModel {
 		return null;
 	}
 	
-	public Map<String, List<DataWrapper>> getSkills(){
+	public List<Skill> getSkills(){
 		return skills; 
 	}
 	

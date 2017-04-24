@@ -10,10 +10,12 @@ import data.SpriteMakerModel;
 import gamecreation.DataWrapper;
 import javafx.collections.ObservableList;
 import newengine.events.SpriteModelEvent;
+import newengine.events.skill.AddSkillEvent;
 import newengine.model.SpriteModel;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.SkillSet;
 
 /**
  * @author tahiaemran
@@ -63,23 +65,29 @@ public class AuthDataTranslator implements Translator {
 	public void translate() {
 		spritesToMake.stream().forEach(model -> {
 			Sprite newSprite = handleComponents(model.getActualComponents());
-			Sprite skilledSprite = handleSkills(newSprite, model.getSkills());
 			// skills
+			Sprite skilledSprite = handleSkills(newSprite, model.getSkills());
 			/// triggers 
-			constructedSprites.add(handleEventHandlers(newSprite, model.getEventHandlers()));				
+			constructedSprites.add(handleEventHandlers(skilledSprite, model.getEventHandlers()));				
 		});
 		gameBus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, constructedSprites));
 	}
 	
-
-	private Sprite handleSkills(Sprite sprite, Map<String, List<DataWrapper>> skills) {
-		for (String skillName: skills.keySet()){
-			List<DataWrapper> parameters = skills.get(skillName);
-			// create skill factory 
-			SkillFactory factory = new SkillFactory(skillName, parameters);
-			Skill constructedSkill= factory.getConstructedSkill(); 
-			// add the skill to the sprite			
-		}
+//
+//	private Sprite handleSkills(Sprite sprite, Map<String, List<DataWrapper>> skills) {
+//		for (String skillName: skills.keySet()){
+//			List<DataWrapper> parameters = skills.get(skillName);
+//			// create skill factory 
+//			SkillFactory factory = new SkillFactory(skillName, parameters);
+//			Skill constructedSkill= factory.getConstructedSkill(); 
+//			// add the skill to the sprite			
+//		}
+//		return sprite; 
+//	}
+//	
+	private Sprite handleSkills(Sprite sprite, List<Skill> skills){
+		skills.stream().forEach(skill-> 
+			sprite.emit(new AddSkillEvent(AddSkillEvent.TYPE, skill)));
 		return sprite; 
 	}
 	
