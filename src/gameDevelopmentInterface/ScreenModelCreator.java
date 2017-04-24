@@ -1,9 +1,8 @@
 package gameDevelopmentInterface;
 
-import data.AttributeData;
-import data.SpritesForScreenUse;
 import data.ScreenModelData;
 import data.SpriteMakerModel;
+import data.SpritesForScreenUse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;

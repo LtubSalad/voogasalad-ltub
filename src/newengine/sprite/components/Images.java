@@ -10,16 +10,23 @@ import newengine.utils.image.LtubImage;
 public class Images extends Component {
 
 	public static final ComponentType<Images> TYPE = new ComponentType<>(Images.class.getName());
-	private ImageSet imageSet;
+//	private ImageSet imageSet;
+	private String imageFilePath;
 	
-	public Images(ImageSet imageSet) {
-		this.imageSet = imageSet;
-	}
+//	public Images(ImageSet imageSet) {
+//		this.imageSet = imageSet;
+//	}
 	
-	@ConstructorForDeveloper
-	public Images(@VariableName(name = "filepath") String filepath){
-		imageSet = new ImageSet(filepath);
+	public Images(String filePath) {
+		this.imageFilePath = filePath;
 	}
+//	
+//	@ConstructorForDeveloper
+//	public Images(@VariableName(name = "filepath") String filepath){
+//		imageSet = new ImageSet(filepath);
+//	}
+	
+	
 	
 	public LtubImage image() {
 		double heading = 0;
@@ -27,7 +34,7 @@ public class Images extends Component {
 		if (sprite!=null&&sprite.getComponent(Speed.TYPE).isPresent()) {
 			heading = sprite.getComponent(Position.TYPE).get().heading();
 		}
-		return imageSet.getImage(heading, dist);
+		return new LtubImage(imageFilePath);//imageSet.getImage(heading, dist);
 	}
 	
 	@Override
@@ -37,6 +44,6 @@ public class Images extends Component {
 
 	@Override
 	public Images clone() {
-		return new Images(imageSet);
+		return new Images(imageFilePath);
 	}
 }

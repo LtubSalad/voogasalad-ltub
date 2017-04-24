@@ -63,7 +63,7 @@ public class App extends Application {
 		Sprite building = new Sprite();
 		LtubImage buildingImage = new LtubImage("images/skills/build.png");
 		ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
-		building.addComponent(new Images(imageSetBuildSkill));
+		building.addComponent(new Images("images/skills/build.png"));
 		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		
 		
@@ -85,7 +85,7 @@ public class App extends Application {
 		sprite1.addComponent(new Owner(player1));
 		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
 		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		sprite1.addComponent(new Images(imageSet1));
+		sprite1.addComponent(new Images("images/characters/tower2_resized.gif"));
 		sprite1.addComponent(new Speed(200));
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
@@ -107,7 +107,7 @@ public class App extends Application {
 		sprite2.addComponent(new Owner(player2));
 		sprite2.addComponent(new Position(new GamePoint(300, 250), 0));
 		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		sprite2.addComponent(new Images(imageSet2));
+		sprite2.addComponent(new Images("images/characters/bahamut_right.png"));
 		sprite2.addComponent(new Speed(100));
 		sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
@@ -127,7 +127,7 @@ public class App extends Application {
 		child.addComponent(new Owner(player2));
 		child.addComponent(new Position(new GamePoint(300, 50), 0));
 		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		child.addComponent(new Images(childImageSet));
+		child.addComponent(new Images("images/characters/bahamut_left.png"));
 		child.addComponent(new Speed(200));
 		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
@@ -147,7 +147,7 @@ public class App extends Application {
 		spawner.addComponent(new Owner(player1));
 		spawner.addComponent(new Position(new GamePoint(-100, -100), 0));
 		spawner.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		spawner.addComponent(new Images(imageSet1));
+		spawner.addComponent(new Images("images/characters/tower2_resized.gif"));
 		spawner.addComponent(new Speed(200));
 		spawner.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		spawner.addComponent(new Selectable(SelectionBoundType.IMAGE));

@@ -3,6 +3,7 @@ package newengine.skill.skills;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.SpriteMakerModel;
 import newengine.events.SpriteModelEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
@@ -16,11 +17,20 @@ public class BuildSkill extends Skill{
 	
 	public static final SkillType<BuildSkill> TYPE = new SkillType<>(BuildSkill.class.getName());
 	private Sprite spriteToCreate;
+	private SpriteMakerModel mySpriteModel;
 	
 	public BuildSkill(Sprite sprite) {
 		this.spriteToCreate = sprite;
 		if (sprite.getComponent(Images.TYPE).isPresent()) {
 			this.icon = sprite.getComponent(Images.TYPE).get().image();
+		}
+	}
+	
+	public BuildSkill(SpriteMakerModel spriteModel) {
+		this.mySpriteModel = spriteModel;
+		if (spriteModel.getComponentByType(Images.TYPE) != null) {
+			Images imageComponent = (Images) spriteModel.getComponentByType(Images.TYPE);
+			this.icon = imageComponent.image();
 		}
 	}
 	

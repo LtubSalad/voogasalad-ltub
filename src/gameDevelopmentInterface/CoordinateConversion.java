@@ -1,6 +1,7 @@
 package gameDevelopmentInterface;
 
 import commons.point.GamePoint;
+import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 /**
  * A utility that allows the front end with a coordinate system to talk to the back
@@ -31,7 +32,11 @@ public class CoordinateConversion {
 	 * @param gameCoord
 	 * @return the coordinates of the sprite on the grid in ScreenMap
 	 */
-	public Pair<Integer, Integer> fromGamePointToPair(GamePoint gameCoord) {
+	public Pair<Integer, Integer> fromGamePointToPair(GamePoint gameCoord, GridPane grid) {
+		Pair<Integer, Integer> toReturn;
+		
+		
+		
 		Double dx = gameCoord.x();
 		Double dy = gameCoord.y();
 		Integer x = dx.intValue();
