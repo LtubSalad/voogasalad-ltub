@@ -25,20 +25,15 @@ public class DamageStrength extends Component {
 	@Override
 	public void afterAdded() {
 		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
-			Player owner = sprite.getComponent(Owner.TYPE).get().player();			
-			Player anotherOwner = e.getTarget().getSprite().get().getComponent(Owner.TYPE).get().player();
-			if (owner != anotherOwner) {
-				sprite.getComponent(Position.TYPE).ifPresent((position) -> {
-					if (position.isMoving() == false) {
-						List<Sprite> spritesToRemove = new ArrayList<>();
-						spritesToRemove.add(sprite);
-						sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
-							gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spritesToRemove));
-						});		
-					}
-				});
-						
-			}
+			sprite.getComponent(Position.TYPE).ifPresent((position) -> {
+				if (position.isMoving() == false) {
+					List<Sprite> spritesToRemove = new ArrayList<>();
+					spritesToRemove.add(sprite);
+					sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
+						gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spritesToRemove));
+					});		
+				}
+			});	
 		});
 	}
 	

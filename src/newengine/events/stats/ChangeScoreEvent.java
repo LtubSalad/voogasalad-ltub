@@ -12,9 +12,9 @@ public class ChangeScoreEvent extends ChangeStatsEvent {
 		super(busEventType, player, changeInScore);
 	}
 	
-	public ChangeScoreEvent(BusEventType<? extends BusEvent> busEventType, String playerName, int changeInScore) {
-		super(busEventType, playerName, changeInScore);
-	}
+//	public ChangeScoreEvent(BusEventType<? extends BusEvent> busEventType, String playerName, int changeInScore) {
+//		super(busEventType, playerName, changeInScore);
+//	}
 	
 	
 }
