@@ -27,8 +27,8 @@ public class SpriteMakerModel {
 	private Map<String, List<String>> componentsForTransfer; 
 	private List<Component> actualComponents; 
 	private List<EventHandleData> myEventHandlers; 
-	
-	
+	private Map<String, List<DataWrapper>> skills; 
+
 	
 	
 	public SpriteMakerModel() {
@@ -36,11 +36,18 @@ public class SpriteMakerModel {
 		myComponents=FXCollections.observableMap(componentMap);
 		Map<BusEvent, String> handlers=new HashMap<>();
 		myScriptMap=FXCollections.observableMap(handlers);
-		//components = new HashMap<String, Map<String, DataWrapper>>();
 		actualComponents = new ArrayList<Component>(); 
+		skills = new HashMap<String, List<DataWrapper>>(); 
 		
 	}
 
+	
+	public void addSkill(String name, List<DataWrapper> parameters){
+		if (!skills.containsKey(name)){
+			skills.put(name, parameters);
+		}
+	}
+	
 	
 	public void addComponent(String componentName, List<String> params) {
 		//TODO: modify this method call to pass data correct data structures (Map<String, DataWrapper>) 
@@ -143,6 +150,12 @@ public class SpriteMakerModel {
 		}
 		return null;
 	}
+	
+	public Map<String, List<DataWrapper>> getSkills(){
+		return skills; 
+	}
+	
+	
 	
 	/**
 	 * Call this AFTER unserialization to avoid the bus issues
