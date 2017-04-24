@@ -6,14 +6,18 @@ import javafx.scene.layout.VBox;
 
 public abstract class LevelCreator extends TitledPane implements ILevelCreator{
 	private VBox content;
+	private LevelCreatorHolder parent;
+	private String name;
 	
-	public LevelCreator(int i) {
-		this(Integer.toString(i));
+	public LevelCreator(int i, LevelCreatorHolder parent) {
+		this(Integer.toString(i), parent);
 	}
 	
-	public LevelCreator(String s){
+	public LevelCreator(String s, LevelCreatorHolder parent){
 		super();
+		this.parent = parent;
 		//TODO resource file
+		this.name = s;
 		this.setText(s);
 		createContent();
 	}
@@ -26,5 +30,18 @@ public abstract class LevelCreator extends TitledPane implements ILevelCreator{
 	
 	public VBox getCurrentContent(){
 		return content;
+	}
+	
+	public void remove(LevelCreator level){
+		parent.remove(level);
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		return(other instanceof LevelCreator && ((LevelCreator) other).getName().equals(this.name));
 	}
 }
