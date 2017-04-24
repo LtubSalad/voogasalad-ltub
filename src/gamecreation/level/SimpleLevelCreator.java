@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 
 public class SimpleLevelCreator extends LevelCreator {
 	private VBox content;
+	private IntegerParameterInput difficultyMod;
 
 	public SimpleLevelCreator(int levelNum, LevelCreatorHolder parent) {
 		super(levelNum, parent);
@@ -19,13 +20,14 @@ public class SimpleLevelCreator extends LevelCreator {
 	@Override
 	public void createContent(){
 		content = new VBox();
-		IntegerParameterInput difficultyMod = new IntegerParameterInput("Difficulty Modifier", 1, 10);
-		content.getChildren().add(difficultyMod.get());
+		difficultyMod = new IntegerParameterInput("Difficulty Modifier", 1, 10);
+		Button remove = new Button("remove");
+		remove.setOnAction(e -> super.remove(this));
+		content.getChildren().addAll(difficultyMod.get(), remove);
 		this.setContent(content);
 	}
-
-	@Override
-	public void addToContent(Node node) {
-		content.getChildren().add(node);
+	
+	public LevelData getData(){
+		return new SimpleLevelData(getName(), difficultyMod.getValue());
 	}
 }
