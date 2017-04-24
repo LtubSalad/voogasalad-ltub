@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
 import bus.BasicEventBus;
-import data.EventHandleData;
+import bus.BusEvent;
 import data.SpriteMakerModel;
 import javafx.collections.ObservableList;
 import newengine.events.SpriteModelEvent;
@@ -66,7 +69,7 @@ public class AuthDataTranslator implements Translator {
 			// skills
 			Sprite skilledSprite = handleSkills(newSprite, model.getSkills());
 			/// triggers 
-			constructedSprites.add(handleEventHandlers(skilledSprite, model.getEventHandlers()));				
+			constructedSprites.add(handleEventHandlers(skilledSprite, model.getScriptMap()));				
 		});
 		gameBus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, constructedSprites));
 	}
@@ -92,8 +95,19 @@ public class AuthDataTranslator implements Translator {
 	
 	
 
-	private Sprite handleEventHandlers(Sprite newSprite, List<EventHandleData> eventHandlers) {
-		// loop through 
+	private Sprite handleEventHandlers(Sprite newSprite, Map<BusEvent, String> scriptMap ) {
+		// TODO: don't hard code groovy
+		ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
+		for (BusEvent event : scriptMap.keySet()){
+			newSprite.getSpriteBus().on(event.getEventType(), e ->{
+				try{
+					scriptHandler.eval(scriptMap.get(event));
+				}
+				catch (Exception exception){
+					System.out.println("hi yes scripting does not work properly here" );
+				}
+			});
+		}
 		return newSprite; 
 
 	}
