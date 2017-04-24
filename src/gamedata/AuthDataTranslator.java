@@ -7,7 +7,6 @@ import java.util.Map;
 import bus.BasicEventBus;
 import data.EventHandleData;
 import data.SpriteMakerModel;
-import gamecreation.DataWrapper;
 import javafx.collections.ObservableList;
 import newengine.events.SpriteModelEvent;
 import newengine.events.skill.AddSkillEvent;
@@ -15,7 +14,6 @@ import newengine.model.SpriteModel;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
-import newengine.sprite.components.SkillSet;
 
 /**
  * @author tahiaemran
