@@ -1,18 +1,26 @@
 package newengine.app;
 
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import bus.EventBus;
 import commons.point.GamePoint;
+import data.SpriteMakerModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
 import newengine.events.QueueEvent;
 import newengine.events.SpriteModelEvent;
+import newengine.events.skill.TriggerSkillEvent;
 import newengine.events.sound.SoundEvent;
+import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
@@ -26,6 +34,8 @@ import newengine.skill.skills.BuildSkill;
 import newengine.skill.skills.FireProjectileSkill;
 import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
+import newengine.sprite.component.Component;
+import newengine.sprite.component.ComponentType;
 import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
@@ -45,13 +55,17 @@ import newengine.trigger.Trigger;
 import newengine.utils.Target;
 import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
+import utilities.XStreamHandler;
 
 public class App extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		
 		Game game = new Game();
+		XStreamHandler xHandler = new XStreamHandler();
+		XStream xStream = new XStream(new DomDriver());
+		SpriteMakerModel spriteToSave = new SpriteMakerModel();
+		
 		Player player1 = new Player("Player 1");
 		Player player2 = new Player("Player 2");
 		
@@ -63,29 +77,83 @@ public class App extends Application {
 		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		
 		
+
 		EventBus bus = game.getBus();
 		
 		// sprite 1
-		Sprite sprite1 = new Sprite();
 		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
 		ImageSet imageSet1 = new ImageSet(image1);
 		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 		skillMap.put(MoveSkill.TYPE, new MoveSkill());
 		skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
 		skillMap.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
-		sprite1.addComponent(new GameBus());
-		sprite1.addComponent(new SkillSet(skillMap));
-		sprite1.addComponent(new Owner(player1));
-		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
-		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		sprite1.addComponent(new Images(imageSet1));
-		sprite1.addComponent(new Speed(200));
-		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		sprite1.addComponent(new Range(128));
-		sprite1.addComponent(new Attacker());
-		sprite1.addComponent(new Health(200));
-		sprite1.addComponent(new EventQueue());
+		spriteToSave.addComponent(new GameBus());
+		spriteToSave.addComponent(new SkillSet(skillMap));
+		spriteToSave.addComponent(new Owner(player1));
+		spriteToSave.addComponent(new Position(new GamePoint(200, 100), 0));
+		spriteToSave.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
+		spriteToSave.addComponent(new Images(imageSet1));
+		spriteToSave.addComponent(new Speed(200));
+		spriteToSave.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		spriteToSave.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		spriteToSave.addComponent(new Range(128));
+		spriteToSave.addComponent(new Attacker());
+		spriteToSave.addComponent(new Health(200));
+		spriteToSave.addComponent(new EventQueue());
+		
+		//xHandler.saveToFile(spriteToSave);
+		File file = new File("data/attributeSkeletons/userCreatedAttributes/USETHIS.xml");
+		SpriteMakerModel fromXML = (SpriteMakerModel) xStream.fromXML(new FileReader(file));
+		
+		Sprite sprite1 = new Sprite();
+		for (ComponentType<?> c : fromXML.getComponents().keySet()) {
+			System.out.println("Component type: " + c);
+			Component componentSaved = fromXML.getComponents().get(c);
+			sprite1.addComponent(componentSaved);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+//		Game game = new Game();
+//		Player player1 = new Player("Player 1");
+//		Player player2 = new Player("Player 2");
+//		
+//		// building
+//		Sprite building = new Sprite();
+//		LtubImage buildingImage = new LtubImage("images/skills/build.png");
+//		ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
+//		building.addComponent(new Images(imageSetBuildSkill));
+//		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
+//		
+//		
+//		EventBus bus = game.getBus();
+//		
+//		// sprite 1
+//		Sprite sprite1 = new Sprite();
+//		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
+//		ImageSet imageSet1 = new ImageSet(image1);
+//		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
+//		skillMap.put(MoveSkill.TYPE, new MoveSkill());
+//		skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
+//		skillMap.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
+//		sprite1.addComponent(new GameBus());
+//		sprite1.addComponent(new SkillSet(skillMap));
+//		sprite1.addComponent(new Owner(player1));
+//		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
+//		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
+//		sprite1.addComponent(new Images(imageSet1));
+//		sprite1.addComponent(new Speed(200));
+//		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
+//		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
+//		sprite1.addComponent(new Range(128));
+//		sprite1.addComponent(new Attacker());
+//		sprite1.addComponent(new Health(200));
+//		sprite1.addComponent(new EventQueue());
 			
 		// sprite 2
 		Sprite sprite2 = new Sprite();
@@ -141,6 +209,7 @@ public class App extends Application {
 				new Target(new GamePoint(500,300)))));
 		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(400,200)))));
+		sprite1.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, sprite1, sprite2));
 	}
 	
 	public static void main(String[] args) {
