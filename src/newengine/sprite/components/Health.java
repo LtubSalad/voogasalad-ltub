@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bus.BusEventHandler;
+import helperAnnotations.DeveloperMethod;
 import newengine.events.SpriteModelEvent;
 import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.ChangeHealthEvent;
@@ -55,6 +56,7 @@ public class Health extends Component {
 		});	
 	}
 
+	@DeveloperMethod
 	private void changeHealth(int change) {
 		health += change;
 		System.out.println(health);

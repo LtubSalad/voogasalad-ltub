@@ -62,21 +62,22 @@ public class XStreamTester extends Application{
 //		sprite1.addComponent(new Health(200));
 //		sprite1.addComponent(new EventQueue());
 		
-//		
-//		Position p = new Position(new GamePoint(200,100), 0); 
-//		XStreamHandler XSH = new XStreamHandler(); 
-//		XSH.saveToFile(p);
+		
+		Position p = new Position(new GamePoint(200,100), 0); 
+		XStreamHandler XSH = new XStreamHandler(); 
+		XSH.saveToFile(p);
+		//XSH.saveToFile(p, location);
 		
 		
 		//XSH.saveToFile(sprite1);
 		
-		File file = new File("data/XMLfiles/another_component.xml");
-		XStream xstream = new XStream(new DomDriver()); 
-		Position test = (Position) xstream.fromXML(file);
-		Sprite new1 = new Sprite(); 
-		new1.addComponent(test);
-		new1.emit(new MoveEvent(MoveEvent.START_SPRITE, new1,new Target( new GamePoint(0,0))));
-//		
+//		File file = new File("data/XMLfiles/another_component.xml");
+//		XStream xstream = new XStream(new DomDriver()); 
+//		Position test = (Position) xstream.fromXML(file);
+//		Sprite new1 = new Sprite(); 
+//		new1.addComponent(test);
+//		new1.emit(new MoveEvent(MoveEvent.START_SPRITE, new1,new Target( new GamePoint(0,0))));
+////		
 		//Sprite newSprite = (Sprite) xstream.fromXML(file);
 		//System.out.println(newSprite.hasComponent(Position.TYPE));
 		//Position p =  newSprite.getComponent(Position.TYPE).get();

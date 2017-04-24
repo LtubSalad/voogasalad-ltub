@@ -12,6 +12,7 @@ import bus.BusEventHandler;
 import commons.MathUtils;
 import commons.point.GamePoint;
 import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.DeveloperMethod;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
 import newengine.events.sound.SoundEvent;
@@ -36,9 +37,9 @@ public class Position extends Component {
 	}
 
 	@ConstructorForDeveloper
-	public Position(@VariableName(name = "xPosition") double xPos,
-			@VariableName(name = "yPosition") double yPos,@VariableName(name = "heading") double heading){
-		this(new GamePoint(xPos,yPos),heading);
+	public Position(@VariableName(name = "xPosition") double xPos, @VariableName(name = "yPosition") double yPos,
+			@VariableName(name = "heading") double heading) {
+		this(new GamePoint(xPos, yPos), heading);
 	}
 
 	@Override
@@ -64,13 +65,16 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.STOP, (e) -> {
+
+		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
 			stopMoving();
 		});
 	}
 	@Override
 	public void onUpdated(double dt) {
-		if (!isMoving()) {return;}
+		if (!isMoving()) {
+			return;
+		}
 		GamePoint pDest = getFollowingPoint();
 		updateMovePosition(dt, pDest);
 	}
@@ -128,15 +132,19 @@ public class Position extends Component {
 	public double heading() {
 		return heading;
 	}
+
+	@DeveloperMethod
 	private void moveTo(Target target) {
 		this.target = target;
 		startMoving();
 	}
 
+	@DeveloperMethod
 	private void startMoving() {
 		isMoving = true;
 	}
 
+	@DeveloperMethod
 	private void stopMoving() {
 		isMoving = false;
 	}
