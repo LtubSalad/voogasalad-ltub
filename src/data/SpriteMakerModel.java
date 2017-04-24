@@ -166,9 +166,9 @@ public class SpriteMakerModel {
 		myComponents.forEach((componentType, component)->{
 			sprite.addComponent(component);
 		});
-		myScriptMap.forEach((event, script)->{
-			sprite.produceHandler(event.getEventType(), script);
-		});
+//		myScriptMap.forEach((event, script)->{
+//			sprite.produceHandler(event.getEventType(), script);
+//		});
 		return sprite;
 	}
 

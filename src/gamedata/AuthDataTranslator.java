@@ -33,6 +33,7 @@ public class AuthDataTranslator implements Translator {
 	private List<Sprite> constructedSprites = new ArrayList<Sprite>(); 
 	private SpriteModel constructedModel = new SpriteModel(gameBus); 
 
+	private Sprite constructed; 
 
 	public AuthDataTranslator(ObservableList<SpriteMakerModel> allObjectsOnScreen) {
 		spritesToMake = new ArrayList<SpriteMakerModel>(allObjectsOnScreen); 
@@ -46,8 +47,18 @@ public class AuthDataTranslator implements Translator {
 	public AuthDataTranslator(SpriteMakerModel spriteToMake){
 		spritesToMake = new ArrayList<SpriteMakerModel>();
 		spritesToMake.add(spriteToMake);
+		makeSingleSprite(spriteToMake);
 	}
 
+	private void makeSingleSprite(SpriteMakerModel spriteToMake) {
+		constructed = handleComponents(spriteToMake.getActualComponents());
+		
+	}
+
+	public Sprite getSprite(){
+		return constructed; 
+	}
+	
 	@Override
 	public void translate() {
 		spritesToMake.stream().forEach(model -> {
