@@ -30,6 +30,11 @@ public class Player {
 		return other == this;
 	}
 	
+	public boolean isEnemyWith(Player other) {
+		// currently all other players are enemy. TODO
+		return other != this;
+	}
+	
 	@Override
 	public String toString() {
 		return name;
