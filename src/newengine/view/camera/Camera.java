@@ -47,8 +47,6 @@ public class Camera {
 		else if (scaleFactor < MIN_FACTOR) {
 			scaleFactor = MIN_FACTOR;
 		}
-		root.setScaleX(scaleFactor);
-		root.setScaleY(scaleFactor);
 	}
 	
 	private void move(CameraEvent e) {
@@ -58,8 +56,6 @@ public class Camera {
 	
 	private void reset() {
 		scaleFactor = 1;
-		root.setScaleX(scaleFactor);
-		root.setScaleY(scaleFactor);
 		root.setTranslateX(0);
 		root.setTranslateY(0);
 	}
@@ -70,7 +66,7 @@ public class Camera {
 	 * @return GamePoint
 	 */
 	public GamePoint viewToGame(ViewPoint viewPoint) {
-		return new GamePoint(viewPoint.x(), viewPoint.y());
+		return new GamePoint(viewPoint.x() / scaleFactor, viewPoint.y() / scaleFactor);
 	}
 	
 	/**
@@ -79,7 +75,7 @@ public class Camera {
 	 * @return ViewPoint
 	 */
 	public ViewPoint gameToView(GamePoint gamePoint) {
-		return new ViewPoint(gamePoint.x(), gamePoint.y());
+		return new ViewPoint(gamePoint.x() * scaleFactor, gamePoint.y() * scaleFactor);
 	}
 	
 	public double getScaleFactor() {
