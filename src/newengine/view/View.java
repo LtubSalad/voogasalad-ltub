@@ -77,7 +77,7 @@ public class View {
 		skillBox = new SkillBox(bus);
 		bottomPane.getChildren().add(skillBox.getBox());
 
-		this.camera = new Camera(bus, gameWorldCanvas, 1);
+		this.camera = new Camera(bus);
 		
 		initHandlers();
 	}

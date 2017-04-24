@@ -14,17 +14,16 @@ import newengine.events.camera.CameraEvent;
 public class Camera {
 
 	private EventBus bus;
-	private Node root;
-	private double scaleFactor;
+	private double scaleFactor = 1;
+	private double translateX = 0;
+	private double translateY = 0;
 	
 	public static final double MAX_FACTOR = 2.5;
 	public static final double MIN_FACTOR = 0.5;
 	public static final double MOVE_SPEED_PER_FRAME = 100;
 	
-	public Camera(EventBus bus, Node root, double scaleFactor) {
+	public Camera(EventBus bus) {
 		this.bus = bus;
-		this.root = root;
-		this.scaleFactor = scaleFactor;
 		initHandlers();
 	}
 	
@@ -51,14 +50,14 @@ public class Camera {
 	}
 	
 	private void move(CameraEvent e) {
-		root.setTranslateX(root.getTranslateX() + e.getTranslateXValue());
-		root.setTranslateY(root.getTranslateY() + e.getTranslateYValue());
+		this.translateX += e.getTranslateXValue();
+		this.translateY += e.getTranslateYValue();
 	}
 	
 	private void reset() {
 		scaleFactor = 1;
-		root.setTranslateX(0);
-		root.setTranslateY(0);
+		this.translateX = 0;
+		this.translateY = 0;
 	}
 	
 	/**
@@ -67,7 +66,8 @@ public class Camera {
 	 * @return GamePoint
 	 */
 	public GamePoint viewToGame(ViewPoint viewPoint) {
-		return new GamePoint(viewPoint.x() / scaleFactor, viewPoint.y() / scaleFactor);
+		return new GamePoint((viewPoint.x() - translateX) / scaleFactor, 
+				(viewPoint.y() - translateY) / scaleFactor);
 	}
 	
 	/**
@@ -76,7 +76,8 @@ public class Camera {
 	 * @return ViewPoint
 	 */
 	public ViewPoint gameToView(GamePoint gamePoint) {
-		return new ViewPoint(gamePoint.x() * scaleFactor, gamePoint.y() * scaleFactor);
+		return new ViewPoint(gamePoint.x() * scaleFactor + translateX, 
+				gamePoint.y() * scaleFactor + translateY);
 	}
 	
 	public double getScaleFactor() {
