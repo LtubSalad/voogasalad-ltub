@@ -25,7 +25,7 @@ public class SpriteMakerModel {
 	
 	// Jake and Tahia's DO NOT TOUCH
 	private Map<String, List<String>> componentsForTransfer; 
-	private Map<String, Map<String, DataWrapper>> components; 
+	private List<Component> actualComponents; 
 	private List<EventHandleData> myEventHandlers; 
 	
 	
@@ -36,8 +36,8 @@ public class SpriteMakerModel {
 		myComponents=FXCollections.observableMap(componentMap);
 		Map<BusEvent, String> handlers=new HashMap<>();
 		myScriptMap=FXCollections.observableMap(handlers);
-		// new shit 
-		components = new HashMap<String, Map<String, DataWrapper>>();
+		//components = new HashMap<String, Map<String, DataWrapper>>();
+		actualComponents = new ArrayList<Component>(); 
 		
 	}
 
@@ -57,12 +57,14 @@ public class SpriteMakerModel {
 	 * 
 	 * USE THIS ONE 
 	 */
-	public void addComponent(String componentName, Map<String, DataWrapper> parameters){
-		if (!components.containsKey(componentName)){
-			components.put(componentName, parameters);
-		}
+	public void addActualComponent(Component c){
+		actualComponents.add(c);
 	}
 	
+	
+	public List<Component> getActualComponents(){
+		return actualComponents; 
+	}
 	
 	public void addEventHandler(EventHandleData eventHandler) {
 		myEventHandlers.add(eventHandler);
