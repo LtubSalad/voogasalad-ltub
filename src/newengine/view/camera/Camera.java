@@ -12,6 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
+import javafx.scene.Node;
+import newengine.events.camera.CameraEvent;
+
 
 /**
  * Convert between {@code GamePoint} and {@code ViewPoint}.
@@ -26,21 +29,21 @@ public class Camera {
 	public static final Paint BACKGROUND = Color.BISQUE;
 
 	private EventBus bus;
-	//the default GamePoint for a camera
-	private GamePoint gameP;
-	//The default ViewPoint for a camera
-	private ViewPoint viewP;
+	private double scaleFactor = 1;
+	private double translateX = 0;
+	private double translateY = 0;
 	private Scene scene;
+	private GamePoint gameP;
+	private ViewPoint viewP;
 	
+	public static final double MAX_FACTOR = 2.5;
+	public static final double MIN_FACTOR = 0.5;
+	public static final double MOVE_SPEED_PER_FRAME = 100;
+	
+
 	public Camera(EventBus bus){
 		this.bus = bus;
-		gameP = new GamePoint(0,0);
-		viewP = new ViewPoint(10,10);
-		VBox root = new VBox();
-		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
-		initHandlers();
 	}
-	
 	public Camera(EventBus bus, GamePoint gamePoint, ViewPoint viewPoint) {
 		this.bus = bus;
 		this.gameP = gamePoint;
@@ -51,33 +54,48 @@ public class Camera {
 	}
 	
 	private void initHandlers() {
-		// TODO Auto-generated method stub
-		
-		scene.setOnKeyPressed(e ->{
-			if(e.getCode() == KeyCode.LEFT){		
-				
-				bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
-				//TODO canvas
-				
-			}
+		bus.on(CameraEvent.ZOOM, (e) -> {
+			zoom(e);
 		});
-		
-		scene.setOnKeyReleased(e ->{		
-				System.out.println("left key is released");
-				bus.emit(new KeyEvent(KeyEvent.RELEASE, e.getCode()));
-				//TODO canvas
+		bus.on(CameraEvent.MOVE, (e) -> {
+			move(e);
 		});
-		
+		bus.on(CameraEvent.RESET, (e) -> {
+			reset();
+		});
 	}
 
-	// TODO now it is a 1-1 camera, without any scaling
+	private void zoom(CameraEvent e) {
+		scaleFactor -= e.getZoomFactor();
+		if (scaleFactor > MAX_FACTOR) {
+			scaleFactor = MAX_FACTOR;
+		}
+		else if (scaleFactor < MIN_FACTOR) {
+			scaleFactor = MIN_FACTOR;
+		}
+	}
+	
+	private void move(CameraEvent e) {
+		this.translateX += e.getTranslateXValue();
+		this.translateY += e.getTranslateYValue();
+	}
+	
+	private void reset() {
+		scaleFactor = 1;
+		this.translateX = 0;
+		this.translateY = 0;
+	}
+	
+
 	/**
 	 * Convert a Point on the view to a Point in the game.
 	 * @param viewPoint a {@code ViewPoint} instance
 	 * @return GamePoint
 	 */
 	public GamePoint viewToGame(ViewPoint viewPoint) {
-		return new GamePoint(viewPoint.x() + gameP.x() - viewP.x(), viewPoint.y()+ gameP.y() - viewP.y());
+		return new GamePoint((viewPoint.x() - translateX) / scaleFactor, 
+				(viewPoint.y() - translateY) / scaleFactor);
+
 	}
 	
 	/**
@@ -86,11 +104,13 @@ public class Camera {
 	 * @return ViewPoint
 	 */
 	public ViewPoint gameToView(GamePoint gamePoint) {
-		return new ViewPoint(gamePoint.x() + viewP.x() - gameP.x(), gamePoint.y() + viewP.y() - gameP.y());
+
+		return new ViewPoint(gamePoint.x() * scaleFactor + translateX, 
+				gamePoint.y() * scaleFactor + translateY);
 	}
 	
-	public GamePoint getGamePoint(){
-		return gameP;
+	public double getScaleFactor() {
+		return scaleFactor;
 	}
 	
 	public ViewPoint getViewPoint(){

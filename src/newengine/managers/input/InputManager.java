@@ -6,6 +6,7 @@ import bus.EventBus;
 import commons.point.GamePoint;
 import javafx.scene.input.KeyCode;
 import newengine.events.QueueEvent;
+import newengine.events.camera.CameraEvent;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
 import newengine.events.selection.SelectSkillEvent;
@@ -23,6 +24,7 @@ import newengine.sprite.components.Position;
 import newengine.utils.ActionMode;
 import newengine.utils.Target;
 import newengine.utils.checker.SelectionChecker;
+import newengine.view.camera.Camera;
 
 public class InputManager {
 
@@ -107,4 +109,21 @@ public class InputManager {
 		});
 	}
 
+	public void update(double dt) {
+		if (keyInputState.isKeyPressed(KeyCode.LEFT)) {
+			bus.emit(new CameraEvent(CameraEvent.MOVE, -Camera.MOVE_SPEED_PER_FRAME * dt, 0));
+		}
+		else if (keyInputState.isKeyPressed(KeyCode.RIGHT)) {
+			bus.emit(new CameraEvent(CameraEvent.MOVE, Camera.MOVE_SPEED_PER_FRAME * dt, 0));
+		}
+		else if (keyInputState.isKeyPressed(KeyCode.UP)) {
+			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, -Camera.MOVE_SPEED_PER_FRAME * dt));
+		}
+		else if (keyInputState.isKeyPressed(KeyCode.DOWN)) {
+			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, Camera.MOVE_SPEED_PER_FRAME * dt));
+		}
+		else if (keyInputState.isKeyPressed(KeyCode.R)) {
+			bus.emit(new CameraEvent(CameraEvent.RESET));
+		}
+	}
 }

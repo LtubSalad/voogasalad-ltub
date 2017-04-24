@@ -4,8 +4,10 @@ package gameDevelopmentInterface.spriteCreator;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.DeveloperData;
 import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
+import gameDevelopmentInterface.developerdata.ComponentSetterView;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -13,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.PathFollower;
 
 public class SpriteInfoPane extends ScrollPane{
 	private VBox myPane;
@@ -21,7 +24,10 @@ public class SpriteInfoPane extends ScrollPane{
 	private SpriteMakerModel spriteData;
 	private SpriteDescriptor descriptor;
 	private ComponentLister lister;
-	public SpriteInfoPane(SpriteMakerModel spriteData){
+	private DeveloperData developerData;
+	
+	public SpriteInfoPane(SpriteMakerModel spriteData, DeveloperData developerData){
+		this.developerData=developerData;
 		myPane=new VBox();
 		this.spriteData=spriteData;
 		descriptor=new SpriteDescriptor();
@@ -45,7 +51,13 @@ public class SpriteInfoPane extends ScrollPane{
 	
 	public void addComponent(Class<? extends Component> clazz){
 		try {
-			ComponentSetter<? extends Component> setter=new SimpleComponentSetter(clazz);
+			ComponentSetterView<? extends Component> setter;
+			if(clazz.equals(PathFollower.class)){
+				setter=new PathFollowerSetter(developerData.getPaths());
+			}
+			else{
+				setter=new SimpleComponentSetter(clazz);
+			}
 			lister.addComponentView(lister.new ComponentViewer(setter));
 		} catch (UnsupportedTypeException e) {
 			e.printStackTrace();
@@ -53,7 +65,7 @@ public class SpriteInfoPane extends ScrollPane{
 		}	
 	}
 	
-	public SpriteMakerModel getSpriteData(){
+	public SpriteMakerModel getSpriteData() throws Exception{
 		lister.updateSpriteModel();
 		return spriteData;
 		
@@ -77,15 +89,15 @@ public class SpriteInfoPane extends ScrollPane{
 			this.getChildren().add(view);
 		}
 		
-		private void updateSpriteModel(){
+		private void updateSpriteModel() throws Exception{
 			for(ComponentViewer component: componentViews){
 				spriteData.addComponent(component.getComponent());
 			}
 		}
 		
 		private class ComponentViewer<T extends Component> extends VBox{
-			private ComponentSetter<T> mySetter;
-			public ComponentViewer(ComponentSetter<T> mySetter){
+			private ComponentSetterView<T> mySetter;
+			public ComponentViewer(ComponentSetterView<T> mySetter){
 				this.mySetter=mySetter;
 				this.getChildren().add(mySetter);
 				Button removeButton =new Button("Remove component");
@@ -99,9 +111,9 @@ public class SpriteInfoPane extends ScrollPane{
 				ComponentLister.this.removeComponentView(this);
 			}
 			
-			private T getComponent(){
+			private T getComponent() throws Exception{
 				try {
-					return mySetter.makeComponent();
+					return mySetter.produceComponent();
 				} catch (UnsupportedTypeException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
