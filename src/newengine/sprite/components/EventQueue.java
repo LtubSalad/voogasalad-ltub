@@ -68,6 +68,6 @@ public class EventQueue extends Component {
 	
 	@Override
 	public EventQueue clone() {
-		return new EventQueue(this.events);
+		return new EventQueue((LinkedList<BusEvent>) events.clone());
 	}
 }

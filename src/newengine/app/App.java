@@ -14,10 +14,12 @@ import newengine.events.GameInitializationEvent;
 import newengine.events.QueueEvent;
 import newengine.events.SpriteModelEvent;
 import newengine.events.player.MainPlayerEvent;
+import newengine.events.skill.TriggerSkillEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
+import newengine.events.timer.PeriodicEvent;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.skill.Skill;
@@ -107,9 +109,51 @@ public class App extends Application {
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(60));
 		
+		// spawned sprite
+		Sprite child = new Sprite();
+		LtubImage childImage = new LtubImage("images/characters/bahamut_left.png");
+		ImageSet childImageSet = new ImageSet(childImage);
+		Map<SkillType<? extends Skill>, Skill> childSkillMap = new HashMap<>();
+		child.addComponent(new GameBus());
+		child.addComponent(new SkillSet(childSkillMap));
+		child.addComponent(new Owner(player1));
+		child.addComponent(new Position(new GamePoint(300, 50), 0));
+		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
+		child.addComponent(new Images(childImageSet));
+		child.addComponent(new Speed(200));
+		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		child.addComponent(new Range(128));
+		child.addComponent(new Attacker());
+		child.addComponent(new Health(200));
+		child.addComponent(new EventQueue(new LinkedList<>()));
+		child.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, child, 
+			new Target(new GamePoint(300,300)))));
+		
+		// The spawner
+		Sprite spawner = new Sprite();
+		Map<SkillType<? extends Skill>, Skill> spawnerSkillMap = new HashMap<>();
+		spawnerSkillMap.put(BuildSkill.TYPE, new BuildSkill(child));
+		spawner.addComponent(new GameBus());
+		spawner.addComponent(new SkillSet(spawnerSkillMap));
+		spawner.addComponent(new Owner(player1));
+		spawner.addComponent(new Position(new GamePoint(200, 100), 0));
+		spawner.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
+		spawner.addComponent(new Images(imageSet1));
+		spawner.addComponent(new Speed(200));
+		spawner.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		spawner.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		spawner.addComponent(new Range(128));
+		spawner.addComponent(new Attacker());
+		spawner.addComponent(new Health(200));
+		spawner.addComponent(new EventQueue(new LinkedList<>()));
+
+		
 		List<Sprite> spritesToAdd = new ArrayList<>();
 		spritesToAdd.add(sprite1);
 		spritesToAdd.add(sprite2);
+//		spritesToAdd.add(child);
+		spritesToAdd.add(spawner);
 		
 		
 		bus.on(GameInitializationEvent.ANY, (e) -> {
@@ -142,6 +186,13 @@ public class App extends Application {
 				new Target(new GamePoint(500,300)))));
 		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 				new Target(new GamePoint(400,200)))));
+		
+
+		GamePoint targetSpawnPos = new GamePoint(10, 20);
+		
+		bus.emit(new PeriodicEvent(5, 3.0, () -> {
+			spawner.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
+		}));
 	}
 	
 	public static void main(String[] args) {

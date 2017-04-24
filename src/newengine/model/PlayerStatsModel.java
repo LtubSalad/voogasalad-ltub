@@ -67,8 +67,8 @@ public class PlayerStatsModel {
 		});
 	}
 
-	public Optional<Map<WealthType, Integer>> getWealth(Player player){
-		return Optional.ofNullable(wealth.get(player));
+	public Optional<Map<WealthType, Integer>> getWealth(String goldVar){
+		return Optional.ofNullable(wealth.get(goldVar));
 	}
 	public Optional<Integer> getLives(Player player) {
 		return Optional.ofNullable(lives.get(player));

@@ -11,7 +11,8 @@ public class GoldMinimumCondition extends Condition{
 	@Override
 	public boolean check() {
 		//TODO check if map has that type
-		return (getPlayerStatsModel().getWealthValue(GOLD_VAR) > goldMin);
+		return false;
+//		return (getPlayerStatsModel().getWealth(GOLD_VAR) > goldMin);
 	} 
 	
 	public void setMinimumGold(int minimumGold){

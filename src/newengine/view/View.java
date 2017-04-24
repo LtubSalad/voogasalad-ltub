@@ -177,11 +177,11 @@ public class View {
 	
 	private List<Text> createText(PlayerStatsModel playerStatsModel, Player player) {
 		List<Text> statsLabels = new ArrayList<Text>();
-		playerStatsModel.getWealth(player).ifPresent((wealthMap) -> {
-			for (WealthType type: wealthMap.keySet()) {
-				statsLabels.add(new Text(type + ":" + wealthMap.get(type)));
-			}
-		});
+//		playerStatsModel.getWealth(player).ifPresent((wealthMap) -> {
+//			for (WealthType type: wealthMap.keySet()) {
+//				statsLabels.add(new Text(type + ":" + wealthMap.get(type)));
+//			}
+//		});
 		//TODO map to resource file
 		playerStatsModel.getLives(player).ifPresent((life) -> {
 			statsLabels.add(new Text("Lives:" + life));
