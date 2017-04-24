@@ -102,21 +102,6 @@ public class View {
 		});
 		scene.setOnKeyPressed(e -> {
 			bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
-			if (e.getCode() == KeyCode.LEFT) {
-				bus.emit(new CameraEvent(CameraEvent.MOVE, -10, 0));
-			}
-			else if (e.getCode() == KeyCode.RIGHT) {
-				bus.emit(new CameraEvent(CameraEvent.MOVE, 10, 0));
-			}
-			else if (e.getCode() == KeyCode.UP) {
-				bus.emit(new CameraEvent(CameraEvent.MOVE, 0, -10));
-			}
-			else if (e.getCode() == KeyCode.DOWN) {
-				bus.emit(new CameraEvent(CameraEvent.MOVE, 0, 10));
-			}
-			else if (e.getCode() == KeyCode.R) {
-				bus.emit(new CameraEvent(CameraEvent.RESET));
-			}
 		});
 		scene.setOnKeyReleased(e -> {
 			bus.emit(new KeyEvent(KeyEvent.RELEASE, e.getCode()));

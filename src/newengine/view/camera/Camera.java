@@ -19,6 +19,7 @@ public class Camera {
 	
 	public static final double MAX_FACTOR = 2.5;
 	public static final double MIN_FACTOR = 0.5;
+	public static final double MOVE_SPEED_PER_FRAME = 100;
 	
 	public Camera(EventBus bus, Node root, double scaleFactor) {
 		this.bus = bus;

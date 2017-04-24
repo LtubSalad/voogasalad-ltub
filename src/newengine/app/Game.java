@@ -58,6 +58,7 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> view.render(models));
 		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 		gameLoop.addLoopComponent((dt) -> timerManager.update(dt));
+		gameLoop.addLoopComponent((dt) -> inputManager.update(dt));
 	}
 	
 	public void addTrigger(Trigger trigger) {
