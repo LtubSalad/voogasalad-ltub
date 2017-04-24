@@ -5,6 +5,10 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 import data.DeveloperData;
 import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
@@ -17,6 +21,7 @@ import javafx.scene.layout.HBox;
 import newengine.sprite.component.Component;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
+import newengine.sprite.components.PathFollower;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.SoundEffect;
@@ -35,7 +40,7 @@ public class SpriteCreationScreen extends BorderPane{
 	
 	public void instantiate(){
 		spriteData=new SpriteMakerModel();
-		infoPane=new SpriteInfoPane(spriteData);
+		infoPane=new SpriteInfoPane(spriteData,model);
 		List<Class<? extends Component>> basicComponents= new ArrayList<>();
 		ObservableList<Class<? extends Component>> observableComponents=FXCollections.observableList(basicComponents);
 		observableComponents.add(Range.class);
@@ -44,12 +49,13 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Owner.class);
 		observableComponents.add(Position.class);
 		observableComponents.add(Images.class);
+		observableComponents.add(PathFollower.class);
 		ComponentSelectorPane selector=new ComponentSelectorPane("Add components with simple parameters", observableComponents,infoPane);
 		this.setRight(selector);
+		this.setLeft(new EventHandlerPane(spriteData));
 		this.setCenter(infoPane);
 		this.setTop(new Label("NEW SPRITE"));
-		this.setBottom(new BottomPanel());
-		
+		this.setBottom(new BottomPanel());	
 	}
 	
 	private Class getClassFromFile(String fullClassName) throws Exception {
@@ -61,17 +67,25 @@ public class SpriteCreationScreen extends BorderPane{
 	}
 
 	private class BottomPanel extends HBox{
-		XStreamHandler dataHandler;
+		XStreamHandler dataHandler=new XStreamHandler();
 		private BottomPanel(){
 			Button saveButton= new Button("Save SpriteMakerModel to File");
 			saveButton.setOnMouseClicked((click)->{
-				dataHandler.saveToFile(infoPane.getSpriteData());
+				try {
+					dataHandler.saveToFile(infoPane.getSpriteData());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			});
 			Button listSaveButton=new Button("Save SpriteMakerModel to THIS GAME's list of SpritemakerModels");
 			listSaveButton.setOnMouseClicked((click)->{
-				model.addSprite(infoPane.getSpriteData());
+				try {
+					model.addSprite(infoPane.getSpriteData());
+				} catch (Exception e) {
+					
+				}				
 			});
-			this.getChildren().add(saveButton);
+			this.getChildren().addAll(saveButton,listSaveButton);
 		}
 	}
 

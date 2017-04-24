@@ -1,31 +1,33 @@
 package gameDevelopmentInterface.spriteCreator;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
 import exception.UnsupportedTypeException;
+import gameDevelopmentInterface.developerdata.ComponentSetterView;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import newengine.sprite.component.Component;
 
-public class ComponentSetter<T extends Component> extends VBox{	
+public class SimpleComponentSetter<T extends Component> extends ComponentSetterView<T>{	
 	private List<SimpleVariableSetter> fieldSetters;
 	private Constructor<T> ctor;
 	
-	public ComponentSetter(Class<T> clazz) throws UnsupportedTypeException{
+	public SimpleComponentSetter(Class<? extends Component> myComponent) throws UnsupportedTypeException{
 		fieldSetters=new ArrayList<>();
-		Constructor<T>[] ctors=(Constructor<T>[]) clazz.getConstructors();
-		System.out.println("length: "+ctors.length);
+		Constructor<T>[] ctors=(Constructor<T>[]) myComponent.getConstructors();
 		for(Constructor<T> constructor:ctors){
 			if(constructor.isAnnotationPresent(ConstructorForDeveloper.class)){
 				ctor=constructor;
 				break;
 			}
-		}	
+		}
+		
 		if(ctor==null){
 			return;
 		}
@@ -37,21 +39,16 @@ public class ComponentSetter<T extends Component> extends VBox{
 			System.out.println(types[i].getName());
 			fieldSetters.add(new SimpleVariableSetter(types[i],name));
 		}
-		this.getChildren().add(new Label(clazz.getName()));
+		this.getChildren().add(new Label(myComponent.getSimpleName()));
 		fieldSetters.forEach((fieldSetter)->this.getChildren().add(fieldSetter));
 	}
-	
-	public T makeComponent() throws UnsupportedTypeException{
+
+	@Override
+	public T produceComponent() throws Exception{
 		List<Object> parameters=new ArrayList<>();
 		for(SimpleVariableSetter setter:fieldSetters){
 			parameters.add(setter.getValue());
 		} 
-		try {
-			return ctor.newInstance(parameters.toArray());
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-		
-		return null;
+		return ctor.newInstance(parameters.toArray());
 	}
 }

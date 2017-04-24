@@ -37,7 +37,7 @@ public class ComponentSelectorPane extends VBox{
 			if (item == null) {
 				return;
 			}
-			Button componentCustomizer = new Button(item.toString());
+			Button componentCustomizer = new Button(item.getSimpleName());
 			componentCustomizer.setOnAction((c) -> {
 				infoPane.addComponent(item);
 			});
