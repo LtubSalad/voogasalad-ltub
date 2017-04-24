@@ -29,7 +29,7 @@ public class TranslationController implements FileTranslator, Translator {
 	}
 
 	public TranslationController(SpriteModel spriteModel){
-		translator = new EngineDataTranslator(spriteModel.getData()); 
+		translator = new EngineDataTranslator(spriteModel.getSprites()); 
 	}
 
 	public TranslationController(String filepath){

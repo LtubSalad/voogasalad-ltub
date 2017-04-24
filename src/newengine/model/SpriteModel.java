@@ -1,28 +1,22 @@
 package newengine.model;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import bus.BusEvent;
 import bus.EventBus;
-import gamedata.Translatable;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.SetGameBusEvent;
 import newengine.events.trigger.SpriteTriggerActionEvent;
 import newengine.events.trigger.SpriteTriggerRegisterEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
-
 /**
  * A container for sprites.
  * @author keping
  *
  */
 public class SpriteModel {
-
 	private EventBus bus;
 	private List<Sprite> sprites = new ArrayList<>();
 	private List<Sprite> spritesToAdd = new ArrayList<>();
@@ -80,7 +74,6 @@ public class SpriteModel {
 			}
 		}
 	}
-
 	private void removeSprite(List<Sprite> sprites) {
 		for (Sprite sprite : sprites) {
 			spritesToRemove.add(sprite);
@@ -92,7 +85,6 @@ public class SpriteModel {
 		this.bus = bus;
 	}
 	
-
 	public Optional<Sprite> getByID(SpriteID spriteID) {
 		// TODO: a map for faster query? not really necessary
 		for (Sprite sprite : sprites) {
@@ -103,8 +95,8 @@ public class SpriteModel {
 		return Optional.empty();
 	}
 	
-private List<Sprite> getSprites() {
-	return sprites; 
+	public List<Sprite> getSprites() {
+		return sprites;
 	}
 	
 	public void update(double dt) {
@@ -115,11 +107,6 @@ private List<Sprite> getSprites() {
 		for (Sprite sprite : sprites) {
 			sprite.update(dt);
 		}
-	}
-
-
-	public List<Sprite> getData() {
-		return sprites; 
 	}
 	
 }

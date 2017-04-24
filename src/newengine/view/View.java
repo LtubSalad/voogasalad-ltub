@@ -1,12 +1,9 @@
 package newengine.view;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
@@ -33,14 +30,12 @@ import newengine.sprite.components.SkillSet;
 import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
-
 public class View {
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 500;
 	public static final int CANVAS_HEIGHT = 300;
 	public static final int STATS_HEIGHT = 100;
 	public static final Paint BACKGROUND = Color.BISQUE;
-
 	private EventBus bus;
 	private Camera camera;
 	private Scene scene;
@@ -53,7 +48,6 @@ public class View {
 	
 	// TODO: mouse location should belong to player input state
 	private ViewPoint mousePos;
-
 	public View(EventBus bus, Camera camera) {
 		this.bus = bus;
 		this.camera = camera;
@@ -71,10 +65,8 @@ public class View {
 		// skill box
 		skillBox = new SkillBox(bus);
 		bottomPane.getChildren().add(skillBox.getBox());
-
 		initHandlers();
 	}
-
 	private void initHandlers() {
 		gameWorldCanvas.setOnMouseClicked(e -> {
 			ViewPoint viewPos = new ViewPoint(e.getX(), e.getY());
@@ -97,11 +89,9 @@ public class View {
 			bus.emit(new KeyEvent(KeyEvent.TYPE, e.getCode()));
 		});
 	}
-
 	public Scene getScene() {
 		return scene;
 	}
-
 	public void clear(){
 		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 	}
@@ -114,7 +104,7 @@ public class View {
 	
 	public void render(SpriteModel model) {
 		// render game cast
-		for (Sprite sprite : model.getData()) {
+		for (Sprite sprite : model.getSprites()) {
 			if (!sprite.getComponent(Position.TYPE).isPresent() ||
 					!sprite.getComponent(Images.TYPE).isPresent()) {
 				continue;
@@ -128,7 +118,6 @@ public class View {
 			gc.drawImage(new Image(image.getInputStream()), viewPos.x(),
 					viewPos.y());
 		}
-
 	}
 	
 	public void render(PlayerStatsModel playerStatsModel) {
@@ -136,7 +125,6 @@ public class View {
 		statsPanel.setSpacing(10);
 		statsPanel.maxHeight(100);
 		createText(playerStatsModel).stream().forEach(e -> statsPanel.getChildren().add(e));
-		statsPanel.setAlignment(Pos.CENTER);
 		
 		//TODO if done with testing playerstatsmodel, delete
 		//bus.emit(new ChangeLivesEvent(ChangeLivesEvent.CHANGE,Player.MAIN_PLAYER, -1));
@@ -154,7 +142,6 @@ public class View {
 		statsLabels.add(new Text("Score:" + playerStatsModel.getScore()));
 		return statsLabels;
 	}
-
 	public void render(SelectionModel selectionModel) {
 		// render the selected sprite and its skill box
 		if (selectionModel.getSelectedSprite().isPresent()) {
@@ -186,5 +173,4 @@ public class View {
 			scene.setCursor(Cursor.DEFAULT);
 		}
 	}
-
 }

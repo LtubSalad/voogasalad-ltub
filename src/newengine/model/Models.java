@@ -53,7 +53,7 @@ public class Models {
 		xstream.autodetectAnnotations(true);
 		xstream.allowTypes(new Class[] {SerializedLambda.class});
 		spritesCopy = new ArrayList<>();
-		for (Sprite sprite : spriteModel.getData()) {
+		for (Sprite sprite : spriteModel.getSprites()) {
 			spritesCopy.add(sprite.clone());
 		}
 		savedSpritesXML = xstream.toXML(spritesCopy);
@@ -61,7 +61,7 @@ public class Models {
 	private void loadGame() {
 		List<Sprite> loadedSprites = (List<Sprite>) xstream.fromXML(savedSpritesXML);
 		System.out.println("size of loaded sprites: "+loadedSprites.size());
-		bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spriteModel.getData()));
+		bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spriteModel.getSprites()));
 		System.out.println("let me debug the loaded sprites");
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, loadedSprites));
 	}
