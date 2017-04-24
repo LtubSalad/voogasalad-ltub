@@ -27,7 +27,7 @@ public class TestTriggers {
 		triggers.add(playSoundWhenFireProjectile());
 		triggers.add(playSoundWhenHealthChanges());
 		triggers.add(playSoundWhenNewSpriteAdded());
-		triggers.add(loseHealthWhenMove());
+//		triggers.add(loseHealthWhenMove());
 	}
 	
 	private Trigger gameSave() {

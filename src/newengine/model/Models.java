@@ -24,16 +24,19 @@ public class Models {
 	private SpriteModel spriteModel;
 	private PlayerStatsModel playerStatsModel;
 	private SelectionModel selectionModel;
+	private final PlayerRelationModel playerRelationModel;
 	
 	private XStream xstream = new XStream(new DomDriver());
 	private List<Sprite> spritesCopy = new ArrayList<>();
 	private List<String> savedSpriteXMLs = new ArrayList<>();
 	private String savedSpritesXML;
 	
-	public Models(EventBus bus, SpriteModel spriteModel, PlayerStatsModel playerStatsModel, SelectionModel selectionModel) {
+	public Models(EventBus bus, SpriteModel spriteModel, PlayerStatsModel playerStatsModel, 
+			PlayerRelationModel playerRelationModel, SelectionModel selectionModel) {
 		this.bus = bus;
 		this.spriteModel = spriteModel;
 		this.playerStatsModel = playerStatsModel;
+		this.playerRelationModel = playerRelationModel;
 		this.selectionModel = selectionModel;
 		initHandlers();
 	}
@@ -74,6 +77,9 @@ public class Models {
 	}
 	public PlayerStatsModel playerStatsModel() {
 		return playerStatsModel;
+	}
+	public PlayerRelationModel playerRelationModel() {
+		return playerRelationModel;
 	}
 	public SelectionModel selectionModel() {
 		return selectionModel;
