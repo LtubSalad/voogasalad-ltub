@@ -2,6 +2,7 @@ package newengine.app;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,13 +13,12 @@ import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
 import newengine.events.QueueEvent;
 import newengine.events.SpriteModelEvent;
+import newengine.events.player.MainPlayerEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
-import newengine.managers.conditions.GoldMinimumCondition;
-import newengine.managers.conditions.NoLivesCondition;
-import newengine.managers.conditions.SetEndConditionEvent;
+import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
@@ -85,7 +85,7 @@ public class App extends Application {
 		sprite1.addComponent(new Range(128));
 		sprite1.addComponent(new Attacker());
 		sprite1.addComponent(new Health(200));
-		sprite1.addComponent(new EventQueue());
+		sprite1.addComponent(new EventQueue(new LinkedList<>()));
 			
 		// sprite 2
 		Sprite sprite2 = new Sprite();
@@ -103,7 +103,7 @@ public class App extends Application {
 		sprite2.addComponent(new Speed(100));
 		sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		sprite2.addComponent(new EventQueue());
+		sprite2.addComponent(new EventQueue(new LinkedList<>()));
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(60));
 		
@@ -115,10 +115,11 @@ public class App extends Application {
 		bus.on(GameInitializationEvent.ANY, (e) -> {
 			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
-			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, Player.MAIN_PLAYER, 3));
-			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, "gold", 100));
-			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
-			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
+			bus.emit(new MainPlayerEvent(player1));
+			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 3));
+			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, WealthType.GOLD, 100));
+//			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
+//			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 		});
 		
 		// Triggers

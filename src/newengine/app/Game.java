@@ -14,14 +14,13 @@ import newengine.managers.input.InputManager;
 import newengine.managers.range.RangeManager;
 import newengine.managers.sound.SoundManager;
 import newengine.model.Models;
+import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
-import newengine.player.Player;
 import newengine.trigger.Trigger;
 import newengine.trigger.TriggerManager;
 import newengine.view.View;
-import newengine.view.camera.Camera;
 
 public class Game {
 
@@ -32,12 +31,12 @@ public class Game {
 	 
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
-		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, Player.MAIN_PLAYER); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
+		PlayerRelationModel playerRelationModel = new PlayerRelationModel(bus);
 		SelectionModel selectionModel = new SelectionModel(bus);
-		Models models = new Models(bus, spriteModel, playerStatsModel, selectionModel);
+		Models models = new Models(bus, spriteModel, playerStatsModel, playerRelationModel, selectionModel);
 		
-		Camera camera = new Camera(bus);
-		view = new View(bus, camera);
+		view = new View(bus);
 		
 		gameLoop = new FXGameLoop(bus);
 		

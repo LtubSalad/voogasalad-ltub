@@ -2,6 +2,7 @@ package newengine.skill;
 
 import java.util.Optional;
 
+import newengine.model.PlayerRelationModel;
 import newengine.sprite.Sprite;
 import newengine.utils.Target;
 import newengine.utils.image.LtubImage;

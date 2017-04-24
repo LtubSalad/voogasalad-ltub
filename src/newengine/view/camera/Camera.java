@@ -3,6 +3,8 @@ package newengine.view.camera;
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
+import javafx.scene.Node;
+import newengine.events.camera.CameraEvent;
 
 /**
  * Convert between {@code GamePoint} and {@code ViewPoint}.
@@ -12,12 +14,56 @@ import commons.point.ViewPoint;
 public class Camera {
 
 	private EventBus bus;
+	private Node root;
+	private double scaleFactor;
 	
-	public Camera(EventBus bus) {
+	public static final double MAX_FACTOR = 2.5;
+	public static final double MIN_FACTOR = 0.5;
+	
+	public Camera(EventBus bus, Node root, double scaleFactor) {
 		this.bus = bus;
+		this.root = root;
+		this.scaleFactor = scaleFactor;
+		initHandlers();
 	}
 	
-	// TODO now it is a 1-1 camera, without any scaling
+	private void initHandlers() {
+		bus.on(CameraEvent.ZOOM, (e) -> {
+			zoom(e);
+		});
+		bus.on(CameraEvent.MOVE, (e) -> {
+			move(e);
+		});
+		bus.on(CameraEvent.RESET, (e) -> {
+			reset();
+		});
+	}
+
+	private void zoom(CameraEvent e) {
+		scaleFactor -= e.getZoomFactor();
+		if (scaleFactor > MAX_FACTOR) {
+			scaleFactor = MAX_FACTOR;
+		}
+		else if (scaleFactor < MIN_FACTOR) {
+			scaleFactor = MIN_FACTOR;
+		}
+		root.setScaleX(scaleFactor);
+		root.setScaleY(scaleFactor);
+	}
+	
+	private void move(CameraEvent e) {
+		root.setTranslateX(root.getTranslateX() + e.getTranslateXValue());
+		root.setTranslateY(root.getTranslateY() + e.getTranslateYValue());
+	}
+	
+	private void reset() {
+		scaleFactor = 1;
+		root.setScaleX(scaleFactor);
+		root.setScaleY(scaleFactor);
+		root.setTranslateX(0);
+		root.setTranslateY(0);
+	}
+	
 	/**
 	 * Convert a Point on the view to a Point in the game.
 	 * @param viewPoint a {@code ViewPoint} instance
@@ -34,5 +80,9 @@ public class Camera {
 	 */
 	public ViewPoint gameToView(GamePoint gamePoint) {
 		return new ViewPoint(gamePoint.x(), gamePoint.y());
+	}
+	
+	public double getScaleFactor() {
+		return scaleFactor;
 	}
 }
