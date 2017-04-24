@@ -3,6 +3,8 @@ package newengine.skill.skills;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.SpriteMakerModel;
+import gamedata.AuthDataTranslator;
 import newengine.events.SpriteModelEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
@@ -24,8 +26,13 @@ public class BuildSkill extends Skill{
 		}
 	}
 	
+	public BuildSkill(SpriteMakerModel spriteModel) {
+		this(new AuthDataTranslator(spriteModel).getSprite());
+	}
+	
 	@Override
 	public void trigger() {
+		System.out.println("Build skill triggered");
 		Target target = this.getTarget().get();
 		// can override previous Position component
 		spriteToCreate.addComponent(new Position(target.getLocation(), 0));

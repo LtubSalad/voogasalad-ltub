@@ -1,53 +1,40 @@
 package newengine.sprite.components;
 
-import data.SpriteMakerModel;
-import gamedata.AuthDataTranslator;
-import newengine.events.SpriteModelEvent;
-import newengine.events.spawner.SpawnEvent;
+import commons.point.GamePoint;
+import newengine.events.skill.TriggerSkillEvent;
 import newengine.events.spawner.SpawnPrefEvent;
 import newengine.events.timer.PeriodicEvent;
-import newengine.sprite.Sprite;
+import newengine.skill.skills.BuildSkill;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
+import newengine.utils.Target;
 
 public class Spawner extends Component {
 	public static final ComponentType<SoundEffect> TYPE = new ComponentType<>(Spawner.class.getName());
-	private SpriteMakerModel mySpriteModel;
-	private Sprite mySprite;
 	private double secondsBetween;
 	private int totalNumber;
-	
-	public Spawner(SpriteMakerModel spriteToSpawn) {
-		mySpriteModel = spriteToSpawn;
-	}
 
 	@Override
 	public void afterAdded() { 
-		AuthDataTranslator translator = new AuthDataTranslator(mySpriteModel);
-		mySprite = translator.getSprite();
-		
-		sprite.on(SpawnPrefEvent.SETPREFS, e -> {
-			this.totalNumber = e.getTotalNumber();
-			this.secondsBetween = e.getSecondBetween();
-			sprite.emit(new PeriodicEvent(totalNumber, secondsBetween, () -> sprite.emit(new SpawnEvent(SpawnEvent.SPAWN))));
-		});
-		sprite.on(SpawnEvent.SPAWN, (e) -> {
-			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.ADD, mySprite.clone()));
-		});
+		//sprite.on(SpawnPrefEvent.SETPREFS, e -> {
+			System.out.println("Made the event spawner");
+			this.totalNumber = 10;//e.getTotalNumber();
+			this.secondsBetween = 10;// e.getSecondBetween();
+			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new PeriodicEvent(totalNumber, secondsBetween, () -> 
+			//System.out.println("clock is working");
+			sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(new GamePoint(10,20))))));//sprite.getComponent(Position.TYPE).get().pos())))));
+		//});
 	}
-	
-	
 
 	@Override
 	public ComponentType<? extends Component> getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return TYPE;
 	}
 
 	@Override
 	public Component clone() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Spawner();
 	}
 
 }

@@ -1,10 +1,7 @@
 package newengine.sprite.components;
-
 import java.io.Serializable;
 import java.util.LinkedList;
-
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import bus.BusEvent;
 import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
@@ -12,23 +9,23 @@ import newengine.events.QueueEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-
 public class EventQueue extends Component {
 	
 	public static final ComponentType<EventQueue> TYPE = new ComponentType<>(EventQueue.class.getName());
 	private LinkedList<BusEvent> events = new LinkedList<>();
 	private boolean eventFinished = true;
 	
-	public EventQueue() {
-		
+	@ConstructorForDeveloper
+	public EventQueue(LinkedList<BusEvent> events) {
+		this.events = events;
 	}
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(QueueEvent.ADD, (e) -> {
+		sprite.on(QueueEvent.ADD, (Serializable & BusEventHandler<QueueEvent>)(e) -> {
 			addEvent(e.getEvent());
 		});
-		sprite.on(QueueEvent.NEXT, (e) -> {
+		sprite.on(QueueEvent.NEXT, (Serializable & BusEventHandler<QueueEvent>)(e) -> {
 			eventFinished = true;
 		});
 	}
@@ -39,11 +36,9 @@ public class EventQueue extends Component {
 			emitNextEvent();
 		}
 	}
-
 	private void addEvent(BusEvent event) {
 		events.addLast(event);
 	}
-
 	private boolean isEmpty() {
 		return events.isEmpty();
 	}
@@ -59,7 +54,6 @@ public class EventQueue extends Component {
 			sprite.getSpriteBus().emit(events.removeFirst());
 		}
 	}
-
 	@Override
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
@@ -67,6 +61,6 @@ public class EventQueue extends Component {
 	
 	@Override
 	public EventQueue clone() {
-		return new EventQueue();
+		return new EventQueue((LinkedList<BusEvent>) events.clone());
 	}
 }

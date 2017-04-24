@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,13 +17,13 @@ import data.SpriteMakerModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
-import newengine.events.QueueEvent;
 import newengine.events.SpriteModelEvent;
+import newengine.events.skill.TriggerSkillEvent;
 import newengine.events.sound.SoundEvent;
-import newengine.events.sprite.FireProjectileEvent;
-import newengine.events.sprite.MoveEvent;
+import newengine.events.spawner.SpawnPrefEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
+import newengine.events.timer.PeriodicEvent;
 import newengine.managers.conditions.GoldMinimumCondition;
 import newengine.managers.conditions.NoLivesCondition;
 import newengine.managers.conditions.SetEndConditionEvent;
@@ -49,6 +50,7 @@ import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
 import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
+import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
 import newengine.trigger.Trigger;
 import newengine.utils.Target;
@@ -84,11 +86,9 @@ public class App extends Application {
 		LtubImage image1 = new LtubImage("images/characters/bahamut_left.png");
 		ImageSet imageSet1 = new ImageSet(image1);
 		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
-		skillMap.put(MoveSkill.TYPE, new MoveSkill());
-		skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
-		skillMap.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
+	
 		spriteToSave.addComponent(new GameBus());
-		spriteToSave.addComponent(new SkillSet(skillMap));
+		//spriteToSave.addComponent(new SkillSet(skillMap));
 		spriteToSave.addComponent(new Owner(player1));
 		spriteToSave.addComponent(new Position(new GamePoint(200, 100), 0));
 		spriteToSave.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
@@ -99,7 +99,8 @@ public class App extends Application {
 		spriteToSave.addComponent(new Range(128));
 		spriteToSave.addComponent(new Attacker());
 		spriteToSave.addComponent(new Health(200));
-		spriteToSave.addComponent(new EventQueue());
+		spriteToSave.addComponent(new EventQueue(new LinkedList<>()));
+		spriteToSave.addComponent(new Spawner());
 		
 		//xHandler.saveToFile(spriteToSave);
 		File file = new File("data/attributeSkeletons/userCreatedAttributes/USETHIS.xml");
@@ -110,9 +111,13 @@ public class App extends Application {
 		for (ComponentType<?> c : fromXML.getComponents().keySet()) {
 			System.out.println("Component type: " + c);
 			Component componentSaved = fromXML.getComponents().get(c);
-			sprite1.addComponent(componentSaved);
+			//sprite1.addComponent(componentSaved);
 		}
 		
+		skillMap.put(MoveSkill.TYPE, new MoveSkill());
+		//skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
+		skillMap.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
+		//sprite1.addComponent(new SkillSet(skillMap));
 		
 		
 		
@@ -209,7 +214,7 @@ public class App extends Application {
 		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
 		skillMap2.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
 		sprite2.addComponent(new GameBus());
-		sprite2.addComponent(new SkillSet(skillMap2));
+		
 		sprite2.addComponent(new Owner(player2));
 		sprite2.addComponent(new Position(new GamePoint(300, 250), 0));
 		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
@@ -217,12 +222,14 @@ public class App extends Application {
 		sprite2.addComponent(new Speed(100));
 		sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		sprite2.addComponent(new EventQueue());
+		sprite2.addComponent(new EventQueue(new LinkedList<>()));
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(60));
+		skillMap.put(BuildSkill.TYPE, new BuildSkill(sprite2));
+		sprite2.addComponent(new SkillSet(skillMap));
 
 		List<Sprite> spritesToAdd = new ArrayList<>();
-		spritesToAdd.add(sprite1);
+		//spritesToAdd.add(sprite1);
 		spritesToAdd.add(sprite2);
 
 
@@ -245,18 +252,24 @@ public class App extends Application {
 		stage.show();
 		
 		// TODO add method to generate path
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
-				new Target(new GamePoint(300,100)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
-				new Target(new GamePoint(250,200)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
-				new Target(new GamePoint(100,150)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
-				new Target(new GamePoint(500,300)))));
-		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
-				new Target(new GamePoint(400,200)))));
-		sprite1.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, sprite1, sprite2));
+//		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
+//				new Target(new GamePoint(300,100)))));
+//		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
+//				new Target(new GamePoint(250,200)))));
+//		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
+//				new Target(new GamePoint(100,150)))));
+//		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
+//				new Target(new GamePoint(500,300)))));
+//		sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
+//				new Target(new GamePoint(400,200)))));
+//		sprite1.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, sprite1, sprite2));
 
+		bus.emit(new PeriodicEvent(5, 3.0, () -> {
+			sprite2.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(new GamePoint(10,20))));
+		}));
+		
+		sprite2.emit(new SpawnPrefEvent(SpawnPrefEvent.SETPREFS, 3, 3));
+		
 		//	// TODO add method to generate path
 		//	sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
 		//	new Target(new GamePoint(300,100)))));

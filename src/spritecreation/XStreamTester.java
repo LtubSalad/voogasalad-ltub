@@ -3,6 +3,7 @@ package spritecreation;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
@@ -33,7 +34,6 @@ import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
-import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
 import newengine.utils.image.ImageSet;
@@ -121,7 +121,7 @@ public class XStreamTester extends Application{
 		sprite1.addComponent(new Range(128));
 		sprite1.addComponent(new Attacker());
 		sprite1.addComponent(new Health(200));
-		sprite1.addComponent(new EventQueue());
+		sprite1.addComponent(new EventQueue(new LinkedList<>()));
 //		
 		XStreamHandler XSH = new XStreamHandler();
 		XSH.saveToFile(sprite1);
