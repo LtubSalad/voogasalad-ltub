@@ -4,7 +4,10 @@ public class NoLivesCondition extends Condition {
 
 	@Override
 	public boolean check() {
-		return 0 == getPlayerStatsModel().getLives();
+		if (this.getPlayerStatsModel().getLives(this.getPlayerRelationModel().getMainPlayer()).isPresent()) {
+			return 0 == this.getPlayerStatsModel().getLives(this.getPlayerRelationModel().getMainPlayer()).get();
+		}
+		return false;
 	}
 }
  
