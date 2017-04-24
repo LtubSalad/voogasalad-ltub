@@ -240,6 +240,9 @@ public class App extends Application {
 			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, "gold", 100));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
+			bus.emit(new PeriodicEvent(5, 3.0, () -> {
+				sprite2.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(new GamePoint(10,20))));
+			}));
 		});
 
 		// Triggers
@@ -264,11 +267,9 @@ public class App extends Application {
 //				new Target(new GamePoint(400,200)))));
 //		sprite1.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, sprite1, sprite2));
 
-		bus.emit(new PeriodicEvent(5, 3.0, () -> {
-			sprite2.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(new GamePoint(10,20))));
-		}));
 		
-		sprite2.emit(new SpawnPrefEvent(SpawnPrefEvent.SETPREFS, 3, 3));
+		
+		//sprite2.emit(new SpawnPrefEvent(SpawnPrefEvent.SETPREFS, 3, 3));
 		
 		//	// TODO add method to generate path
 		//	sprite1.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite1, 
