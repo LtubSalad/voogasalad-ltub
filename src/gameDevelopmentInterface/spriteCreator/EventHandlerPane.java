@@ -7,6 +7,7 @@ import java.util.List;
 
 import bus.BusEvent;
 import data.SpriteMakerModel;
+import helperAnnotations.DeveloperMethod;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
@@ -81,49 +82,29 @@ public class EventHandlerPane extends ScrollPane {
 		}
 
 		private void addScript(String script) {
-			scriptField.setText("EW");
+			scriptField.setText(scriptField.getText()+script+";"+"\n");
 		}
 
 		private void updateSprite() {
 			mySprite.getScriptMap().put(myEvent, scriptField.getText());
 		}
 
-		private class MethodDisplay extends ComboBox<Method> {
-			private ObservableList<Method> methods;
+		private class MethodDisplay extends ComboBox<String> {
+			private ObservableList<String> methods;
 			private final int ROW_COUNT = 5;
 
 			private MethodDisplay() {
 				this.setVisibleRowCount(ROW_COUNT);
 				this.setPromptText("Available commands");
 
-				List<Method> dumMethods = new ArrayList<>();
+				List<String> dumMethods = new ArrayList<>();
 				methods = FXCollections.observableList(dumMethods);
 				registerSprite();
 				updateMethods();
 				this.setItems(methods);
-				this.setCellFactory(new Callback<ListView<Method>, ListCell<Method>>() {
-					@Override
-					public ListCell<Method> call(ListView<Method> list) {
-						return new SingleMethodCell();
-					}
-				});
-			}
-
-			class SingleMethodCell extends ListCell<Method> {
-				@Override
-				public void updateItem(Method item, boolean empty) {
-					super.updateItem(item, empty);
-					if (item == null || empty) {
-						setGraphic(null);
-						return;
-					}
-					Button methodAdder = new Button(methodToString(item));
-					methodAdder.setOnAction((c) -> {
-						SingleEventHandler.this.addScript(methodToString(item));
+				this.getSelectionModel().selectedIndexProperty().addListener((observableValue,oldVal,newVal)->{
+						SingleEventHandler.this.addScript(getSelectionModel().getSelectedItem());	
 					});
-					methodAdder.setPrefWidth(prefWidth);
-					setGraphic(methodAdder);
-				}
 			}
 
 			private void registerSprite() {
@@ -138,12 +119,16 @@ public class EventHandlerPane extends ScrollPane {
 			private void updateMethods() {
 				methods.clear();
 				for (Method method : Sprite.class.getDeclaredMethods()) {
-					methods.add(method);
+					if(method.isAnnotationPresent(DeveloperMethod.class)){
+						methods.add(methodToString(method));
+					}
 				}
 				mySprite.getComponents().forEach((type, component) -> {
 					Class<?> clazz = component.getClass();
 					for (Method method : clazz.getDeclaredMethods()) {
-						methods.add(method);
+						if(method.isAnnotationPresent(DeveloperMethod.class)){
+							methods.add(methodToString(method));
+						}
 					}
 				});
 			}
@@ -156,7 +141,7 @@ public class EventHandlerPane extends ScrollPane {
 				}
 				s += "(";
 				for (int i = 0; i < parameters.length; i++) {
-					s += "variable";
+					s += "?";
 					if (i < parameters.length - 1) {
 						s += ",";
 					}

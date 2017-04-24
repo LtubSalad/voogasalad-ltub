@@ -9,6 +9,7 @@ import bus.BusEventHandler;
 import commons.MathUtils;
 import commons.point.GamePoint;
 import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.DeveloperMethod;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
 import newengine.events.sound.SoundEvent;
@@ -28,18 +29,18 @@ public class Position extends Component {
 	private Target target;
 	private boolean isMoving = false;
 	private boolean followingSprite = false;
-	
+
 	public Position(GamePoint pos, double heading) {
 		this.pos = pos;
 		this.heading = heading;
 	}
-	
+
 	@ConstructorForDeveloper
-	public Position(@VariableName(name = "xPosition") double xPos,
-			@VariableName(name = "yPosition") double yPos,@VariableName(name = "heading") double heading){
-		this(new GamePoint(xPos,yPos),heading);
+	public Position(@VariableName(name = "xPosition") double xPos, @VariableName(name = "yPosition") double yPos,
+			@VariableName(name = "heading") double heading) {
+		this(new GamePoint(xPos, yPos), heading);
 	}
-	
+
 	@Override
 	public void afterAdded() {
 		sprite.on(MoveEvent.START_POSITION, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
@@ -62,14 +63,16 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.STOP,  (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
 			stopMoving();
 		});
 	}
 
 	@Override
 	public void onUpdated(double dt) {
-		if (!isMoving()) {return;}
+		if (!isMoving()) {
+			return;
+		}
 		GamePoint pDest = getFollowingPoint();
 		updateMovePosition(dt, pDest);
 	}
@@ -88,7 +91,6 @@ public class Position extends Component {
 		double dist = pos.distFrom(pDest);
 		double speed = sprite.getComponent(Speed.TYPE).get().speed();
 
-		
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
@@ -113,12 +115,12 @@ public class Position extends Component {
 		pos = new GamePoint(x + vx * dt, y + vy * dt);
 		return;
 	}
-	
+
 	@Override
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
 	}
-	
+
 	@Override
 	public Position clone() {
 		return new Position(pos, heading);
@@ -132,35 +134,38 @@ public class Position extends Component {
 		return heading;
 	}
 
+	@DeveloperMethod
 	private void moveTo(Target target) {
 		this.target = target;
 		startMoving();
 	}
-	
+
+	@DeveloperMethod
 	private void startMoving() {
 		isMoving = true;
 	}
-	
+
+	@DeveloperMethod
 	private void stopMoving() {
 		isMoving = false;
 	}
-	
+
 	public boolean isMoving() {
 		return isMoving;
 	}
-	
+
 	private void followingSprite() {
 		followingSprite = true;
 	}
-	
+
 	private void followingPosition() {
 		followingSprite = false;
 	}
-	
+
 	private boolean isFollowingSprite() {
 		return followingSprite;
 	}
-	
+
 	private GamePoint getFollowingPoint() {
 		if (isFollowingSprite()) {
 			if (target.getSprite().isPresent()) {
