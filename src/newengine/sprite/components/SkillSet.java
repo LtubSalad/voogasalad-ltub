@@ -36,6 +36,7 @@ public class SkillSet extends Component {
 		return skills.get(type);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void afterAdded() {
 		for (Skill skill: skills.values()) {
