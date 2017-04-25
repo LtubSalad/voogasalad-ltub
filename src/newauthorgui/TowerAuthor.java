@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 /**
  * 
  */
-public class TowerAuthor {
+public class TowerAuthor implements GameAuthor {
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
 	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
@@ -49,7 +49,7 @@ public class TowerAuthor {
 	}
 	
 	private void instantiateSteps() {
-		developerSteps = new StepOrganizer();
+		developerSteps = new StepOrganizer(this);
 		addStep(new DeveloperStep("Welcome", new WelcomeTowerScreen()));
 		addStep(new DeveloperStep("Level Options", new LevelOptionsSelector()));
 		addStep(new DeveloperStep("Sprite creation",new SpriteCreatorPane(myModelData)));
@@ -63,12 +63,13 @@ public class TowerAuthor {
 	
 	public void addStep(int index, DeveloperStep step){
 		developerSteps.addStep(index, step);
-		step.setOnMouseClicked(e -> {
-			currentStep.getChildren().clear();
-			currentStep.getChildren().add(step.getStep());
-		});
 	}
 	
+	public void changeStep(DeveloperStep step){
+		currentStep.getChildren().clear();
+		currentStep.getChildren().add(step.getStep());
+	}
+
 	
 	public Scene getScene() {
 		return developerScene;
