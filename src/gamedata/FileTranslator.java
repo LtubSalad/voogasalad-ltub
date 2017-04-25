@@ -10,7 +10,7 @@ import newengine.sprite.Sprite;
  * an implementing class should be a composition of translators, one for each direction in which translation proceeds 
  *
  */
-public interface FileTranslator extends Translator<Sprite> {
+public interface FileTranslator extends Translator {
 	/**
 	 * 
 	 * method used to set the translator for translating from Authoring Data to Game Data

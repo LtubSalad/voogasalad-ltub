@@ -19,7 +19,7 @@ import utilities.XStreamHandler;
  *
  */
 public class TranslationController implements FileTranslator {
-	private Translator<?> translator;
+	private Translator translator;
 
 	private File fileToTranslate; 
 	private XStreamHandler handler; 
@@ -60,11 +60,11 @@ public class TranslationController implements FileTranslator {
 
 	
 	//FIXME: ya fix this
-	@Override
-	public List<Sprite> getTranslated() {
-		return (List<Sprite>) translator.getTranslated();
-	}
-	
+//	@Override
+//	public List<Sprite> getTranslated() {
+//		return (List<Sprite>) translator.getTranslated();
+//	}
+//	
 	
 	//FIXME fix this somehow
 	

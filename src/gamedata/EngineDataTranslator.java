@@ -36,9 +36,6 @@ public class EngineDataTranslator implements Translator{
 		
 	}
 
-	@Override
-	public List getTranslated() {
-		// TODO Auto-generated method stub
-		return null;
+
 	}
-}
+
