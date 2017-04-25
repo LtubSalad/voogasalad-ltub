@@ -1,15 +1,15 @@
 package gameDevelopmentInterface;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import data.AttributeData;
-import data.SpriteMakerModel;
 import commons.point.GamePoint;
+import data.SpriteMakerModel;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Bounds;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -110,25 +110,26 @@ public class ScreenMap extends StackPane {
 		double actualY = (gp.y()*(getGrid().getHeight()/NUM_ROWS)) + ((getGrid().getHeight()/NUM_ROWS)/2);
 		return new GamePoint(actualX, actualY);
 	}
+
 	
 	private void redrawGrid() {
 		Map<SpriteMakerModel, Boolean> onScreenOrNot = mySMC.getScreenData().getIfOnScreen();
 		for (SpriteMakerModel sprite : onScreenOrNot.keySet()) {
 			if (onScreenOrNot.get(sprite) == false) {
 				onScreenOrNot.put(sprite, true);
-				//List<Component> components = sprite.getComponents();
 				for (Component c : sprite.getComponents().values()) {
 					if (c.getType().equals(Images.TYPE)) {
 						Images imageComponent = (Images) c;
-						Image image = imageComponent.image().getFXImage();
-						ImageView imageView = new ImageView(image);
+						ImageView imageView = new ImageView(imageComponent.image().getFXImage());
+						imageView.setFitHeight(myGrid.getHeight() / getNumRows());
+						imageView.setFitWidth(myGrid.getWidth() / getNumCols());
 						Component possiblePosition = sprite.getComponentByType(Position.TYPE);
 						if (possiblePosition != null) {
 							Position pos = (Position) possiblePosition;
 							GamePoint screenPoint = pos.pos();
-							GamePoint gridPoint = getCoordOfMouseHover(screenPoint.x(), screenPoint.y());
-							Integer xPos = (int) gridPoint.x();
-							Integer yPos = (int) gridPoint.y();
+							GamePoint gridCoords = getCoordOfMouseHover(screenPoint.x(), screenPoint.y());
+							Integer xPos = (int) gridCoords.x();
+							Integer yPos = (int) gridCoords.y();
 							myGrid.add(imageView, xPos, yPos);
 						}
 					}
@@ -139,7 +140,7 @@ public class ScreenMap extends StackPane {
 	
 	public void addBorderToCoordinate(GamePoint coord) {
 		CoordinateConversion cc = new CoordinateConversion();
-		Pair<Integer, Integer> gridCoord = cc.fromGamePointToPair(coord);
+		Pair<Integer, Integer> gridCoord = cc.fromGamePointToPair(coord, myGrid);
 		Rectangle border = new Rectangle(myGrid.getWidth()/getNumCols(), myGrid.getHeight()/getNumRows());
 		border.setFill(Color.TRANSPARENT);
 		border.setStroke(Color.BLACK);

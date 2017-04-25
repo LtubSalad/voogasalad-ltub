@@ -1,9 +1,7 @@
 package gameDevelopmentInterface;
-
-import data.AttributeData;
-import data.SpritesForScreenUse;
 import data.ScreenModelData;
 import data.SpriteMakerModel;
+import data.SpritesForScreenUse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -19,7 +17,6 @@ import javafx.scene.layout.BorderPane;
  * @author Jake
  *
  */
-
 public class ScreenModelCreator extends BorderPane {
 	private ObservableMap<String,String> myGeneralData;
 	private ScreenModelData myScreenData = new ScreenModelData();

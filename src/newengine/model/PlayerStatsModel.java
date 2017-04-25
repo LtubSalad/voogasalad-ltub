@@ -25,7 +25,7 @@ public class PlayerStatsModel {
 		this.bus = bus;
 		initHandlers();
 	}
-	
+
 	private void initHandlers() {
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
 			Player player = e.getPlayer();

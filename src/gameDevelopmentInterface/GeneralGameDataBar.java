@@ -1,6 +1,7 @@
 package gameDevelopmentInterface;
 
 import java.util.ResourceBundle;
+
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.scene.layout.HBox;
@@ -14,6 +15,7 @@ import javafx.scene.text.Text;
  *
  */
 public class GeneralGameDataBar extends HBox {
+	
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
 	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);

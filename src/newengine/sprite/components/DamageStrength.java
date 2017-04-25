@@ -24,7 +24,7 @@ public class DamageStrength extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.STOP, (e) -> {
 			sprite.getComponent(Position.TYPE).ifPresent((position) -> {
 				if (position.isMoving() == false) {
 					List<Sprite> spritesToRemove = new ArrayList<>();
