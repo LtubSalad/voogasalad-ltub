@@ -91,7 +91,9 @@ public class Position extends Component {
 		double x = pos.x();
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
-			sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+			if (sprite.getComponent(Weapon.TYPE).isPresent()){
+				sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+			}
 			stopMoving();
 			return;
 		}

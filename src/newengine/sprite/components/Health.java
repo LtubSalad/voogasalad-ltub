@@ -51,6 +51,7 @@ public class Health extends Component {
 						another.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
 							int damage = damageStrength.getStrength();
 							sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, -damage));
+							System.out.println("decremented health");
 						});				
 					}
 				});	

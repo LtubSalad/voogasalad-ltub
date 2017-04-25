@@ -26,17 +26,17 @@ public class DamageStrength extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
-			sprite.getComponent(Position.TYPE).ifPresent((position) -> {
-				if (position.isMoving() == false) {
-					List<Sprite> spritesToRemove = new ArrayList<>();
-					spritesToRemove.add(sprite);
-					sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
-						gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spritesToRemove));
-					});		
-				}
-			});	
-		});
+//		sprite.on(MoveEvent.STOP, (e) -> {
+//			sprite.getComponent(Position.TYPE).ifPresent((position) -> {
+////				if (position.isMoving() == false) {
+//					List<Sprite> spritesToRemove = new ArrayList<>();
+//					spritesToRemove.add(sprite);
+//					sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
+//						gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spritesToRemove));
+//					});		
+////				}
+//			});	
+//		});
 	}
 	
 	@Override

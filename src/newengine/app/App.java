@@ -84,7 +84,7 @@ public class App extends Application {
 		sprite1.addComponent(new GameBus());
 		sprite1.addComponent(new SkillSet(skillMap1));
 		sprite1.addComponent(new Owner(player1));
-		sprite1.addComponent(new Position(new GamePoint(400, 100), 0));
+		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
 		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite1.addComponent(new Images(imageSet1));
 		sprite1.addComponent(new Speed(200));
@@ -118,10 +118,9 @@ public class App extends Application {
 		sprite2.addComponent(new EventQueue(new LinkedList<>()));
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(600));
-		sprite2.addComponent(new RangeShootingAI());
-		sprite2.addComponent(new Range(200));
-
-	//	sprite2.addComponent(new PathFollower(new Path()));
+//		sprite2.addComponent(new RangeShootingAI());
+//		sprite2.addComponent(new Range(200));
+		sprite2.addComponent(new PathFollower(new Path()));
 		
 		
 		

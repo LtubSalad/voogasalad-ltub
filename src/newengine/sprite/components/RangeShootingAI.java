@@ -23,7 +23,7 @@ public class RangeShootingAI extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(InRangeEvent.ANY, (Serializable & BusEventHandler<InRangeEvent>) (e) -> {
+		sprite.on(InRangeEvent.ANY, (e) -> {
 			Sprite shootTarget = null;
 			for (Sprite detectee: e.getDetectees()) {
 				if (detectee.getComponent(Owner.TYPE).get().player().isEnemyWith(
