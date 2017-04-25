@@ -65,13 +65,13 @@ public class AuthDataTranslator implements Translator {
 	@Override
 	public void translate() {
 		spritesToMake.stream().forEach(model -> {
+			System.out.println(model.getActualComponents().size());
 			Sprite newSprite = handleComponents(model.getActualComponents());
 			// skills
 			Sprite skilledSprite = handleSkills(newSprite, model.getSkills());
 			/// triggers 
 			constructedSprites.add(handleEventHandlers(skilledSprite, model.getScriptMap()));				
 		});
-		gameBus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, constructedSprites));
 	}
 	
 //
@@ -113,17 +113,22 @@ public class AuthDataTranslator implements Translator {
 
 	
 	
-	public SpriteModel getSprites(){
-		return constructedModel;
+//
+//	public SpriteModel getSprites(){
+//		return constructedModel;
+
+	public List<Sprite> getSprites(){
+		return constructedSprites;
 	}
 
 
 	private Sprite handleComponents(List<Component>transferComponents) {
 		Sprite sprite = new Sprite(); 
 		for (Component comp: transferComponents){
+			System.out.println(comp.getType().getType());
 			sprite.addComponent(comp);
 		}
-		return sprite; 
+		return sprite;
 	}
 
 }

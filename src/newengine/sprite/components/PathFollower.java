@@ -6,8 +6,10 @@ import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
 public class PathFollower extends Component{
+	public static final ComponentType<Images> TYPE = new ComponentType<>(PathFollower.class.getName());
 	private Path path;
 	private double speed;
+	
 	public PathFollower(Path path){
 		this.path=path;
 	}
@@ -20,13 +22,13 @@ public class PathFollower extends Component{
 	@Override
 	public ComponentType<? extends Component> getType() {
 		// TODO Auto-generated method stub
-		return null;
+		return TYPE;
 	}
 
 	@Override
 	public Component clone() {
 		// TODO Auto-generated method stub
-		return null;
+		return new PathFollower(path);
 	}
 
 }

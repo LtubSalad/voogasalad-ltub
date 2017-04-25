@@ -65,7 +65,6 @@ public class SpriteModel {
 	private void addSprite(List<Sprite> sprites) {
 		for (Sprite sprite : sprites) {
 			if (!(this.sprites.contains(sprite))) {
-				System.out.println("sprite added to sprite model");
 				this.spritesToAdd.add(sprite);
 				for (SpriteTriggerRegisterEvent e : spriteTriggerRegisterEvents) {
 					sprite.on(e.getTriggerBusEventType(), e.getTriggerHandler());

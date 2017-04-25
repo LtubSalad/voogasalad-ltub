@@ -6,12 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import bus.BusEventHandler;
 import newengine.events.skill.AddSkillEvent;
+import newengine.events.skill.ResetSkillCooldownEvent;
 import newengine.events.skill.TriggerSkillEvent;
-import newengine.events.sprite.FireProjectileEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.sprite.component.Component;
@@ -49,11 +47,17 @@ public class SkillSet extends Component {
 		});
 		sprite.on(TriggerSkillEvent.ANY,  (e) -> {
 			Skill skill = skills.get(e.getType());
+			if (sprite.getComponent(Cooldown.TYPE).isPresent() &&
+					!sprite.getComponent(Cooldown.TYPE).get().isReady(e.getType())) {
+//				System.out.println("Skill "+e.getType()+" is still cooling down");
+				return; // skill triggering is not executed if it is still in cooldown period.
+			}
 			if (skill != null) {
 				skill.setSource(sprite);
 				e.getTarget().ifPresent((target) -> skill.setTarget(target));
 				skill.trigger();
 			}
+			sprite.emit(new ResetSkillCooldownEvent(e.getType()));
 		});
 	}
 	

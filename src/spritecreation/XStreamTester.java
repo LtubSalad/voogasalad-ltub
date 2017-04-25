@@ -97,7 +97,7 @@ public class XStreamTester extends Application{
 		Sprite building = new Sprite();
 		LtubImage buildingImage = new LtubImage("images/skills/build.png");
 		ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
-		building.addComponent(new Images(imageSetBuildSkill));
+		building.addComponent(new Images("images/skills/build.png"));
 		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		
 		Player player1 = new Player("Player 1");
@@ -107,14 +107,14 @@ public class XStreamTester extends Application{
 		ImageSet imageSet1 = new ImageSet(image1);
 		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 		skillMap.put(MoveSkill.TYPE, new MoveSkill());
-		skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
+		//skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
 		skillMap.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
 		sprite1.addComponent(new GameBus());
 		//sprite1.addComponent(new SkillSet(skillMap));
 		sprite1.addComponent(new Owner(player1));
 		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
 		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		sprite1.addComponent(new Images(imageSet1));
+		sprite1.addComponent(new Images("images/characters/bahamut_left.png"));
 		sprite1.addComponent(new Speed(200));
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));

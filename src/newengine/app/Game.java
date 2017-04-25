@@ -14,10 +14,10 @@ import newengine.managers.range.RangeManager;
 import newengine.managers.sound.SoundManager;
 import newengine.managers.timer.TimerManager;
 import newengine.model.Models;
+import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
-import newengine.player.Player;
 import newengine.trigger.Trigger;
 import newengine.trigger.TriggerManager;
 import newengine.view.View;
@@ -30,12 +30,12 @@ public class Game {
 	 
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
-		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus, Player.MAIN_PLAYER); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
+		PlayerRelationModel playerRelationModel = new PlayerRelationModel(bus);
 		SelectionModel selectionModel = new SelectionModel(bus);
-		Models models = new Models(bus, spriteModel, playerStatsModel, selectionModel);
+		Models models = new Models(bus, spriteModel, playerStatsModel, playerRelationModel, selectionModel);
 		
-		Camera camera = new Camera(bus);
-		view = new View(bus, camera);
+		view = new View(bus);
 		
 		gameLoop = new FXGameLoop(bus);
 		
@@ -45,8 +45,8 @@ public class Game {
 		SoundManager soundManager = new SoundManager(bus);
 		DebugManager debugManager = new DebugManager(bus);
 		TriggerManager triggerManager = new TriggerManager(bus, models);
-		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel);
 		TimerManager timerManager = new TimerManager(bus);
+		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel);
 		
 		gameLoop.addLoopComponent((dt) -> view.clear());
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
@@ -55,6 +55,8 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> view.render(models));
 		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 		gameLoop.addLoopComponent((dt) -> timerManager.update(dt));
+		gameLoop.addLoopComponent((dt) -> inputManager.update(dt));
+
 	}
 	
 	public void addTrigger(Trigger trigger) {

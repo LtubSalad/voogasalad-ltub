@@ -51,11 +51,11 @@ public class PathCreator {
 	private void targetSetOnMouseDragged(ScreenMap target, MouseEvent e) {
 		double mouseX = e.getScreenX();
 		double mouseY = e.getScreenY();
-		Pair<Integer, Integer> gridCoords = target.getCoordOfMouseHover(mouseX, mouseY);
-		GamePoint actualGameLocation = target.getActualLocationOfSprite(gridCoords);
+		GamePoint coords = target.getCoordOfMouseHover(mouseX, mouseY);
+		GamePoint actualGameLocation = target.getActualLocationOfSprite(coords);
 		if (!coordAlreadyInPath(actualGameLocation)) {
 			replacementPath.add(actualGameLocation);
-			target.addBorderToCoordinate(gridCoords);
+			target.addBorderToCoordinate(coords);
 		}
 		e.consume();
 	}

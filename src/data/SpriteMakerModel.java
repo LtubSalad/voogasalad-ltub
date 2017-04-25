@@ -100,17 +100,24 @@ public class SpriteMakerModel {
 		return componentsForTransfer; 
 	}
 	
+	public SpriteMakerModel(SpriteMakerModel toCopy) {
+		this.myCustomEventHandlers = toCopy.myCustomEventHandlers;
+		this.myComponents = toCopy.myComponents;
+		this.myScriptMap = toCopy.myScriptMap;
+	}
+	
 	/**
 	 * This code means that the sprite only has one component for each type... though
 	 * you can possibly have two components of the same class with different "type".
 	 * @param comp
 	 */
 	public void addComponent(Component comp) {
-		myComponents.forEach((type,component)->{
-			if(comp.getType().equals(type)){
-				myComponents.remove(type,component);
-			}
-		});
+//		myComponents.forEach((type,component)->{
+//			if(comp.getType().equals(type)){
+//				myComponents.remove(type,component);
+//			}
+//		});
+		actualComponents.add(comp);
 		myComponents.put(comp.getType(), comp);
 	}
 	
