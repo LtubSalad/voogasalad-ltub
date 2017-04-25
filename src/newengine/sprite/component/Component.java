@@ -25,6 +25,7 @@ public abstract class Component {
 
 	public abstract ComponentType<? extends Component> getType();
 	
+
 	public abstract Component clone();
 	
 }

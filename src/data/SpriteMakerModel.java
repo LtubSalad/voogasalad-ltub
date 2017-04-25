@@ -5,10 +5,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import bus.BusEvent;
+import gamecreation.DataWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
+import javafx.util.Pair;
 import newengine.events.sprite.SpriteKilledEvent;
+import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -19,11 +23,87 @@ public class SpriteMakerModel {
 	private ObservableMap<BusEvent, String> myScriptMap;
 	private String spriteName;
 	
+	
+	// Jake and Tahia's DO NOT TOUCH
+	private Map<String, List<String>> componentsForTransfer; 
+	private List<Component> actualComponents; 
+	private List<EventHandleData> myEventHandlers; 
+	//private Map<String, List<DataWrapper>> skills; 
+	List<Skill> skills; 
+
+	
+	
 	public SpriteMakerModel() {
 		Map<ComponentType<?>, Component >componentMap=new HashMap<>();
 		myComponents=FXCollections.observableMap(componentMap);
 		Map<BusEvent, String> handlers=new HashMap<>();
 		myScriptMap=FXCollections.observableMap(handlers);
+		actualComponents = new ArrayList<Component>(); 
+		skills = new ArrayList<Skill>(); 
+		
+	}
+
+	
+	public void addSkill(Skill skill){
+		skills.add(skill);
+	}
+	
+	
+	public void addComponent(String componentName, List<String> params) {
+		//TODO: modify this method call to pass data correct data structures (Map<String, DataWrapper>) 
+		if (!componentsForTransfer.keySet().contains(componentName)) {
+			componentsForTransfer.put(componentName, params);
+		}
+		
+	}
+	
+	
+	/**
+	 * @param componentName
+	 * @param parameters
+	 * 
+	 * USE THIS ONE 
+	 */
+	public void addActualComponent(Component c){
+		actualComponents.add(c);
+	}
+	
+	
+	public List<Component> getActualComponents(){
+		return actualComponents; 
+	}
+	
+	public void addEventHandler(EventHandleData eventHandler) {
+		myEventHandlers.add(eventHandler);
+	}
+//	
+//	public List<Component> getComponents() {
+//		return myComponents;
+//	}
+	
+	public List<EventHandleData> getEventHandlers() {
+		return myEventHandlers;
+	}
+	
+//	public void printComponents() {
+//		for (Component c : myComponents) {
+//			System.out.println(c.getType());
+//		}
+//	}
+
+	
+//	public Map<BusEvent,String> getScriptMap() {
+//		return myScriptMap;
+//	}
+	
+	public Map<String,List<String>> getTransferComponents() {
+		return componentsForTransfer; 
+	}
+	
+	public SpriteMakerModel(SpriteMakerModel toCopy) {
+		this.myCustomEventHandlers = toCopy.myCustomEventHandlers;
+		this.myComponents = toCopy.myComponents;
+		this.myScriptMap = toCopy.myScriptMap;
 	}
 	
 	public void clearComponents(){
@@ -36,11 +116,12 @@ public class SpriteMakerModel {
 	 * @param comp
 	 */
 	public void addComponent(Component comp) {
-		myComponents.forEach((type,component)->{
-			if(comp.getType().equals(type)){
-				myComponents.remove(type,component);
-			}
-		});
+//		myComponents.forEach((type,component)->{
+//			if(comp.getType().equals(type)){
+//				myComponents.remove(type,component);
+//			}
+//		});
+		actualComponents.add(comp);
 		myComponents.put(comp.getType(), comp);
 	}
 	
@@ -63,6 +144,15 @@ public class SpriteMakerModel {
 	}
 	
 
+	public Pair<String, List<String>> getComponentByType(String componentName) {
+		for (String c : componentsForTransfer.keySet()) {
+			if (c.equals(componentName)) {
+				return new Pair<String, List<String>>(c, componentsForTransfer.get(c));
+			}
+		}
+		return null; 
+	}
+	
 	public Component getComponentByType(ComponentType<?> type) {
 		for (Component c : myComponents.values()) {
 			if (c.getType().equals(type)) {
@@ -71,6 +161,12 @@ public class SpriteMakerModel {
 		}
 		return null;
 	}
+	
+	public List<Skill> getSkills(){
+		return skills; 
+	}
+	
+	
 	
 	/**
 	 * Call this AFTER unserialization to avoid the bus issues
@@ -81,9 +177,9 @@ public class SpriteMakerModel {
 		myComponents.forEach((componentType, component)->{
 			sprite.addComponent(component);
 		});
-		myScriptMap.forEach((event, script)->{
-			sprite.produceHandler(event.getEventType(), script);
-		});
+//		myScriptMap.forEach((event, script)->{
+//			sprite.produceHandler(event.getEventType(), script);
+//		});
 		return sprite;
 	}
 
