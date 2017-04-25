@@ -7,32 +7,27 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class ImageParameterInput implements ParameterInput{
+public class ImageParameterInput extends HBox implements ParameterInput{
 	public static final String TYPE = "String";
 	private String varName;
-	private HBox complete;
 	private Button fileChoose;
 	private String imagePath;
 	
 	
 	public ImageParameterInput(String varName){
+		super();
 		this.varName = varName;
 		createBox();
 	}
 	
 	private void createBox(){
-		complete = new HBox();
 		//TODO resource file
 		fileChoose = new Button("Select Image");
 		//TODO check for image path
 		fileChoose.setOnAction(e -> imagePath = new FileChooser().showOpenDialog(new Stage()).toString());
-		complete.getChildren().addAll(new Text(varName), fileChoose);
+		this.getChildren().addAll(new Text(varName), fileChoose);
 	}
 
-	@Override
-	public Node get() {
-		return complete;
-	}
 
 	@Override
 	public String getValue() {

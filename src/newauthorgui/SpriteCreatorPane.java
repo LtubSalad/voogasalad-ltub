@@ -1,10 +1,13 @@
-package gameDevelopmentInterface.spriteCreator;
+package newauthorgui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import data.DeveloperData;
 import data.SpriteMakerModel;
+import gameDevelopmentInterface.spriteCreator.ComponentSelectorPane;
+import gameDevelopmentInterface.spriteCreator.EventHandlerPane;
+import gameDevelopmentInterface.spriteCreator.SpriteInfoPane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -29,13 +32,13 @@ import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
 import utilities.XStreamHandler;
 
-public class SpriteCreationScreen extends BorderPane{
+public class SpriteCreatorPane extends BorderPane{
 	private SpriteMakerModel spriteData;
 	private SpriteInfoPane infoPane;
 	private EventHandlerPane scriptPane;
 	private DeveloperData model;
 	
-	public SpriteCreationScreen(DeveloperData model){
+	public SpriteCreatorPane(DeveloperData model){
 		this.model=model;
 		instantiate();
 	}
@@ -44,9 +47,9 @@ public class SpriteCreationScreen extends BorderPane{
 		spriteData=new SpriteMakerModel();
 		scriptPane=new EventHandlerPane(spriteData);
 		infoPane=new SpriteInfoPane(spriteData,model);
-		this.setRight(instantiateSelector());
-		this.setLeft(scriptPane);
-		this.setCenter(infoPane);
+		this.setCenter(instantiateSelector());
+		this.setRight(scriptPane);
+		this.setLeft(infoPane);
 		this.setTop(new Label("NEW SPRITE"));
 		this.setBottom(new BottomPanel());	
 	}
@@ -58,11 +61,11 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Collidable.class);
 		observableComponents.add(Cooldown.class);
 		observableComponents.add(DamageStrength.class);
-		observableComponents.add(EventQueue.class);
 		observableComponents.add(Health.class);
 		observableComponents.add(Images.class);
 		observableComponents.add(Owner.class);
 		observableComponents.add(PathFollower.class);
+		observableComponents.add(Position.class);
 		observableComponents.add(Range.class);
 		observableComponents.add(RangeShootingAI.class);
 		observableComponents.add(Selectable.class);
@@ -81,7 +84,6 @@ public class SpriteCreationScreen extends BorderPane{
 					updateSprite();
 					dataHandler.saveToFile(spriteData);
 				} catch (Exception e) {
-					//FIXME
 					e.printStackTrace();
 				}
 			});
@@ -91,7 +93,7 @@ public class SpriteCreationScreen extends BorderPane{
 					updateSprite();
 					model.addSprite(spriteData);
 				} catch (Exception e) {
-					//FIXME
+					
 				}				
 			});
 			this.getChildren().addAll(saveButton,listSaveButton);

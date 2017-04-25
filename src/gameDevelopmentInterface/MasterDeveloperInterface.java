@@ -1,7 +1,7 @@
 package gameDevelopmentInterface;
 import java.util.ResourceBundle;
+
 import data.DeveloperData;
-import data.SpritesForScreenUse;
 import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;

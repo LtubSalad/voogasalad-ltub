@@ -23,7 +23,7 @@ public class SimpleLevelCreator extends LevelCreator {
 		difficultyMod = new IntegerParameterInput("Difficulty Modifier", 1, 10);
 		Button remove = new Button("remove");
 		remove.setOnAction(e -> super.remove(this));
-		content.getChildren().addAll(difficultyMod.get(), remove);
+		content.getChildren().addAll(difficultyMod, remove);
 		this.setContent(content);
 	}
 	
