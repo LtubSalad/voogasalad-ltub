@@ -164,9 +164,12 @@ public class ScreenObjectHolder extends HBox {
 		skillMap1.put(MoveSkill.TYPE, new MoveSkill());
 		skillMap1.put(BuildSkill.TYPE, new BuildSkill(building));
 		FireProjectileSkill fireSkill1 = new FireProjectileSkill();
-		fireSkill1.setCooldown(3); // add cooldown to the fireProjectilSkill
+		fireSkill1.setCooldown(3); // add cooldown to the fireProjectileSkill
 		sprite1.addComponent(new Cooldown());
 		skillMap1.put(FireProjectileSkill.TYPE, fireSkill1);
+		sprite1.addSkill(new MoveSkill());
+		sprite1.addSkill(new BuildSkill(building));
+		sprite1.addSkill(new FireProjectileSkill());
 		sprite1.addComponent(new GameBus());
 		sprite1.addComponent(new SkillSet(skillMap1));
 		sprite1.addComponent(new Owner(player1));
@@ -243,8 +246,8 @@ public class ScreenObjectHolder extends HBox {
 		spawner.addComponent(new Health(200));
 		spawner.addComponent(new EventQueue(new LinkedList<>()));
 		addObject(sprite1);
-		addObject(sprite2);
-		addObject(spawner);
+		//addObject(sprite2);
+		//addObject(spawner);
 		
 //		List<Sprite> spritesToAdd = new ArrayList<>();
 //		spritesToAdd.add(sprite1);
