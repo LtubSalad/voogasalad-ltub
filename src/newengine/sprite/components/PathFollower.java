@@ -4,7 +4,9 @@ import commons.point.GamePoint;
 import gameDevelopmentInterface.Path;
 import helperAnnotations.DeveloperMethod;
 import newengine.events.QueueEvent;
+import newengine.events.debug.SysPrintEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.timer.DelayedEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.Target;
@@ -29,6 +31,7 @@ public class PathFollower extends Component{
 		GamePoint curr = path.getPath().poll();
 		while (curr != null){
 			sprite.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite, new Target(curr))));
+//			sprite.emit(new QueueEvent(QueueEvent.ADD, new DelayedEvent(DelayedEvent.ANY, 10)));
 			curr = path.getPath().poll();
 		}
 	}

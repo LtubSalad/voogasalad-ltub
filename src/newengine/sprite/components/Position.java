@@ -12,7 +12,9 @@ import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.DeveloperMethod;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
+import newengine.events.SpriteModelEvent;
 import newengine.events.sound.SoundEvent;
+import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.sprite.Sprite;
@@ -65,6 +67,11 @@ public class Position extends Component {
 		});
 		sprite.on(MoveEvent.STOP, (e) -> {
 			stopMoving();
+			if (sprite.getComponent(Weapon.TYPE).isPresent()){
+				System.out.println("the weapon reached dest");
+				//sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, sprite.getComponent(DamageStrength.TYPE).get().getStrength()));
+				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
+			}
 		});
 	}
 
@@ -83,6 +90,7 @@ public class Position extends Component {
 		double x = pos.x();
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
+			sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			stopMoving();
 			return;
 		}
@@ -94,7 +102,9 @@ public class Position extends Component {
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
-			sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+			if (sprite.getComponent(Weapon.TYPE).isPresent()){
+				sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, sprite.getComponent(DamageStrength.TYPE).get().getStrength()));;
+			}
 			target.getSprite().ifPresent((targetSprite) -> {
 				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			});

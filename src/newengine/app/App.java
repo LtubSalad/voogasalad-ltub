@@ -77,7 +77,6 @@ public class App extends Application {
 		ImageSet imageSet1 = new ImageSet(image1);
 		Map<SkillType<? extends Skill>, Skill> skillMap1 = new HashMap<>();
 		skillMap1.put(MoveSkill.TYPE, new MoveSkill());
-//		skillMap1.put(BuildSkill.TYPE, new BuildSkill(building));
 		FireProjectileSkill fireSkill1 = new FireProjectileSkill();
 		fireSkill1.setCooldown(3); // add cooldown to the fireProjectilSkill
 		sprite1.addComponent(new Cooldown());
@@ -85,7 +84,7 @@ public class App extends Application {
 		sprite1.addComponent(new GameBus());
 		sprite1.addComponent(new SkillSet(skillMap1));
 		sprite1.addComponent(new Owner(player1));
-		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
+		sprite1.addComponent(new Position(new GamePoint(400, 100), 0));
 		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite1.addComponent(new Images(imageSet1));
 		sprite1.addComponent(new Speed(200));
@@ -103,11 +102,14 @@ public class App extends Application {
 		ImageSet imageSet2 = new ImageSet(image2);
 		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
 		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
-		skillMap2.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
+		FireProjectileSkill fireSkill2 = new FireProjectileSkill();
+		fireSkill2.setCooldown(3); // add cooldown to the fireProjectilSkill
+		sprite2.addComponent(new Cooldown());
+		skillMap2.put(FireProjectileSkill.TYPE, fireSkill2);
 		sprite2.addComponent(new GameBus());
 		sprite2.addComponent(new SkillSet(skillMap2));
 		sprite2.addComponent(new Owner(player2));
-		sprite2.addComponent(new Position(new GamePoint(300, 250), 0));
+		sprite2.addComponent(new Position(new GamePoint(0, 100), 0));
 		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite2.addComponent(new Images(imageSet2));
 		sprite2.addComponent(new Speed(100));
@@ -116,7 +118,10 @@ public class App extends Application {
 		sprite2.addComponent(new EventQueue(new LinkedList<>()));
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(600));
-		sprite2.addComponent(new PathFollower(new Path()));
+		sprite2.addComponent(new RangeShootingAI());
+		sprite2.addComponent(new Range(200));
+
+	//	sprite2.addComponent(new PathFollower(new Path()));
 		
 		
 		
@@ -161,7 +166,7 @@ public class App extends Application {
 
 		
 		List<Sprite> spritesToAdd = new ArrayList<>();
-//		spritesToAdd.add(sprite1);
+		spritesToAdd.add(sprite1);
 		spritesToAdd.add(sprite2);
 //		spritesToAdd.add(child);
 //		spritesToAdd.add(spawner);
