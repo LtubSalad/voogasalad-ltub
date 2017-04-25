@@ -17,6 +17,7 @@ import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.timer.DelayedEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -102,9 +103,6 @@ public class Position extends Component {
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
-			if (sprite.getComponent(Weapon.TYPE).isPresent()){
-				sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, sprite.getComponent(DamageStrength.TYPE).get().getStrength()));;
-			}
 			target.getSprite().ifPresent((targetSprite) -> {
 				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			});
