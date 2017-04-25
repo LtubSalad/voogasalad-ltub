@@ -1,9 +1,14 @@
 package gamedata;
 
 import java.io.File;
+import java.util.List;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import data.ScreenModelData;
 import newengine.model.SpriteModel;
+import newengine.sprite.Sprite;
 import utilities.XStreamHandler;
 
 /**
@@ -13,8 +18,8 @@ import utilities.XStreamHandler;
  * 
  *
  */
-public class TranslationController implements FileTranslator, Translator {
-	private Translator translator;
+public class TranslationController implements FileTranslator {
+	private Translator<?> translator;
 
 	private File fileToTranslate; 
 	private XStreamHandler handler; 
@@ -35,8 +40,13 @@ public class TranslationController implements FileTranslator, Translator {
 	public TranslationController(String filepath){
 		fileToTranslate = new File(filepath);	
 	}
+	
+	public TranslationController(File file){
+		fileToTranslate = file;
+	}
 
 	public void setTranslatorForAuthFile(){
+		XStream xstream = new XStream(new DomDriver());
 		translator = new AuthDataTranslator(handler.getScreenModel(fileToTranslate));
 	}
 
@@ -47,5 +57,19 @@ public class TranslationController implements FileTranslator, Translator {
 	public void translate(){
 		translator.translate();
 	}
+
+	
+	//FIXME: ya fix this
+	@Override
+	public List<Sprite> getTranslated() {
+		return (List<Sprite>) translator.getTranslated();
+	}
+	
+	
+	//FIXME fix this somehow
+	
+//	public List<Sprite> getSprites(){
+//		return translator.getSprites(); 
+//	}
 
 }

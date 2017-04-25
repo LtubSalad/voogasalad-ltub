@@ -1,5 +1,7 @@
 package gamedata;
 
+import java.util.List;
+
 /**
  * @author tahiaemran
  * 
@@ -13,4 +15,7 @@ public interface Translator {
 	 * 
 	 */
 	public void translate(); 
+	
+	//public List<K> getTranslated(); 
+	
 }

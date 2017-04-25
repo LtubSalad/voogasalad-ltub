@@ -25,7 +25,7 @@
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/walk.png</path>
+                        <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/walk.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -422,7 +422,7 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/build.png</path>
+                        <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/build.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -892,7 +892,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</hb>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/crosshairs.png</path>
+                        <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/crosshairs.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -1429,7 +1429,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
                 <parent class="java.io.FileInputStream" reference="../.."/>
                 <closed>false</closed>
               </fd>
-              <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/walk.png</path>
+              <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/walk.png</path>
               <closeLock/>
               <closed>false</closed>
             </in>
@@ -1821,7 +1821,7 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
                 <parent class="java.io.FileInputStream" reference="../.."/>
                 <closed>false</closed>
               </fd>
-              <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/build.png</path>
+              <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/build.png</path>
               <closeLock/>
               <closed>false</closed>
             </in>
