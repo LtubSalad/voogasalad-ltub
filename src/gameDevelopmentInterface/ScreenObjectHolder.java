@@ -8,7 +8,6 @@ import java.util.Map;
 import commons.point.GamePoint;
 import data.ScreenModelData;
 import data.SpriteMakerModel;
-import data.SpritesForScreenUse;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -64,7 +63,7 @@ public class ScreenObjectHolder extends HBox {
 	private ScreenModelData myScreenData;
 	private Map<Pair<String, Image>, SpriteMakerModel> myScreenObjects = new HashMap<Pair<String, Image>, SpriteMakerModel>();
 	
-	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd, SpritesForScreenUse attributesModel) {
+	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd) {
 		myScreenModel = smc;
 		myScreenData = smd;
 //		myScreenModel.getPossibleSprites().addListener(new ListChangeListener<SpriteMakerModel>() {

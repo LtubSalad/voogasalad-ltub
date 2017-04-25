@@ -49,7 +49,6 @@ public class SkillSet extends Component {
 			Skill skill = skills.get(e.getType());
 			if (sprite.getComponent(Cooldown.TYPE).isPresent() &&
 					!sprite.getComponent(Cooldown.TYPE).get().isReady(e.getType())) {
-//				System.out.println("Skill "+e.getType()+" is still cooling down");
 				return; // skill triggering is not executed if it is still in cooldown period.
 			}
 			if (skill != null) {
