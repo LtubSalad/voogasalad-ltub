@@ -22,7 +22,6 @@ import newengine.sprite.component.ComponentType;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Position;
 import newengine.utils.image.ImageSet;
-import newengine.utils.image.LtubImage;
 /**
  * This class holds all possible sprites that a user can place on the screen.
  * @author Jake
@@ -41,7 +40,7 @@ public class ScreenObjectHolder extends HBox {
 	private ScreenModelData myScreenData;
 	private Map<Pair<String, Image>, SpriteMakerModel> myScreenObjects = new HashMap<Pair<String, Image>, SpriteMakerModel>();
 	
-	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd, SpritesForScreenUse attributesModel) {
+	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd) {
 		myScreenModel = smc;
 		myScreenData = smd;
 //		myScreenModel.getPossibleSprites().addListener(new ListChangeListener<SpriteMakerModel>() {

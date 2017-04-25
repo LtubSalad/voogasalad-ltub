@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
  * Only works for primitive variables and strings.
  * @param <T>
  */
-public class SimpleVariableSetter<T> extends HBox{
+public class SimpleVariableSetter<T> extends VariableSetter{
 	private TextField value;
 	Class<T> type;
 	
@@ -22,8 +22,8 @@ public class SimpleVariableSetter<T> extends HBox{
 		this.setSpacing(20);
 	}
 	
-	public Object getValue() throws UnsupportedTypeException{
-		PrimitiveConverter converter=new PrimitiveConverter();
+	public T getValue() throws UnsupportedTypeException{
+		PrimitiveConverter<T> converter=new PrimitiveConverter();
 		return converter.convertString(type, value.getText());
 	}
 
