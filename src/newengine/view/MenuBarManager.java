@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -88,6 +91,12 @@ public class MenuBarManager implements NodeManager<Node>{
 		buttonList.add(btnHealth);
 
 		return buttonList;
+	}
+	
+	//the observable list of buttons will change of the health or some other attributes change
+	
+	public ObservableList<Button> getObervableButtonList(){
+		return FXCollections.observableList(getButtonList());
 	}
 
 	private void healthAction() {
