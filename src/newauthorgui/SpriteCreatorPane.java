@@ -19,7 +19,6 @@ import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Cooldown;
 import newengine.sprite.components.DamageStrength;
-import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;

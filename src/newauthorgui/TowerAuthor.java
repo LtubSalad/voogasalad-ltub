@@ -19,25 +19,21 @@ public class TowerAuthor implements GameAuthor {
 	private static final String SCREEN_SETTING = "SCREEN_SETTING";
 	private static final String GENERAL_DATA = "GENERAL_DATA";
 	private static final String PATH_TO_STYLE_SHEETS = "/styleSheets/MainStyle.css";
+	public static final int SCENE_WIDTH = 1200;
+	public static final int SCENE_HEIGHT = 800;
 	private Scene developerScene;
 	private BorderPane view;
 	private Group currentStep;
 	private StepOrganizer developerSteps;
 	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
 	private DeveloperData myModelData;
-	private Stage towerStage;
 	
-	public TowerAuthor() {
-		towerStage = new Stage();
-		
+	public TowerAuthor() {	
 		myModelData=new DeveloperData();
 		currentStep = new Group();
 		instantiate();
-		developerScene = new Scene(view);
+		developerScene = new Scene(view, SCENE_WIDTH, SCENE_HEIGHT);
 		developerScene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
-		
-		towerStage.setScene(developerScene);
-		towerStage.show();
 	}
 	
 	private void instantiate() {
@@ -70,7 +66,6 @@ public class TowerAuthor implements GameAuthor {
 		currentStep.getChildren().add(step.getStep());
 	}
 
-	
 	public Scene getScene() {
 		return developerScene;
 	}
