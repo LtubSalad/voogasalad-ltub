@@ -8,6 +8,7 @@ import java.util.Map;
 
 import bus.EventBus;
 import commons.point.GamePoint;
+import gameDevelopmentInterface.Path;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
@@ -37,6 +38,7 @@ import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
+import newengine.sprite.components.PathFollower;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.RangeShootingAI;
@@ -75,7 +77,7 @@ public class App extends Application {
 		ImageSet imageSet1 = new ImageSet(image1);
 		Map<SkillType<? extends Skill>, Skill> skillMap1 = new HashMap<>();
 		skillMap1.put(MoveSkill.TYPE, new MoveSkill());
-		skillMap1.put(BuildSkill.TYPE, new BuildSkill(building));
+//		skillMap1.put(BuildSkill.TYPE, new BuildSkill(building));
 		FireProjectileSkill fireSkill1 = new FireProjectileSkill();
 		fireSkill1.setCooldown(3); // add cooldown to the fireProjectilSkill
 		sprite1.addComponent(new Cooldown());
@@ -113,7 +115,8 @@ public class App extends Application {
 		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite2.addComponent(new EventQueue(new LinkedList<>()));
 		sprite2.addComponent(new Attacker());
-		sprite2.addComponent(new Health(60));
+		sprite2.addComponent(new Health(100));
+		sprite2.addComponent(new PathFollower(new Path()));
 		
 		
 		
@@ -158,10 +161,10 @@ public class App extends Application {
 
 		
 		List<Sprite> spritesToAdd = new ArrayList<>();
-		spritesToAdd.add(sprite1);
+//		spritesToAdd.add(sprite1);
 		spritesToAdd.add(sprite2);
 //		spritesToAdd.add(child);
-		spritesToAdd.add(spawner);
+//		spritesToAdd.add(spawner);
 		
 		
 		bus.on(GameInitializationEvent.ANY, (e) -> {
@@ -174,9 +177,9 @@ public class App extends Application {
 //			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 			// call the spawner to spawn
 			GamePoint targetSpawnPos = new GamePoint(10, 20);
-			bus.emit(new PeriodicEvent(5, 3.0, () -> {
-				spawner.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
-			}));
+//			bus.emit(new PeriodicEvent(5, 3.0, () -> {
+//				spawner.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
+//			}));
 		});
 		
 		// Triggers

@@ -43,7 +43,7 @@ public class Position extends Component {
 
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.START_POSITION, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.START_POSITION, (e) -> {
 			moveTo(e.getTarget());
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
 				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
@@ -54,7 +54,7 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.START_SPRITE, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.START_SPRITE, (e) -> {
 			moveTo(e.getTarget());
 			followingSprite();
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
@@ -63,7 +63,7 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.STOP, (e) -> {
 			stopMoving();
 		});
 	}
