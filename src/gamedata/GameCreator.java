@@ -30,7 +30,7 @@ public class GameCreator {
 	XStreamHandler XSH; 
 	XStream xstream; 
 	
-	private Translator translator; 
+	private TranslationController translator; 
 	private Game game; 
 	
 	
@@ -50,9 +50,15 @@ public class GameCreator {
 
 	private void createGame() {
 		List<SpriteMakerModel> models = (List<SpriteMakerModel>) xstream.fromXML(fileToRead);
-		AuthDataTranslator ADT = new AuthDataTranslator(models);
-		ADT.translate(); 
-		List<Sprite> createdSprites = ADT.getSprites();
+		TranslationController translator = new TranslationController(fileToRead); 
+		translator.setTranslatorForAuthFile();
+		translator.translate();
+		List<Sprite> createdSprites = (List<Sprite>) translator.getTranslated();  
+		
+//		AuthDataTranslator ADT = new AuthDataTranslator(models);
+//		ADT.translate(); 
+//		List<Sprite> createdSprites = ADT.getSprites();
+		
 		game = new Game(); 
 		EventBus bus = game.getBus();
 		
@@ -63,6 +69,8 @@ public class GameCreator {
 		bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, createdSprites.get(0).getComponent(Owner.TYPE).get().player(), 3));
 		bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, createdSprites.get(0).getComponent(Owner.TYPE).get().player(),
 				WealthType.GOLD, 100));
+		
+		
 		
 	}
 	

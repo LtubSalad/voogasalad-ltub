@@ -7,8 +7,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import data.ScreenModelData;
+import data.SpriteMakerModel;
 import newengine.model.SpriteModel;
-import newengine.sprite.Sprite;
 import utilities.XStreamHandler;
 
 /**
@@ -41,13 +41,14 @@ public class TranslationController implements FileTranslator {
 		fileToTranslate = new File(filepath);	
 	}
 	
+	
 	public TranslationController(File file){
 		fileToTranslate = file;
 	}
 
 	public void setTranslatorForAuthFile(){
 		XStream xstream = new XStream(new DomDriver());
-		translator = new AuthDataTranslator(handler.getScreenModel(fileToTranslate));
+		translator = new AuthDataTranslator((List<SpriteMakerModel>)xstream.fromXML(fileToTranslate));
 	}
 
 	public void setTranslatorForGameFile(){
@@ -56,6 +57,12 @@ public class TranslationController implements FileTranslator {
 
 	public void translate(){
 		translator.translate();
+	}
+
+	@Override
+	public List<?> getTranslated() {
+		// TODO Auto-generated method stub
+		return translator.getTranslated();
 	}
 
 	
