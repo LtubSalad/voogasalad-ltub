@@ -20,6 +20,10 @@ public class EventQueue extends Component {
 	private boolean eventFinished = true;
 	
 	@ConstructorForDeveloper
+	public EventQueue(){
+		this(new LinkedList<BusEvent>());
+	}
+	
 	public EventQueue(LinkedList<BusEvent> events) {
 		this.events = events;
 	}

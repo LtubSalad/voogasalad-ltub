@@ -115,7 +115,7 @@ public class App extends Application {
 		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite2.addComponent(new EventQueue(new LinkedList<>()));
 		sprite2.addComponent(new Attacker());
-		sprite2.addComponent(new Health(100));
+		sprite2.addComponent(new Health(600));
 		sprite2.addComponent(new PathFollower(new Path()));
 		
 		
@@ -176,7 +176,7 @@ public class App extends Application {
 //			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 //			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 			// call the spawner to spawn
-			GamePoint targetSpawnPos = new GamePoint(10, 20);
+//			GamePoint targetSpawnPos = new GamePoint(10, 20);
 //			bus.emit(new PeriodicEvent(5, 3.0, () -> {
 //				spawner.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
 //			}));

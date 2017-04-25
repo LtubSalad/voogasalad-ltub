@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
@@ -11,11 +13,13 @@ public class Selectable extends Component {
 	public static final ComponentType<Selectable> TYPE = new ComponentType<>(Selectable.class.getName());
 	private final SelectionBoundType boundType;
 
-	public Selectable(SelectionBoundType boundType) {
+	@ConstructorForDeveloper
+	public Selectable(@VariableName(name = "Bound type") SelectionBoundType boundType) {
 		this.boundType = boundType;
 	}
 	
 	public SelectionBoundType boundType() {
+		
 		return boundType;
 	}
 	
