@@ -17,18 +17,22 @@ import newengine.utils.Target;
 public class BuildSkill extends Skill {
 
 	public static final SkillType<BuildSkill> TYPE = new SkillType<>(BuildSkill.class.getName());
-	private Sprite spriteToCreate;
+	//private Sprite spriteToCreate;
 	private SpriteMakerModel mySpriteModel;
 
-	public BuildSkill(Sprite sprite) {
-		this.spriteToCreate = sprite;
-		if (sprite.getComponent(Images.TYPE).isPresent()) {
-			this.icon = sprite.getComponent(Images.TYPE).get().image();
-		}
-	}
+//	public BuildSkill(Sprite sprite) {
+//		this.spriteToCreate = sprite;
+//		if (sprite.getComponent(Images.TYPE).isPresent()) {
+//			this.icon = sprite.getComponent(Images.TYPE).get().image();
+//		}
+//	}
 
 	public BuildSkill(SpriteMakerModel spriteModel) {
-		this(new AuthDataTranslator(spriteModel).getSprite());
+		this.mySpriteModel = spriteModel;
+		if (spriteModel.getComponentByType(Images.TYPE) != null) {
+			Images imageComponent = (Images) spriteModel.getComponentByType(Images.TYPE);
+			this.icon = imageComponent.image();
+		}
 	}
 
 	@Override
@@ -41,7 +45,8 @@ public class BuildSkill extends Skill {
 		// List<Sprite> spritesToCreate = new ArrayList<>();
 		// spritesToCreate.add(spriteToCreate.clone());
 		// this.getSource().get().getComponent(GameBus.TYPE).get().getGameBus()
-
+		AuthDataTranslator translator = new AuthDataTranslator(mySpriteModel);
+		Sprite spriteToCreate = translator.getSprite();
 		System.out.println("Build skill triggered");
 		Target target = this.getTarget().get();
 		// can override previous Position component

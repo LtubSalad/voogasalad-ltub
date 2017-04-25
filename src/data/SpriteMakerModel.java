@@ -117,6 +117,7 @@ public class SpriteMakerModel {
 //				myComponents.remove(type,component);
 //			}
 //		});
+		actualComponents.add(comp);
 		myComponents.put(comp.getType(), comp);
 	}
 	

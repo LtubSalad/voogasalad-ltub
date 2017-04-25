@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
 import bus.BasicEventBus;
-import data.EventHandleData;
+import bus.BusEvent;
 import data.SpriteMakerModel;
-import gamecreation.DataWrapper;
 import javafx.collections.ObservableList;
 import newengine.events.SpriteModelEvent;
 import newengine.events.skill.AddSkillEvent;
@@ -15,7 +17,6 @@ import newengine.model.SpriteModel;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
-import newengine.sprite.components.SkillSet;
 
 /**
  * @author tahiaemran
@@ -36,6 +37,7 @@ public class AuthDataTranslator implements Translator {
 	private SpriteModel constructedModel = new SpriteModel(gameBus); 
 
 	private Sprite constructed; 
+	
 
 	public AuthDataTranslator(ObservableList<SpriteMakerModel> allObjectsOnScreen) {
 		spritesToMake = new ArrayList<SpriteMakerModel>(allObjectsOnScreen); 
@@ -64,13 +66,13 @@ public class AuthDataTranslator implements Translator {
 	@Override
 	public void translate() {
 		spritesToMake.stream().forEach(model -> {
+			System.out.println(model.getActualComponents().size());
 			Sprite newSprite = handleComponents(model.getActualComponents());
 			// skills
 			Sprite skilledSprite = handleSkills(newSprite, model.getSkills());
 			/// triggers 
-			constructedSprites.add(handleEventHandlers(skilledSprite, model.getEventHandlers()));				
+			constructedSprites.add(handleEventHandlers(skilledSprite, model.getScriptMap()));				
 		});
-		gameBus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, constructedSprites));
 	}
 	
 //
@@ -94,21 +96,33 @@ public class AuthDataTranslator implements Translator {
 	
 	
 
-	private Sprite handleEventHandlers(Sprite newSprite, List<EventHandleData> eventHandlers) {
-		// loop through 
+	private Sprite handleEventHandlers(Sprite newSprite, Map<BusEvent, String> scriptMap ) {
+		// TODO: debate design on this 
+		for (BusEvent event : scriptMap.keySet()){
+			newSprite.getSpriteBus().on(event.getEventType(), e ->{
+				try{
+					newSprite.getScriptHandler().eval(scriptMap.get(event));
+				}
+				catch (Exception exception){
+					System.out.println("hi yes scripting does not work properly here" );
+				}
+			});
+		}
 		return newSprite; 
 
 	}
 
 	
-	public SpriteModel getSprites(){
-		return constructedModel;
+	
+	public List<Sprite> getSprites(){
+		return constructedSprites;
 	}
 
 
 	private Sprite handleComponents(List<Component>transferComponents) {
 		Sprite sprite = new Sprite(); 
 		for (Component comp: transferComponents){
+			System.out.println(comp.getType());
 			sprite.addComponent(comp);
 		}
 		return sprite; 

@@ -152,7 +152,7 @@ public class ScreenObjectHolder extends HBox {
 		LtubImage buildingImage = new LtubImage("images/skills/build.png");
 		ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
 		building.addComponent(new Images("images/skills/build.png"));
-		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		//building.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		
 		
 		
@@ -196,8 +196,8 @@ public class ScreenObjectHolder extends HBox {
 		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite2.addComponent(new Images("images/characters/bahamut_right.png"));
 		sprite2.addComponent(new Speed(100));
-		sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		//sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		//sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite2.addComponent(new EventQueue(new LinkedList<>()));
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(60));
@@ -216,8 +216,8 @@ public class ScreenObjectHolder extends HBox {
 		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		child.addComponent(new Images("images/characters/bahamut_left.png"));
 		child.addComponent(new Speed(200));
-		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		//child.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		//child.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		child.addComponent(new Range(128));
 		child.addComponent(new Attacker());
 		child.addComponent(new Health(200));
@@ -228,7 +228,7 @@ public class ScreenObjectHolder extends HBox {
 		// The spawner
 		SpriteMakerModel spawner = new SpriteMakerModel();
 		Map<SkillType<? extends Skill>, Skill> spawnerSkillMap = new HashMap<>();
-		spawnerSkillMap.put(BuildSkill.TYPE, new BuildSkill(child));
+		//spawnerSkillMap.put(BuildSkill.TYPE, new BuildSkill(child));
 		spawner.addComponent(new GameBus());
 		spawner.addComponent(new SkillSet(spawnerSkillMap));
 		spawner.addComponent(new Owner(player1));
@@ -236,8 +236,8 @@ public class ScreenObjectHolder extends HBox {
 		spawner.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		spawner.addComponent(new Images("images/characters/tower2_resized.gif"));
 		spawner.addComponent(new Speed(200));
-		spawner.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		spawner.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		//spawner.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		//spawner.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		spawner.addComponent(new Range(128));
 		spawner.addComponent(new Attacker());
 		spawner.addComponent(new Health(200));
