@@ -11,7 +11,7 @@ import javafx.collections.ObservableMap;
 import javafx.util.Pair;
 /**
  * 
- * @author Jake
+ * @author Jake, Daniel
  * Stores the data not specific to any screen, such as health, lives, score.
  */
 public class DeveloperData {
@@ -21,11 +21,10 @@ public class DeveloperData {
 	private static final String NUMBER_OF_STARTING_BONUSES = "Number of Starting Bonuses";
 	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
 	private ObservableList<Path> myPaths;
-	private ObservableList<SpriteMakerModel> sprites;
+	private SpritesForScreenUse jakeSprites;
 	
 	public DeveloperData() {
-		List<SpriteMakerModel> dummyList=new ArrayList<>();
-		sprites=FXCollections.observableList(dummyList);
+		jakeSprites=new SpritesForScreenUse();
 		List<Path> dummyPaths=new ArrayList<>();
 		myPaths=FXCollections.observableList(dummyPaths);
 		myPaths.add(new Path());
@@ -36,7 +35,7 @@ public class DeveloperData {
 	}
 	
 	public void addSprite(SpriteMakerModel sprite){
-		sprites.add(sprite);
+		jakeSprites.addComponent(sprite);
 		System.out.println("reached end");
 	}
 	
@@ -48,8 +47,8 @@ public class DeveloperData {
 		return myPaths;
 	}
 	
-	public ObservableList<SpriteMakerModel> getSprites(){
-		return sprites;
+	public SpritesForScreenUse getSprites(){
+		return jakeSprites;
 	}
 	
 	/**

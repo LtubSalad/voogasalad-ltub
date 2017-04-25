@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bus.BusEventHandler;
+import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.DeveloperMethod;
+import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
 import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.ChangeHealthEvent;
@@ -22,8 +24,8 @@ public class Health extends Component {
 	public static final ComponentType<Health> TYPE = new ComponentType<>(Health.class.getName());
 	private int health;
 
-
-	public Health(int health){
+	@ConstructorForDeveloper
+	public Health(@VariableName(name="health")int health){
 		this.health = health;
 	}
 	

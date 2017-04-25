@@ -9,29 +9,23 @@ import gameDevelopmentInterface.Path;
 import gameDevelopmentInterface.developerdata.ComponentSetterView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
-import javafx.util.Callback;
 import newengine.sprite.components.PathFollower;
 
 public class PathFollowerSetter extends ComponentSetterView<PathFollower> {
 	private Path selectedPath;
-	private Map<String,Path> paths;
+	private Map<String,Path> pathMap;
 
 	public PathFollowerSetter(List<Path> paths){
-		this.paths=new HashMap<>();
+		super(PathFollower.class);
+		pathMap=new HashMap<>();
 		paths.forEach((path)->{
-			this.paths.put(path.getName(),path);
+			pathMap.put(path.getName(),path);
 		});
 		this.getChildren().add(new Label("PathFollower"));
 		List<String> pathNames=new ArrayList<>();
-		this.paths.forEach((name,path)->{
+		pathMap.forEach((name,path)->{
 			pathNames.add(name);
 		});
 		
@@ -39,8 +33,7 @@ public class PathFollowerSetter extends ComponentSetterView<PathFollower> {
 		ChoiceBox<String> box= new ChoiceBox<>(observablePaths);
 		
 		box.getSelectionModel().selectedItemProperty().addListener((invalidation)->{
-			selectedPath=this.paths.get(box.getValue());
-			System.out.println("ah");
+			selectedPath=this.pathMap.get(box.getValue());
 		});
 		this.getChildren().add(box);
 	}

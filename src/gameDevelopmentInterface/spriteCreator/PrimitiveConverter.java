@@ -7,24 +7,29 @@ import exception.UnsupportedTypeException;
  *
  */
 
-public class PrimitiveConverter {
-	public <T> Object convertString(Class<T> convertableType, String data) throws UnsupportedTypeException {
+public class PrimitiveConverter<T> {
+	
+	public <T> T convertString(Class<T> convertableType, String data) throws UnsupportedTypeException {
+		Object returnItem=null;
 		if (Boolean.class == convertableType||Boolean.TYPE==convertableType)
-			return Boolean.parseBoolean(data);
+			returnItem= Boolean.parseBoolean(data);
 		if (Byte.class == convertableType||Byte.TYPE==convertableType)
-			return Byte.parseByte(data);
+			returnItem= Byte.parseByte(data);
 		if (Short.class == convertableType||Short.TYPE==convertableType)
-			return Short.parseShort(data);
+			returnItem= Short.parseShort(data);
 		if (Integer.class == convertableType||Integer.TYPE==convertableType)
-			return Integer.parseInt(data);
+			returnItem= Integer.parseInt(data);
 		if (Long.class == convertableType||Long.TYPE==convertableType)
-			return Long.parseLong(data);
+			returnItem= Long.parseLong(data);
 		if (Float.class == convertableType||Float.TYPE==convertableType)
-			return Float.parseFloat(data);
+			returnItem= Float.parseFloat(data);
 		if (Double.class == convertableType||Double.TYPE==convertableType)
-			return Double.parseDouble(data);
+			returnItem= Double.parseDouble(data);
 		if (String.class == convertableType)
-			return data;
+			returnItem= data;
+		if(returnItem!=null){
+			return (T) returnItem;
+		}
 		else {
 			throw new UnsupportedTypeException(convertableType);
 		}

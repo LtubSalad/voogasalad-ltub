@@ -26,11 +26,11 @@ public class ComponentInfo<T extends Component> {
 		}
 		return methods;
 	}
-	
+	/*
 	public ComponentSetterView<T> createSetter() throws UnsupportedTypeException{
 		return new SimpleComponentSetter<T>(myComponent);
 		
-	}
+	}*/
 	
 	public Collection<BusEvent> getListenedEvents(){
 		return null;
