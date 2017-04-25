@@ -37,7 +37,7 @@ public class AuthDataTranslator implements Translator {
 	private SpriteModel constructedModel = new SpriteModel(gameBus); 
 
 	private Sprite constructed; 
-
+	
 	public AuthDataTranslator(ObservableList<SpriteMakerModel> allObjectsOnScreen) {
 		spritesToMake = new ArrayList<SpriteMakerModel>(allObjectsOnScreen); 
 	}
@@ -96,12 +96,11 @@ public class AuthDataTranslator implements Translator {
 	
 
 	private Sprite handleEventHandlers(Sprite newSprite, Map<BusEvent, String> scriptMap ) {
-		// TODO: don't hard code groovy
-		ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
+		// TODO: debate design on this 
 		for (BusEvent event : scriptMap.keySet()){
 			newSprite.getSpriteBus().on(event.getEventType(), e ->{
 				try{
-					scriptHandler.eval(scriptMap.get(event));
+					newSprite.getScriptHandler().eval(scriptMap.get(event));
 				}
 				catch (Exception exception){
 					System.out.println("hi yes scripting does not work properly here" );
@@ -112,6 +111,7 @@ public class AuthDataTranslator implements Translator {
 
 	}
 
+	
 	
 	public SpriteModel getSprites(){
 		return constructedModel;

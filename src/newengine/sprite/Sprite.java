@@ -23,7 +23,8 @@ public class Sprite {
 	private EventBus spriteBus = new BasicEventBus();
 	private SpriteID spriteID = IDGenerator.generateID();
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
-	//private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
+	// TODO: is dis ok for serialization 
+	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
 
 	public EventBus getSpriteBus() {
 		return spriteBus;
@@ -105,5 +106,9 @@ public class Sprite {
 //		};
 //		on(eventType, newHandler);
 //	}
+	
+	public ScriptEngine getScriptHandler(){
+		return scriptHandler; 
+	}
 
 }
