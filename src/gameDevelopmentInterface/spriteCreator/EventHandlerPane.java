@@ -49,16 +49,11 @@ public class EventHandlerPane extends ScrollPane {
 		for (BusEvent event : mySprite.getListenedEvents()) {
 			handlerSetters.add(new SingleEventHandler(event));
 		}
-		Button saveHandlers = new Button("Save handlers");
-		saveHandlers.setOnAction((click) -> {
-			updateSprite();
-		});
 		myContents.getChildren().add(new Label("Event Handlers"));
 		myContents.getChildren().addAll(handlerSetters);
-		myContents.getChildren().add(saveHandlers);
 	}
 
-	private void updateSprite() {
+	public void updateSprite() {
 		handlerSetters.forEach((handlerSetter) -> {
 			handlerSetter.updateSprite();
 		});

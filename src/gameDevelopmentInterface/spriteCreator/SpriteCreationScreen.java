@@ -3,6 +3,7 @@ package gameDevelopmentInterface.spriteCreator;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.script.ScriptEngine;
@@ -19,11 +20,17 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.Attacker;
+import newengine.sprite.components.Collidable;
+import newengine.sprite.components.Cooldown;
+import newengine.sprite.components.DamageStrength;
+import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.PathFollower;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
+import newengine.sprite.components.Selectable;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
 import utilities.XStreamHandler;
@@ -31,6 +38,7 @@ import utilities.XStreamHandler;
 public class SpriteCreationScreen extends BorderPane{
 	private SpriteMakerModel spriteData;
 	private SpriteInfoPane infoPane;
+	private EventHandlerPane scriptPane;
 	private DeveloperData model;
 	
 	public SpriteCreationScreen(DeveloperData model){
@@ -40,30 +48,33 @@ public class SpriteCreationScreen extends BorderPane{
 	
 	public void instantiate(){
 		spriteData=new SpriteMakerModel();
+		scriptPane=new EventHandlerPane(spriteData);
 		infoPane=new SpriteInfoPane(spriteData,model);
-		List<Class<? extends Component>> basicComponents= new ArrayList<>();
-		ObservableList<Class<? extends Component>> observableComponents=FXCollections.observableList(basicComponents);
-		observableComponents.add(Range.class);
-		observableComponents.add(SoundEffect.class);
-		observableComponents.add(Speed.class);
-		observableComponents.add(Owner.class);
-		observableComponents.add(Position.class);
-		observableComponents.add(Images.class);
-		observableComponents.add(PathFollower.class);
-		ComponentSelectorPane selector=new ComponentSelectorPane("Add components with simple parameters", observableComponents,infoPane);
-		this.setRight(selector);
-		this.setLeft(new EventHandlerPane(spriteData));
+		this.setRight(instantiateSelector());
+		this.setLeft(scriptPane);
 		this.setCenter(infoPane);
 		this.setTop(new Label("NEW SPRITE"));
 		this.setBottom(new BottomPanel());	
 	}
 	
-	private Class getClassFromFile(String fullClassName) throws Exception {
-	    URLClassLoader loader = new URLClassLoader(new URL[] {
-	            new URL("file://")
-	            
-	    });
-	    return loader.loadClass(fullClassName);
+	private ComponentSelectorPane instantiateSelector(){
+		List<Class<? extends Component>> basicComponents= new ArrayList<>();
+		ObservableList<Class<? extends Component>> observableComponents=FXCollections.observableList(basicComponents);
+		observableComponents.add(Attacker.class);
+		observableComponents.add(Collidable.class);
+		observableComponents.add(Cooldown.class);
+		observableComponents.add(DamageStrength.class);
+		observableComponents.add(Health.class);
+		observableComponents.add(Images.class);
+		observableComponents.add(Owner.class);
+		observableComponents.add(PathFollower.class);
+		observableComponents.add(Position.class);
+		observableComponents.add(Range.class);
+		observableComponents.add(SoundEffect.class);
+		observableComponents.add(Selectable.class);
+		observableComponents.add(Speed.class);
+		
+		return new ComponentSelectorPane("Add components and set parameters", observableComponents,infoPane);
 	}
 
 	private class BottomPanel extends HBox{
@@ -72,7 +83,8 @@ public class SpriteCreationScreen extends BorderPane{
 			Button saveButton= new Button("Save SpriteMakerModel to File");
 			saveButton.setOnMouseClicked((click)->{
 				try {
-					dataHandler.saveToFile(infoPane.getSpriteData());
+					updateSprite();
+					dataHandler.saveToFile(spriteData);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,12 +92,18 @@ public class SpriteCreationScreen extends BorderPane{
 			Button listSaveButton=new Button("Save SpriteMakerModel to THIS GAME's list of SpritemakerModels");
 			listSaveButton.setOnMouseClicked((click)->{
 				try {
-					model.addSprite(infoPane.getSpriteData());
+					updateSprite();
+					model.addSprite(spriteData);
 				} catch (Exception e) {
 					
 				}				
 			});
 			this.getChildren().addAll(saveButton,listSaveButton);
+		}
+		
+		private void updateSprite() throws Exception{
+			scriptPane.updateSprite();
+			infoPane.updateSpriteData();
 		}
 	}
 

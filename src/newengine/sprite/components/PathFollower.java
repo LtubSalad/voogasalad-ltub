@@ -8,6 +8,7 @@ import newengine.sprite.component.ComponentType;
 public class PathFollower extends Component{
 	private Path path;
 	private double speed;
+	
 	public PathFollower(Path path){
 		this.path=path;
 	}

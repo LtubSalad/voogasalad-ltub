@@ -15,7 +15,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.Collidable;
 import newengine.sprite.components.PathFollower;
+import newengine.sprite.components.Selectable;
 
 public class SpriteInfoPane extends ScrollPane{
 	private VBox myPane;
@@ -51,7 +53,7 @@ public class SpriteInfoPane extends ScrollPane{
 	
 	public void addComponent(Class<? extends Component> clazz){
 		try {
-			ComponentSetterView<? extends Component> setter;
+			ComponentSetterView<? extends Component> setter = null;
 			if(clazz.equals(PathFollower.class)){
 				setter=new PathFollowerSetter(developerData.getPaths());
 			}
@@ -65,10 +67,8 @@ public class SpriteInfoPane extends ScrollPane{
 		}	
 	}
 	
-	public SpriteMakerModel getSpriteData() throws Exception{
-		lister.updateSpriteModel();
-		return spriteData;
-		
+	public void updateSpriteData() throws Exception{
+		lister.updateSpriteModel();		
 	}
 	
 	private class ComponentLister extends VBox{
@@ -85,10 +85,19 @@ public class SpriteInfoPane extends ScrollPane{
 		}
 		
 		private void addComponentView(ComponentViewer view){
+			for(ComponentViewer<? extends Component> viewer: componentViews){
+				if(view.getType().equals(viewer.getType())){
+					return;
+				}
+			}
 			componentViews.add(view);
 			this.getChildren().add(view);
 		}
 		
+		/**
+		 * ONLY CALL WHEN DONE
+		 * @throws Exception
+		 */
 		private void updateSpriteModel() throws Exception{
 			for(ComponentViewer component: componentViews){
 				spriteData.addComponent(component.getComponent());
@@ -98,6 +107,7 @@ public class SpriteInfoPane extends ScrollPane{
 		private class ComponentViewer<T extends Component> extends VBox{
 			private ComponentSetterView<T> mySetter;
 			public ComponentViewer(ComponentSetterView<T> mySetter){
+				this.setStyle("-fx-background-color: cyan;-fx-border-color:red");
 				this.mySetter=mySetter;
 				this.getChildren().add(mySetter);
 				Button removeButton =new Button("Remove component");
@@ -119,6 +129,10 @@ public class SpriteInfoPane extends ScrollPane{
 					e.printStackTrace();
 				}
 				return null;
+			}
+			
+			private Class<T> getType(){
+				return mySetter.getType();
 			}
 			
 		}

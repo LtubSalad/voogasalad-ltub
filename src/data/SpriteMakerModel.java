@@ -26,6 +26,10 @@ public class SpriteMakerModel {
 		myScriptMap=FXCollections.observableMap(handlers);
 	}
 	
+	public void clearComponents(){
+		myComponents.clear();
+	}
+	
 	/**
 	 * This code means that the sprite only has one component for each type... though
 	 * you can possibly have two components of the same class with different "type".
