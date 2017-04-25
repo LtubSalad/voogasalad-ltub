@@ -1288,6 +1288,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
       </entry>
       <entry>
         <newengine.sprite.component.ComponentType>
+          <typename>newengine.sprite.components.Position</typename>
+        </newengine.sprite.component.ComponentType>
+        <newengine.sprite.components.Position>
+          <pos>
+            <x>200.0</x>
+            <y>100.0</y>
+          </pos>
+          <heading>0.0</heading>
+          <isMoving>false</isMoving>
+          <followingSprite>false</followingSprite>
+        </newengine.sprite.components.Position>
+      </entry>
+      <entry>
+        <newengine.sprite.component.ComponentType>
           <typename>newengine.sprite.components.Cooldown</typename>
         </newengine.sprite.component.ComponentType>
         <newengine.sprite.components.Cooldown>
@@ -1387,20 +1401,21 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
     <backingMap/>
   </myScriptMap>
   <actualComponents>
-    <newengine.sprite.components.Cooldown reference="../../myComponents/backingMap/entry[3]/newengine.sprite.components.Cooldown"/>
-    <newengine.sprite.components.GameBus reference="../../myComponents/backingMap/entry[4]/newengine.sprite.components.GameBus"/>
+    <newengine.sprite.components.Cooldown reference="../../myComponents/backingMap/entry[4]/newengine.sprite.components.Cooldown"/>
+    <newengine.sprite.components.GameBus reference="../../myComponents/backingMap/entry[5]/newengine.sprite.components.GameBus"/>
     <newengine.sprite.components.SkillSet reference="../../myComponents/backingMap/entry/newengine.sprite.components.SkillSet"/>
-    <newengine.sprite.components.Owner reference="../../myComponents/backingMap/entry[9]/newengine.sprite.components.Owner"/>
-    <newengine.sprite.components.SoundEffect reference="../../myComponents/backingMap/entry[6]/newengine.sprite.components.SoundEffect"/>
-    <newengine.sprite.components.Images reference="../../myComponents/backingMap/entry[11]/newengine.sprite.components.Images"/>
-    <newengine.sprite.components.Speed reference="../../myComponents/backingMap/entry[7]/newengine.sprite.components.Speed"/>
-    <newengine.sprite.components.Collidable reference="../../myComponents/backingMap/entry[14]/newengine.sprite.components.Collidable"/>
-    <newengine.sprite.components.Selectable reference="../../myComponents/backingMap/entry[12]/newengine.sprite.components.Selectable"/>
+    <newengine.sprite.components.Owner reference="../../myComponents/backingMap/entry[10]/newengine.sprite.components.Owner"/>
+    <newengine.sprite.components.Position reference="../../myComponents/backingMap/entry[3]/newengine.sprite.components.Position"/>
+    <newengine.sprite.components.SoundEffect reference="../../myComponents/backingMap/entry[7]/newengine.sprite.components.SoundEffect"/>
+    <newengine.sprite.components.Images reference="../../myComponents/backingMap/entry[12]/newengine.sprite.components.Images"/>
+    <newengine.sprite.components.Speed reference="../../myComponents/backingMap/entry[8]/newengine.sprite.components.Speed"/>
+    <newengine.sprite.components.Collidable reference="../../myComponents/backingMap/entry[15]/newengine.sprite.components.Collidable"/>
+    <newengine.sprite.components.Selectable reference="../../myComponents/backingMap/entry[13]/newengine.sprite.components.Selectable"/>
     <newengine.sprite.components.Range reference="../../myComponents/backingMap/entry[2]/newengine.sprite.components.Range"/>
-    <newengine.sprite.components.Attacker reference="../../myComponents/backingMap/entry[13]/newengine.sprite.components.Attacker"/>
-    <newengine.sprite.components.Health reference="../../myComponents/backingMap/entry[10]/newengine.sprite.components.Health"/>
-    <newengine.sprite.components.EventQueue reference="../../myComponents/backingMap/entry[5]/newengine.sprite.components.EventQueue"/>
-    <newengine.sprite.components.RangeShootingAI reference="../../myComponents/backingMap/entry[8]/newengine.sprite.components.RangeShootingAI"/>
+    <newengine.sprite.components.Attacker reference="../../myComponents/backingMap/entry[14]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.Health reference="../../myComponents/backingMap/entry[11]/newengine.sprite.components.Health"/>
+    <newengine.sprite.components.EventQueue reference="../../myComponents/backingMap/entry[6]/newengine.sprite.components.EventQueue"/>
+    <newengine.sprite.components.RangeShootingAI reference="../../myComponents/backingMap/entry[9]/newengine.sprite.components.RangeShootingAI"/>
   </actualComponents>
   <skills/>
 </data.SpriteMakerModel>

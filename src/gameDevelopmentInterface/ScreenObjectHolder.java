@@ -170,7 +170,7 @@ public class ScreenObjectHolder extends HBox {
 		sprite1.addComponent(new GameBus());
 		sprite1.addComponent(new SkillSet(skillMap1));
 		sprite1.addComponent(new Owner(player1));
-		//sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
+		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
 		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite1.addComponent(new Images("images/characters/tower2_resized.gif"));
 		sprite1.addComponent(new Speed(200));

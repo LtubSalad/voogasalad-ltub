@@ -10,10 +10,16 @@ import data.SpriteMakerModel;
 import gamedata.AuthDataTranslator;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import newengine.model.SpriteModel;
+import newengine.events.GameInitializationEvent;
+import newengine.events.SpriteModelEvent;
+import newengine.events.player.MainPlayerEvent;
+import newengine.events.sound.SoundEvent;
+import newengine.events.stats.ChangeLivesEvent;
+import newengine.events.stats.ChangeWealthEvent;
+import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.sprite.Sprite;
-import newengine.sprite.components.Images;
+import newengine.sprite.components.Position;
 import utilities.XStreamHandler;
 
 public class App extends Application {
@@ -28,8 +34,8 @@ public class App extends Application {
 		List<SpriteMakerModel> spriteModelsFromFile = xHandler.getScreenModelFile();
 		
 		for (SpriteMakerModel smm : spriteModelsFromFile) {
-			Images imageComponent = (Images) smm.getComponentByType(Images.TYPE);
-			System.out.println(imageComponent.image().getFileName());
+			Position imageComponent = (Position) smm.getComponentByType(Position.TYPE);
+			System.out.println(imageComponent.pos().x() + " " + imageComponent.pos().y());
 		}
 		
 		AuthDataTranslator translator = new AuthDataTranslator(spriteModelsFromFile);
@@ -42,20 +48,20 @@ public class App extends Application {
 			//System.out.println(s.getComponent(Images.TYPE).get().image().getFileName());
 		}
 		
-//		bus.on(GameInitializationEvent.ANY, (e) -> {
-//			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
-//			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, listSprites));
-//			bus.emit(new MainPlayerEvent(player1));
-//			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 3));
-//			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, WealthType.GOLD, 100));
-////			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
-//	//		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
-//			// call the spawner to spawn
-////			GamePoint targetSpawnPos = new GamePoint(10, 20);
-////			bus.emit(new PeriodicEvent(5, 3.0, () -> {
-////				spawner.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
-////			}));
-//		});
+		bus.on(GameInitializationEvent.ANY, (e) -> {
+			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
+			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, listSprites));
+			bus.emit(new MainPlayerEvent(player1));
+			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 3));
+			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, WealthType.GOLD, 100));
+//			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
+	//		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
+			// call the spawner to spawn
+//			GamePoint targetSpawnPos = new GamePoint(10, 20);
+//			bus.emit(new PeriodicEvent(5, 3.0, () -> {
+//				spawner.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
+//			}));
+		});
 		
 		stage.setScene(game.getScene());
 		game.start();

@@ -122,10 +122,10 @@ public class AuthDataTranslator implements Translator {
 	private Sprite handleComponents(List<Component>transferComponents) {
 		Sprite sprite = new Sprite(); 
 		for (Component comp: transferComponents){
-			System.out.println(comp.getType());
+			System.out.println(comp.getType().getType());
 			sprite.addComponent(comp);
 		}
-		return sprite; 
+		return sprite;
 	}
 
 }

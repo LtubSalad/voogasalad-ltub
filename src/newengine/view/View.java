@@ -55,7 +55,6 @@ public class View {
 	
 	// TODO: mouse location should belong to player input state
 	private ViewPoint mousePos;
-
 	public View(EventBus bus) {
 		this.bus = bus;
 		VBox root = new VBox();
@@ -72,7 +71,8 @@ public class View {
 		// skill box
 		skillBox = new SkillBox(bus);
 		bottomPane.getChildren().add(skillBox.getBox());
-
+		this.camera = new Camera(bus);
+		
 		initHandlers();
 	}
 	private void initHandlers() {
@@ -167,7 +167,6 @@ public class View {
 		});
 		return statsLabels;
 	}
-
 	public void render(SelectionModel selectionModel, PlayerRelationModel playerRelationModel) {
 		// render the selected sprite and its skill box
 		if (selectionModel.getSelectedSprite().isPresent()) {

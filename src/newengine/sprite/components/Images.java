@@ -32,7 +32,8 @@ public class Images extends Component {
 		double heading = 0;
 		double dist = 100;
 		if (sprite!=null&&sprite.getComponent(Speed.TYPE).isPresent()) {
-			heading = sprite.getComponent(Position.TYPE).get().heading();
+			Position positionComponent = (Position) sprite.getComponent(Position.TYPE).get();
+			heading = positionComponent.heading();
 		}
 		return new LtubImage(imageFilePath);//imageSet.getImage(heading, dist);
 	}
