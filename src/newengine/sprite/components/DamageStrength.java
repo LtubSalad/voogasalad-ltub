@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bus.BusEventHandler;
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.player.Player;
@@ -17,8 +19,8 @@ public class DamageStrength extends Component {
 	public static final ComponentType<DamageStrength> TYPE = new ComponentType<>(DamageStrength.class.getName());
 	private int strength;
 
-
-	public DamageStrength(int strength){
+	@ConstructorForDeveloper
+	public DamageStrength(@VariableName(name = "Damage")int strength){
 		this.strength = strength;
 	}
 	

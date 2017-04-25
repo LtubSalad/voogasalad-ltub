@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import bus.BusEventHandler;
+import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.skill.Skill;
@@ -30,6 +31,11 @@ public class Attacker extends Component {
 //	public Attacker(Sprite weapon) {
 //		this.weapon = weapon;
 //	}
+	
+	@ConstructorForDeveloper
+	public Attacker(){
+		
+	}
 
 	@Override
 	public void afterAdded() {
