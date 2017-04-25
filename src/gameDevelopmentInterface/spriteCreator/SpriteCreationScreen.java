@@ -24,12 +24,14 @@ import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Cooldown;
 import newengine.sprite.components.DamageStrength;
+import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.PathFollower;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
+import newengine.sprite.components.RangeShootingAI;
 import newengine.sprite.components.Selectable;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
@@ -64,14 +66,16 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Collidable.class);
 		observableComponents.add(Cooldown.class);
 		observableComponents.add(DamageStrength.class);
+		observableComponents.add(EventQueue.class);
 		observableComponents.add(Health.class);
 		observableComponents.add(Images.class);
 		observableComponents.add(Owner.class);
 		observableComponents.add(PathFollower.class);
 		observableComponents.add(Position.class);
 		observableComponents.add(Range.class);
-		observableComponents.add(SoundEffect.class);
+		observableComponents.add(RangeShootingAI.class);
 		observableComponents.add(Selectable.class);
+		observableComponents.add(SoundEffect.class);
 		observableComponents.add(Speed.class);
 		
 		return new ComponentSelectorPane("Add components and set parameters", observableComponents,infoPane);
@@ -89,7 +93,7 @@ public class SpriteCreationScreen extends BorderPane{
 					e.printStackTrace();
 				}
 			});
-			Button listSaveButton=new Button("Save SpriteMakerModel to THIS GAME's list of SpritemakerModels");
+			Button listSaveButton=new Button("Save SpriteMakerModel to THIS GAME's list of SpriteMakerModels");
 			listSaveButton.setOnMouseClicked((click)->{
 				try {
 					updateSprite();
