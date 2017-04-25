@@ -107,7 +107,7 @@ public class XStreamTester extends Application{
 		ImageSet imageSet1 = new ImageSet(image1);
 		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 		skillMap.put(MoveSkill.TYPE, new MoveSkill());
-		skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
+		//skillMap.put(BuildSkill.TYPE, new BuildSkill(building));
 		skillMap.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
 		sprite1.addComponent(new GameBus());
 		//sprite1.addComponent(new SkillSet(skillMap));
