@@ -19,7 +19,8 @@ public class ViewTester extends Application{
 		stage.setTitle("Test");
 		MenuBarManager m = new MenuBarManager();
 		
-		Scene scene = new Scene((HBox)m.getNode(), 400,400);
+		Scene scene = new Scene((HBox)m.getNode(), 800,500);
+		stage.setScene(scene);
 		stage.show();
 		
 	}
