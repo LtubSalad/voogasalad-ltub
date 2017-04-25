@@ -23,7 +23,7 @@ public class Cost extends Component {
 
 	@Override
 	public Component clone() {
-		return null;
+		return new Cost(cost);
 	}
 
 }
