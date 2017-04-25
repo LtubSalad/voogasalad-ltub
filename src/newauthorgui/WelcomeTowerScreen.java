@@ -16,7 +16,6 @@ public class WelcomeTowerScreen extends VBox {
 	private void createWelcome(){
 		//TODO resource file
 		Text welcome = new Text("Tower Defense Game Creation Environment");
-		Button nextStep = new Button("next");
-		this.getChildren().addAll(welcome, nextStep);
+		this.getChildren().add(welcome);
 	}
 }

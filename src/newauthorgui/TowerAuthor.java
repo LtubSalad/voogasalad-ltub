@@ -4,10 +4,11 @@ import java.util.ResourceBundle;
 import data.DeveloperData;
 import gameDevelopmentInterface.GeneralDataCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
 
 /**
  * 
@@ -42,8 +43,9 @@ public class TowerAuthor implements GameAuthor {
 		instantiateSteps();
 		view.setLeft(developerSteps);
 		view.setCenter(currentStep);
+		view.setBottom(instantiateButtons());
 	}
-	
+
 	private void instantiateSteps() {
 		developerSteps = new StepOrganizer(this);
 		addStep(new DeveloperStep("Welcome", new WelcomeTowerScreen()));
@@ -51,6 +53,13 @@ public class TowerAuthor implements GameAuthor {
 		addStep(new DeveloperStep("Sprite creation",new SpriteCreatorPane(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
 		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getSprites(),myGeneralDataCreator)));
+	}
+	
+	private HBox instantiateButtons() {
+		HBox buttons = new HBox(100);
+		buttons.getChildren().addAll(new PreviousStepButton(developerSteps), new NextStepButton(developerSteps));
+		buttons.setAlignment(Pos.CENTER);
+		return buttons;
 	}
 	
 	public void addStep(DeveloperStep step){

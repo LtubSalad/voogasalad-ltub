@@ -62,14 +62,14 @@ public class StepOrganizer extends VBox {
 	
 	public void nextStep(){
 		if(currentIndex != steps.size() -1){
-			nextIndex = currentIndex++;
+			nextIndex = currentIndex + 1;
 			updateStep();
 		}
 	}
 	
 	public void previousStep(){
 		if(currentIndex != 0){
-			nextIndex = currentIndex--;
+			nextIndex = currentIndex - 1;
 			updateStep();
 		}
 	}
