@@ -83,7 +83,7 @@ public class Position extends Component {
 		double x = pos.x();
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
-			stopMoving();
+//			sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			return;
 		}
 		double xDiff = xDest - x;
