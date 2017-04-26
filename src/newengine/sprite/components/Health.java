@@ -44,6 +44,9 @@ public class Health extends Component {
 			changeHealth(e.getChange());
 		});
 		sprite.on(MoveEvent.STOP, (e) -> {
+			if (!e.getSprite().getComponent(Weapon.TYPE).isPresent()){
+				return;
+			}
 			Sprite another = e.getSprite();
 			Player owner = sprite.getComponent(Owner.TYPE).get().player();
 			another.getComponent(Owner.TYPE).ifPresent((anotherOwner) -> {

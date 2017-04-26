@@ -67,11 +67,10 @@ public class Position extends Component {
 			});
 		});
 		sprite.on(MoveEvent.STOP, (e) -> {
-			stopMoving();
-			if (sprite.getComponent(Weapon.TYPE).isPresent()){
-				System.out.println("the weapon reached dest");
+			if (e.getSprite().getComponent(Weapon.TYPE).isPresent()){
+				System.out.println("the weapon reached dest so we remove it");
 				//sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, sprite.getComponent(DamageStrength.TYPE).get().getStrength()));
-				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
+				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, e.getSprite()));
 			}
 		});
 	}
@@ -92,6 +91,7 @@ public class Position extends Component {
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
 			if (sprite.getComponent(Weapon.TYPE).isPresent()){
+				System.out.println("weapon reaches target");
 				sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			}
 			stopMoving();
@@ -105,6 +105,7 @@ public class Position extends Component {
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
+			System.out.println("weapon reaches target");
 			target.getSprite().ifPresent((targetSprite) -> {
 				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			});
