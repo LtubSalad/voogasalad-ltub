@@ -1,4 +1,4 @@
-package newauthorgui;
+package gameauthorgui;
 
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
@@ -8,7 +8,7 @@ public class DeveloperStep extends HBox{
 	private Node step;
 	private String name;
 
-	DeveloperStep(String name, Node step){
+	public DeveloperStep(String name, Node step){
 		super();
 		this.getChildren().add(new Text(name));
 		this.step = step;

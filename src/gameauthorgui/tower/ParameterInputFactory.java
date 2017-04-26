@@ -1,4 +1,4 @@
-package newauthorgui;
+package gameauthorgui.tower;
 
 import java.util.HashMap;
 import java.util.Map;

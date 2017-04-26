@@ -1,4 +1,4 @@
-package newauthorgui;
+package gameauthorgui.tower;
 
 import java.util.ArrayList;
 import java.util.List;

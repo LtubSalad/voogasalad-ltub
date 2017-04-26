@@ -1,4 +1,4 @@
-package newauthorgui;
+package gameauthorgui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,9 @@ public class StepOrganizer extends VBox {
 	private VBox stepHolder;
 	private int currentIndex;
 	private int nextIndex;
-	private GameAuthor author;
+	private IGameAuthor author;
 	
-	public StepOrganizer(GameAuthor author){
+	public StepOrganizer(IGameAuthor author){
 		super();
 		this.author = author;
 		this.steps = new ArrayList<DeveloperStep>();
@@ -46,6 +46,9 @@ public class StepOrganizer extends VBox {
 	public void addStep(int index, DeveloperStep step){
 		stepHolder.getChildren().add(index, step);
 		steps.add(index, step);
+		if(steps.size() == 1){
+			updateStep();
+		}
 		step.setOnMouseClicked(e -> {
 			nextIndex = steps.indexOf(step);
 			updateStep();
