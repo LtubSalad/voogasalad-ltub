@@ -29,7 +29,7 @@ public class AdvancedLevelCreator extends LevelCreator{
 		damageMultiplier = new DoubleParameterInput("Damage Multiplier", 0, 5);
 		Button remove = new Button("remove");
 		remove.setOnAction(e -> super.remove(this));
-		content.getChildren().addAll(numEnemies.get(), spawnTime.get(), damageMultiplier.get(), remove);
+		content.getChildren().addAll(numEnemies, spawnTime, damageMultiplier, remove);
 		this.setContent(content);
 	}
 	

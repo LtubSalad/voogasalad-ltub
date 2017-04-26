@@ -1,7 +1,5 @@
 package gamecreation;
 
-import java.util.List;
-
 import data.SpriteMakerModel;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;

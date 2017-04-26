@@ -35,6 +35,7 @@ public class DeveloperData {
 	}
 	
 	public void addSprite(SpriteMakerModel sprite){
+		//FIXME jake sprite?
 		//jakeSprites.addComponent(sprite);
 		System.out.println("reached end");
 	}

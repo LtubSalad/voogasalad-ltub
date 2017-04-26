@@ -8,7 +8,6 @@ import java.util.Map;
 import commons.point.GamePoint;
 import data.ScreenModelData;
 import data.SpriteMakerModel;
-import data.SpritesForScreenUse;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;

@@ -1,12 +1,8 @@
 package gamecreation;
 
-import javafx.scene.Node;
+public interface ParameterInput<E> {
 
-public interface ParameterInput {
-
-	public Node get();
-
-	public Object getValue();
+	public E getValue();
 	
 	public String getType();
 }

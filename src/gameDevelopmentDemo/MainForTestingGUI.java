@@ -1,20 +1,8 @@
 package gameDevelopmentDemo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import commons.point.GamePoint;
-import data.SpriteMakerModel;
-import gameDevelopmentInterface.MasterDeveloperInterface;
+import gameauthorgui.tower.TowerAuthor;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import newengine.events.sprite.MoveEvent;
-import newengine.player.Player;
-import newengine.sprite.Sprite;
-import newengine.utils.Target;
-import newengine.utils.image.ImageSet;
-import newengine.utils.image.LtubImage;
-import utilities.XStreamHandler;
 
 public class MainForTestingGUI extends Application {
 	private static final String DEVELOPER_GUI = "DeveloperGUI";
@@ -22,8 +10,10 @@ public class MainForTestingGUI extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle(DEVELOPER_GUI);
 		primaryStage.show();
-		MasterDeveloperInterface developerView = new MasterDeveloperInterface();
+		//MasterDeveloperInterface developerView = new MasterDeveloperInterface();
+		TowerAuthor developerView = new TowerAuthor();
 		primaryStage.setScene(developerView.getScene());
+		primaryStage.setFullScreen(true);
 	}
 
 	public static void main(String[] args) {
