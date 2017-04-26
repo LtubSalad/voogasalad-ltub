@@ -1,20 +1,35 @@
 package newauthorgui;
 
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
-public class DeveloperStep extends Label{
+public class DeveloperStep extends HBox{
 	private Node step;
+	private String name;
 
 	DeveloperStep(String name, Node step){
-		super(name);
+		super();
+		this.getChildren().add(new Text(name));
 		this.step = step;
-		this.setOnMouseClicked(e-> this.setTextFill(new Color(100, 100, 100, 100)));
+		this.name = name;
+		setBaseColor();
+	}
+	
+	public void highlight(){
+		this.setStyle("-fx-background-color: #ffff00;");
+	}
+	
+	public void setBaseColor(){
+		this.setStyle("-fx-background-color: #ffffff;");
 	}
 	
 	public Node getStep(){
 		return step;
+	}
+	
+	public String getName(){
+		return name;
 	}
 
 }

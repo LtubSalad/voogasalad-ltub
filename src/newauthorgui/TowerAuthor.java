@@ -6,22 +6,27 @@ import data.ScreenModelData;
 import gameDevelopmentInterface.BackgroundSetter;
 import gameDevelopmentInterface.GeneralDataCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
  * 
  */
-public class TowerAuthor {
-	private static final String SET_THE_BACKGROUND = "Set the Background";
+
+public class TowerAuthor implements GameAuthor {
+	private static final String SET_THE_BACKGROUND = "Set the background";
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
 	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
 	private static final String SCREEN_SETTING = "SCREEN_SETTING";
 	private static final String GENERAL_DATA = "GENERAL_DATA";
 	private static final String PATH_TO_STYLE_SHEETS = "/styleSheets/MainStyle.css";
+	public static final int SCENE_WIDTH = 1200;
+	public static final int SCENE_HEIGHT = 800;
 	private Scene developerScene;
 	private BorderPane view;
 	private Group currentStep;
@@ -35,10 +40,11 @@ public class TowerAuthor {
 		towerStage = new Stage();
 		myScreenData = new ScreenModelData();
 		myScreenData.getAllObjectsOnScreen();
+	
 		myModelData=new DeveloperData();
 		currentStep = new Group();
 		instantiate();
-		developerScene = new Scene(view);
+		developerScene = new Scene(view, SCENE_WIDTH, SCENE_HEIGHT);
 		developerScene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		
 		towerStage.setScene(developerScene);
@@ -51,10 +57,11 @@ public class TowerAuthor {
 		instantiateSteps();
 		view.setLeft(developerSteps);
 		view.setCenter(currentStep);
+		view.setBottom(instantiateButtons());
 	}
-	
+
 	private void instantiateSteps() {
-		developerSteps = new StepOrganizer();
+		developerSteps = new StepOrganizer(this);
 		addStep(new DeveloperStep("Welcome", new WelcomeTowerScreen()));
 		addStep(new DeveloperStep("Level Options", new LevelOptionsSelector()));
 		addStep(new DeveloperStep(SET_THE_BACKGROUND, new BackgroundSetter(myModelData.getSprites(), myGeneralDataCreator, myScreenData)));
@@ -63,19 +70,26 @@ public class TowerAuthor {
 		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getSprites(), myGeneralDataCreator, myScreenData)));
 	}
 	
+	private HBox instantiateButtons() {
+		HBox buttons = new HBox(100);
+		buttons.getChildren().addAll(new PreviousStepButton(developerSteps), new NextStepButton(developerSteps));
+		buttons.setAlignment(Pos.CENTER);
+		return buttons;
+	}
+	
 	public void addStep(DeveloperStep step){
 		addStep(developerSteps.getNumberSteps(), step);
 	}
 	
 	public void addStep(int index, DeveloperStep step){
 		developerSteps.addStep(index, step);
-		step.setOnMouseClicked(e -> {
-			currentStep.getChildren().clear();
-			currentStep.getChildren().add(step.getStep());
-		});
 	}
 	
-	
+	public void changeStep(DeveloperStep step){
+		currentStep.getChildren().clear();
+		currentStep.getChildren().add(step.getStep());
+	}
+
 	public Scene getScene() {
 		return developerScene;
 	}
