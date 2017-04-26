@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import newengine.events.camera.CameraEvent;
 import newengine.events.input.KeyEvent;
@@ -185,6 +186,8 @@ public class View {
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
 				gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
+				LtubImage stats = new LtubImage("images/skills/crosshairs.png");
+				gcSelected.drawImage(stats.getFXImage(), 100, 0);
 			}
 			if (sprite.getComponent(Owner.TYPE).isPresent()) {
 				Player player = sprite.getComponent(Owner.TYPE).get().player();

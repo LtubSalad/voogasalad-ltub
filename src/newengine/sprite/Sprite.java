@@ -16,14 +16,32 @@ import bus.BusEventHandler;
 import bus.BusEventType;
 import bus.EventBus;
 import helperAnnotations.DeveloperMethod;
+import javafx.beans.property.ReadOnlyListWrapper;
+import javafx.collections.FXCollections;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
+import newengine.sprite.components.Attacker;
+import newengine.sprite.components.Cooldown;
+import newengine.sprite.components.DamageStrength;
+import newengine.sprite.components.Health;
+import newengine.sprite.components.Owner;
+import newengine.sprite.components.Position;
+import newengine.sprite.components.Range;
+import newengine.sprite.components.SkillSet;
+import newengine.sprite.components.Speed;
+import newengine.sprite.state.State;
 
 public class Sprite {
 	private EventBus spriteBus = new BasicEventBus();
 	private SpriteID spriteID = IDGenerator.generateID();
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
 	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
+	
+	private State myState;
+
+	public Sprite() {
+		myState = new State();
+	}
 
 	public EventBus getSpriteBus() {
 		return spriteBus;
@@ -40,6 +58,38 @@ public class Sprite {
 
 	public SpriteID getID() {
 		return spriteID;
+	}
+	
+	public State getState(){
+		myState.setID(spriteID);
+		this.getComponent(Owner.TYPE).ifPresent((owner) -> {
+			myState.setPlayer(owner.player());
+		});
+		this.getComponent(Attacker.TYPE).ifPresent((attacker) -> {
+			myState.setIsAttacker(true);
+		});
+//		this.getComponent(SkillSet.TYPE).ifPresent((skillset) -> {
+//			if (skillset.skills().contains(<T extends FireProjectileSkill> T)){
+//				
+//			}
+//		});
+		this.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
+			myState.setDamageStrength(damageStrength.getStrength());
+		});
+		this.getComponent(Health.TYPE).ifPresent((health) -> {
+			myState.setHealth(health.getHealth());
+		});
+		this.getComponent(Position.TYPE).ifPresent((position) -> {
+			myState.setPos(position.pos());
+		});
+		this.getComponent(Range.TYPE).ifPresent((range) -> {
+			myState.setRange(range.range());
+		});
+		this.getComponent(Speed.TYPE).ifPresent((speed) -> {
+			myState.setSpeed(speed.speed());
+		});
+		
+		return myState;
 	}
 
 	public void addComponent(Component component) {
