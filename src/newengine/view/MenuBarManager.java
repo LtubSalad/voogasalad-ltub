@@ -3,23 +3,18 @@
  */
 package newengine.view;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import player.App;
 
@@ -41,7 +36,7 @@ public class MenuBarManager implements NodeManager<Node>{
 		HBox hb = new HBox();
 		hb.setPadding(new Insets(15, 12, 15, 12));
 		hb.setSpacing(10);
-		hb.getChildren().addAll(getButtonList());
+		hb.getChildren().addAll(getButtons().values());
 		
 		return hb;
 	}
@@ -51,17 +46,17 @@ public class MenuBarManager implements NodeManager<Node>{
 		String imageName = imageNameOpt.isPresent() ? imageNameOpt.get() : null;
 		if(imageName.equals("")){
 			Button button = new Button(myResources.getString(buttonName));
-			button.setMinSize(30, 10);
+			button.setMinSize(10, 10);
 			return button;
 		}
 		
-		Image image= new Image(getClass().getClassLoader().getResourceAsStream(imageName), 200,100, false,true);
+		Image image= new Image(getClass().getClassLoader().getResourceAsStream(imageName), 20,10, false,true);
 		Button button = new Button("",new ImageView(image));
 		
 		return button;
 	}
 	
-	private List<Button> getButtonList(){
+	private Map<String, Button> getButtons(){
 
 		Button btnHelp = addButton("help", Optional.of(""));
 		btnHelp.setOnAction(e -> helpAction());
@@ -75,46 +70,27 @@ public class MenuBarManager implements NodeManager<Node>{
 		Button btnMenu = addButton("menu", Optional.of(""));
 		btnMenu.setOnAction(e -> meuAction());
 		
-		Button btnGold = addButton("gold", Optional.of(GOLD));
-		btnGold.setOnAction(e -> goldAction());
-
-		Button btnHealth = addButton("health",Optional.of(HEALTH));
-		btnHealth.setOnAction(e -> healthAction());
 		
 		
-		List<Button> buttonList = new ArrayList<>();
-		buttonList.add(btnHelp);
-		buttonList.add(btnQuit);
-		buttonList.add(btnLog);
-		buttonList.add(btnMenu);
-		buttonList.add(btnGold);
-		buttonList.add(btnHealth);
+		Map<String, Button> buttons = new HashMap<>();
+		buttons.put("help", btnHelp);
+		buttons.put("quit", btnQuit);
+		buttons.put("log", btnLog);
+		buttons.put("menu", btnMenu);
 
-		return buttonList;
+
+		return buttons;
 	}
 	
-	//the observable list of buttons will change of the health or some other attributes change
-	
-	public ObservableList<Button> getObervableButtonList(){
-		return FXCollections.observableList(getButtonList());
-	}
-
-	private void healthAction() {
-		// TODO Auto-generated method stub
-	}
-
-	private void goldAction() {
-		// TODO Auto-generated method stub
-	}
 
 	private void meuAction() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private Object logAction() {
+	private void logAction() {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	private void quitAction() {
@@ -123,7 +99,7 @@ public class MenuBarManager implements NodeManager<Node>{
 	}
 
 	private void helpAction() {
-		// TODO Auto-generated method stub
+		System.out.println("Help me");
 		
 	}
 

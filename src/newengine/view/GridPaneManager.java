@@ -44,7 +44,8 @@ public class GridPaneManager implements NodeManager<Node>{
 		GridPane grid = new GridPane();
 		grid.setMinSize(30, 500);
 		grid.setHgap(5);
-		grid.add(getSmallMap(), 0, 0);
+		//TODO: add a small map
+		//grid.add(getSmallMap(), 0, 0);
 		grid.add(getSelectedSpriteButton(), 1, 0);
 		grid.add(getAllSpritesButton(), 2, 0);
 		grid.add(getSkillsButton(), 3, 0);
