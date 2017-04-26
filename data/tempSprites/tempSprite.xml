@@ -47,11 +47,11 @@
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
-                          <fd>29</fd>
+                          <fd>17</fd>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/walk.png</path>
+                        <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/walk.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -444,11 +444,11 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
-                          <fd>30</fd>
+                          <fd>18</fd>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/crosshairs.png</path>
+                        <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/crosshairs.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -844,6 +844,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
       </entry>
       <entry>
         <newengine.sprite.component.ComponentType>
+          <typename>newengine.sprite.components.Position</typename>
+        </newengine.sprite.component.ComponentType>
+        <newengine.sprite.components.Position>
+          <pos>
+            <x>335.0</x>
+            <y>413.0</y>
+          </pos>
+          <heading>0.0</heading>
+          <isMoving>false</isMoving>
+          <followingSprite>false</followingSprite>
+        </newengine.sprite.components.Position>
+      </entry>
+      <entry>
+        <newengine.sprite.component.ComponentType>
           <typename>newengine.sprite.components.Attacker</typename>
         </newengine.sprite.component.ComponentType>
         <newengine.sprite.components.Attacker>
@@ -880,15 +894,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
     <backingMap/>
   </myScriptMap>
   <actualComponents>
-    <newengine.sprite.components.GameBus reference="../../myComponents/backingMap/entry[7]/newengine.sprite.components.GameBus"/>
+    <newengine.sprite.components.GameBus reference="../../myComponents/backingMap/entry[8]/newengine.sprite.components.GameBus"/>
     <newengine.sprite.components.SkillSet reference="../../myComponents/backingMap/entry[4]/newengine.sprite.components.SkillSet"/>
     <newengine.sprite.components.Owner reference="../../myComponents/backingMap/entry[2]/newengine.sprite.components.Owner"/>
-    <newengine.sprite.components.SoundEffect reference="../../myComponents/backingMap/entry[9]/newengine.sprite.components.SoundEffect"/>
+    <newengine.sprite.components.SoundEffect reference="../../myComponents/backingMap/entry[10]/newengine.sprite.components.SoundEffect"/>
     <newengine.sprite.components.Images reference="../../myComponents/backingMap/entry[5]/newengine.sprite.components.Images"/>
     <newengine.sprite.components.Speed reference="../../myComponents/backingMap/entry/newengine.sprite.components.Speed"/>
-    <newengine.sprite.components.EventQueue reference="../../myComponents/backingMap/entry[8]/newengine.sprite.components.EventQueue"/>
-    <newengine.sprite.components.Attacker reference="../../myComponents/backingMap/entry[6]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.EventQueue reference="../../myComponents/backingMap/entry[9]/newengine.sprite.components.EventQueue"/>
+    <newengine.sprite.components.Attacker reference="../../myComponents/backingMap/entry[7]/newengine.sprite.components.Attacker"/>
     <newengine.sprite.components.Health reference="../../myComponents/backingMap/entry[3]/newengine.sprite.components.Health"/>
+    <newengine.sprite.components.Position reference="../../myComponents/backingMap/entry[6]/newengine.sprite.components.Position"/>
   </actualComponents>
   <skills/>
 </data.SpriteMakerModel>

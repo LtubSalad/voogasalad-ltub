@@ -2,6 +2,8 @@ package newauthorgui;
 import java.util.ResourceBundle;
 
 import data.DeveloperData;
+import data.ScreenModelData;
+import gameDevelopmentInterface.BackgroundSetter;
 import gameDevelopmentInterface.GeneralDataCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
 import javafx.scene.Group;
@@ -13,6 +15,7 @@ import javafx.stage.Stage;
  * 
  */
 public class TowerAuthor {
+	private static final String SET_THE_BACKGROUND = "Set the Background";
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
 	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
@@ -25,11 +28,13 @@ public class TowerAuthor {
 	private StepOrganizer developerSteps;
 	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
 	private DeveloperData myModelData;
+	private ScreenModelData myScreenData;
 	private Stage towerStage;
 	
 	public TowerAuthor() {
 		towerStage = new Stage();
-		
+		myScreenData = new ScreenModelData();
+		myScreenData.getAllObjectsOnScreen();
 		myModelData=new DeveloperData();
 		currentStep = new Group();
 		instantiate();
@@ -37,7 +42,7 @@ public class TowerAuthor {
 		developerScene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		
 		towerStage.setScene(developerScene);
-		towerStage.show();
+		//towerStage.show();
 	}
 	
 	private void instantiate() {
@@ -52,9 +57,10 @@ public class TowerAuthor {
 		developerSteps = new StepOrganizer();
 		addStep(new DeveloperStep("Welcome", new WelcomeTowerScreen()));
 		addStep(new DeveloperStep("Level Options", new LevelOptionsSelector()));
+		addStep(new DeveloperStep(SET_THE_BACKGROUND, new BackgroundSetter(myModelData.getSprites(), myGeneralDataCreator, myScreenData)));
 		addStep(new DeveloperStep("Sprite creation",new SpriteCreatorPane(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
-		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getSprites(),myGeneralDataCreator)));
+		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getSprites(), myGeneralDataCreator, myScreenData)));
 	}
 	
 	public void addStep(DeveloperStep step){
