@@ -85,18 +85,16 @@ public class Position extends Component {
 	}
 
 	private void updateMovePosition(double dt, GamePoint pDest) {
+		if (!sprite.getComponent(Speed.TYPE).isPresent()){
+			return;
+		}
 		double xDest = pDest.x();
 		double yDest = pDest.y();
 		double x = pos.x();
 		double y = pos.y();
-		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
-			if (sprite.getComponent(Weapon.TYPE).isPresent()){
-				System.out.println("weapon reaches target");
-				sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
-			}
-			stopMoving();
-			return;
-		}
+		
+
+		
 		double xDiff = xDest - x;
 		double yDiff = yDest - y;
 		double dist = pos.distFrom(pDest);
@@ -105,7 +103,6 @@ public class Position extends Component {
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
-			System.out.println("weapon reaches target");
 			target.getSprite().ifPresent((targetSprite) -> {
 				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			});

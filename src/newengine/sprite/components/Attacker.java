@@ -52,7 +52,7 @@ public class Attacker extends Component {
 			weapon.addComponent(new Owner(source.getComponent(Owner.TYPE).get().player()));
 			weapon.addComponent(new Position(source.getComponent(Position.TYPE).get().pos(), source.getComponent(Position.TYPE).get().heading()));
 			weapon.addComponent(new Images(imageSet1));
-			weapon.addComponent(new Speed(100));
+			weapon.addComponent(new Speed(250));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
 			weapon.addComponent(new DamageStrength(25));
 			weapon.addComponent(new GameBus());	
