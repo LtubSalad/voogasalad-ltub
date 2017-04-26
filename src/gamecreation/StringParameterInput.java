@@ -4,7 +4,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-public class StringParameterInput extends HBox implements ParameterInput{
+public class StringParameterInput extends HBox implements ParameterInput<String>{
 	public static final String TYPE = "String";
 	private String varName;
 	private TextField input;

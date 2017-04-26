@@ -1,13 +1,12 @@
 package gamecreation;
 
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class ImageParameterInput extends HBox implements ParameterInput{
+public class ImageParameterInput extends HBox implements ParameterInput<String>{
 	public static final String TYPE = "String";
 	private String varName;
 	private Button fileChoose;

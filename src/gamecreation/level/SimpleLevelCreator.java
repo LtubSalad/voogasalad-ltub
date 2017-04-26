@@ -1,7 +1,6 @@
 package gamecreation.level;
 
 import gamecreation.IntegerParameterInput;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
@@ -25,6 +24,7 @@ public class SimpleLevelCreator extends LevelCreator {
 		remove.setOnAction(e -> super.remove(this));
 		content.getChildren().addAll(difficultyMod, remove);
 		this.setContent(content);
+		
 	}
 	
 	public LevelData getData(){

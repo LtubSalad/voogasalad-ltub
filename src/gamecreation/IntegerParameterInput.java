@@ -5,7 +5,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-public class IntegerParameterInput extends HBox implements ParameterInput{
+public class IntegerParameterInput extends HBox implements ParameterInput<Integer>{
 	public static final String TYPE = "Integer";
 	private String varName;
 	private Slider slide;
@@ -26,7 +26,7 @@ public class IntegerParameterInput extends HBox implements ParameterInput{
 		this.getChildren().addAll(title, slide, value);
 	}
 	
-	
+
 	@Override
 	public Integer getValue() {
 		return (int) slide.getValue();
@@ -36,6 +36,7 @@ public class IntegerParameterInput extends HBox implements ParameterInput{
 	public String getType() {
 		return TYPE;
 	}
+
 
 	
 }

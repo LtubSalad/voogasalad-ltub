@@ -5,7 +5,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-public class DoubleParameterInput extends HBox implements ParameterInput{
+public class DoubleParameterInput extends HBox implements ParameterInput<Double>{
 	public static final String TYPE = "Double";
 	private String varName;
 	private Slider slide;
