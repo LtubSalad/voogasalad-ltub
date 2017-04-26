@@ -64,7 +64,7 @@ public class ScreenObjectHolder extends HBox {
 	private ScreenModelData myScreenData;
 	private Map<Pair<String, Image>, SpriteMakerModel> myScreenObjects = new HashMap<Pair<String, Image>, SpriteMakerModel>();
 	
-	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd, SpritesForScreenUse attributesModel) {
+	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd) {
 		myScreenModel = smc;
 		myScreenData = smd;
 //		myScreenModel.getPossibleSprites().addListener(new ListChangeListener<SpriteMakerModel>() {
@@ -167,6 +167,9 @@ public class ScreenObjectHolder extends HBox {
 		fireSkill1.setCooldown(3); // add cooldown to the fireProjectilSkill
 		sprite1.addComponent(new Cooldown());
 		skillMap1.put(FireProjectileSkill.TYPE, fireSkill1);
+		sprite1.addSkill(new MoveSkill());
+		sprite1.addSkill(new BuildSkill(building));
+		sprite1.addSkill(fireSkill1);
 		sprite1.addComponent(new GameBus());
 		sprite1.addComponent(new SkillSet(skillMap1));
 		sprite1.addComponent(new Owner(player1));
@@ -243,8 +246,8 @@ public class ScreenObjectHolder extends HBox {
 		spawner.addComponent(new Health(200));
 		spawner.addComponent(new EventQueue(new LinkedList<>()));
 		addObject(sprite1);
-		addObject(sprite2);
-		addObject(spawner);
+		//addObject(sprite2);
+		//addObject(spawner);
 		
 //		List<Sprite> spritesToAdd = new ArrayList<>();
 //		spritesToAdd.add(sprite1);

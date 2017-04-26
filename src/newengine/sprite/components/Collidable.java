@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commons.point.GamePoint;
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.image.LtubImage;
@@ -17,7 +19,8 @@ public class Collidable extends Component {
 	private final CollisionBoundType boundType;
 	private final List<GamePoint> bound = new ArrayList<>();
 	
-	public Collidable(CollisionBoundType boundType) {
+	@ConstructorForDeveloper
+	public Collidable(@VariableName(name = "Bound type") CollisionBoundType boundType) {
 		this.boundType = boundType; // TODO different kinds of points
 	}
 	

@@ -25,7 +25,7 @@ import newengine.sprite.component.Component;
  * Takes in a list of sprite maker models and translates them into sprites 
  *
  */
-public class AuthDataTranslator implements Translator {
+public class AuthDataTranslator implements Translator<Sprite>{
 	
 	//TODO: make a single translator for single sprite translatino 
 	//TODO: instantiate skills 
@@ -38,7 +38,6 @@ public class AuthDataTranslator implements Translator {
 
 	private Sprite constructed; 
 	
-
 	public AuthDataTranslator(ObservableList<SpriteMakerModel> allObjectsOnScreen) {
 		spritesToMake = new ArrayList<SpriteMakerModel>(allObjectsOnScreen); 
 	}
@@ -53,6 +52,8 @@ public class AuthDataTranslator implements Translator {
 		spritesToMake.add(spriteToMake);
 		makeSingleSprite(spriteToMake);
 	}
+
+
 
 	private void makeSingleSprite(SpriteMakerModel spriteToMake) {
 		constructed = handleComponents(spriteToMake.getActualComponents());
@@ -114,6 +115,10 @@ public class AuthDataTranslator implements Translator {
 
 	
 	
+//
+//	public SpriteModel getSprites(){
+//		return constructedModel;
+
 	public List<Sprite> getSprites(){
 		return constructedSprites;
 	}
@@ -127,5 +132,11 @@ public class AuthDataTranslator implements Translator {
 		}
 		return sprite;
 	}
+
+	@Override
+	public List<Sprite> getTranslated() {
+		return constructedSprites; 
+	}
+
 
 }
