@@ -9,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.HLineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
@@ -17,11 +16,11 @@ import javafx.scene.shape.VLineTo;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import player.gameChoice.GameManager;
-import player.levelChoice.LevelImageManager;
+import utilities.ImageManager;
 
 public class LoaderTester extends Application {
 
-	private LevelImageManager lim = new LevelImageManager(230,460);
+	private ImageManager lim = new ImageManager(230,460);
 	 private Node myActor;
 	 private Node myActor1;
 	 private Node myActor2;
