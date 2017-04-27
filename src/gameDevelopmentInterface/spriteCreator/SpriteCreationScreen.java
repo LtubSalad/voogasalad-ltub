@@ -71,7 +71,7 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Selectable.class);
 		observableComponents.add(SoundEffect.class);
 		observableComponents.add(Speed.class);
-		//observableComponents.add(SkillSet.class);
+		observableComponents.add(SkillSet.class);
 		
 		return new ComponentSelectorPane("Add components and set parameters", observableComponents,infoPane);
 	}

@@ -14,10 +14,16 @@ public abstract class VariableSetter<T> extends HBox{
 	private double PREF_LABEL_WIDTH=200;
 	private double PREF_LABEL_HEIGHT=50;
 	
-	public VariableSetter(Class<T> clazz, String variableName){
-		Label label=produceLabel(clazz.getSimpleName());
+	public VariableSetter(String variableName){
+		//Label label=produceLabel(clazz.getSimpleName());
 		Label descriptorLabel=produceLabel(variableName);
-		this.getChildren().addAll(label,descriptorLabel);
+		this.getChildren().addAll(descriptorLabel);
+	}
+	
+	public VariableSetter(Class<T> clazz,String variableName){
+		//Label label=produceLabel(clazz.getSimpleName());
+		Label descriptorLabel=produceLabel(variableName);
+		this.getChildren().addAll(descriptorLabel);
 	}
 	
 	public abstract T getValue() throws UnsupportedTypeException, Exception;

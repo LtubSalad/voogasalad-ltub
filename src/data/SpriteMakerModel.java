@@ -26,6 +26,11 @@ public class SpriteMakerModel {
 		myScriptMap=FXCollections.observableMap(handlers);
 	}
 	
+	public SpriteMakerModel(String name){
+		this();
+		spriteName=name;
+	}
+	
 	public void clearComponents(){
 		myComponents.clear();
 	}

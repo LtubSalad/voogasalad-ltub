@@ -42,20 +42,9 @@ public class ComponentSetter<T extends Component> extends ComponentSetterView<T>
 		}
 
 		Parameter[] parameters=ctor.getParameters();
+		VariableSetterFactory setterFactory=new VariableSetterFactory(data);
 		for(int i=0;i<parameters.length;i++){
-			String name=parameters[i].getAnnotation(VariableName.class).name();
-			if(parameters[i].getType().isPrimitive()||parameters[i].getType().equals(String.class)){
-				fieldSetters.add(new SimpleVariableSetter(parameters[i].getType(),name));
-			}
-			else if(parameters[i].getType().isAssignableFrom(Path.class)){
-				fieldSetters.add(new PathSetter(data.getPaths(),name));
-			}
-			else if(parameters[i].getType().isEnum()){
-				fieldSetters.add(new EnumSetter(parameters[i].getType(),name));
-			}
-			else{
-				throw new UnsupportedTypeException(parameters[i].getType());
-			}
+			fieldSetters.add(setterFactory.setterFromParameter(parameters[i]));
 		}
 		fieldSetters.forEach((fieldSetter)->this.getChildren().add(fieldSetter));
 	}

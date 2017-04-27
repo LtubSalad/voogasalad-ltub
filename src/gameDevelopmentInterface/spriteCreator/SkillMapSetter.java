@@ -21,9 +21,11 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 	private VBox displayContents;
 	private List<SkillSelector<? extends Skill>> skillSelectors;
 
-	public SkillMapSetter(Class<Map<SkillType<? extends Skill>, Skill>> clazz, String variableName, DeveloperData data) {
-		super(clazz, variableName);
+	public SkillMapSetter(String variableName, DeveloperData data) {
+		super(variableName);
+		this.data=data;
 		displayContents=new VBox();
+		this.getChildren().add(displayContents);
 		List<Class<? extends Skill>> availableSkills= new ArrayList<>();
 		availableSkills.add(BuildSkill.class);
 		availableSkills.add(FireProjectileSkill.class);
@@ -33,7 +35,6 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 			displayContents.getChildren().add(selector);
 		});
 		
-		this.data=data;
 	}
 	
 	public List<SkillSelector<? extends Skill>> skillsToSelectors(List<Class<? extends Skill>> classes){
@@ -103,6 +104,8 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		public SpriteCreatorSelector() {
 			super(BuildSkill.class);
 			availableSprites=new ChoiceBox<>(data.getSprites());
+			availableSprites.getItems().add(new SpriteMakerModel());
+			this.getChildren().add(availableSprites);
 		}
 		
 		@Override

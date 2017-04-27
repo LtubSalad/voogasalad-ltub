@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import exception.UnsupportedTypeException;
 import gameDevelopmentInterface.Path;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
