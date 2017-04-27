@@ -23,15 +23,12 @@ public class SpriteMakerModel {
 	private ObservableMap<BusEvent, String> myScriptMap;
 	private String spriteName;
 	
-	
 	// Jake and Tahia's DO NOT TOUCH
 	private Map<String, List<String>> componentsForTransfer; 
 	private List<Component> actualComponents; 
 	private List<EventHandleData> myEventHandlers; 
-	//private Map<String, List<DataWrapper>> skills; 
 	List<Skill> skills; 
-
-	
+	List<Pair<BusEvent, BusEvent>> triggers; // event + Action for the trigger (custom event handling) 	
 	
 	public SpriteMakerModel() {
 		Map<ComponentType<?>, Component >componentMap=new HashMap<>();
