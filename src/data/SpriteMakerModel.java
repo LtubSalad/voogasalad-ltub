@@ -18,10 +18,10 @@ import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
 public class SpriteMakerModel {
-	// Key Event.TYPE Value Action.TYPE
 	private Map<String, String> myCustomEventHandlers;
 	private ObservableMap<ComponentType<?>,Component> myComponents;
 	private ObservableMap<BusEvent, String> myScriptMap;
+	private String spriteName;
 	
 	
 	// Jake and Tahia's DO NOT TOUCH
@@ -104,6 +104,10 @@ public class SpriteMakerModel {
 		this.myCustomEventHandlers = toCopy.myCustomEventHandlers;
 		this.myComponents = toCopy.myComponents;
 		this.myScriptMap = toCopy.myScriptMap;
+	}
+	
+	public void clearComponents(){
+		myComponents.clear();
 	}
 	
 	/**

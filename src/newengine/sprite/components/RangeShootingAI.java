@@ -3,6 +3,7 @@ package newengine.sprite.components;
 import java.io.Serializable;
 
 import bus.BusEventHandler;
+import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.range.InRangeEvent;
 import newengine.events.skill.TriggerSkillEvent;
 import newengine.skill.skills.FireProjectileSkill;
@@ -15,6 +16,11 @@ public class RangeShootingAI extends Component {
 	
 	public static final ComponentType<RangeShootingAI> TYPE = new ComponentType<>(RangeShootingAI.class.getName());
 
+	@ConstructorForDeveloper
+	public RangeShootingAI(){
+		
+	}
+	
 	@Override
 	public void afterAdded() {
 		sprite.on(InRangeEvent.ANY, (Serializable & BusEventHandler<InRangeEvent>) (e) -> {

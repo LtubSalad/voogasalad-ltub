@@ -34,7 +34,7 @@ public class Game {
 		SelectionModel selectionModel = new SelectionModel(bus);
 		Models models = new Models(bus, spriteModel, playerStatsModel, playerRelationModel, selectionModel);
 		
-		view = new View(bus);
+		view = new View(bus, null);
 		
 		gameLoop = new FXGameLoop(bus);
 		

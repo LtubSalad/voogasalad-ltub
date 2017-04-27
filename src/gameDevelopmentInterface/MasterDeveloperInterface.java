@@ -1,8 +1,8 @@
 package gameDevelopmentInterface;
 import java.util.ResourceBundle;
+
 import data.DeveloperData;
-import data.SpritesForScreenUse;
-import gameDevelopmentInterface.attributeCreator.GroundUpAttributeCreator;
+import data.ScreenModelData;
 import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -33,10 +33,7 @@ public class MasterDeveloperInterface {
 	private Scene developerScene;
 	private BorderPane view;
 	private TabPane developerTabs;
-	private SpritesForScreenUse attributesModel = new SpritesForScreenUse();
-	//private AttributeHolderCreator myAttributeHolderCreator = new AttributeHolderCreator(attributesModel);
 	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
-	private ScreenModelCreator myScreenModelCreator = new ScreenModelCreator(attributesModel, myGeneralDataCreator);
 	private DeveloperData myModelData;
 	public MasterDeveloperInterface() {
 		myModelData=new DeveloperData();
@@ -48,7 +45,7 @@ public class MasterDeveloperInterface {
 		developerTabs = new TabPane();
 		Tab spriteCreation = new Tab("Sprite creation",new SpriteCreationScreen(myModelData));
 		Tab GeneralDataTab = new Tab(myResources.getString(GENERAL_DATA), myGeneralDataCreator);
-		Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), myScreenModelCreator);
+		Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getSprites(),myGeneralDataCreator, new ScreenModelData()));
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
 		myTabs.addAll(spriteCreation,GeneralDataTab, ScreenSettingView);
 	}
@@ -83,7 +80,7 @@ public class MasterDeveloperInterface {
 			});
 			screenButton.setOnAction((clicked) -> {
 				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
-						new ScreenModelCreator(attributesModel, myGeneralDataCreator));
+						new ScreenModelCreator(myModelData.getSprites(), myGeneralDataCreator, new ScreenModelData()));
 				developerTabs.getTabs().add(screenTab);
 			});
 //			attributeButton.setOnAction((clicked) -> {

@@ -1,11 +1,7 @@
 package gameDevelopmentInterface;
 
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-
 import commons.point.GamePoint;
 import data.SpriteMakerModel;
 import javafx.collections.ListChangeListener;

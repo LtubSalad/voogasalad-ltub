@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 /**
  * 
  * The job of the ScreenModelCreator is to provide an interface for the developer to set all the data for a 
- * given screen. It has no public methods aside from it's instantiator. Things it does: binding between the 
+ * given screen. It has no public methods aside from its instantiator. Things it does: binding between the 
  * DummyScreenView and the ScreenModel, allowing the user to place objects on the screen. Adding an object 
  * to the screen should modify the ScreenModel and display something on the DummyScreen if the object implements
  * Sprite.
@@ -19,16 +19,19 @@ import javafx.scene.layout.BorderPane;
  */
 public class ScreenModelCreator extends BorderPane {
 	private ObservableMap<String,String> myGeneralData;
-	private ScreenModelData myScreenData = new ScreenModelData();
+	private ScreenModelData myScreenData;
 	private ScreenObjectHolder myObjectsToPlace;
-	private ScreenMap myScreen = new ScreenMap(this);
-	private ButtonsPanel myButtonsPanel = new ButtonsPanel(this);
+	private ScreenMap myScreen;
+	private TowerSetButtonsPanel myButtonsPanel;
 	private SpritesForScreenUse myAttributesModel;
 	private ObservableList<SpriteMakerModel> possibleSprites = FXCollections.observableArrayList();
 	
-	public ScreenModelCreator(SpritesForScreenUse attributesModel, GeneralDataCreator gdc) {
+	public ScreenModelCreator(SpritesForScreenUse attributesModel, GeneralDataCreator gdc, ScreenModelData screenData) {
+		myScreenData = screenData;
+		myScreen = new ScreenMap(this);
+		myButtonsPanel = new TowerSetButtonsPanel(this);
 		myAttributesModel = attributesModel;
-		myObjectsToPlace = new ScreenObjectHolder(this, myScreenData, myAttributesModel);
+		myObjectsToPlace = new ScreenObjectHolder(this, myScreenData);
 		myGeneralData = gdc.getAllData();
 		this.setTop(new GeneralGameDataBar(myGeneralData));
 		this.setBottom(myObjectsToPlace);
