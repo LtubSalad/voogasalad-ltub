@@ -21,7 +21,6 @@ import newengine.model.SpriteModel;
 import newengine.trigger.Trigger;
 import newengine.trigger.TriggerManager;
 import newengine.view.View;
-import newengine.view.camera.Camera;
 public class Game {
 	private EventBus bus = new BasicEventBus();
 	private GameLoop gameLoop;
@@ -56,7 +55,6 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 		gameLoop.addLoopComponent((dt) -> timerManager.update(dt));
 		gameLoop.addLoopComponent((dt) -> inputManager.update(dt));
-
 	}
 	
 	public void addTrigger(Trigger trigger) {
@@ -81,6 +79,5 @@ public class Game {
 		return view.getScene();
 	}
 	
-	
-	
-} 
+}
+
