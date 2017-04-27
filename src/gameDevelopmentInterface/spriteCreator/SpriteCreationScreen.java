@@ -92,7 +92,7 @@ public class SpriteCreationScreen extends BorderPane{
 			listSaveButton.setOnMouseClicked((click)->{
 				try {
 					updateSprite();
-					model.addSprite(spriteData);
+					model.addScreenSprite(spriteData);
 				} catch (Exception e) {
 					
 				}				
