@@ -18,7 +18,7 @@ public class SpritesForScreenUse {
 	 * 
 	 * @param newData a possible new sprite the user can place on the screen
 	 */
-	public void addComponent(SpriteMakerModel newSprite) {
+	public void addPossibleSprite(SpriteMakerModel newSprite) {
 		allPossibleScreenAttributes.add(newSprite);
 	}
 	/**

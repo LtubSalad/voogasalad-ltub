@@ -1,5 +1,5 @@
 package gameDevelopmentInterface;
 
-public class componentData {
+public class ComponentData {
 
 }

@@ -20,7 +20,7 @@ public class GameBus extends Component {
 
 	@Override
 	public void afterAdded() {
-		sprite.on(SetGameBusEvent.ANY, (Serializable & BusEventHandler<SetGameBusEvent>) (e) -> {
+		sprite.on(SetGameBusEvent.ANY, (e) -> {
 			setGameBus(e.getGameBus());
 		});
 	}
