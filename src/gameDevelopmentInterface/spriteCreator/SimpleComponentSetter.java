@@ -17,7 +17,7 @@ import newengine.sprite.component.Component;
  * 
  * @author Daniel
  * A GUI component that allows the user to instantiate any component, so long 
- * as it does not take parameters aside from enum, string or primitives.
+ * as it does not take parameters aside from enumerators, strings or primitives.
  * @param <T>
  */
 public class SimpleComponentSetter<T extends Component> extends ComponentSetterView<T>{	
@@ -51,7 +51,6 @@ public class SimpleComponentSetter<T extends Component> extends ComponentSetterV
 				throw new UnsupportedTypeException(parameters[i].getType());
 			}
 		}
-		this.getChildren().add(new Label("Component: "+myComponent.getSimpleName()));
 		fieldSetters.forEach((fieldSetter)->this.getChildren().add(fieldSetter));
 	}
 
