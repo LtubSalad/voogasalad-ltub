@@ -452,7 +452,7 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
                         <closed>false</closed>
                       </in>
                       <buf>iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAAK/INwWK6QAAAAlwSFlz
-AAALEwAACxMBAJqcGAAAActpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1s
+sAAALEwAACxMBAJqcGAAAActpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1s
 bnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpS
 REYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMj
 Ij4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6
@@ -1739,6 +1739,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</hb>
               <closed>false</closed>
             </in>
             <buf>iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAAK/INwWK6QAAAAlwSFlz
+=======
+>>>>>>> 312d4aa23e1e6dd0d4c20d7fb87ad228b07da9df
 AAALEwAACxMBAJqcGAAAActpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1s
 bnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpS
 REYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMj
@@ -2093,6 +2095,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
+<<<<<<< HEAD
                 <offset>0</offset>
                 <isReadOnly>false</isReadOnly>
                 <bigEndian>true</bigEndian>
@@ -2117,4 +2120,89 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
       <cooldown>1.0</cooldown>
     </newengine.skill.skills.FireProjectileSkill>
   </skills>
+=======
+                          <offset>0</offset>
+                          <isReadOnly>false</isReadOnly>
+                          <bigEndian>true</bigEndian>
+                          <nativeByteOrder>false</nativeByteOrder>
+                        </pixelBuffer>
+                        <minX>0</minX>
+                        <minY>0</minY>
+                        <width>50</width>
+                        <height>50</height>
+                        <scanlineStride>200</scanlineStride>
+                        <pixelFormat>BYTE_BGRA_PRE</pixelFormat>
+                        <pixelScale>1.0</pixelScale>
+                        <serial>
+                          <int>0</int>
+                        </serial>
+                      </value>
+                      <outer-class reference="../.."/>
+                    </platformImage>
+                  </image>
+                </icon>
+                <cooldown>1.0</cooldown>
+              </newengine.skill.skills.FireProjectileSkill>
+            </entry>
+          </skills>
+        </newengine.sprite.components.SkillSet>
+      </entry>
+      <entry>
+        <newengine.sprite.component.ComponentType>
+          <typename>newengine.sprite.components.Images</typename>
+        </newengine.sprite.component.ComponentType>
+        <newengine.sprite.components.Images>
+          <imageFilePath>images/characters/bahamut_right.png</imageFilePath>
+        </newengine.sprite.components.Images>
+      </entry>
+      <entry>
+        <newengine.sprite.component.ComponentType>
+          <typename>newengine.sprite.components.Attacker</typename>
+        </newengine.sprite.component.ComponentType>
+        <newengine.sprite.components.Attacker>
+          <reloadPeriod>1.0</reloadPeriod>
+          <timeRemaining>1.0</timeRemaining>
+        </newengine.sprite.components.Attacker>
+      </entry>
+      <entry>
+        <newengine.sprite.component.ComponentType>
+          <typename>newengine.sprite.components.GameBus</typename>
+        </newengine.sprite.component.ComponentType>
+        <newengine.sprite.components.GameBus/>
+      </entry>
+      <entry>
+        <newengine.sprite.component.ComponentType>
+          <typename>newengine.sprite.components.EventQueue</typename>
+        </newengine.sprite.component.ComponentType>
+        <newengine.sprite.components.EventQueue>
+          <events/>
+          <eventFinished>true</eventFinished>
+        </newengine.sprite.components.EventQueue>
+      </entry>
+      <entry>
+        <newengine.sprite.component.ComponentType>
+          <typename>newengine.sprite.components.SoundEffect</typename>
+        </newengine.sprite.component.ComponentType>
+        <newengine.sprite.components.SoundEffect>
+          <moveSoundFile>data/sounds/Psyessr4.wav</moveSoundFile>
+        </newengine.sprite.components.SoundEffect>
+      </entry>
+    </backingMap>
+  </myComponents>
+  <myScriptMap class="com.sun.javafx.collections.ObservableMapWrapper">
+    <backingMap/>
+  </myScriptMap>
+  <actualComponents>
+    <newengine.sprite.components.GameBus reference="../../myComponents/backingMap/entry[7]/newengine.sprite.components.GameBus"/>
+    <newengine.sprite.components.SkillSet reference="../../myComponents/backingMap/entry[4]/newengine.sprite.components.SkillSet"/>
+    <newengine.sprite.components.Owner reference="../../myComponents/backingMap/entry[2]/newengine.sprite.components.Owner"/>
+    <newengine.sprite.components.SoundEffect reference="../../myComponents/backingMap/entry[9]/newengine.sprite.components.SoundEffect"/>
+    <newengine.sprite.components.Images reference="../../myComponents/backingMap/entry[5]/newengine.sprite.components.Images"/>
+    <newengine.sprite.components.Speed reference="../../myComponents/backingMap/entry/newengine.sprite.components.Speed"/>
+    <newengine.sprite.components.EventQueue reference="../../myComponents/backingMap/entry[8]/newengine.sprite.components.EventQueue"/>
+    <newengine.sprite.components.Attacker reference="../../myComponents/backingMap/entry[6]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.Health reference="../../myComponents/backingMap/entry[3]/newengine.sprite.components.Health"/>
+  </actualComponents>
+  <skills/>
+>>>>>>> 312d4aa23e1e6dd0d4c20d7fb87ad228b07da9df
 </data.SpriteMakerModel>
