@@ -1,10 +1,10 @@
-package newauthorgui;
+package gameauthorgui;
 
 import javafx.scene.control.Button;
 
 public class NextStepButton extends Button{
 
-	NextStepButton(StepOrganizer stepOrganizer){
+	public NextStepButton(StepOrganizer stepOrganizer){
 		//TODO resource file
 		super("Next Step");
 		this.setOnAction(e -> stepOrganizer.nextStep());

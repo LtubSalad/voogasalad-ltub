@@ -1,4 +1,4 @@
-package newauthorgui;
+package gameauthorgui.tower;
 
 import javafx.scene.layout.VBox;
 

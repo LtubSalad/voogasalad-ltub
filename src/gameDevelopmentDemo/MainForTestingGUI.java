@@ -1,9 +1,8 @@
 package gameDevelopmentDemo;
 
-import gameDevelopmentInterface.MasterDeveloperInterface;
+import gameauthorgui.tower.TowerAuthor;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import newauthorgui.TowerAuthor;
 
 public class MainForTestingGUI extends Application {
 	private static final String DEVELOPER_GUI = "DeveloperGUI";

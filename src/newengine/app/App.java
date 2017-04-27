@@ -63,8 +63,8 @@ public class App extends Application {
 			bus.emit(new MainPlayerEvent(player1));
 			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 3));
 			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, WealthType.GOLD, 100));
-//			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
-	//		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
+			//bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
+			//bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 			// call the spawner to spawn
 			GamePoint targetSpawnPos = new GamePoint(100, 50);
 			bus.emit(new PeriodicEvent(5, 1.0, () -> {

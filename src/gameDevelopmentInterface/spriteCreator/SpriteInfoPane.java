@@ -12,13 +12,9 @@ import gamecreation.StringParameterInput;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import newengine.sprite.component.Component;
-import newengine.sprite.components.Collidable;
 import newengine.sprite.components.PathFollower;
-import newengine.sprite.components.Selectable;
 
 public class SpriteInfoPane extends ScrollPane{
 	private VBox myPane;

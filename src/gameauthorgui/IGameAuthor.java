@@ -1,8 +1,8 @@
-package newauthorgui;
+package gameauthorgui;
 
 import javafx.scene.Scene;
 
-public interface GameAuthor {
+public interface IGameAuthor {
 		
 		public void addStep(DeveloperStep step);
 		public void addStep(int index, DeveloperStep step);
