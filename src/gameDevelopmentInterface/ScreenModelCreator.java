@@ -1,6 +1,5 @@
 package gameDevelopmentInterface;
 
-import data.AttributeData;
 import data.SpritesForScreenUse;
 import data.ScreenModelData;
 import data.SpriteMakerModel;

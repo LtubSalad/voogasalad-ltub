@@ -1,7 +1,9 @@
 package newengine.sprite.components;
 
 import gameDevelopmentInterface.Path;
+import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.DeveloperMethod;
+import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
@@ -9,7 +11,8 @@ public class PathFollower extends Component{
 	private Path path;
 	private double speed;
 	
-	public PathFollower(Path path){
+	@ConstructorForDeveloper
+	public PathFollower(@VariableName(name = "SelectedPath") Path path){
 		this.path=path;
 	}
 	

@@ -71,5 +71,4 @@ public class SkillSetSetter extends ComponentSetterView<SkillSet>{
 		
 		return skill;
 	}
-
 }

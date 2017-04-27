@@ -50,17 +50,7 @@ public class SpriteInfoPane extends ScrollPane{
 	
 	public <T extends Component> void  addComponent(Class<T> clazz){
 		try {
-			ComponentSetterView<? extends Component> setter = null;
-			if(clazz.equals(PathFollower.class)){
-				setter=new PathFollowerSetter(developerData.getPaths());
-			}
-			else if(clazz.equals(SkillSet.class)){
-				setter=new SkillSetSetter();
-			}
-			else{
-				setter=new SimpleComponentSetter<T>(clazz);
-			
-			}
+			ComponentSetterView<? extends Component> setter=new ComponentSetter<T>(clazz,developerData);
 			lister.addComponentView(lister.new ComponentViewer(setter));
 		} catch (UnsupportedTypeException e) {
 			e.printStackTrace();
