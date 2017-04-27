@@ -1,6 +1,6 @@
 package gameDevelopmentDemo;
 
-import gameauthorgui.tower.TowerAuthor;
+import gameauthorgui.rts.RTSAuthor;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,7 +11,7 @@ public class MainForTestingGUI extends Application {
 		primaryStage.setTitle(DEVELOPER_GUI);
 		primaryStage.show();
 		//MasterDeveloperInterface developerView = new MasterDeveloperInterface();
-		TowerAuthor developerView = new TowerAuthor();
+		RTSAuthor developerView = new RTSAuthor();
 		primaryStage.setScene(developerView.getScene());
 		primaryStage.setFullScreen(true);
 	}
