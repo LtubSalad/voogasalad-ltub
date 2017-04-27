@@ -28,11 +28,10 @@ public class TranslationController implements FileTranslator {
 	// TODO: using XML file of SpriteMakerModels --> Sprites 
 	// TODO: using XML file of current game state (Sprites)  --> sprite maker models 
 	// TODO: using SpriteModel of current game state --> sprite maker models
-//
+
 	public TranslationController(String filepath){
 		fileToTranslate = new File(filepath);	
 	}
-	
 	
 	public TranslationController(File file){
 		fileToTranslate = file;
