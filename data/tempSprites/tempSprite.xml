@@ -21,11 +21,11 @@
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
-                          <fd>25</fd>
+                          <fd>17</fd>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/walk.png</path>
+                        <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/walk.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -422,11 +422,7 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-<<<<<<< HEAD
                         <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/build.png</path>
-=======
-                        <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/build.png</path>
->>>>>>> 756816feef8a42e55350823380f393b339b9734f
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -896,11 +892,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</hb>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-<<<<<<< HEAD
                         <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/crosshairs.png</path>
-=======
-                        <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/crosshairs.png</path>
->>>>>>> 756816feef8a42e55350823380f393b339b9734f
+                          <fd>18</fd>
+                          <parent class="java.io.FileInputStream" reference="../.."/>
+                          <closed>false</closed>
+           
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -1297,6 +1293,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
       <entry>
         <newengine.sprite.component.ComponentType>
           <typename>newengine.sprite.components.Position</typename>
+        </newengine.sprite.component.ComponentType>
+        <newengine.sprite.components.Position>
+          <pos>
+            <x>335.0</x>
+            <y>413.0</y>
+          </pos>
+          <heading>0.0</heading>
+          <isMoving>false</isMoving>
+          <followingSprite>false</followingSprite>
+        </newengine.sprite.components.Position>
+      </entry>
+      <entry>
+        <newengine.sprite.component.ComponentType>
+          <typename>newengine.sprite.components.Attacker</typename>
         </newengine.sprite.component.ComponentType>
         <newengine.sprite.components.Position>
           <pos>

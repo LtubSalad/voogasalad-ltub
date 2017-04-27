@@ -1,7 +1,7 @@
 /**
  * 
  */
-package player.levelChoice;
+package utilities;
 
 import java.util.ResourceBundle;
 
@@ -14,14 +14,14 @@ import player.App;
  * @author Zhiyong
  *
  */
-public class LevelImageManager {
+public class ImageManager {
 
 	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	
 	private int width;
 	private int height;
 	
-	public LevelImageManager(int width, int height){
+	public ImageManager(int width, int height){
 		this.width = width;
 		this.height = height;
 		
