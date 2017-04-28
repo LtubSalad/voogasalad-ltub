@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import data.DeveloperData;
 import gameDevelopmentInterface.GeneralDataCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
+import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import gameauthorgui.DeveloperStep;
 import gameauthorgui.GameAuthor;
 import gameauthorgui.WelcomeScreen;
@@ -32,7 +33,7 @@ public class TowerAuthor extends GameAuthor {
 	public void instantiateSteps() {
 		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense")));
 		addStep(new DeveloperStep("Level Options", new LevelOptionsSelector()));
-		addStep(new DeveloperStep("Sprite creation",new SpriteCreatorPane(myModelData)));
+		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
 		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getSprites(),myGeneralDataCreator)));
 	}

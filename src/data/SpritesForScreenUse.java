@@ -25,7 +25,7 @@ public class SpritesForScreenUse {
 	 * 
 	 * @return all sprites that have been placed on the bottom of the screen for clicking and dragging
 	 */
-	public ObservableList<SpriteMakerModel> getScreenAttributes() {
+	public ObservableList<SpriteMakerModel> getSpriteMakerModels() {
 		return allPossibleScreenAttributes;
 	}
 

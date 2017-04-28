@@ -23,6 +23,10 @@ public class StringParameterInput extends HBox implements ParameterInput<String>
 	public String getValue(){
 		return input.getText();
 	}
+	
+	public TextField getTextField(){
+		return input;
+	}
 
 	@Override
 	public String getType() {

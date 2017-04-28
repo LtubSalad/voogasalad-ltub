@@ -21,7 +21,7 @@
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
-                          <fd>25</fd>
+                          <fd>32</fd>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
@@ -418,15 +418,11 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
-                          <fd>26</fd>
+                          <fd>33</fd>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-<<<<<<< HEAD
-                        <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/build.png</path>
-=======
                         <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/build.png</path>
->>>>>>> 756816feef8a42e55350823380f393b339b9734f
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -892,15 +888,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</hb>
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
-                          <fd>27</fd>
+                          <fd>34</fd>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-<<<<<<< HEAD
-                        <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/crosshairs.png</path>
-=======
                         <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/crosshairs.png</path>
->>>>>>> 756816feef8a42e55350823380f393b339b9734f
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -1433,11 +1425,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
           <impl__source class="java.io.BufferedInputStream">
             <in class="java.io.FileInputStream">
               <fd>
-                <fd>16</fd>
+                <fd>35</fd>
                 <parent class="java.io.FileInputStream" reference="../.."/>
                 <closed>false</closed>
               </fd>
-              <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/walk.png</path>
+              <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/walk.png</path>
               <closeLock/>
               <closed>false</closed>
             </in>
@@ -1825,11 +1817,11 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
           <impl__source class="java.io.BufferedInputStream">
             <in class="java.io.FileInputStream">
               <fd>
-                <fd>17</fd>
+                <fd>36</fd>
                 <parent class="java.io.FileInputStream" reference="../.."/>
                 <closed>false</closed>
               </fd>
-              <path>/Users/tahiaemran/Documents/workspace/voogasalad_ltub/bin/images/skills/build.png</path>
+              <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/build.png</path>
               <closeLock/>
               <closed>false</closed>
             </in>
