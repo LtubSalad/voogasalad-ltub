@@ -21,11 +21,12 @@
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
-                          <fd>32</fd>
+                          <fd>-1</fd>
+                          <handle>1484</handle>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/walk.png</path>
+                        <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\walk.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -418,11 +419,12 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
-                          <fd>33</fd>
+                          <fd>-1</fd>
+                          <handle>1492</handle>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/build.png</path>
+                        <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\build.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -888,11 +890,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</hb>
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
-                          <fd>34</fd>
+                          <fd>-1</fd>
+                          <handle>1440</handle>
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/crosshairs.png</path>
+                        <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\crosshairs.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -1329,6 +1332,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
         </newengine.sprite.component.ComponentType>
         <newengine.sprite.components.SoundEffect>
           <moveSoundFile>data/sounds/Psyessr4.wav</moveSoundFile>
+          <base>C:\Users\Daniel\workspace308\voogasalad_ltub\data</base>
         </newengine.sprite.components.SoundEffect>
       </entry>
       <entry>
@@ -1425,11 +1429,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
           <impl__source class="java.io.BufferedInputStream">
             <in class="java.io.FileInputStream">
               <fd>
-                <fd>35</fd>
+                <fd>-1</fd>
+                <handle>1496</handle>
                 <parent class="java.io.FileInputStream" reference="../.."/>
                 <closed>false</closed>
               </fd>
-              <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/walk.png</path>
+              <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\walk.png</path>
               <closeLock/>
               <closed>false</closed>
             </in>
@@ -1817,11 +1822,12 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
           <impl__source class="java.io.BufferedInputStream">
             <in class="java.io.FileInputStream">
               <fd>
-                <fd>36</fd>
+                <fd>-1</fd>
+                <handle>1500</handle>
                 <parent class="java.io.FileInputStream" reference="../.."/>
                 <closed>false</closed>
               </fd>
-              <path>/Users/mtribby/Documents/workspace/308/voogasalad_ltub/bin/images/skills/build.png</path>
+              <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\build.png</path>
               <closeLock/>
               <closed>false</closed>
             </in>

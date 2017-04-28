@@ -35,7 +35,7 @@ public class EnumSetter<T extends Enum> extends VariableSetter<T>{
 	}
 
 	@Override
-	public void setInitialField(T initialValue) {
+	public void setField(T initialValue) {
 		enumChoices.getSelectionModel().select(initialValue);
 		
 	}

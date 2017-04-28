@@ -18,7 +18,10 @@ public class LtubImage {
 	 */
 	private GamePoint pivot = null;
 	
-	LtubImage() { }
+	LtubImage() { 
+		
+	}
+	
 	
 	public LtubImage(String filename) {
 		this.filename = filename;
@@ -64,6 +67,7 @@ public class LtubImage {
 		}
 	}
 	public InputStream getInputStream() {
+		System.out.println(filename);
 		return getClass().getClassLoader().getResourceAsStream(filename);
 	}
 	

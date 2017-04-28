@@ -43,7 +43,6 @@ public class XStreamHandler {
 		return object;
 	}
 	
-
 	public List<SpriteMakerModel> getScreenModelFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
@@ -58,7 +57,6 @@ public class XStreamHandler {
 		return attribute;
 	}
 	
-
 	public void saveToFile(Object data) {
 		FileChooser chooser = new FileChooser();
 		File location = chooser.showSaveDialog(new Stage());

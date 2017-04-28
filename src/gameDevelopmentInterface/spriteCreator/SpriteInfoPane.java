@@ -23,8 +23,7 @@ public class SpriteInfoPane extends ScrollPane{
 	private SpriteDescriptor descriptor;
 	private ComponentLister lister;
 	private DeveloperData developerData;
-	private double MAX_HEIGHT=500;
-	private double MAX_WIDTH=300;
+	private double PREF_WIDTH=600;
 	
 	public SpriteInfoPane(SpriteMakerModel spriteData, DeveloperData developerData){
 		this.developerData=developerData;
@@ -34,20 +33,14 @@ public class SpriteInfoPane extends ScrollPane{
 		lister=new ComponentLister();
 		myPane.getChildren().addAll(descriptor,lister);
 		this.setContent(myPane);
-		this.setMaxSize(MAX_WIDTH, MAX_HEIGHT);
+		this.setPrefWidth(PREF_WIDTH);
 	}
 	
 	private class SpriteDescriptor extends VBox{
 		private SpriteDescriptor(){
-			try{
 				this.getChildren().add(new Label("Add Sprite Components"));
-				this.getChildren().add(new SimpleVariableSetter<String>(String.class, "Sprite name:"));
-				this.getChildren().add(new SimpleVariableSetter<String>(String.class, "Sprite description:"));
-			}
-			catch (UnsupportedTypeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				this.getChildren().add(new StringParameterInput( "Sprite name:"));
+				this.getChildren().add(new StringParameterInput("Sprite description:"));
 		}
 	}
 	
@@ -70,6 +63,7 @@ public class SpriteInfoPane extends ScrollPane{
 		
 		public ComponentLister(){
 			componentViews=new ArrayList<>();
+			this.prefWidthProperty().bind(SpriteInfoPane.this.prefWidthProperty());
 		}
 		
 		private void removeComponentView(ComponentViewer<? extends Component> view){
@@ -109,6 +103,7 @@ public class SpriteInfoPane extends ScrollPane{
 					removeMe();
 				});
 				this.getChildren().add(removeButton);
+				this.prefWidthProperty().bind(ComponentLister.this.prefWidthProperty());
 			}
 			
 			private void removeMe(){
