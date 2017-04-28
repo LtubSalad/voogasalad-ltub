@@ -11,24 +11,22 @@ import javafx.scene.layout.HBox;
  * @param <T>
  */
 public abstract class VariableSetter<T> extends HBox{
-	private double PREF_LABEL_WIDTH=200;
+	private double PREF_LABEL_WIDTH=150;
 	private double PREF_LABEL_HEIGHT=50;
 	
 	public VariableSetter(String variableName){
-		//Label label=produceLabel(clazz.getSimpleName());
 		Label descriptorLabel=produceLabel(variableName);
 		this.getChildren().addAll(descriptorLabel);
 	}
 	
 	public VariableSetter(Class<T> clazz,String variableName){
-		//Label label=produceLabel(clazz.getSimpleName());
 		Label descriptorLabel=produceLabel(variableName);
 		this.getChildren().addAll(descriptorLabel);
 	}
 	
 	public abstract T getValue() throws UnsupportedTypeException, Exception;
 	
-	public abstract void setInitialField(T initialValue);
+	public abstract void setField(T initialValue);
 
 	private Label produceLabel(String name){
 		Label label=new Label(name);
