@@ -10,6 +10,7 @@ public class MainForTestingGUI extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle(DEVELOPER_GUI);
 		primaryStage.show();
+		//MasterDeveloperInterface developerView = new MasterDeveloperInterface();
 		TowerAuthor developerView = new TowerAuthor();
 		primaryStage.setScene(developerView.getScene());
 		primaryStage.setFullScreen(true);

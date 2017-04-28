@@ -34,6 +34,7 @@ public class BackgroundButtonsPanel extends TowerSetButtonsPanel {
 	public BackgroundButtonsPanel(ScreenModelCreator smc) {
 		super(smc);
 		//makeButtons();
+		mySMC = smc;
 		rowsBox = new HBox();
 		colsBox = new HBox();
 		makeRowColSetters();
