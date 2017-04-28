@@ -62,7 +62,7 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 	}
 
 	@Override
-	public void setInitialField(Map<SkillType<? extends Skill>, Skill> initialValue) {
+	public void setField(Map<SkillType<? extends Skill>, Skill> initialValue) {
 		
 	}
 	
@@ -94,7 +94,7 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		}
 
 		@Override
-		public void setInitialField(T initialValue) {
+		public void setField(T initialValue) {
 			checkbox.setSelected(initialValue!=null);
 		}
 	}
@@ -118,7 +118,7 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		}
 		
 		@Override
-		public void setInitialField(BuildSkill buildSkill){
+		public void setField(BuildSkill buildSkill){
 			setSelected(buildSkill!=null);
 			availableSprites.getItems().add(buildSkill.getModel());
 			availableSprites.setValue(buildSkill.getModel());

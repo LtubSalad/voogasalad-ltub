@@ -9,5 +9,4 @@ public class TowerWelcomeScreen extends WelcomeScreen{
 		//TODO resource file
 		super("Tower Defense");
 	}
-
 }

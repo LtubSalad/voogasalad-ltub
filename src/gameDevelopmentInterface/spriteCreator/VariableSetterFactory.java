@@ -1,5 +1,6 @@
 package gameDevelopmentInterface.spriteCreator;
 
+import java.io.File;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
 
@@ -9,6 +10,7 @@ import gameDevelopmentInterface.Path;
 import helperAnnotations.VariableName;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
+import newengine.utils.image.LtubImage;
 
 public class VariableSetterFactory {
 	private DeveloperData data;
@@ -27,6 +29,12 @@ public class VariableSetterFactory {
 		}
 		else if(parameter.getType().isEnum()){
 			return new EnumSetter(parameter.getType(),name);
+		}
+		else if(parameter.getType().isAssignableFrom(LtubImage.class)){
+			return new ImageVariableSetter(name);
+		}
+		else if(parameter.getType().isAssignableFrom(File.class)){
+			return new FileVariableSetter(name);
 		}
 		else if(name.equals("Skills")){
 			return new SkillMapSetter(name, data);
