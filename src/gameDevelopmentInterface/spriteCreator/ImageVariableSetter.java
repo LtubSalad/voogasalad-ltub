@@ -1,11 +1,11 @@
 package gameDevelopmentInterface.spriteCreator;
 
 import java.io.File;
+import java.io.IOException;
 
 import exception.UnsupportedTypeException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -21,6 +21,7 @@ public class ImageVariableSetter extends VariableSetter<LtubImage>{
 	private StringProperty myImagePath;
 	private double PREF_IMAGE_WIDTH=300;
 	private double PREF_IMAGE_HEIGHT=300;
+	private final File base =new File(System.getProperty("user.dir")+File.separator+"data");
 	
 	public ImageVariableSetter(String variableName) {
 		super(variableName);
@@ -30,15 +31,15 @@ public class ImageVariableSetter extends VariableSetter<LtubImage>{
 		Button button= new Button("Choose Image File");
 		button.setOnMouseClicked((event)->{
 			FileChooser chooser=new FileChooser();
+			chooser.setInitialDirectory(base);	
 			File imageFile=chooser.showOpenDialog(new Stage());
 			if(imageFile!=null){
-				myImagePath.set(imageFile.toURI().toString());
+				File relativePath=new File(base.toURI().relativize(imageFile.toURI()).getPath());
+				myImagePath.set(relativePath.toString());
 			}
-			
 		});
 		myContents.getChildren().addAll(new ImageDisplay(),button);
 		myContents.setSpacing(20);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

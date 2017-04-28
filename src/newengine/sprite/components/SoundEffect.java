@@ -12,6 +12,8 @@ public class SoundEffect extends Component {
 	public static final ComponentType<SoundEffect> TYPE = new ComponentType<>(SoundEffect.class.getName());
 	
 	private String moveSoundFile;
+
+	private final File base =new File(System.getProperty("user.dir")+File.separator+"data");
 	
 	@ConstructorForDeveloper
 	public SoundEffect(@VariableName(name = "Sound file") File soundFile){
