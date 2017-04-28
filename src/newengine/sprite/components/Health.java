@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bus.BusEventHandler;
+import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.DeveloperMethod;
+import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
 import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.ChangeHealthEvent;
@@ -22,8 +24,8 @@ public class Health extends Component {
 	public static final ComponentType<Health> TYPE = new ComponentType<>(Health.class.getName());
 	private int health;
 
-
-	public Health(int health){
+	@ConstructorForDeveloper
+	public Health(@VariableName(name="health")int health){
 		this.health = health;
 	}
 	
@@ -38,10 +40,13 @@ public class Health extends Component {
 	
 	@Override
 	public void afterAdded(){
-		sprite.on(ChangeHealthEvent.ANY, (Serializable & BusEventHandler<ChangeHealthEvent>)e -> {
+		sprite.on(ChangeHealthEvent.ANY, e -> {
 			changeHealth(e.getChange());
 		});
-		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.STOP, (e) -> {
+			if (!e.getSprite().getComponent(Weapon.TYPE).isPresent()){
+				return;
+			}
 			Sprite another = e.getSprite();
 			Player owner = sprite.getComponent(Owner.TYPE).get().player();
 			another.getComponent(Owner.TYPE).ifPresent((anotherOwner) -> {
@@ -49,6 +54,7 @@ public class Health extends Component {
 						another.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
 							int damage = damageStrength.getStrength();
 							sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, -damage));
+							System.out.println("decremented health");
 						});				
 					}
 				});	

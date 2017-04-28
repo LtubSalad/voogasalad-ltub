@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import bus.BusEventHandler;
+import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.skill.ResetSkillCooldownEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
@@ -16,7 +17,12 @@ public class Cooldown extends Component {
 	public static final ComponentType<Cooldown> TYPE = new ComponentType<>(Cooldown.class.getName());
 
 	private Map<SkillType<? extends Skill>, Double> remainingTime = new HashMap<>();
-
+	
+	@ConstructorForDeveloper
+	public Cooldown(){
+		
+	}
+	
 	@Override
 	public void afterAdded() {
 		sprite.on(ResetSkillCooldownEvent.RESET, (Serializable & BusEventHandler<ResetSkillCooldownEvent>) (e) -> {

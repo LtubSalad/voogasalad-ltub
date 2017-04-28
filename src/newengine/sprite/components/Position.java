@@ -12,9 +12,12 @@ import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.DeveloperMethod;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
+import newengine.events.SpriteModelEvent;
 import newengine.events.sound.SoundEvent;
+import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.timer.DelayedEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -43,7 +46,7 @@ public class Position extends Component {
 
 	@Override
 	public void afterAdded() {
-		sprite.on(MoveEvent.START_POSITION, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.START_POSITION, (e) -> {
 			moveTo(e.getTarget());
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
 				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
@@ -54,7 +57,7 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.START_SPRITE, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.START_SPRITE, (e) -> {
 			moveTo(e.getTarget());
 			followingSprite();
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
@@ -63,7 +66,12 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
+		sprite.on(MoveEvent.STOP, (e) -> {
+//			if (e.getSprite().getComponent(Weapon.TYPE).isPresent()){
+//				System.out.println("the weapon reached dest so we remove it");
+//				//sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, sprite.getComponent(DamageStrength.TYPE).get().getStrength()));
+//				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, e.getSprite()));
+//			}
 			stopMoving();
 		});
 	}
@@ -83,7 +91,11 @@ public class Position extends Component {
 		double x = pos.x();
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
-//			sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+			if (sprite.getComponent(Weapon.TYPE).isPresent()){
+				System.out.println("weapon reaches target");
+				sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+			}
+			stopMoving();
 			return;
 		}
 		double xDiff = xDest - x;
@@ -94,8 +106,8 @@ public class Position extends Component {
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
-			sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			target.getSprite().ifPresent((targetSprite) -> {
+				System.out.println("weapon reaches target");
 				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			});
 			sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));

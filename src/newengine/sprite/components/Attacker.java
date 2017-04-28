@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import bus.BusEventHandler;
+import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.skill.Skill;
@@ -23,24 +24,23 @@ import newengine.utils.image.LtubImage;
 public class Attacker extends Component {
 
 	public static final ComponentType<Attacker> TYPE = new ComponentType<>(Attacker.class.getName());
-	private Sprite weapon;
 	private double reloadPeriod = 1;
 	private double timeRemaining = 1;
 	
 //	public Attacker(Sprite weapon) {
 //		this.weapon = weapon;
 //	}
+	
+	@ConstructorForDeveloper
+	public Attacker(){
+		
+	}
 
 	@Override
 	public void afterAdded() {
-		sprite.on(FireProjectileEvent.SPECIFIC, (Serializable & BusEventHandler<FireProjectileEvent>) e -> {
-//			if (!weaponReloaded()){
-//				return;
-//			}
-//			resetTimeRemaining();
+		sprite.on(FireProjectileEvent.SPECIFIC, e -> {
 			Sprite source = e.getSprite();
 			Sprite target = e.getTarget();
-//			Target target = e.getTarget();
 
 			Sprite weapon = new Sprite();
 			LtubImage image1 = new LtubImage("images/skills/bullet.png");
@@ -52,10 +52,11 @@ public class Attacker extends Component {
 			weapon.addComponent(new Owner(source.getComponent(Owner.TYPE).get().player()));
 			weapon.addComponent(new Position(source.getComponent(Position.TYPE).get().pos(), source.getComponent(Position.TYPE).get().heading()));
 			weapon.addComponent(new Images(imageSet1));
-			weapon.addComponent(new Speed(100));
+			weapon.addComponent(new Speed(250));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
 			weapon.addComponent(new DamageStrength(25));
-			weapon.addComponent(new GameBus());			
+			weapon.addComponent(new GameBus());	
+			weapon.addComponent(new Weapon());
 			
 			List<Sprite> spritesToAdd = new ArrayList<Sprite>();
 			spritesToAdd.add(weapon);
@@ -73,15 +74,6 @@ public class Attacker extends Component {
 		return TYPE;
 	}
 
-	private boolean weaponReloaded() {
-		return (timeRemaining < 0);
-	}
-	
-	private void resetTimeRemaining(){
-		timeRemaining = reloadPeriod;
-	}
-	
-	
 	public void onUpdate(double dt){
 		timeRemaining -= dt;
 	}

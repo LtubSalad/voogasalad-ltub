@@ -20,16 +20,20 @@ public class EventQueue extends Component {
 	private boolean eventFinished = true;
 	
 	@ConstructorForDeveloper
+	public EventQueue(){
+		this(new LinkedList<BusEvent>());
+	}
+	
 	public EventQueue(LinkedList<BusEvent> events) {
 		this.events = events;
 	}
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(QueueEvent.ADD, (Serializable & BusEventHandler<QueueEvent>)(e) -> {
+		sprite.on(QueueEvent.ADD, (e) -> {
 			addEvent(e.getEvent());
 		});
-		sprite.on(QueueEvent.NEXT, (Serializable & BusEventHandler<QueueEvent>)(e) -> {
+		sprite.on(QueueEvent.NEXT, (e) -> {
 			eventFinished = true;
 		});
 	}
