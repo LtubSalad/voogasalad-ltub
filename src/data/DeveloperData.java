@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.util.Pair;
+import newengine.sprite.Sprite;
 /**
  * 
  * @author Jake, Daniel
@@ -21,9 +22,12 @@ public class DeveloperData {
 	private static final String NUMBER_OF_STARTING_BONUSES = "Number of Starting Bonuses";
 	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
 	private ObservableList<Path> myPaths;
+	private ObservableList<SpriteMakerModel> mySprites;
 	private SpritesForScreenUse jakeSprites;
 	
 	public DeveloperData() {
+		List<SpriteMakerModel> list=new ArrayList<SpriteMakerModel>();
+		mySprites=FXCollections.observableList(list);
 		jakeSprites=new SpritesForScreenUse();
 		List<Path> dummyPaths=new ArrayList<>();
 		myPaths=FXCollections.observableList(dummyPaths);
@@ -44,11 +48,15 @@ public class DeveloperData {
 		myPaths.add(path);
 	}
 	
-	public List<Path> getPaths(){
+	public ObservableList<Path> getPaths(){
 		return myPaths;
 	}
 	
-	public SpritesForScreenUse getSprites(){
+	public ObservableList<SpriteMakerModel> getSprites(){
+		return mySprites;
+	}
+	
+	public SpritesForScreenUse getScreenSprites(){
 		return jakeSprites;
 	}
 	
