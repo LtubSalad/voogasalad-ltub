@@ -13,7 +13,7 @@ public abstract class  ComponentSetterView<T extends Component> extends VBox {
 		myType=clazz;
 		this.getChildren().add(new Label("Component: "+clazz.getSimpleName()));
 	}
-	
+
 	public Class<T> getComponentType(){
 		return myType;
 	}

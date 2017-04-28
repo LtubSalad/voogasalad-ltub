@@ -7,10 +7,8 @@ import java.util.List;
 
 import data.DeveloperData;
 import exception.UnsupportedTypeException;
-import gameDevelopmentInterface.Path;
 import gameDevelopmentInterface.developerdata.ComponentSetterView;
 import helperAnnotations.ConstructorForDeveloper;
-import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 /**
  * 
@@ -20,7 +18,7 @@ import newengine.sprite.component.Component;
  * GUI setters to instantiate a class using the constructor's parameters.
  * @param <T>
  */
-public class ComponentSetter<T extends Component> extends ComponentSetterView<T>{	
+public class ComponentSetter<T extends Component> extends ComponentSetterView{	
 	private List<VariableSetter> fieldSetters;
 	private Constructor<T> ctor;
 	private DeveloperData data;
@@ -30,6 +28,31 @@ public class ComponentSetter<T extends Component> extends ComponentSetterView<T>
 		this.data=data;
 		fieldSetters=new ArrayList<>();
 		Constructor<T>[] ctors=(Constructor<T>[]) myComponent.getConstructors();
+		for(Constructor<T> constructor:ctors){
+			if(constructor.isAnnotationPresent(ConstructorForDeveloper.class)){
+				ctor=constructor;
+				break;
+			}
+		}
+		
+		if(ctor==null){
+			return;
+		}
+
+		Parameter[] parameters=ctor.getParameters();
+		VariableSetterFactory setterFactory=new VariableSetterFactory(data);
+		for(int i=0;i<parameters.length;i++){
+			fieldSetters.add(setterFactory.setterFromParameter(parameters[i]));
+		}
+		fieldSetters.forEach((fieldSetter)->this.getChildren().add(fieldSetter));
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ComponentSetter(T component, DeveloperData data) throws UnsupportedTypeException{
+		super(component.getClass());
+		this.data=data;
+		fieldSetters=new ArrayList<>();
+		Constructor<T>[] ctors=(Constructor<T>[]) component.getClass().getConstructors();
 		for(Constructor<T> constructor:ctors){
 			if(constructor.isAnnotationPresent(ConstructorForDeveloper.class)){
 				ctor=constructor;
