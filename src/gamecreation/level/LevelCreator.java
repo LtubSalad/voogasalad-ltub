@@ -8,16 +8,18 @@ public abstract class LevelCreator extends TitledPane implements ILevelCreator{
 	private VBox content;
 	private LevelCreatorHolder parent;
 	private String name;
+	private LevelData data;
 	
-	public LevelCreator(int i, LevelCreatorHolder parent) {
-		this(Integer.toString(i), parent);
+	public LevelCreator(int i, LevelCreatorHolder parent, LevelData data) {
+		this(Integer.toString(i), parent, data);
 	}
 	
-	public LevelCreator(String s, LevelCreatorHolder parent){
+	public LevelCreator(String s, LevelCreatorHolder parent, LevelData data){
 		super();
 		this.parent = parent;
 		//TODO resource file
 		this.name = s;
+		this.data = data;
 		this.setText(s);
 		createContent();
 	}
@@ -38,6 +40,10 @@ public abstract class LevelCreator extends TitledPane implements ILevelCreator{
 	
 	public String getName(){
 		return name;
+	}
+
+	public LevelData getData(){
+		return data;
 	}
 	
 	@Override

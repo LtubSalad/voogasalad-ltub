@@ -7,5 +7,4 @@ public interface ILevelCreator {
 	public void addToContent(Node node);
 	public Node getCurrentContent();
 	public void remove(LevelCreator level);
-	public LevelData getData();
 }

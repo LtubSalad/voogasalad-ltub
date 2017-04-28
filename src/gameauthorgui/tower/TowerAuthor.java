@@ -6,23 +6,15 @@ import data.ScreenModelData;
 import gameDevelopmentInterface.BackgroundSetter;
 import gameDevelopmentInterface.GeneralDataCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
+import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import gameauthorgui.DeveloperStep;
 import gameauthorgui.GameAuthor;
-import gameauthorgui.NextStepButton;
-import gameauthorgui.PreviousStepButton;
-import gameauthorgui.StepOrganizer;
 import gameauthorgui.WelcomeScreen;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
+import gamecreation.level.LevelCreationPane;
 
 /**
  * 
  */
-
 public class TowerAuthor extends GameAuthor {
 	private static final String SET_THE_BACKGROUND = "Set the background";
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
@@ -31,72 +23,28 @@ public class TowerAuthor extends GameAuthor {
 	private static final String SCREEN_SETTING = "SCREEN_SETTING";
 	private static final String GENERAL_DATA = "GENERAL_DATA";
 	private static final String PATH_TO_STYLE_SHEETS = "/styleSheets/MainStyle.css";
-	public static final int SCENE_WIDTH = 1200;
-	public static final int SCENE_HEIGHT = 800;
-	private Scene developerScene;
-	private BorderPane view;
-	private Group currentStep;
-	private StepOrganizer developerSteps;
-	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
+	public static final int CENTER_OFFSETS = 200;
+	private GeneralDataCreator myGeneralDataCreator;
 	private DeveloperData myModelData;
-	private ScreenModelData myScreenData;
-	private Stage towerStage;
+	private ScreenModelData myScreenModelData;
 	
-	public TowerAuthor() {
-		towerStage = new Stage();
-		myScreenData = new ScreenModelData();
-		myScreenData.getAllObjectsOnScreen();
-	
+	public TowerAuthor() {	
+		super();
 		myModelData=new DeveloperData();
-		currentStep = new Group();
-		instantiate();
-		developerScene = new Scene(view, SCENE_WIDTH, SCENE_HEIGHT);
-		developerScene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
-		
-		towerStage.setScene(developerScene);
-		//towerStage.show();
-	}
-	
-	private void instantiate() {
-		view = new BorderPane();
-		currentStep.getChildren().add(new WelcomeScreen("Tower"));
+		myGeneralDataCreator = new GeneralDataCreator();
+		myScreenModelData = new ScreenModelData();
+		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();
-		view.setLeft(developerSteps);
-		view.setCenter(currentStep);
-		view.setBottom(instantiateButtons());
 	}
-
+	
 	public void instantiateSteps() {
-		developerSteps = new StepOrganizer(this);
-		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower")));
-		addStep(new DeveloperStep("Level Options", new LevelOptionsSelector()));
-		addStep(new DeveloperStep(SET_THE_BACKGROUND, new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenData)));
-		addStep(new DeveloperStep("Sprite creation",new SpriteCreatorPane(myModelData)));
+		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense")));
+		addStep(new DeveloperStep("Level Options", new LevelCreationPane(myModelData, getScene().getHeight()-CENTER_OFFSETS)));
+		addStep(new DeveloperStep(SET_THE_BACKGROUND, new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
+		addStep(new DeveloperStep("Spawner creation",new SpawnerCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
-		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenData)));
+		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData)));
 	}
 	
-	private HBox instantiateButtons() {
-		HBox buttons = new HBox(100);
-		buttons.getChildren().addAll(new PreviousStepButton(developerSteps), new NextStepButton(developerSteps));
-		buttons.setAlignment(Pos.CENTER);
-		return buttons;
-	}
-	
-	public void addStep(DeveloperStep step){
-		addStep(developerSteps.getNumberSteps(), step);
-	}
-	
-	public void addStep(int index, DeveloperStep step){
-		developerSteps.addStep(index, step);
-	}
-	
-	public void changeStep(DeveloperStep step){
-		currentStep.getChildren().clear();
-		currentStep.getChildren().add(step.getStep());
-	}
-
-	public Scene getScene() {
-		return developerScene;
-	}
 }
