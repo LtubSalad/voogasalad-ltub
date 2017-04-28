@@ -7,7 +7,6 @@ import javafx.beans.property.StringProperty;
 import newengine.managers.conditions.ICondition;
 
 public class LevelData extends Observable implements ILevelData {
-	private int diffMod; 
 	private String name;
 	private ICondition winningCondition;
 	private ICondition losingCondition;
