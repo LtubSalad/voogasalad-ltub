@@ -4,27 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-public class LevelCreatorHolder {
+public class LevelCreatorHolder extends ScrollPane{
 	private VBox holder;
 	private HBox addButtons;
 	private int numLevels;
 	private ArrayList<LevelCreator> levels;
 	
 	public LevelCreatorHolder(){
-		ScrollPane root = new ScrollPane();
+		super();
 		holder = new VBox();
-		root.setContent(holder);
-		Stage testStage = new Stage();
-		Scene testScene = new Scene(root, 400, 400);
-		testStage.setScene(testScene);
-		testStage.show();
+		this.setContent(holder);
 		numLevels = 0;
 		levels = new ArrayList<LevelCreator>();
 		setUpBox();

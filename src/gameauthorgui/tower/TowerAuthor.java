@@ -9,6 +9,7 @@ import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import gameauthorgui.DeveloperStep;
 import gameauthorgui.GameAuthor;
 import gameauthorgui.WelcomeScreen;
+import gamecreation.level.LevelCreatorHolder;
 
 /**
  * 
@@ -35,7 +36,7 @@ public class TowerAuthor extends GameAuthor {
 	
 	public void instantiateSteps() {
 		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense")));
-		addStep(new DeveloperStep("Level Options", new LevelOptionsSelector()));
+		addStep(new DeveloperStep("Level Options", new LevelCreatorHolder()));
 		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
 		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData)));

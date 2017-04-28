@@ -1,6 +1,5 @@
 package gameDevelopmentDemo;
 
-import gameDevelopmentInterface.MasterDeveloperInterface;
 import gameauthorgui.tower.TowerAuthor;
 import javafx.application.Application;
 import javafx.stage.Stage;
