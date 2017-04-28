@@ -3,9 +3,8 @@ package gameDevelopmentInterface;
 import java.util.ResourceBundle;
 
 import data.DeveloperData;
-import gamecreation.StringParameterInput;
+import gamecreation.IntegerInputText;
 import javafx.collections.ObservableMap;
-import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -38,9 +37,9 @@ public class GeneralDataCreator extends BorderPane{
 	private ObservableMap<String, String> myData = myGeneralModel.getAllData();
 	private GeneralGameDataBar myBar = new GeneralGameDataBar(myData);
 	private VBox content;
-	private StringParameterInput numGold;
-	private StringParameterInput numLives;
-	private StringParameterInput levelCompletionBonus;
+	private IntegerInputText numGold;
+	private IntegerInputText numLives;
+	private IntegerInputText levelCompletionBonus;
 	private CheckBox towerBuild;
 
 
@@ -63,13 +62,13 @@ public class GeneralDataCreator extends BorderPane{
 	
 
 	private void initTiles() {
-		numLives = new StringParameterInput(myResources.getString(NUM_LIVES));
+		numLives = new IntegerInputText(myResources.getString(NUM_LIVES));
 		numLives.getTextField().textProperty().addListener(e -> sendNumLives());
 		
-		numGold = new StringParameterInput(myResources.getString(NUM_STARTING_GOLD));
+		numGold = new IntegerInputText(myResources.getString(NUM_STARTING_GOLD));
 		numGold.getTextField().textProperty().addListener(e -> sendStartingGold());
 		
-		levelCompletionBonus = new StringParameterInput(myResources.getString(NUM_STARTING_BONUSES));
+		levelCompletionBonus = new IntegerInputText(myResources.getString(NUM_STARTING_BONUSES));
 		levelCompletionBonus.getTextField().textProperty().addListener(e -> sendLevelBonuses());
 		
 		towerBuild = new CheckBox(myResources.getString(BUILD_IN_GAME));

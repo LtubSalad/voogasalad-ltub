@@ -5,12 +5,12 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-public class IntegerParameterInput extends HBox implements ParameterInput<Integer>{
+public class IntegerInputSlider extends HBox implements ParameterInput<Integer>{
 	public static final String TYPE = "Integer";
 	private String varName;
 	private Slider slide;
 
-	public IntegerParameterInput(String varName, int startRange, int endRange){
+	public IntegerInputSlider(String varName, int startRange, int endRange){
 		super(10);
 		this.varName = varName;
 		createBox(startRange, endRange);
