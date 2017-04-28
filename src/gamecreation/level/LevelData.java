@@ -1,9 +1,12 @@
 package gamecreation.level;
 
+import newengine.managers.conditions.Condition;
+
 public interface LevelData {
 
 	public String getName();
-	public int getTotalMonsters();
+	public Condition getWinningCondition();
+	public Condition getLosingCondition();
 	public double getSpawnTime();
 	public double getDamageMultiplier();
 }

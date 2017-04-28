@@ -1,6 +1,8 @@
 package newengine.managers.conditions;
 
 import bus.EventBus;
+import newengine.events.conditions.EndConditionTriggeredEvent;
+import newengine.events.conditions.SetEndConditionEvent;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SpriteModel;
 
@@ -30,7 +32,6 @@ public class ConditionManager {
 	
 	private void checkWinningCondition(){
 		if(winning != null && winning.check()){
-			//TODO Have game player to be set to subscribe to this event
 			bus.emit(new EndConditionTriggeredEvent(EndConditionTriggeredEvent.WIN));
 		}
 	}
@@ -47,6 +48,5 @@ public class ConditionManager {
 		condition.setSpriteModel(spriteModel);
 		return condition;
 	}
-
 	
 }

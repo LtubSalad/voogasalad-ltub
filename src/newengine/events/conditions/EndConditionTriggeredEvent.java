@@ -1,4 +1,4 @@
-package newengine.managers.conditions;
+package newengine.events.conditions;
 
 import bus.BusEvent;
 import bus.BusEventType;

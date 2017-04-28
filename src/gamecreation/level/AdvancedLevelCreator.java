@@ -34,7 +34,7 @@ public class AdvancedLevelCreator extends LevelCreator{
 	}
 	
 	public LevelData getData(){
-		return new AdvancedLevelData(getName(), numEnemies.getValue(), spawnTime.getValue(), damageMultiplier.getValue());
+		return new AdvancedLevelData(getName(), spawnTime.getValue(), damageMultiplier.getValue());
 	}
 	
 	

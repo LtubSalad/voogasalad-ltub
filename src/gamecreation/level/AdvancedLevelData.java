@@ -1,14 +1,16 @@
 package gamecreation.level;
 
+import newengine.managers.conditions.Condition;
+
 public class AdvancedLevelData implements LevelData {
 	private String name;
-	private int totalMonsters;
 	private double spawnTime;
 	private double damageMulti;
+	private Condition winningCondition;
+	private Condition losingCondition;
 	
-	public AdvancedLevelData(String name, int totalMonsters, double spawnTime, double damageMultiplier){
+	public AdvancedLevelData(String name, double spawnTime, double damageMultiplier){
 		this.name = name;
-		this.totalMonsters = totalMonsters;
 		this.spawnTime = spawnTime;
 		this.damageMulti = damageMultiplier;
 	}
@@ -19,10 +21,6 @@ public class AdvancedLevelData implements LevelData {
 		return name;
 	}
 
-	@Override
-	public int getTotalMonsters() {
-		return totalMonsters;
-	}
 
 	@Override
 	public double getSpawnTime() {
@@ -32,6 +30,17 @@ public class AdvancedLevelData implements LevelData {
 	@Override
 	public double getDamageMultiplier() {
 		return damageMulti;
+	}
+
+
+	@Override
+	public Condition getWinningCondition() {
+		return winningCondition;
+	}
+
+	@Override
+	public Condition getLosingCondition() {
+		return losingCondition;
 	}
 
 }

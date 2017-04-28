@@ -6,11 +6,16 @@ import javafx.scene.text.Text;
 
 public class LevelCreationPane extends BorderPane {
 	
-	public LevelCreationPane(){
+	private static final double DEFAULT_PREF_HEIGHT = 600.0;
+
+	public LevelCreationPane(double prefHeight){
 		super();
 		this.setTop(createTitle());
-		this.setCenter(new LevelCreatorHolder());
-		
+		this.setCenter(new LevelCreatorHolder(prefHeight));
+	}
+	
+	public LevelCreationPane(){
+		this(DEFAULT_PREF_HEIGHT);
 	}
 	
 	private Text createTitle(){

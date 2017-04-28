@@ -8,9 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 public class LevelCreatorHolder extends ScrollPane{
 	private VBox holder;
@@ -19,13 +16,12 @@ public class LevelCreatorHolder extends ScrollPane{
 	private ArrayList<LevelCreator> levels;
 	public static final int DEFAULT_PREF_HEIGHT = 600;
 
-	public LevelCreatorHolder(int prefHeight){
+	public LevelCreatorHolder(double prefHeight){
 		super();
 		this.setFitToHeight(true);
 		
 		holder = new VBox();
 		holder.setPrefHeight(prefHeight);
-		createTitle();
 		
 		this.setContent(holder);
 		numLevels = 0;
@@ -36,13 +32,7 @@ public class LevelCreatorHolder extends ScrollPane{
 	public LevelCreatorHolder(){
 		this(DEFAULT_PREF_HEIGHT);
 	}
-	
-	private void createTitle(){
-		Text title = new Text("Level Creation");
-		title.setTextAlignment(TextAlignment.CENTER);
-		title.setFont(new Font(40));
-		holder.getChildren().add(title);
-	}
+
 	
 	private void setUpBox(){
 		holder.setAlignment(Pos.CENTER);
@@ -60,7 +50,7 @@ public class LevelCreatorHolder extends ScrollPane{
 	}
 	
 	private  void addDefaultLevelCreator(){
-		addLevelCreator(new SimpleLevelCreator("Level " + (numLevels+1), this));
+		addLevelCreator(new BasicLevelCreator("Level " + (numLevels+1), this));
 	}
 	private void addAdvancedLevelCreator(){
 		addLevelCreator(new AdvancedLevelCreator("Level "+ (numLevels+1), this));
@@ -112,7 +102,6 @@ public class LevelCreatorHolder extends ScrollPane{
 		for(LevelData level : levels){
 			System.out.println("\n" + "New Level Beginning:");
 			System.out.println(level.getName());
-			System.out.println(level.getTotalMonsters());
 			System.out.println(level.getSpawnTime());
 			System.out.print(level.getDamageMultiplier());
 		}
