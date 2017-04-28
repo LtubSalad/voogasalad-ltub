@@ -21,6 +21,7 @@ public class User {
 	public User(String username, String imageFile) {
 		this.name = username; 
 		this.image = new Image(imageFile);
+		history = new UserHistory(); 
 		// directory
 	}
 	
@@ -43,6 +44,14 @@ public class User {
 	
 	public UserHistory getUserHistory(){
 		return history; 
+	}
+	
+	public String getName(){
+		return name; 
+	}
+	
+	public Image getImage(){
+		return image; 
 	}
 
 }

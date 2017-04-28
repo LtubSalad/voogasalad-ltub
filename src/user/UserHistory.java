@@ -23,6 +23,9 @@ public class UserHistory {
 		gameToFile = new HashMap<String, String>();  
 		authored = new ArrayList<String>();
 		played = new ArrayList<String>(); 
+		
+		authToHistory = new HashMap<String, GameHistory>();
+		gameToHistory = new HashMap<String, GameHistory>();
 	}
 	
 		
