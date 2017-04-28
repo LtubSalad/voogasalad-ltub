@@ -1,6 +1,3 @@
-/**
- * 
- */
 package player.levelChoice;
 
 import javafx.scene.control.MenuItem;
@@ -22,8 +19,8 @@ public class HelpMenuHandler implements MenuItemHandler{
 
 	@Override
 	public void handle() {
-		
-		
+		HelpMessage help = new HelpMessage();
+		help.show();		
 	}
 
 	@Override
