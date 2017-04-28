@@ -1,9 +1,7 @@
 package gameDevelopmentInterface.spriteCreator;
 
 import exception.UnsupportedTypeException;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 
 /**
  * 
