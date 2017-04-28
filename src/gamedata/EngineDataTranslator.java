@@ -13,6 +13,9 @@ import newengine.sprite.Sprite;
  */
 public class EngineDataTranslator implements Translator{
 	
+	//FIXME: (Tahia) Finish this class
+	
+	
 	List<Sprite> spritesToBreak; 
 	
 	// TODO: add resource file 
@@ -32,4 +35,13 @@ public class EngineDataTranslator implements Translator{
 		// disassemble the component by into string (type) and get its constructor from the resource file 
 		
 	}
-}
+
+	@Override
+	public List getTranslated() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	}
+

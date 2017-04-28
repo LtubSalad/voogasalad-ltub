@@ -14,29 +14,30 @@ import javafx.scene.control.ChoiceBox;
  * @param <T>
  */
 public class EnumSetter<T extends Enum> extends VariableSetter<T>{
-	private T selectedEnum;
+	private ChoiceBox<T> enumChoices;
 	
 	public EnumSetter(Class<T> clazz,String description){
-		this.getChildren().add(produceLabel(description));
+		super(clazz,description);
 		T[] enumConstants=clazz.getEnumConstants();
 		List<T> list=new ArrayList<>();
 		for(int i=0; i< enumConstants.length;i++){
 			list.add(enumConstants[i]);
 		}
 	
-		ChoiceBox<T> enumChoices=new ChoiceBox<>();		
+		enumChoices=new ChoiceBox<>();		
 		enumChoices.setItems(FXCollections.observableList(list));
-		
-		enumChoices.selectionModelProperty().addListener((invalidation)->{
-			selectedEnum=enumChoices.getValue();
-		});
 		this.getChildren().add(enumChoices);
 	}
 	
 	@Override
 	public T getValue() {
-		// TODO Auto-generated method stub
-		return selectedEnum;
+		return enumChoices.getValue();
+	}
+
+	@Override
+	public void setField(T initialValue) {
+		enumChoices.getSelectionModel().select(initialValue);
+		
 	}
 
 }

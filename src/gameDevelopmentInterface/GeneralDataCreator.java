@@ -1,13 +1,16 @@
 package gameDevelopmentInterface;
 
 import java.util.ResourceBundle;
+
 import data.DeveloperData;
+import gameauthorgui.inputhelpers.IntegerInputText;
 import javafx.collections.ObservableMap;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Pair;
 
 /**
@@ -17,38 +20,33 @@ import javafx.util.Pair;
  * GeneralModelData classes when the save button is pressed on the text input
  * box.
  * 
- * @author Jake
+ * @author Jake, Matt
  */
-public class GeneralDataCreator extends GridPane{
+public class GeneralDataCreator extends BorderPane{
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
 	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
-	private static final int INSETS = 50;
-	private static final int MAX_SCREEN_SIZE = 600;
-	private static final String SAVE_ALL_VALUES = "SAVE_ALL_VALUES";
-	private static final String NUM_STARTING_BONUSES = "NUM_STARTING_BONUSES";
+	private static final int OFFSETS = 50;
+	private static final String LEVEL_COMPLETION_BONUS = "LEVEL_COMPLETION_BONUS";
 	private static final String NUM_STARTING_GOLD = "NUM_STARTING_GOLD";
-	private static final String NUM_LEVELS = "NUM_LEVELS";
+	private static final String BUILD_IN_GAME = "BUILD_IN_GAME";
 	private static final String NUM_LIVES = "NUM_LIVES";
-	private static final String SEND = "SEND";
-	private TextArea myNumLivesInput = new TextArea();
-	private TextArea myNumLevelsInput = new TextArea();
-	private TextArea myStartingGoldInput = new TextArea();
-	private TextArea myStartingBonusesInput = new TextArea();
-	private Button sendNumLivesInput = new Button(myResources.getString(SEND));
-	private Button sendNumLevelsInput = new Button(myResources.getString(SEND));
-	private Button sendStartingGoldInput = new Button(myResources.getString(SEND));
-	private Button sendStartingBonusesInput = new Button(myResources.getString(SEND));
-	private Button saveAll = new Button(myResources.getString(SAVE_ALL_VALUES));
 	private DeveloperData myGeneralModel = new DeveloperData();
 	private ObservableMap<String, String> myData = myGeneralModel.getAllData();
 	private GeneralGameDataBar myBar = new GeneralGameDataBar(myData);
+	private VBox content;
+	private IntegerInputText numGold;
+	private IntegerInputText numLives;
+	private IntegerInputText levelCompletionBonus;
+	private CheckBox towerBuild;
+
 
 	public GeneralDataCreator() {
-		this.setMaxSize(MAX_SCREEN_SIZE, MAX_SCREEN_SIZE);
-		this.setPadding(new Insets(INSETS, INSETS, INSETS, INSETS));
-		this.setHgap(INSETS / 5);
-		setupButtons();
+		super();
+		content = new VBox(OFFSETS);
+		this.setCenter(content);
+		setupTitle();
+		initTiles();
 		placeTiles();
 	}
 
@@ -59,52 +57,51 @@ public class GeneralDataCreator extends GridPane{
 	public GeneralGameDataBar getBar() {
 		return myBar;
 	}
+	
+
+	private void initTiles() {
+		numLives = new IntegerInputText(myResources.getString(NUM_LIVES));
+		numLives.getTextProperty().addListener(e -> sendNumLives());
+		
+		numGold = new IntegerInputText(myResources.getString(NUM_STARTING_GOLD));
+		numGold.getTextProperty().addListener(e -> sendStartingGold());
+		
+		levelCompletionBonus = new IntegerInputText(myResources.getString(LEVEL_COMPLETION_BONUS));
+		levelCompletionBonus.getTextProperty().addListener(e -> sendLevelBonuses());
+		
+		towerBuild = new CheckBox(myResources.getString(BUILD_IN_GAME));
+		towerBuild.selectedProperty().addListener(e -> sendTowerBuild());
+	}
+	
+	private void setupTitle(){
+		Text title = new Text("General Game Data");
+		title.setFont(new Font(40));	
+		title.setTextAlignment(TextAlignment.CENTER);
+		this.setTop(title);
+	}
 
 	private void placeTiles() {
-		this.add(new Text(myResources.getString(NUM_LIVES)), 0, 0);
-		this.add(new Text(myResources.getString(NUM_LEVELS)), 1, 0);
-		this.add(new Text(myResources.getString(NUM_STARTING_GOLD)), 2, 0);
-		this.add(new Text(myResources.getString(NUM_STARTING_BONUSES)), 3, 0);
-		this.add(myNumLivesInput, 0, 1);
-		this.add(myNumLevelsInput, 1, 1);
-		this.add(myStartingGoldInput, 2, 1);
-		this.add(myStartingBonusesInput, 3, 1);
-		this.add(sendNumLivesInput, 0, 2);
-		this.add(sendNumLevelsInput, 1, 2);
-		this.add(sendStartingGoldInput, 2, 2);
-		this.add(sendStartingBonusesInput, 3, 2);
-		this.add(saveAll, 4, 1);
+		content.getChildren().addAll(numLives, numGold, levelCompletionBonus, towerBuild);
 	}
-
-	private void setupButtons() {
-		sendNumLivesInput.setOnAction(e -> sendNumLives());
-		sendNumLevelsInput.setOnAction(e -> sendNumLevels());
-		sendStartingGoldInput.setOnAction(e -> sendStartingGold());
-		sendStartingBonusesInput.setOnAction(e -> sendStartingBonuses());
-		saveAll.setOnAction(e -> {
-			sendNumLives();
-			sendNumLevels();
-			sendStartingGold();
-			sendStartingBonuses();
-		});
-		saveAll.setMinSize(150, 30);
-	}
-
+	
 	private void sendNumLives() {
-		myGeneralModel.addData(new Pair<String, String>(myResources.getString(NUM_LIVES), myNumLivesInput.getText()));
+		myGeneralModel.addData(new Pair<String, String>(myResources.getString(NUM_LIVES), numLives.getValue()));
+		System.out.println("check" + numLives.getValue());
 	}
 
-	private void sendNumLevels() {
-		myGeneralModel.addData(new Pair<String, String>(myResources.getString(NUM_LEVELS), myNumLevelsInput.getText()));
-	}
 
 	private void sendStartingGold() {
 		myGeneralModel.addData(
-				new Pair<String, String>(myResources.getString(NUM_STARTING_GOLD), myStartingGoldInput.getText()));
+				new Pair<String, String>(myResources.getString(NUM_STARTING_GOLD), numGold.getValue()));
 	}
 
-	private void sendStartingBonuses() {
-		myGeneralModel.addData(new Pair<String, String>(myResources.getString(NUM_STARTING_BONUSES),
-				myStartingBonusesInput.getText()));
+	private void sendLevelBonuses() {
+		myGeneralModel.addData(new Pair<String, String>(myResources.getString(LEVEL_COMPLETION_BONUS),
+				levelCompletionBonus.getValue()));
+	}
+	
+	private void sendTowerBuild(){
+		myGeneralModel.addData(new Pair<String, String>(myResources.getString(BUILD_IN_GAME), 
+				Boolean.toString(towerBuild.isSelected())));
 	}
 }

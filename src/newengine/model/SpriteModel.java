@@ -72,6 +72,7 @@ public class SpriteModel {
 				sprite.emit(new SetGameBusEvent(bus));
 			}
 		}
+		
 	}
 	private void removeSprite(List<Sprite> sprites) {
 		for (Sprite sprite : sprites) {

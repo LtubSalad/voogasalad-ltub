@@ -97,7 +97,7 @@ public class Sprite {
 //		BusEventHandler<T> newHandler;
 //		
 //		newHandler = (onFired) -> {
-//			try {
+//			try { 
 //				scriptHandler.eval(script);
 //			} catch (ScriptException e) {
 //				// TODO Auto-generated catch block

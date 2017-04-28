@@ -6,9 +6,9 @@ import data.DeveloperData;
 import data.ScreenModelData;
 import gameDevelopmentInterface.GeneralDataCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
+import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import gameauthorgui.DeveloperStep;
 import gameauthorgui.GameAuthor;
-import gameauthorgui.tower.SpriteCreatorPane;
 
 public class RTSAuthor extends GameAuthor{
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
@@ -31,9 +31,9 @@ public class RTSAuthor extends GameAuthor{
 	@Override
 	public void instantiateSteps() {
 		addStep(new DeveloperStep("Welcome", new RTSWelcomeScreen()));
-		addStep(new DeveloperStep("Sprite creation",new SpriteCreatorPane(myModelData)));
+		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
 		addStep(new DeveloperStep("General Data", myGeneralDataCreator));
-		addStep(new DeveloperStep("Screen Setting", new ScreenModelCreator(myModelData.getSprites(),myGeneralDataCreator, myScreenModelData )));
+		addStep(new DeveloperStep("Screen Setting", new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData )));
 	}
 
 }

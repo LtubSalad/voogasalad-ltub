@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import bus.BusEvent;
-import gamecreation.DataWrapper;
+import gameauthorgui.inputhelpers.DataWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.util.Pair;
@@ -104,6 +104,11 @@ public class SpriteMakerModel {
 		this.myCustomEventHandlers = toCopy.myCustomEventHandlers;
 		this.myComponents = toCopy.myComponents;
 		this.myScriptMap = toCopy.myScriptMap;
+	}
+	
+	public SpriteMakerModel(String name){
+		this();
+		spriteName=name;
 	}
 	
 	public void clearComponents(){

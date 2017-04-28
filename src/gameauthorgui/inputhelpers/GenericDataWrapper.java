@@ -1,4 +1,4 @@
-package gamecreation;
+package gameauthorgui.inputhelpers;
 
 public class GenericDataWrapper<E> implements DataWrapper{
 	private E e;

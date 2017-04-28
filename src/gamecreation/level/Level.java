@@ -1,4 +1,4 @@
-package gamecreation;
+package gamecreation.level;
 
 public interface Level {
 	

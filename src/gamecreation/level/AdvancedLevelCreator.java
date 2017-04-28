@@ -1,13 +1,13 @@
 package gamecreation.level;
 
-import gamecreation.DoubleParameterInput;
-import gamecreation.IntegerParameterInput;
+import gameauthorgui.inputhelpers.DoubleParameterInput;
+import gameauthorgui.inputhelpers.IntegerInputSlider;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class AdvancedLevelCreator extends LevelCreator{
 	private VBox content;
-	private IntegerParameterInput numEnemies;
+	private IntegerInputSlider numEnemies;
 	private DoubleParameterInput spawnTime;
 	private DoubleParameterInput damageMultiplier;
 
@@ -24,7 +24,7 @@ public class AdvancedLevelCreator extends LevelCreator{
 	public void createContent() {
 		content = new VBox();
 		//TODO magic values
-		numEnemies = new IntegerParameterInput("Number of Enemies", 0, 500);
+		numEnemies = new IntegerInputSlider("Number of Enemies", 0, 500);
 		spawnTime = new DoubleParameterInput("Time between spawn (sec)",0, 10);
 		damageMultiplier = new DoubleParameterInput("Damage Multiplier", 0, 5);
 		Button remove = new Button("remove");

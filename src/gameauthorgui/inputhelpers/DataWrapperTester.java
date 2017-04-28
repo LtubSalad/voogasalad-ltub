@@ -1,4 +1,4 @@
-package gamecreation;
+package gameauthorgui.inputhelpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
