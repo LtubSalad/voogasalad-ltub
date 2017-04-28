@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import bus.BusEventHandler;
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.DeveloperMethod;
+import helperAnnotations.VariableName;
 import newengine.events.skill.AddSkillEvent;
 import newengine.events.skill.ResetSkillCooldownEvent;
 import newengine.events.skill.TriggerSkillEvent;
@@ -20,7 +23,8 @@ public class SkillSet extends Component {
 	public static final ComponentType<SkillSet> TYPE = new ComponentType<>(SkillSet.class.getName());
 	private Map<SkillType<? extends Skill>, Skill> skills = new HashMap<>();
 	
-	public SkillSet(Map<SkillType<? extends Skill>, Skill> skills) {
+	@ConstructorForDeveloper
+	public SkillSet(@VariableName(name = "Skills") Map<SkillType<? extends Skill>, Skill> skills) {
 		this.skills = skills;
 	}
 	
