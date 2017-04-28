@@ -59,10 +59,12 @@ public class ImageVariableSetter extends VariableSetter<LtubImage>{
 			Rectangle rec=new Rectangle(PREF_IMAGE_WIDTH,PREF_IMAGE_HEIGHT);
 			this.getChildren().add(rec);
 			rec.setFill(Color.BEIGE);
+			this.setAutoSizeChildren(false);
 			myImagePath.addListener((invalidation)->{
 				display=new ImageView(new LtubImage(myImagePath.getValue()).getFileName());
 				display.fitHeightProperty().setValue(PREF_IMAGE_HEIGHT);
 				display.fitWidthProperty().setValue(PREF_IMAGE_WIDTH);
+				this.getChildren().clear();
 				this.getChildren().add(display);
 				
 			});
