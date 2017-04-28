@@ -16,7 +16,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import player.App;
 
 /**

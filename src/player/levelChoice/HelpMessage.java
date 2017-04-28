@@ -1,7 +1,7 @@
 /**
  * 
  */
-package player.passwordManager;
+package player.levelChoice;
 
 import java.util.ResourceBundle;
 
@@ -18,26 +18,24 @@ import utilities.PopUpMessage;
  * @author Zhiyong
  *
  */
-public class SuccessRegistration implements PopUpMessage {
-	
+public class HelpMessage implements PopUpMessage{
 	private ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
-	
-	public void show(){
+
+	@Override
+	public void show() {
 		
-		Stage stage = new Stage();
-		
-		Text splash = new Text();
-		
-		splash = new Text(10,50,myResources.getString("success"));
+		Stage stage = new Stage();		
+		Text splash = new Text();		
+		splash = new Text(10,50,myResources.getString("HelpMessageForStarting"));
 		splash.setFont(Font.font(25));
 		splash.setFill(Color.DARKVIOLET);
 		Pane root = new Pane();
 		root.getChildren().add(splash);
 		Scene scene = new Scene(root,400,200);
-		stage.setScene(scene);
-		stage.show();
-		
-
+		stage.setScene(scene);		
+		stage.show();		
 	}
+	
+	
 
 }
