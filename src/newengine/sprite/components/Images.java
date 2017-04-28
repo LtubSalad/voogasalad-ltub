@@ -21,10 +21,10 @@ public class Images extends Component {
 		this.imageFilePath = filePath;
 	}
 //	
-//	@ConstructorForDeveloper
-//	public Images(@VariableName(name = "filepath") String filepath){
-//		imageSet = new ImageSet(filepath);
-//	}
+	@ConstructorForDeveloper
+	public Images(@VariableName(name = "Image") LtubImage image){
+		this(image.getFileName());
+	}
 	
 	
 	

@@ -1,6 +1,7 @@
 package newengine.sprite.components;
 
 import commons.point.GamePoint;
+import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.skill.TriggerSkillEvent;
 import newengine.events.spawner.SpawnPrefEvent;
 import newengine.events.timer.PeriodicEvent;
@@ -14,6 +15,11 @@ public class Spawner extends Component {
 	private double secondsBetween;
 	private int totalNumber;
 
+	@ConstructorForDeveloper
+	public Spawner(){
+		
+	}
+	
 	@Override
 	public void afterAdded() { 
 		//sprite.on(SpawnPrefEvent.SETPREFS, e -> {

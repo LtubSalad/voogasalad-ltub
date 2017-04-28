@@ -29,7 +29,7 @@ public class SimpleVariableSetter<T> extends VariableSetter<T>{
 	}
 
 	@Override
-	public void setInitialField(T initialValue) {
+	public void setField(T initialValue) {
 		value.setText(initialValue.toString());
 	}
 
