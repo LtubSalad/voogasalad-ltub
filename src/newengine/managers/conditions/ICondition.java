@@ -37,4 +37,5 @@ public interface ICondition {
 	 * @param playerRelationModel
 	 */
 	public void setPlayerRelationModel(PlayerRelationModel playerRelationModel);
+	
 }

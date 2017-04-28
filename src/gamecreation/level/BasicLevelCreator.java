@@ -28,8 +28,8 @@ public class BasicLevelCreator extends LevelCreator{
 	private void initConditions(){
 		winningConditions = new HashMap<String, Class<? extends ICondition>>();
 		losingConditions = new HashMap<String, Class<? extends ICondition>>();
-		winningConditions.put("Gold Minimum", GoldMinimumCondition.class);
 		winningConditions.put("No Monsters Left", NoMonstersCondition.class);
+		winningConditions.put("Gold Minimum (Input)", GoldMinimumCondition.class);
 		losingConditions.put("No Lives Left", NoLivesCondition.class);
 	}
 	
@@ -43,7 +43,23 @@ public class BasicLevelCreator extends LevelCreator{
 		
 		ComboBoxParameterInput winningCondition = new ComboBoxParameterInput("Winning Condition", new ArrayList<String>(winningConditions.keySet()));
 		ComboBoxParameterInput losingCondition = new ComboBoxParameterInput("Losing Condition", new ArrayList<String> (losingConditions.keySet()));
+//		winningCondition.getValueProperty().addListener(e -> {
+//			if(winningCondition.getValue().contains("(Input)")){
+//				winningCondition.appendTextInput();
+//			}
+//			else{
+//				winningCondition.removeTextInput();
+//				try {
+//					getData().setWinningCondition(winningConditions.get(winningCondition.getValue()).newInstance());
+//				} catch(Exception exc){
+//					//FIXME
+//					exc.printStackTrace();
+//					System.out.println("Not a valid condition");
+//				}
+//			}
+//		});
 		
+	
 		Button remove = new Button("Remove");
 		remove.setOnAction(e -> super.remove(this));
 		

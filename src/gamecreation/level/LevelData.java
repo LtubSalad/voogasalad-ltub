@@ -4,13 +4,13 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javafx.beans.property.StringProperty;
-import newengine.managers.conditions.Condition;
+import newengine.managers.conditions.ICondition;
 
 public class LevelData extends Observable implements ILevelData {
 	private int diffMod; 
 	private String name;
-	private Condition winningCondition;
-	private Condition losingCondition;
+	private ICondition winningCondition;
+	private ICondition losingCondition;
 	private double spawnTime;
 
 	public LevelData(){
@@ -37,13 +37,18 @@ public class LevelData extends Observable implements ILevelData {
 		return spawnTime;
 	}
 
+	public void setWinningCondition(ICondition condition){
+		this.winningCondition = condition;
+		System.out.println(winningCondition == null);
+	}
+	
 	@Override
-	public Condition getWinningCondition() {
+	public ICondition getWinningCondition() {
 		return winningCondition;
 	}
 
 	@Override
-	public Condition getLosingCondition() {
+	public ICondition getLosingCondition() {
 		return losingCondition;
 	}
 
