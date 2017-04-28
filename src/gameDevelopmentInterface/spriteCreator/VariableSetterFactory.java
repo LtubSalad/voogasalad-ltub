@@ -1,5 +1,6 @@
 package gameDevelopmentInterface.spriteCreator;
 
+import java.io.File;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
 
@@ -31,6 +32,9 @@ public class VariableSetterFactory {
 		}
 		else if(parameter.getType().isAssignableFrom(LtubImage.class)){
 			return new ImageVariableSetter(name);
+		}
+		else if(parameter.getType().isAssignableFrom(File.class)){
+			return new FileVariableSetter(name);
 		}
 		else if(name.equals("Skills")){
 			return new SkillMapSetter(name, data);
