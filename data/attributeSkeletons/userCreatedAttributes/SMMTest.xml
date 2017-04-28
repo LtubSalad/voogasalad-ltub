@@ -1,0 +1,17 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <newengine.sprite.components.TestPosition>
+      <posVar>
+        <t class="commons.point.GamePoint">
+          <x>0.0</x>
+          <y>0.0</y>
+        </t>
+      </posVar>
+      <headingVar>
+        <t class="double">0.0</t>
+      </headingVar>
+      <isMoving>false</isMoving>
+    </newengine.sprite.components.TestPosition>
+  </myComponents>
+  <myEventHandlers/>
+</data.SpriteMakerModel>

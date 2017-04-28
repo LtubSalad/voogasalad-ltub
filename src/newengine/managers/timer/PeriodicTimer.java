@@ -21,6 +21,7 @@ public class PeriodicTimer {
 	}
 	
 	public void update(double dt) {
+		System.out.println("Time remaining: " + timeRemained);
 		if (repeatingTimes == 0) {
 			finished = true;
 			return;
@@ -28,6 +29,7 @@ public class PeriodicTimer {
 		if (callback == null) {return;} // TODO
 		timeRemained += -dt;
 		if (timeRemained <= 0) {
+			System.out.println("Timer working");
 			callback.execute();
 			if (repeatingTimes > 0) {
 				repeatingTimes--;
