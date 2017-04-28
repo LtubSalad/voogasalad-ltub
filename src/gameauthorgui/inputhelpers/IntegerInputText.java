@@ -1,7 +1,7 @@
 package gameauthorgui.inputhelpers;
 
 import gameauthorgui.IntegerTextField;
-import javafx.scene.control.TextField;
+import javafx.beans.property.StringProperty;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
@@ -25,8 +25,12 @@ public class IntegerInputText extends HBox implements ParameterInput<String>{
 		return input.getText();
 	}
 	
-	public TextField getTextField(){
-		return input;
+	/**
+	 * This method is used in order to bind listeners to the input
+	 * @return String property
+	 */
+	public StringProperty getTextProperty(){
+		return input.textProperty();
 	}
 
 	@Override

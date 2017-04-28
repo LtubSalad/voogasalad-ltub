@@ -27,12 +27,10 @@ public class GeneralDataCreator extends BorderPane{
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
 	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
 	private static final int OFFSETS = 50;
-	private static final int MAX_SCREEN_SIZE = 600;
-	private static final String NUM_STARTING_BONUSES = "NUM_STARTING_BONUSES";
+	private static final String LEVEL_COMPLETION_BONUS = "LEVEL_COMPLETION_BONUS";
 	private static final String NUM_STARTING_GOLD = "NUM_STARTING_GOLD";
 	private static final String BUILD_IN_GAME = "BUILD_IN_GAME";
 	private static final String NUM_LIVES = "NUM_LIVES";
-	private static final String SEND = "SEND";
 	private DeveloperData myGeneralModel = new DeveloperData();
 	private ObservableMap<String, String> myData = myGeneralModel.getAllData();
 	private GeneralGameDataBar myBar = new GeneralGameDataBar(myData);
@@ -63,13 +61,13 @@ public class GeneralDataCreator extends BorderPane{
 
 	private void initTiles() {
 		numLives = new IntegerInputText(myResources.getString(NUM_LIVES));
-		numLives.getTextField().textProperty().addListener(e -> sendNumLives());
+		numLives.getTextProperty().addListener(e -> sendNumLives());
 		
 		numGold = new IntegerInputText(myResources.getString(NUM_STARTING_GOLD));
-		numGold.getTextField().textProperty().addListener(e -> sendStartingGold());
+		numGold.getTextProperty().addListener(e -> sendStartingGold());
 		
-		levelCompletionBonus = new IntegerInputText(myResources.getString(NUM_STARTING_BONUSES));
-		levelCompletionBonus.getTextField().textProperty().addListener(e -> sendLevelBonuses());
+		levelCompletionBonus = new IntegerInputText(myResources.getString(LEVEL_COMPLETION_BONUS));
+		levelCompletionBonus.getTextProperty().addListener(e -> sendLevelBonuses());
 		
 		towerBuild = new CheckBox(myResources.getString(BUILD_IN_GAME));
 		towerBuild.selectedProperty().addListener(e -> sendTowerBuild());
@@ -98,7 +96,7 @@ public class GeneralDataCreator extends BorderPane{
 	}
 
 	private void sendLevelBonuses() {
-		myGeneralModel.addData(new Pair<String, String>(myResources.getString(NUM_STARTING_BONUSES),
+		myGeneralModel.addData(new Pair<String, String>(myResources.getString(LEVEL_COMPLETION_BONUS),
 				levelCompletionBonus.getValue()));
 	}
 	
