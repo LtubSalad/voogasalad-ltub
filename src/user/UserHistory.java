@@ -13,6 +13,8 @@ public class UserHistory {
 	Map<String, GameHistory> gameToHistory;
 	Map<String, GameHistory> authToHistory;
 	
+	
+	
 	public UserHistory(){
 		gameToFile = new HashMap<String, String>();  
 		authored = new ArrayList<String>();

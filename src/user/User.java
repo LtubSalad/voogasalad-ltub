@@ -14,6 +14,8 @@ public class User {
 
 	private UserHistory history; 
 
+	
+	
 	public User(String username, String imageFile) {
 		this.name = username; 
 		this.image = new Image(imageFile);
