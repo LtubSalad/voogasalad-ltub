@@ -33,7 +33,7 @@ public class EventHandlerPane extends ScrollPane {
 	private VBox myContents;
 	private SpriteMakerModel mySprite;
 	private List<SingleEventHandler> handlerSetters;
-	private double prefWidth = 400;
+	private final double PREF_WIDTH=300;
 
 	public EventHandlerPane(SpriteMakerModel sprite) {
 		myContents = new VBox();
@@ -41,7 +41,7 @@ public class EventHandlerPane extends ScrollPane {
 		handlerSetters = new ArrayList<>();
 		refreshNodes();
 		this.setContent(myContents);
-		this.setPrefWidth(prefWidth);
+		this.setPrefWidth(PREF_WIDTH);
 	}
 
 	private void refreshNodes() {
@@ -68,7 +68,6 @@ public class EventHandlerPane extends ScrollPane {
 			Label eventLabel = new Label(event.getClass().getSimpleName());
 			scriptField = new TextArea();
 			scriptField.setPrefHeight(SCRIPT_HEIGHT);
-			scriptField.setPrefWidth(prefWidth);
 			this.getChildren().addAll(eventLabel, scriptField, new MethodDisplay());
 		}
 
