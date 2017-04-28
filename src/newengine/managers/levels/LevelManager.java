@@ -6,6 +6,7 @@ import bus.EventBus;
 import gamecreation.level.LevelData;
 import newengine.events.conditions.EndConditionTriggeredEvent;
 import newengine.events.conditions.SetEndConditionEvent;
+import newengine.events.spawner.SpawnPrefEvent;
 
 public class LevelManager{
 	private EventBus bus;
@@ -18,6 +19,7 @@ public class LevelManager{
 		this.data = data;
 		this.numLevels = data.size();
 		this.currentLevel = 1;
+		loadLevel(data.get(0));
 		initHandlers();
 	}
 	
@@ -28,8 +30,9 @@ public class LevelManager{
 
 	public void nextLevel(){
 		if(!(currentLevel == numLevels)){
-			loadLevel(data.get(currentLevel-1));
 			currentLevel++;
+			System.out.println("Current level: " + currentLevel);
+			loadLevel(data.get(currentLevel-1));
 			return;
 		}
 			bus.emit(new WinGameEvent(WinGameEvent.WIN));
@@ -48,6 +51,7 @@ public class LevelManager{
 	private void loadLevel(LevelData newLevel){
 		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, newLevel.getWinningCondition()));
 		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, newLevel.getLosingCondition()));
+		bus.emit(new SpawnPrefEvent(SpawnPrefEvent.SETPREFS, newLevel.getSpawnTime()));	
 	}
 
 }

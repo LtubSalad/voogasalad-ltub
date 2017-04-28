@@ -1,5 +1,6 @@
 package newengine.managers.conditions;
 
+import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SpriteModel;
 
@@ -25,4 +26,6 @@ public interface ICondition {
 	 * Allows the user of this class to switch between different player stats models if desired
 	 */
 	public void setPlayerStatsModel(PlayerStatsModel playerStatsModel);
+
+	public void setPlayerRelationModel(PlayerRelationModel playerRelationModel);
 }

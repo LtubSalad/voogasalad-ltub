@@ -45,7 +45,7 @@ public class Game {
 		DebugManager debugManager = new DebugManager(bus);
 		TriggerManager triggerManager = new TriggerManager(bus, models);
 		TimerManager timerManager = new TimerManager(bus);
-		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel);
+		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel, playerRelationModel);
 		
 		gameLoop.addLoopComponent((dt) -> view.clear());
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
