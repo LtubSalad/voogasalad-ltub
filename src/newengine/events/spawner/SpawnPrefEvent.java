@@ -7,16 +7,10 @@ public class SpawnPrefEvent extends BusEvent{
 	public static final BusEventType<SpawnPrefEvent> SETPREFS = new BusEventType<>(SpawnPrefEvent.class.getName()+"SETPREFS");
 	
 	private double secondBetween;
-	private int totalNumber;
 
-	public SpawnPrefEvent(BusEventType<? extends BusEvent> busEventType, double secondBetween, int totalNumber) {
+	public SpawnPrefEvent(BusEventType<? extends BusEvent> busEventType, double secondBetween) {
 		super(busEventType);
 		this.secondBetween = secondBetween;
-		this.totalNumber = totalNumber;
-	}
-	
-	public int getTotalNumber(){
-		return totalNumber;
 	}
 	
 	public double getSecondBetween(){
