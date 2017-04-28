@@ -1,14 +1,14 @@
 package newengine.sprite.components;
 
+import java.util.ResourceBundle;
+
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
 
 public class Images extends Component {
-
 	public static final ComponentType<Images> TYPE = new ComponentType<>(Images.class.getName());
 //	private ImageSet imageSet;
 	private String imageFilePath;
@@ -24,9 +24,7 @@ public class Images extends Component {
 	@ConstructorForDeveloper
 	public Images(@VariableName(name = "Image") LtubImage image){
 		this(image.getFileName());
-	}
-	
-	
+	}	
 	
 	public LtubImage image() {
 		double heading = 0;
