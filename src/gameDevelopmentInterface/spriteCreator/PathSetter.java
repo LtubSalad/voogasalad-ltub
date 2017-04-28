@@ -65,7 +65,6 @@ public class PathSetter extends VariableSetter<Path> {
 			}
 			this.setText(item.getName());
 		}
-		
 	}
 	
 	@Override
@@ -74,7 +73,7 @@ public class PathSetter extends VariableSetter<Path> {
 	}
 
 	@Override
-	public void setInitialField(Path initialValue) {
+	public void setField(Path initialValue) {
 		if(!paths.contains(initialValue)){
 			paths.add(initialValue);
 		}

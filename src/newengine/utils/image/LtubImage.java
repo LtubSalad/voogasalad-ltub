@@ -20,6 +20,7 @@ public class LtubImage {
 	
 	LtubImage() { }
 	
+	
 	public LtubImage(String filename) {
 		this.filename = filename;
 		try {
