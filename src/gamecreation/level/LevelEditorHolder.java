@@ -26,10 +26,10 @@ public class LevelEditorHolder extends ScrollPane {
 	}
 
 	private void render(){
-		List<SimpleLevelEditor> creators = new ArrayList<SimpleLevelEditor>();
+		List<LevelEditor> creators = new ArrayList<LevelEditor>();
 		content.getChildren().clear();
 		modelData.getLevelData().stream().forEach(e -> {
-			creators.add(new SimpleLevelEditor("Level", null, e));
+			creators.add(new LevelEditor(e));
 		});
 		content.getChildren().addAll(creators);
 	}

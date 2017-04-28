@@ -3,18 +3,18 @@ package newengine.managers.levels;
 import java.util.List;
 
 import bus.EventBus;
-import gamecreation.level.LevelData;
+import gamecreation.level.ILevelData;
 import newengine.events.conditions.EndConditionTriggeredEvent;
 import newengine.events.conditions.SetEndConditionEvent;
 import newengine.events.spawner.SpawnPrefEvent;
 
 public class LevelManager{
 	private EventBus bus;
-	private List<LevelData> data;
+	private List<ILevelData> data;
 	private int numLevels;
 	private int currentLevel;
 	
-	public LevelManager(EventBus bus, List<LevelData> data){
+	public LevelManager(EventBus bus, List<ILevelData> data){
 		this.bus = bus;
 		this.data = data;
 		this.currentLevel = 1;
@@ -51,7 +51,7 @@ public class LevelManager{
 		}
 	}
 	
-	private void loadLevel(LevelData newLevel){
+	private void loadLevel(ILevelData newLevel){
 		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, newLevel.getWinningCondition()));
 		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, newLevel.getLosingCondition()));
 		bus.emit(new SpawnPrefEvent(SpawnPrefEvent.SETPREFS, newLevel.getSpawnTime()));	

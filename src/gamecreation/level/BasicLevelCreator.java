@@ -47,10 +47,7 @@ public class BasicLevelCreator extends LevelCreator{
 		this.setContent(content);
 	}
 	
-	@Override
-	public LevelData getData() {
-		return null;
-	}
+
 
 	
 }

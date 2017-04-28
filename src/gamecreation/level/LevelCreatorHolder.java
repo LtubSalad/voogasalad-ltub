@@ -56,7 +56,7 @@ public class LevelCreatorHolder extends ScrollPane{
 		//addLevelCreator(new BasicLevelCreator("Level " + (numLevels+1), this));
 		try {
 			Constructor<? extends LevelCreator> ctor = clazz.getConstructor(String.class, LevelCreatorHolder.class, LevelData.class);
-			addLevelCreator((LevelCreator) ctor.newInstance("Level " + (numLevels +1), LevelCreatorHolder.this, new SimpleLevelData()));
+			addLevelCreator((LevelCreator) ctor.newInstance("Level " + (numLevels +1), LevelCreatorHolder.this, new LevelData()));
 		} catch (Exception e){
 			//FIXME
 			e.printStackTrace();

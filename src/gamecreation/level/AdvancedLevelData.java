@@ -1,8 +1,9 @@
 package gamecreation.level;
 
+import javafx.beans.property.StringProperty;
 import newengine.managers.conditions.Condition;
 
-public class AdvancedLevelData implements LevelData {
+public class AdvancedLevelData implements ILevelData {
 	private String name;
 	private double spawnTime;
 	private double damageMulti;
@@ -49,4 +50,10 @@ public class AdvancedLevelData implements LevelData {
 		this.name = name;
 	}
 
+
+	@Override
+	public StringProperty getNameTextProperty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
