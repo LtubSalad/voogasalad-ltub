@@ -27,6 +27,7 @@ import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.RangeShootingAI;
 import newengine.sprite.components.Selectable;
+import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
 import utilities.XStreamHandler;
@@ -36,6 +37,8 @@ public class SpriteCreatorPane extends BorderPane{
 	private SpriteInfoPane infoPane;
 	private EventHandlerPane scriptPane;
 	private DeveloperData model;
+	private double PREF_WIDTH=700;
+	private double PREF_HEIGHT=600;
 	
 	public SpriteCreatorPane(DeveloperData model){
 		this.model=model;
@@ -51,6 +54,7 @@ public class SpriteCreatorPane extends BorderPane{
 		this.setLeft(infoPane);
 		this.setTop(new Label("NEW SPRITE"));
 		this.setBottom(new BottomPanel());	
+		//this.setPrefSize(PREF_WIDTH, PREF_HEIGHT);
 	}
 	
 	private ComponentSelectorPane instantiateSelector(){
@@ -70,6 +74,7 @@ public class SpriteCreatorPane extends BorderPane{
 		observableComponents.add(Selectable.class);
 		observableComponents.add(SoundEffect.class);
 		observableComponents.add(Speed.class);
+		observableComponents.add(SkillSet.class);
 		
 		return new ComponentSelectorPane("Add components and set parameters", observableComponents,infoPane);
 	}

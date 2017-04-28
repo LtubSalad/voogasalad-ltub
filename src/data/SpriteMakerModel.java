@@ -106,6 +106,11 @@ public class SpriteMakerModel {
 		this.myScriptMap = toCopy.myScriptMap;
 	}
 	
+	public SpriteMakerModel(String name){
+		this();
+		spriteName=name;
+	}
+	
 	public void clearComponents(){
 		myComponents.clear();
 	}

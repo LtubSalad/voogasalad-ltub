@@ -1,4 +1,6 @@
 package gameDevelopmentInterface;
+
+import data.SpritesForScreenUse;
 import data.ScreenModelData;
 import data.SpriteMakerModel;
 import data.SpritesForScreenUse;
@@ -19,14 +21,17 @@ import javafx.scene.layout.BorderPane;
  */
 public class ScreenModelCreator extends BorderPane {
 	private ObservableMap<String,String> myGeneralData;
-	private ScreenModelData myScreenData = new ScreenModelData();
+	private ScreenModelData myScreenData;
 	private ScreenObjectHolder myObjectsToPlace;
-	private ScreenMap myScreen = new ScreenMap(this);
-	private ButtonsPanel myButtonsPanel = new ButtonsPanel(this);
+	private ScreenMap myScreen;
+	private TowerSetButtonsPanel myButtonsPanel;
 	private SpritesForScreenUse myAttributesModel;
 	private ObservableList<SpriteMakerModel> possibleSprites = FXCollections.observableArrayList();
 	
-	public ScreenModelCreator(SpritesForScreenUse attributesModel, GeneralDataCreator gdc) {
+	public ScreenModelCreator(SpritesForScreenUse attributesModel, GeneralDataCreator gdc, ScreenModelData screenData) {
+		myScreenData = screenData;
+		myScreen = new ScreenMap(this);
+		myButtonsPanel = new TowerSetButtonsPanel(this);
 		myAttributesModel = attributesModel;
 		myObjectsToPlace = new ScreenObjectHolder(this, myScreenData);
 		myGeneralData = gdc.getAllData();

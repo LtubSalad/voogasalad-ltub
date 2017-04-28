@@ -35,6 +35,16 @@ public class BuildSkill extends Skill {
 		}
 	}
 
+	
+	
+	public SpriteMakerModel getModel(){
+		return mySpriteModel;
+	}
+	
+	public void setModel(SpriteMakerModel model){
+		this.mySpriteModel=model;
+	}
+	
 	@Override
 	public void trigger() {
 		// if (canControl()) {

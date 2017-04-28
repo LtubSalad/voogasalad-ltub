@@ -2,6 +2,7 @@ package gameauthorgui.tower;
 import java.util.ResourceBundle;
 
 import data.DeveloperData;
+import data.ScreenModelData;
 import gameDevelopmentInterface.GeneralDataCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
 import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
@@ -21,11 +22,13 @@ public class TowerAuthor extends GameAuthor {
 	private static final String PATH_TO_STYLE_SHEETS = "/styleSheets/MainStyle.css";
 	private GeneralDataCreator myGeneralDataCreator;
 	private DeveloperData myModelData;
+	private ScreenModelData myScreenModelData;
 	
 	public TowerAuthor() {	
 		super();
 		myModelData=new DeveloperData();
 		myGeneralDataCreator = new GeneralDataCreator();
+		myScreenModelData = new ScreenModelData();
 		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();
 	}
@@ -35,7 +38,7 @@ public class TowerAuthor extends GameAuthor {
 		addStep(new DeveloperStep("Level Options", new LevelOptionsSelector()));
 		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
-		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getSprites(),myGeneralDataCreator)));
+		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData)));
 	}
 	
 }
