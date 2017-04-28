@@ -17,11 +17,11 @@ public class BasicLevelCreator extends LevelCreator{
 	private Map<String, Class<? extends ICondition>> winningConditions;
 	private Map<String, Class<? extends ICondition>> losingConditions;
 
-	public BasicLevelCreator(int i, LevelCreatorHolder parent) {
-		this(Integer.toString(i), parent);
+	public BasicLevelCreator(int i, LevelCreatorHolder parent, LevelData data) {
+		this(Integer.toString(i), parent, data);
 	}
-	public BasicLevelCreator(String name, LevelCreatorHolder parent) {
-		super(name, parent);
+	public BasicLevelCreator(String name, LevelCreatorHolder parent, LevelData data) {
+		super(name, parent, data);
 	}
 	
 	private void initConditions(){
@@ -38,6 +38,7 @@ public class BasicLevelCreator extends LevelCreator{
 		initConditions();
 		//TODO resource file
 		StringParameterInput title = new StringParameterInput("Level Title");
+		title.getTextProperty().addListener(e -> BasicLevelCreator.this.getData().setName(title.getValue()));
 		
 		ComboBoxParameterInput winningCondition = new ComboBoxParameterInput("Winning Condition", new ArrayList<String>(winningConditions.keySet()));
 		ComboBoxParameterInput losingCondition = new ComboBoxParameterInput("Losing Condition", new ArrayList<String> (losingConditions.keySet()));
@@ -48,9 +49,8 @@ public class BasicLevelCreator extends LevelCreator{
 	
 	@Override
 	public LevelData getData() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-
+	
 }

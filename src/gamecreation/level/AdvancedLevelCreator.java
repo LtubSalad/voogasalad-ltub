@@ -12,12 +12,12 @@ public class AdvancedLevelCreator extends LevelCreator{
 	private DoubleParameterInput damageMultiplier;
 
 
-	public AdvancedLevelCreator(int i, LevelCreatorHolder parent) {
-		super(i, parent);
+	public AdvancedLevelCreator(int i, LevelCreatorHolder parent, LevelData data) {
+		super(i, parent, data);
 	}
 	
-	public AdvancedLevelCreator(String s, LevelCreatorHolder parent){
-		super(s, parent);
+	public AdvancedLevelCreator(String s, LevelCreatorHolder parent, LevelData data){
+		super(s, parent, data);
 	}
 
 	@Override

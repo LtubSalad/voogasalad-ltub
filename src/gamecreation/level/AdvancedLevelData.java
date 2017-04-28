@@ -43,4 +43,10 @@ public class AdvancedLevelData implements LevelData {
 		return losingCondition;
 	}
 
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

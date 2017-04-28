@@ -1,21 +1,21 @@
 package gamecreation.level;
 
+import data.DeveloperData;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class LevelCreationPane extends BorderPane {
+	public static final double DEFAULT_PREF_HEIGHT = 600.0;
 	
-	private static final double DEFAULT_PREF_HEIGHT = 600.0;
-
-	public LevelCreationPane(double prefHeight){
+	public LevelCreationPane(DeveloperData modelData, double prefHeight){
 		super();
 		this.setTop(createTitle());
-		this.setCenter(new LevelCreatorHolder(prefHeight));
+		this.setCenter(new LevelCreatorHolder(modelData, prefHeight, BasicLevelCreator.class));
 	}
 	
-	public LevelCreationPane(){
-		this(DEFAULT_PREF_HEIGHT);
+	public LevelCreationPane(DeveloperData modelData){
+		this(modelData, DEFAULT_PREF_HEIGHT);
 	}
 	
 	private Text createTitle(){

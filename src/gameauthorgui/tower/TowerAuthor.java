@@ -10,6 +10,7 @@ import gameauthorgui.DeveloperStep;
 import gameauthorgui.GameAuthor;
 import gameauthorgui.WelcomeScreen;
 import gamecreation.level.LevelCreationPane;
+import gamecreation.level.LevelEditorHolder;
 
 /**
  * 
@@ -37,8 +38,9 @@ public class TowerAuthor extends GameAuthor {
 	
 	public void instantiateSteps() {
 		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense")));
-		addStep(new DeveloperStep("Level Options", new LevelCreationPane(getScene().getHeight()-CENTER_OFFSETS)));
+		addStep(new DeveloperStep("Level Options", new LevelCreationPane(myModelData, getScene().getHeight()-CENTER_OFFSETS)));
 		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
+		addStep(new DeveloperStep("Spawner creation",new LevelEditorHolder(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
 		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData)));
 	}

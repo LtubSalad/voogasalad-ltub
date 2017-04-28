@@ -8,8 +8,11 @@ public class SimpleLevelData implements LevelData {
 	private Condition winningCondition;
 	private Condition losingCondition;
 
-	public SimpleLevelData(String name, int difficultyModifier){
-		this.diffMod = difficultyModifier;
+	public SimpleLevelData(){
+		this.name = "Level";
+	}
+	
+	public void setName(String name){
 		this.name = name;
 	}
 	
