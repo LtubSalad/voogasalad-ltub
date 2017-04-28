@@ -3,13 +3,12 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.SpriteMakerModel;
 import gameDevelopmentInterface.Path;
+import gamecreation.level.LevelData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.util.Pair;
-import newengine.sprite.Sprite;
 /**
  * 
  * @author Jake, Daniel
@@ -21,12 +20,14 @@ public class DeveloperData {
 	private static final String NUMBER_OF_STARTING_GOLD = "Number of Starting Gold";
 	private static final String NUMBER_OF_STARTING_BONUSES = "Number of Starting Bonuses";
 	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
+	private ObservableList<LevelData> levelData;
 	private ObservableList<Path> myPaths;
 	private ObservableList<SpriteMakerModel> mySprites;
 	private SpritesForScreenUse jakeSprites;
 	
 	public DeveloperData() {
 		List<SpriteMakerModel> list=new ArrayList<SpriteMakerModel>();
+		levelData = FXCollections.observableArrayList();
 		mySprites=FXCollections.observableList(list);
 		jakeSprites=new SpritesForScreenUse();
 		List<Path> dummyPaths=new ArrayList<>();
@@ -38,7 +39,7 @@ public class DeveloperData {
 		myData.put(NUMBER_OF_LIVES, "");
 	}
 	
-public void addSprite(SpriteMakerModel sprite){
+	public void addSprite(SpriteMakerModel sprite){
 		//FIXME jake sprite?
 		jakeSprites.addPossibleSprite(sprite);
 		System.out.println("reached end");
@@ -58,6 +59,10 @@ public void addSprite(SpriteMakerModel sprite){
 	
 	public SpritesForScreenUse getScreenSprites(){
 		return jakeSprites;
+	}
+	
+	public ObservableList<LevelData> getLevelData(){
+		return levelData;
 	}
 	
 	/**

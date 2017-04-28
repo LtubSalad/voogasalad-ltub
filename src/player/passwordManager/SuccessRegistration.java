@@ -12,16 +12,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import player.App;
+import utilities.PopUpMessage;
 
 /**
  * @author Zhiyong
  *
  */
-public class SuccessRegistration {
+public class SuccessRegistration implements PopUpMessage {
 	
-	private static ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
+	private ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	
-	public static void show(){
+	public void show(){
 		
 		Stage stage = new Stage();
 		

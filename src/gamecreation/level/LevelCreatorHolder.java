@@ -1,55 +1,67 @@
 package gamecreation.level;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.DeveloperData;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-public class LevelCreatorHolder {
+public class LevelCreatorHolder extends ScrollPane{
+	public static final int DEFAULT_PREF_HEIGHT = 600;
 	private VBox holder;
 	private HBox addButtons;
 	private int numLevels;
-	private ArrayList<LevelCreator> levels;
+	private List<LevelCreator> levels;
+	private DeveloperData modelData;
+	private Class<? extends LevelCreator> clazz;
 	
-	public LevelCreatorHolder(){
-		ScrollPane root = new ScrollPane();
+
+	public LevelCreatorHolder(DeveloperData modelData, double prefHeight, Class<? extends LevelCreator> clazz){
+		super();
+		this.clazz = clazz;
+		this.modelData = modelData;
+		
 		holder = new VBox();
-		root.setContent(holder);
-		Stage testStage = new Stage();
-		Scene testScene = new Scene(root, 400, 400);
-		testStage.setScene(testScene);
-		testStage.show();
+		holder.setPrefHeight(prefHeight);
+		
+		this.setContent(holder);
 		numLevels = 0;
 		levels = new ArrayList<LevelCreator>();
 		setUpBox();
+	
 	}
+	
+	public LevelCreatorHolder(DeveloperData modelData, Class <? extends LevelCreator> clazz){
+		this(modelData, DEFAULT_PREF_HEIGHT, clazz);
+	}
+
 	
 	private void setUpBox(){
 		holder.setAlignment(Pos.CENTER);
 		addButtons = new HBox();
 		//TODO resource file
-		Button addDefaultButton = new Button("+ Default Level");
-		Button addAdvancedButton = new Button("+ Custom Level");
-		//TODO put into resource file
-		addAdvancedButton.setOnAction(e -> addAdvancedLevelCreator());
+		Button addDefaultButton = new Button("+ Level");
 		addDefaultButton.setOnAction(e -> addDefaultLevelCreator());
-		Button tester = new Button("tester");
-		tester.setOnAction(e -> testPrint());
-		addButtons.getChildren().addAll(addDefaultButton, addAdvancedButton, tester);
+	
+		addButtons.getChildren().addAll(addDefaultButton);
 		holder.getChildren().add(addButtons);
 	}
 	
 	private  void addDefaultLevelCreator(){
-		addLevelCreator(new SimpleLevelCreator("Level " + (numLevels+1), this));
-	}
-	private void addAdvancedLevelCreator(){
-		addLevelCreator(new AdvancedLevelCreator("Level "+ (numLevels+1), this));
+		//addLevelCreator(new BasicLevelCreator("Level " + (numLevels+1), this));
+		try {
+			Constructor<? extends LevelCreator> ctor = clazz.getConstructor(String.class, LevelCreatorHolder.class, LevelData.class);
+			addLevelCreator((LevelCreator) ctor.newInstance("Level " + (numLevels +1), LevelCreatorHolder.this, new LevelData()));
+		} catch (Exception e){
+			//FIXME
+			e.printStackTrace();
+			System.out.println("No such class found");
+		}
 	}
 	
 	private void addLevelCreator(LevelCreator level){
@@ -61,6 +73,7 @@ public class LevelCreatorHolder {
 			holder.getChildren().add(level);
 		}
 		levels.add(level);
+		modelData.getLevelData().add(level.getData());
 	}
 	
 	public int getNumberLevels(){
@@ -81,6 +94,7 @@ public class LevelCreatorHolder {
 			if(level.equals(levels.get(i))){
 				numLevels--;
 				levels.remove(i);
+				modelData.getLevelData().remove(i);
 				//The ArrayList and the holder will always be parallel
 				holder.getChildren().remove(i);
 			}
@@ -98,9 +112,7 @@ public class LevelCreatorHolder {
 		for(LevelData level : levels){
 			System.out.println("\n" + "New Level Beginning:");
 			System.out.println(level.getName());
-			System.out.println(level.getTotalMonsters());
 			System.out.println(level.getSpawnTime());
-			System.out.print(level.getDamageMultiplier());
 		}
 	}
 }

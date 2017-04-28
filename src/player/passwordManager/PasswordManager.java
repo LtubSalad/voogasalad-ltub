@@ -1,7 +1,6 @@
 package player.passwordManager;
 
 import java.util.ResourceBundle;
-
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,8 +18,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import player.App;
 import player.levelChoice.LevelManager;
+import utilities.PopUpMessage;
 
 
 public class PasswordManager{
@@ -110,24 +109,25 @@ public class PasswordManager{
 		btnReset.setOnAction(e -> buttonResetAction());
 		
 		//Action for btnRegister
-		btnRegister.setOnAction(e -> buttonRegisterAction());
+		btnRegister.setOnAction(e -> buttonRegisterAction(new SuccessRegistration()));
 				
 				
 		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 	}
 	
 	
-	private void buttonRegisterAction() {
+	private void buttonRegisterAction(PopUpMessage p) {
 				
 		tempCheckUser = txtUserName.getText().toString();
 		tempCheckPw = pf.getText().toString();
 		
 		writer.write(tempCheckUser, tempCheckPw);
-		SuccessRegistration.show();
+		p.show();
 		buttonResetAction();
 		
 		
 	}
+	
 	
 	
 	private void handleKeyInput(KeyCode code) {
