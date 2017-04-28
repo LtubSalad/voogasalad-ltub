@@ -1,5 +1,8 @@
 package gameauthorgui.inputhelpers;
 
+import java.text.DecimalFormat;
+
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
@@ -19,7 +22,10 @@ public class DoubleParameterInput extends HBox implements ParameterInput<Double>
 	private void createBox(double startRange, double endRange){
 		slide = new CustomSlider(startRange, endRange, startRange);
 		Label value = new Label(Double.toString(startRange));
-		slide.valueProperty().addListener(e -> value.setText(Double.toString(Math.floor(slide.getValue()* 100)/100)));
+		
+		//http://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+		DecimalFormat df = new DecimalFormat("#.00");
+		slide.valueProperty().addListener(e -> value.setText(df.format(slide.getValue())));
 		
 		Text title = new Text(varName);
 		title.setWrappingWidth(100);
@@ -29,6 +35,14 @@ public class DoubleParameterInput extends HBox implements ParameterInput<Double>
 	@Override
 	public Double getValue() {
 		return slide.getValue();
+	}
+	
+	/**
+	 * Used to listen to the changes of the parameter input
+	 * @return DoubleProperty
+	 */
+	public DoubleProperty getDoubleProperty(){
+		return slide.valueProperty();
 	}
 
 	@Override

@@ -25,19 +25,19 @@ public class ScreenModelCreator extends BorderPane {
 	private ScreenObjectHolder myObjectsToPlace;
 	private ScreenMap myScreen;
 	private TowerSetButtonsPanel myButtonsPanel;
-	private SpritesForScreenUse myAttributesModel;
+	private SpritesForScreenUse mySpriteModelsToDrag;
 	private ObservableList<SpriteMakerModel> possibleSprites = FXCollections.observableArrayList();
 	
-	public ScreenModelCreator(SpritesForScreenUse attributesModel, GeneralDataCreator gdc, ScreenModelData screenData) {
+	public ScreenModelCreator(SpritesForScreenUse spriteModelsToDrag, GeneralDataCreator gdc, ScreenModelData screenData) {
 		myScreenData = screenData;
 		myScreen = new ScreenMap(this);
 		myButtonsPanel = new TowerSetButtonsPanel(this);
-		myAttributesModel = attributesModel;
+		mySpriteModelsToDrag = spriteModelsToDrag;
 		myObjectsToPlace = new ScreenObjectHolder(this, myScreenData);
 		myGeneralData = gdc.getAllData();
 		this.setTop(new GeneralGameDataBar(myGeneralData));
 		this.setBottom(myObjectsToPlace);
-		this.setCenter(myScreen);
+		this.setCenter(new ScrollingEnvironmentSetter(myScreen));
 		this.setRight(myButtonsPanel);
 	}
 	/**

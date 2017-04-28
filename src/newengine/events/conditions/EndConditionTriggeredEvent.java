@@ -1,4 +1,4 @@
-package newengine.managers.conditions;
+package newengine.events.conditions;
 
 import bus.BusEvent;
 import bus.BusEventType;
@@ -10,12 +10,12 @@ public class EndConditionTriggeredEvent extends BusEvent {
 
 	public EndConditionTriggeredEvent(BusEventType<? extends BusEvent> busEventType) {
 		super(busEventType);
-		if(busEventType.equals(EndConditionTriggeredEvent.WIN)){
-			System.out.println("Win Game: Testing in EndPlayEvent");
-		}
-		if(busEventType.equals(EndConditionTriggeredEvent.LOSE)){
-			System.out.println("Lose Game: Testing in EndPlayEvent");
-		}
+//		if(busEventType.equals(EndConditionTriggeredEvent.WIN)){
+//			System.out.println("Win Game: Testing in EndPlayEvent");
+//		}
+//		if(busEventType.equals(EndConditionTriggeredEvent.LOSE)){
+//			System.out.println("Lose Game: Testing in EndPlayEvent");
+//		}
 	}
 
 }
