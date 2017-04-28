@@ -23,6 +23,8 @@ public class SpriteInfoPane extends ScrollPane{
 	private SpriteDescriptor descriptor;
 	private ComponentLister lister;
 	private DeveloperData developerData;
+	private double MAX_HEIGHT=500;
+	private double MAX_WIDTH=300;
 	
 	public SpriteInfoPane(SpriteMakerModel spriteData, DeveloperData developerData){
 		this.developerData=developerData;
@@ -32,6 +34,7 @@ public class SpriteInfoPane extends ScrollPane{
 		lister=new ComponentLister();
 		myPane.getChildren().addAll(descriptor,lister);
 		this.setContent(myPane);
+		this.setMaxSize(MAX_WIDTH, MAX_HEIGHT);
 	}
 	
 	private class SpriteDescriptor extends VBox{
