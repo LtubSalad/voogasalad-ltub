@@ -18,14 +18,23 @@ public interface ICondition {
 	public boolean check(); 
 	
 	/**
-	 * Allows the user of this class to switch between different sprite models if desired
+	 * Allows the user of this class to switch between different sprite models if desired. Built to
+	 * allow the ConditionManager to set the model for the user upon the condition being added.
+	 * @param spriteModel
 	 */
 	public void setSpriteModel(SpriteModel spriteModel);
 	
 	/**
-	 * Allows the user of this class to switch between different player stats models if desired
+	 * Allows the user of this class to switch between different player stats models if desired. Built
+	 * originally so ConditionManager can set the model for the user upon addition of the condition.
+	 * @param playerStatsModel
 	 */
 	public void setPlayerStatsModel(PlayerStatsModel playerStatsModel);
 
+	/**
+	 * Allows the user of this class to switch between player relation model. Also allows the
+	 * ConditionManager class to set the model for the user, 
+	 * @param playerRelationModel
+	 */
 	public void setPlayerRelationModel(PlayerRelationModel playerRelationModel);
 }

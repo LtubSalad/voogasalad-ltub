@@ -17,15 +17,18 @@ public class LevelManager{
 	public LevelManager(EventBus bus, List<LevelData> data){
 		this.bus = bus;
 		this.data = data;
-		this.numLevels = data.size();
 		this.currentLevel = 1;
-		loadLevel(data.get(0));
+		if(data != null){
+			this.numLevels = data.size();
+			loadLevel(data.get(0));
+		}
 		initHandlers();
 	}
 	
 	private void initHandlers() {
-		bus.on(EndConditionTriggeredEvent.WIN, e -> nextLevel());
-		bus.on(SetLevelEvent.SET, e -> setLevel(e.getLevelNumber()));
+		bus.on(EndConditionTriggeredEvent.WIN, e -> {if(data!= null) nextLevel();});
+		bus.on(EndConditionTriggeredEvent.LOSE, e -> System.out.println("loser"));
+		bus.on(SetLevelEvent.SET, e -> {if(data!= null) setLevel(e.getLevelNumber());});
 	}
 
 	public void nextLevel(){

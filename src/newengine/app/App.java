@@ -28,7 +28,6 @@ import newengine.skill.skills.BuildSkill;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
-import newengine.sprite.components.SkillSet;
 import newengine.utils.Target;
 import utilities.XStreamHandler;
 
@@ -37,9 +36,6 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-
-		//Player player1 = new Player("Player 1");
-
 		XStreamHandler xHandler = new XStreamHandler();
 		XStream xStream = new XStream(new DomDriver());
 		List<SpriteMakerModel> spriteModelsFromFile = xHandler.getScreenModelFile();
@@ -47,7 +43,7 @@ public class App extends Application {
 
 		for (SpriteMakerModel smm : spriteModelsFromFile) {
 			Position imageComponent = (Position) smm.getComponentByType(Position.TYPE);
-			System.out.println(imageComponent.pos().x() + " " + imageComponent.pos().y());
+			//System.out.println(imageComponent.pos().x() + " " + imageComponent.pos().y());
 		}
 		
 		AuthDataTranslator translator = new AuthDataTranslator(spriteModelsFromFile);
@@ -59,7 +55,7 @@ public class App extends Application {
 		//List<Sprite> listSprites = spriteModel.getSprites();
 		//System.out.println(listSprites.size());
 		for (Sprite s : listSprites) {
-			System.out.println(s.getComponent(SkillSet.TYPE).get().skills());
+			//System.out.println(s.getComponent(SkillSet.TYPE).get().skills());
 		}
 		
 		Player player1 = listSprites.get(0).getComponent(Owner.TYPE).get().player();
@@ -68,7 +64,7 @@ public class App extends Application {
 			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, listSprites));
 			bus.emit(new MainPlayerEvent(player1));
-			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 3));
+			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 0));
 			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, WealthType.GOLD, 100));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));

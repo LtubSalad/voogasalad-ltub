@@ -41,7 +41,6 @@ public class ConditionManager {
 	
 	private void checkLosingCondition(){
 		if(losing != null && losing.check()){
-			//TODO Have game player be set to subscribe to this event
 			bus.emit(new EndConditionTriggeredEvent(EndConditionTriggeredEvent.LOSE));
 		}
 	}
