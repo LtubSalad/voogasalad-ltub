@@ -24,7 +24,7 @@ public class SimpleVariableSetter<T> extends VariableSetter<T>{
 	}
 	
 	public T getValue() throws UnsupportedTypeException{
-		PrimitiveConverter<T> converter=new PrimitiveConverter();
+		PrimitiveConverter<T> converter=new PrimitiveConverter<T>();
 		return converter.convertString(type, value.getText());
 	}
 
