@@ -1,5 +1,6 @@
 package gameauthorgui.inputhelpers;
 
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -24,8 +25,8 @@ public class StringParameterInput extends HBox implements ParameterInput<String>
 		return input.getText();
 	}
 	
-	public TextField getTextField(){
-		return input;
+	public StringProperty getTextProperty(){
+		return input.textProperty();
 	}
 
 	@Override

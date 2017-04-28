@@ -10,6 +10,7 @@ import newengine.managers.collision.CollisionManager;
 import newengine.managers.conditions.ConditionManager;
 import newengine.managers.debug.DebugManager;
 import newengine.managers.input.InputManager;
+import newengine.managers.levels.LevelManager;
 import newengine.managers.range.RangeManager;
 import newengine.managers.sound.SoundManager;
 import newengine.managers.timer.TimerManager;
@@ -45,7 +46,8 @@ public class Game {
 		DebugManager debugManager = new DebugManager(bus);
 		TriggerManager triggerManager = new TriggerManager(bus, models);
 		TimerManager timerManager = new TimerManager(bus);
-		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel);
+		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel, playerRelationModel);
+		LevelManager levelManager = new LevelManager(bus, null);
 		
 		gameLoop.addLoopComponent((dt) -> view.clear());
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));

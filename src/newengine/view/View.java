@@ -1,6 +1,7 @@
 package newengine.view;
 import java.util.ArrayList;
 import java.util.List;
+
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
@@ -21,6 +22,7 @@ import javafx.scene.text.Text;
 import newengine.events.camera.CameraEvent;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
+import newengine.events.stats.ChangeLivesEvent;
 import newengine.model.Models;
 import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
