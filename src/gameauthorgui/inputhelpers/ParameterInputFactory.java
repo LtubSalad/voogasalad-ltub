@@ -1,15 +1,8 @@
-package gameauthorgui.tower;
+package gameauthorgui.inputhelpers;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
-
-import gamecreation.DoubleParameterInput;
-import gamecreation.ImageParameterInput;
-import gamecreation.IntegerInputSlider;
-import gamecreation.ParameterInput;
-import gamecreation.StringParameterInput;
 import javafx.scene.image.Image;
 
 public class ParameterInputFactory {

@@ -1,6 +1,6 @@
 package gamecreation.level;
 
-import gamecreation.IntegerInputSlider;
+import gameauthorgui.inputhelpers.IntegerInputSlider;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 

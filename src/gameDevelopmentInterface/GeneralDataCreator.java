@@ -3,7 +3,7 @@ package gameDevelopmentInterface;
 import java.util.ResourceBundle;
 
 import data.DeveloperData;
-import gamecreation.IntegerInputText;
+import gameauthorgui.inputhelpers.IntegerInputText;
 import javafx.collections.ObservableMap;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.BorderPane;

@@ -1,4 +1,4 @@
-package gamecreation;
+package gameauthorgui.inputhelpers;
 
 import gameauthorgui.IntegerTextField;
 import javafx.scene.control.TextField;

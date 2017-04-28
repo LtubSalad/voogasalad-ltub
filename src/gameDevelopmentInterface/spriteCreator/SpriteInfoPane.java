@@ -8,7 +8,7 @@ import data.DeveloperData;
 import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
 import gameDevelopmentInterface.developerdata.ComponentSetterView;
-import gamecreation.StringParameterInput;
+import gameauthorgui.inputhelpers.StringParameterInput;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;

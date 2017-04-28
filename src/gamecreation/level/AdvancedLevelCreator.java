@@ -1,7 +1,7 @@
 package gamecreation.level;
 
-import gamecreation.DoubleParameterInput;
-import gamecreation.IntegerInputSlider;
+import gameauthorgui.inputhelpers.DoubleParameterInput;
+import gameauthorgui.inputhelpers.IntegerInputSlider;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 

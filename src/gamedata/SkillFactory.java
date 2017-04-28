@@ -2,7 +2,7 @@ package gamedata;
 
 import java.util.List;
 
-import gamecreation.DataWrapper;
+import gameauthorgui.inputhelpers.DataWrapper;
 import newengine.skill.Skill;
 
 public class SkillFactory {
