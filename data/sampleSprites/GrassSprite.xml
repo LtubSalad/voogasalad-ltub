@@ -1,0 +1,20 @@
+<data.SpriteMakerModel>
+  <myComponents class="com.sun.javafx.collections.ObservableMapWrapper">
+    <entrySet>
+      <outer-class reference="../.."/>
+    </entrySet>
+    <backingMap>
+      <entry>
+        <newengine.sprite.component.ComponentType>
+          <typename>newengine.sprite.components.Images</typename>
+        </newengine.sprite.component.ComponentType>
+        <newengine.sprite.components.Images>
+          <imageFilePath>images/characters/Grass.jpg</imageFilePath>
+        </newengine.sprite.components.Images>
+      </entry>
+    </backingMap>
+  </myComponents>
+  <myScriptMap class="com.sun.javafx.collections.ObservableMapWrapper">
+    <backingMap/>
+  </myScriptMap>
+</data.SpriteMakerModel>

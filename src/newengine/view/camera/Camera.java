@@ -3,26 +3,47 @@ package newengine.view.camera;
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import newengine.events.camera.CameraEvent;
+
 
 /**
  * Convert between {@code GamePoint} and {@code ViewPoint}.
- * @author Yilin
+ * @author Yilin, Zhiyong
  *
  */
 public class Camera {
+	
+	public static final int WIDTH = 600;
+	public static final int HEIGHT = 500;
+	public static final int CANVAS_HEIGHT = 300;
+	public static final Paint BACKGROUND = Color.BISQUE;
 
 	private EventBus bus;
 	private double scaleFactor = 1;
 	private double translateX = 0;
 	private double translateY = 0;
+	private Scene scene;
+	private GamePoint gameP;
+	private ViewPoint viewP;
 	
 	public static final double MAX_FACTOR = 2.5;
 	public static final double MIN_FACTOR = 0.5;
 	public static final double MOVE_SPEED_PER_FRAME = 100;
 	
-	public Camera(EventBus bus) {
+
+	public Camera(EventBus bus){
 		this.bus = bus;
+	}
+	public Camera(EventBus bus, GamePoint gamePoint, ViewPoint viewPoint) {
+		this.bus = bus;
+		this.gameP = gamePoint;
+		this.viewP = viewPoint;
+		VBox root = new VBox();
+		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
 		initHandlers();
 	}
 	
@@ -59,6 +80,7 @@ public class Camera {
 		this.translateY = 0;
 	}
 	
+
 	/**
 	 * Convert a Point on the view to a Point in the game.
 	 * @param viewPoint a {@code ViewPoint} instance
@@ -67,6 +89,7 @@ public class Camera {
 	public GamePoint viewToGame(ViewPoint viewPoint) {
 		return new GamePoint((viewPoint.x() - translateX) / scaleFactor, 
 				(viewPoint.y() - translateY) / scaleFactor);
+
 	}
 	
 	/**
@@ -75,6 +98,7 @@ public class Camera {
 	 * @return ViewPoint
 	 */
 	public ViewPoint gameToView(GamePoint gamePoint) {
+
 		return new ViewPoint(gamePoint.x() * scaleFactor + translateX, 
 				gamePoint.y() * scaleFactor + translateY);
 	}
@@ -82,4 +106,24 @@ public class Camera {
 	public double getScaleFactor() {
 		return scaleFactor;
 	}
+	
+	public ViewPoint getViewPoint(){
+		return viewP;
+	}
+	
+	/**
+	 * @param viewPoint the chosen viewPoint
+	 * @param rationToZoom  the ration to zoom in or out according to the size to ratio
+	 * if ratio > 1, the result is "zoom in"; otherwise, it is "zoom out"
+	 */
+	//TODO : Zoom around the selection area by the mouse
+	public void zoom(ViewPoint viewPoint, double ratioToZoom){
+		
+	}
+	
+	public Scene getScene(){
+		
+		return scene;
+	}
+
 }

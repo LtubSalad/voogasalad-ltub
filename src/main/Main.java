@@ -38,7 +38,7 @@ public class Main extends Application {
 		});
 		play_game = new Button(PLAY_A_GAME);
 		play_game.setOnAction(e -> {
-			
+			// TODO: pop up file chooser + read in the game u wanna make + launch it 
 		});
 	}
 

@@ -9,6 +9,8 @@ package player.winnerorloser;
  */
 public class ResultAccessor {
 	
+	//TODO : get result from the game
+	
 	double getHealth() {
 		return 0;
 	}
@@ -16,6 +18,6 @@ public class ResultAccessor {
 		return 0;
 	}
 	String getGameName() {
-		return null;
+		return "Tower Defense Game";
 	}
 }

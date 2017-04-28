@@ -1,10 +1,7 @@
 package newengine.sprite.components;
-
 import java.io.Serializable;
 import java.util.LinkedList;
-
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import bus.BusEvent;
 import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
@@ -12,7 +9,6 @@ import newengine.events.QueueEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-
 public class EventQueue extends Component {
 	
 	public static final ComponentType<EventQueue> TYPE = new ComponentType<>(EventQueue.class.getName());
@@ -44,11 +40,9 @@ public class EventQueue extends Component {
 			emitNextEvent();
 		}
 	}
-
 	private void addEvent(BusEvent event) {
 		events.addLast(event);
 	}
-
 	private boolean isEmpty() {
 		return events.isEmpty();
 	}
@@ -64,7 +58,6 @@ public class EventQueue extends Component {
 			sprite.getSpriteBus().emit(events.removeFirst());
 		}
 	}
-
 	@Override
 	public ComponentType<? extends Component> getType() {
 		return TYPE;

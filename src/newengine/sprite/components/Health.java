@@ -40,13 +40,10 @@ public class Health extends Component {
 	
 	@Override
 	public void afterAdded(){
-		sprite.on(ChangeHealthEvent.ANY, e -> {
+		sprite.on(ChangeHealthEvent.ANY,e -> {
 			changeHealth(e.getChange());
 		});
-		sprite.on(MoveEvent.STOP, (e) -> {
-			if (!e.getSprite().getComponent(Weapon.TYPE).isPresent()){
-				return;
-			}
+		sprite.on(MoveEvent.STOP,  (e) -> {
 			Sprite another = e.getSprite();
 			Player owner = sprite.getComponent(Owner.TYPE).get().player();
 			another.getComponent(Owner.TYPE).ifPresent((anotherOwner) -> {

@@ -1,8 +1,6 @@
 package newengine.view;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
@@ -13,7 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -38,7 +38,6 @@ import newengine.sprite.components.SkillSet;
 import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
-
 public class View {
 	private double WIDTH = 600;
 	private double HEIGHT = 500;
@@ -47,7 +46,6 @@ public class View {
 	private double STATS_HEIGHT = 100;
 	private double SELECTION_HEIGHT = 200;
 	public static final Paint BACKGROUND = Color.BISQUE;
-
 	private EventBus bus;
 	private Camera camera;
 	private Scene scene;
@@ -58,10 +56,18 @@ public class View {
 	private GraphicsContext gcSelected;
 	private SkillBox skillBox;
 	
+	
 	// TODO: mouse location should belong to player input state
 	private ViewPoint mousePos;
+	
+	private NodeManager controlManager = new MenuBarManager();
+	private HBox controlPanel;
+	
+	private NodeManager gridPaneManager = new GridPaneManager();
+	private GridPane spriteInformation;
 
-	public View(EventBus bus) {
+	public View(EventBus bus, Camera camera) {
+		
 		this.bus = bus;
 		VBox root = new VBox();
 		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
@@ -72,24 +78,36 @@ public class View {
 		CANVAS_HEIGHT = HEIGHT - SELECTION_HEIGHT - STATS_HEIGHT;
 		
 		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
+		
+		
+		//statsPanel = new HBox();
 		statsPanel = new HBox();
+		
+		controlPanel = (HBox) controlManager.getNode();
+		
+		GridPane gridPaneTop = new GridPane();
+		gridPaneTop.add(controlPanel, 0, 0);
+		gridPaneTop.add(statsPanel, 1, 0);
+		
 		gameWorldCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		bottomPane = new HBox();
-		root.getChildren().addAll(statsPanel, gameWorldCanvas, bottomPane);
+		spriteInformation = (GridPane) gridPaneManager.getNode();
+		
+		GridPane gridPaneBottom = new GridPane();
+		gridPaneBottom.add(spriteInformation, 0, 0);
+		gridPaneBottom.add(bottomPane, 1, 0);
+		
+		
+		root.getChildren().addAll(gridPaneTop, gameWorldCanvas, gridPaneBottom);
 		// selected sprite
 		Canvas selectionCanvas = new Canvas(WIDTH / 2, SELECTION_HEIGHT);
 		// skill box
 		skillBox = new SkillBox(bus);
-		bottomPane.getChildren().addAll(selectionCanvas, skillBox.getBox());
-
-		gc = gameWorldCanvas.getGraphicsContext2D();
-		gcSelected = selectionCanvas.getGraphicsContext2D();
-		
+		bottomPane.getChildren().add(skillBox.getBox());
 		this.camera = new Camera(bus);
 		
 		initHandlers();
 	}
-
 	private void initHandlers() {
 		gameWorldCanvas.setOnMouseClicked(e -> {
 			ViewPoint viewPos = new ViewPoint(e.getX(), e.getY());
@@ -109,7 +127,12 @@ public class View {
 			bus.emit(new CameraEvent(CameraEvent.ZOOM, e.getDeltaY() / 400));
 		});
 		scene.setOnKeyPressed(e -> {
-			bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
+			ViewPoint viewPos = new ViewPoint(0, 0);
+			if(e.getCode() == KeyCode.L){
+				System.out.println("left key is pressed");
+			   bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
+			}
+			//bus.emit(new KeyEvent(KeyEvent.PRESS, e.getCode()));
 		});
 		scene.setOnKeyReleased(e -> {
 			bus.emit(new KeyEvent(KeyEvent.RELEASE, e.getCode()));
@@ -118,9 +141,12 @@ public class View {
 			bus.emit(new KeyEvent(KeyEvent.TYPE, e.getCode()));
 		});
 	}
-
 	public Scene getScene() {
 		return scene;
+	}
+	
+	public void clear(){
+		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 	}
 	
 	public void render(Models models) {
@@ -147,7 +173,6 @@ public class View {
 					image.getFXImage().getWidth() * camera.getScaleFactor(), 
 					image.getFXImage().getHeight() * camera.getScaleFactor());
 		}
-
 	}
 	
 	private void render(PlayerStatsModel playerStatsModel, 
@@ -162,19 +187,22 @@ public class View {
 				Player mainPlayer = playerRelationModel.getMainPlayer();
 				if (player == mainPlayer) {
 					createText(playerStatsModel, player).stream().forEach(e -> statsPanel.getChildren().add(e));
+					
 				}
 			});			
 		});
 	}
 	
 	private List<Text> createText(PlayerStatsModel playerStatsModel, Player player) {
-		List<Text> statsLabels = new ArrayList<Text>();
+		
 //		playerStatsModel.getWealth(player).ifPresent((wealthMap) -> {
 //			for (WealthType type: wealthMap.keySet()) {
 //				statsLabels.add(new Text(type + ":" + wealthMap.get(type)));
 //			}
 //		});
 		//TODO map to resource file
+		
+		List<Text> statsLabels = new ArrayList<Text>();
 		playerStatsModel.getLives(player).ifPresent((life) -> {
 			statsLabels.add(new Text("Lives:" + life));
 		});
@@ -182,21 +210,25 @@ public class View {
 			statsLabels.add(new Text("Scores:" + score));
 		});
 		return statsLabels;
+		
 	}
-
 	public void render(SelectionModel selectionModel, PlayerRelationModel playerRelationModel) {
 		// render the selected sprite and its skill box
 		if (selectionModel.getSelectedSprite().isPresent()) {
+			System.out.println("Selected sprite is present");
 			Sprite sprite = selectionModel.getSelectedSprite().get();
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
 				clearSelectionCanvas();
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
 			}
 			if (sprite.getComponent(Owner.TYPE).isPresent()) {
+				System.out.println("We have an owner");
 				Player player = sprite.getComponent(Owner.TYPE).get().player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();
-				if (player == mainPlayer) {				
+				if (player == mainPlayer) {
+					System.out.println("Player is main player");
 					if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
+						System.out.println("we have a skillset");
 						skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
 					}
 					else {
@@ -226,6 +258,10 @@ public class View {
 		else {
 			scene.setCursor(Cursor.DEFAULT);
 		}
+	}
+	
+	public Canvas getCanvas(){
+		return gameWorldCanvas;
 	}
 
 	private void clearGameWorldCanvas(){

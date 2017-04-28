@@ -1,6 +1,9 @@
 package newengine.sprite.components;
 
 import java.io.Serializable;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+import java.io.Serializable;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -22,9 +25,7 @@ import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.Target;
-
 public class Position extends Component {
-
 	public static final ComponentType<Position> TYPE = new ComponentType<>(Position.class.getName());
 	private GamePoint pos;
 	private double heading;
@@ -58,6 +59,7 @@ public class Position extends Component {
 			});
 		});
 		sprite.on(MoveEvent.START_SPRITE, (e) -> {
+			System.out.println("lol hi");
 			moveTo(e.getTarget());
 			followingSprite();
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
@@ -66,16 +68,10 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.STOP, (e) -> {
-//			if (e.getSprite().getComponent(Weapon.TYPE).isPresent()){
-//				System.out.println("the weapon reached dest so we remove it");
-//				//sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, sprite.getComponent(DamageStrength.TYPE).get().getStrength()));
-//				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, e.getSprite()));
-//			}
+		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
 			stopMoving();
 		});
 	}
-
 	@Override
 	public void onUpdated(double dt) {
 		if (!isMoving()) {
@@ -84,7 +80,6 @@ public class Position extends Component {
 		GamePoint pDest = getFollowingPoint();
 		updateMovePosition(dt, pDest);
 	}
-
 	private void updateMovePosition(double dt, GamePoint pDest) {
 		double xDest = pDest.x();
 		double yDest = pDest.y();
@@ -137,11 +132,9 @@ public class Position extends Component {
 	public Position clone() {
 		return new Position(pos, heading);
 	}
-
 	public GamePoint pos() {
 		return pos;
 	}
-
 	public double heading() {
 		return heading;
 	}

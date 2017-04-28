@@ -1,18 +1,10 @@
 package gameDevelopmentInterface.spriteCreator;
 
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 
 import data.DeveloperData;
 import data.SpriteMakerModel;
-import exception.UnsupportedTypeException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -33,6 +25,7 @@ import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.RangeShootingAI;
 import newengine.sprite.components.Selectable;
+import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
 import utilities.XStreamHandler;
@@ -71,12 +64,12 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Images.class);
 		observableComponents.add(Owner.class);
 		observableComponents.add(PathFollower.class);
-		observableComponents.add(Position.class);
 		observableComponents.add(Range.class);
 		observableComponents.add(RangeShootingAI.class);
 		observableComponents.add(Selectable.class);
 		observableComponents.add(SoundEffect.class);
 		observableComponents.add(Speed.class);
+		observableComponents.add(SkillSet.class);
 		
 		return new ComponentSelectorPane("Add components and set parameters", observableComponents,infoPane);
 	}
@@ -90,6 +83,7 @@ public class SpriteCreationScreen extends BorderPane{
 					updateSprite();
 					dataHandler.saveToFile(spriteData);
 				} catch (Exception e) {
+					//FIXME
 					e.printStackTrace();
 				}
 			});
@@ -99,7 +93,7 @@ public class SpriteCreationScreen extends BorderPane{
 					updateSprite();
 					model.addSprite(spriteData);
 				} catch (Exception e) {
-					
+					//FIXME
 				}				
 			});
 			this.getChildren().addAll(saveButton,listSaveButton);
