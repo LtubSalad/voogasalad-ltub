@@ -1,5 +1,7 @@
 package gamedata;
 
+import newengine.sprite.Sprite;
+
 /**
  * @author tahiaemran
  * 
@@ -8,7 +10,7 @@ package gamedata;
  * an implementing class should be a composition of translators, one for each direction in which translation proceeds 
  *
  */
-public interface FileTranslator {
+public interface FileTranslator extends Translator {
 	/**
 	 * 
 	 * method used to set the translator for translating from Authoring Data to Game Data
@@ -22,4 +24,6 @@ public interface FileTranslator {
 	 * 
 	 */
 	public void setTranslatorForGameFile();
+	
+	
 }

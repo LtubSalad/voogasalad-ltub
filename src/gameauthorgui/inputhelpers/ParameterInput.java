@@ -1,4 +1,4 @@
-package gamecreation;
+package gameauthorgui.inputhelpers;
 
 public interface ParameterInput<E> {
 

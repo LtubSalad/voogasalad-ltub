@@ -23,8 +23,8 @@ import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.skill.skills.BuildSkill;
 import newengine.skill.skills.FireProjectileSkill;
-import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
+import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.SkillSet;
 import newengine.utils.Target;
@@ -35,7 +35,9 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-		Player player1 = new Player("Player 1");
+
+		//Player player1 = new Player("Player 1");
+
 		XStreamHandler xHandler = new XStreamHandler();
 		XStream xStream = new XStream(new DomDriver());
 		List<SpriteMakerModel> spriteModelsFromFile = xHandler.getScreenModelFile();
@@ -49,6 +51,7 @@ public class App extends Application {
 		AuthDataTranslator translator = new AuthDataTranslator(spriteModelsFromFile);
 		translator.translate();
 		List<Sprite> listSprites = translator.getSprites();
+
 		Game game = new Game();
 		EventBus bus = game.getBus();
 		//List<Sprite> listSprites = spriteModel.getSprites();
@@ -56,6 +59,8 @@ public class App extends Application {
 		for (Sprite s : listSprites) {
 			System.out.println(s.getComponent(SkillSet.TYPE).get().skills());
 		}
+		
+		Player player1 = listSprites.get(0).getComponent(Owner.TYPE).get().player();
 		
 		bus.on(GameInitializationEvent.ANY, (e) -> {
 			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
@@ -66,12 +71,12 @@ public class App extends Application {
 			//bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 			//bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 			// call the spawner to spawn
-			GamePoint targetSpawnPos = new GamePoint(100, 50);
-			bus.emit(new PeriodicEvent(5, 1.0, () -> {
-				listSprites.get(0).emit(new TriggerSkillEvent(FireProjectileSkill.TYPE, new Target(targetSpawnPos)));
+
+			GamePoint targetSpawnPos = new GamePoint(10, 20);
+			bus.emit(new PeriodicEvent(5, 3.0, () -> {
+				listSprites.get(0).emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
 			}));
-//			bus.emit(new TriggerSkillEvent(MoveSkill.TYPE, new Target(targetSpawnPos)));
-//			bus.emit(new TriggerSkillEvent(FireProjectileSkill.TYPE, new Target(targetSpawnPos)));
+
 		});
 		
 		stage.setScene(game.getScene());

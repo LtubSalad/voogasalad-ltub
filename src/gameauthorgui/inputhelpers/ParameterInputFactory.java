@@ -1,15 +1,8 @@
-package gameauthorgui.tower;
+package gameauthorgui.inputhelpers;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
-
-import gamecreation.DoubleParameterInput;
-import gamecreation.ImageParameterInput;
-import gamecreation.IntegerParameterInput;
-import gamecreation.ParameterInput;
-import gamecreation.StringParameterInput;
 import javafx.scene.image.Image;
 
 public class ParameterInputFactory {
@@ -22,7 +15,7 @@ public class ParameterInputFactory {
 	private void initMap(){
 		parameterInputs = new HashMap<>();
 		parameterInputs.put(String.class, StringParameterInput.class);
-		parameterInputs.put(Integer.class, IntegerParameterInput.class);
+		parameterInputs.put(Integer.class, IntegerInputSlider.class);
 		parameterInputs.put(Double.class, DoubleParameterInput.class);
 		parameterInputs.put(Image.class, ImageParameterInput.class);
 	}

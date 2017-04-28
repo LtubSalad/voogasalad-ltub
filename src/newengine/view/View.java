@@ -205,16 +205,20 @@ public class View {
 	public void render(SelectionModel selectionModel, PlayerRelationModel playerRelationModel) {
 		// render the selected sprite and its skill box
 		if (selectionModel.getSelectedSprite().isPresent()) {
+			System.out.println("Selected sprite is present");
 			Sprite sprite = selectionModel.getSelectedSprite().get();
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
 				gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
 			}
 			if (sprite.getComponent(Owner.TYPE).isPresent()) {
+				System.out.println("We have an owner");
 				Player player = sprite.getComponent(Owner.TYPE).get().player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();
-				if (player == mainPlayer) {				
+				if (player == mainPlayer) {
+					System.out.println("Player is main player");
 					if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
+						System.out.println("we have a skillset");
 						skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
 					}
 					else {

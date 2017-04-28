@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import bus.BusEvent;
-import gamecreation.DataWrapper;
+import gameauthorgui.inputhelpers.DataWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.util.Pair;

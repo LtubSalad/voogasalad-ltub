@@ -1,4 +1,4 @@
-package gamecreation;
+package gameauthorgui.inputhelpers;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
