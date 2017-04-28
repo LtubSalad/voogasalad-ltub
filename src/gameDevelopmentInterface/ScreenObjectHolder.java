@@ -3,7 +3,6 @@ import java.io.File;
 //import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import commons.point.GamePoint;
@@ -11,6 +10,7 @@ import data.ScreenModelData;
 import data.SpriteMakerModel;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableMap;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -98,111 +98,6 @@ public class ScreenObjectHolder extends HBox {
 			}
 		});
 		
-//		Player player1 = new Player("Player 1");
-//		Player player2 = new Player("Player 2");
-//		
-//		// building
-//		SpriteMakerModel building = new SpriteMakerModel();
-//		LtubImage buildingImage = new LtubImage("images/skills/build.png");
-//		ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
-//		building.addComponent(new Images("images/skills/build.png"));
-//		//building.addComponent(new Selectable(SelectionBoundType.IMAGE));
-//		
-//		
-//		
-//		// sprite 1: the tower
-//		SpriteMakerModel sprite1 = new SpriteMakerModel();
-//		LtubImage image1 = new LtubImage("images/characters/tower2_resized.gif");
-//		ImageSet imageSet1 = new ImageSet(image1);
-//		Map<SkillType<? extends Skill>, Skill> skillMap1 = new HashMap<>();
-//		skillMap1.put(MoveSkill.TYPE, new MoveSkill());
-//		skillMap1.put(BuildSkill.TYPE, new BuildSkill(building));
-//		FireProjectileSkill fireSkill1 = new FireProjectileSkill();
-//		fireSkill1.setCooldown(3); // add cooldown to the fireProjectilSkill
-//		sprite1.addComponent(new Cooldown());
-//		skillMap1.put(FireProjectileSkill.TYPE, fireSkill1);
-//		sprite1.addComponent(new GameBus());
-//		sprite1.addComponent(new SkillSet(skillMap1));
-//		sprite1.addComponent(new Owner(player1));
-//		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
-//		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-//		sprite1.addComponent(new Images("images/characters/tower2_resized.gif"));
-//		sprite1.addComponent(new Speed(200));
-//		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
-//		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
-//		sprite1.addComponent(new Range(200));
-//		sprite1.addComponent(new Attacker());
-//		sprite1.addComponent(new Health(200));
-//		sprite1.addComponent(new EventQueue(new LinkedList<>()));
-//		sprite1.addComponent(new RangeShootingAI());
-//			
-//		// sprite 2
-//		SpriteMakerModel sprite2 = new SpriteMakerModel();
-//		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
-//		ImageSet imageSet2 = new ImageSet(image2);
-//		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
-//		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
-//		skillMap2.put(FireProjectileSkill.TYPE, new FireProjectileSkill());
-//		sprite2.addComponent(new GameBus());
-//		sprite2.addComponent(new SkillSet(skillMap2));
-//		sprite2.addComponent(new Owner(player2));
-//		//sprite2.addComponent(new Position(new GamePoint(300, 250), 0));
-//		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-//		sprite2.addComponent(new Images("images/characters/bahamut_right.png"));
-//		sprite2.addComponent(new Speed(100));
-//		//sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
-//		//sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
-//		sprite2.addComponent(new EventQueue(new LinkedList<>()));
-//		sprite2.addComponent(new Attacker());
-//		sprite2.addComponent(new Health(60));
-//		
-//		
-//		
-//		// spawned sprite
-//		SpriteMakerModel child = new SpriteMakerModel();
-//		LtubImage childImage = new LtubImage("images/characters/bahamut_left.png");
-//		ImageSet childImageSet = new ImageSet(childImage);
-//		Map<SkillType<? extends Skill>, Skill> childSkillMap = new HashMap<>();
-//		child.addComponent(new GameBus());
-//		child.addComponent(new SkillSet(childSkillMap));
-//		child.addComponent(new Owner(player2));
-//		//child.addComponent(new Position(new GamePoint(300, 50), 0));
-//		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-//		child.addComponent(new Images("images/characters/bahamut_left.png"));
-//		child.addComponent(new Speed(200));
-//		//child.addComponent(new Collidable(CollisionBoundType.IMAGE));
-//		//child.addComponent(new Selectable(SelectionBoundType.IMAGE));
-//		child.addComponent(new Range(128));
-//		child.addComponent(new Attacker());
-//		child.addComponent(new Health(200));
-//		child.addComponent(new EventQueue(new LinkedList<>()));
-////		child.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, child, 
-////			new Target(new GamePoint(300,300)))));
-//		
-//		// The spawner
-//		SpriteMakerModel spawner = new SpriteMakerModel();
-//		Map<SkillType<? extends Skill>, Skill> spawnerSkillMap = new HashMap<>();
-//		//spawnerSkillMap.put(BuildSkill.TYPE, new BuildSkill(child));
-//		spawner.addComponent(new GameBus());
-//		spawner.addComponent(new SkillSet(spawnerSkillMap));
-//		spawner.addComponent(new Owner(player1));
-//		//spawner.addComponent(new Position(new GamePoint(-100, -100), 0));
-//		spawner.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-//		spawner.addComponent(new Images("images/characters/tower2_resized.gif"));
-//		spawner.addComponent(new Speed(200));
-//		//spawner.addComponent(new Collidable(CollisionBoundType.IMAGE));
-//		//spawner.addComponent(new Selectable(SelectionBoundType.IMAGE));
-//		spawner.addComponent(new Range(128));
-//		spawner.addComponent(new Attacker());
-//		spawner.addComponent(new Health(200));
-//		spawner.addComponent(new EventQueue(new LinkedList<>()));
-//		addObject(sprite1);
-		
-		
-		
-		
-		
-		
 		Player player1 = new Player("Player 1");
 		Player player2 = new Player("Player 2");
 		
@@ -210,10 +105,7 @@ public class ScreenObjectHolder extends HBox {
 		SpriteMakerModel building = new SpriteMakerModel();
 		LtubImage buildingImage = new LtubImage("images/skills/build.png");
 		ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
-		building.addComponent(new Images("images/skills/build.png"));
-		//building.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		
-		
+		building.addComponent(new Images("images/skills/build.png"));	
 		
 		// sprite 1: the tower
 		SpriteMakerModel sprite1 = new SpriteMakerModel();
@@ -254,17 +146,12 @@ public class ScreenObjectHolder extends HBox {
 		sprite2.addComponent(new GameBus());
 		sprite2.addComponent(new SkillSet(skillMap2));
 		sprite2.addComponent(new Owner(player2));
-		//sprite2.addComponent(new Position(new GamePoint(300, 250), 0));
 		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite2.addComponent(new Images("images/characters/bahamut_right.png"));
 		sprite2.addComponent(new Speed(100));
-		//sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		//sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite2.addComponent(new EventQueue(new LinkedList<>()));
 		sprite2.addComponent(new Attacker());
 		sprite2.addComponent(new Health(60));
-		
-		
 		
 		// spawned sprite
 		SpriteMakerModel child = new SpriteMakerModel();
@@ -274,46 +161,28 @@ public class ScreenObjectHolder extends HBox {
 		child.addComponent(new GameBus());
 		child.addComponent(new SkillSet(childSkillMap));
 		child.addComponent(new Owner(player2));
-		//child.addComponent(new Position(new GamePoint(300, 50), 0));
 		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		child.addComponent(new Images("images/characters/bahamut_left.png"));
 		child.addComponent(new Speed(200));
-		//child.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		//child.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		child.addComponent(new Range(128));
 		child.addComponent(new Attacker());
 		child.addComponent(new Health(200));
 		child.addComponent(new EventQueue(new LinkedList<>()));
-//		child.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, child, 
-//			new Target(new GamePoint(300,300)))));
 		
 		// The spawner
 		SpriteMakerModel spawner = new SpriteMakerModel();
 		Map<SkillType<? extends Skill>, Skill> spawnerSkillMap = new HashMap<>();
-		//spawnerSkillMap.put(BuildSkill.TYPE, new BuildSkill(child));
 		spawner.addComponent(new GameBus());
 		spawner.addComponent(new SkillSet(spawnerSkillMap));
 		spawner.addComponent(new Owner(player1));
-		//spawner.addComponent(new Position(new GamePoint(-100, -100), 0));
 		spawner.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		spawner.addComponent(new Images("images/characters/tower2_resized.gif"));
 		spawner.addComponent(new Speed(200));
-		//spawner.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		//spawner.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		spawner.addComponent(new Range(128));
 		spawner.addComponent(new Attacker());
 		spawner.addComponent(new Health(200));
 		spawner.addComponent(new EventQueue(new LinkedList<>()));
-		addObject(sprite1);
-		//addObject(sprite2);
-		//addObject(spawner);
-		
-//		List<Sprite> spritesToAdd = new ArrayList<>();
-//		spritesToAdd.add(sprite1);
-//		spritesToAdd.add(sprite2);
-////		spritesToAdd.add(child);
-//		spritesToAdd.add(spawner);
-		
+		addObject(sprite1);		
 		
 	}
 	/**
@@ -359,7 +228,8 @@ public class ScreenObjectHolder extends HBox {
 		boolean success = false;
 		if (e.getDragboard().hasImage()) {
 			String imageName = db.getString();
-			GamePoint gameCoords = new GamePoint(e.getScreenX(), e.getScreenY());
+			Point2D point = target.sceneToLocal(e.getSceneX(), e.getSceneY());
+			GamePoint gameCoords = new GamePoint(point.getX()/target.getScreenWidth(), point.getY()/target.getScreenHeight());
 			for (Pair<String, Image> p : myScreenObjects.keySet()) {
 				String iName = p.getKey();
 				if (imageName.equals(iName)) {

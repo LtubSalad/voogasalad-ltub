@@ -11,8 +11,8 @@ import utilities.XStreamHandler;
 public class BackgroundSetter extends ScreenModelCreator {
 	private XStreamHandler xstream = new XStreamHandler();
 
-	public BackgroundSetter(SpritesForScreenUse attributesModel, GeneralDataCreator gdc, ScreenModelData screenData) {
-		super(attributesModel, gdc, screenData);
+	public BackgroundSetter(SpritesForScreenUse spriteModelsToDrag, GeneralDataCreator gdc, ScreenModelData screenData) {
+		super(spriteModelsToDrag, gdc, screenData);
 		this.setTop(null);
 		this.setRight(new BackgroundButtonsPanel(this));
 		addTiles();
