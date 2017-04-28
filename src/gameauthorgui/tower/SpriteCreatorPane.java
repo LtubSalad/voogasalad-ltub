@@ -37,6 +37,8 @@ public class SpriteCreatorPane extends BorderPane{
 	private SpriteInfoPane infoPane;
 	private EventHandlerPane scriptPane;
 	private DeveloperData model;
+	private double PREF_WIDTH=700;
+	private double PREF_HEIGHT=600;
 	
 	public SpriteCreatorPane(DeveloperData model){
 		this.model=model;
@@ -52,6 +54,7 @@ public class SpriteCreatorPane extends BorderPane{
 		this.setLeft(infoPane);
 		this.setTop(new Label("NEW SPRITE"));
 		this.setBottom(new BottomPanel());	
+		//this.setPrefSize(PREF_WIDTH, PREF_HEIGHT);
 	}
 	
 	private ComponentSelectorPane instantiateSelector(){
