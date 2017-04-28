@@ -23,7 +23,7 @@ public class ImageAnimation extends Transition {
 	private final int height;
 	private ImageView imageView;
 	private int count;
-	
+
 	private int index;
 
 	public ImageAnimation( List<Image> imageList, ImageView imageView, Duration duration, int width,   int height) {

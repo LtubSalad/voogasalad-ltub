@@ -33,7 +33,7 @@ public class GameCreator {
 	
 	private TranslationController translator; 
 	private Game game; 
-	
+
 	
 	public GameCreator(String filepath){
 		// set up file reading 

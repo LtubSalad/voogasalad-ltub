@@ -77,6 +77,7 @@ public class Loader {
 		root.getChildren().add(vb);
 		scene.getStylesheets().setAll("/styleSheets/login.css");
 		primaryStage.setScene(scene);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.show();
 
 

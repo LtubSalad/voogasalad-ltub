@@ -25,6 +25,7 @@ import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.RangeShootingAI;
 import newengine.sprite.components.Selectable;
+import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
 import utilities.XStreamHandler;
@@ -68,6 +69,7 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Selectable.class);
 		observableComponents.add(SoundEffect.class);
 		observableComponents.add(Speed.class);
+		observableComponents.add(SkillSet.class);
 		
 		return new ComponentSelectorPane("Add components and set parameters", observableComponents,infoPane);
 	}

@@ -313,9 +313,10 @@ public class ScreenObjectHolder extends HBox {
 //		spritesToAdd.add(sprite2);
 ////		spritesToAdd.add(child);
 //		spritesToAdd.add(spawner);
-		
+
 //		addObject(sprite2);
 //		addObject(spawner);
+
 		
 	}
 	/**

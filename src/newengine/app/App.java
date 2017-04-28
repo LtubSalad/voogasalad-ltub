@@ -37,6 +37,8 @@ public class App extends Application {
 		
 
 		Player player1 = new Player("Player 1");
+		//Player player1 = new Player("Player 1");
+
 		XStreamHandler xHandler = new XStreamHandler();
 		XStream xStream = new XStream(new DomDriver());
 		List<SpriteMakerModel> spriteModelsFromFile = xHandler.getScreenModelFile();
@@ -50,6 +52,7 @@ public class App extends Application {
 		AuthDataTranslator translator = new AuthDataTranslator(spriteModelsFromFile);
 		translator.translate();
 		List<Sprite> listSprites = translator.getSprites();
+
 		Game game = new Game();
 		EventBus bus = game.getBus();
 		//List<Sprite> listSprites = spriteModel.getSprites();
@@ -68,6 +71,7 @@ public class App extends Application {
 			//bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 			//bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 			// call the spawner to spawn
+
 			GamePoint targetSpawnPos = new GamePoint(10, 20);
 			bus.emit(new PeriodicEvent(5, 3.0, () -> {
 				listSprites.get(0).emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
@@ -77,6 +81,7 @@ public class App extends Application {
 			}));
 //			bus.emit(new TriggerSkillEvent(MoveSkill.TYPE, new Target(targetSpawnPos)));
 //			bus.emit(new TriggerSkillEvent(FireProjectileSkill.TYPE, new Target(targetSpawnPos)));
+
 		});
 		
 		stage.setScene(game.getScene());

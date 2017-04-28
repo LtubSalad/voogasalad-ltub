@@ -3,41 +3,98 @@
  */
 package player.winnerorloser;
 
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import player.App;
 
 /**
  * @author Zhiyong
  *
  */
 public class WinPresentation implements ResultPresentation{
+	
+	//add the buttons on the VBox so that they have the same appearance
+	
+	private VBox vbButtons;
+	
+	private VBox vbTexts;
+	private Stage primaryStage = new Stage();
+	
+	public WinPresentation(){
+		vbButtons = new VBox(20);
+		vbButtons.setLayoutY(200);
+		vbButtons.setLayoutX(500);
+		vbButtons.setSpacing(20);
+		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
+		
+		vbTexts = new VBox(20);
+		vbTexts.setLayoutY(20);
+		vbButtons.setLayoutX(100);
+		vbTexts.setSpacing(20);
+		vbTexts.setPadding(new Insets(0, 20, 10, 20)); 
+	}
 
 	@Override
 	public void show(ResultAccessor result) {
-		Stage primaryStage = new Stage();
 		primaryStage.setTitle("Winner");
 		Group root = new Group();
 		Button playButton = new Button("restart");
-		playButton.setLayoutX(50);
-		playButton.setLayoutY(50);
+		playButton.setMaxWidth(Double.MAX_VALUE);
 		playButton.setOnAction( e -> restartAction());
 		
 		Button exitButton = new Button("exit");
-		exitButton.setLayoutX(50);
-		exitButton.setLayoutY(70);
+		exitButton.setMaxWidth(Double.MAX_VALUE);
+		exitButton.setOnAction(e -> exitAction());
 		
-		root.getChildren().addAll(playButton, exitButton);
+
+		
+		vbButtons.getChildren().add(playButton);
+		vbButtons.getChildren().add(exitButton);
+		
+		vbTexts.getChildren().add(getText("For this game:    " + result.getGameName()));
+		vbTexts.getChildren().add(getText("You get the score:   " + result.getPoint()));
+		vbTexts.getChildren().add(getText("Your health is:    " + result.getHealth()));
+		root.getChildren().add(vbTexts);
+		
+		root.getChildren().addAll(vbButtons);
+		//TODO : add animation and background
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
 	}
 
-	private void restartAction() {
+	private void exitAction() {
 		// TODO Auto-generated method stub
+		primaryStage.close();
 		
+	}
+
+	private void restartAction() {
+		App app = new App();
+		try {
+			app.start(primaryStage);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private Text getText(String message){
+		Text splash = new Text();
+		
+		splash = new Text(10,50,message);
+		splash.setFont(Font.font(25));
+		splash.setFill(Color.DARKVIOLET);
+		return splash;
 	}
 
 }

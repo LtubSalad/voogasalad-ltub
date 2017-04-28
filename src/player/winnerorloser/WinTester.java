@@ -18,7 +18,7 @@ public class WinTester extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		ResultAccessor r = new ResultAccessor();
-		ResultPresentation res = new WinPresentation();
+		ResultPresentation res = new LosePresentation();
 		res.show(r);
 		
 	}

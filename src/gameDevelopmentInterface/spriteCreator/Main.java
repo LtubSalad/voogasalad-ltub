@@ -14,7 +14,7 @@ public class Main extends Application{
 		Scene scene = new Scene(new SpriteCreationScreen(new DeveloperData()));
 		primaryStage.setScene(scene);
 	}
-
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

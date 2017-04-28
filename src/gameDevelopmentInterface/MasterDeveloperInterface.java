@@ -45,7 +45,8 @@ public class MasterDeveloperInterface {
 		developerTabs = new TabPane();
 		Tab spriteCreation = new Tab("Sprite creation",new SpriteCreationScreen(myModelData));
 		Tab GeneralDataTab = new Tab(myResources.getString(GENERAL_DATA), myGeneralDataCreator);
-		Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getSprites(),myGeneralDataCreator, new ScreenModelData()));
+		Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, new ScreenModelData()));
+
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
 		myTabs.addAll(spriteCreation,GeneralDataTab, ScreenSettingView);
 	}
@@ -80,7 +81,7 @@ public class MasterDeveloperInterface {
 			});
 			screenButton.setOnAction((clicked) -> {
 				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
-						new ScreenModelCreator(myModelData.getSprites(), myGeneralDataCreator, new ScreenModelData()));
+						new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, new ScreenModelData()));
 				developerTabs.getTabs().add(screenTab);
 			});
 //			attributeButton.setOnAction((clicked) -> {
