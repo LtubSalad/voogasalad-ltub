@@ -113,7 +113,6 @@ public class LevelCreatorHolder extends ScrollPane{
 			System.out.println("\n" + "New Level Beginning:");
 			System.out.println(level.getName());
 			System.out.println(level.getSpawnTime());
-			System.out.print(level.getDamageMultiplier());
 		}
 	}
 }

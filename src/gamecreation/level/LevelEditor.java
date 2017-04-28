@@ -3,37 +3,27 @@ package gamecreation.level;
 import java.util.Observable;
 import java.util.Observer;
 
-import gameauthorgui.inputhelpers.IntegerInputSlider;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.VBox;
 
-public class LevelEditor extends TitledPane implements Observer{
-	private VBox content;
+public abstract class LevelEditor extends TitledPane implements Observer{
 	private LevelData data;
-	private IntegerInputSlider difficultyMod;
 
 	public LevelEditor(LevelData data){
 		super();
 		data.subscribe(this);
-		this.setText("Untitled Level");
+		this.setText(data.getName());
 		this.data = data;
-		createContent();
 	}
 
-	public void createContent(){
-		content = new VBox();
-		difficultyMod = new IntegerInputSlider("Difficulty Modifier", 1, 10);
-		content.getChildren().add(difficultyMod);
-		this.setContent(content);
-		
-	}
+	public abstract void createContent();
 	
 	public LevelData getData(){
-		return new LevelData();
+		return data;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("check");
 		String name = arg.toString();
 		this.setText(name);
 	}

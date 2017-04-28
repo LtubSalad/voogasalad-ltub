@@ -6,6 +6,7 @@ import java.util.Map;
 
 import gameauthorgui.inputhelpers.ComboBoxParameterInput;
 import gameauthorgui.inputhelpers.StringParameterInput;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import newengine.managers.conditions.GoldMinimumCondition;
 import newengine.managers.conditions.ICondition;
@@ -43,7 +44,10 @@ public class BasicLevelCreator extends LevelCreator{
 		ComboBoxParameterInput winningCondition = new ComboBoxParameterInput("Winning Condition", new ArrayList<String>(winningConditions.keySet()));
 		ComboBoxParameterInput losingCondition = new ComboBoxParameterInput("Losing Condition", new ArrayList<String> (losingConditions.keySet()));
 		
-		content.getChildren().addAll(title, winningCondition, losingCondition);
+		Button remove = new Button("Remove");
+		remove.setOnAction(e -> super.remove(this));
+		
+		content.getChildren().addAll(title, winningCondition, losingCondition, remove);
 		this.setContent(content);
 	}
 	

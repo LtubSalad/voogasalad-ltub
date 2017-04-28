@@ -5,18 +5,19 @@ import java.util.List;
 
 import data.DeveloperData;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
 public class LevelEditorHolder extends ScrollPane {
-	private DeveloperData modelData;
+	private ObservableList<LevelData> levelData;
 	private VBox content;
 	
-	public LevelEditorHolder(DeveloperData modelData){
-		this.modelData = modelData;
+	public LevelEditorHolder(ObservableList<LevelData> data){
 		this.content = new VBox();
+		this.levelData = data;
 		this.setContent(content);
-		modelData.getLevelData().addListener(new ListChangeListener<LevelData>(){
+		levelData.addListener(new ListChangeListener<LevelData>(){
 			@Override
 			public void onChanged(Change<? extends LevelData> c) {
 				render();
@@ -28,8 +29,8 @@ public class LevelEditorHolder extends ScrollPane {
 	private void render(){
 		List<LevelEditor> creators = new ArrayList<LevelEditor>();
 		content.getChildren().clear();
-		modelData.getLevelData().stream().forEach(e -> {
-			creators.add(new LevelEditor(e));
+		levelData.stream().forEach(level -> {
+			creators.add(new SpawnerLevelEditor(level));
 		});
 		content.getChildren().addAll(creators);
 	}

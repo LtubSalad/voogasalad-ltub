@@ -64,7 +64,7 @@ public class App extends Application {
 			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, listSprites));
 			bus.emit(new MainPlayerEvent(player1));
-			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 0));
+			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 3));
 			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, WealthType.GOLD, 100));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));

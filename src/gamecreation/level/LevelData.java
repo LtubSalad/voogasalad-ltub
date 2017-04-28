@@ -11,9 +11,10 @@ public class LevelData extends Observable implements ILevelData {
 	private String name;
 	private Condition winningCondition;
 	private Condition losingCondition;
+	private double spawnTime;
 
 	public LevelData(){
-		this.name = "Level";
+		this.name = "Untitled Level";
 	}
 	
 	public void setName(String name){
@@ -27,14 +28,13 @@ public class LevelData extends Observable implements ILevelData {
 		return name;
 	}
 
+	public void setSpawnTime(double time) {
+		this.spawnTime = time;
+	}
+	
 	@Override
 	public double getSpawnTime() {
-		return 10.0/diffMod;
-	}
-
-	@Override
-	public double getDamageMultiplier() {
-		return 5.0/diffMod;
+		return spawnTime;
 	}
 
 	@Override
@@ -55,4 +55,7 @@ public class LevelData extends Observable implements ILevelData {
 	public void subscribe(Observer o){
 		this.addObserver(o);
 	}
+
+
+
 }
