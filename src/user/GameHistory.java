@@ -11,6 +11,7 @@ import java.util.Map;
  * history object for every game authored or played 
  *
  */
+
 public class GameHistory {
 	
 	private String name; 
@@ -43,8 +44,6 @@ public class GameHistory {
 		return filePath; 
 	}
 	
-	
-	
 	public void addComment(String user, String message){
 		if (!comments.containsKey(user)){
 			comments.put(user, new ArrayList<String>());
@@ -55,6 +54,14 @@ public class GameHistory {
 	
 	public void addRecordedStat(String statName, String stat){
 		stats.addCustomStat(statName, stat);
+	}
+	
+	public boolean containsRecordedStat(String name){
+		return (stats.getCustomStat(name)!=null);
+	}
+	
+	public String getCustomStat(String name){
+		return stats.getCustomStat(name);
 	}
 	
 	public void addRating(Integer rating){

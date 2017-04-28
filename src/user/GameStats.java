@@ -41,4 +41,8 @@ public class GameStats {
 		displayableStats.put(name, value);
 	}
 	
+	public String getCustomStat(String name){
+		return displayableStats.get(name);
+	}
+	
 }

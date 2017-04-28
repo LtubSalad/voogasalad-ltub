@@ -6,6 +6,10 @@ import java.util.Map;
 
 import javafx.scene.image.Image;
 
+/**
+ * @author tahiaemran
+ *
+ */
 public class User {
 
 	private String name; 
@@ -13,8 +17,6 @@ public class User {
 	private Image image; 
 
 	private UserHistory history; 
-
-	
 	
 	public User(String username, String imageFile) {
 		this.name = username; 
@@ -23,9 +25,10 @@ public class User {
 	}
 	
 		
-	public void onGamePlayed(String gameFile, int score){
-		// increment game plays
-		// modify score 
+	public void onGameEnded(String gameFile, int score){
+		// check if game is new 
+		history.checkHighScore(gameFile,score);
+		history.incrementPlays(gameFile);
 	}
 	
 	

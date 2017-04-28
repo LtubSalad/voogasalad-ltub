@@ -5,6 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author tahiaemran
+ * 
+ * each user's game history for both authored and played games 
+ *
+ */
 public class UserHistory {
 	
 	Map<String, String> gameToFile; 
@@ -12,8 +18,6 @@ public class UserHistory {
 	List<String> played;
 	Map<String, GameHistory> gameToHistory;
 	Map<String, GameHistory> authToHistory;
-	
-	
 	
 	public UserHistory(){
 		gameToFile = new HashMap<String, String>();  
@@ -67,7 +71,7 @@ public class UserHistory {
 		}
 	}
 	
-	//TODO: restructure this to rid the ifs 
+	//TODO: MODIFY TO USE COMMENTS 
 
 	public void addComment(String username, String comment){
 		if(authored.contains(username)){
@@ -88,6 +92,22 @@ public class UserHistory {
 		GameHistory GH = new GameHistory(name, filepath);
 		GH.addRecordedStat("High Score", Integer.toString(0));
 		return GH;
+	}
+
+
+
+	public void checkHighScore(String gameFile, int score) {
+		if(authored.contains(gameFile)){
+				if (Integer.parseInt(gameToHistory.get(gameFile).getCustomStat("High Score")) < score){
+					gameToHistory.get(gameFile).addRecordedStat("High Score", Integer.toString(score));
+				}
+		}
+		if(played.contains(gameFile)){
+			if (Integer.parseInt(gameToHistory.get(gameFile).getCustomStat("High Score")) < score){
+				gameToHistory.get(gameFile).addRecordedStat("High Score", Integer.toString(score));
+			}
+		}
+		
 	}
 	
 	
