@@ -37,6 +37,7 @@ public class PasswordManager{
 		lblMessage = new Label();
 		pf = new PasswordField();
 	}
+	//FIXME: refactor this method into smaller methods 
 	public void show() {
 		primaryStage.setTitle(TITLE);
 		BorderPane bp = new BorderPane();
