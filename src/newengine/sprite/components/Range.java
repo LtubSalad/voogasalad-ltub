@@ -33,7 +33,7 @@ public class Range extends Component {
 
 	@Override
 	public void afterAdded() {
-		sprite.on(InRangeEvent.ANY, (Serializable & BusEventHandler<InRangeEvent>) (e) -> {
+		sprite.on(InRangeEvent.ANY,  (e) -> {
 			for (Sprite detectee: e.getDetectees()) {
 				Target target = new Target(detectee);
 //				System.out.println("In range received?");

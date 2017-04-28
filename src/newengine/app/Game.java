@@ -1,5 +1,4 @@
 package newengine.app;
-
 import bus.BasicEventBus;
 import bus.EventBus;
 import javafx.scene.Scene;
@@ -22,9 +21,7 @@ import newengine.model.SpriteModel;
 import newengine.trigger.Trigger;
 import newengine.trigger.TriggerManager;
 import newengine.view.View;
-
 public class Game {
-
 	private EventBus bus = new BasicEventBus();
 	private GameLoop gameLoop;
 	private View view;
@@ -43,7 +40,6 @@ public class Game {
 		
 		CollisionManager collisionManager = new CollisionManager(bus); // TODO
 		RangeManager rangeManager = new RangeManager(bus); // TODO
-
 		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
 		SoundManager soundManager = new SoundManager(bus);
 		DebugManager debugManager = new DebugManager(bus);

@@ -8,6 +8,7 @@ import data.DeveloperData;
 import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
 import gameDevelopmentInterface.developerdata.ComponentSetterView;
+import gamecreation.StringParameterInput;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -18,8 +19,6 @@ import newengine.sprite.components.SkillSet;
 
 public class SpriteInfoPane extends ScrollPane{
 	private VBox myPane;
-	private final double WIDTH=400;
-	private final double HEIGHT=400;
 	private SpriteMakerModel spriteData;
 	private SpriteDescriptor descriptor;
 	private ComponentLister lister;
@@ -37,11 +36,12 @@ public class SpriteInfoPane extends ScrollPane{
 	
 	private class SpriteDescriptor extends VBox{
 		private SpriteDescriptor(){
-			try {
+			try{
 				this.getChildren().add(new Label("Add Sprite Components"));
 				this.getChildren().add(new SimpleVariableSetter<String>(String.class, "Sprite name:"));
 				this.getChildren().add(new SimpleVariableSetter<String>(String.class, "Sprite description:"));
-			} catch (UnsupportedTypeException e) {
+			}
+			catch (UnsupportedTypeException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

@@ -38,8 +38,9 @@ public class DeveloperData {
 		myData.put(NUMBER_OF_LIVES, "");
 	}
 	
-	public void addScreenSprite(SpriteMakerModel sprite){
-		jakeSprites.addComponent(sprite);
+public void addSprite(SpriteMakerModel sprite){
+		//FIXME jake sprite?
+		jakeSprites.addPossibleSprite(sprite);
 		System.out.println("reached end");
 	}
 	

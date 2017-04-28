@@ -10,6 +10,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import data.SpriteMakerModel;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import newengine.sprite.Sprite;
 
 public class XStreamHandler {
 	//TODO: Remove duplicate code using generics
@@ -34,6 +35,15 @@ public class XStreamHandler {
 		return object;
 	}
 	
+	public <T> T getObjectFromFile(){
+		XStream xstream = new XStream(new DomDriver());
+		FileChooser chooser = new FileChooser();
+		File file = chooser.showOpenDialog(new Stage());
+		T object = (T)xstream.fromXML(file);
+		return object;
+	}
+	
+
 	public List<SpriteMakerModel> getScreenModelFile() {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
@@ -47,6 +57,7 @@ public class XStreamHandler {
 		List<SpriteMakerModel> attribute = (List<SpriteMakerModel>)xstream.fromXML(file);
 		return attribute;
 	}
+	
 
 	public void saveToFile(Object data) {
 		FileChooser chooser = new FileChooser();
@@ -65,4 +76,14 @@ public class XStreamHandler {
 			// user clicked cancel. No need to exclaim anything went wrong
 		}
 	}
+	
+	public List<Sprite> getSpriteModel(File file){
+		XStream xstream = new XStream(new DomDriver());
+		List<Sprite> sprites = (List<Sprite>)xstream.fromXML(file);
+		return sprites;
+	}
+	
+
+	
+	
 }

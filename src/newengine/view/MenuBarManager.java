@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -99,7 +97,8 @@ public class MenuBarManager implements NodeManager<Node>{
 	}
 
 	private void helpAction() {
-		System.out.println("Help me");
+		HelpPage help = new HelpPage(myResources.getString("helpMessage"));
+		help.showMessage();
 		
 	}
 

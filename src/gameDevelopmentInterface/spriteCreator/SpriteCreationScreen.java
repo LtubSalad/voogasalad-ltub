@@ -3,7 +3,6 @@ package gameDevelopmentInterface.spriteCreator;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import data.DeveloperData;
 import data.SpriteMakerModel;
 import javafx.collections.FXCollections;
@@ -65,7 +64,6 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Images.class);
 		observableComponents.add(Owner.class);
 		observableComponents.add(PathFollower.class);
-		observableComponents.add(Position.class);
 		observableComponents.add(Range.class);
 		observableComponents.add(RangeShootingAI.class);
 		observableComponents.add(Selectable.class);
@@ -85,6 +83,7 @@ public class SpriteCreationScreen extends BorderPane{
 					updateSprite();
 					dataHandler.saveToFile(spriteData);
 				} catch (Exception e) {
+					//FIXME
 					e.printStackTrace();
 				}
 			});
@@ -92,9 +91,9 @@ public class SpriteCreationScreen extends BorderPane{
 			listSaveButton.setOnMouseClicked((click)->{
 				try {
 					updateSprite();
-					model.addScreenSprite(spriteData);
+					model.addSprite(spriteData);
 				} catch (Exception e) {
-					
+					//FIXME
 				}				
 			});
 			this.getChildren().addAll(saveButton,listSaveButton);
