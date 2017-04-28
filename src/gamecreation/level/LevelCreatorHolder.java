@@ -8,20 +8,40 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class LevelCreatorHolder extends ScrollPane{
 	private VBox holder;
 	private HBox addButtons;
 	private int numLevels;
 	private ArrayList<LevelCreator> levels;
-	
-	public LevelCreatorHolder(){
+	public static final int DEFAULT_PREF_HEIGHT = 600;
+
+	public LevelCreatorHolder(int prefHeight){
 		super();
+		this.setFitToHeight(true);
+		
 		holder = new VBox();
+		holder.setPrefHeight(prefHeight);
+		createTitle();
+		
 		this.setContent(holder);
 		numLevels = 0;
 		levels = new ArrayList<LevelCreator>();
 		setUpBox();
+	}
+	
+	public LevelCreatorHolder(){
+		this(DEFAULT_PREF_HEIGHT);
+	}
+	
+	private void createTitle(){
+		Text title = new Text("Level Creation");
+		title.setTextAlignment(TextAlignment.CENTER);
+		title.setFont(new Font(40));
+		holder.getChildren().add(title);
 	}
 	
 	private void setUpBox(){
