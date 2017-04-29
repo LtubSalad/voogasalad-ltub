@@ -14,6 +14,8 @@ import newengine.sprite.Sprite;
  *
  */
 public class Level {
+	//TODO: change this class to accomodate what levels actually accomodate 
+	
 	private List<Sprite> mySprites; 
 	// private Path myPath 
 	// private Condition myWinningCondition

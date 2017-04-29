@@ -16,16 +16,20 @@ public class SpriteTriggerRegisterEvent extends BusEvent {
 	private BusEventHandler<BusEvent> triggerHandler;
 	private SpriteID spriteID;
 	
-	private SpriteTriggerRegisterEvent(BusEventType<? extends BusEvent> busEventType, BusEventType<? extends BusEvent> triggerBusEventType, BusEventHandler<BusEvent> triggerHandler, SpriteID spriteID) {
+	private SpriteTriggerRegisterEvent(BusEventType<? extends BusEvent> busEventType, 
+			BusEventType<? extends BusEvent> triggerBusEventType,
+			BusEventHandler<BusEvent> triggerHandler, SpriteID spriteID) {
 		super(busEventType);
 		this.triggerBusEventType = triggerBusEventType;
 		this.triggerHandler = triggerHandler;
 		this.spriteID = spriteID;
 	}
-	public static SpriteTriggerRegisterEvent spriteAllRegisterEvent(BusEventType<? extends BusEvent> triggerBusEventType, BusEventHandler<BusEvent> triggerHandler) {
+	public static SpriteTriggerRegisterEvent spriteAllRegisterEvent(BusEventType<? extends BusEvent> triggerBusEventType, 
+			BusEventHandler<BusEvent> triggerHandler) {
 		return new SpriteTriggerRegisterEvent(SPRITE_ALL, triggerBusEventType, triggerHandler, null);
 	}
-	public static SpriteTriggerRegisterEvent spriteSpecificRegisterEvent(BusEventType<? extends BusEvent> triggerBusEventType, BusEventHandler<BusEvent> triggerHandler, SpriteID spriteID) {
+	public static SpriteTriggerRegisterEvent spriteSpecificRegisterEvent(BusEventType<? extends BusEvent> triggerBusEventType,
+			BusEventHandler<BusEvent> triggerHandler, SpriteID spriteID) {
 		return new SpriteTriggerRegisterEvent(SPRITE_SPECIFIC, triggerBusEventType, triggerHandler, spriteID);
 	}
 	

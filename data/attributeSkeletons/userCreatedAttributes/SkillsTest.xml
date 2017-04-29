@@ -1293,8 +1293,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
           </newengine.sprite.component.ComponentType>
           <newengine.sprite.components.Position>
             <pos>
-              <x>391.0</x>
-              <y>154.0</y>
+              <x>392.0</x>
+              <y>159.0</y>
             </pos>
             <heading>0.0</heading>
             <isMoving>false</isMoving>

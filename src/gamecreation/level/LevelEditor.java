@@ -23,7 +23,6 @@ public abstract class LevelEditor extends TitledPane implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("check");
 		String name = arg.toString();
 		this.setText(name);
 	}

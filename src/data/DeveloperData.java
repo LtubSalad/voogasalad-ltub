@@ -15,16 +15,18 @@ import javafx.util.Pair;
  * Stores the data not specific to any screen, such as health, lives, score.
  */
 public class DeveloperData {
-	private static final String NUMBER_OF_LIVES = "Number of Lives";
+	private static final String NUMBER_OF_LIVES = "Number of Lives"; 
 	private static final String NUMBER_OF_LEVELS = "Number of Levels";
 	private static final String NUMBER_OF_STARTING_GOLD = "Number of Starting Gold";
 	private static final String NUMBER_OF_STARTING_BONUSES = "Number of Starting Bonuses";
-	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
-	private ObservableList<LevelData> levelData;
+	private ObservableMap<String,String> myData = FXCollections.observableHashMap(); //need
+	private ObservableList<LevelData> levelData; // need
 	private ObservableList<Path> myPaths;
-	private ObservableList<SpriteMakerModel> mySprites;
-	private SpritesForScreenUse jakeSprites;
-	
+	private ObservableList<SpriteMakerModel> mySprites; //need
+	private SpritesForScreenUse jakeSprites;  //need
+	private String gameName; //need
+	private String gameIconFilePath;//need
+ 	
 	public DeveloperData() {
 		List<SpriteMakerModel> list=new ArrayList<SpriteMakerModel>();
 		levelData = FXCollections.observableArrayList();
@@ -79,4 +81,22 @@ public class DeveloperData {
 	public ObservableMap<String,String> getAllData() {
 		return myData;
 	}
+	
+	public void setGameName(String name){
+		this.gameName = name;
+	}
+	
+	public String getGameName(){
+		return gameName;
+	}
+	
+	public void setGameIcon(String filepath){
+		gameIconFilePath = filepath;
+	}
+	
+	public String getGameIcon(){
+		return gameIconFilePath;
+	}
+	
+	
 }

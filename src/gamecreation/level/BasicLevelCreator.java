@@ -3,6 +3,7 @@ package gamecreation.level;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import gameauthorgui.inputhelpers.ComboBoxParameterInput;
 import gameauthorgui.inputhelpers.StringParameterInput;
@@ -14,6 +15,9 @@ import newengine.managers.conditions.NoLivesCondition;
 import newengine.managers.conditions.NoMonstersCondition;
 
 public class BasicLevelCreator extends LevelCreator{
+	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
+	private static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
 	private VBox content;
 	private Map<String, Class<? extends ICondition>> winningConditions;
 	private Map<String, Class<? extends ICondition>> losingConditions;
@@ -28,9 +32,9 @@ public class BasicLevelCreator extends LevelCreator{
 	private void initConditions(){
 		winningConditions = new HashMap<String, Class<? extends ICondition>>();
 		losingConditions = new HashMap<String, Class<? extends ICondition>>();
-		winningConditions.put("No Monsters Left", NoMonstersCondition.class);
-		winningConditions.put("Gold Minimum (Input)", GoldMinimumCondition.class);
-		losingConditions.put("No Lives Left", NoLivesCondition.class);
+		winningConditions.put(myResources.getString("noMonsters"), NoMonstersCondition.class);
+		winningConditions.put(myResources.getString("goldMin"), GoldMinimumCondition.class);
+		losingConditions.put(myResources.getString("noLives"), NoLivesCondition.class);
 	}
 	
 	@Override
@@ -38,11 +42,11 @@ public class BasicLevelCreator extends LevelCreator{
 		content = new VBox();
 		initConditions();
 		//TODO resource file
-		StringParameterInput title = new StringParameterInput("Level Title");
+		StringParameterInput title = new StringParameterInput(myResources.getString("levelTitle"));
 		title.getTextProperty().addListener(e -> BasicLevelCreator.this.getData().setName(title.getValue()));
 		
-		ComboBoxParameterInput winningCondition = new ComboBoxParameterInput("Winning Condition", new ArrayList<String>(winningConditions.keySet()));
-		ComboBoxParameterInput losingCondition = new ComboBoxParameterInput("Losing Condition", new ArrayList<String> (losingConditions.keySet()));
+		ComboBoxParameterInput winningCondition = new ComboBoxParameterInput(myResources.getString("winningCondition"), new ArrayList<String>(winningConditions.keySet()));
+		ComboBoxParameterInput losingCondition = new ComboBoxParameterInput(myResources.getString("losingCondition"), new ArrayList<String> (losingConditions.keySet()));
 //		winningCondition.getValueProperty().addListener(e -> {
 //			if(winningCondition.getValue().contains("(Input)")){
 //				winningCondition.appendTextInput();
@@ -60,7 +64,7 @@ public class BasicLevelCreator extends LevelCreator{
 //		});
 		
 	
-		Button remove = new Button("Remove");
+		Button remove = new Button(myResources.getString("remove"));
 		remove.setOnAction(e -> super.remove(this));
 		
 		content.getChildren().addAll(title, winningCondition, losingCondition, remove);

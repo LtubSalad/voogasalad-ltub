@@ -1,6 +1,5 @@
 package newengine.sprite.components;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
