@@ -36,6 +36,11 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		
+
+		Player player1 = new Player("Player 1");
+		//Player player1 = new Player("Player 1");
+
+
 		XStreamHandler xHandler = new XStreamHandler();
 		XStream xStream = new XStream(new DomDriver());
 		List<SpriteMakerModel> spriteModelsFromFile = xHandler.getScreenModelFile();
@@ -58,7 +63,6 @@ public class App extends Application {
 			//System.out.println(s.getComponent(SkillSet.TYPE).get().skills());
 		}
 		
-		Player player1 = listSprites.get(0).getComponent(Owner.TYPE).get().player();
 		
 		bus.on(GameInitializationEvent.ANY, (e) -> {
 			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
@@ -74,6 +78,11 @@ public class App extends Application {
 			bus.emit(new PeriodicEvent(5, 3.0, () -> {
 				listSprites.get(0).emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
 			}));
+			bus.emit(new PeriodicEvent(5, 1.0, () -> {
+				listSprites.get(0).emit(new TriggerSkillEvent(FireProjectileSkill.TYPE, new Target(targetSpawnPos)));
+			}));
+//			bus.emit(new TriggerSkillEvent(MoveSkill.TYPE, new Target(targetSpawnPos)));
+//			bus.emit(new TriggerSkillEvent(FireProjectileSkill.TYPE, new Target(targetSpawnPos)));
 
 		});
 		

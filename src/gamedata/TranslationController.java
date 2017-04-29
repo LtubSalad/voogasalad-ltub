@@ -29,21 +29,16 @@ public class TranslationController implements FileTranslator {
 	// TODO: using XML file of current game state (Sprites)  --> sprite maker models 
 	// TODO: using SpriteModel of current game state --> sprite maker models
 
-	public TranslationController(ScreenModelData screenModel){
-		translator = new AuthDataTranslator(screenModel.getData()); 
-	}
-
-	public TranslationController(SpriteModel spriteModel){
-		translator = new EngineDataTranslator(spriteModel.getSprites()); 
-	}
-
 	public TranslationController(String filepath){
 		fileToTranslate = new File(filepath);	
 	}
 	
-	
 	public TranslationController(File file){
 		fileToTranslate = file;
+	}
+	
+	public TranslationController (List<SpriteMakerModel> sprites){
+		translator = new AuthDataTranslator(sprites);
 	}
 
 	public void setTranslatorForAuthFile(){
