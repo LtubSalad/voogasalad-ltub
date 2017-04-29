@@ -3,11 +3,15 @@ package user.view;
 import java.util.List;
 import java.util.Map;
 
+import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import user.GameHistory;
 import user.User;
 
@@ -20,42 +24,48 @@ public class UserSocialPage extends BorderPane{
 	private VBox playHistory; 
 	private VBox authoredHistory; 
 	private VBox messages; 
-	private VBox profileInfo; 
+	private BorderPane profileView; 
 
 	public UserSocialPage(User user){
 		myUser = user; 
 		configProfile(); 
-		contents = new HBox(); 
+		contents = new HBox(100); 
 		playHistory = configHistory(user.getUserHistory().getPlayedHistory());
 		authoredHistory = configHistory(user.getUserHistory().getAuthoredHistory());
 		messages = configMessageBox();
 		configure(); 
+		
 	}
 
 	private void configure() {
 		contents.getChildren().addAll(playHistory, authoredHistory, messages);
-		this.setCenter(profileInfo);
-		this.setBottom(contents);
+		contents.fillHeightProperty().setValue(true);
+		// TODO: Figure this out
+		contents.getStylesheets().add("resources/socialStyle.css");
+		contents.getStyleClass().add("hbox");
+		this.setTop(profileView);
+		this.setCenter(contents);
+		this.getStylesheets().add("resources/socialStyle.css");
+		this.getStyleClass().add("borderpane");
 	}
 
 	private VBox configMessageBox() {
-		// TODO finish this 
-		VBox messages = new VBox();
-		messages.getChildren().add(new Text("write your message here"));
-		return messages; 
-	}
-
-
+			// TODO finish this 
+			VBox messages = new VBox(5);
+			Map<String, String> toDisplay = myUser.getDisplayableMessages();
+			for (String person: toDisplay.keySet()){
+				Text display = new Text(person + ": " +  toDisplay.get(person));
+				TextFlow wrapper = new TextFlow(display);
+				wrapper.setTextAlignment(TextAlignment.LEFT);
+				messages.getChildren().add(wrapper);
+			}
+			return messages; 
+		}
 
 	private VBox configHistory(Map<String, GameHistory> history) {
-		VBox hist = new VBox(); 
+		VBox hist = new VBox(10); 
 		for (String game: history.keySet()){
-			VBox gameSpecific = new VBox(); 
-			GameHistory GH = history.get(game);
-			gameSpecific.getChildren().add(new Text(game));
-			VBox stats = makeStatsPane(GH.getStats());
-			VBox comments = makeCommentsPane(GH.getComments());
-			gameSpecific.getChildren().addAll(stats, comments);
+			GameStatsView gameSpecific = new GameStatsView(game, history.get(game));
 			hist.getChildren().add(gameSpecific);
 		}
 		return hist;
@@ -78,26 +88,20 @@ public class UserSocialPage extends BorderPane{
 
 
 
-	private VBox makeStatsPane(Map<String, String> stats) {
-		VBox statsBox = new VBox(); 
-		for(String statName: stats.keySet()){
-			HBox statLine = new HBox(); 
-			Text name = new Text( statName);
-			Text stat = new Text(stats.get(statName));
-			statLine.getChildren().addAll(name, stat);
-			statsBox.getChildren().add(statLine);
-		}
-		return statsBox; 
-	}
-
-
-
 	private void configProfile() {
-		profileInfo = new VBox();
+		profileView = new BorderPane();
+		VBox profileInfo = new VBox(10);
 		ImageView img = new ImageView(myUser.getImage());
+		System.out.println("did add the image");
+		
 		Text name = new Text(myUser.getName());
-		profileInfo.getChildren().addAll(img, name);
-
+		name.setFont(new Font(18));
+		TextFlow textWrapper = new TextFlow(name);
+		textWrapper.setTextAlignment(TextAlignment.CENTER);
+		
+		profileInfo.getChildren().addAll(img, textWrapper);
+		profileInfo.setAlignment(Pos.CENTER);
+		profileView.setCenter(profileInfo);
 	}
 
 }
