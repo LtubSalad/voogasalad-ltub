@@ -15,8 +15,8 @@ import javafx.scene.layout.HBox;
 public class SpriteCreationEnvironment extends BorderPane{
 	private TabPane creationScreens;
 	private DeveloperData developerData;
-	private final double MAX_WIDTH=1200;
-	private final double MAX_HEIGHT=700;
+	private final double MAX_WIDTH=1000;
+	private final double MAX_HEIGHT=500;
 	
 	public SpriteCreationEnvironment(DeveloperData data){
 		developerData=data;
