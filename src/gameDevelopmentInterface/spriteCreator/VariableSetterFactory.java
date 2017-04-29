@@ -21,9 +21,6 @@ public class VariableSetterFactory {
 	
 	public VariableSetter setterFromParameter(Parameter parameter) throws UnsupportedTypeException{
 		String name=parameter.getAnnotation(VariableName.class).name();
-		if(name.equals("Image")){
-			return new ImageStringVariableSetter(name);
-		}
 		if(parameter.getType().isPrimitive()||parameter.getType().equals(String.class)){
 			return new SimpleVariableSetter(parameter.getType(),name);
 		}
