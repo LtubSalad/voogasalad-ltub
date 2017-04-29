@@ -24,11 +24,11 @@ public class DeveloperData {
 	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
 	private ObservableList<LevelData> levelData;
 	private ObservableList<Path> myPaths;
-	private ObservableList<SpriteMakerModel> mySprites;
-	private SpritesForScreenUse jakeSprites;
-	private String gameName;
-	private String gameIconFilePath;
-	
+	private ObservableList<SpriteMakerModel> mySprites; //need
+	private SpritesForScreenUse jakeSprites;  //need
+	private String gameName; //need
+	private String gameIconFilePath;//need
+ 	
 	public DeveloperData() {
 		List<SpriteMakerModel> list=new ArrayList<SpriteMakerModel>();
 		levelData = FXCollections.observableArrayList();
