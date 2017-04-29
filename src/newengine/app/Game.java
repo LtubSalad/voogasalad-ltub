@@ -25,6 +25,7 @@ import newengine.model.SpriteModel;
 import newengine.trigger.Trigger;
 import newengine.trigger.TriggerManager;
 import newengine.view.View;
+import newengine.view.camera.Camera;
 public class Game {
 	private EventBus bus = new BasicEventBus();
 	private GameLoop gameLoop;
@@ -38,7 +39,8 @@ public class Game {
 		SelectionModel selectionModel = new SelectionModel(bus);
 		Models models = new Models(bus, spriteModel, playerStatsModel, playerRelationModel, selectionModel);
 		
-		view = new View(bus, null);
+		Camera camera = new Camera(bus);
+		view = new View(bus, camera);
 		
 		gameLoop = new FXGameLoop(bus);
 		
@@ -52,7 +54,6 @@ public class Game {
 		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel, playerRelationModel);
 		LevelManager levelManager = new LevelManager(bus, levels);
 		
-		gameLoop.addLoopComponent((dt) -> view.clear());
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
@@ -71,7 +72,8 @@ public class Game {
 		SelectionModel selectionModel = new SelectionModel(bus);
 		Models models = new Models(bus, spriteModel, playerStatsModel, playerRelationModel, selectionModel);
 		
-		view = new View(bus, null);
+		Camera camera = new Camera(bus);
+		view = new View(bus, camera);
 		
 		gameLoop = new FXGameLoop(bus);
 		
@@ -85,7 +87,7 @@ public class Game {
 		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel, playerRelationModel);
 		LevelManager levelManager = new LevelManager(bus, null);
 		
-		gameLoop.addLoopComponent((dt) -> view.clear());
+//		gameLoop.addLoopComponent((dt) -> view.clearGameWorldCanvas());
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
