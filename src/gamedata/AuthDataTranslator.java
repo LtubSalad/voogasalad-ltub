@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-
 import bus.BasicEventBus;
 import bus.BusEvent;
+import commons.point.GamePoint;
 import data.SpriteMakerModel;
 import javafx.collections.ObservableList;
-import newengine.events.SpriteModelEvent;
 import newengine.events.skill.AddSkillEvent;
-import newengine.model.SpriteModel;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.Position;
 
 /**
  * @author tahiaemran
@@ -114,6 +111,21 @@ public class AuthDataTranslator implements Translator<Sprite>{
 		Sprite sprite = new Sprite(); 
 		for (Component comp: transferComponents){
 			System.out.println(comp.getType().getType());
+			if (comp.getType().equals(Position.TYPE)) {
+				Position position = (Position)comp;
+				GamePoint pos = position.pos();
+				double xPerc = pos.x();
+				double yPerc = pos.y();
+				// TODO where to get the data
+				int numCol = 50;
+				int numRow = 25;
+				int size = 100;
+				double x = xPerc * numCol * size;
+				double y = yPerc * numRow * size;
+				Position newPosition = new Position(x, y, position.heading());
+				sprite.addComponent(newPosition);
+				break;
+			}
 			sprite.addComponent(comp);
 		}
 		return sprite;
