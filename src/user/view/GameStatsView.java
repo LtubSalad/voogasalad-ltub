@@ -16,11 +16,11 @@ import javafx.scene.text.TextFlow;
 import user.GameHistory;
 
 public class GameStatsView extends VBox {
-	VBox myStats; 
-	HBox myInteractiveElements; 
+	private VBox myStats; 
+	private HBox myInteractiveElements; 
 	
-	String myName; 
-	GameHistory myHistory; 
+	private String myName; 
+	private GameHistory myHistory; 
 	
 	private final List<String> possibleRatings = Arrays.asList(new String[]{"1", "2", "3", "4", "5"});
 	
@@ -64,8 +64,6 @@ public class GameStatsView extends VBox {
 		myInteractiveElements.getChildren().addAll(ratingsBox, likeButton);
 		
 	}
-	
-	
 	
 	private void makeStatsPane(Map<String, String> stats) {
 		myStats = new VBox(5);
