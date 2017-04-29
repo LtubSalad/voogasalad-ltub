@@ -16,6 +16,15 @@ public class UserTest extends Application {
 //		Scene scene = new Scene(page);
 //		primaryStage.setScene(scene);
 //		primaryStage.show();
+		
+		
+		UsersModel model = new UsersModel(); 
+		model.addUser("me", "1234");
+		User me = model.getUserByName("me");
+		model.addUser("not me", "4321");
+		User notMe = model.getUserByName("not me");
+		me.sendMessage("not me", "hi");
+		
 	}
 	
 	public static void main (String[] args){

@@ -26,6 +26,7 @@ public class MessagingHistory {
 	}
 	
 	public void addSent(String recipient, String message){
+		System.out.println("message being added to send history for user " + myUserName);
 		mySentMessages.add(new Message(recipient, message));
 	}
 	

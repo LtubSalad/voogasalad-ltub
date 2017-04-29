@@ -21,7 +21,7 @@ public class User {
 	public User(String username, String imageFile, MessagingHandler MH) {
 		// directory
 		this.name = username; 
-		this.image = new Image(imageFile);
+		//this.image = new Image(imageFile);
 		history = new UserHistory(); 
 		messages = new MessagingHistory(username); 
 		handler = MH; 
@@ -63,6 +63,7 @@ public class User {
 	public void sendMessage(String recipient, String message){
 		handler.sendMessage(name, message, recipient);
 		messages.addSent(recipient, message);
+		System.out.println("message being sent to recipient " + recipient);
 	}
 
 }
