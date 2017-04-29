@@ -79,9 +79,9 @@ public class App extends Application {
 			bus.emit(new PeriodicEvent(5, 3.0, () -> {
 				listSprites.get(0).emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(targetSpawnPos)));
 			}));
-			bus.emit(new PeriodicEvent(5, 1.0, () -> {
-				listSprites.get(0).emit(new TriggerSkillEvent(FireProjectileSkill.TYPE, new Target(targetSpawnPos)));
-			}));
+//			bus.emit(new PeriodicEvent(5, 1.0, () -> {
+//				listSprites.get(0).emit(new TriggerSkillEvent(FireProjectileSkill.TYPE, new Target(targetSpawnPos)));
+//			}));
 //			bus.emit(new TriggerSkillEvent(MoveSkill.TYPE, new Target(targetSpawnPos)));
 //			bus.emit(new TriggerSkillEvent(FireProjectileSkill.TYPE, new Target(targetSpawnPos)));
 

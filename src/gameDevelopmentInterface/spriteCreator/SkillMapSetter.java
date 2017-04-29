@@ -1,6 +1,7 @@
 package gameDevelopmentInterface.spriteCreator;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +35,9 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		skillSelectors.forEach((selector)->{
 			displayContents.getChildren().add(selector);
 		});
-		
 	}
 	
-	public List<SkillSelector<? extends Skill>> skillsToSelectors(List<Class<? extends Skill>> classes){
+	public List<SkillSelector<? extends Skill>> skillsToSelectors(Collection<Class<? extends Skill>> classes){
 		List<SkillSelector<? extends Skill>> selectors=new ArrayList<>();
 		classes.forEach((clazz)->{
 			if(clazz.isAssignableFrom(BuildSkill.class)){
@@ -51,9 +51,8 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 	
 	@Override
 	public Map<SkillType<? extends Skill>, Skill> getValue() throws Exception {
-		// TODO Auto-generated method stub
 		Map<SkillType<? extends Skill>, Skill> skillMap=new HashMap<>();
-		for(SkillSelector selector:skillSelectors){
+		for(SkillSelector<?> selector:skillSelectors){
 			if(selector.getValue()!=null){
 				skillMap.put(selector.getValue().getType(), selector.getValue());
 			}
@@ -63,7 +62,21 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 
 	@Override
 	public void setField(Map<SkillType<? extends Skill>, Skill> initialValue) {
-		
+		skillSelectors.clear();
+		initialValue.values().forEach((skill)->{
+			SkillSelector selector;
+			if(skill instanceof BuildSkill){
+				selector=new SpriteCreatorSelector();
+				selector.setField((BuildSkill)skill);
+				skillSelectors.add(new SpriteCreatorSelector());
+			}
+			else{
+				selector=new SkillSelector(skill.getClass());
+				selector.setField(skill);
+				skillSelectors.add(selector);
+			}
+			this.getChildren().add(selector);
+		});
 	}
 	
 	private class SkillSelector<T extends Skill> extends VariableSetter<T>{
@@ -97,6 +110,10 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		public void setField(T initialValue) {
 			checkbox.setSelected(initialValue!=null);
 		}
+		
+		public Class<? extends Skill> getType(){
+			return clazz;
+		}
 	}
 	
 	private class SpriteCreatorSelector extends SkillSelector<BuildSkill>{
@@ -122,7 +139,6 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 			setSelected(buildSkill!=null);
 			availableSprites.getItems().add(buildSkill.getModel());
 			availableSprites.setValue(buildSkill.getModel());
-			//await someone elses merge
 		}
 		
 	}

@@ -19,8 +19,8 @@ import newengine.sprite.component.ComponentType;
 
 public class SpriteMakerModel {
 	private Map<String, String> myCustomEventHandlers;
-	private ObservableMap<ComponentType<?>,Component> myComponents;
-	private ObservableMap<BusEvent, String> myScriptMap;
+	private Map<ComponentType<?>,Component> myComponents;
+	private Map<BusEvent, String> myScriptMap;
 	private String spriteName;
 	
 	// Jake and Tahia's DO NOT TOUCH
@@ -31,10 +31,8 @@ public class SpriteMakerModel {
 	List<Pair<BusEvent, BusEvent>> triggers; // event + Action for the trigger (custom event handling) 	
 	
 	public SpriteMakerModel() {
-		Map<ComponentType<?>, Component >componentMap=new HashMap<>();
-		myComponents=FXCollections.observableMap(componentMap);
-		Map<BusEvent, String> handlers=new HashMap<>();
-		myScriptMap=FXCollections.observableMap(handlers);
+		myComponents=new HashMap<>();
+		myScriptMap=new HashMap<>();
 		actualComponents = new ArrayList<Component>(); 
 		skills = new ArrayList<Skill>(); 
 		
@@ -135,7 +133,7 @@ public class SpriteMakerModel {
 		return myScriptMap;
 	}
 	
-	public ObservableMap<ComponentType<?>,Component> getComponents() {
+	public Map<ComponentType<?>,Component> getComponents() {
 		return myComponents;
 	}
 	

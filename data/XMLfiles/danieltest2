@@ -1,0 +1,10 @@
+<data.SpriteMakerModel>
+  <myComponents class="com.sun.javafx.collections.ObservableMapWrapper">
+    <backingMap/>
+  </myComponents>
+  <myScriptMap class="com.sun.javafx.collections.ObservableMapWrapper">
+    <backingMap/>
+  </myScriptMap>
+  <actualComponents/>
+  <skills/>
+</data.SpriteMakerModel>

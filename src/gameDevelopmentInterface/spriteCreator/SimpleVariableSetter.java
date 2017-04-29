@@ -1,9 +1,7 @@
 package gameDevelopmentInterface.spriteCreator;
 
 import exception.UnsupportedTypeException;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 
 /**
  * 
@@ -24,7 +22,7 @@ public class SimpleVariableSetter<T> extends VariableSetter<T>{
 	}
 	
 	public T getValue() throws UnsupportedTypeException{
-		PrimitiveConverter<T> converter=new PrimitiveConverter();
+		PrimitiveConverter<T> converter=new PrimitiveConverter<T>();
 		return converter.convertString(type, value.getText());
 	}
 

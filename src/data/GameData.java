@@ -18,6 +18,7 @@ public class GameData {
 	
 	int numLives; 
 	int numStartingGold; 
+	int levelCompletionBonus; 
 	
 	public GameData(){
 		levels = new ArrayList<LevelData>(); 

@@ -4,17 +4,18 @@ import java.util.List;
 
 import bus.EventBus;
 import gamecreation.level.ILevelData;
+import gamecreation.level.LevelData;
 import newengine.events.conditions.EndConditionTriggeredEvent;
 import newengine.events.conditions.SetEndConditionEvent;
 import newengine.events.spawner.SpawnPrefEvent;
 
 public class LevelManager{
 	private EventBus bus;
-	private List<ILevelData> data;
+	private List<LevelData> data;
 	private int numLevels;
 	private int currentLevel;
 	
-	public LevelManager(EventBus bus, List<ILevelData> data){
+	public LevelManager(EventBus bus, List<LevelData> data){
 		this.bus = bus;
 		this.data = data;
 		this.currentLevel = 1;

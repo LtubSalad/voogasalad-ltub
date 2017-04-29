@@ -1,15 +1,12 @@
 package newengine.sprite.components;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.MoveEvent;
-import newengine.player.Player;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -52,6 +49,13 @@ public class DamageStrength extends Component {
 	public Component clone() {
 		DamageStrength clone = new DamageStrength(this.strength);
 		return clone;
+	}
+
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters= new Object[1];
+		parameters[0]=strength;
+		return parameters;
 	}
 
 }

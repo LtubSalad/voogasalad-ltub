@@ -1,6 +1,6 @@
 package newengine.sprite.components;
 
-import java.util.ResourceBundle;
+
 
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
@@ -17,12 +17,13 @@ public class Images extends Component {
 //		this.imageSet = imageSet;
 //	}
 	
-	public Images(String filePath) {
-		this.imageFilePath = filePath;
+
+	public Images(String imageFilePath) {
+		this.imageFilePath = imageFilePath;
 	}
 //	
 	@ConstructorForDeveloper
-	public Images(@VariableName(name = "Image") LtubImage image){
+	public Images(@VariableName(name="Image")LtubImage image){
 		this(image.getFileName());
 	}	
 	
@@ -44,5 +45,11 @@ public class Images extends Component {
 	@Override
 	public Images clone() {
 		return new Images(imageFilePath);
+	}
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=new LtubImage(imageFilePath);
+		return parameters;
 	}
 }
