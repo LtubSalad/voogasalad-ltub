@@ -1,7 +1,6 @@
 package gamecreation.level;
 
 import javafx.beans.property.StringProperty;
-import newengine.managers.conditions.Condition;
 import newengine.managers.conditions.ICondition;
 
 public interface ILevelData{

@@ -2,6 +2,7 @@ package gameauthorgui.rts;
 
 import java.util.ResourceBundle;
 
+import data.DeveloperData;
 import gameauthorgui.WelcomeScreen;
 
 public class RTSWelcomeScreen extends WelcomeScreen {
@@ -9,7 +10,7 @@ public class RTSWelcomeScreen extends WelcomeScreen {
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
 	private static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
 
-	public RTSWelcomeScreen() {
-		super(myResources.getString("RTS"));
+	public RTSWelcomeScreen(DeveloperData modelData) {
+		super(myResources.getString("RTS"), modelData);
 	}	
 }

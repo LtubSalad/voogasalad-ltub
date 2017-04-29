@@ -2,6 +2,7 @@ package gameauthorgui.tower;
 
 import java.util.ResourceBundle;
 
+import data.DeveloperData;
 import gameauthorgui.WelcomeScreen;
 
 
@@ -11,7 +12,8 @@ public class TowerWelcomeScreen extends WelcomeScreen{
 	private static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
 	public static final String WELCOME_KEY = "TOWER_DEFENSE";
 
-	public TowerWelcomeScreen() {
-		super(myResources.getString(WELCOME_KEY));
+	public TowerWelcomeScreen(DeveloperData modelData) {
+		super(myResources.getString(WELCOME_KEY), modelData);
+		
 	}
 }

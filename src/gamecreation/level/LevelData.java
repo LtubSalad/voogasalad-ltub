@@ -38,7 +38,6 @@ public class LevelData extends Observable implements ILevelData {
 
 	public void setWinningCondition(ICondition condition){
 		this.winningCondition = condition;
-		System.out.println(winningCondition == null);
 	}
 	
 	@Override

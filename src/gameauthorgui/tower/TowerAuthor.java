@@ -38,7 +38,7 @@ public class TowerAuthor extends GameAuthor {
 	}
 	
 	public void instantiateSteps() {
-		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense")));
+		addStep(new DeveloperStep("Welcome", new TowerWelcomeScreen(myModelData)));
 		addStep(new DeveloperStep("Level Options", new LevelCreationPane(myModelData, getScene().getHeight()-CENTER_OFFSETS)));
 		addStep(new DeveloperStep(SET_THE_BACKGROUND, new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
 		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
