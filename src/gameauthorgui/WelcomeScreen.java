@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Pair;
 
 public class WelcomeScreen extends VBox {
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
@@ -22,6 +23,7 @@ public class WelcomeScreen extends VBox {
 	
 	public WelcomeScreen(String genreName, DeveloperData modelData){
 		super(VERTICAL_GAP);
+		this.modelData = modelData;
 		createWelcome(genreName);
 		this.setAlignment(Pos.CENTER);
 	}
@@ -39,10 +41,10 @@ public class WelcomeScreen extends VBox {
 	public void createUserData(){
 		StringParameterInput gameName = new StringParameterInput(myResources.getString("GAME_NAME"));
 		gameName.setAlignment(Pos.CENTER);
-		gameName.getTextProperty().addListener(e -> modelData.setGameName(gameName.getValue()));
+		gameName.getTextProperty().addListener(e -> modelData.addData(new Pair<String, String>("GAME_NAME", gameName.getValue())));
 		ImageParameterInput icon = new ImageParameterInput(myResources.getString("GAME_ICON"));
 		icon.setAlignment(Pos.CENTER);
-		icon.getTextProperty().addListener(e -> modelData.setGameIcon(icon.getValue()));
+		icon.getTextProperty().addListener(e -> modelData.addData(new Pair<String, String>("GAME_ICON", icon.getValue())));
 		this.getChildren().addAll(gameName, icon);
 	}
 }
