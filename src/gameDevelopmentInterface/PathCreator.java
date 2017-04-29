@@ -4,8 +4,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import commons.point.GamePoint;
+import data.DeveloperData;
+import data.ScreenModelData;
+import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Pair;
+import javafx.scene.layout.BorderPane;
 
 /**
  * Starts the ability for the user to define a path by clicking
@@ -13,14 +16,37 @@ import javafx.util.Pair;
  * @author Jake
  *
  */
-public class PathCreator {
+public class PathCreator extends BorderPane {
+	private static final double close_bounds = 0.0001;
 	private Path myPath;
 	private Queue<GamePoint> replacementPath = new LinkedList<GamePoint>();
-	private ScreenModelCreator myScreenModel;
+	private DeveloperData myDeveloperData;
+	private ScreenModelData myScreenData;
+	private ScreenMap target;
 	
-	public PathCreator(ScreenModelCreator smc) {
-		myScreenModel = smc;
+	public PathCreator(DeveloperData developerData, ScreenModelData screenData) {
+		myDeveloperData = developerData;
+		myScreenData = screenData;
 		myPath = new Path();
+		clearPath();
+	}
+	public ScreenMap getScreen() {
+		return target;
+	}
+	public DeveloperData getDeveloperData() {
+		return myDeveloperData;
+	}
+	public void clearPath() {
+		this.getChildren().clear();
+		target = new ScreenMap(new ScreenModelCreator(myDeveloperData.getScreenSprites(), new GeneralDataCreator(), myScreenData));
+		target.resize(350, 350);
+		this.setCenter(target);
+		this.setRight(new PathButtonsPanel(this, target));
+	}
+	public void refreshScreen(int rows, int columns) {
+		target.setNumRows(rows);
+		target.setNumCols(columns);
+		this.setCenter(target);
 	}
 	/**
 	 * 
@@ -33,7 +59,6 @@ public class PathCreator {
 	 * Called by the buttons panel
 	 */
 	public void makePath() {
-		ScreenMap target = myScreenModel.getScreen();
 		target.setOnMouseEntered(e -> target.getGrid().setGridLinesVisible(true));
 		target.setOnMouseExited(e -> target.getGrid().setGridLinesVisible(false));
 		target.setOnMouseDragged(e -> targetSetOnMouseDragged(target, e));
@@ -49,12 +74,14 @@ public class PathCreator {
 	}
 	
 	private void targetSetOnMouseDragged(ScreenMap target, MouseEvent e) {
-		double mouseX = e.getScreenX();
-		double mouseY = e.getScreenY();
+		Point2D point = target.sceneToLocal(e.getSceneX(), e.getSceneY());
+		double mouseX = point.getX();
+		double mouseY = point.getY();
 		GamePoint coords = target.getCoordOfMouseHover(mouseX, mouseY);
 		GamePoint actualGameLocation = target.getActualLocationOfSprite(coords);
-		if (!coordAlreadyInPath(actualGameLocation)) {
-			replacementPath.add(actualGameLocation);
+		GamePoint percentLocation = new GamePoint(actualGameLocation.x()/target.getScreenWidth(), actualGameLocation.y()/target.getScreenHeight());
+		if (!coordAlreadyInPath(percentLocation)) {
+			replacementPath.add(percentLocation);
 			target.addBorderToCoordinate(coords);
 		}
 		e.consume();
@@ -66,7 +93,7 @@ public class PathCreator {
 		for (GamePoint gp : replacementPath) {
 			double alreadyX = gp.x();
 			double alreadyY = gp.y();
-			if (testX == alreadyX && testY == alreadyY) {
+			if (Math.abs(testX - alreadyX) < close_bounds && Math.abs(testY - alreadyY) < close_bounds) {
 				return true;
 			}
 		}
@@ -74,26 +101,26 @@ public class PathCreator {
 	}
 
 	private boolean isValidPath(Queue<GamePoint> path) {
-		int numCols = myScreenModel.getScreen().getNumCols();
-		int numRows = myScreenModel.getScreen().getNumRows();
-		GamePoint currCoord = path.poll();
-		int index = 0;
-		while (path.size() > 1) {
-			if (outOfBounds(numCols, numRows, currCoord)) {
-				return false;
-			}
-			if (index == 0 && !atBoundary(currCoord, numCols, numRows)) {
-				return false;
-			}
-			if (!possibleTransition(currCoord, path.peek())) {
-				return false;
-			}
-			currCoord = path.poll();
-			index += 1;
-		}
-		if (!atBoundary(path.poll(), numCols, numRows)) {
-			return false;
-		}
+//		int numCols = myScreenModel.getScreen().getNumCols();
+//		int numRows = myScreenModel.getScreen().getNumRows();
+//		GamePoint currCoord = path.poll();
+//		int index = 0;
+//		while (path.size() > 1) {
+//			if (outOfBounds(numCols, numRows, currCoord)) {
+//				return false;
+//			}
+//			if (index == 0 && !atBoundary(currCoord, numCols, numRows)) {
+//				return false;
+//			}
+//			if (!possibleTransition(currCoord, path.peek())) {
+//				return false;
+//			}
+//			currCoord = path.poll();
+//			index += 1;
+//		}
+//		if (!atBoundary(path.poll(), numCols, numRows)) {
+//			return false;
+//		}
 		return true;
 	}
 	private boolean outOfBounds(int numCols, int numRows, GamePoint currCoord) {

@@ -33,5 +33,9 @@ public class PathFollower extends Component{
 		// TODO Auto-generated method stub
 		return new PathFollower(path);
 	}
+	
+	public Path getPath() {
+		return path;
+	}
 
 }

@@ -1,10 +1,12 @@
 package gameauthorgui.tower;
+
 import java.util.ResourceBundle;
 
 import data.DeveloperData;
 import data.ScreenModelData;
 import gameDevelopmentInterface.BackgroundSetter;
 import gameDevelopmentInterface.GeneralDataCreator;
+import gameDevelopmentInterface.PathCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
 import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import gameauthorgui.DeveloperStep;
@@ -27,24 +29,28 @@ public class TowerAuthor extends GameAuthor {
 	private GeneralDataCreator myGeneralDataCreator;
 	private DeveloperData myModelData;
 	private ScreenModelData myScreenModelData;
-	
-	public TowerAuthor() {	
+
+	public TowerAuthor() {
 		super();
-		myModelData=new DeveloperData();
+		myModelData = new DeveloperData();
 		myGeneralDataCreator = new GeneralDataCreator();
 		myScreenModelData = new ScreenModelData();
 		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();
 	}
-	
+
 	public void instantiateSteps() {
 		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense")));
-		addStep(new DeveloperStep("Level Options", new LevelCreationPane(myModelData, getScene().getHeight()-CENTER_OFFSETS)));
-		addStep(new DeveloperStep(SET_THE_BACKGROUND, new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
-		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
-		addStep(new DeveloperStep("Spawner creation",new SpawnerCreationScreen(myModelData)));
+		addStep(new DeveloperStep("Level Options",
+				new LevelCreationPane(myModelData, getScene().getHeight() - CENTER_OFFSETS)));
+		addStep(new DeveloperStep(SET_THE_BACKGROUND,
+				new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+		addStep(new DeveloperStep("Sprite creation", new SpriteCreationScreen(myModelData)));
+		addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData, myScreenModelData)));
+		addStep(new DeveloperStep("Spawner creation", new SpawnerCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
-		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData)));
+		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
+				new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
 	}
-	
+
 }

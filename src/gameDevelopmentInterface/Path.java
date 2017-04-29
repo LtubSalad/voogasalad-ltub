@@ -18,12 +18,17 @@ public class Path {
 	private String pathName;
 	
 	public Path() {
-		this("A Nameless Path");
+		this("A Nameless Path", new LinkedList<GamePoint>());
 	}
 	
 	public Path(String name) {
+		this(name, new LinkedList<GamePoint>());
+	}
+	
+	public Path(String name, Queue<GamePoint> path) {
 		this.pathName=name;
-		makeDefaultPath();
+		myPath = path;
+		//makeDefaultPath();
 	}
 	
 	/**

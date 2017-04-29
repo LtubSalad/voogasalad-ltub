@@ -20,7 +20,20 @@ public class ScreenModelData {
 	
 	public ScreenModelData() {
 		
-	}	
+	}
+//	public void setNumCols(int numCols) {
+//		this.numCols = numCols;
+//	}
+//	public void setNumRows(int numRows) {
+//		this.numRows = numRows;
+//	}
+//	public int getNumCols() {
+//		return numCols;
+//	}
+//	public int getNumRows() {
+//		return numRows;
+//	}
+	
 	/**
 	 * Will put this object into the collection of objects for the screen
 	 * @param data the possibly unique representation of the object
