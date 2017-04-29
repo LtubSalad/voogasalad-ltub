@@ -1,17 +1,13 @@
 package newengine.sprite.components;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.DeveloperMethod;
 import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
-import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.ChangeHealthEvent;
-import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.player.Player;
 import newengine.sprite.Sprite;
@@ -79,6 +75,13 @@ public class Health extends Component {
 	@Override
 	public Component clone() {
 		return new Health(health);
+	}
+
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=health;
+		return parameters;
 	}
 
 }

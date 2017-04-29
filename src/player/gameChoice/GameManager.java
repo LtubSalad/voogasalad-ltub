@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import commons.FileLoader;
+import gamedata.GameCreator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import newengine.app.Game;
 import player.App;
 import player.loaderManager.Loader;
 
@@ -133,6 +135,14 @@ public class GameManager {
 			if (gameFile != null) {
 				// gameFactory.loadGame(gameFile);
 				// load the game file into the GameFactory
+				GameCreator gameCreator = new GameCreator(gameFile);
+				Game game = gameCreator.getGame();
+				
+				primaryStage.setScene(game.getScene());
+				
+				// get scene
+				// display
+				// start
 			}
 		} else {
 			// TODO load the corresponding game file into gameFile

@@ -21,7 +21,6 @@ import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.PathFollower;
-import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.RangeShootingAI;
 import newengine.sprite.components.Selectable;
@@ -51,6 +50,10 @@ public class SpriteCreationScreen extends BorderPane{
 		this.setCenter(infoPane);
 		this.setTop(new Label("NEW SPRITE"));
 		this.setBottom(new BottomPanel());	
+	}
+	
+	public SpriteInfoPane getInfoPane(){
+		return infoPane;
 	}
 	
 	private ComponentSelectorPane instantiateSelector(){

@@ -57,4 +57,12 @@ public class Collidable extends Component {
 		return new Collidable(boundType);		
 	}
 
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		Object[] parameters= new Object[1];
+		parameters[0]=boundType;
+		return parameters;
+	}
+
 }

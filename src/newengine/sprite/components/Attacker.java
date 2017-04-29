@@ -90,5 +90,11 @@ public class Attacker extends Component {
 		return clone;
 	}
 
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

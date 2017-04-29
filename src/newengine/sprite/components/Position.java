@@ -182,4 +182,13 @@ public class Position extends Component {
 		}
 		return target.getLocation();
 	}
+
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[3];
+		parameters[0]=pos.x();
+		parameters[1]=pos.y();
+		parameters[2]=heading;
+		return parameters;
+	}
 }
