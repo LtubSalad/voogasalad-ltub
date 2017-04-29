@@ -1,8 +1,5 @@
 package newengine.sprite.components;
 
-import java.io.Serializable;
-
-import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.range.InRangeEvent;
 import newengine.events.skill.TriggerSkillEvent;
@@ -51,7 +48,7 @@ public class RangeShootingAI extends Component {
 	@Override
 	public Object[] getParameters() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Object[] {};
 	}
 	
 	
