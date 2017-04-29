@@ -7,6 +7,13 @@ import java.util.HashMap;
 import data.DeveloperData;
 import exception.UnsupportedTypeException;
 import gameDevelopmentInterface.Path;
+import gameDevelopmentInterface.spriteCreator.variableSetters.EnumSetter;
+import gameDevelopmentInterface.spriteCreator.variableSetters.FileVariableSetter;
+import gameDevelopmentInterface.spriteCreator.variableSetters.ImageVariableSetter;
+import gameDevelopmentInterface.spriteCreator.variableSetters.PathSetter;
+import gameDevelopmentInterface.spriteCreator.variableSetters.SimpleVariableSetter;
+import gameDevelopmentInterface.spriteCreator.variableSetters.SkillMapSetter;
+import gameDevelopmentInterface.spriteCreator.variableSetters.VariableSetter;
 import helperAnnotations.VariableName;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
@@ -31,7 +38,7 @@ public class VariableSetterFactory {
 			return new EnumSetter(parameter.getType(),name);
 		}
 		else if(parameter.getType().isAssignableFrom(LtubImage.class)){
-			return new ImageVariableSetter(name+"e");
+			return new ImageVariableSetter(name);
 		}
 		else if(parameter.getType().isAssignableFrom(File.class)){
 			return new FileVariableSetter(name);
