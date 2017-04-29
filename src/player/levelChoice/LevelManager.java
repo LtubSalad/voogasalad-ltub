@@ -1,6 +1,3 @@
-/**
- * 
- */
 package player.levelChoice;
 
 import java.util.ArrayList;
@@ -8,12 +5,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
+import newengine.animation.ImageAnimationTest;
 import player.App;
 
 /**
@@ -47,12 +47,30 @@ public class LevelManager {
 		Stage primaryStage = new Stage();
 		primaryStage.setTitle("Game Level Choice");
 		Group root = new Group();
+		
+		ImageAnimationTest im = new ImageAnimationTest();
+		
+		
 		root.getChildren().add(menuBar);
 		Scene scene = new Scene(root);
 
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString("levelChoiceImagePath")));
 		scene.setFill(new ImagePattern(image));
+		
+		scene.getStylesheets().setAll("/styleSheets/login.css");
+		
+		HBox
 
+		Button starting = new Button("Start A Game of Random Level");
+		
+		
+		starting.setLayoutX(300);
+		starting.setLayoutY(300);
+		starting.setId("starting");
+		starting.setMinWidth(100);
+		starting.setMinHeight(100);
+		root.getChildren().add(starting);
+		
 		primaryStage.setScene(scene);
 		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setFullScreen(true);
@@ -101,6 +119,4 @@ public class LevelManager {
 	public int getNumberOfLevel(){
 		return numberOfLevel;
 	}
-
-
 }
