@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gameDevelopmentInterface.Path;
+import gamecreation.level.ILevelData;
 import gamecreation.level.LevelData;
+import gamecreation.level.SerializableLevelData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -73,13 +75,19 @@ public class DeveloperData {
 		return levelData;
 	}
 	
+	public List<ILevelData> getReadOnlyLevelData(){
+		List<ILevelData> readOnly = new ArrayList<ILevelData>();
+		levelData.stream().forEach(e -> readOnly.add(new SerializableLevelData(e)));
+		return readOnly;
+	}
+	
 	/**
 	 * Put in data representing variable-variable name pairs.
 	 * @param data
 	 */
 	public void addData(Pair<String,String> data) {
 		myData.put(data.getKey(), data.getValue());
-//	
+//		TODO delete if working later
 //		if(myData.containsKey(NUMBER_OF_LIVES))
 //		System.out.println("Number of Lives :" + myData.get(NUMBER_OF_LIVES));
 //		if(myData.containsKey(BUILD_TOWER))
@@ -102,21 +110,6 @@ public class DeveloperData {
 		return myData;
 	}
 	
-	public void setGameName(String name){
-		this.gameName = name;
-	}
-	
-	public String getGameName(){
-		return gameName;
-	}
-	
-	public void setGameIcon(String filepath){
-		gameIconFilePath = filepath;
-	}
-	
-	public String getGameIcon(){
-		return gameIconFilePath;
-	}
 	
 	
 }
