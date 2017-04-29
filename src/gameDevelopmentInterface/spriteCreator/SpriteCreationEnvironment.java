@@ -53,7 +53,7 @@ public class SpriteCreationEnvironment extends BorderPane{
 			Button presetTowerButton=new Button("Load Tower Preset");
 			presetTowerButton.setOnAction((clicked)->{
 				SpriteCreationScreen screen=loader.loadModelPreset(new ExampleTower(), developerData);
-				Tab towerTab=new Tab("Load Tower", screen);
+				Tab towerTab=new Tab("Loaded Tower", screen);
 				creationScreens.getTabs().add(towerTab);
 			});
 			Button presetMonsterButton=new Button("Load Monster Preset");
