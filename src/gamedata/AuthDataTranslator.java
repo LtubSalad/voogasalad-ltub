@@ -111,21 +111,6 @@ public class AuthDataTranslator implements Translator<Sprite>{
 		Sprite sprite = new Sprite(); 
 		for (Component comp: transferComponents){
 			System.out.println(comp.getType().getType());
-			if (comp.getType().equals(Position.TYPE)) {
-				Position position = (Position)comp;
-				GamePoint pos = position.pos();
-				double xPerc = pos.x();
-				double yPerc = pos.y();
-				// TODO where to get the data
-				int numCol = 50;
-				int numRow = 25;
-				int size = 100;
-				double x = xPerc * numCol * size;
-				double y = yPerc * numRow * size;
-				Position newPosition = new Position(x, y, position.heading());
-				sprite.addComponent(newPosition);
-				break;
-			}
 			sprite.addComponent(comp);
 		}
 		return sprite;
