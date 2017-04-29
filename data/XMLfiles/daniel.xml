@@ -58,7 +58,8 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName></spriteName>
+  <spriteName>Daniel</spriteName>
+  <spriteDescription>Da</spriteDescription>
   <actualComponents>
     <newengine.sprite.components.Speed reference="../../myComponents/entry/newengine.sprite.components.Speed"/>
     <newengine.sprite.components.Owner reference="../../myComponents/entry[2]/newengine.sprite.components.Owner"/>
