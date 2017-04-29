@@ -109,4 +109,10 @@ public class TestPosition extends Component {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

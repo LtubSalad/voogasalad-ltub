@@ -38,7 +38,7 @@ public class ComponentConstructorFactory extends VBox {
 		mySpriteModel = spriteModel;
 		myComponentName = componentName;
 		createPopUpBox();
-		this.getChildren().addAll(title,myParamVBox);
+		this.getChildren().addAll(title, myParamVBox);
 	}
 	
 	private void createPopUpBox() {

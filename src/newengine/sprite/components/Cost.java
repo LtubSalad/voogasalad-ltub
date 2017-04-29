@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
@@ -8,7 +10,8 @@ public class Cost extends Component {
 	public static final ComponentType<Cost> TYPE = new ComponentType<>(Cost.class.getName());
 	private int cost;
 	
-	public Cost(int cost){
+	@ConstructorForDeveloper
+	public Cost(@VariableName(name = "Cost") int cost){
 		this.cost = cost;
 	}
 	
@@ -24,6 +27,14 @@ public class Cost extends Component {
 	@Override
 	public Component clone() {
 		return new Cost(cost);
+	}
+
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		Object[] parameters=new Object[1];
+		parameters[0]=cost;
+		return parameters;
 	}
 
 }

@@ -33,10 +33,11 @@ public class MasterDeveloperInterface {
 	private Scene developerScene;
 	private BorderPane view;
 	private TabPane developerTabs;
-	private GeneralDataCreator myGeneralDataCreator = new GeneralDataCreator();
+	private GeneralDataCreator myGeneralDataCreator;
 	private DeveloperData myModelData;
 	public MasterDeveloperInterface() {
 		myModelData=new DeveloperData();
+		myGeneralDataCreator = new GeneralDataCreator(myModelData);
 		instantiate();
 		developerScene = new Scene(view);
 		developerScene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
