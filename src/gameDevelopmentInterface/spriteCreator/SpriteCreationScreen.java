@@ -32,7 +32,7 @@ import utilities.XStreamHandler;
 
 public class SpriteCreationScreen extends BorderPane{
 	private SpriteMakerModel spriteData;
-	private SpriteInfoPane infoPane;
+	private SpriteDataPane infoPane;
 	private EventHandlerPane scriptPane;
 	private DeveloperData model;
 	
@@ -44,7 +44,7 @@ public class SpriteCreationScreen extends BorderPane{
 	public void instantiate(){
 		spriteData=new SpriteMakerModel();
 		scriptPane=new EventHandlerPane(spriteData);
-		infoPane=new SpriteInfoPane(spriteData,model);
+		infoPane=new SpriteDataPane(spriteData,model);
 		this.setRight(instantiateSelector());
 		this.setLeft(scriptPane);
 		this.setCenter(infoPane);
@@ -52,7 +52,7 @@ public class SpriteCreationScreen extends BorderPane{
 		this.setBottom(new BottomPanel());	
 	}
 	
-	public SpriteInfoPane getInfoPane(){
+	public SpriteDataPane getInfoPane(){
 		return infoPane;
 	}
 	

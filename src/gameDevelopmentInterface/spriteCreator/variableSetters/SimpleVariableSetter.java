@@ -1,6 +1,8 @@
-package gameDevelopmentInterface.spriteCreator;
+package gameDevelopmentInterface.spriteCreator.variableSetters;
 
 import exception.UnsupportedTypeException;
+import gameDevelopmentInterface.spriteCreator.PrimitiveConverter;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 /**
@@ -29,6 +31,10 @@ public class SimpleVariableSetter<T> extends VariableSetter<T>{
 	@Override
 	public void setField(T initialValue) {
 		value.setText(initialValue.toString());
+	}
+	
+	public void setText(String test){
+		value.setText(test);
 	}
 
 }

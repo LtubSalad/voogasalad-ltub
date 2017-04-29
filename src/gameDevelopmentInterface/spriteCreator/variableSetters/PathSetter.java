@@ -1,4 +1,4 @@
-package gameDevelopmentInterface.spriteCreator;
+package gameDevelopmentInterface.spriteCreator.variableSetters;
 
 import java.util.ArrayList;
 import java.util.HashMap;

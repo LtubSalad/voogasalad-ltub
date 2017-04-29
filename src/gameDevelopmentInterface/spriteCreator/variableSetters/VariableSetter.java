@@ -1,4 +1,4 @@
-package gameDevelopmentInterface.spriteCreator;
+package gameDevelopmentInterface.spriteCreator.variableSetters;
 
 import exception.UnsupportedTypeException;
 import javafx.scene.control.Label;
@@ -18,7 +18,7 @@ public abstract class VariableSetter<T> extends HBox{
 		Label descriptorLabel=produceLabel(variableName);
 		this.getChildren().addAll(descriptorLabel);
 	}
-	
+
 	public VariableSetter(Class<T> clazz,String variableName){
 		Label descriptorLabel=produceLabel(variableName);
 		this.getChildren().addAll(descriptorLabel);
