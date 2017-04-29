@@ -51,15 +51,8 @@ public class UserSocialPage extends BorderPane{
 
 	private VBox configMessageBox() {
 			// TODO finish this 
-			VBox messages = new VBox(5);
-			Map<String, String> toDisplay = myUser.getDisplayableMessages();
-			for (String person: toDisplay.keySet()){
-				Text display = new Text(person + ": " +  toDisplay.get(person));
-				TextFlow wrapper = new TextFlow(display);
-				wrapper.setTextAlignment(TextAlignment.LEFT);
-				messages.getChildren().add(wrapper);
-			}
-			return messages; 
+			MessagingView MV = new MessagingView(myUser);
+			return MV; 
 		}
 
 	private VBox configHistory(Map<String, GameHistory> history) {
