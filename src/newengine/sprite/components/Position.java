@@ -17,6 +17,7 @@ import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.sprite.StateChangeEvent;
 import newengine.events.timer.DelayedEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
@@ -88,6 +89,7 @@ public class Position extends Component {
 		if (!sprite.getComponent(Speed.TYPE).isPresent()){
 			return;
 		}
+		
 		double xDest = pDest.x();
 		double yDest = pDest.y();
 		double x = pos.x();
@@ -121,6 +123,8 @@ public class Position extends Component {
 			vy = speed / dist * yDiff;
 		}
 		pos = new GamePoint(x + vx * dt, y + vy * dt);
+		sprite.emit(new StateChangeEvent(StateChangeEvent.XPOS, sprite, pos.x()));
+		sprite.emit(new StateChangeEvent(StateChangeEvent.YPOS, sprite, pos.y()));		
 		return;
 	}
 

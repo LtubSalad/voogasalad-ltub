@@ -10,6 +10,7 @@ import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.FireProjectileEvent;
+import newengine.events.sprite.StateChangeEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.MoveSkill;
@@ -33,7 +34,7 @@ public class Attacker extends Component {
 	
 	@ConstructorForDeveloper
 	public Attacker(){
-		
+		sprite.emit(new StateChangeEvent(StateChangeEvent.ATTACKER, sprite, true));
 	}
 
 	@Override

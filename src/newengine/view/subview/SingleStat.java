@@ -17,7 +17,7 @@ import newengine.sprite.components.Owner;
 public class SingleStat extends HBox {
 	
 	private Sprite sprite;
-	private int cost;
+	private int cost = 10;
 	private String name;
 	private Text label;
 	private TextArea value;

@@ -2,6 +2,7 @@ package newengine.sprite.state;
 
 import bus.EventBus;
 import commons.point.GamePoint;
+import newengine.events.sprite.StateChangeEvent;
 import newengine.player.Player;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
@@ -9,28 +10,57 @@ import newengine.sprite.components.GameBus;
 
 public class SpriteState {
 	
+	private static final int NAN = -10000000;
 	private Sprite sprite;
 	private SpriteID id = null;
 	private Player player = null;
 	private boolean isAttacker = false;
-	private double cooldown = -1.0;
-	private int damageStrength = -1;
-	private int health = -1;
-	private double xpos = 0;
-	private double ypos = 0;
-	private double range = -1;
-	private double speed = -1;
-	
-	private EventBus bus;
+	private double cooldown = NAN;
+	private int damageStrength = NAN;
+	private int health = NAN;
+	private double xpos = NAN;
+	private double ypos = NAN;
+	private double range = NAN;
+	private double speed = NAN;
 	
 	public SpriteState(Sprite sprite) {
 		this.sprite = sprite;
-		bus = sprite.getComponent(GameBus.TYPE).get().getGameBus();
 		initHandlers();
 	}
 	
 	private void initHandlers(){
-		
+		sprite.on(StateChangeEvent.ID, e -> {
+			e.getSprite().getState().setID(e.getNewID());
+		});
+		sprite.on(StateChangeEvent.PLAYER, e -> {
+			e.getSprite().getState().setPlayer(e.getNewPlayer());
+		});
+		sprite.on(StateChangeEvent.ATTACKER, e -> {
+			e.getSprite().getState().setIsAttacker(e.getNewBoolean());
+		});
+		sprite.on(StateChangeEvent.COOLDOWN, e -> {
+			e.getSprite().getState().setCooldown(e.getNewDouble());
+		});
+		sprite.on(StateChangeEvent.DAMAGESTRENGTH, e -> {
+			this.damageStrength = e.getNewInt();
+		});
+		sprite.on(StateChangeEvent.HEALTH, e -> {
+			System.out.println("state - health was changed to " + e.getNewInt());
+			this.health = e.getNewInt();
+		});
+		sprite.on(StateChangeEvent.XPOS, e -> {
+			System.out.println("state - xpos is changed to " + Math.round(e.getNewDouble()));
+			this.xpos = Math.round(e.getNewDouble());
+		});
+		sprite.on(StateChangeEvent.YPOS, e -> {
+			this.ypos = Math.round(e.getNewDouble());
+		});
+		sprite.on(StateChangeEvent.RANGE, e -> {
+			this.range = e.getNewDouble();
+		});
+		sprite.on(StateChangeEvent.SPEED, e -> {
+			this.speed = e.getNewDouble();
+		});
 	}
 	
 	public void setID(SpriteID id){

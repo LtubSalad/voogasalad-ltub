@@ -33,14 +33,15 @@ import newengine.sprite.state.SpriteState;
 
 public class Sprite {
 	private EventBus spriteBus = new BasicEventBus();
-	private SpriteID spriteID = IDGenerator.generateID();
+	private SpriteID spriteID;
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
 	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
 	
-	public SpriteState myState;
+	private SpriteState myState;
 
 	public Sprite() {
 		myState = new SpriteState(this);
+		spriteID = IDGenerator.generateID();
 	}
 
 	public EventBus getSpriteBus() {
@@ -61,37 +62,6 @@ public class Sprite {
 	}
 	
 	public SpriteState getState(){
-		myState.setID(spriteID);
-		this.getComponent(Owner.TYPE).ifPresent((owner) -> {
-			myState.setPlayer(owner.player());
-		});
-		this.getComponent(Attacker.TYPE).ifPresent((attacker) -> {
-			myState.setIsAttacker(true);
-		});
-//		this.getComponent(SkillSet.TYPE).ifPresent((skillset) -> {
-//			if (skillset.skills().contains(<T extends FireProjectileSkill> T)){
-//				
-//			}
-//		});
-		this.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
-			myState.setDamageStrength(damageStrength.getStrength());
-		});
-		this.getComponent(Health.TYPE).ifPresent((health) -> {
-			myState.setHealth(health.getHealth());
-		});
-		this.getComponent(Position.TYPE).ifPresent((position) -> {
-			myState.setXPos(position.xPos());
-		});
-		this.getComponent(Position.TYPE).ifPresent((position) -> {
-			myState.setYPos(position.yPos());
-		});
-		this.getComponent(Range.TYPE).ifPresent((range) -> {
-			myState.setRange(range.range());
-		});
-		this.getComponent(Speed.TYPE).ifPresent((speed) -> {
-			myState.setSpeed(speed.speed());
-		});
-		
 		return myState;
 	}
 

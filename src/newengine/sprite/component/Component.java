@@ -4,7 +4,7 @@ import newengine.sprite.Sprite;
 
 public abstract class Component {
 
-	protected Sprite sprite;
+	protected Sprite sprite = new Sprite();
 	
 	public final void onAdded(Sprite sprite) {
 		this.sprite = sprite;  

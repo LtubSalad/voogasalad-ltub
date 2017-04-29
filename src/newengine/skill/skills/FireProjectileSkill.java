@@ -1,6 +1,7 @@
 package newengine.skill.skills;
 
 import newengine.events.sprite.FireProjectileEvent;
+import newengine.events.sprite.StateChangeEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.sprite.Sprite;
@@ -18,6 +19,7 @@ public class FireProjectileSkill extends Skill {
 	
 	public void setCooldown(double cooldown) { // TODO: it's better if there is no setter API? 
 		this.cooldown = cooldown;
+		source.emit(new StateChangeEvent(StateChangeEvent.COOLDOWN, source, cooldown));
 	}
 	@Override
 	public double getCooldown() {

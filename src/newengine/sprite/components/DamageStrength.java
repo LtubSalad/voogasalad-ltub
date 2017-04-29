@@ -9,6 +9,7 @@ import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.sprite.StateChangeEvent;
 import newengine.player.Player;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
@@ -22,6 +23,7 @@ public class DamageStrength extends Component {
 	@ConstructorForDeveloper
 	public DamageStrength(@VariableName(name = "Damage")int strength){
 		this.strength = strength;
+		sprite.emit(new StateChangeEvent(StateChangeEvent.DAMAGESTRENGTH, sprite, strength));
 	}
 	
 	@Override

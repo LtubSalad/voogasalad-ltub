@@ -13,6 +13,7 @@ import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.sprite.StateChangeEvent;
 import newengine.events.stats.ChangeWealthEvent;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
@@ -70,7 +71,7 @@ public class Health extends Component {
 	@DeveloperMethod
 	private void changeHealth(int change) {
 		health += change;
-		System.out.println(health);
+		sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, health));
 		checkForDeath();
 	}
 	

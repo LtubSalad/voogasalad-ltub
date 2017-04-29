@@ -23,67 +23,22 @@ public class StateDisplay {
 	
 	public void render(Sprite sprite){
 		this.sprite = sprite;
-		makeIDLabel();
-		makePlayerLabel();
-		makeAttackerLabel();
-		makeCooldownLabel();
-		makeDamageLabel();
-		makeHealthLabel();
-		makeXPosLabel();
-		makeYPosLabel();
-		makeRangeLabel();
-		makeSpeedLabel();
-	}
-
-	private void makeIDLabel() {
-		SingleStat ID = new SingleStat("Sprite ID", sprite.getState().getID(), sprite);
-		box.getChildren().add(ID);
-	}
-
-	private void makePlayerLabel() {
-		SingleStat player = new SingleStat("Player", sprite.getState().getPlayer(), sprite);
-		box.getChildren().add(player);
-	}
-
-	private void makeAttackerLabel() {
-		SingleStat attacker = new SingleStat("Is Attacker?", sprite.getState().isAttacker(), sprite);
-		box.getChildren().add(attacker);
-	}
-
-	private void makeCooldownLabel() {
-		SingleStat cooldown = new SingleStat("Cooldown time", sprite.getState().getCooldown(), sprite);
-		box.getChildren().add(cooldown);
-	}
-
-	private void makeDamageLabel() {
-		SingleStat damage = new SingleStat("Damage Strength", sprite.getState().getDamageStrength(), sprite);
-		damage.addUpgradeBtn();
-		box.getChildren().add(damage);
-	}
-
-	private void makeHealthLabel() {
-		SingleStat health = new SingleStat("Health", sprite.getState().getHealth(), sprite);
-		box.getChildren().add(health);
-	}
-
-	private void makeXPosLabel() {
-		SingleStat pos = new SingleStat("X Position", sprite.getState().getXPos(), sprite);
-		box.getChildren().add(pos);
+		box.getChildren().clear();
+		makeSingleStat("Sprite ID", sprite.getState().getID(), sprite);
+		makeSingleStat("Player", sprite.getState().getPlayer(), sprite);
+		makeSingleStat("Is Attacker?", sprite.getState().isAttacker(), sprite);
+		makeSingleStat("Cooldown time", sprite.getState().getCooldown(), sprite);
+		makeSingleStat("Damage Strength", sprite.getState().getDamageStrength(), sprite);
+		makeSingleStat("Health", sprite.getState().getHealth(), sprite);
+		makeSingleStat("X Position", sprite.getState().getXPos(), sprite);
+		makeSingleStat("Y Position", sprite.getState().getYPos(), sprite);
+		makeSingleStat("Range", sprite.getState().getRange(), sprite);
+		makeSingleStat("Speed", sprite.getState().getSpeed(), sprite);
 	}
 	
-	private void makeYPosLabel() {
-		SingleStat pos = new SingleStat("Y Position", sprite.getState().getYPos(), sprite);
-		box.getChildren().add(pos);
-	}
-
-	private void makeRangeLabel() {
-		SingleStat range = new SingleStat("Range", sprite.getState().getRange(), sprite);
-		box.getChildren().add(range);
-	}
-
-	private void makeSpeedLabel() {
-		SingleStat speed = new SingleStat("Speed", sprite.getState().getSpeed(), sprite);
-		box.getChildren().add(speed);
+	private void makeSingleStat(String label, Object value, Sprite sprite) {
+		SingleStat singleStat = new SingleStat(label, value, sprite);
+		box.getChildren().add(singleStat);
 	}
 	
 	public VBox getBox() {

@@ -58,12 +58,13 @@ public class View {
 	private HBox statsPanel;
 	private GraphicsContext gcSelected;
 	private SkillBox skillBox;
-	private StateDisplay spriteState;
+	private StateDisplay stateDisplay;
 	
 	// TODO: mouse location should belong to player input state
 	private ViewPoint mousePos;
 
 	public View(EventBus bus) {
+		System.out.println("OPEN PLS"); //TODO take out
 		this.bus = bus;
 		VBox root = new VBox();
 		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
@@ -78,8 +79,9 @@ public class View {
 		gcSelected = selectionCanvas.getGraphicsContext2D();
 		// skill box
 		skillBox = new SkillBox(bus);
-		spriteState = new StateDisplay();
-		bottomPane.getChildren().addAll(spriteState.getBox(), skillBox.getBox());
+		stateDisplay = new StateDisplay();
+		bottomPane.getChildren().add(stateDisplay.getBox());
+		bottomPane.getChildren().add(skillBox.getBox());
 
 		this.camera = new Camera(bus);
 		
@@ -191,12 +193,12 @@ public class View {
 				gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
 			}
+			//fill stats box with stats of selected sprite
+			stateDisplay.render(sprite);
 			if (sprite.getComponent(Owner.TYPE).isPresent()) {
 				Player player = sprite.getComponent(Owner.TYPE).get().player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();
 				if (player == mainPlayer) {				
-					//fill stats box with stats of selected sprite
-					spriteState.render(sprite);
 					
 					//fill skill box with skills of selected sprite
 					if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
