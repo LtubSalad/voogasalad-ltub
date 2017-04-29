@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Range;
+import newengine.sprite.components.Weapon;
 import newengine.utils.SpriteUtils;
 
 /**
@@ -20,7 +21,7 @@ public class RangeChecker {
 	public static List<Sprite> spritesInRange(Sprite detector, List<Sprite> sprites) {
 		double range = detector.getComponent(Range.TYPE).get().range();
 		List<Sprite> detectees = sprites.stream().filter((s) -> {
-			return (s != detector && SpriteUtils.dist(detector, s) <= range);
+			return (s != detector && SpriteUtils.dist(detector, s) <= range && !s.getComponent(Weapon.TYPE).isPresent());
 		}).collect(Collectors.toList());
 		return detectees;
 	}
