@@ -30,6 +30,10 @@ public class SpawnerCreation extends BorderPane {
 		this.setBottom(new SaveSpawner(this, myMonsterAdder));
 	}
 	
+	public void saveSpawnerToModel() {
+		this.model.addSprite(spawnerData);
+	}
+	
 	public void setCurrentMonsterToSpawn(SpriteMakerModel monster) {
 		spriteToSpawn = monster;
 	}
