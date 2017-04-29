@@ -1,4 +1,4 @@
-package gameDevelopmentInterface.spriteCreator;
+package gameDevelopmentInterface.spriteCreator.variableSetters;
 
 
 import java.io.File;
@@ -28,6 +28,7 @@ public class FileVariableSetter extends VariableSetter<File>{
 			}
 		});
 		this.getChildren().addAll(fileChooser,fileLabel);
+		;
 	}
 	
 	@Override

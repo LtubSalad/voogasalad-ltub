@@ -102,12 +102,7 @@ public class EventHandlerPane extends ScrollPane {
 			}
 
 			private void registerSprite() {
-				mySprite.getComponents().addListener(new MapChangeListener<ComponentType<?>, Component>() {
-					@Override
-					public void onChanged(Change<? extends ComponentType<?>, ? extends Component> change) {
-						updateMethods();
-					}
-				});
+				
 			}
 
 			private void updateMethods() {

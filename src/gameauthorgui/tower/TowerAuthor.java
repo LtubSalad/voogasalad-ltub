@@ -8,6 +8,7 @@ import gameDevelopmentInterface.BackgroundSetter;
 import gameDevelopmentInterface.GeneralDataCreator;
 import gameDevelopmentInterface.PathCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
+import gameDevelopmentInterface.spriteCreator.SpriteCreationEnvironment;
 import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import gameauthorgui.DeveloperStep;
 import gameauthorgui.GameAuthor;
@@ -51,7 +52,6 @@ public class TowerAuthor extends GameAuthor {
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
 		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
 				new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
-
 	}
 
 }

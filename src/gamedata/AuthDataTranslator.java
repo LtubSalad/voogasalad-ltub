@@ -68,7 +68,7 @@ public class AuthDataTranslator implements Translator<Sprite>{
 			// skills
 			Sprite skilledSprite = handleSkills(newSprite, model.getSkills());
 			/// triggers 
-			constructedSprites.add(handleEventHandlers(skilledSprite, model.getScriptMap()));				
+			constructedSprites.add(handleEventHandlers(skilledSprite, model.getScriptMap()));	
 		});
 	}
 	
@@ -112,6 +112,13 @@ public class AuthDataTranslator implements Translator<Sprite>{
 		for (Component comp: transferComponents){
 			//System.out.println(comp.getType().getType());
 			sprite.addComponent(comp);
+			if (comp.getType().equals(Position.TYPE)) {
+				Position position = (Position)comp;
+				GamePoint oriPos = position.pos();
+				double xPerc = oriPos.x();
+				double yPerc = oriPos.y();
+				
+			}
 		}
 		return sprite;
 	}
