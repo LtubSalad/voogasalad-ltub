@@ -39,6 +39,7 @@ import newengine.sprite.components.SkillSet;
 import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
+import newengine.view.subview.StateDisplay;
 
 public class View {
 	public static final int WIDTH = 600;
@@ -57,6 +58,7 @@ public class View {
 	private HBox statsPanel;
 	private GraphicsContext gcSelected;
 	private SkillBox skillBox;
+	private StateDisplay spriteState;
 	
 	// TODO: mouse location should belong to player input state
 	private ViewPoint mousePos;
@@ -76,7 +78,8 @@ public class View {
 		gcSelected = selectionCanvas.getGraphicsContext2D();
 		// skill box
 		skillBox = new SkillBox(bus);
-		bottomPane.getChildren().add(skillBox.getBox());
+		spriteState = new StateDisplay();
+		bottomPane.getChildren().addAll(spriteState.getBox(), skillBox.getBox());
 
 		this.camera = new Camera(bus);
 		
@@ -164,11 +167,11 @@ public class View {
 	
 	private List<Text> createText(PlayerStatsModel playerStatsModel, Player player) {
 		List<Text> statsLabels = new ArrayList<Text>();
-//		playerStatsModel.getWealth(player).ifPresent((wealthMap) -> {
-//			for (WealthType type: wealthMap.keySet()) {
-//				statsLabels.add(new Text(type + ":" + wealthMap.get(type)));
-//			}
-//		});
+		playerStatsModel.getWealth(player).ifPresent((wealthMap) -> {
+			for (WealthType type: wealthMap.keySet()) {
+				statsLabels.add(new Text(type + ": " + wealthMap.get(type)));
+			}
+		});
 		//TODO map to resource file
 		playerStatsModel.getLives(player).ifPresent((life) -> {
 			statsLabels.add(new Text("Lives:" + life));
@@ -183,16 +186,19 @@ public class View {
 		// render the selected sprite and its skill box
 		if (selectionModel.getSelectedSprite().isPresent()) {
 			Sprite sprite = selectionModel.getSelectedSprite().get();
+			//display sprite in selected canvas
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
 				gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
-				LtubImage stats = new LtubImage("images/skills/crosshairs.png");
-				gcSelected.drawImage(stats.getFXImage(), 100, 0);
 			}
 			if (sprite.getComponent(Owner.TYPE).isPresent()) {
 				Player player = sprite.getComponent(Owner.TYPE).get().player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();
 				if (player == mainPlayer) {				
+					//fill stats box with stats of selected sprite
+					spriteState.render(sprite);
+					
+					//fill skill box with skills of selected sprite
 					if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
 						skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
 					}
@@ -224,5 +230,6 @@ public class View {
 			scene.setCursor(Cursor.DEFAULT);
 		}
 	}
+	
 
 }

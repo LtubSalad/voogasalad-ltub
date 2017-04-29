@@ -29,7 +29,7 @@ import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
 import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.Speed;
-import newengine.sprite.state.State;
+import newengine.sprite.state.SpriteState;
 
 public class Sprite {
 	private EventBus spriteBus = new BasicEventBus();
@@ -37,10 +37,10 @@ public class Sprite {
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
 	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
 	
-	private State myState;
+	public SpriteState myState;
 
 	public Sprite() {
-		myState = new State();
+		myState = new SpriteState(this);
 	}
 
 	public EventBus getSpriteBus() {
@@ -60,7 +60,7 @@ public class Sprite {
 		return spriteID;
 	}
 	
-	public State getState(){
+	public SpriteState getState(){
 		myState.setID(spriteID);
 		this.getComponent(Owner.TYPE).ifPresent((owner) -> {
 			myState.setPlayer(owner.player());
@@ -80,7 +80,10 @@ public class Sprite {
 			myState.setHealth(health.getHealth());
 		});
 		this.getComponent(Position.TYPE).ifPresent((position) -> {
-			myState.setPos(position.pos());
+			myState.setXPos(position.xPos());
+		});
+		this.getComponent(Position.TYPE).ifPresent((position) -> {
+			myState.setYPos(position.yPos());
 		});
 		this.getComponent(Range.TYPE).ifPresent((range) -> {
 			myState.setRange(range.range());

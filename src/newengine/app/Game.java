@@ -39,6 +39,8 @@ public class Game {
 		
 		view = new View(bus);
 		
+		bindStats();
+		
 		gameLoop = new FXGameLoop(bus);
 		
 		CollisionManager collisionManager = new CollisionManager(bus); // TODO
@@ -59,6 +61,10 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 		gameLoop.addLoopComponent((dt) -> timerManager.update(dt));
 		gameLoop.addLoopComponent((dt) -> inputManager.update(dt));
+	}
+	
+	private void bindStats(){
+		
 	}
 	
 	public void addTrigger(Trigger trigger) {

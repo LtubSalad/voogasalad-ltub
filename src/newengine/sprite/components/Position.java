@@ -137,6 +137,14 @@ public class Position extends Component {
 	public GamePoint pos() {
 		return pos;
 	}
+	
+	public double xPos() {
+		return pos.x();
+	}
+	
+	public double yPos() {
+		return pos.y();
+	}
 
 	public double heading() {
 		return heading;

@@ -13,6 +13,8 @@ import newengine.events.collision.CollisionEvent;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.stats.ChangeWealthEvent;
+import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
@@ -47,14 +49,17 @@ public class Health extends Component {
 			if (!e.getSprite().getComponent(Weapon.TYPE).isPresent()){
 				return;
 			}
-			Sprite another = e.getSprite();
-			Player owner = sprite.getComponent(Owner.TYPE).get().player();
-			another.getComponent(Owner.TYPE).ifPresent((anotherOwner) -> {
-					if (owner != anotherOwner.player()) {
-						another.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
+			if (!e.getTarget().getSprite().isPresent()){
+				return;
+			}
+			Sprite weapon = e.getSprite();
+			Sprite target = e.getTarget().getSprite().get();
+			weapon.getComponent(Owner.TYPE).ifPresent((weaponOwner) -> {
+					if (weaponOwner.player() != target.getComponent(Owner.TYPE).get().player()) {
+						weapon.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
 							int damage = damageStrength.getStrength();
 							sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, -damage));
-							System.out.println("decremented health");
+							System.out.println("health decremented");
 						});				
 					}
 				});	

@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import bus.EventBus;
+import javafx.collections.FXCollections;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeScoreEvent;
 import newengine.events.stats.ChangeWealthEvent;
@@ -17,7 +18,7 @@ public class PlayerStatsModel {
 	}
 
 	private EventBus bus;
-	private Map<Player, Map<WealthType, Integer>> wealth = new HashMap<>();
+	private Map<Player, Map<WealthType, Integer>> wealth = FXCollections.observableMap(new HashMap<>());
 	private Map<Player, Integer> lives = new HashMap<>();
 	private Map<Player, Integer> scores = new HashMap<>();
 	
@@ -28,6 +29,7 @@ public class PlayerStatsModel {
 	
 	private void initHandlers() {
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
+			System.out.println("change wealth!!");
 			Player player = e.getPlayer();
 			WealthType type = e.getWealthType();
 			if (wealth.containsKey(player)) {
@@ -42,7 +44,7 @@ public class PlayerStatsModel {
 			else {
 				Map<WealthType, Integer> wealths = new HashMap<>();
 				wealths.put(e.getWealthType(), e.getAmountChanged());
-				wealth.put(e.getPlayer(), wealths);
+				wealth.put(player, wealths);
 			}
 		});
 		bus.on(ChangeLivesEvent.CHANGE, (e) ->{

@@ -1,35 +1,35 @@
 package newengine.sprite.state;
 
+import bus.EventBus;
 import commons.point.GamePoint;
 import newengine.player.Player;
+import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
+import newengine.sprite.components.GameBus;
 
-public class State {
+public class SpriteState {
 	
+	private Sprite sprite;
 	private SpriteID id = null;
 	private Player player = null;
 	private boolean isAttacker = false;
 	private double cooldown = -1.0;
 	private int damageStrength = -1;
 	private int health = -1;
-	private GamePoint pos = null;
+	private double xpos = 0;
+	private double ypos = 0;
 	private double range = -1;
 	private double speed = -1;
 	
-	public State(SpriteID id, Player player, boolean isAttacker, double cooldown, int damageStrength, int health,
-			GamePoint pos, double range, double speed){
-		this.id = id;
-		this.player = player;
-		this.isAttacker = isAttacker;
-		this.cooldown = cooldown;
-		this.damageStrength = damageStrength;
-		this.health = health;
-		this.pos = pos;
-		this.range = range;
-		this.speed = speed;
+	private EventBus bus;
+	
+	public SpriteState(Sprite sprite) {
+		this.sprite = sprite;
+		bus = sprite.getComponent(GameBus.TYPE).get().getGameBus();
+		initHandlers();
 	}
 	
-	public State() {
+	private void initHandlers(){
 		
 	}
 	
@@ -51,8 +51,11 @@ public class State {
 	public void setHealth(int health){
 		this.health = health;
 	}
-	public void setPos(GamePoint pos){
-		this.pos = pos;
+	public void setXPos(double xpos){
+		this.xpos = xpos;
+	}
+	public void setYPos(double ypos){
+		this.ypos = ypos;
 	}
 	public void setRange(double range){
 		this.range = range;
@@ -79,8 +82,11 @@ public class State {
 	public int getHealth(){
 		return health;
 	}
-	public GamePoint getPos(){
-		return pos;
+	public double getXPos(){
+		return xpos;
+	}
+	public double getYPos(){
+		return ypos;
 	}
 	public double getRange(){
 		return range;

@@ -85,7 +85,7 @@ public class App extends Application {
 		sprite1.addComponent(new SkillSet(skillMap1));
 		sprite1.addComponent(new Owner(player1));
 		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
-		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
+//		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite1.addComponent(new Images(imageSet1));
 //		sprite1.addComponent(new Speed(200));
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
@@ -110,7 +110,7 @@ public class App extends Application {
 		sprite2.addComponent(new SkillSet(skillMap2));
 		sprite2.addComponent(new Owner(player2));
 		sprite2.addComponent(new Position(new GamePoint(100, 100), 0));
-		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
+//		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite2.addComponent(new Images(imageSet2));
 		sprite2.addComponent(new Speed(100));
 		sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
@@ -175,6 +175,8 @@ public class App extends Application {
 			bus.emit(new MainPlayerEvent(player1));
 			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 3));
 			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, WealthType.GOLD, 100));
+			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player2, 3));
+			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player2, WealthType.GOLD, 100));
 //			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 //			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 			// call the spawner to spawn
@@ -188,7 +190,7 @@ public class App extends Application {
 		for (Trigger trigger : (new TestTriggers()).getTriggers()) {
 			game.addTrigger(trigger);
 		}
-		
+
 		stage.setScene(game.getScene());
 		game.start();
 		stage.show();
