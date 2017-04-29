@@ -138,6 +138,8 @@ public class GameManager {
 				GameCreator gameCreator = new GameCreator(gameFile);
 				Game game = gameCreator.getGame();
 				
+				primaryStage.setScene(game.getScene());
+				
 				// get scene
 				// display
 				// start
