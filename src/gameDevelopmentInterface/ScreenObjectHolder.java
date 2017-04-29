@@ -196,7 +196,6 @@ public class ScreenObjectHolder extends HBox {
 //		addObject(sprite2);
 //		addObject(spawner);
 
-		addObject(sprite1);		
 		
 	}
 	/**

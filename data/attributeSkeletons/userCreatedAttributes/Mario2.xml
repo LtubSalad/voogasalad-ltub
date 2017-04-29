@@ -5,7 +5,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>images/marioCropped.gif</imageFilePath>
+        <imageFilePath>images/marioGif.gif</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
   </myComponents>
@@ -15,7 +15,7 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>Jake</spriteName>
+  <spriteName>Jake2</spriteName>
   <actualComponents>
     <newengine.sprite.components.Images reference="../../myComponents/entry/newengine.sprite.components.Images"/>
   </actualComponents>

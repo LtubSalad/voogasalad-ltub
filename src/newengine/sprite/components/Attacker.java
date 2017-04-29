@@ -67,12 +67,16 @@ public class Attacker extends Component {
 			
 			sprite.getComponent(GameBus.TYPE).get().getGameBus()
 				.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
+			
+			sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
+				System.out.println(gameBus.getGameBus() == null);
+			});
 
 			moveSkill.setTarget(new Target(target));
 			moveSkill.trigger();
 		});
 	}
-
+	
 	@Override
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
