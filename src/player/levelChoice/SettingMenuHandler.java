@@ -9,20 +9,17 @@ import javafx.scene.input.KeyCombination;
  * @author Zhiyong
  *
  */
-public class SettingMenuHandler implements MenuItemHandler{
+public abstract class SettingMenuHandler implements MenuItemHandler{
 	private MenuItem setting;
 	//add optional shortcutcode for the setting
-	public SettingMenuHandler(String source, KeyCode  keyCode, KeyCombination.Modifier ... shortcut){
+	public SettingMenuHandler(String source){
 		setting = new MenuItem(source);
-		setting.setAccelerator(new KeyCodeCombination(keyCode, shortcut));
+//		setting.setAccelerator(new KeyCodeCombination(keyCode, shortcut));
 		setting.setOnAction(e -> handle());
 	}
 
 	@Override
-	public void handle() {
-		
-		
-	}
+	public abstract void handle();
 
 	@Override
 	public MenuItem getMenuItem() {
