@@ -8,6 +8,7 @@ import java.util.List;
 import data.DeveloperData;
 import exception.UnsupportedTypeException;
 import gameDevelopmentInterface.developerdata.ComponentSetter;
+import gameDevelopmentInterface.spriteCreator.variableSetters.VariableSetter;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.sprite.component.Component;
 /**
@@ -17,67 +18,65 @@ import newengine.sprite.component.Component;
  * Looks for a method marked ConstructorForDeveloper, and and creates 
  * GUI setters to instantiate a class using the constructor's parameters.
  * 
- * I wrote a lot of duplicate code between the two methods- refactor later.
  * @param <T>
  */
-public class DefaultComponentSetter<T extends Component> extends ComponentSetter{	
-	private List<VariableSetter> fieldSetters;
-	private Constructor<T> ctor;
+public class DefaultComponentSetter<T extends Component> extends ComponentSetter<T>{
+	private Constructor<? extends T> ctor;
+	private Parameter[] parameters;
 	private DeveloperData data;
+	private List<VariableSetter<?>> variableSetters;
+	private VariableSetterFactory setterFactory;
 	
-	public DefaultComponentSetter(Class<T> myComponent, DeveloperData data) throws UnsupportedTypeException{
+	public DefaultComponentSetter(Class<? extends T> myComponent, DeveloperData data) throws UnsupportedTypeException{
 		super(myComponent);
-		this.data=data;
-		fieldSetters=new ArrayList<>();
-		ctor=getDeveloperConstructor(myComponent);		
-		if(ctor==null){
-			return;
-		}
-
-		Parameter[] parameters=ctor.getParameters();
-		VariableSetterFactory setterFactory=new VariableSetterFactory(data);
+		addDefaultLabel();
+		updateFactoryData(myComponent,data);
+		
 		for(int i=0;i<parameters.length;i++){
-			fieldSetters.add(setterFactory.setterFromParameter(parameters[i]));
+			VariableSetter<?> fieldSetter=setterFactory.setterFromParameter(parameters[i]);
+			variableSetters.add(fieldSetter);
+			this.getChildren().add(fieldSetter);
 		}
-		fieldSetters.forEach((fieldSetter)->this.getChildren().add(fieldSetter));
+	}
+
+	public <U> DefaultComponentSetter(T component, DeveloperData data) throws UnsupportedTypeException{
+		super((Class<? extends T>)component.getClass());
+		addDefaultLabel();
+		updateFactoryData(getComponentType(),data);
+		Object[] currentFields=component.getParameters();
+		
+		for(int i=0;i<parameters.length;i++){
+			VariableSetter fieldSetter = (VariableSetter<U>) setterFactory.setterFromParameter(parameters[i]);
+			variableSetters.add(fieldSetter);
+			this.getChildren().add(fieldSetter);
+			fieldSetter.setField((U)currentFields[i]);
+		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public DefaultComponentSetter(T component, DeveloperData data) throws UnsupportedTypeException{
-		super(component.getClass());
-		this.data=data;
-		fieldSetters=new ArrayList<>();
-		ctor=getDeveloperConstructor(component.getClass());		
-		if(ctor==null){
-			return;
-		}
-
-		Parameter[] parameters=ctor.getParameters();
-		VariableSetterFactory setterFactory=new VariableSetterFactory(data);
-		for(int i=0;i<parameters.length;i++){
-			VariableSetter setter=setterFactory.setterFromParameter(parameters[i]);
-			setter.setField(component.getParameters()[i]);
-			fieldSetters.add(setterFactory.setterFromParameter(parameters[i]));
-		}
-		fieldSetters.forEach((fieldSetter)->this.getChildren().add(fieldSetter));
-	}
 	
-	public Constructor<T> getDeveloperConstructor(Class<? extends Component> component){
-		Constructor<T> myCtor=null;
-		Constructor<T>[] ctors=(Constructor<T>[]) component.getConstructors();
-		for(Constructor<T> constructor:ctors){
+	private void updateFactoryData(Class<? extends T> clazz, DeveloperData data){
+		this.data=data;
+		variableSetters=new ArrayList<>();
+		Constructor<? extends T> myCtor=null;
+		Constructor<? extends T>[] ctors=(Constructor<? extends T>[]) clazz.getConstructors();
+		for(Constructor<? extends T> constructor:ctors){
 			if(constructor.isAnnotationPresent(ConstructorForDeveloper.class)){
-				myCtor=constructor;
+				ctor=constructor;
 				break;
 			}
 		}	
-		return myCtor;
+		if(ctor==null){
+			//Throw exception
+			return;
+		}
+		parameters=ctor.getParameters();
+		setterFactory=new VariableSetterFactory(data);
 	}
 
 	@Override
 	public T produceComponent() throws Exception{
 		List<Object> parameters=new ArrayList<>();
-		for(VariableSetter<?> setter:fieldSetters){
+		for(VariableSetter<?> setter:variableSetters){
 			parameters.add(setter.getValue());
 		} 
 		return ctor.newInstance(parameters.toArray());
