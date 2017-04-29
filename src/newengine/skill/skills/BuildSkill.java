@@ -20,12 +20,6 @@ public class BuildSkill extends Skill {
 	//private Sprite spriteToCreate;
 	private SpriteMakerModel mySpriteModel;
 
-//	public BuildSkill(Sprite sprite) {
-//		this.spriteToCreate = sprite;
-//		if (sprite.getComponent(Images.TYPE).isPresent()) {
-//			this.icon = sprite.getComponent(Images.TYPE).get().image();
-//		}
-//	}
 
 	public BuildSkill(SpriteMakerModel spriteModel) {
 		this.mySpriteModel = spriteModel;

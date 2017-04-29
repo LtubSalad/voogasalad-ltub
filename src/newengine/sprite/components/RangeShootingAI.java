@@ -47,6 +47,12 @@ public class RangeShootingAI extends Component {
 	public Component clone() {
 		return new RangeShootingAI();
 	}
+
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

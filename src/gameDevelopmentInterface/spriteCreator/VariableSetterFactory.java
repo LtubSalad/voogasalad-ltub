@@ -31,7 +31,7 @@ public class VariableSetterFactory {
 			return new EnumSetter(parameter.getType(),name);
 		}
 		else if(parameter.getType().isAssignableFrom(LtubImage.class)){
-			return new ImageVariableSetter(name);
+			return new ImageVariableSetter(name+"e");
 		}
 		else if(parameter.getType().isAssignableFrom(File.class)){
 			return new FileVariableSetter(name);
