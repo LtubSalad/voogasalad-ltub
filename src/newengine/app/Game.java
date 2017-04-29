@@ -1,6 +1,9 @@
 package newengine.app;
+import java.util.List;
+
 import bus.BasicEventBus;
 import bus.EventBus;
+import gamecreation.level.LevelData;
 import javafx.scene.Scene;
 import newengine.events.GameInitializationEvent;
 import newengine.events.trigger.AddTriggerEvent;
@@ -27,7 +30,40 @@ public class Game {
 	private GameLoop gameLoop;
 	private View view;
 	private boolean mapInitialized = false;
-	 
+	
+	public Game(List<LevelData> levels){
+		SpriteModel spriteModel = new SpriteModel(bus);
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
+		PlayerRelationModel playerRelationModel = new PlayerRelationModel(bus);
+		SelectionModel selectionModel = new SelectionModel(bus);
+		Models models = new Models(bus, spriteModel, playerStatsModel, playerRelationModel, selectionModel);
+		
+		view = new View(bus, null);
+		
+		gameLoop = new FXGameLoop(bus);
+		
+		CollisionManager collisionManager = new CollisionManager(bus); // TODO
+		RangeManager rangeManager = new RangeManager(bus); // TODO
+		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
+		SoundManager soundManager = new SoundManager(bus);
+		DebugManager debugManager = new DebugManager(bus);
+		TriggerManager triggerManager = new TriggerManager(bus, models);
+		TimerManager timerManager = new TimerManager(bus);
+		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel, playerRelationModel);
+		LevelManager levelManager = new LevelManager(bus, levels);
+		
+		gameLoop.addLoopComponent((dt) -> view.clear());
+		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
+		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
+		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
+		gameLoop.addLoopComponent((dt) -> view.render(models));
+		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
+		gameLoop.addLoopComponent((dt) -> timerManager.update(dt));
+		gameLoop.addLoopComponent((dt) -> inputManager.update(dt));
+	}
+	
+	
+	
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
 		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
