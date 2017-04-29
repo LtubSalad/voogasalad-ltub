@@ -182,6 +182,20 @@ public class ScreenObjectHolder extends HBox {
 		spawner.addComponent(new Attacker());
 		spawner.addComponent(new Health(200));
 		spawner.addComponent(new EventQueue(new LinkedList<>()));
+
+		addObject(sprite1);
+		//addObject(sprite2);
+		//addObject(spawner);
+		
+//		List<Sprite> spritesToAdd = new ArrayList<>();
+//		spritesToAdd.add(sprite1);
+//		spritesToAdd.add(sprite2);
+////		spritesToAdd.add(child);
+//		spritesToAdd.add(spawner);
+
+//		addObject(sprite2);
+//		addObject(spawner);
+
 		addObject(sprite1);		
 		
 	}
