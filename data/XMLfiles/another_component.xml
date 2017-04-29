@@ -1,9 +1,0 @@
-<newengine.sprite.components.Position>
-  <pos>
-    <x>200.0</x>
-    <y>100.0</y>
-  </pos>
-  <heading>0.0</heading>
-  <isMoving>false</isMoving>
-  <followingSprite>false</followingSprite>
-</newengine.sprite.components.Position>
