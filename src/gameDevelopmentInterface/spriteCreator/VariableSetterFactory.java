@@ -21,6 +21,9 @@ public class VariableSetterFactory {
 	
 	public VariableSetter setterFromParameter(Parameter parameter) throws UnsupportedTypeException{
 		String name=parameter.getAnnotation(VariableName.class).name();
+		if(name.equals("Image")){
+			return new ImageStringVariableSetter(name);
+		}
 		if(parameter.getType().isPrimitive()||parameter.getType().equals(String.class)){
 			return new SimpleVariableSetter(parameter.getType(),name);
 		}
@@ -31,7 +34,7 @@ public class VariableSetterFactory {
 			return new EnumSetter(parameter.getType(),name);
 		}
 		else if(parameter.getType().isAssignableFrom(LtubImage.class)){
-			return new ImageVariableSetter(name);
+			return new ImageVariableSetter(name+"e");
 		}
 		else if(parameter.getType().isAssignableFrom(File.class)){
 			return new FileVariableSetter(name);

@@ -38,7 +38,7 @@ public class PathCreator extends BorderPane {
 	}
 	public void clearPath() {
 		this.getChildren().clear();
-		target = new ScreenMap(new ScreenModelCreator(myDeveloperData.getScreenSprites(), new GeneralDataCreator(), myScreenData));
+		target = new ScreenMap(new ScreenModelCreator(myDeveloperData.getScreenSprites(), new GeneralDataCreator(myDeveloperData), myScreenData));
 		target.resize(350, 350);
 		this.setCenter(target);
 		this.setRight(new PathButtonsPanel(this, target));

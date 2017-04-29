@@ -31,9 +31,9 @@ public class GeneralDataCreator extends BorderPane{
 	private static final String NUM_STARTING_GOLD = "NUM_STARTING_GOLD";
 	private static final String BUILD_IN_GAME = "BUILD_IN_GAME";
 	private static final String NUM_LIVES = "NUM_LIVES";
-	private DeveloperData myGeneralModel = new DeveloperData();
-	private ObservableMap<String, String> myData = myGeneralModel.getAllData();
-	private GeneralGameDataBar myBar = new GeneralGameDataBar(myData);
+	private DeveloperData myGeneralModel;
+	private ObservableMap<String, String> myData;
+	private GeneralGameDataBar myBar;
 	private VBox content;
 	private IntegerInputText numGold;
 	private IntegerInputText numLives;
@@ -41,8 +41,11 @@ public class GeneralDataCreator extends BorderPane{
 	private CheckBox towerBuild;
 
 
-	public GeneralDataCreator() {
+	public GeneralDataCreator(DeveloperData modelData) {
 		super();
+		this.myGeneralModel = modelData;
+		this.myData = modelData.getAllData();
+		this.myBar = new GeneralGameDataBar(myData);
 		content = new VBox(OFFSETS);
 		this.setCenter(content);
 		setupTitle();
@@ -74,7 +77,7 @@ public class GeneralDataCreator extends BorderPane{
 	}
 	
 	private void setupTitle(){
-		Text title = new Text("General Game Data");
+		Text title = new Text(myResources.getString("generalGameData"));
 		title.setFont(new Font(40));	
 		title.setTextAlignment(TextAlignment.CENTER);
 		this.setTop(title);
@@ -85,23 +88,22 @@ public class GeneralDataCreator extends BorderPane{
 	}
 	
 	private void sendNumLives() {
-		myGeneralModel.addData(new Pair<String, String>(myResources.getString(NUM_LIVES), numLives.getValue()));
-		System.out.println("check" + numLives.getValue());
+		myGeneralModel.addData(new Pair<String, String>("NUM_LIVES", numLives.getValue()));
 	}
 
 
 	private void sendStartingGold() {
 		myGeneralModel.addData(
-				new Pair<String, String>(myResources.getString(NUM_STARTING_GOLD), numGold.getValue()));
+				new Pair<String, String>("NUM_GOLD", numGold.getValue()));
 	}
 
 	private void sendLevelBonuses() {
-		myGeneralModel.addData(new Pair<String, String>(myResources.getString(LEVEL_COMPLETION_BONUS),
+		myGeneralModel.addData(new Pair<String, String>("LEVEL_COMPLETION",
 				levelCompletionBonus.getValue()));
 	}
 	
 	private void sendTowerBuild(){
-		myGeneralModel.addData(new Pair<String, String>(myResources.getString(BUILD_IN_GAME), 
+		myGeneralModel.addData(new Pair<String, String>("BUILD_IN_GAME", 
 				Boolean.toString(towerBuild.isSelected())));
 	}
 }

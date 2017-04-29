@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-
 import bus.BasicEventBus;
 import bus.BusEvent;
+import commons.point.GamePoint;
 import data.SpriteMakerModel;
 import javafx.collections.ObservableList;
-import newengine.events.SpriteModelEvent;
 import newengine.events.skill.AddSkillEvent;
-import newengine.model.SpriteModel;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.Position;
 
 /**
  * @author tahiaemran
@@ -34,7 +31,6 @@ public class AuthDataTranslator implements Translator<Sprite>{
 	private BasicEventBus gameBus = new BasicEventBus(); 
 
 	private List<Sprite> constructedSprites = new ArrayList<Sprite>(); 
-	private SpriteModel constructedModel = new SpriteModel(gameBus); 
 
 	private Sprite constructed; 
 	
@@ -67,7 +63,7 @@ public class AuthDataTranslator implements Translator<Sprite>{
 	@Override
 	public void translate() {
 		spritesToMake.stream().forEach(model -> {
-			System.out.println(model.getActualComponents().size());
+			//System.out.println(model.getActualComponents().size());
 			Sprite newSprite = handleComponents(model.getActualComponents());
 			// skills
 			Sprite skilledSprite = handleSkills(newSprite, model.getSkills());
@@ -76,18 +72,7 @@ public class AuthDataTranslator implements Translator<Sprite>{
 		});
 	}
 	
-//
-//	private Sprite handleSkills(Sprite sprite, Map<String, List<DataWrapper>> skills) {
-//		for (String skillName: skills.keySet()){
-//			List<DataWrapper> parameters = skills.get(skillName);
-//			// create skill factory 
-//			SkillFactory factory = new SkillFactory(skillName, parameters);
-//			Skill constructedSkill= factory.getConstructedSkill(); 
-//			// add the skill to the sprite			
-//		}
-//		return sprite; 
-//	}
-//	
+	
 	private Sprite handleSkills(Sprite sprite, List<Skill> skills){
 		skills.stream().forEach(skill-> 
 			sprite.emit(new AddSkillEvent(AddSkillEvent.TYPE, skill)));
@@ -95,8 +80,6 @@ public class AuthDataTranslator implements Translator<Sprite>{
 	}
 	
 	
-	
-
 	private Sprite handleEventHandlers(Sprite newSprite, Map<BusEvent, String> scriptMap ) {
 		// TODO: debate design on this 
 		for (BusEvent event : scriptMap.keySet()){

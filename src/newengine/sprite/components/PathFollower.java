@@ -38,4 +38,12 @@ public class PathFollower extends Component{
 		return path;
 	}
 
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=path;
+		// TODO Auto-generated method stub
+		return parameters;
+	}
+
 }

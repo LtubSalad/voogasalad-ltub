@@ -33,4 +33,11 @@ public class Selectable extends Component {
 		return new Selectable(boundType);
 	}
 
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters= new Object[1];
+		parameters[0]=boundType;
+		return parameters;
+	}
+
 }

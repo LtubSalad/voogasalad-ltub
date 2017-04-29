@@ -32,15 +32,15 @@ public class TowerAuthor extends GameAuthor {
 
 	public TowerAuthor() {
 		super();
-		myModelData = new DeveloperData();
-		myGeneralDataCreator = new GeneralDataCreator();
+		myModelData=new DeveloperData();
+		myGeneralDataCreator = new GeneralDataCreator(myModelData);
 		myScreenModelData = new ScreenModelData();
 		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();
 	}
 
 	public void instantiateSteps() {
-		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense")));
+		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense", myModelData)));
 		addStep(new DeveloperStep("Level Options",
 				new LevelCreationPane(myModelData, getScene().getHeight() - CENTER_OFFSETS)));
 		addStep(new DeveloperStep(SET_THE_BACKGROUND,
@@ -51,6 +51,7 @@ public class TowerAuthor extends GameAuthor {
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
 		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
 				new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+
 	}
 
 }

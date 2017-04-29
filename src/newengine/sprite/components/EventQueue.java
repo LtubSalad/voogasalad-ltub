@@ -67,4 +67,10 @@ public class EventQueue extends Component {
 	public EventQueue clone() {
 		return new EventQueue((LinkedList<BusEvent>) events.clone());
 	}
+
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

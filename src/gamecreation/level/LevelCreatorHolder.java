@@ -3,6 +3,7 @@ package gamecreation.level;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import data.DeveloperData;
 import javafx.geometry.Pos;
@@ -12,6 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class LevelCreatorHolder extends ScrollPane{
+	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
+	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
 	public static final int DEFAULT_PREF_HEIGHT = 600;
 	private VBox holder;
 	private HBox addButtons;
@@ -45,15 +49,13 @@ public class LevelCreatorHolder extends ScrollPane{
 		holder.setAlignment(Pos.CENTER);
 		addButtons = new HBox();
 		//TODO resource file
-		Button addDefaultButton = new Button("+ Level");
+		Button addDefaultButton = new Button(myResources.getString("addLevel"));
 		addDefaultButton.setOnAction(e -> addDefaultLevelCreator());
-	
 		addButtons.getChildren().addAll(addDefaultButton);
 		holder.getChildren().add(addButtons);
 	}
 	
 	private  void addDefaultLevelCreator(){
-		//addLevelCreator(new BasicLevelCreator("Level " + (numLevels+1), this));
 		try {
 			Constructor<? extends LevelCreator> ctor = clazz.getConstructor(String.class, LevelCreatorHolder.class, LevelData.class);
 			addLevelCreator((LevelCreator) ctor.newInstance("Level " + (numLevels +1), LevelCreatorHolder.this, new LevelData()));
@@ -106,13 +108,5 @@ public class LevelCreatorHolder extends ScrollPane{
 		levels.stream().forEach(e -> data.add(e.getData()));
 		return data;
 	}
-	
-	public void testPrint(){
-		List<LevelData> levels = getData();
-		for(LevelData level : levels){
-			System.out.println("\n" + "New Level Beginning:");
-			System.out.println(level.getName());
-			System.out.println(level.getSpawnTime());
-		}
-	}
+
 }

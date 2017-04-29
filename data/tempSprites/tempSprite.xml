@@ -21,11 +21,16 @@
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
+<<<<<<< HEAD
                           <fd>47</fd>
+=======
+                          <fd>-1</fd>
+                          <handle>1528</handle>
+>>>>>>> 99d091856aae84486fe9f483b9f7415a1a229d63
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/walk.png</path>
+                        <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\walk.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -418,11 +423,16 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
+<<<<<<< HEAD
                           <fd>48</fd>
+=======
+                          <fd>-1</fd>
+                          <handle>1480</handle>
+>>>>>>> 99d091856aae84486fe9f483b9f7415a1a229d63
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/build.png</path>
+                        <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\build.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -888,11 +898,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</hb>
                     <impl__source class="java.io.BufferedInputStream">
                       <in class="java.io.FileInputStream">
                         <fd>
+<<<<<<< HEAD
                           <fd>49</fd>
+=======
+                          <fd>-1</fd>
+                          <handle>1556</handle>
+>>>>>>> 99d091856aae84486fe9f483b9f7415a1a229d63
                           <parent class="java.io.FileInputStream" reference="../.."/>
                           <closed>false</closed>
                         </fd>
-                        <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/crosshairs.png</path>
+                        <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\crosshairs.png</path>
                         <closeLock/>
                         <closed>false</closed>
                       </in>
@@ -1329,7 +1344,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
         </newengine.sprite.component.ComponentType>
         <newengine.sprite.components.SoundEffect>
           <moveSoundFile>data/sounds/Psyessr4.wav</moveSoundFile>
-          <base>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/data</base>
         </newengine.sprite.components.SoundEffect>
       </entry>
       <entry>
@@ -1426,11 +1440,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
           <impl__source class="java.io.BufferedInputStream">
             <in class="java.io.FileInputStream">
               <fd>
+<<<<<<< HEAD
                 <fd>50</fd>
+=======
+                <fd>-1</fd>
+                <handle>1560</handle>
+>>>>>>> 99d091856aae84486fe9f483b9f7415a1a229d63
                 <parent class="java.io.FileInputStream" reference="../.."/>
                 <closed>false</closed>
               </fd>
-              <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/walk.png</path>
+              <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\walk.png</path>
               <closeLock/>
               <closed>false</closed>
             </in>
@@ -1818,11 +1837,16 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
           <impl__source class="java.io.BufferedInputStream">
             <in class="java.io.FileInputStream">
               <fd>
+<<<<<<< HEAD
                 <fd>51</fd>
+=======
+                <fd>-1</fd>
+                <handle>1564</handle>
+>>>>>>> 99d091856aae84486fe9f483b9f7415a1a229d63
                 <parent class="java.io.FileInputStream" reference="../.."/>
                 <closed>false</closed>
               </fd>
-              <path>/Users/Jake/Documents/College/Senior/Spring/Compsci308/voogasalad_ltub/bin/images/skills/build.png</path>
+              <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\build.png</path>
               <closeLock/>
               <closed>false</closed>
             </in>
