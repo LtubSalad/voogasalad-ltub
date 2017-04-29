@@ -56,7 +56,6 @@ public class TranslationController implements FileTranslator {
 
 	@Override
 	public List<?> getTranslated() {
-		// TODO Auto-generated method stub
 		return translator.getTranslated();
 	}
 

@@ -40,7 +40,7 @@ public class Speed extends Component {
 	@Override
 	public Object[] getParameters() {
 		Object[] parameters=new Object[1];
-		parameters[1]=speed;
+		parameters[0]=speed;
 		return parameters;
 	}
 }

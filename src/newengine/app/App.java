@@ -14,7 +14,6 @@ import bus.EventBus;
 import commons.point.GamePoint;
 import data.SpriteMakerModel;
 import gameDevelopmentInterface.Path;
-import gamedata.AuthDataTranslator;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
@@ -22,8 +21,6 @@ import newengine.events.SpriteModelEvent;
 import newengine.events.conditions.SetEndConditionEvent;
 import newengine.events.game.StartLevelEvent;
 import newengine.events.player.MainPlayerEvent;
-import newengine.events.skill.TriggerSkillEvent;
-import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
 import newengine.events.timer.PeriodicEvent;
@@ -56,9 +53,6 @@ import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
-import newengine.utils.Target;
-import newengine.utils.image.ImageSet;
-import newengine.utils.image.LtubImage;
 import utilities.XStreamHandler;
 
 public class App extends Application {
@@ -186,5 +180,7 @@ public class App extends Application {
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
+
+
 
 }

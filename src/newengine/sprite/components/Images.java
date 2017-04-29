@@ -17,12 +17,13 @@ public class Images extends Component {
 //		this.imageSet = imageSet;
 //	}
 	
+
 	public Images(String imageFilePath) {
 		this.imageFilePath = imageFilePath;
 	}
 //	
 	@ConstructorForDeveloper
-	public Images(@VariableName(name = "Image") LtubImage image){
+	public Images(@VariableName(name="Image")LtubImage image){
 		this(image.getFileName());
 	}	
 	
