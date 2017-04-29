@@ -1,4 +1,4 @@
-package gameDevelopmentInterface.spriteCreator;
+package gameDevelopmentInterface.spriteCreator.variableSetters;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,14 +16,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import newengine.utils.image.LtubImage;
 
-public class ImageStringVariableSetter extends VariableSetter<String>{
+public class ImageVariableSetter extends VariableSetter<LtubImage>{
 	private VBox myContents;
 	private StringProperty myImagePath;
 	private double PREF_IMAGE_WIDTH=300;
 	private double PREF_IMAGE_HEIGHT=300;
 	private final File base =new File(System.getProperty("user.dir")+File.separator+"data");
 	
-	public ImageStringVariableSetter(String variableName) {
+	public ImageVariableSetter(String variableName) {
 		super(variableName);
 		myImagePath=new SimpleStringProperty();
 		myContents=new VBox();
@@ -43,13 +43,13 @@ public class ImageStringVariableSetter extends VariableSetter<String>{
 	}
 
 	@Override
-	public String getValue() throws UnsupportedTypeException, Exception {
-		return myImagePath.getValue();
+	public LtubImage getValue() throws UnsupportedTypeException, Exception {
+		return new LtubImage(myImagePath.getValue());
 	}
 
 	@Override
-	public void setField(String initialValue) {
-		myImagePath.set(initialValue);
+	public void setField(LtubImage initialValue) {
+		myImagePath.set(initialValue.getFileName());
 	}
 	
 	private class ImageDisplay extends Group{
@@ -70,4 +70,5 @@ public class ImageStringVariableSetter extends VariableSetter<String>{
 		}
 		
 	}
+
 }

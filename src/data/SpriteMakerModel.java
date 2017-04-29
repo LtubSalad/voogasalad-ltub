@@ -37,6 +37,14 @@ public class SpriteMakerModel {
 		skills = new ArrayList<Skill>(); 
 		
 	}
+	
+	public String getName(){
+		return spriteName;
+	}
+	
+	public void setName(String name){
+		spriteName=name;
+	}
 
 	
 	public void addSkill(Skill skill){

@@ -1,36 +1,32 @@
 <data.SpriteMakerModel>
-  <myComponents class="com.sun.javafx.collections.ObservableMapWrapper">
-    <values>
-      <outer-class reference="../.."/>
-    </values>
-    <backingMap>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.SkillSet</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.SkillSet>
-          <skills>
-            <entry>
-              <newengine.skill.SkillType>
-                <type>newengine.skill.skills.MoveSkill</type>
-              </newengine.skill.SkillType>
-              <newengine.skill.skills.MoveSkill>
-                <icon>
-                  <filename>images/skills/walk.png</filename>
-                  <image>
-                    <impl__source class="java.io.BufferedInputStream">
-                      <in class="java.io.FileInputStream">
-                        <fd>
-                          <fd>-1</fd>
-                          <handle>1528</handle>
-                          <parent class="java.io.FileInputStream" reference="../.."/>
-                          <closed>false</closed>
-                        </fd>
-                        <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\walk.png</path>
-                        <closeLock/>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.SkillSet</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.SkillSet>
+        <skills>
+          <entry>
+            <newengine.skill.SkillType>
+              <type>newengine.skill.skills.MoveSkill</type>
+            </newengine.skill.SkillType>
+            <newengine.skill.skills.MoveSkill>
+              <icon>
+                <filename>images/skills/walk.png</filename>
+                <image>
+                  <impl__source class="java.io.BufferedInputStream">
+                    <in class="java.io.FileInputStream">
+                      <fd>
+                        <fd>-1</fd>
+                        <handle>1596</handle>
+                        <parent class="java.io.FileInputStream" reference="../.."/>
                         <closed>false</closed>
-                      </in>
-                      <buf>iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+                      </fd>
+                      <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\walk.png</path>
+                      <closeLock/>
+                      <closed>false</closed>
+                    </in>
+                    <buf>iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
 AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAA
 CW9GRnMAAAAQAAAAEQCKJZdFAAAACXBIWXMAAABgAAAAYADwa0LPAAAAB3RJTUUH4QQRBSoqvvIz
 qAAAAAl2cEFnAAAAUQAAAFEAcaAKTgAADY5JREFUaN7Nmnt01dWVx/fe5/e4uTEPEiEBAsRgyjOA
@@ -174,42 +170,42 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
-                      <count>3785</count>
-                      <pos>3683</pos>
-                      <markpos>-1</markpos>
-                      <marklimit>0</marklimit>
-                    </impl__source>
-                    <progress>
-                      <value>1.0</value>
-                      <valid>false</valid>
-                      <bean class="javafx.scene.image.Image" reference="../.."/>
-                      <name>progress</name>
-                    </progress>
-                    <requestedWidth>0.0</requestedWidth>
-                    <requestedHeight>0.0</requestedHeight>
-                    <width>
-                      <name>width</name>
-                      <value>50.0</value>
-                      <outer-class reference="../.."/>
-                    </width>
-                    <height>
-                      <name>height</name>
-                      <value>50.0</value>
-                      <outer-class reference="../.."/>
-                    </height>
-                    <preserveRatio>false</preserveRatio>
-                    <smooth>false</smooth>
-                    <backgroundLoading>false</backgroundLoading>
-                    <platformImage>
-                      <name>platformImage</name>
-                      <value class="com.sun.prism.Image">
-                        <pixelBuffer class="java.nio.HeapByteBuffer">
-                          <mark>-1</mark>
-                          <position>0</position>
-                          <limit>10000</limit>
-                          <capacity>10000</capacity>
-                          <address>0</address>
-                          <hb>AQEBBQICAgcAAAAAAQEBBAICAggAAAABAQEBAwICAggBAQECAQEBAgICAggBAQEDAAAAAQICAggB
+                    <count>3785</count>
+                    <pos>3683</pos>
+                    <markpos>-1</markpos>
+                    <marklimit>0</marklimit>
+                  </impl__source>
+                  <progress>
+                    <value>1.0</value>
+                    <valid>false</valid>
+                    <bean class="javafx.scene.image.Image" reference="../.."/>
+                    <name>progress</name>
+                  </progress>
+                  <requestedWidth>0.0</requestedWidth>
+                  <requestedHeight>0.0</requestedHeight>
+                  <width>
+                    <name>width</name>
+                    <value>50.0</value>
+                    <outer-class reference="../.."/>
+                  </width>
+                  <height>
+                    <name>height</name>
+                    <value>50.0</value>
+                    <outer-class reference="../.."/>
+                  </height>
+                  <preserveRatio>false</preserveRatio>
+                  <smooth>false</smooth>
+                  <backgroundLoading>false</backgroundLoading>
+                  <platformImage>
+                    <name>platformImage</name>
+                    <value class="com.sun.prism.Image">
+                      <pixelBuffer class="java.nio.HeapByteBuffer">
+                        <mark>-1</mark>
+                        <position>0</position>
+                        <limit>10000</limit>
+                        <capacity>10000</capacity>
+                        <address>0</address>
+                        <hb>AQEBBQICAgcAAAAAAQEBBAICAggAAAABAQEBAwICAggBAQECAQEBAgICAggBAQEDAAAAAQICAggB
 AQEEAAAAAAICAgcBAQEFAAAAAAICAgYCAgIGAAAAAAEBAQUCAgIHAAAAAAEBAQQCAgIIAAAAAQEB
 AQICAgIIAQEBAgABAQICAgIGAQEBEQAAAFECAgJLAQEBCQAAAAACAgIHAQEBBQAAAAACAgIGAgIC
 BgAAAAABAQEFAgICBwAAAAABAQEDAgICCAAAAAECAgIHAAAAAQEBAQMCAgIIAQEBAgEBAQICAgII
@@ -385,50 +381,50 @@ AAAAAAICAgYCAgIGAAAAAAEBAQUBAQEEAAAABgEBAR4CAgIeAAAABAEBAQMCAgIIAAAAAQEBAQIC
 AgIIAQEBAgAAAAECAgIIAQEBAwAAAAACAgIHAQEBBAAAAAACAgIGAgICBgAAAAABAQEFAgICBwAA
 AAABAQEEAgICCAAAAAEBAQEDAgICCAAAAAEBAQECAgICCAEBAQIAAAABAgICCAEBAQMAAAAAAgIC
 BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
-                          <offset>0</offset>
-                          <isReadOnly>false</isReadOnly>
-                          <bigEndian>true</bigEndian>
-                          <nativeByteOrder>false</nativeByteOrder>
-                        </pixelBuffer>
-                        <minX>0</minX>
-                        <minY>0</minY>
-                        <width>50</width>
-                        <height>50</height>
-                        <scanlineStride>200</scanlineStride>
-                        <pixelFormat>BYTE_BGRA_PRE</pixelFormat>
-                        <pixelScale>1.0</pixelScale>
-                        <serial>
-                          <int>0</int>
-                        </serial>
-                      </value>
-                      <valid>true</valid>
-                      <outer-class reference="../.."/>
-                    </platformImage>
-                  </image>
-                </icon>
-              </newengine.skill.skills.MoveSkill>
-            </entry>
-            <entry>
-              <newengine.skill.SkillType>
-                <type>newengine.skill.skills.BuildSkill</type>
-              </newengine.skill.SkillType>
-              <newengine.skill.skills.BuildSkill>
-                <icon>
-                  <filename>images/skills/build.png</filename>
-                  <image>
-                    <impl__source class="java.io.BufferedInputStream">
-                      <in class="java.io.FileInputStream">
-                        <fd>
-                          <fd>-1</fd>
-                          <handle>1480</handle>
-                          <parent class="java.io.FileInputStream" reference="../.."/>
-                          <closed>false</closed>
-                        </fd>
-                        <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\build.png</path>
-                        <closeLock/>
+                        <offset>0</offset>
+                        <isReadOnly>false</isReadOnly>
+                        <bigEndian>true</bigEndian>
+                        <nativeByteOrder>false</nativeByteOrder>
+                      </pixelBuffer>
+                      <minX>0</minX>
+                      <minY>0</minY>
+                      <width>50</width>
+                      <height>50</height>
+                      <scanlineStride>200</scanlineStride>
+                      <pixelFormat>BYTE_BGRA_PRE</pixelFormat>
+                      <pixelScale>1.0</pixelScale>
+                      <serial>
+                        <int>0</int>
+                      </serial>
+                    </value>
+                    <valid>true</valid>
+                    <outer-class reference="../.."/>
+                  </platformImage>
+                </image>
+              </icon>
+            </newengine.skill.skills.MoveSkill>
+          </entry>
+          <entry>
+            <newengine.skill.SkillType>
+              <type>newengine.skill.skills.BuildSkill</type>
+            </newengine.skill.SkillType>
+            <newengine.skill.skills.BuildSkill>
+              <icon>
+                <filename>images/skills/build.png</filename>
+                <image>
+                  <impl__source class="java.io.BufferedInputStream">
+                    <in class="java.io.FileInputStream">
+                      <fd>
+                        <fd>-1</fd>
+                        <handle>1600</handle>
+                        <parent class="java.io.FileInputStream" reference="../.."/>
                         <closed>false</closed>
-                      </in>
-                      <buf>iVBORw0KGgoAAAANSUhEUgAAADIAAABACAYAAABY1SR7AAAABGdBTUEAALGOfPtRkwAAACBjSFJN
+                      </fd>
+                      <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\build.png</path>
+                      <closeLock/>
+                      <closed>false</closed>
+                    </in>
+                    <buf>iVBORw0KGgoAAAANSUhEUgAAADIAAABACAYAAABY1SR7AAAABGdBTUEAALGOfPtRkwAAACBjSFJN
 AACHDwAAjA8AAP1SAACBQAAAfXkAAOmLAAA85QAAGcxzPIV3AAAABmJLR0QA/wD/AP+gvaeTAAAA
 CW9GRnMAAAAXAAAADwBDYZgiAAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4QQTAh4P4ZrK
 FgAAAAl2cEFnAAAAXgAAAFkASC8ykwAAGhVJREFUaN61mmmspdlVnp89f9MZ7j13qrG77W5MD24P
@@ -572,42 +568,42 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
-                      <count>7028</count>
-                      <pos>6890</pos>
-                      <markpos>-1</markpos>
-                      <marklimit>0</marklimit>
-                    </impl__source>
-                    <progress>
-                      <value>1.0</value>
-                      <valid>false</valid>
-                      <bean class="javafx.scene.image.Image" reference="../.."/>
-                      <name>progress</name>
-                    </progress>
-                    <requestedWidth>0.0</requestedWidth>
-                    <requestedHeight>0.0</requestedHeight>
-                    <width>
-                      <name>width</name>
-                      <value>50.0</value>
-                      <outer-class reference="../.."/>
-                    </width>
-                    <height>
-                      <name>height</name>
-                      <value>64.0</value>
-                      <outer-class reference="../.."/>
-                    </height>
-                    <preserveRatio>false</preserveRatio>
-                    <smooth>false</smooth>
-                    <backgroundLoading>false</backgroundLoading>
-                    <platformImage>
-                      <name>platformImage</name>
-                      <value class="com.sun.prism.Image">
-                        <pixelBuffer class="java.nio.HeapByteBuffer">
-                          <mark>-1</mark>
-                          <position>0</position>
-                          <limit>12800</limit>
-                          <capacity>12800</capacity>
-                          <address>0</address>
-                          <hb>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                    <count>7028</count>
+                    <pos>6890</pos>
+                    <markpos>-1</markpos>
+                    <marklimit>0</marklimit>
+                  </impl__source>
+                  <progress>
+                    <value>1.0</value>
+                    <valid>false</valid>
+                    <bean class="javafx.scene.image.Image" reference="../.."/>
+                    <name>progress</name>
+                  </progress>
+                  <requestedWidth>0.0</requestedWidth>
+                  <requestedHeight>0.0</requestedHeight>
+                  <width>
+                    <name>width</name>
+                    <value>50.0</value>
+                    <outer-class reference="../.."/>
+                  </width>
+                  <height>
+                    <name>height</name>
+                    <value>64.0</value>
+                    <outer-class reference="../.."/>
+                  </height>
+                  <preserveRatio>false</preserveRatio>
+                  <smooth>false</smooth>
+                  <backgroundLoading>false</backgroundLoading>
+                  <platformImage>
+                    <name>platformImage</name>
+                    <value class="com.sun.prism.Image">
+                      <pixelBuffer class="java.nio.HeapByteBuffer">
+                        <mark>-1</mark>
+                        <position>0</position>
+                        <limit>12800</limit>
+                        <capacity>12800</capacity>
+                        <address>0</address>
+                        <hb>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQsEBgdDBggKUw0UGKcfLzv/ITRD/xwq
 NuUDBQY5AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -832,74 +828,67 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAUBAQETAAABCQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAwQEHg0OD0cgJCZ9OD1C
 ulpjaO1VXWHcJikrgQgJCjIAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</hb>
-                          <offset>0</offset>
-                          <isReadOnly>false</isReadOnly>
-                          <bigEndian>true</bigEndian>
-                          <nativeByteOrder>false</nativeByteOrder>
-                        </pixelBuffer>
-                        <minX>0</minX>
-                        <minY>0</minY>
-                        <width>50</width>
-                        <height>64</height>
-                        <scanlineStride>200</scanlineStride>
-                        <pixelFormat>BYTE_BGRA_PRE</pixelFormat>
-                        <pixelScale>1.0</pixelScale>
-                        <serial>
-                          <int>0</int>
-                        </serial>
-                      </value>
-                      <valid>true</valid>
-                      <outer-class reference="../.."/>
-                    </platformImage>
-                  </image>
-                </icon>
-                <mySpriteModel>
-                  <myComponents class="com.sun.javafx.collections.ObservableMapWrapper">
-                    <values>
-                      <outer-class reference="../.."/>
-                    </values>
-                    <backingMap>
-                      <entry>
-                        <newengine.sprite.component.ComponentType>
-                          <typename>newengine.sprite.components.Images</typename>
-                        </newengine.sprite.component.ComponentType>
-                        <newengine.sprite.components.Images>
-                          <imageFilePath>images/skills/build.png</imageFilePath>
-                        </newengine.sprite.components.Images>
-                      </entry>
-                    </backingMap>
-                  </myComponents>
-                  <myScriptMap class="com.sun.javafx.collections.ObservableMapWrapper">
-                    <backingMap/>
-                  </myScriptMap>
-                  <actualComponents>
-                    <newengine.sprite.components.Images reference="../../myComponents/backingMap/entry/newengine.sprite.components.Images"/>
-                  </actualComponents>
-                  <skills/>
-                </mySpriteModel>
-              </newengine.skill.skills.BuildSkill>
-            </entry>
-            <entry>
-              <newengine.skill.SkillType>
-                <type>newengine.skill.skills.FireProjectileSkill</type>
-              </newengine.skill.SkillType>
-              <newengine.skill.skills.FireProjectileSkill>
-                <icon>
-                  <filename>images/skills/crosshairs.png</filename>
-                  <image>
-                    <impl__source class="java.io.BufferedInputStream">
-                      <in class="java.io.FileInputStream">
-                        <fd>
-                          <fd>-1</fd>
-                          <handle>1556</handle>
-                          <parent class="java.io.FileInputStream" reference="../.."/>
-                          <closed>false</closed>
-                        </fd>
-                        <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\crosshairs.png</path>
-                        <closeLock/>
+                        <offset>0</offset>
+                        <isReadOnly>false</isReadOnly>
+                        <bigEndian>true</bigEndian>
+                        <nativeByteOrder>false</nativeByteOrder>
+                      </pixelBuffer>
+                      <minX>0</minX>
+                      <minY>0</minY>
+                      <width>50</width>
+                      <height>64</height>
+                      <scanlineStride>200</scanlineStride>
+                      <pixelFormat>BYTE_BGRA_PRE</pixelFormat>
+                      <pixelScale>1.0</pixelScale>
+                      <serial>
+                        <int>0</int>
+                      </serial>
+                    </value>
+                    <valid>true</valid>
+                    <outer-class reference="../.."/>
+                  </platformImage>
+                </image>
+              </icon>
+              <mySpriteModel>
+                <myComponents>
+                  <entry>
+                    <newengine.sprite.component.ComponentType>
+                      <typename>newengine.sprite.components.Images</typename>
+                    </newengine.sprite.component.ComponentType>
+                    <newengine.sprite.components.Images>
+                      <imageFilePath>images/skills/build.png</imageFilePath>
+                    </newengine.sprite.components.Images>
+                  </entry>
+                </myComponents>
+                <myScriptMap/>
+                <actualComponents>
+                  <newengine.sprite.components.Images reference="../../myComponents/entry/newengine.sprite.components.Images"/>
+                </actualComponents>
+                <skills/>
+              </mySpriteModel>
+            </newengine.skill.skills.BuildSkill>
+          </entry>
+          <entry>
+            <newengine.skill.SkillType>
+              <type>newengine.skill.skills.FireProjectileSkill</type>
+            </newengine.skill.SkillType>
+            <newengine.skill.skills.FireProjectileSkill>
+              <icon>
+                <filename>images/skills/crosshairs.png</filename>
+                <image>
+                  <impl__source class="java.io.BufferedInputStream">
+                    <in class="java.io.FileInputStream">
+                      <fd>
+                        <fd>-1</fd>
+                        <handle>1604</handle>
+                        <parent class="java.io.FileInputStream" reference="../.."/>
                         <closed>false</closed>
-                      </in>
-                      <buf>iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAAK/INwWK6QAAAAlwSFlz
+                      </fd>
+                      <path>C:\Users\Daniel\workspace308\voogasalad_ltub\bin\images\skills\crosshairs.png</path>
+                      <closeLock/>
+                      <closed>false</closed>
+                    </in>
+                    <buf>iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAAK/INwWK6QAAAAlwSFlz
 AAALEwAACxMBAJqcGAAAActpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1s
 bnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpS
 REYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMj
@@ -1043,42 +1032,42 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</buf>
-                      <count>3200</count>
-                      <pos>3196</pos>
-                      <markpos>-1</markpos>
-                      <marklimit>0</marklimit>
-                    </impl__source>
-                    <progress>
-                      <value>1.0</value>
-                      <valid>false</valid>
-                      <bean class="javafx.scene.image.Image" reference="../.."/>
-                      <name>progress</name>
-                    </progress>
-                    <requestedWidth>0.0</requestedWidth>
-                    <requestedHeight>0.0</requestedHeight>
-                    <width>
-                      <name>width</name>
-                      <value>50.0</value>
-                      <outer-class reference="../.."/>
-                    </width>
-                    <height>
-                      <name>height</name>
-                      <value>50.0</value>
-                      <outer-class reference="../.."/>
-                    </height>
-                    <preserveRatio>false</preserveRatio>
-                    <smooth>false</smooth>
-                    <backgroundLoading>false</backgroundLoading>
-                    <platformImage>
-                      <name>platformImage</name>
-                      <value class="com.sun.prism.Image">
-                        <pixelBuffer class="java.nio.HeapByteBuffer">
-                          <mark>-1</mark>
-                          <position>0</position>
-                          <limit>10000</limit>
-                          <capacity>10000</capacity>
-                          <address>0</address>
-                          <hb>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                    <count>3200</count>
+                    <pos>3196</pos>
+                    <markpos>-1</markpos>
+                    <marklimit>0</marklimit>
+                  </impl__source>
+                  <progress>
+                    <value>1.0</value>
+                    <valid>false</valid>
+                    <bean class="javafx.scene.image.Image" reference="../.."/>
+                    <name>progress</name>
+                  </progress>
+                  <requestedWidth>0.0</requestedWidth>
+                  <requestedHeight>0.0</requestedHeight>
+                  <width>
+                    <name>width</name>
+                    <value>50.0</value>
+                    <outer-class reference="../.."/>
+                  </width>
+                  <height>
+                    <name>height</name>
+                    <value>50.0</value>
+                    <outer-class reference="../.."/>
+                  </height>
+                  <preserveRatio>false</preserveRatio>
+                  <smooth>false</smooth>
+                  <backgroundLoading>false</backgroundLoading>
+                  <platformImage>
+                    <name>platformImage</name>
+                    <value class="com.sun.prism.Image">
+                      <pixelBuffer class="java.nio.HeapByteBuffer">
+                        <mark>-1</mark>
+                        <position>0</position>
+                        <limit>10000</limit>
+                        <capacity>10000</capacity>
+                        <address>0</address>
+                        <hb>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAEBAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -1254,171 +1243,168 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
-                          <offset>0</offset>
-                          <isReadOnly>false</isReadOnly>
-                          <bigEndian>true</bigEndian>
-                          <nativeByteOrder>false</nativeByteOrder>
-                        </pixelBuffer>
-                        <minX>0</minX>
-                        <minY>0</minY>
-                        <width>50</width>
-                        <height>50</height>
-                        <scanlineStride>200</scanlineStride>
-                        <pixelFormat>BYTE_BGRA_PRE</pixelFormat>
-                        <pixelScale>1.0</pixelScale>
-                        <serial>
-                          <int>0</int>
-                        </serial>
-                      </value>
-                      <valid>true</valid>
-                      <outer-class reference="../.."/>
-                    </platformImage>
-                  </image>
-                </icon>
-                <cooldown>3.0</cooldown>
-              </newengine.skill.skills.FireProjectileSkill>
-            </entry>
-          </skills>
-        </newengine.sprite.components.SkillSet>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.Range</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.Range>
-          <range>200.0</range>
-        </newengine.sprite.components.Range>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.Position</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.Position>
-          <pos>
-            <x>200.0</x>
-            <y>100.0</y>
-          </pos>
-          <heading>0.0</heading>
-          <isMoving>false</isMoving>
-          <followingSprite>false</followingSprite>
-        </newengine.sprite.components.Position>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.Cooldown</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.Cooldown>
-          <remainingTime/>
-        </newengine.sprite.components.Cooldown>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.GameBus</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.GameBus/>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.EventQueue</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.EventQueue>
-          <events/>
-          <eventFinished>true</eventFinished>
-        </newengine.sprite.components.EventQueue>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.SoundEffect</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.SoundEffect>
-          <moveSoundFile>data/sounds/Psyessr4.wav</moveSoundFile>
-        </newengine.sprite.components.SoundEffect>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.Speed</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.Speed>
-          <speed>200.0</speed>
-        </newengine.sprite.components.Speed>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.RangeShootingAI</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.RangeShootingAI/>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.Owner</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.Owner>
-          <owner>
-            <name>Player 1</name>
-          </owner>
-        </newengine.sprite.components.Owner>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.Health</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.Health>
-          <health>200</health>
-        </newengine.sprite.components.Health>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType reference="../../entry/newengine.sprite.components.SkillSet/skills/entry[2]/newengine.skill.skills.BuildSkill/mySpriteModel/myComponents/backingMap/entry/newengine.sprite.component.ComponentType"/>
-        <newengine.sprite.components.Images>
-          <imageFilePath>images/characters/tower2_resized.gif</imageFilePath>
-        </newengine.sprite.components.Images>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.Selectable</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.Selectable>
-          <boundType>IMAGE</boundType>
-        </newengine.sprite.components.Selectable>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.Attacker</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.Attacker>
-          <reloadPeriod>1.0</reloadPeriod>
-          <timeRemaining>1.0</timeRemaining>
-        </newengine.sprite.components.Attacker>
-      </entry>
-      <entry>
-        <newengine.sprite.component.ComponentType>
-          <typename>newengine.sprite.components.Collidable</typename>
-        </newengine.sprite.component.ComponentType>
-        <newengine.sprite.components.Collidable>
-          <boundType>IMAGE</boundType>
-          <bound/>
-        </newengine.sprite.components.Collidable>
-      </entry>
-    </backingMap>
+                        <offset>0</offset>
+                        <isReadOnly>false</isReadOnly>
+                        <bigEndian>true</bigEndian>
+                        <nativeByteOrder>false</nativeByteOrder>
+                      </pixelBuffer>
+                      <minX>0</minX>
+                      <minY>0</minY>
+                      <width>50</width>
+                      <height>50</height>
+                      <scanlineStride>200</scanlineStride>
+                      <pixelFormat>BYTE_BGRA_PRE</pixelFormat>
+                      <pixelScale>1.0</pixelScale>
+                      <serial>
+                        <int>0</int>
+                      </serial>
+                    </value>
+                    <valid>true</valid>
+                    <outer-class reference="../.."/>
+                  </platformImage>
+                </image>
+              </icon>
+              <cooldown>3.0</cooldown>
+            </newengine.skill.skills.FireProjectileSkill>
+          </entry>
+        </skills>
+      </newengine.sprite.components.SkillSet>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Range</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Range>
+        <range>200.0</range>
+      </newengine.sprite.components.Range>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Position</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Position>
+        <pos>
+          <x>200.0</x>
+          <y>100.0</y>
+        </pos>
+        <heading>0.0</heading>
+        <isMoving>false</isMoving>
+        <followingSprite>false</followingSprite>
+      </newengine.sprite.components.Position>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Cooldown</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Cooldown>
+        <remainingTime/>
+      </newengine.sprite.components.Cooldown>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.GameBus</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.GameBus/>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.EventQueue</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.EventQueue>
+        <events/>
+        <eventFinished>true</eventFinished>
+      </newengine.sprite.components.EventQueue>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.SoundEffect</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.SoundEffect>
+        <moveSoundFile>data/sounds/Psyessr4.wav</moveSoundFile>
+      </newengine.sprite.components.SoundEffect>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Speed</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Speed>
+        <speed>200.0</speed>
+      </newengine.sprite.components.Speed>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.RangeShootingAI</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.RangeShootingAI/>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Owner</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Owner>
+        <owner>
+          <name>Player 1</name>
+        </owner>
+      </newengine.sprite.components.Owner>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Health</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Health>
+        <health>200</health>
+      </newengine.sprite.components.Health>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType reference="../../entry/newengine.sprite.components.SkillSet/skills/entry[2]/newengine.skill.skills.BuildSkill/mySpriteModel/myComponents/entry/newengine.sprite.component.ComponentType"/>
+      <newengine.sprite.components.Images>
+        <imageFilePath>images/characters/tower2_resized.gif</imageFilePath>
+      </newengine.sprite.components.Images>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Selectable</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Selectable>
+        <boundType>IMAGE</boundType>
+      </newengine.sprite.components.Selectable>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Attacker</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Attacker>
+        <reloadPeriod>1.0</reloadPeriod>
+        <timeRemaining>1.0</timeRemaining>
+      </newengine.sprite.components.Attacker>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Collidable</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Collidable>
+        <boundType>IMAGE</boundType>
+        <bound/>
+      </newengine.sprite.components.Collidable>
+    </entry>
   </myComponents>
-  <myScriptMap class="com.sun.javafx.collections.ObservableMapWrapper">
-    <backingMap/>
-  </myScriptMap>
+  <myScriptMap/>
   <actualComponents>
-    <newengine.sprite.components.Cooldown reference="../../myComponents/backingMap/entry[4]/newengine.sprite.components.Cooldown"/>
-    <newengine.sprite.components.GameBus reference="../../myComponents/backingMap/entry[5]/newengine.sprite.components.GameBus"/>
-    <newengine.sprite.components.SkillSet reference="../../myComponents/backingMap/entry/newengine.sprite.components.SkillSet"/>
-    <newengine.sprite.components.Owner reference="../../myComponents/backingMap/entry[10]/newengine.sprite.components.Owner"/>
-    <newengine.sprite.components.Position reference="../../myComponents/backingMap/entry[3]/newengine.sprite.components.Position"/>
-    <newengine.sprite.components.SoundEffect reference="../../myComponents/backingMap/entry[7]/newengine.sprite.components.SoundEffect"/>
-    <newengine.sprite.components.Images reference="../../myComponents/backingMap/entry[12]/newengine.sprite.components.Images"/>
-    <newengine.sprite.components.Speed reference="../../myComponents/backingMap/entry[8]/newengine.sprite.components.Speed"/>
-    <newengine.sprite.components.Collidable reference="../../myComponents/backingMap/entry[15]/newengine.sprite.components.Collidable"/>
-    <newengine.sprite.components.Selectable reference="../../myComponents/backingMap/entry[13]/newengine.sprite.components.Selectable"/>
-    <newengine.sprite.components.Range reference="../../myComponents/backingMap/entry[2]/newengine.sprite.components.Range"/>
-    <newengine.sprite.components.Attacker reference="../../myComponents/backingMap/entry[14]/newengine.sprite.components.Attacker"/>
-    <newengine.sprite.components.Health reference="../../myComponents/backingMap/entry[11]/newengine.sprite.components.Health"/>
-    <newengine.sprite.components.EventQueue reference="../../myComponents/backingMap/entry[6]/newengine.sprite.components.EventQueue"/>
-    <newengine.sprite.components.RangeShootingAI reference="../../myComponents/backingMap/entry[9]/newengine.sprite.components.RangeShootingAI"/>
+    <newengine.sprite.components.Cooldown reference="../../myComponents/entry[4]/newengine.sprite.components.Cooldown"/>
+    <newengine.sprite.components.GameBus reference="../../myComponents/entry[5]/newengine.sprite.components.GameBus"/>
+    <newengine.sprite.components.SkillSet reference="../../myComponents/entry/newengine.sprite.components.SkillSet"/>
+    <newengine.sprite.components.Owner reference="../../myComponents/entry[10]/newengine.sprite.components.Owner"/>
+    <newengine.sprite.components.Position reference="../../myComponents/entry[3]/newengine.sprite.components.Position"/>
+    <newengine.sprite.components.SoundEffect reference="../../myComponents/entry[7]/newengine.sprite.components.SoundEffect"/>
+    <newengine.sprite.components.Images reference="../../myComponents/entry[12]/newengine.sprite.components.Images"/>
+    <newengine.sprite.components.Speed reference="../../myComponents/entry[8]/newengine.sprite.components.Speed"/>
+    <newengine.sprite.components.Collidable reference="../../myComponents/entry[15]/newengine.sprite.components.Collidable"/>
+    <newengine.sprite.components.Selectable reference="../../myComponents/entry[13]/newengine.sprite.components.Selectable"/>
+    <newengine.sprite.components.Range reference="../../myComponents/entry[2]/newengine.sprite.components.Range"/>
+    <newengine.sprite.components.Attacker reference="../../myComponents/entry[14]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.Health reference="../../myComponents/entry[11]/newengine.sprite.components.Health"/>
+    <newengine.sprite.components.EventQueue reference="../../myComponents/entry[6]/newengine.sprite.components.EventQueue"/>
+    <newengine.sprite.components.RangeShootingAI reference="../../myComponents/entry[9]/newengine.sprite.components.RangeShootingAI"/>
   </actualComponents>
   <skills>
     <newengine.skill.skills.MoveSkill>
@@ -1429,7 +1415,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</hb>
             <in class="java.io.FileInputStream">
               <fd>
                 <fd>-1</fd>
-                <handle>1560</handle>
+                <handle>1608</handle>
                 <parent class="java.io.FileInputStream" reference="../.."/>
                 <closed>false</closed>
               </fd>
@@ -1822,7 +1808,7 @@ BwEBAQUAAAAAAgICBgICAgYAAAAAAQEBBA==</hb>
             <in class="java.io.FileInputStream">
               <fd>
                 <fd>-1</fd>
-                <handle>1564</handle>
+                <handle>1612</handle>
                 <parent class="java.io.FileInputStream" reference="../.."/>
                 <closed>false</closed>
               </fd>
@@ -2255,8 +2241,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</hb>
           </platformImage>
         </image>
       </icon>
-      <mySpriteModel reference="../../../myComponents/backingMap/entry/newengine.sprite.components.SkillSet/skills/entry[2]/newengine.skill.skills.BuildSkill/mySpriteModel"/>
+      <mySpriteModel reference="../../../myComponents/entry/newengine.sprite.components.SkillSet/skills/entry[2]/newengine.skill.skills.BuildSkill/mySpriteModel"/>
     </newengine.skill.skills.BuildSkill>
-    <newengine.skill.skills.FireProjectileSkill reference="../../myComponents/backingMap/entry/newengine.sprite.components.SkillSet/skills/entry[3]/newengine.skill.skills.FireProjectileSkill"/>
+    <newengine.skill.skills.FireProjectileSkill reference="../../myComponents/entry/newengine.sprite.components.SkillSet/skills/entry[3]/newengine.skill.skills.FireProjectileSkill"/>
   </skills>
 </data.SpriteMakerModel>
