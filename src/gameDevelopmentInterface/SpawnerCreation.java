@@ -44,7 +44,7 @@ public class SpawnerCreation extends SpriteCreationScreen {
 		//scriptPane = new EventHandlerPane(spriteData);
 		infoPane = new SpriteInfoPane(spriteData, model);
 		this.setCenter(infoPane);
-		//this.setTop(new MonsterAdder(model));
+		this.setTop(new MonsterAdder(model));
 		this.setLeft(instantiateSelector());
 		this.setBottom(new BottomPanel());
 	}

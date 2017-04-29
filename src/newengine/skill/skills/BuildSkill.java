@@ -39,6 +39,7 @@ public class BuildSkill extends Skill {
 		this.mySpriteModel=model;
 	}
 	
+	
 	@Override
 	public void trigger() {
 		// if (canControl()) {
@@ -59,7 +60,7 @@ public class BuildSkill extends Skill {
 			List<Sprite> spritesToCreate = new ArrayList<>();
 			spritesToCreate.add(spriteToCreate.clone());
 			this.getSource().get().getComponent(GameBus.TYPE).get().getGameBus()
-					.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToCreate));
+			.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToCreate));
 		}
 		// }
 	}
