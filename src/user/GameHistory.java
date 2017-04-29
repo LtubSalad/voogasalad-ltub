@@ -72,4 +72,8 @@ public class GameHistory {
 		stats.incrementPlays();
 	}
 	
+	public void incrementLikes(){
+		stats.incrementLikes();
+	}
+	
 }

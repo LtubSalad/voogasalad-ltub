@@ -2,11 +2,11 @@ package user;
 
 import javafx.util.Pair;
 
-public class Comment {
+public class Message {
 	private String commenter; 
 	private String comment; 
 	
-	public Comment(String person, String message){
+	public Message(String person, String message){
 		this.commenter = person; 
 		this.comment = message; 
 	}

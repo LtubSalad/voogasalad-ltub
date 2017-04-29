@@ -26,8 +26,9 @@ public class DeveloperData {
 	private static final String GAME_NAME = "GAME_NAME";
 	private static final String GAME_ICON = "GAME_ICON";
 	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
-	private ObservableList<LevelData> levelData;
+	private ObservableList<LevelData> levelData; // need 
 	private ObservableList<Path> myPaths;
+
 	private ObservableList<SpriteMakerModel> mySprites; //need
 	private SpritesForScreenUse jakeSprites;  //need
 	private String gameName; //need
