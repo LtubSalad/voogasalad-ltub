@@ -1,4 +1,4 @@
-package gameDevelopmentInterface.spriteCreator;
+package gameDevelopmentInterface.spriteCreator.variableSetters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import javafx.scene.control.ChoiceBox;
  * Set an enum.
  * @param <T>
  */
-public class EnumSetter<T extends Enum> extends VariableSetter<T>{
+public class EnumSetter<T extends Enum<?>> extends VariableSetter<T>{
 	private ChoiceBox<T> enumChoices;
 	
 	public EnumSetter(Class<T> clazz,String description){
@@ -37,6 +37,8 @@ public class EnumSetter<T extends Enum> extends VariableSetter<T>{
 	@Override
 	public void setField(T initialValue) {
 		enumChoices.getSelectionModel().select(initialValue);
+		System.out.println("set field:" +initialValue);
+		System.out.println(enumChoices.getValue());
 		
 	}
 

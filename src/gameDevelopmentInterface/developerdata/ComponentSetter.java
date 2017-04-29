@@ -6,9 +6,9 @@ import javafx.scene.layout.VBox;
 import newengine.sprite.component.Component;
 
 public abstract class  ComponentSetter<T extends Component> extends VBox {
-	private Class<T> myType;
+	private Class<? extends T> myType;
 	
-	public ComponentSetter(Class<T> clazz){
+	public ComponentSetter(Class<? extends T> clazz){
 		myType=clazz;
 		setStyle(" -fx-background-color: white;");
 	}
@@ -17,7 +17,7 @@ public abstract class  ComponentSetter<T extends Component> extends VBox {
 		this.getChildren().add(new Label("Component: "+myType.getSimpleName()));
 	}
 
-	public Class<T> getComponentType(){
+	public Class<? extends T> getComponentType(){
 		return myType;
 	}
 	
