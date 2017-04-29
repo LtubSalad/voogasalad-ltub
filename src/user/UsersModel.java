@@ -6,16 +6,23 @@ import java.util.List;
 import java.util.Map;
 
 public class UsersModel {
-	// hashmap of username to password 
-	// hashmap of each user to userdata objects 
-	// hashmap of each user to file system location 
 
+	
+	public class MessagingHandler{
+		public void sendMessage(String sender, String message, String reciever){
+			sendMessage(sender, message, reciever); 
+		}
+	}
+	
+	
+	
 	private Map<String, String> userToPass; 
 	private Map<String, User> usernameToData; 
 	private Map<String, String> userToDirectory; //unsure if necessary
 	private List<String> passwordVerify; 
-
 	private User currentUser; 
+	
+	private MessagingHandler MH; 
 	// public void add user - add their username and password to the hashmap, create them a file system that they add authored games to
 	// when they save a game, add it to their game history 
 	// when they play a game, add it to their game played history 
@@ -26,15 +33,22 @@ public class UsersModel {
 		usernameToData = new HashMap<String, User>(); 
 		userToDirectory = new HashMap<String, String>(); 
 		passwordVerify = new ArrayList<String>();
+		MH = new MessagingHandler(); // TODO: is this necessary 
 	}
 
 	// TODO: handle loading data
+	
+	private void sendMessage(String sender, String message, String username){
+		User reciever = usernameToData.get(username);
+		reciever.recieveMessage(sender, message);
+		
+	}
 
 	public void addUser(String username, String password){
 		if (!userToPass.containsKey(username)){
 			userToPass.put(username, password);
 			passwordVerify.add(username+password);
-			User user = new User(username, "dummy image file name");
+			User user = new User(username, "dummy image file name", MH);
 			usernameToData.put(username, user);
 		}
 
