@@ -155,6 +155,7 @@ public class App extends Application {
 		
 		sprite2.addComponent(new Spawner(100, new Path(), 0.01));
 
+
 		
 		
 		listSprites.add(sprite2);
