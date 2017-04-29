@@ -30,17 +30,17 @@ import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
 import utilities.XStreamHandler;
 
-public class SpriteCreationScreen extends BorderPane{
+public class SpriteCreationScreen extends BorderPane {
 	private SpriteMakerModel spriteData;
 	private SpriteDataPane infoPane;
 	private EventHandlerPane scriptPane;
 	private DeveloperData model;
-	
-	public SpriteCreationScreen(DeveloperData model){
-		this.model=model;
+
+	public SpriteCreationScreen(DeveloperData model) {
+		this.model = model;
 		instantiate();
 	}
-	
+
 	public void instantiate(){
 		spriteData=new SpriteMakerModel();
 		scriptPane=new EventHandlerPane(spriteData);
@@ -49,7 +49,7 @@ public class SpriteCreationScreen extends BorderPane{
 		this.setLeft(scriptPane);
 		this.setCenter(infoPane);
 		this.setTop(new Label("NEW SPRITE"));
-		this.setBottom(new BottomPanel());	
+		this.setBottom(new BottomPanel());
 	}
 	
 	public SpriteDataPane getInfoPane(){
@@ -75,40 +75,42 @@ public class SpriteCreationScreen extends BorderPane{
 		observableComponents.add(Speed.class);
 		observableComponents.add(SkillSet.class);
 		observableComponents.add(Spawner.class);
-		
-		return new ComponentSelectorPane("Add components and set parameters", observableComponents,infoPane);
+
+		return new ComponentSelectorPane("Add components and set parameters", observableComponents, infoPane);
 	}
 
-	private class BottomPanel extends HBox{
-		XStreamHandler dataHandler=new XStreamHandler();
-		private BottomPanel(){
-			Button saveButton= new Button("Save SpriteMakerModel to File");
-			saveButton.setOnMouseClicked((click)->{
+	public class BottomPanel extends HBox {
+		XStreamHandler dataHandler = new XStreamHandler();
+
+		public BottomPanel() {
+			Button saveButton = new Button("Save SpriteMakerModel to File");
+			saveButton.setOnMouseClicked((click) -> {
 				try {
 					updateSprite();
 					dataHandler.saveToFile(spriteData);
 				} catch (Exception e) {
-					//FIXME
+					// FIXME
 					e.printStackTrace();
 				}
 			});
-			Button listSaveButton=new Button("Save SpriteMakerModel to THIS GAME's list of SpriteMakerModels");
-			listSaveButton.setOnMouseClicked((click)->{
+			Button listSaveButton = new Button("Save SpriteMakerModel to THIS GAME's list of SpriteMakerModels");
+			listSaveButton.setOnMouseClicked((click) -> {
 				try {
+					System.out.println("Supposed to add to model");
 					updateSprite();
 					model.addSprite(spriteData);
 				} catch (Exception e) {
-					//FIXME
-				}				
+					// FIXME
+					System.out.println("there was an exception");
+				}
 			});
-			this.getChildren().addAll(saveButton,listSaveButton);
+			this.getChildren().addAll(saveButton, listSaveButton);
 		}
-		
-		private void updateSprite() throws Exception{
+
+		private void updateSprite() throws Exception {
 			scriptPane.updateSprite();
 			infoPane.updateSpriteData();
 		}
 	}
-
 
 }

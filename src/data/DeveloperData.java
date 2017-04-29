@@ -30,7 +30,7 @@ public class DeveloperData {
 	private ObservableList<Path> myPaths;
 
 	private ObservableList<SpriteMakerModel> mySprites; //need
-	private SpritesForScreenUse jakeSprites;  //need
+	private SpritesForScreenUse jakeSprites = new SpritesForScreenUse();  //need
 	private String gameName; //need
 	private String gameIconFilePath;//need
  	

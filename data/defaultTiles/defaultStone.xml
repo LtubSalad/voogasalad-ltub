@@ -5,17 +5,11 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>images/marioCropped.gif</imageFilePath>
+        <imageFilePath>images/characters/Stone.jpg</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
   </myComponents>
-  <myScriptMap>
-    <entry>
-      <null/>
-      <string></string>
-    </entry>
-  </myScriptMap>
-  <spriteName>Jake</spriteName>
+  <myScriptMap/>
   <actualComponents>
     <newengine.sprite.components.Images reference="../../myComponents/entry/newengine.sprite.components.Images"/>
   </actualComponents>

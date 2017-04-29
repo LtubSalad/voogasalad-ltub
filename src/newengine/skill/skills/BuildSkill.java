@@ -47,6 +47,7 @@ public class BuildSkill extends Skill {
 		this.mySpriteModel=model;
 	}
 	
+	
 	@Override
 	public void trigger() {
 		AuthDataTranslator translator = new AuthDataTranslator(mySpriteModel);
@@ -77,6 +78,7 @@ public class BuildSkill extends Skill {
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToCreate));
 		}
 	}
+
 
 	@Override
 	public SkillType<? extends Skill> getType() {
