@@ -38,6 +38,13 @@ public class StateDisplay {
 	
 	private void makeSingleStat(String label, Object value, Sprite sprite) {
 		SingleStat singleStat = new SingleStat(label, value, sprite);
+		//singleStat.addUpgradeBtn();
+		box.getChildren().add(singleStat);
+	}
+	
+	private void makeStatandUpgrade(String label, Object value, Sprite sprite){
+		SingleStat singleStat = new SingleStat(label, value, sprite);
+		singleStat.addUpgradeBtn();
 		box.getChildren().add(singleStat);
 	}
 	

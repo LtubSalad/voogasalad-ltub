@@ -31,9 +31,9 @@ public class GameTimerTest extends Application {
 			bus.emit(new SysPrintEvent("Hello Sandy!"));
 		}));
 //		
-//		bus.emit(new PeriodicEvent(10,1,() -> {
-//			bus.emit(new SysPrintEvent("Hello Sandy!"));
-//		}));
+		bus.emit(new PeriodicEvent(10,1,() -> {
+			bus.emit(new SysPrintEvent("Hello Sandy!"));
+		}));
 		
 		System.out.println("Loop started");
 		gameLoop.start();

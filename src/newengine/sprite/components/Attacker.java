@@ -9,6 +9,7 @@ import java.util.Map;
 import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.SpriteModelEvent;
+import newengine.events.debug.SysPrintEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.StateChangeEvent;
 import newengine.skill.Skill;
@@ -39,6 +40,7 @@ public class Attacker extends Component {
 
 	@Override
 	public void afterAdded() {
+		
 		sprite.on(FireProjectileEvent.SPECIFIC, e -> {
 			Sprite source = e.getSprite();
 			Sprite target = e.getTarget();
@@ -53,9 +55,9 @@ public class Attacker extends Component {
 			weapon.addComponent(new Owner(source.getComponent(Owner.TYPE).get().player()));
 			weapon.addComponent(new Position(source.getComponent(Position.TYPE).get().pos(), source.getComponent(Position.TYPE).get().heading()));
 			weapon.addComponent(new Images(imageSet1));
-			weapon.addComponent(new Speed(250));
+			weapon.addComponent(new Speed(400));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
-			weapon.addComponent(new DamageStrength(25));
+			weapon.addComponent(new DamageStrength(55));
 			weapon.addComponent(new GameBus());	
 			weapon.addComponent(new Weapon());
 			
@@ -64,6 +66,10 @@ public class Attacker extends Component {
 			
 			sprite.getComponent(GameBus.TYPE).get().getGameBus()
 				.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
+			
+			sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
+				System.out.println(gameBus.getGameBus() == null);
+			});
 
 			moveSkill.setTarget(new Target(target));
 			moveSkill.trigger();

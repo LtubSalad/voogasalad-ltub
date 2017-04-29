@@ -81,6 +81,7 @@ public class Health extends Component {
 			spritesToRemove.add(sprite);
 			sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
 				gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spritesToRemove));
+				System.out.println("REMOVE SPRITE " + spritesToRemove);
 			});
 		}
 	}

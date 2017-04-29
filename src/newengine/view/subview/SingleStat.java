@@ -20,15 +20,15 @@ public class SingleStat extends HBox {
 	private int cost = 10;
 	private String name;
 	private Text label;
-	private TextArea value;
+	private Text value;
 	private Button upgradeBtn;
 	
 	public SingleStat(String name, Object value, Sprite sprite){
 		this.sprite = sprite;
 		this.name = name;
 		this.label = new Text(name + ": ");
-		this.value = new TextArea("" + value);
-		this.setMaxWidth(100);
+		this.value = new Text("" + value);
+		this.setMaxWidth(200);
 		this.setMaxHeight(25);
 		this.getChildren().addAll(this.label, this.value);
 	}

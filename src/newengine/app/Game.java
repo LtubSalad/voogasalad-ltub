@@ -47,7 +47,7 @@ public class Game {
 		RangeManager rangeManager = new RangeManager(bus); // TODO
 
 		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
-		SoundManager soundManager = new SoundManager(bus);
+//		SoundManager soundManager = new SoundManager(bus);
 		DebugManager debugManager = new DebugManager(bus);
 		TriggerManager triggerManager = new TriggerManager(bus, models);
 		TimerManager timerManager = new TimerManager(bus);

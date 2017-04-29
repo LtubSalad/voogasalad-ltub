@@ -45,11 +45,9 @@ public class SpriteState {
 			this.damageStrength = e.getNewInt();
 		});
 		sprite.on(StateChangeEvent.HEALTH, e -> {
-			System.out.println("state - health was changed to " + e.getNewInt());
 			this.health = e.getNewInt();
 		});
 		sprite.on(StateChangeEvent.XPOS, e -> {
-			System.out.println("state - xpos is changed to " + Math.round(e.getNewDouble()));
 			this.xpos = Math.round(e.getNewDouble());
 		});
 		sprite.on(StateChangeEvent.YPOS, e -> {
