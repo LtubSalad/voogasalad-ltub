@@ -7,7 +7,12 @@ import java.util.Map;
 
 public class UsersModel {
 
-	
+	/**
+	 * @author tahiaemran
+	 * 
+	 * nested class, allows encapsulated sending of messages from one user to the other 
+	 * 
+	 */
 	public class MessagingHandler{
 		public void sendMessage(String sender, String message, String reciever){
 			System.out.println("entering handler");
@@ -15,17 +20,13 @@ public class UsersModel {
 		}
 	}
 	
-	
-	
 	private Map<String, String> userToPass; 
 	private Map<String, User> usernameToData; 
 	private Map<String, String> userToDirectory; //unsure if necessary
 	private List<String> passwordVerify; 
 	private User currentUser; 
-		// public void add user - add their username and password to the hashmap, create them a file system that they add authored games to
 	// when they save a game, add it to their game history 
 	// when they play a game, add it to their game played history 
-	// allow each game to have a rating 
 
 	public UsersModel(){
 		userToPass = new HashMap<String, String>(); 
@@ -47,7 +48,7 @@ public class UsersModel {
 		if (!userToPass.containsKey(username)){
 			userToPass.put(username, password);
 			passwordVerify.add(username+password);
-			User user = new User(username, "data/images/characters/Grass.jpg", new MessagingHandler());
+			User user = new User(username, "resources/maple.jpg", new MessagingHandler());
 			usernameToData.put(username, user);
 		}
 
@@ -63,7 +64,6 @@ public class UsersModel {
 	}
 
 	public User getUserByName(String string) {
-		// TODO Auto-generated method stub
 		return usernameToData.get(string);
 	}
 

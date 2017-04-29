@@ -17,13 +17,22 @@ public class UserTest extends Application {
 //		primaryStage.setScene(scene);
 //		primaryStage.show();
 		
-		
 		UsersModel model = new UsersModel(); 
 		model.addUser("me", "1234");
-		User me = model.getUserByName("me");
 		model.addUser("not me", "4321");
+		User me = model.getUserByName("me");
 		User notMe = model.getUserByName("not me");
-		me.sendMessage("not me", "hi");
+		
+		notMe.sendMessage("me", "hi");
+		// is not me recieving
+		me.recordAuthored("test game auth", "yike.xml");
+		me.recordGamePlayed("test play", "yike.xml");
+		
+		UserSocialPage page = new UserSocialPage(me);
+		
+		Scene scene = new Scene(page, 600, 600);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 		
 	}
 	

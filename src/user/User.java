@@ -1,5 +1,7 @@
 package user;
 
+import java.util.Map;
+
 import javafx.scene.image.Image;
 import user.UsersModel.MessagingHandler;
 
@@ -21,7 +23,7 @@ public class User {
 	public User(String username, String imageFile, MessagingHandler MH) {
 		// directory
 		this.name = username; 
-		//this.image = new Image(imageFile);
+		this.image = new Image(imageFile, 150, 150, false, false);
 		history = new UserHistory(); 
 		messages = new MessagingHistory(username); 
 		handler = MH; 
@@ -64,6 +66,10 @@ public class User {
 		handler.sendMessage(name, message, recipient);
 		messages.addSent(recipient, message);
 		System.out.println("message being sent to recipient " + recipient);
+	}
+	
+	public Map<String,String> getDisplayableMessages(){
+		return messages.getDisplayableMessages();
 	}
 
 }

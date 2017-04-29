@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.util.Pair;
+
 public class MessagingHistory {
 	
 	private String myUserName; 
@@ -32,7 +34,6 @@ public class MessagingHistory {
 	
 	//TODO: fix this, time permitting 
 	public void sendPrivateMessage(String other, String message){
-		// other = key in the map 
 		if (!myPrivateMessages.containsKey(other)){
 			myPrivateMessages.put(other, new ArrayList<Message>());
 		}
@@ -44,6 +45,15 @@ public class MessagingHistory {
 			myPrivateMessages.put(sender, new ArrayList<Message>());
 		}
 		myPrivateMessages.get(sender).add(new Message(sender, message));
+	}
+	
+	public Map<String, String> getDisplayableMessages(){
+		Map<String, String> dispMessages = new HashMap<String, String>(); 
+		myRecievedPosts.stream().forEach(message -> {
+			Pair<String,String> m = message.getComment();
+			dispMessages.put(m.getKey(), m.getValue());
+		});
+		return dispMessages; 
 	}
 
 }
