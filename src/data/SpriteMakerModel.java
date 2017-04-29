@@ -19,8 +19,6 @@ import newengine.sprite.component.ComponentType;
 
 public class SpriteMakerModel {
 	private Map<String, String> myCustomEventHandlers;
-	private ObservableMap<ComponentType<?>,Component> myComponents;
-	private ObservableMap<BusEvent, String> myScriptMap;
 	private String spriteName;
 	
 	// Jake and Tahia's DO NOT TOUCH
@@ -32,9 +30,7 @@ public class SpriteMakerModel {
 	
 	public SpriteMakerModel() {
 		Map<ComponentType<?>, Component >componentMap=new HashMap<>();
-		myComponents=FXCollections.observableMap(componentMap);
 		Map<BusEvent, String> handlers=new HashMap<>();
-		myScriptMap=FXCollections.observableMap(handlers);
 		actualComponents = new ArrayList<Component>(); 
 		skills = new ArrayList<Skill>(); 
 		
@@ -97,20 +93,20 @@ public class SpriteMakerModel {
 		return componentsForTransfer; 
 	}
 	
-	public SpriteMakerModel(SpriteMakerModel toCopy) {
-		this.myCustomEventHandlers = toCopy.myCustomEventHandlers;
-		this.myComponents = toCopy.myComponents;
-		this.myScriptMap = toCopy.myScriptMap;
-	}
+//	public SpriteMakerModel(SpriteMakerModel toCopy) {
+//		this.myCustomEventHandlers = toCopy.myCustomEventHandlers;
+//		this.myComponents = toCopy.myComponents;
+//		this.myScriptMap = toCopy.myScriptMap;
+//	}
 	
 	public SpriteMakerModel(String name){
 		this();
 		spriteName=name;
 	}
 	
-	public void clearComponents(){
-		myComponents.clear();
-	}
+//	public void clearComponents(){
+//		myComponents.clear();
+//	}
 	
 	/**
 	 * This code means that the sprite only has one component for each type... though
@@ -124,21 +120,20 @@ public class SpriteMakerModel {
 //			}
 //		});
 		actualComponents.add(comp);
-		myComponents.put(comp.getType(), comp);
 	}
 	
-	public void addScript(BusEvent event, String script) {
-		myScriptMap.put(event, script);
-	}
-	
-	public Map<BusEvent,String> getScriptMap() {
-		return myScriptMap;
-	}
-	
-	public ObservableMap<ComponentType<?>,Component> getComponents() {
-		return myComponents;
-	}
-	
+//	public void addScript(BusEvent event, String script) {
+//		myScriptMap.put(event, script);
+//	}
+//	
+//	public Map<BusEvent,String> getScriptMap() {
+//		return myScriptMap;
+//	}
+//	
+//	public ObservableMap<ComponentType<?>,Component> getComponents() {
+//		return myComponents;
+//	}
+//	
 	public Collection<BusEvent> getListenedEvents(){
 		List<BusEvent> dummyList=new ArrayList<>();
 		dummyList.add(new SpriteKilledEvent());
@@ -156,7 +151,7 @@ public class SpriteMakerModel {
 	}
 	
 	public Component getComponentByType(ComponentType<?> type) {
-		for (Component c : myComponents.values()) {
+		for (Component c : actualComponents) {
 			if (c.getType().equals(type)) {
 				return c;
 			}
@@ -174,15 +169,15 @@ public class SpriteMakerModel {
 	 * Call this AFTER unserialization to avoid the bus issues
 	 * @return
 	 */
-	public Sprite produceSprite(){
-		Sprite sprite=new Sprite();
-		myComponents.forEach((componentType, component)->{
-			sprite.addComponent(component);
-		});
-//		myScriptMap.forEach((event, script)->{
-//			sprite.produceHandler(event.getEventType(), script);
+//	public Sprite produceSprite(){
+//		Sprite sprite=new Sprite();
+//		myComponents.forEach((componentType, component)->{
+//			sprite.addComponent(component);
 //		});
-		return sprite;
-	}
+////		myScriptMap.forEach((event, script)->{
+////			sprite.produceHandler(event.getEventType(), script);
+////		});
+//		return sprite;
+//	}
 
 }

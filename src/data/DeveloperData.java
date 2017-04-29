@@ -20,10 +20,10 @@ public class DeveloperData {
 	private static final String NUMBER_OF_STARTING_GOLD = "Number of Starting Gold";
 	private static final String NUMBER_OF_STARTING_BONUSES = "Number of Starting Bonuses";
 	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
-	private ObservableList<LevelData> levelData;
+	private ObservableList<LevelData> levelData; // need 
 	private ObservableList<Path> myPaths;
-	private ObservableList<SpriteMakerModel> mySprites;
-	private SpritesForScreenUse jakeSprites;
+	private ObservableList<SpriteMakerModel> mySprites; // need 
+	private SpritesForScreenUse jakeSprites; // need
 	
 	public DeveloperData() {
 		List<SpriteMakerModel> list=new ArrayList<SpriteMakerModel>();
