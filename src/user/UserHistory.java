@@ -27,7 +27,6 @@ public class UserHistory {
 		authToHistory = new HashMap<String, GameHistory>();
 		gameToHistory = new HashMap<String, GameHistory>();
 	}
-	
 		
 	
 	public Map<String, GameHistory> getPlayedHistory(){

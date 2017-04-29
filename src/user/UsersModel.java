@@ -10,7 +10,8 @@ public class UsersModel {
 	
 	public class MessagingHandler{
 		public void sendMessage(String sender, String message, String reciever){
-			sendMessage(sender, message, reciever); 
+			System.out.println("entering handler");
+			sendAMessage(sender, message, reciever); 
 		}
 	}
 	
@@ -21,9 +22,7 @@ public class UsersModel {
 	private Map<String, String> userToDirectory; //unsure if necessary
 	private List<String> passwordVerify; 
 	private User currentUser; 
-	
-	private MessagingHandler MH; 
-	// public void add user - add their username and password to the hashmap, create them a file system that they add authored games to
+		// public void add user - add their username and password to the hashmap, create them a file system that they add authored games to
 	// when they save a game, add it to their game history 
 	// when they play a game, add it to their game played history 
 	// allow each game to have a rating 
@@ -33,12 +32,12 @@ public class UsersModel {
 		usernameToData = new HashMap<String, User>(); 
 		userToDirectory = new HashMap<String, String>(); 
 		passwordVerify = new ArrayList<String>();
-		MH = new MessagingHandler(); // TODO: is this necessary 
 	}
 
 	// TODO: handle loading data
 	
-	private void sendMessage(String sender, String message, String username){
+	private void sendAMessage(String sender, String message, String username){
+		System.out.println("handler working");
 		User reciever = usernameToData.get(username);
 		reciever.recieveMessage(sender, message);
 		
@@ -48,7 +47,7 @@ public class UsersModel {
 		if (!userToPass.containsKey(username)){
 			userToPass.put(username, password);
 			passwordVerify.add(username+password);
-			User user = new User(username, "dummy image file name", MH);
+			User user = new User(username, "data/images/characters/Grass.jpg", new MessagingHandler());
 			usernameToData.put(username, user);
 		}
 
@@ -61,6 +60,11 @@ public class UsersModel {
 			currentUser = usernameToData.get(username); 
 			// TODO: connect here to the gameplayer 
 		}
+	}
+
+	public User getUserByName(String string) {
+		// TODO Auto-generated method stub
+		return usernameToData.get(string);
 	}
 
 
