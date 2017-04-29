@@ -50,7 +50,7 @@ public class LevelData extends Observable implements ILevelData {
 		return losingCondition;
 	}
 
-	@Override
+
 	public StringProperty getNameTextProperty() {
 		return null;
 	}
