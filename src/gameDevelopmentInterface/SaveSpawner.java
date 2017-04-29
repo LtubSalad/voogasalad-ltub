@@ -4,6 +4,7 @@ import data.SpriteMakerModel;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import newengine.sprite.components.Spawner;
+import utilities.XStreamHandler;
 
 public class SaveSpawner extends HBox {
 	private Button saveSpawnerToFile = new Button("Save Spawner to File");
@@ -22,10 +23,14 @@ public class SaveSpawner extends HBox {
 		saveSpawnerToFile.setOnAction(click -> {
 			SpriteMakerModel spawner = mySpawnerCreation.getSpawner();
 			spawner.addComponent(new Spawner(myMonsterAdder.getNumMonsters(), mySpawnerCreation.getPath(), mySpawnerCreation.getSpawnBetweenTime()));
+			XStreamHandler xstream = new XStreamHandler();
+			xstream.saveToFile(spawner);
 		});
 		
 		saveSpawnerToData.setOnAction(click -> {
-			
+			SpriteMakerModel spawner = mySpawnerCreation.getSpawner();
+			spawner.addComponent(new Spawner(myMonsterAdder.getNumMonsters(), mySpawnerCreation.getPath(), mySpawnerCreation.getSpawnBetweenTime()));
+			mySpawnerCreation.saveSpawnerToModel();
 		});
 	}
 
