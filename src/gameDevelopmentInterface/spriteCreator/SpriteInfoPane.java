@@ -98,7 +98,8 @@ public class SpriteInfoPane extends ScrollPane{
 		 * @throws Exception
 		 */
 		private void updateSpriteModel() throws Exception{
-			spriteData.clearComponents();
+			//FIXME: clear components
+			//spriteData.clearComponents();
 			for(ComponentSetter<? extends Component> component: componentViews){
 				spriteData.addComponent(component.produceComponent());
 			}
