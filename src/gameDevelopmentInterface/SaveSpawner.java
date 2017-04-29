@@ -9,8 +9,10 @@ public class SaveSpawner extends HBox {
 	private Button saveSpawnerToFile = new Button("Save Spawner to File");
 	private Button saveSpawnerToData = new Button("Save Spawner to Data");
 	private SpawnerCreation mySpawnerCreation;
+	private MonsterAdder myMonsterAdder;
 	
-	public SaveSpawner(SpawnerCreation spawnCreation) {
+	public SaveSpawner(SpawnerCreation spawnCreation, MonsterAdder monsterAdder) {
+		myMonsterAdder = monsterAdder;
 		mySpawnerCreation = spawnCreation;
 		makeButtons();
 		this.getChildren().addAll(saveSpawnerToFile, saveSpawnerToData);
@@ -19,7 +21,7 @@ public class SaveSpawner extends HBox {
 	private void makeButtons() {
 		saveSpawnerToFile.setOnAction(click -> {
 			SpriteMakerModel spawner = mySpawnerCreation.getSpawner();
-			spawner.addComponent(new Spawner(mySpawnerCreation.getHowManyToSpawn(), mySpawnerCreation.getPath(), mySpawnerCreation.getSpawnBetweenTime()));
+			spawner.addComponent(new Spawner(myMonsterAdder.getNumMonsters(), mySpawnerCreation.getPath(), mySpawnerCreation.getSpawnBetweenTime()));
 		});
 		
 		saveSpawnerToData.setOnAction(click -> {

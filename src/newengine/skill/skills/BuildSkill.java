@@ -71,15 +71,6 @@ public class BuildSkill extends Skill {
 		if (this.getSource().get().getComponent(GameBus.TYPE).isPresent()) {
 			List<Sprite> spritesToCreate = new ArrayList<>();
 			spritesToCreate.add(spriteToCreate.clone());
-			
-			
-
-			this.getSource().get().getComponent(GameBus.TYPE).get().getGameBus()
-			.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToCreate));
-			
-			
-			
-
 			EventBus bus = this.getSource().get().getComponent(GameBus.TYPE).get().getGameBus();
 			// emit change wealth event besides check cost and build event, 
 			// only to utilize the already existing change wealth event handling 
@@ -87,6 +78,7 @@ public class BuildSkill extends Skill {
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToCreate));
 		}
 	}
+
 
 	@Override
 	public SkillType<? extends Skill> getType() {
