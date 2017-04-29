@@ -28,6 +28,7 @@ public class FileVariableSetter extends VariableSetter<File>{
 			}
 		});
 		this.getChildren().addAll(fileChooser,fileLabel);
+		;
 	}
 	
 	@Override

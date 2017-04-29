@@ -30,12 +30,7 @@ public class SimpleVariableSetter<T> extends VariableSetter<T>{
 
 	@Override
 	public void setField(T initialValue) {
-		value.setText("()");
-		value.setText(value.getText());
-		this.getChildren().remove(value);
-		
-		System.out.println("initialValue:" + initialValue.toString());
-		System.out.println("current value:"+value.getText());
+		value.setText(initialValue.toString());
 	}
 	
 	public void setText(String test){
