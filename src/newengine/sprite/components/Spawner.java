@@ -43,4 +43,10 @@ public class Spawner extends Component {
 		return new Spawner();
 	}
 
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

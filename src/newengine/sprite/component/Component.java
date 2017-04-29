@@ -28,4 +28,6 @@ public abstract class Component {
 
 	public abstract Component clone();
 	
+	public abstract Object[] getParameters();
+	
 }
