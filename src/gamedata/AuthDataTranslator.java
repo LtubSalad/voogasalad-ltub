@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-
 import bus.BasicEventBus;
 import bus.BusEvent;
+import commons.point.GamePoint;
 import data.SpriteMakerModel;
 import javafx.collections.ObservableList;
-import newengine.events.SpriteModelEvent;
 import newengine.events.skill.AddSkillEvent;
-import newengine.model.SpriteModel;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.Position;
 
 /**
  * @author tahiaemran
@@ -71,7 +68,7 @@ public class AuthDataTranslator implements Translator<Sprite>{
 			// skills
 			Sprite skilledSprite = handleSkills(newSprite, model.getSkills());
 			/// triggers 
-			constructedSprites.add(handleEventHandlers(skilledSprite, model.getScriptMap()));				
+			constructedSprites.add(handleEventHandlers(skilledSprite, model.getScriptMap()));	
 		});
 	}
 	
@@ -115,6 +112,13 @@ public class AuthDataTranslator implements Translator<Sprite>{
 		for (Component comp: transferComponents){
 			System.out.println(comp.getType().getType());
 			sprite.addComponent(comp);
+			if (comp.getType().equals(Position.TYPE)) {
+				Position position = (Position)comp;
+				GamePoint oriPos = position.pos();
+				double xPerc = oriPos.x();
+				double yPerc = oriPos.y();
+				
+			}
 		}
 		return sprite;
 	}
