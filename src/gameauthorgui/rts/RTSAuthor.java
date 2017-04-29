@@ -21,8 +21,8 @@ public class RTSAuthor extends GameAuthor{
 	
 	public RTSAuthor(){
 		super();
-		myGeneralDataCreator = new GeneralDataCreator();
 		myModelData = new DeveloperData();
+		myGeneralDataCreator = new GeneralDataCreator(myModelData);
 		myScreenModelData = new ScreenModelData();
 		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();

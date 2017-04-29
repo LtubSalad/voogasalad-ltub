@@ -28,7 +28,7 @@ public class TowerAuthor extends GameAuthor {
 	public TowerAuthor() {	
 		super();
 		myModelData=new DeveloperData();
-		myGeneralDataCreator = new GeneralDataCreator();
+		myGeneralDataCreator = new GeneralDataCreator(myModelData);
 		myScreenModelData = new ScreenModelData();
 		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();
