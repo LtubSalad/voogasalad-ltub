@@ -52,6 +52,10 @@ public class SpriteCreationScreen extends BorderPane{
 		this.setBottom(new BottomPanel());	
 	}
 	
+	public SpriteInfoPane getInfoPane(){
+		return infoPane;
+	}
+	
 	private ComponentSelectorPane instantiateSelector(){
 		List<Class<? extends Component>> basicComponents= new ArrayList<>();
 		ObservableList<Class<? extends Component>> observableComponents=FXCollections.observableList(basicComponents);

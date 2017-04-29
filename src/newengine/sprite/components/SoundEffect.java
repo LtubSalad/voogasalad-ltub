@@ -13,7 +13,6 @@ public class SoundEffect extends Component {
 	
 	private String moveSoundFile;
 
-	private final File base =new File(System.getProperty("user.dir")+File.separator+"data");
 	
 	@ConstructorForDeveloper
 	public SoundEffect(@VariableName(name = "Sound file") File soundFile){
@@ -36,5 +35,12 @@ public class SoundEffect extends Component {
 	@Override
 	public SoundEffect clone() {
 		return new SoundEffect(moveSoundFile);
+	}
+
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=new File(moveSoundFile);
+		return parameters;
 	}
 }

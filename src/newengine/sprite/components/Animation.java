@@ -21,4 +21,10 @@ public class Animation extends Component {
 		return null;
 	}
 
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

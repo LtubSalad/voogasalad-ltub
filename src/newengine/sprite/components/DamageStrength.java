@@ -51,4 +51,11 @@ public class DamageStrength extends Component {
 		return clone;
 	}
 
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters= new Object[1];
+		parameters[0]=strength;
+		return parameters;
+	}
+
 }
