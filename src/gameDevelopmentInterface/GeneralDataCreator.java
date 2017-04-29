@@ -74,7 +74,7 @@ public class GeneralDataCreator extends BorderPane{
 	}
 	
 	private void setupTitle(){
-		Text title = new Text("General Game Data");
+		Text title = new Text(myResources.getString("generalGameData"));
 		title.setFont(new Font(40));	
 		title.setTextAlignment(TextAlignment.CENTER);
 		this.setTop(title);
@@ -85,23 +85,23 @@ public class GeneralDataCreator extends BorderPane{
 	}
 	
 	private void sendNumLives() {
-		myGeneralModel.addData(new Pair<String, String>(myResources.getString(NUM_LIVES), numLives.getValue()));
+		myGeneralModel.addData(new Pair<String, String>(myResources.getString("NUM_LIVES_KEY"), numLives.getValue()));
 		System.out.println("check" + numLives.getValue());
 	}
 
 
 	private void sendStartingGold() {
 		myGeneralModel.addData(
-				new Pair<String, String>(myResources.getString(NUM_STARTING_GOLD), numGold.getValue()));
+				new Pair<String, String>(myResources.getString("NUM_STARTING_GOLD_KEY"), numGold.getValue()));
 	}
 
 	private void sendLevelBonuses() {
-		myGeneralModel.addData(new Pair<String, String>(myResources.getString(LEVEL_COMPLETION_BONUS),
+		myGeneralModel.addData(new Pair<String, String>(myResources.getString("LEVEL_COMPLETION_BONUS_KEY"),
 				levelCompletionBonus.getValue()));
 	}
 	
 	private void sendTowerBuild(){
-		myGeneralModel.addData(new Pair<String, String>(myResources.getString(BUILD_IN_GAME), 
+		myGeneralModel.addData(new Pair<String, String>(myResources.getString("BUILD_IN_GAME_KEY"), 
 				Boolean.toString(towerBuild.isSelected())));
 	}
 }

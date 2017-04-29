@@ -15,10 +15,10 @@ import javafx.util.Pair;
  * Stores the data not specific to any screen, such as health, lives, score.
  */
 public class DeveloperData {
-	private static final String NUMBER_OF_LIVES = "Number of Lives";
-	private static final String NUMBER_OF_LEVELS = "Number of Levels";
-	private static final String NUMBER_OF_STARTING_GOLD = "Number of Starting Gold";
-	private static final String NUMBER_OF_STARTING_BONUSES = "Number of Starting Bonuses";
+	private static final String NUMBER_OF_LIVES = "NUM_LIVES_KEY";
+	private static final String BUILD_TOWER = "BUILD_IN_GAME_KEY";
+	private static final String NUMBER_OF_STARTING_GOLD = "NUM_STARTING_GOLD_KEY";
+	private static final String LEVEL_COMPLETION_BONUS = "LEVEL_COMPLETION_BONUS_KEY";
 	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
 	private ObservableList<LevelData> levelData;
 	private ObservableList<Path> myPaths;
@@ -35,9 +35,9 @@ public class DeveloperData {
 		List<Path> dummyPaths=new ArrayList<>();
 		myPaths=FXCollections.observableList(dummyPaths);
 		myPaths.add(new Path());
-		myData.put(NUMBER_OF_STARTING_BONUSES, "");
+		myData.put(LEVEL_COMPLETION_BONUS, "");
 		myData.put(NUMBER_OF_STARTING_GOLD, "");	
-		myData.put(NUMBER_OF_LEVELS, "");
+		myData.put(BUILD_TOWER, "");
 		myData.put(NUMBER_OF_LIVES, "");
 	}
 	
@@ -74,8 +74,8 @@ public class DeveloperData {
 	public void addData(Pair<String,String> data) {
 		myData.put(data.getKey(), data.getValue());
 	}
+	
 	/**
-	 * 
 	 * @return all of the data held in this model
 	 */
 	public ObservableMap<String,String> getAllData() {
