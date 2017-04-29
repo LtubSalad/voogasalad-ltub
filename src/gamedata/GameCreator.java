@@ -7,9 +7,10 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import bus.EventBus;
-import data.GameData;
+import data.DeveloperData;
 import data.SpriteMakerModel;
 import gamecreation.level.LevelData;
+import javafx.collections.ObservableList;
 import newengine.app.Game;
 import newengine.events.SpriteModelEvent;
 import newengine.events.player.MainPlayerEvent;
@@ -31,7 +32,7 @@ public class GameCreator {
 	XStreamHandler XSH; 
 	XStream xstream; 
 	
-	private TranslationController translator; 
+	
 	private Game game; 
 
 	
@@ -43,6 +44,10 @@ public class GameCreator {
 		// create the game
 		createGame(); 
 	}
+	
+	public GameCreator(File file){
+		this.fileToRead = file; 
+	}
 
 	public Game getGame(){ 
 		return game; 
@@ -50,11 +55,10 @@ public class GameCreator {
 
 	private void createGame() {
 		// Read out the game 
-		GameData gameData = (GameData) xstream.fromXML(fileToRead);
+		DeveloperData gameData = (DeveloperData) xstream.fromXML(fileToRead);
 	
 		//Process Levels
-		List<LevelData> levels = gameData.getLevels();
-		// TODO: how to account for levels in the game?
+		ObservableList<LevelData> levels = gameData.getLevelData();
 		
 		//Process Sprites 
 		List<SpriteMakerModel> initialSpriteModels = gameData.getSprites();
@@ -66,15 +70,16 @@ public class GameCreator {
 		EventBus bus = game.getBus();
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, createdSprites));
 		
-		// TODO: figure this part out 
-		bus.emit(new MainPlayerEvent(createdSprites.get(0).getComponent(Owner.TYPE).get().player()));
-		bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, 
-				createdSprites.get(0).getComponent(Owner.TYPE).get().player(), 
-				gameData.getStartingLives()));
-		bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE,
-				createdSprites.get(0).getComponent(Owner.TYPE).get().player(),
-				WealthType.GOLD, gameData.getStartingGold()));
 		
+//		// TODO: figure this part out 
+//		bus.emit(new MainPlayerEvent(createdSprites.get(0).getComponent(Owner.TYPE).get().player()));
+//		bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, 
+//				createdSprites.get(0).getComponent(Owner.TYPE).get().player(), 
+//				gameData.getStartingLives()));
+//		bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE,
+//				createdSprites.get(0).getComponent(Owner.TYPE).get().player(),
+//				WealthType.GOLD, gameData.getStartingGold()));
+//		
 	}
 	
 }
