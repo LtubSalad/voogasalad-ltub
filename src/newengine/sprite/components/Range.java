@@ -51,5 +51,12 @@ public class Range extends Component {
 		return new Range(range);
 	}
 
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=range;
+		return parameters;
+	}
+
 	
 }

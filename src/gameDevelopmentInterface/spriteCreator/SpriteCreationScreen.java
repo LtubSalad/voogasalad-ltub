@@ -53,12 +53,8 @@ public class SpriteCreationScreen extends BorderPane{
 		this.setBottom(new BottomPanel());	
 	}
 	
-	public void addComponent(Class<? extends Component> clazz){
-		infoPane.addComponent(clazz);
-	}
-	
-	public void addComponent(Component component){
-		infoPane.addComponent(component.getClass());
+	public SpriteInfoPane getInfoPane(){
+		return infoPane;
 	}
 	
 	private ComponentSelectorPane instantiateSelector(){

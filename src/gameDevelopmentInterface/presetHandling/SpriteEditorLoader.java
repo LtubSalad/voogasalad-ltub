@@ -5,19 +5,18 @@ import data.SpriteMakerModel;
 import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 
 public class SpriteEditorLoader {
-	public SpriteCreationScreen loadSavedModel(SpriteMakerModel model, DeveloperData data){
+	public SpriteCreationScreen loadModel(SpriteMakerModel model, DeveloperData data){
 		SpriteCreationScreen screen=new SpriteCreationScreen(data);
 		model.getComponents().values().forEach((component)->{
-			screen.addComponent(component);
+			screen.getInfoPane().addComponent(component,true);
 		});
 		return screen;
 	}
 	
-	public SpriteCreationScreen loadPresetModel(SpriteMakerModel model, DeveloperData data){
+	public SpriteCreationScreen loadModelPreset(SpriteMakerModel model, DeveloperData data){
 		SpriteCreationScreen screen=new SpriteCreationScreen(data);
 		model.getComponents().values().forEach((component)->{
-			//make it unremovable
-			screen.addComponent(component);
+			screen.getInfoPane().addComponent(component,false);
 		});
 		return screen;
 	}

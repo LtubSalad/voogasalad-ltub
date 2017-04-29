@@ -28,11 +28,8 @@ public class FileVariableSetter extends VariableSetter<File>{
 			}
 		});
 		this.getChildren().addAll(fileChooser,fileLabel);
-		// TODO Auto-generated constructor stub
 	}
 	
-	
-
 	@Override
 	public File getValue() throws UnsupportedTypeException, Exception {
 		// TODO Auto-generated method stub

@@ -7,7 +7,7 @@ import java.util.List;
 
 import data.DeveloperData;
 import exception.UnsupportedTypeException;
-import gameDevelopmentInterface.developerdata.ComponentSetterView;
+import gameDevelopmentInterface.developerdata.ComponentSetter;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.sprite.component.Component;
 /**
@@ -16,25 +16,20 @@ import newengine.sprite.component.Component;
  * A GUI component that allows the user to instantiate any component.
  * Looks for a method marked ConstructorForDeveloper, and and creates 
  * GUI setters to instantiate a class using the constructor's parameters.
+ * 
+ * I wrote a lot of duplicate code between the two methods- refactor later.
  * @param <T>
  */
-public class ComponentSetter<T extends Component> extends ComponentSetterView{	
+public class DefaultComponentSetter<T extends Component> extends ComponentSetter{	
 	private List<VariableSetter> fieldSetters;
 	private Constructor<T> ctor;
 	private DeveloperData data;
 	
-	public ComponentSetter(Class<T> myComponent, DeveloperData data) throws UnsupportedTypeException{
+	public DefaultComponentSetter(Class<T> myComponent, DeveloperData data) throws UnsupportedTypeException{
 		super(myComponent);
 		this.data=data;
 		fieldSetters=new ArrayList<>();
-		Constructor<T>[] ctors=(Constructor<T>[]) myComponent.getConstructors();
-		for(Constructor<T> constructor:ctors){
-			if(constructor.isAnnotationPresent(ConstructorForDeveloper.class)){
-				ctor=constructor;
-				break;
-			}
-		}
-		
+		ctor=getDeveloperConstructor(myComponent);		
 		if(ctor==null){
 			return;
 		}
@@ -48,18 +43,11 @@ public class ComponentSetter<T extends Component> extends ComponentSetterView{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ComponentSetter(T component, DeveloperData data) throws UnsupportedTypeException{
+	public DefaultComponentSetter(T component, DeveloperData data) throws UnsupportedTypeException{
 		super(component.getClass());
 		this.data=data;
 		fieldSetters=new ArrayList<>();
-		Constructor<T>[] ctors=(Constructor<T>[]) component.getClass().getConstructors();
-		for(Constructor<T> constructor:ctors){
-			if(constructor.isAnnotationPresent(ConstructorForDeveloper.class)){
-				ctor=constructor;
-				break;
-			}
-		}
-		
+		ctor=getDeveloperConstructor(component.getClass());		
 		if(ctor==null){
 			return;
 		}
@@ -67,9 +55,23 @@ public class ComponentSetter<T extends Component> extends ComponentSetterView{
 		Parameter[] parameters=ctor.getParameters();
 		VariableSetterFactory setterFactory=new VariableSetterFactory(data);
 		for(int i=0;i<parameters.length;i++){
+			VariableSetter setter=setterFactory.setterFromParameter(parameters[i]);
+			setter.setField(component.getParameters()[i]);
 			fieldSetters.add(setterFactory.setterFromParameter(parameters[i]));
 		}
 		fieldSetters.forEach((fieldSetter)->this.getChildren().add(fieldSetter));
+	}
+	
+	public Constructor<T> getDeveloperConstructor(Class<? extends Component> component){
+		Constructor<T> myCtor=null;
+		Constructor<T>[] ctors=(Constructor<T>[]) component.getConstructors();
+		for(Constructor<T> constructor:ctors){
+			if(constructor.isAnnotationPresent(ConstructorForDeveloper.class)){
+				myCtor=constructor;
+				break;
+			}
+		}	
+		return myCtor;
 	}
 
 	@Override

@@ -45,4 +45,10 @@ public class Images extends Component {
 	public Images clone() {
 		return new Images(imageFilePath);
 	}
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=new LtubImage(imageFilePath);
+		return parameters;
+	}
 }
