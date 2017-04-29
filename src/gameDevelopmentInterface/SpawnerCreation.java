@@ -11,7 +11,6 @@ public class SpawnerCreation extends BorderPane {
 	private SpriteMakerModel spawnerData;
 	private SpriteMakerModel spriteToSpawn;
 	private DeveloperData model;
-	private int howManyToSpawn;
 	private Path pathForChildrenToFollow;
 	private double spawnBetweenTime;
 	
@@ -24,22 +23,15 @@ public class SpawnerCreation extends BorderPane {
 		spawnerData = new SpriteMakerModel();
 		SpawnerInfoPane mySpawnerInfo = new SpawnerInfoPane();
 		AllPossibleMonsters myPossibleMonsters = new AllPossibleMonsters(this, this.model, mySpawnerInfo);
+		MonsterAdder myMonsterAdder = new MonsterAdder(myPossibleMonsters);
 		this.setLeft(myPossibleMonsters);
 		this.setCenter(mySpawnerInfo);
-		this.setTop(new MonsterAdder(myPossibleMonsters));
-		this.setBottom(new SaveSpawner(this));
+		this.setTop(myMonsterAdder);
+		this.setBottom(new SaveSpawner(this, myMonsterAdder));
 	}
 	
 	public void setCurrentMonsterToSpawn(SpriteMakerModel monster) {
 		spriteToSpawn = monster;
-	}
-	
-	public int getHowManyToSpawn() {
-		return howManyToSpawn;
-	}
-	
-	public void setHowManyToSpawn(int numberToSpawn) {
-		howManyToSpawn = numberToSpawn;
 	}
 	
 	public SpriteMakerModel getSpawner() {

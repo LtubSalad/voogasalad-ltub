@@ -36,15 +36,34 @@ public class AllPossibleMonsters extends ScrollPane {
 	
 	public void getMonstersOnScreen() {
 		this.getChildren().clear();
+		monstersAlreadyInBox.clear();
 		List<SpriteMakerModel> allSprites = 
 				new ArrayList<SpriteMakerModel>(myData.getScreenSprites().getSpriteMakerModels());
+		System.out.println(allSprites.size());
 		List<SpriteMakerModel> onlyMonsters = new ArrayList<>();
 		for (SpriteMakerModel possibleMonster : allSprites) {
 			if (isMonster(possibleMonster)) {
 				onlyMonsters.add(possibleMonster);			
 			}
 		}
+		System.out.println(onlyMonsters.size());
 		for (SpriteMakerModel monster : onlyMonsters) {
+			loadFromFile(monster);
+//			if (!monstersAlreadyInBox.contains(monster.getSpriteName())) {
+//				monstersAlreadyInBox.add(monster.getSpriteName());
+//				System.out.println("Got here");
+//				Images imageComp = (Images) monster.getComponentByType(Images.TYPE);
+//				ImageView iv = new ImageView(imageComp.image().getFXImage());
+//				iv.setFitWidth(100);
+//				iv.setFitHeight(100);
+//				iv.setOnMouseClicked(click -> setCurrentMonster(monster, new ImageView(imageComp.image().getFXImage())));
+//				monsterImages.getChildren().add(iv);
+//			}
+		}
+	}
+	
+	public void loadFromFile(SpriteMakerModel monster) {
+		if (isMonster(monster)) {
 			if (!monstersAlreadyInBox.contains(monster.getSpriteName())) {
 				monstersAlreadyInBox.add(monster.getSpriteName());
 				Images imageComp = (Images) monster.getComponentByType(Images.TYPE);
@@ -63,12 +82,12 @@ public class AllPossibleMonsters extends ScrollPane {
 	}
 	
 	private boolean isMonster(SpriteMakerModel possibleMonster) {
-		return (possibleMonster.getComponentByType(Images.TYPE) != null &&
-				possibleMonster.getComponentByType(Speed.TYPE) != null &&
-				possibleMonster.getComponentByType(Health.TYPE) != null &&
-				possibleMonster.getComponentByType(PathFollower.TYPE) != null &&
-				possibleMonster.getComponentByType(EventQueue.TYPE) != null &&
-				possibleMonster.getComponentByType(GameBus.TYPE) != null &&
-				possibleMonster.getComponentByType(SkillSet.TYPE) != null);
+		return (possibleMonster.getComponentByType(Images.TYPE) != null);// &&
+//				possibleMonster.getComponentByType(Speed.TYPE) != null &&
+//				possibleMonster.getComponentByType(Health.TYPE) != null &&
+//				possibleMonster.getComponentByType(PathFollower.TYPE) != null &&
+//				possibleMonster.getComponentByType(EventQueue.TYPE) != null &&
+//				possibleMonster.getComponentByType(GameBus.TYPE) != null &&
+//				possibleMonster.getComponentByType(SkillSet.TYPE) != null);
 	}
 }
