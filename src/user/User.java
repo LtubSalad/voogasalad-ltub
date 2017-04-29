@@ -17,6 +17,7 @@ public class User {
 	private Image image; 
 
 	private UserHistory history; 
+	private MessagingHistory messages;
 	
 	public User(String username, String imageFile) {
 		this.name = username; 
