@@ -60,13 +60,13 @@ public class SpriteDataPane extends ScrollPane{
 		}
 	}
 	
-	public void addComponent(Component component, boolean removable){
+	public <T extends Component> void addComponent(T component, boolean removable){
 		try{
-			ComponentSetter setter=new DefaultComponentSetter(component,developerData);
+			ComponentSetter<T> setter=new DefaultComponentSetter<T>(component,developerData);
 			if(!removable){
-				lister.addComponentView(new DefaultComponentSetter(component.getClass(),developerData));
+				lister.addComponentView(setter);
 			}else{
-				lister.addComponentView(lister.new RemovableComponentViewer(setter));
+				lister.addComponentView(lister.new RemovableComponentViewer<T>(setter));
 			}
 		}
 		catch(UnsupportedTypeException e){
