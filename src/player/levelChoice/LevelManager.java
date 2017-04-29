@@ -59,7 +59,7 @@ public class LevelManager {
 		
 		scene.getStylesheets().setAll("/styleSheets/login.css");
 		
-		HBox
+		//HBox
 
 		Button starting = new Button("Start A Game of Random Level");
 		

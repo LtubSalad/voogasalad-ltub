@@ -18,7 +18,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import player.gameChoice.GameManager;
 import player.levelChoice.LevelManager;
+import user.UsersModel;
 import utilities.PopUpMessage;
 
 
@@ -120,6 +122,8 @@ public class PasswordManager{
 				
 		tempCheckUser = txtUserName.getText().toString();
 		tempCheckPw = pf.getText().toString();
+		UsersModel usersModel = new UsersModel();
+		usersModel.addUser(tempCheckUser, tempCheckPw);
 		
 		writer.write(tempCheckUser, tempCheckPw);
 		p.show();
@@ -144,7 +148,8 @@ public class PasswordManager{
 			lblMessage.setTextFill(Color.GREEN);
 			primaryStage.hide();
 			LevelManager levelManager = new LevelManager(primaryStage);
-			levelManager.show();
+			//levelManager.show();
+			new GameManager(primaryStage);
 		}
 		else{
 			lblMessage.setText("Incorrect user or pw.");
