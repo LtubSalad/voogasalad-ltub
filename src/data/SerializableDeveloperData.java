@@ -10,6 +10,12 @@ import java.util.stream.Collectors;
 import gamecreation.level.LevelData;
 import javafx.collections.ObservableList;
 
+/**
+ * @author tahiaemran
+ *
+ *serializable version of developer data for saving authored game files 
+ *
+ */
 public class SerializableDeveloperData {
 	private Map<String, String> gameData; 
 	private List<SpriteMakerModel> mySprites; 
