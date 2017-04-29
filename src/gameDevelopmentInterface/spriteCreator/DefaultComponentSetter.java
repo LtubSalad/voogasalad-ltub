@@ -46,10 +46,12 @@ public class DefaultComponentSetter<T extends Component> extends ComponentSetter
 		Object[] currentFields=component.getParameters();
 		
 		for(int i=0;i<parameters.length;i++){
-			VariableSetter fieldSetter = (VariableSetter<U>) setterFactory.setterFromParameter(parameters[i]);
+			VariableSetter<U> fieldSetter = setterFactory.setterFromParameter(parameters[i]);
 			variableSetters.add(fieldSetter);
 			this.getChildren().add(fieldSetter);
 			fieldSetter.setField((U)currentFields[i]);
+			
+			//fieldSetter.setField(currentFields[i]);
 		}
 	}
 	

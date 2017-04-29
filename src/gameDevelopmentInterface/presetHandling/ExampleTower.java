@@ -1,5 +1,7 @@
 package gameDevelopmentInterface.presetHandling;
 
+import java.io.File;
+
 import data.SpriteMakerModel;
 import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Images;
@@ -17,10 +19,11 @@ public class ExampleTower extends SpriteMakerModel {
 	public void loadComponents(){
 		this.addComponent(new Owner("TowerTeam"));
 		this.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		//this.addComponent(new SoundEffect());
-		//this.addComponent(new Images());
+		this.addComponent(new SoundEffect(new File("sounds\\Dnpisd1.wav")));
+		this.addComponent(new Images("images\\Mario.jpg"));
 		this.addComponent(new Speed(20));
-		this.addComponent(new Attacker());		
+		this.addComponent(new Attacker());
+		
 	}
 	
 	

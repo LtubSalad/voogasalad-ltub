@@ -15,11 +15,14 @@ import javafx.scene.layout.HBox;
 public class SpriteCreationEnvironment extends BorderPane{
 	private TabPane creationScreens;
 	private DeveloperData developerData;
+	private final double MAX_WIDTH=1200;
+	private final double MAX_HEIGHT=700;
 	
 	public SpriteCreationEnvironment(DeveloperData data){
 		developerData=data;
 		instantiateTabs();
 		this.setBottom(new TabAdder());
+		this.setMaxSize(MAX_WIDTH,MAX_HEIGHT);
 	}
 	
 	private void instantiateTabs() {
@@ -49,6 +52,7 @@ public class SpriteCreationEnvironment extends BorderPane{
 				Tab spriteTab = new Tab(myResources.getString(CREATE_NEW_SPRITE),
 						new SpriteCreationScreen(developerData));
 				creationScreens.getTabs().add(spriteTab);
+				creationScreens.getSelectionModel().select(spriteTab);
 			});
 			Button presetTowerButton=new Button("Load Tower Preset");
 			presetTowerButton.setOnAction((clicked)->{
