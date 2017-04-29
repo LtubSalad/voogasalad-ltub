@@ -25,6 +25,7 @@ import newengine.managers.conditions.NoLivesCondition;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.skill.skills.BuildSkill;
+import newengine.skill.skills.FireProjectileSkill;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
@@ -95,5 +96,7 @@ public class App extends Application {
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
+
+
 
 }

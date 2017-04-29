@@ -19,6 +19,7 @@ public class Path {
 	
 	public Path() {
 		this("A Nameless Path");
+		makeDefaultPath();
 	}
 	
 	public Path(String name) {

@@ -3,16 +3,6 @@ package newengine.view.camera;
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import newengine.events.input.KeyEvent;
-import newengine.events.input.MouseEvent;
-import javafx.scene.Node;
 import newengine.events.camera.CameraEvent;
 
 
@@ -22,19 +12,11 @@ import newengine.events.camera.CameraEvent;
  *
  */
 public class Camera {
-	
-	public static final int WIDTH = 600;
-	public static final int HEIGHT = 500;
-	public static final int CANVAS_HEIGHT = 300;
-	public static final Paint BACKGROUND = Color.BISQUE;
 
 	private EventBus bus;
 	private double scaleFactor = 1;
 	private double translateX = 0;
 	private double translateY = 0;
-	private Scene scene;
-	private GamePoint gameP;
-	private ViewPoint viewP;
 	
 	public static final double MAX_FACTOR = 2.5;
 	public static final double MIN_FACTOR = 0.5;
@@ -43,13 +25,6 @@ public class Camera {
 
 	public Camera(EventBus bus){
 		this.bus = bus;
-	}
-	public Camera(EventBus bus, GamePoint gamePoint, ViewPoint viewPoint) {
-		this.bus = bus;
-		this.gameP = gamePoint;
-		this.viewP = viewPoint;
-		VBox root = new VBox();
-		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
 		initHandlers();
 	}
 	
@@ -98,38 +73,11 @@ public class Camera {
 
 	}
 	
-	/**
-	 * Convert a Point in the game to a Point on the view.
-	 * @param gamePoint a {@code GamePoint} instance
-	 * @return ViewPoint
-	 */
 	public ViewPoint gameToView(GamePoint gamePoint) {
-
-		return new ViewPoint(gamePoint.x() * scaleFactor + translateX, 
-				gamePoint.y() * scaleFactor + translateY);
+		return new ViewPoint(gamePoint.x() * scaleFactor + translateX, gamePoint.y() * scaleFactor + translateY);
 	}
-	
+
 	public double getScaleFactor() {
-		return scaleFactor;
+		return this.scaleFactor;
 	}
-	
-	public ViewPoint getViewPoint(){
-		return viewP;
-	}
-	
-	/**
-	 * @param viewPoint the chosen viewPoint
-	 * @param rationToZoom  the ration to zoom in or out according to the size to ratio
-	 * if ratio > 1, the result is "zoom in"; otherwise, it is "zoom out"
-	 */
-	//TODO : Zoom around the selection area by the mouse
-	public void zoom(ViewPoint viewPoint, double ratioToZoom){
-		
-	}
-	
-	public Scene getScene(){
-		
-		return scene;
-	}
-
 }
