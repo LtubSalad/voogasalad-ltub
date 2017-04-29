@@ -1,6 +1,6 @@
 package newengine.sprite.components;
 
-import java.util.ResourceBundle;
+
 
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
@@ -17,8 +17,8 @@ public class Images extends Component {
 //		this.imageSet = imageSet;
 //	}
 	
-	public Images(String filePath) {
-		this.imageFilePath = filePath;
+	public Images(String imageFilePath) {
+		this.imageFilePath = imageFilePath;
 	}
 //	
 	@ConstructorForDeveloper

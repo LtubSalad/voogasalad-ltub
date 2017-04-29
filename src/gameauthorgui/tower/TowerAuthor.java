@@ -9,7 +9,6 @@ import gameDevelopmentInterface.ScreenModelCreator;
 import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import gameauthorgui.DeveloperStep;
 import gameauthorgui.GameAuthor;
-import gameauthorgui.WelcomeScreen;
 import gamecreation.level.LevelCreationPane;
 
 /**
