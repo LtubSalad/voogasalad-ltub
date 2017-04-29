@@ -93,16 +93,7 @@ public class App extends Application {
 			//System.out.println(s.getComponent(SkillSet.TYPE).get().skills());
 		}
 		
-		SpriteMakerModel building = new SpriteMakerModel();
-		building.addComponent(new GameBus());
-		building.addComponent(new Images("images/skills/build.png"));	
-		building.addComponent(new PathFollower(new Path()));
-		building.addComponent(new Position(new GamePoint(200, 100), 0));
-		Map<SkillType<? extends Skill>, Skill> monsterMap = new HashMap<>();
-		monsterMap.put(MoveSkill.TYPE, new MoveSkill());
-		building.addComponent(new Speed(100));
-		building.addComponent(new Owner(player1));
-		building.addComponent(new SkillSet(monsterMap));		
+				
 		
 		Sprite spawner = new Sprite();
 		Map<SkillType<? extends Skill>, Skill> skillMap1 = new HashMap<>();
@@ -126,24 +117,29 @@ public class App extends Application {
 		spawner.addComponent(new EventQueue(new LinkedList<>()));
 		spawner.addComponent(new RangeShootingAI());
 		Queue<SpriteMakerModel> toAdd = new LinkedList<SpriteMakerModel>();
-		toAdd.add(building);
-		spawner.addComponent(new Spawner(toAdd, new Path(), 1.0));
+		//toAdd.add(building);
 		spawner.addComponent(new SkillSet(skillMap1));
 
+		SpriteMakerModel building = new SpriteMakerModel();
+		Map<SkillType<? extends Skill>, Skill> monsterMap = new HashMap<>();
+		monsterMap.put(MoveSkill.TYPE, new MoveSkill());
+		building.addComponent(new GameBus());
+		building.addComponent(new SkillSet(monsterMap));
+		building.addComponent(new Owner(player1));
+		building.addComponent(new Images("images/characters/bahamut_right.png"));
+		building.addComponent(new Speed(100));
+		building.addComponent(new Health(100));
+		building.addComponent(new EventQueue(new LinkedList<>()));
+		building.addComponent(new PathFollower(new Path()));
+		
 		
 		SpriteMakerModel child = new SpriteMakerModel();
 		Map<SkillType<? extends Skill>, Skill> childSkillMap = new HashMap<>();
 		child.addComponent(new GameBus());
 		child.addComponent(new SkillSet(childSkillMap));
 		child.addComponent(new Owner(player1));
-		child.addComponent(new Position(new GamePoint(300, 50), 0));
-		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		child.addComponent(new Images("images/skills/build.png"));
-		child.addComponent(new Speed(100));
-		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		child.addComponent(new Range(128));
-		child.addComponent(new Attacker());
+		child.addComponent(new Speed(500));
 		child.addComponent(new Health(100));
 		child.addComponent(new EventQueue(new LinkedList<>()));
 		child.addComponent(new PathFollower(new Path()));
@@ -151,8 +147,6 @@ public class App extends Application {
 		
 		
 		Sprite sprite2 = new Sprite();
-		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
-		ImageSet imageSet2 = new ImageSet(image2);
 		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
 		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
 		skillMap2.put(BuildSkill.TYPE, new BuildSkill(child));
@@ -164,20 +158,8 @@ public class App extends Application {
 		sprite2.addComponent(new SkillSet(skillMap2));
 		sprite2.addComponent(new Owner(player1));
 		sprite2.addComponent(new Position(new GamePoint(100, 100), 0));
-		//		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		sprite2.addComponent(new Images("images/characters/bahamut_right.png"));
-		sprite2.addComponent(new Speed(100));
-		sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		sprite2.addComponent(new EventQueue(new LinkedList<>()));
-		sprite2.addComponent(new Attacker());
-		Queue<SpriteMakerModel> toAdd2 = new LinkedList<SpriteMakerModel>();
-		for (int i=0; i < 10; i++) {
-			toAdd2.add(building);
-		}
-		sprite2.addComponent(new Spawner(toAdd2, new Path(), 1.0));
-		sprite2.addComponent(new Health(600));
-		//sprite2.addComponent(new PathFollower(new Path()));
+		
+		sprite2.addComponent(new Spawner(100, new Path(), 0.01));
 
 		
 		

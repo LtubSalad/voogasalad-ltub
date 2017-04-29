@@ -19,15 +19,10 @@ public class Spawner extends Component {
 	private boolean needToSpawn = true;
 	private GamePoint startingPosition;
 	
-	public Spawner(Queue<SpriteMakerModel> spritesToSpawn, Path pathSpritesFollow, double spawnBetweenTime) {
+	public Spawner(int spritesToSpawn, Path pathSpritesFollow, double spawnBetweenTime) {
 		secondsBetween = spawnBetweenTime;
-		totalNumber = spritesToSpawn.size();
+		totalNumber = spritesToSpawn;
 		startingPosition = pathSpritesFollow.getPath().peek();
-	}
-
-	public void afterAdded(){
-		//		sprite.emit(new QueueEvent(QueueEvent.ADD, new PeriodicEvent(5, 3.0, () -> sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(new GamePoint(10,20)))))));
-		//		sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
 	}
 
 	public void onUpdated(double dt) {

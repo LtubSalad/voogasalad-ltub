@@ -37,7 +37,14 @@ public class SpriteMakerModel {
 		myScriptMap=FXCollections.observableMap(handlers);
 		actualComponents = new ArrayList<Component>(); 
 		skills = new ArrayList<Skill>(); 
-		
+	}
+	
+	public void addName(String name) {
+		spriteName = name;
+	}
+	
+	public String getSpriteName() {
+		return spriteName;
 	}
 
 	
