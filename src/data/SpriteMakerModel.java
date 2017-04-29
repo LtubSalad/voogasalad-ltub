@@ -22,6 +22,7 @@ public class SpriteMakerModel {
 	private Map<ComponentType<?>,Component> myComponents;
 	private Map<BusEvent, String> myScriptMap;
 	private String spriteName;
+	private String spriteDescription;
 	
 	// Jake and Tahia's DO NOT TOUCH
 	private Map<String, List<String>> componentsForTransfer; 
@@ -46,6 +47,13 @@ public class SpriteMakerModel {
 		spriteName=name;
 	}
 
+	public String getDescription(){
+		return spriteDescription;
+	}
+	
+	public void setDescription(String description){
+		spriteDescription=description;
+	}
 	
 	public void addSkill(Skill skill){
 		skills.add(skill);
