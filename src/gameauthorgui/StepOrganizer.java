@@ -2,11 +2,17 @@ package gameauthorgui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class StepOrganizer extends VBox {
+	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
+	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
 	private List<DeveloperStep> steps;
 	private VBox stepHolder;
 	private int currentIndex;
@@ -17,7 +23,8 @@ public class StepOrganizer extends VBox {
 		super();
 		this.author = author;
 		this.steps = new ArrayList<DeveloperStep>();
-		createBasic();
+		this.setAlignment(Pos.CENTER);
+		createTitle();
 		currentIndex = 0;
 		nextIndex = 0;
 	}
@@ -29,8 +36,9 @@ public class StepOrganizer extends VBox {
 		currentIndex = nextIndex;
 	}
 
-	private void createBasic(){
-		Text stepTitle = new Text("Creation Steps");
+	private void createTitle(){
+		Text stepTitle = new Text(myResources.getString("CREATION_STEPS"));
+		stepTitle.setFont(new Font(20));
 		stepHolder = new VBox();
 		this.getChildren().addAll(stepTitle, stepHolder);
 	}

@@ -24,6 +24,8 @@ public class DeveloperData {
 	private ObservableList<Path> myPaths;
 	private ObservableList<SpriteMakerModel> mySprites;
 	private SpritesForScreenUse jakeSprites;
+	private String gameName;
+	private String gameIconFilePath;
 	
 	public DeveloperData() {
 		List<SpriteMakerModel> list=new ArrayList<SpriteMakerModel>();
@@ -79,4 +81,22 @@ public class DeveloperData {
 	public ObservableMap<String,String> getAllData() {
 		return myData;
 	}
+	
+	public void setGameName(String name){
+		this.gameName = name;
+	}
+	
+	public String getGameName(){
+		return gameName;
+	}
+	
+	public void setGameIcon(String filepath){
+		gameIconFilePath = filepath;
+	}
+	
+	public String getGameIcon(){
+		return gameIconFilePath;
+	}
+	
+	
 }
