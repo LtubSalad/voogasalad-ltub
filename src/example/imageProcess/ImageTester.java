@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  */
 
 public class ImageTester extends Application{
-	public static final String IMAGE_DIRECTORY = "resources/home.png";
+	public static final String IMAGE_DIRECTORY = "resources/bahamut_left.png";
 	public static void main(String[] args){
 		launch(args);
 		}
@@ -46,12 +46,12 @@ public class ImageTester extends Application{
 
              root.getChildren().addAll(r);
              
-             ImageToPolygon im = new ImageToPolygon(image);
-             Polygon pol = im.getPolygon();
-             pol.setLayoutX(100);
-             pol.setLayoutY(100);
-             pol.setFill(Color.RED);
-         root.getChildren().add(pol);
+            ImageToPolygon im = new ImageToPolygon(image);
+            Polygon pol = im.getPolygon();
+            pol.setLayoutX(100);
+            pol.setLayoutY(100);
+            pol.setFill(Color.RED);
+            root.getChildren().add(pol);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	}

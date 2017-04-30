@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import gameauthorgui.inputhelpers.ComboBoxParameterInput;
 import gameauthorgui.inputhelpers.StringParameterInput;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import newengine.managers.conditions.GoldMinimumCondition;
@@ -47,23 +49,9 @@ public class BasicLevelCreator extends LevelCreator{
 		
 		ComboBoxParameterInput winningCondition = new ComboBoxParameterInput(myResources.getString("winningCondition"), new ArrayList<String>(winningConditions.keySet()));
 		ComboBoxParameterInput losingCondition = new ComboBoxParameterInput(myResources.getString("losingCondition"), new ArrayList<String> (losingConditions.keySet()));
-//		winningCondition.getValueProperty().addListener(e -> {
-//			if(winningCondition.getValue().contains("(Input)")){
-//				winningCondition.appendTextInput();
-//			}
-//			else{
-//				winningCondition.removeTextInput();
-//				try {
-//					getData().setWinningCondition(winningConditions.get(winningCondition.getValue()).newInstance());
-//				} catch(Exception exc){
-//					//FIXME
-//					exc.printStackTrace();
-//					System.out.println("Not a valid condition");
-//				}
-//			}
-//		});
+		//winningCondition.getValueProperty().addListener(new ComboListener(winningCondition));
+		//losingCondition.getValueProperty().addListener(new ComboListener(losingCondition));
 		
-	
 		Button remove = new Button(myResources.getString("remove"));
 		remove.setOnAction(e -> super.remove(this));
 		
@@ -71,7 +59,35 @@ public class BasicLevelCreator extends LevelCreator{
 		this.setContent(content);
 	}
 	
-
-
-	
+//	private class ComboListener implements ChangeListener<String> {
+//		private ComboBoxParameterInput input;
+//		
+//		public ComboListener(ComboBoxParameterInput input){
+//			this.input = input;
+//		}
+//
+//		@Override
+//		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//			if(input.getValue().contains("(Input)")){
+//				input.appendTextInput();
+//				input.getDoneButton().setOnAction(e -> createCondition());
+//			}
+//			else{
+//				input.removeTextInput();
+//			}
+//		}
+//		
+//		private void createCondition(){
+//			try {
+//				getData().setWinningCondition(winningConditions.get(input.getValue()).newInstance());
+//			} catch(Exception exc){
+//				//FIXME
+//				exc.printStackTrace();
+//				System.out.println("Not a valid condition");
+//			}
+//		}
+//		
+//	
+//	}
+//	
 }

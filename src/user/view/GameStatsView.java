@@ -3,6 +3,8 @@ package user.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,12 +17,12 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import user.GameHistory;
 
-public class GameStatsView extends VBox {
-	VBox myStats; 
-	HBox myInteractiveElements; 
+public class GameStatsView extends VBox implements Observer {
+	private VBox myStats; 
+	private HBox myInteractiveElements; 
 	
-	String myName; 
-	GameHistory myHistory; 
+	private String myName; 
+	private GameHistory myHistory; 
 	
 	private final List<String> possibleRatings = Arrays.asList(new String[]{"1", "2", "3", "4", "5"});
 	
@@ -65,8 +67,6 @@ public class GameStatsView extends VBox {
 		
 	}
 	
-	
-	
 	private void makeStatsPane(Map<String, String> stats) {
 		myStats = new VBox(5);
 		for(String statName : stats.keySet()){
@@ -82,5 +82,19 @@ public class GameStatsView extends VBox {
 		myStats.getStylesheets().add("resources/socialStyle.css");
 		myStats.getStyleClass().add("statsbox");
 		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		GameHistory newHistory = (GameHistory) o; 
+		makeStatsPane(newHistory.getStats());
+		reconfigure();
+		//FIXME: FINISH ME FIRST
+
+	}
+
+	private void reconfigure() {
+		this.getChildren().clear();
+		configure(myName);
 	}
 }
