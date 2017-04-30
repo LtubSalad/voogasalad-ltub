@@ -132,27 +132,35 @@ public class App extends Application {
 		child.addComponent(new GameBus());
 		child.addComponent(new SkillSet(childSkillMap));
 		child.addComponent(new Owner(player1));
+		child.addComponent(new Position(new GamePoint(300, 50), 0));
+		//child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		child.addComponent(new Images("images/skills/build.png"));
-		child.addComponent(new Speed(500));
+		child.addComponent(new Speed(100));
+		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		child.addComponent(new Range(128));
+		child.addComponent(new Attacker());
 		child.addComponent(new Health(100));
 		child.addComponent(new EventQueue(new LinkedList<>()));
 		child.addComponent(new PathFollower(new Path()));
+
+
 
 		
 		
 		Sprite sprite2 = new Sprite();
 		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
-		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
+//		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
 		skillMap2.put(BuildSkill.TYPE, new BuildSkill(child));
-		FireProjectileSkill fireSkill2 = new FireProjectileSkill();
-		fireSkill2.setCooldown(3); // add cooldown to the fireProjectilSkill
-		sprite2.addComponent(new Cooldown());
-		skillMap2.put(FireProjectileSkill.TYPE, fireSkill2);
+//		FireProjectileSkill fireSkill2 = new FireProjectileSkill();
+//		fireSkill2.setCooldown(3); // add cooldown to the fireProjectilSkill
+//		sprite2.addComponent(new Cooldown());
+//		skillMap2.put(FireProjectileSkill.TYPE, fireSkill2);
+		sprite2.addComponent(new Images("images/characters/bahamut_right.png"));
 		sprite2.addComponent(new GameBus());
 		sprite2.addComponent(new SkillSet(skillMap2));
 		sprite2.addComponent(new Owner(player1));
 		sprite2.addComponent(new Position(new GamePoint(100, 100), 0));
-		
 		sprite2.addComponent(new Spawner(100, new Path(), 0.01));
 
 		
