@@ -1,5 +1,6 @@
 package gameDevelopmentInterface;
 
+import data.DeveloperData;
 import data.SpriteMakerModel;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -11,8 +12,10 @@ public class SaveSpawner extends HBox {
 	private Button saveSpawnerToData = new Button("Save Spawner to Data");
 	private SpawnerCreation mySpawnerCreation;
 	private MonsterAdder myMonsterAdder;
+	private DeveloperData myModel;
 	
-	public SaveSpawner(SpawnerCreation spawnCreation, MonsterAdder monsterAdder) {
+	public SaveSpawner(DeveloperData data, SpawnerCreation spawnCreation, MonsterAdder monsterAdder) {
+		myModel = data;
 		myMonsterAdder = monsterAdder;
 		mySpawnerCreation = spawnCreation;
 		makeButtons();
