@@ -11,12 +11,12 @@ import utilities.XStreamHandler;
 public class BackgroundSetter extends ScreenModelCreator {
 	private XStreamHandler xstream = new XStreamHandler();
 
-	public BackgroundSetter(DeveloperData data) {
-		super(data);
-		this.setTop(null);
-		this.setRight(new BackgroundButtonsPanel(this, data));
-		addTiles();
-	}
+	public BackgroundSetter(SpritesForScreenUse spriteModelsToDrag, GeneralDataCreator gdc, ScreenModelData screenData) {
+		super(new DeveloperData());
+//		super(spriteModelsToDrag, gdc, screenData);
+//		this.setTop(null);
+//		this.setRight(new BackgroundButtonsPanel(this));
+}
 	
 	private void addTiles() {
 		File defaultTileDirectory = new File("data/defaultTiles");
