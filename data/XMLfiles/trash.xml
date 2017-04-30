@@ -1,0 +1,54 @@
+<data.SerializableDeveloperData>
+  <gameData>
+    <entry>
+      <string>LEVEL_COMPLETION</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>GAME_ICON</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>NUM_LIVES</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>NUM_GOLD</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>BUILD_IN_GAME</string>
+      <string>false</string>
+    </entry>
+    <entry>
+      <string>GAME_NAME</string>
+      <string>oooh baby</string>
+    </entry>
+  </gameData>
+  <mySprites/>
+  <myLevels>
+    <gamecreation.level.SerializableLevelData>
+      <name>ooooh baby</name>
+      <winning class="newengine.managers.conditions.NoMonstersCondition"/>
+      <losing class="newengine.managers.conditions.NoLivesCondition"/>
+      <spawnTime>0.0</spawnTime>
+      <spawners/>
+    </gamecreation.level.SerializableLevelData>
+    <gamecreation.level.SerializableLevelData>
+      <name>Untitled Level</name>
+      <winning class="newengine.managers.conditions.NoMonstersCondition"/>
+      <losing class="newengine.managers.conditions.NoLivesCondition"/>
+      <spawnTime>0.0</spawnTime>
+      <spawners/>
+    </gamecreation.level.SerializableLevelData>
+  </myLevels>
+  <screenSprites>
+    <allPossibleScreenAttributes class="com.sun.javafx.collections.ObservableListWrapper">
+      <changeBuilder>
+        <list class="com.sun.javafx.collections.ObservableListWrapper" reference="../.."/>
+        <changeLock>0</changeLock>
+      </changeBuilder>
+      <backingList/>
+    </allPossibleScreenAttributes>
+  </screenSprites>
+</data.SerializableDeveloperData>
