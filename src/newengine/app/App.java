@@ -11,13 +11,12 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import bus.EventBus;
 import commons.point.GamePoint;
-import data.DeveloperData;
+import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
 import gameDevelopmentInterface.Path;
 import gamedata.AuthDataTranslator;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import main.Main;
 import newengine.events.GameInitializationEvent;
 import newengine.events.SpriteModelEvent;
 import newengine.events.conditions.SetEndConditionEvent;
@@ -53,10 +52,10 @@ import newengine.sprite.components.Speed;
 import utilities.XStreamHandler;
 
 public class App extends Application {
-	DeveloperData myData;
+	SerializableDeveloperData myData;
 	
-	public App(DeveloperData mainData) {
-		myData = mainData;
+	public App(SerializableDeveloperData tester) {
+		myData = tester;
 	}
 	
 

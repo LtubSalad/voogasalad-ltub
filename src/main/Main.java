@@ -1,5 +1,6 @@
 package main;
 
+import data.SerializableDeveloperData;
 import gameauthorgui.tower.TowerAuthor;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import newengine.app.App;
+import utilities.XStreamHandler;
 
 public class Main extends Application {
 	private static final String PLAY_A_GAME = "Play a game";
@@ -47,13 +49,13 @@ public class Main extends Application {
 		});
 		play_game = new Button(PLAY_A_GAME);
 		play_game.setOnAction(e -> {
-			// TODO: pop up file chooser + read in the game u wanna make + launch it 
+			XStreamHandler xstream = new XStreamHandler();
+			SerializableDeveloperData tester = (SerializableDeveloperData) xstream.getObjectFromFile();
 			
-			App runScreen = new App(currentTowerGUI.getData());
+			App runScreen = new App(tester);
 			try {
 				runScreen.start(ps);
 			} catch (Exception e1) {
-				//TODO remove this
 				e1.printStackTrace();
 			}
 		});
