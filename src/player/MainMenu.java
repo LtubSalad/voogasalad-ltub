@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import user.UsersModel;
 
 public class MainMenu {
+	
+	public static final String CSS_LOCATION = "/styleSheets/login.css";
 
 	private Stage primaryStage;
 	private UsersModel usersModel;
@@ -22,11 +24,22 @@ public class MainMenu {
 		this.usersModel = usersModel;
 		BorderPane root = new BorderPane();
 		VBox buttons = new VBox();
+		buttons.setId("vbox");
 		buttons.getChildren().addAll(playGame, authorGame, socialCenter);
+		
+		playGame.setMaxWidth(Double.MAX_VALUE);
+		authorGame.setMaxWidth(Double.MAX_VALUE);
+		socialCenter.setMaxWidth(Double.MAX_VALUE);
+		
+		
+		playGame.setId("main-button");
+		authorGame.setId("main-button");
+		socialCenter.setId("main-button");
 		root.setCenter(buttons);
 
 		initHandlers();
 		scene = new Scene(root, App.WIDTH, App.HEIGHT);
+		scene.getStylesheets().setAll(CSS_LOCATION);
 		primaryStage.setScene(scene);
 	}
 	
