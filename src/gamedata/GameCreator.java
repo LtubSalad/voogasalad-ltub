@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-
 import bus.EventBus;
 import commons.RunningMode;
 import data.DeveloperData;
@@ -36,6 +33,7 @@ import newengine.sprite.SpriteID;
 import newengine.sprite.components.GameBus;
 import newengine.sprite.components.SkillSet;
 import player.helpers.GameLoadException;
+import utilities.XStreamHandler;
 
 /**
  * Class that creates a game from an XML file of translated GameData
@@ -44,11 +42,7 @@ import player.helpers.GameLoadException;
  */
 public class GameCreator {
 
-	private XStream xstream;
-
-	public GameCreator() {
-		xstream = new XStream(new DomDriver());
-	}
+	public GameCreator() { }
 
 	private Sprite createTowerBuilder(Player player, List<SpriteMakerModel> availableTowers) {
 		Sprite towerBuilder = new Sprite(SpriteID.TOWER_BUILDER_ID);
@@ -70,7 +64,9 @@ public class GameCreator {
 		try {
 			Game game = new Game();
 
-			SerializableDeveloperData myData = (SerializableDeveloperData) xstream.fromXML(gameFile); 
+			
+			XStreamHandler xstreamHandler = new XStreamHandler();
+			SerializableDeveloperData myData = xstreamHandler.<SerializableDeveloperData>getObjectFromFile(gameFile);
 			// serializableDeveloperData?
 			
 			// sync the players authoring and game.
