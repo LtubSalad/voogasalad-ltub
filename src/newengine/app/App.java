@@ -123,19 +123,20 @@ public class App extends Application {
 		monster.addComponent(new Cooldown());
 //		skillMap2.put(FireProjectileSkill.TYPE, fireSkill2);
 		monster.addComponent(new GameBus());
+		monster.addComponent(new EventQueue(new LinkedList<>()));
 		monster.addComponent(new SkillSet(skillMap2));
 		monster.addComponent(new Owner(player2));
+		monster.addComponent(new PathFollower(new Path()));
 		monster.addComponent(new Position(new GamePoint(100, 100), 0));
 		monster.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		monster.addComponent(new Images("images/characters/bahamut_right.png"));
 		monster.addComponent(new Speed(100));
 		monster.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		monster.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		monster.addComponent(new EventQueue(new LinkedList<>()));
 //		sprite2.addComponent(new Attacker(25));
 //		sprite2.addComponent(new Spawner());
 		monster.addComponent(new Health(600));
-		monster.addComponent(new PathFollower(new Path()));
+		
 
 
 		SpriteMakerModel building = new SpriteMakerModel();
@@ -169,6 +170,8 @@ public class App extends Application {
 //		sprite2.addComponent(new Position(new GamePoint(100, 100), 0));
 //		
 //		sprite2.addComponent(new Spawner(100, new Path(), 0.01));
+//		sprite2.addComponent(new Spawner(10, new Path(), 0.1));
+
 
 		
 		

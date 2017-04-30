@@ -5,12 +5,25 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>images/characters/Snow.jpg</imageFilePath>
+        <imageFilePath>resources/health.jpg</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
   </myComponents>
-  <myScriptMap/>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName></spriteName>
+  <spriteDescription></spriteDescription>
   <actualComponents>
+    <newengine.sprite.components.Images>
+      <imageFilePath>resources/health.jpg</imageFilePath>
+    </newengine.sprite.components.Images>
+    <newengine.sprite.components.Images>
+      <imageFilePath>resources/health.jpg</imageFilePath>
+    </newengine.sprite.components.Images>
     <newengine.sprite.components.Images reference="../../myComponents/entry/newengine.sprite.components.Images"/>
   </actualComponents>
   <skills/>
