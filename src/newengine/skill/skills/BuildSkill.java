@@ -8,7 +8,6 @@ import data.SpriteMakerModel;
 import gamedata.AuthDataTranslator;
 import newengine.events.SpriteModelEvent;
 import newengine.events.skill.CheckCostAndBuildEvent;
-import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.stats.ChangeWealthEvent;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
@@ -26,41 +25,48 @@ public class BuildSkill extends Skill {
 
 	public static final SkillType<BuildSkill> TYPE = new SkillType<>(BuildSkill.class.getName());
 	//private Sprite spriteToCreate;
-	private SpriteMakerModel mySpriteModel;
+	private SpriteMakerModel mySpriteMakerModel;
 
-
-	public BuildSkill(SpriteMakerModel spriteModel) {
-		this.mySpriteModel = spriteModel;
-		if (spriteModel.getComponentByType(Images.TYPE) != null) {
-			Images imageComponent = (Images) spriteModel.getComponentByType(Images.TYPE);
+	private SkillType<BuildSkill> skillType;
+	
+	
+	public BuildSkill(SpriteMakerModel spriteMakerModel) {
+		this(spriteMakerModel, TYPE);
+	}
+	
+	public BuildSkill(SpriteMakerModel spriteMakerModel, SkillType<BuildSkill> skillType) {
+		this.mySpriteMakerModel = spriteMakerModel;
+		this.skillType = skillType;
+		if (spriteMakerModel.getComponentByType(Images.TYPE) != null) {
+			Images imageComponent = (Images) spriteMakerModel.getComponentByType(Images.TYPE);
 			this.icon = imageComponent.image();
 		}
 	}
-
-	
 	
 	public SpriteMakerModel getModel(){
-		return mySpriteModel;
+		return mySpriteMakerModel;
 	}
 	
 	public void setModel(SpriteMakerModel model){
-		this.mySpriteModel=model;
+		this.mySpriteMakerModel = model;
 	}
 	
 	
 	@Override
 	public void trigger() {
-		AuthDataTranslator translator = new AuthDataTranslator(mySpriteModel);
+		AuthDataTranslator translator = new AuthDataTranslator(mySpriteMakerModel);
 		Sprite spriteToCreate = translator.getSprite();
+		Player player = getSource().get().getComponent(Owner.TYPE).get().player();
 		if (spriteToCreate.getComponent(Cost.TYPE).isPresent()) {
 			int cost = spriteToCreate.getComponent(Cost.TYPE).get().getCost();
-			Player player = getSource().get().getComponent(Owner.TYPE).get().player();
 			getSource().get().getComponent(GameBus.TYPE).ifPresent((gameBusComponent) -> {
 				gameBusComponent.getGameBus().emit(
 						new CheckCostAndBuildEvent(cost, player, () -> {
 							buildSprite(spriteToCreate, player, cost);
 						}));
 			});
+		} else {
+			buildSprite(spriteToCreate, player, 0); // cost 0
 		}
 	}
 	
@@ -82,7 +88,7 @@ public class BuildSkill extends Skill {
 
 	@Override
 	public SkillType<? extends Skill> getType() {
-		return TYPE;
+		return skillType;
 	}
 
 }
