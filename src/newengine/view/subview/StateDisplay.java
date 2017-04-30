@@ -2,6 +2,7 @@ package newengine.view.subview;
 
 import javafx.scene.layout.VBox;
 import newengine.skill.skills.BuildSkill;
+import newengine.skill.skills.FireProjectileSkill;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Attacker;
 import newengine.sprite.components.DamageStrength;
@@ -34,8 +35,8 @@ public class StateDisplay {
 		this.sprite = sprite;
 		box.getChildren().clear();
 		sprite.getComponent(SkillSet.TYPE).ifPresent((skillSet) -> {
-			if (skillSet.getSkill(BuildSkill.TYPE) != null) {
-			makeSingleStat("Cooldown time", skillSet.getSkill(BuildSkill.TYPE).getCooldown(), sprite);
+			if (skillSet.getSkill(FireProjectileSkill.TYPE) != null) {
+			makeSingleStat("Cooldown time", skillSet.getSkill(FireProjectileSkill.TYPE).getCooldown(), sprite);
 			}
 		});
 		sprite.getComponent(Attacker.TYPE).ifPresent((attacker) -> {

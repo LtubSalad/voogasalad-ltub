@@ -8,7 +8,6 @@ import java.util.Optional;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import bus.BasicEventBus;
 import bus.BusEvent;
@@ -45,6 +44,10 @@ public class Sprite {
 		spriteID = IDGenerator.generateID();
 	}
 
+	public Sprite(SpriteID spriteID) {
+		this.spriteID = spriteID;
+	}
+	
 	public EventBus getSpriteBus() {
 		return spriteBus;
 	}

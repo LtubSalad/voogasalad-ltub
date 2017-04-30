@@ -7,18 +7,12 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import bus.EventBus;
-import data.DeveloperData;
+import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
-import gamecreation.level.LevelData;
-import javafx.collections.ObservableList;
+import gamecreation.level.ILevelData;
 import newengine.app.Game;
 import newengine.events.SpriteModelEvent;
-import newengine.events.player.MainPlayerEvent;
-import newengine.events.stats.ChangeLivesEvent;
-import newengine.events.stats.ChangeWealthEvent;
-import newengine.model.PlayerStatsModel.WealthType;
 import newengine.sprite.Sprite;
-import newengine.sprite.components.Owner;
 import utilities.XStreamHandler;
 
 /**
@@ -58,13 +52,14 @@ public class GameCreator {
 
 	private void createGame() {
 		// Read out the game 
-		DeveloperData gameData = (DeveloperData) xstream.fromXML(fileToRead);
+		SerializableDeveloperData gameData = (SerializableDeveloperData) xstream.fromXML(fileToRead);
 	
 		//Process Levels
-		ObservableList<LevelData> levels = gameData.getLevelData();
+		List<ILevelData> levels = gameData.getLevels();
 		
 		//Process Sprites 
-		List<SpriteMakerModel> initialSpriteModels = gameData.getSprites();
+		List<SpriteMakerModel> initialSpriteModels =  gameData.getSprites();
+		System.out.println(initialSpriteModels);
 		TranslationController translator = new TranslationController(initialSpriteModels); 
 		translator.translate();
 		List<Sprite> createdSprites = (List<Sprite>) translator.getTranslated();  

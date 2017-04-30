@@ -19,7 +19,6 @@ public class Selectable extends Component {
 	}
 	
 	public SelectionBoundType boundType() {
-		
 		return boundType;
 	}
 	

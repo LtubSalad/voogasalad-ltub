@@ -6,11 +6,17 @@ import java.util.Optional;
 
 import bus.EventBus;
 import javafx.collections.FXCollections;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import newengine.events.skill.CheckCostAndBuildEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeScoreEvent;
 import newengine.events.stats.ChangeWealthEvent;
+import newengine.events.stats.InsufficientGoldEvent;
 import newengine.player.Player;
 
 public class PlayerStatsModel {
@@ -41,13 +47,53 @@ public class PlayerStatsModel {
 				bus.emit(new SoundEvent(SoundEvent.SOUND_EFFECT, "data/sounds/alert_sound.mp3"));
 			}
 		});
+		bus.on(InsufficientGoldEvent.CHECK, e -> {
+			Player player = e.getPlayer();
+			WealthType type = e.getType();
+			System.out.println("insufficient gold event handled");
+
+			if (wealth.containsKey(player)) {
+				Map<WealthType, Integer> wealths = wealth.get(player);
+				if (wealths.containsKey(type)) {
+					if (wealths.get(type) <= 0){
+						System.out.println("insufficient gold warning popup");
+						Stage warning = new Stage();
+						VBox root = new VBox();
+						Scene scene = new Scene(root);
+						Text  text = new Text("You don't have enough gold for this update. Sorry!");
+						Button close = new Button("close");
+						close.setOnAction(f -> {
+							warning.close();
+						});
+						root.getChildren().addAll(text, close);
+						warning.setScene(scene);
+						warning.show();
+					}
+				}
+			}
+		});
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
-			System.out.println("change wealth!!");
 			Player player = e.getPlayer();
 			WealthType type = e.getWealthType();
 			if (wealth.containsKey(player)) {
 				Map<WealthType, Integer> wealths = wealth.get(player);
 				if (wealths.containsKey(type)) {
+					if (wealths.get(type) <= 0 || wealths.get(type) < Math.abs(e.getAmountChanged())){
+						System.out.println("insufficient gold warning popup");
+						bus.emit(new InsufficientGoldEvent(InsufficientGoldEvent.ANY));
+						Stage warning = new Stage();
+						VBox root = new VBox();
+						Scene scene = new Scene(root);
+						Text  text = new Text("You don't have enough gold for this update. Sorry!");
+						Button close = new Button("close");
+						close.setOnAction(f -> {
+							warning.close();
+						});
+						root.getChildren().addAll(text, close);
+						warning.setScene(scene);
+						warning.show();
+						return;
+					}
 					wealths.put(type, wealths.get(type) + e.getAmountChanged());
 				}
 				else {

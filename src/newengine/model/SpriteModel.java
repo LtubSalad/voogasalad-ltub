@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import bus.BusEvent;
 import bus.EventBus;
 import newengine.events.SpriteModelEvent;
+import newengine.events.selection.SelectSpriteEvent;
 import newengine.events.sprite.SetGameBusEvent;
 import newengine.events.trigger.SpriteTriggerActionEvent;
 import newengine.events.trigger.SpriteTriggerRegisterEvent;
@@ -59,6 +60,11 @@ public class SpriteModel {
 		bus.on(SpriteTriggerActionEvent.SPECIFIC, (e) -> {
 			getByID(e.getSpriteID()).ifPresent((sprite) -> {
 				sprite.emit(e.getEvent());
+			});
+		});
+		bus.on(SelectSpriteEvent.SINGLE_BY_ID, (e) -> {
+			getByID(e.getSpriteID()).ifPresent((sprite) -> {
+				bus.emit(new SelectSpriteEvent(SelectSpriteEvent.SINGLE, sprite));
 			});
 		});
 	}

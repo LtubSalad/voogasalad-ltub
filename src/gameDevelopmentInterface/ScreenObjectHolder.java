@@ -73,7 +73,7 @@ public class ScreenObjectHolder extends HBox {
 			@Override
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
 				myScreenModel.getPossibleSprites().forEach(spriteMakerModel -> {
-					Map<ComponentType<?>, Component> screenObjectComponents = spriteMakerModel.getComponents();
+					Map<ComponentType<?>, Component> screenObjectComponents = spriteMakerModel.getDeprecatedComponents();
 					for (Component c : screenObjectComponents.values()) {
 						ComponentType<?> type = c.getType();
 						if (type.equals(Images.TYPE)) {
@@ -205,7 +205,7 @@ public class ScreenObjectHolder extends HBox {
 	 *            the sprite to add to the HBox
 	 */
 	public void addObject(SpriteMakerModel screenObject) {
-		for (Component c : screenObject.getComponents().values()) {
+		for (Component c : screenObject.getDeprecatedComponents().values()) {
 			ComponentType<?> type = c.getType();
 			if (type.equals(Images.TYPE)) {
 				Images imageComponent = (Images) c;

@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.UpgradeEvent;
 import newengine.events.stats.ChangeWealthEvent;
+import newengine.events.stats.InsufficientGoldEvent;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.GameBus;
@@ -16,17 +17,28 @@ import newengine.sprite.components.Health;
 import newengine.sprite.components.Owner;
 
 public class UpgradeBtn extends Button{
-	
+
 	private VBox box;
 	private Sprite sprite;
 	private Button button;
-	
+	private boolean canUpdate = true;
+
 	public UpgradeBtn(){
 		box = new VBox();
 		button = new Button("UPGRADE THIS SPRITE :)");
+		//initHandlers();
+	}
+
+	private void initHandlers() {
+		sprite.getComponent(GameBus.TYPE).get().getGameBus().on(InsufficientGoldEvent.ANY, e -> {
+			canUpdate = false;
+		});
 	}
 	
 	public void render(Sprite sprite) {
+		sprite.getComponent(GameBus.TYPE).get().getGameBus().on(InsufficientGoldEvent.ANY, e -> {
+			canUpdate = false;
+		});
 		box.getChildren().clear();
 		this.sprite = sprite;
 		button.setMinHeight(25);
@@ -35,16 +47,18 @@ public class UpgradeBtn extends Button{
 			Stage msgStage = new Stage();
 			VBox root = new VBox();
 			Scene scene = new Scene(root);
-			Text  text = new Text("Are you sure you want to upgrade this sprite? It will cost you 25 gold.");
+			Text  text = new Text("Are you sure you want to upgrade this sprite? It will cost you 55 gold.");
 			HBox options = new HBox();
 			Button yes = new Button ("yes");
 			yes.setOnAction(f -> {
 				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new ChangeWealthEvent
-						(ChangeWealthEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), WealthType.GOLD, -25));
-				sprite.getComponent(Health.TYPE).ifPresent((health) -> {
-					sprite.emit(new UpgradeEvent(UpgradeEvent.RESET, sprite, sprite.getComponent(Health.TYPE).get().getInitHealth()));
-				});
-				sprite.emit(new UpgradeEvent(UpgradeEvent.DOUBLE, sprite));
+						(ChangeWealthEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), WealthType.GOLD, -55, canUpdate));
+				if (canUpdate) {
+					sprite.getComponent(Health.TYPE).ifPresent((health) -> {
+						sprite.emit(new UpgradeEvent(UpgradeEvent.RESET, sprite, sprite.getComponent(Health.TYPE).get().getInitHealth()));
+					});
+					sprite.emit(new UpgradeEvent(UpgradeEvent.DOUBLE, sprite));
+				}
 				msgStage.close();
 			});
 			Button no = new Button("no");
@@ -56,17 +70,17 @@ public class UpgradeBtn extends Button{
 			msgStage.setScene(scene);
 			msgStage.show();
 		});
-		
+
 		box.getChildren().add(button);
 	}
-	
+
 	public VBox getBox(){
 		return box;
 	}
-	
+
 	public Button getButton(){
 		return button;
 	}
-	
+
 
 }
