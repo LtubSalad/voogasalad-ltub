@@ -112,7 +112,7 @@ public class EventHandlerPane extends ScrollPane {
 						methods.add(methodToString(method));
 					}
 				}
-				mySprite.getComponents().forEach((type, component) -> {
+				mySprite.getDeprecatedComponents().forEach((type, component) -> {
 					Class<?> clazz = component.getClass();
 					for (Method method : clazz.getDeclaredMethods()) {
 						if(method.isAnnotationPresent(DeveloperMethod.class)){
