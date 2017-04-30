@@ -8,6 +8,9 @@ import java.util.Observer;
 import data.SpriteMakerModel;
 import javafx.beans.property.StringProperty;
 import newengine.managers.conditions.Condition;
+import newengine.managers.conditions.NoLivesCondition;
+import newengine.managers.conditions.NoMonstersCondition;
+
 
 
 public class LevelData extends Observable implements ILevelData {

@@ -41,6 +41,17 @@ public class SpriteDataPane extends ScrollPane{
 		}
 	}
 	
+//	public SpriteDataPane(SpriteMakerModel spriteData, DeveloperData developerData, boolean removableComponents){
+//		this.developerData=developerData;
+//		myPane=new VBox();
+//		this.spriteData=new SpriteMakerModel();
+//		descriptor=new SpriteDescriptor();
+//		lister=new ComponentLister();
+//		myPane.getChildren().addAll(descriptor,lister);
+//		this.setContent(myPane);
+//		this.setPrefWidth(PREF_WIDTH);
+//	}
+	
 	private void instantiate(SpriteMakerModel spriteData, DeveloperData developerData){
 		this.developerData=developerData;
 		myPane=new VBox();
@@ -52,6 +63,7 @@ public class SpriteDataPane extends ScrollPane{
 		myPane.getChildren().addAll(descriptor,lister);
 		this.setContent(myPane);
 		this.setPrefWidth(PREF_WIDTH);
+		
 	}
 	
 	private void updateLister(SpriteMakerModel sprite){

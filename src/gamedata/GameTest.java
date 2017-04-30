@@ -1,6 +1,9 @@
 package gamedata;
 
+import java.io.File;
+
 import javafx.application.Application;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import newengine.app.Game;
 
@@ -12,6 +15,7 @@ public class GameTest extends Application {
 		// make a file chooser?
 		// create game from file 
 		
+
 		String filepath = "data/XMLfiles/trash.xml";
 		GameCreator creator = new GameCreator();
 		Game game = creator.createGame(filepath);

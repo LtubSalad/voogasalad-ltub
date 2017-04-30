@@ -49,5 +49,11 @@ public class BackgroundButtonsPanel extends TowerSetButtonsPanel {
 		myNumColsInput.setMaxHeight(MAX_HEIGHT);
 		myNumColsInput.setMaxWidth(MAX_WIDTH);
 
+		sendNumRows = new Button(myResources.getString(SET_NUMBER_OF_ROWS));
+		sendNumCols = new Button(myResources.getString(SET_NUMBER_OF_COLUMNS));
+//		sendNumRows.setOnAction(e -> mySMC.getScreen().setNumRows(Integer.parseInt(myNumRowsInput.getText())));
+//		sendNumCols.setOnAction(e -> mySMC.getScreen().setNumCols(Integer.parseInt(myNumColsInput.getText())));
+//		rowsBox.getChildren().addAll(myNumRowsInput, sendNumRows);
+		colsBox.getChildren().addAll(myNumColsInput, sendNumCols);
 	}
 }

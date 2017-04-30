@@ -42,6 +42,7 @@ public class SerializableDeveloperData {
 		mySprites = data.stream().collect(Collectors.toList());
 	}
 
+
 	private void configData(ObservableMap<String, String> dataToTranslate) {
 		gameData = new HashMap<String, String>();	
 		for (String dataName: dataToTranslate.keySet()){
