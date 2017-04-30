@@ -5,17 +5,19 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import bus.EventBus;
 import commons.point.GamePoint;
+import data.DeveloperData;
 import data.SpriteMakerModel;
 import gameDevelopmentInterface.Path;
+import gamedata.AuthDataTranslator;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import main.Main;
 import newengine.events.GameInitializationEvent;
 import newengine.events.SpriteModelEvent;
 import newengine.events.conditions.SetEndConditionEvent;
@@ -31,13 +33,10 @@ import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.BuildSkill;
-import newengine.skill.skills.FireProjectileSkill;
-import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
-import newengine.sprite.components.Cooldown;
 import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Health;
@@ -46,16 +45,20 @@ import newengine.sprite.components.Owner;
 import newengine.sprite.components.PathFollower;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
-import newengine.sprite.components.RangeShootingAI;
 import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
 import newengine.sprite.components.SkillSet;
-import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
 import utilities.XStreamHandler;
 
 public class App extends Application {
+	DeveloperData myData;
+	
+	public App(DeveloperData mainData) {
+		myData = mainData;
+	}
+	
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -66,10 +69,19 @@ public class App extends Application {
 		XStreamHandler xHandler = new XStreamHandler();
 		XStream xStream = new XStream(new DomDriver());
 		
-		List<Sprite> listSprites = new ArrayList<Sprite>();// = translator.getSprites();
+		//List<SpriteMakerModel> listSpriteModels = myData.getLevelData().get(0).getSpawners();
+		
+		SpriteCreator jakeTestCreator = new SpriteCreator();
+		List<SpriteMakerModel> listSpriteModels = jakeTestCreator.getSprites();// = translator.getSprites();
+		List<Sprite> listSprites = new ArrayList<>();
+		for (SpriteMakerModel smm : listSpriteModels) {
+			AuthDataTranslator translator = new AuthDataTranslator(smm);
+			listSprites.add(translator.getSprite());
+		}
 
 		Game game = new Game();
 		EventBus bus = game.getBus();
+		
 		
 		
 		SpriteMakerModel child = new SpriteMakerModel();
@@ -102,7 +114,7 @@ public class App extends Application {
 
 		
 		
-		listSprites.add(sprite2);
+		//listSprites.add(sprite2);
 		
 		
 		bus.on(GameInitializationEvent.ANY, (e) -> {

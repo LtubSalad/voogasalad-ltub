@@ -1,12 +1,14 @@
 package main;
 
+import data.DeveloperData;
+import gameauthorgui.tower.TowerAuthor;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import gameDevelopmentInterface.MasterDeveloperInterface;
+import newengine.app.App;
 
 public class Main extends Application {
 	private static final String PLAY_A_GAME = "Play a game";
@@ -19,6 +21,7 @@ public class Main extends Application {
 	private Button play_game;
 	private VBox root = new VBox();
 	private Scene scene = new Scene(root);
+	private TowerAuthor currentTowerGUI = new TowerAuthor();
 
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle(HOME_SCREEN);
@@ -30,15 +33,26 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 	
+	
 	private void makeButtons(Stage ps) {
 		create_game = new Button(CREATE_A_GAME);
 		create_game.setOnAction(e -> {
-			MasterDeveloperInterface myDeveloperGUI = new MasterDeveloperInterface();
-			ps.setScene(myDeveloperGUI.getScene());
+			currentTowerGUI = new TowerAuthor();
+			Stage createGameStage = new Stage();
+			createGameStage.setScene(currentTowerGUI.getScene());
+			createGameStage.setFullScreen(true);
+			createGameStage.show();
 		});
 		play_game = new Button(PLAY_A_GAME);
 		play_game.setOnAction(e -> {
 			// TODO: pop up file chooser + read in the game u wanna make + launch it 
+			App runScreen = new App(currentTowerGUI.getData());
+			try {
+				runScreen.start(ps);
+			} catch (Exception e1) {
+				//TODO remove this
+				e1.printStackTrace();
+			}
 		});
 	}
 

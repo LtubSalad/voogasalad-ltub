@@ -44,14 +44,18 @@ public class TowerAuthor extends GameAuthor {
 		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense", myModelData)));
 		addStep(new DeveloperStep("Level Options",
 				new LevelCreationPane(myModelData, getScene().getHeight() - CENTER_OFFSETS)));
-		addStep(new DeveloperStep(SET_THE_BACKGROUND,
-				new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+//		addStep(new DeveloperStep(SET_THE_BACKGROUND,
+//				new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
 		addStep(new DeveloperStep("Sprite creation", new SpriteCreationScreen(myModelData)));
 		addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData, myScreenModelData)));
 		addStep(new DeveloperStep("Spawner creation", new SpawnerCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
-		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
-				new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+//		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
+//				new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+	}
+	
+	public DeveloperData getData() {
+		return myModelData;
 	}
 
 }
