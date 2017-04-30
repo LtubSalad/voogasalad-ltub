@@ -70,15 +70,19 @@ public class View {
 	public View(EventBus bus, Camera camera) {		
 		this.bus = bus;
 		this.camera = camera;
+		initNodes();
+		initHandlers();
+	}
+	
+	private void initNodes() {
 		VBox root = new VBox();
 		scene = new Scene(root, width, height, BACKGROUND);
 		root.getChildren().addAll(
 				statsPanel, gameWorldCanvas, bottomPane);
 		skillBox = new SkillBox(this.bus);
 		bottomPane.getChildren().addAll(
-				selectionCanvas, skillBox.getBox());
+				selectionCanvas, (new TowersButton(bus)).getNode(), skillBox.getBox());
 		
-		initHandlers();
 	}
 	
 	private void initHandlers() {
@@ -152,13 +156,15 @@ public class View {
 				continue;
 			}
 			GamePoint spritePos = sprite.getComponent(Position.TYPE).get().pos();
-			LtubImage image = sprite.getComponent(Images.TYPE).get().image();
-			GamePoint gamePos = new GamePoint(spritePos.x() - image.getImagePivot().x(), 
-					spritePos.y() - image.getImagePivot().y());
-			ViewPoint viewPos = camera.gameToView(gamePos);
-			gc.drawImage(image.getFXImage(), viewPos.x(), viewPos.y(), 
-					image.getFXImage().getWidth() * camera.getScaleFactor(), 
-					image.getFXImage().getHeight() * camera.getScaleFactor());
+			sprite.getComponent(Images.TYPE).ifPresent((imagesComponent) -> {
+				LtubImage image = imagesComponent.image();
+				GamePoint gamePos = new GamePoint(spritePos.x() - image.getImagePivot().x(), 
+						spritePos.y() - image.getImagePivot().y());
+				ViewPoint viewPos = camera.gameToView(gamePos);
+				gc.drawImage(image.getFXImage(), viewPos.x(), viewPos.y(), 
+						image.getFXImage().getWidth() * camera.getScaleFactor(), 
+						image.getFXImage().getHeight() * camera.getScaleFactor());
+			});
 		}
 	}
 
