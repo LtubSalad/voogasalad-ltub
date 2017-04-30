@@ -39,7 +39,7 @@ public class GameCreator {
 			SerializableDeveloperData gameData = (SerializableDeveloperData) xstream.getObjectFromFile();//fromXML(gameFile);
 			System.out.println("Got game data");
 			//Process Levels
-			List<ILevelData> levels = gameData.getLevels();
+			List<ILevelData> levels = gameData.getLevelData();
 			System.out.println(levels.get(0).getName());
 			//Process Sprites 
 			List<SpriteMakerModel> initialSpriteModels =  gameData.getSprites();

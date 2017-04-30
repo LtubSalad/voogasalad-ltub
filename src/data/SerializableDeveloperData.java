@@ -56,7 +56,7 @@ public class SerializableDeveloperData {
 		return Collections.unmodifiableList(mySprites); 
 	}
 	
-	public List<ILevelData> getLevels(){
+	public List<ILevelData> getLevelData(){
 		return Collections.unmodifiableList(myLevels);
 	}
 	
