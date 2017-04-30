@@ -85,6 +85,7 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		
 		public SkillSelector(Class<T> skill){
 			super(skill, skill.getSimpleName());
+			clazz=skill;
 			checkbox=new CheckBox();
 			checkbox.setAllowIndeterminate(false);	
 			this.getChildren().add(checkbox);
@@ -101,6 +102,7 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		@Override
 		public T getValue() throws Exception {
 			if(isSelected()){
+				System.out.println(clazz.getSimpleName());
 				return clazz.newInstance();
 			}
 			return null;
@@ -127,7 +129,7 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		
 		@Override
 		public BuildSkill getValue(){
-			if(isSelected()){
+			if(isSelected()&&availableSprites.getValue()!=null){
 				return new BuildSkill(availableSprites.getValue());
 			}else{
 				return null;
