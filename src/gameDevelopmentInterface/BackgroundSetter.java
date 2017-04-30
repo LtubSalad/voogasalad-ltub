@@ -1,21 +1,21 @@
 package gameDevelopmentInterface;
 
 import java.io.File;
-import java.util.List;
 
+import data.DeveloperData;
 import data.ScreenModelData;
 import data.SpriteMakerModel;
 import data.SpritesForScreenUse;
-import newengine.sprite.components.Images;
 import utilities.XStreamHandler;
 
 public class BackgroundSetter extends ScreenModelCreator {
 	private XStreamHandler xstream = new XStreamHandler();
 
 	public BackgroundSetter(SpritesForScreenUse spriteModelsToDrag, GeneralDataCreator gdc, ScreenModelData screenData) {
-		super(spriteModelsToDrag, gdc, screenData);
-		this.setTop(null);
-		this.setRight(new BackgroundButtonsPanel(this));
+		super(new DeveloperData());
+//		super(spriteModelsToDrag, gdc, screenData);
+//		this.setTop(null);
+//		this.setRight(new BackgroundButtonsPanel(this));
 		addTiles();
 	}
 	
