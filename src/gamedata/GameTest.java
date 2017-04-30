@@ -1,6 +1,9 @@
 package gamedata;
 
+import java.io.File;
+
 import javafx.application.Application;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import newengine.app.Game;
 
@@ -11,10 +14,15 @@ public class GameTest extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// make a file chooser?
 		// create game from file 
-		String filepath = "data/XMLfiles/game_test.xml";
-		GameCreator creator = new GameCreator(filepath);
-		Game game = creator.getGame();
 		
+		String filepath = "src/MorningTest.xml";
+		FileChooser fileChooser = new FileChooser();
+		 fileChooser.setTitle("Open Resource File");
+		 File selectedFile = fileChooser.showOpenDialog(primaryStage);
+
+		GameCreator creator = new GameCreator();
+		Game game = creator.createGame(selectedFile);
+
 		primaryStage.setScene(game.getScene());
 		game.start();
 		

@@ -50,6 +50,7 @@ public class BuildSkill extends Skill {
 	
 	@Override
 	public void trigger() {
+		
 		AuthDataTranslator translator = new AuthDataTranslator(mySpriteModel);
 		Sprite spriteToCreate = translator.getSprite();
 		System.out.println("Build skill triggered");
