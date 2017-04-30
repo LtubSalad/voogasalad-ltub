@@ -2,6 +2,8 @@ package newengine.sprite.components;
 
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
+import newengine.events.sprite.StateChangeEvent;
+import newengine.events.sprite.UpgradeEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
@@ -9,7 +11,7 @@ public class Speed extends Component {
 	
 	public static final ComponentType<Speed> TYPE = new ComponentType<>(Speed.class.getName());
 	
-	private final double speed;
+	private double speed;
 	
 //	public Speed(double speed) {
 //		this.speed = speed;
@@ -21,7 +23,12 @@ public class Speed extends Component {
 	}
 	
 	@Override
-	public void afterAdded() { }
+	public void afterAdded() { 
+		sprite.on(UpgradeEvent.DOUBLE, e -> {
+			speed = speed*2;
+			sprite.emit(new StateChangeEvent(StateChangeEvent.SPEED, sprite, speed));
+		});
+	}
 	
 	public double speed() {
 		return speed;

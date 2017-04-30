@@ -9,6 +9,10 @@ import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.sprite.StateChangeEvent;
+import newengine.events.sprite.UpgradeEvent;
+import newengine.events.stats.ChangeWealthEvent;
+import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
@@ -18,11 +22,14 @@ import newengine.utils.Target;
 public class Health extends Component {
 
 	public static final ComponentType<Health> TYPE = new ComponentType<>(Health.class.getName());
+	private int initHealth;
 	private int health;
 
 	@ConstructorForDeveloper
 	public Health(@VariableName(name="health")int health){
+		this.initHealth = health;
 		this.health = health;
+		sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, sprite, health));
 	}
 	
 	@Override
@@ -34,20 +41,35 @@ public class Health extends Component {
 		return health;
 	}
 	
+	public int getInitHealth(){
+		return initHealth;
+	}
+	
 	@Override
 	public void afterAdded(){
-		sprite.on(ChangeHealthEvent.ANY,e -> {
-			changeHealth(e.getChange());
+		sprite.on(ChangeHealthEvent.ANY, e -> {
+			changeHealth(e.getValue());
 		});
-		sprite.on(MoveEvent.STOP,  (e) -> {
-			Sprite another = e.getSprite();
-			Player owner = sprite.getComponent(Owner.TYPE).get().player();
-			another.getComponent(Owner.TYPE).ifPresent((anotherOwner) -> {
-					if (owner != anotherOwner.player()) {
-						another.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
+		sprite.on(UpgradeEvent.RESET, e -> {
+			health = e.getValue();
+			sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, e.getSprite(), health));
+			System.out.println("health was upgraded and reset to " + e.getValue());
+		});
+		sprite.on(MoveEvent.STOP, (e) -> {
+			if (!e.getSprite().getComponent(Weapon.TYPE).isPresent()){
+				return;
+			}
+			if (!e.getTarget().getSprite().isPresent()){
+				return;
+			}
+			Sprite weapon = e.getSprite();
+			Sprite target = e.getTarget().getSprite().get();
+			weapon.getComponent(Owner.TYPE).ifPresent((weaponOwner) -> {
+					if (weaponOwner.player() != target.getComponent(Owner.TYPE).get().player()) {
+						weapon.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
 							int damage = damageStrength.getStrength();
 							sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, -damage));
-							System.out.println("decremented health");
+							System.out.println("health decremented");
 						});				
 					}
 				});	
@@ -58,7 +80,7 @@ public class Health extends Component {
 	@DeveloperMethod
 	private void changeHealth(int change) {
 		health += change;
-		System.out.println(health);
+		sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, sprite, health));
 		checkForDeath();
 	}
 	
@@ -68,6 +90,7 @@ public class Health extends Component {
 			spritesToRemove.add(sprite);
 			sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
 				gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spritesToRemove));
+				System.out.println("REMOVE SPRITE " + spritesToRemove);
 			});
 		}
 	}
