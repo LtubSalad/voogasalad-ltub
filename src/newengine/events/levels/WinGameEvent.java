@@ -1,4 +1,4 @@
-package newengine.managers.levels;
+package newengine.events.levels;
 
 import bus.BusEvent;
 import bus.BusEventType;
