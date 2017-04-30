@@ -24,7 +24,6 @@ public class Range extends Component {
 	@ConstructorForDeveloper
 	public Range(@VariableName(name = "range") double range) {
 		this.range = range;
-		sprite.emit(new StateChangeEvent(StateChangeEvent.RANGE, sprite, range));
 	}
 	
 	public double range() {

@@ -1,6 +1,7 @@
 package newengine.sprite;
 
 public class SpriteID {
+	public static final SpriteID TOWER_BUILDER_ID = new SpriteID("__TOWER_BUILDER");
 
 	private String idString;
 
