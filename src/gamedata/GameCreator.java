@@ -35,10 +35,12 @@ public class GameCreator {
 	}
 	public Game createGame(File gameFile) throws GameLoadException {
 		try {
+
 			// Read out the game 
 			SerializableDeveloperData gameData = (SerializableDeveloperData) xstream.fromXML(gameFile);
 			//Process Levels
 			List<ILevelData> levels = gameData.getLevels();
+			System.out.println(levels.get(0).getName());
 			//Process Sprites 
 			List<SpriteMakerModel> initialSpriteModels =  gameData.getSprites();
 			System.out.println(initialSpriteModels);

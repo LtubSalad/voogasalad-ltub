@@ -161,7 +161,8 @@ public class App extends Application {
 		sprite2.addComponent(new Owner(player1));
 		sprite2.addComponent(new Position(new GamePoint(100, 100), 0));
 		
-		sprite2.addComponent(new Spawner(100, new Path(), 0.01));
+		sprite2.addComponent(new Spawner(10, new Path(), 0.1));
+
 
 		
 		
