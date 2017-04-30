@@ -29,6 +29,8 @@ public class LtubImage {
 			image = new Image(getInputStream());
 		} catch (NullPointerException e) {
 			if (RunningMode.DEV_MODE) {
+				System.out.println("DEV MODE stacktrace");
+				System.out.println(this.filename);
 				e.printStackTrace();
 			}
 		}
@@ -67,7 +69,6 @@ public class LtubImage {
 		}
 	}
 	public InputStream getInputStream() {
-		System.out.println(filename);
 		return getClass().getClassLoader().getResourceAsStream(filename);
 	}
 	
