@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import user.serializabledata.SerializableUserModel;
 import user.view.UserSocialPage;
@@ -30,7 +31,7 @@ public class UsersModel {
 	private List<String> passwordVerify; 
 	//TODO: finish this 
 	private User currentUser; 
-	private UserSocialPage page; 
+	private UserSocialPage currentUserPage; 
 	// when they save a game, add it to their game history 
 	// when they play a game, add it to their game played history 
 
@@ -60,7 +61,20 @@ public class UsersModel {
 
 		// user directory stuff 
 	}
+	
+	public void setCurrentUser(String username) {
+		this.currentUser = usernameToData.getOrDefault(username, 
+				new User(username, "resources/maple.jpg", new MessagingHandler()));
+		this.currentUserPage = new UserSocialPage(currentUser);
+	}
 
+	public User getCurrentUser() {
+		return this.currentUser;
+	}
+	
+	public Scene getUserSocialPage() {
+		return new Scene(this.currentUserPage);
+	}
 
 	public void verifyUser(String username, String usernameandpassword){
 		if (passwordVerify.contains(usernameandpassword)){
@@ -90,7 +104,7 @@ public class UsersModel {
 	}
 	
 	public BorderPane getSocialView(){
-		return page; 
+		return currentUserPage; 
 	}
 
 }
