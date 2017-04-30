@@ -36,6 +36,8 @@ public class SpriteMakerModel {
 		myScriptMap=new HashMap<>();
 		actualComponents = new ArrayList<Component>(); 
 		skills = new ArrayList<Skill>(); 
+		spriteName="";
+		spriteDescription="";
 	}
 	
 	public void addName(String name) {

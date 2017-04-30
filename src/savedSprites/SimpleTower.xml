@@ -1,0 +1,62 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Range</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Range>
+        <range>30.0</range>
+      </newengine.sprite.components.Range>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Images</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Images>
+        <imageFilePath>resources\green_house.jpg</imageFilePath>
+      </newengine.sprite.components.Images>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Cooldown</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Cooldown>
+        <remainingTime/>
+      </newengine.sprite.components.Cooldown>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Attacker</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Attacker>
+        <reloadPeriod>1.0</reloadPeriod>
+        <timeRemaining>1.0</timeRemaining>
+      </newengine.sprite.components.Attacker>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.EventQueue</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.EventQueue>
+        <events/>
+        <eventFinished>true</eventFinished>
+      </newengine.sprite.components.EventQueue>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>Simple Tower</spriteName>
+  <spriteDescription>basic tower, but you can build up from here</spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.Images reference="../../myComponents/entry[2]/newengine.sprite.components.Images"/>
+    <newengine.sprite.components.Attacker reference="../../myComponents/entry[4]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.Cooldown reference="../../myComponents/entry[3]/newengine.sprite.components.Cooldown"/>
+    <newengine.sprite.components.EventQueue reference="../../myComponents/entry[5]/newengine.sprite.components.EventQueue"/>
+    <newengine.sprite.components.Range reference="../../myComponents/entry/newengine.sprite.components.Range"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>

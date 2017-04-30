@@ -47,6 +47,8 @@ public class SpriteDataPane extends ScrollPane{
 		descriptor=new SpriteDescriptor();
 		lister=new ComponentLister();
 		updateLister(spriteData);
+		nameSetter.setField(spriteData.getName());
+		descriptionSetter.setField(spriteData.getDescription());
 		myPane.getChildren().addAll(descriptor,lister);
 		this.setContent(myPane);
 		this.setPrefWidth(PREF_WIDTH);
