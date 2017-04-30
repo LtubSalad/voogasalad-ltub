@@ -83,11 +83,11 @@ public class AllPossibleMonsters extends ScrollPane {
 	}
 	
 	private boolean isMonster(SpriteMakerModel possibleMonster) {
-		return (possibleMonster.getComponentByType(Images.TYPE) != null &&
-				possibleMonster.getComponentByType(Speed.TYPE) != null &&
-				possibleMonster.getComponentByType(Health.TYPE) != null &&
-				possibleMonster.getComponentByType(PathFollower.TYPE) != null &&
-				possibleMonster.getComponentByType(EventQueue.TYPE) != null);
+				return (possibleMonster.getComponentByType(Images.TYPE) != null);// &&
+//				possibleMonster.getComponentByType(Speed.TYPE) != null &&
+//				possibleMonster.getComponentByType(Health.TYPE) != null &&
+//				possibleMonster.getComponentByType(PathFollower.TYPE) != null &&
+//				possibleMonster.getComponentByType(EventQueue.TYPE) != null);
 			//	possibleMonster.getComponentByType(GameBus.TYPE) != null);
 	}
 }

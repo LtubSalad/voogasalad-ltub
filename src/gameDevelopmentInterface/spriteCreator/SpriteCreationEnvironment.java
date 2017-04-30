@@ -1,8 +1,10 @@
 package gameDevelopmentInterface.spriteCreator;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
 import data.DeveloperData;
+import data.SpriteMakerModel;
 import gameDevelopmentInterface.presetHandling.ExampleTower;
 import gameDevelopmentInterface.presetHandling.SpriteEditorLoader;
 import javafx.collections.ObservableList;
@@ -11,6 +13,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import utilities.XStreamHandler;
 
 public class SpriteCreationEnvironment extends BorderPane{
 	private TabPane creationScreens;
@@ -47,7 +52,6 @@ public class SpriteCreationEnvironment extends BorderPane{
 		}
 		
 		private void instantiate() {
-			SpriteEditorLoader loader=new SpriteEditorLoader();
 			Button spriteButton = new Button(myResources.getString(CREATE_NEW_SPRITE));
 			spriteButton.setOnAction((clicked) -> {
 				Tab spriteTab = new Tab(myResources.getString(CREATE_NEW_SPRITE),
@@ -55,25 +59,27 @@ public class SpriteCreationEnvironment extends BorderPane{
 				creationScreens.getTabs().add(spriteTab);
 				creationScreens.getSelectionModel().select(spriteTab);
 			});
-			Button presetTowerButton=new Button("Load Tower Preset");
-			presetTowerButton.setOnAction((clicked)->{
-				SpriteCreationScreen screen=loader.loadModelPreset(new ExampleTower(), developerData);
-				Tab towerTab=new Tab("Loaded Tower", screen);
-				creationScreens.getTabs().add(towerTab);
-			});
-			Button presetMonsterButton=new Button("Load Monster Preset");
-			presetMonsterButton.setOnAction((event)->{
-				
+
+			
+			Button loadSavedSprite=new Button("Load Saved Sprite");
+			loadSavedSprite.setOnAction((event)->{
+				XStreamHandler handler=new XStreamHandler();
+				SpriteMakerModel model=handler.<SpriteMakerModel>getObjectFromFile();
+				Tab spriteTab = new Tab(myResources.getString(CREATE_NEW_SPRITE),
+						new SpriteCreationScreen(developerData, model));
+				creationScreens.getTabs().add(spriteTab);
+				creationScreens.getSelectionModel().select(spriteTab);
 			});
 			Button presetSpawnerButton=new Button("Load Spawner Preset");
 			Button loadPresetSprite=new Button("Load Preset");
-			Button loadSavedSprite=new Button("Load Saved Sprite");
+		//	Button loadSavedSprite=new Button("Load Saved Sprite");
 			loadSavedSprite.setOnAction((event)->{
 
 			});
 			
 			
-			this.getChildren().addAll(spriteButton, presetTowerButton,  presetMonsterButton, presetSpawnerButton, loadSavedSprite);
+			
+			this.getChildren().addAll(spriteButton, loadSavedSprite);
 		}
 	}
 }

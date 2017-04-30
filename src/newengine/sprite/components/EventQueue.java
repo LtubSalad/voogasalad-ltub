@@ -43,7 +43,7 @@ public class EventQueue extends Component {
 	private void addEvent(BusEvent event) {
 		events.addLast(event);
 	}
-	private boolean isEmpty() {
+	public boolean isEmpty() {
 		return events.isEmpty();
 	}
 	
