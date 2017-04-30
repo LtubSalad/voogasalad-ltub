@@ -54,7 +54,8 @@ public class PlayerStatsModel {
 			if (wealth.containsKey(player)) {
 				Map<WealthType, Integer> wealths = wealth.get(player);
 				if (wealths.containsKey(type)) {
-					if (wealths.get(type) <= 0 || wealths.get(type) < Math.abs(e.getAmountChanged())){
+					System.out.println(wealths.get(type));
+					if (wealths.get(type) < 0 || wealths.get(type) < Math.abs(e.getAmountChanged())){
 						System.out.println("insufficient gold warning popup");
 						bus.emit(new InsufficientGoldEvent(InsufficientGoldEvent.ANY));
 						Stage warning = new Stage();

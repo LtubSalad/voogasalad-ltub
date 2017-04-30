@@ -2,17 +2,16 @@ package gamedata;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import bus.BasicEventBus;
-import bus.BusEvent;
 import data.SpriteMakerModel;
 import javafx.collections.ObservableList;
 import newengine.events.skill.AddSkillEvent;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
-import newengine.sprite.components.Collidable;
+import newengine.sprite.components.EventQueue;
+import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Position;
 
@@ -70,6 +69,8 @@ public class AuthDataTranslator implements Translator<Sprite>{
 
 	private void makeSingleSprite(SpriteMakerModel spriteToMake) {
 		constructed = handleComponents(spriteToMake.getActualComponents());
+		constructed.addComponent(new GameBus());
+		//constructed.addComponent(new EventQueue());
 
 	}
 
@@ -98,21 +99,21 @@ public class AuthDataTranslator implements Translator<Sprite>{
 	}
 
 
-	private Sprite handleEventHandlers(Sprite newSprite, Map<BusEvent, String> scriptMap ) {
-		// TODO: debate design on this 
-		for (BusEvent event : scriptMap.keySet()){
-			newSprite.getSpriteBus().on(event.getEventType(), e ->{
-				try{
-					newSprite.getScriptHandler().eval(scriptMap.get(event));
-				}
-				catch (Exception exception){
-					System.out.println("hi yes scripting does not work properly here" );
-				}
-			});
-		}
-		return newSprite; 
-
-	}
+//	private Sprite handleEventHandlers(Sprite newSprite, Map<BusEvent, String> scriptMap ) {
+//		// TODO: debate design on this 
+//		for (BusEvent event : scriptMap.keySet()){
+//			newSprite.getSpriteBus().on(event.getEventType(), e ->{
+//				try{
+//					newSprite.getScriptHandler().eval(scriptMap.get(event));
+//				}
+//				catch (Exception exception){
+//					System.out.println("hi yes scripting does not work properly here" );
+//				}
+//			});
+//		}
+//		return newSprite; 
+//
+//	}
 	
 	public List<Sprite> getSprites(){
 		return constructedSprites;

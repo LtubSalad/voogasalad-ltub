@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import gamecreation.level.ILevelData;
-import gamecreation.level.LevelData;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import newengine.player.Player;
 
 /**
  * @author tahiaemran
@@ -22,20 +22,22 @@ public class SerializableDeveloperData {
 	private Map<String, String> gameData; 
 	private List<SpriteMakerModel> mySprites; 
 	private List<ILevelData> myLevels; 
-	private SpritesForScreenUse screenSprites; 
 	private String gameName; 
 	private String gameIconFile; 
 	
 	//DeveloperData dataToTranslate; // TODO: see if this serializes ok 
 	
 	public SerializableDeveloperData(DeveloperData data){
-		this.screenSprites = data.getScreenSprites();
 		configData(data.getAllData()); 
 		configSprites(data.getSprites()); 
 		myLevels = data.getReadOnlyLevelData();
 		
 	}
 
+	public Player getUserPlayer() {
+		//TODO
+		return new Player("USER");
+	}
 
 	private void configSprites(ObservableList<SpriteMakerModel> data) {
 		mySprites = new ArrayList<SpriteMakerModel>();
@@ -54,16 +56,12 @@ public class SerializableDeveloperData {
 		return Collections.unmodifiableList(mySprites); 
 	}
 	
-	public List<ILevelData> getLevelData(){
+	public List<ILevelData> getLevels(){
 		return Collections.unmodifiableList(myLevels);
 	}
 	
 	public Map<String, String> getGameData(){
 		return Collections.unmodifiableMap(gameData);
-	}
-	
-	public SpritesForScreenUse getScreenSprites(){
-		return this.screenSprites;
 	}
 	
 
