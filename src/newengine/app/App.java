@@ -12,12 +12,12 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import bus.EventBus;
 import commons.point.GamePoint;
 import data.DeveloperData;
+import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
 import gameDevelopmentInterface.Path;
 import gamedata.AuthDataTranslator;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import main.Main;
 import newengine.events.GameInitializationEvent;
 import newengine.events.SpriteModelEvent;
 import newengine.events.conditions.SetEndConditionEvent;
@@ -66,8 +66,8 @@ public class App extends Application {
 		Player player1 = new Player("Player 1");
 
 
-		XStreamHandler xHandler = new XStreamHandler();
-		XStream xStream = new XStream(new DomDriver());
+//		XStreamHandler xHandler = new XStreamHandler();
+//		XStream xStream = new XStream(new DomDriver());
 		
 		List<SpriteMakerModel> listSpriteModels = myData.getLevelData().get(0).getSpawners();
 		
