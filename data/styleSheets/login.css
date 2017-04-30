@@ -58,7 +58,7 @@
 }
 
 #vbox{
-	-fx-background-color:blue;
+	-fx-background-color:cyan;
 	-fx-padding: 15;
     -fx-spacing: 10;
     -fx-background-radius: 5.0; 
