@@ -11,8 +11,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import utilities.XStreamHandler;
 
 public class SpriteCreationEnvironment extends BorderPane{

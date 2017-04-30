@@ -32,6 +32,7 @@ import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
 import newengine.sprite.components.TowerDefenceTypeInformation;
+import newengine.sprite.components.Upgradeable;
 import utilities.AlertHandler;
 import utilities.XStreamHandler;
 
@@ -85,6 +86,7 @@ public class SpriteCreationScreen extends BorderPane {
 		observableComponents.add(SkillSet.class);
 		observableComponents.add(Spawner.class);
 		observableComponents.add(TowerDefenceTypeInformation.class);
+		observableComponents.add(Upgradeable.class);
 
 		return new ComponentSelectorPane("Add components", observableComponents, infoPane);
 	}
