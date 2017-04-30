@@ -12,15 +12,20 @@ public class FireProjectileSkill extends Skill {
 
 	public static final SkillType<FireProjectileSkill> TYPE = new SkillType<>(FireProjectileSkill.class.getName()); 
 	private double cooldown = 1;
-	
+
 	public FireProjectileSkill() {
 		icon = new LtubImage("images/skills/crosshairs.png");
 	}
-	
+
+	public FireProjectileSkill(double cooldown){
+		this.cooldown = cooldown;
+	}
+
 	public void setCooldown(double cooldown) { // TODO: it's better if there is no setter API? 
 		this.cooldown = cooldown;
 		source.emit(new StateChangeEvent(StateChangeEvent.COOLDOWN, source, cooldown));
 	}
+	
 	@Override
 	public double getCooldown() {
 		return cooldown;
@@ -28,13 +33,11 @@ public class FireProjectileSkill extends Skill {
 
 	@Override
 	public void trigger() {
-//		if (canControl()) {
-			Sprite source = this.getSource().get();
-			Target target = this.getTarget().get();
-			target.getSprite().ifPresent((targetSprite) -> {
-				source.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, source, targetSprite));
-			});
-//		}
+		Sprite source = this.getSource().get();
+		Target target = this.getTarget().get();
+		target.getSprite().ifPresent((targetSprite) -> {
+			source.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, source, targetSprite));
+		});
 	}
 
 	@Override
