@@ -35,6 +35,9 @@ public class SpriteDataPane extends ScrollPane{
 	
 	public SpriteDataPane(SpriteMakerModel spriteData, DeveloperData developerData){
 		instantiate(spriteData, developerData);
+		for(Component component:spriteData.getActualComponents()){
+			addComponent(component,true);
+		}
 	}
 	
 	public SpriteDataPane(SpriteMakerModel spriteData, DeveloperData developerData, boolean removableComponents){
@@ -146,6 +149,7 @@ public class SpriteDataPane extends ScrollPane{
 					spriteData.addComponent(component.produceComponent());
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				AlertHandler.errorPopUp(e.getMessage());
 			}
 			

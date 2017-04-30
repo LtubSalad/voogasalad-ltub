@@ -1,12 +1,17 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gameDevelopmentInterface.Path;
 import gamecreation.level.ILevelData;
 import gamecreation.level.LevelData;
 import gamecreation.level.SerializableLevelData;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -28,7 +33,12 @@ public class DeveloperData {
 	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
 	private ObservableList<LevelData> levelData; // need 
 	private ObservableList<Path> myPaths;
-
+	private List<SpriteMakerModel> availableTowers = new ArrayList<>();
+	private ObservableList<SpriteMakerModel> backgroundTiles = FXCollections.observableArrayList();
+	private ObservableList<SpriteMakerModel> backgroundTilesToDrag = FXCollections.observableArrayList();
+	private Map<SpriteMakerModel, Boolean> onScreenOrNot = new HashMap<SpriteMakerModel, Boolean>();
+	private int numRows = 6;
+	private int numCols = 6;
 	private ObservableList<SpriteMakerModel> mySprites; //need
 	private SpritesForScreenUse jakeSprites = new SpritesForScreenUse();  //need
 	private String gameName; //need
@@ -48,6 +58,31 @@ public class DeveloperData {
 		myData.put(NUMBER_OF_LIVES, "");
 		myData.put(GAME_NAME, "");
 		myData.put(GAME_ICON, "");
+	}
+	
+	public void addTileToDrag(SpriteMakerModel tile) {
+		backgroundTilesToDrag.add(tile);
+	}
+	
+	public ObservableList<SpriteMakerModel> getTilesToDrag() {
+		return backgroundTilesToDrag;
+	}
+	
+	public ObservableList<SpriteMakerModel> getBackgroundTiles() {
+		return backgroundTiles;
+	}
+	
+	public Map<SpriteMakerModel, Boolean> getIfTileOnScreen() {
+		return onScreenOrNot;
+	}
+	
+	public void addBackgroundTile(SpriteMakerModel tile) {
+		onScreenOrNot.put(tile, false);
+		backgroundTiles.add(tile);
+	}
+	
+	public void addTowerToModel(SpriteMakerModel tower) {
+		availableTowers.add(tower);
 	}
 	
 	public void addSprite(SpriteMakerModel sprite){
@@ -109,6 +144,22 @@ public class DeveloperData {
 	 */
 	public ObservableMap<String,String> getAllData() {
 		return myData;
+	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+
+	public void setNumRows(int numRows) {
+		this.numRows=numRows;
+	}
+
+	public int getNumCols() {
+		return numCols;
+	}
+
+	public void setNumCols(int numCols) {
+		this.numCols=numCols;
 	}
 	
 	
