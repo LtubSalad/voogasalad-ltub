@@ -3,6 +3,8 @@ package user.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +17,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import user.GameHistory;
 
-public class GameStatsView extends VBox {
+public class GameStatsView extends VBox implements Observer {
 	private VBox myStats; 
 	private HBox myInteractiveElements; 
 	
@@ -80,5 +82,11 @@ public class GameStatsView extends VBox {
 		myStats.getStylesheets().add("resources/socialStyle.css");
 		myStats.getStyleClass().add("statsbox");
 		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		GameHistory newHistory = (GameHistory) o; 
+
 	}
 }

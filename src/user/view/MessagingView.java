@@ -1,6 +1,8 @@
 package user.view;
 
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,9 +12,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import user.MessagingHistory;
 import user.User;
 
-public class MessagingView extends VBox{
+public class MessagingView extends VBox implements Observer{
 	private VBox messagesToDisplay; 
 	private VBox messageInputBox; 
 	
@@ -26,8 +29,16 @@ public class MessagingView extends VBox{
 		messagesToDisplay = makeMessageDisplay(myUser.getDisplayableMessages());
 		messageInputBox = makeInputBox();
 		this.getChildren().addAll(messagesToDisplay, messageInputBox);
+	
 	}
 
+	private void reconfigure(){
+		this.getChildren().clear();
+		messagesToDisplay = makeMessageDisplay(myUser.getDisplayableMessages());
+		messageInputBox = makeInputBox();
+		this.getChildren().addAll(messagesToDisplay, messageInputBox);
+	}
+	
 	private VBox makeInputBox() {
 		VBox inputBox = new VBox(10);
 		Label username = new Label(USERNAME_LABEL);
@@ -36,7 +47,6 @@ public class MessagingView extends VBox{
 		TextField inputField = new TextField();
 		Button sendButton = new Button("Send");
 		sendButton.setOnAction(e -> {
-			System.out.println("workinggg");
 			String message = inputField.getText(); 
 			String sender = userField.getText(); 
 			//FIXME: fix connection stuff
@@ -63,9 +73,12 @@ public class MessagingView extends VBox{
 		}
 		return messagesBox; 
 	}
-	
-	
-	
-	
+
+	@Override
+	public void update(Observable o, Object arg) {
+		MessagingHistory newHist = (MessagingHistory) o;
+		this.messagesToDisplay = makeMessageDisplay(newHist.getDisplayableMessages());
+		reconfigure();
+	}
 	
 }

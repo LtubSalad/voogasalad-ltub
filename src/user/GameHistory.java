@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 /**
  * @author tahiaemran
@@ -12,7 +13,7 @@ import java.util.Map;
  *
  */
 
-public class GameHistory {
+public class GameHistory extends Observable {
 	
 	private String name; 
 	private String filePath; 
@@ -70,10 +71,14 @@ public class GameHistory {
 	
 	public void incrementPlays(){
 		stats.incrementPlays();
+		setChanged();
+		notifyObservers(); 
 	}
 	
 	public void incrementLikes(){
 		stats.incrementLikes();
+		setChanged();
+		notifyObservers();
 	}
 	
 	public GameStats getStatsForSerialization(){
