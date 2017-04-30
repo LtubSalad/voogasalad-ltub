@@ -1,8 +1,5 @@
 package newengine.sprite.components;
 
-import java.io.Serializable;
-
-import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.range.InRangeEvent;
 import newengine.events.skill.TriggerSkillEvent;
@@ -23,7 +20,7 @@ public class RangeShootingAI extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(InRangeEvent.ANY, (Serializable & BusEventHandler<InRangeEvent>) (e) -> {
+		sprite.on(InRangeEvent.ANY, (e) -> {
 			Sprite shootTarget = null;
 			for (Sprite detectee: e.getDetectees()) {
 				if (detectee.getComponent(Owner.TYPE).get().player().isEnemyWith(
@@ -46,6 +43,12 @@ public class RangeShootingAI extends Component {
 	@Override
 	public Component clone() {
 		return new RangeShootingAI();
+	}
+
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return new Object[] {};
 	}
 	
 	

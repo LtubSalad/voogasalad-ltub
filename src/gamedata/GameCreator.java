@@ -47,6 +47,9 @@ public class GameCreator {
 	
 	public GameCreator(File file){
 		this.fileToRead = file; 
+		XSH = new XStreamHandler();
+		xstream = new XStream(new DomDriver());
+		createGame(); 
 	}
 
 	public Game getGame(){ 

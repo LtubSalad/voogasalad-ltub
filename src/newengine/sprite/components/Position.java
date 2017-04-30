@@ -15,9 +15,12 @@ import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.DeveloperMethod;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
+import newengine.events.SpriteModelEvent;
 import newengine.events.sound.SoundEvent;
+import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.timer.DelayedEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -65,7 +68,6 @@ public class Position extends Component {
 				});
 			});
 		});
-
 		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
 			stopMoving();
 		});
@@ -84,6 +86,10 @@ public class Position extends Component {
 		double x = pos.x();
 		double y = pos.y();
 		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
+			if (sprite.getComponent(Weapon.TYPE).isPresent()){
+				System.out.println("weapon reaches target");
+				sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+			}
 			stopMoving();
 			return;
 		}
@@ -95,8 +101,8 @@ public class Position extends Component {
 		if (speed * dt > dist) {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
-			sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			target.getSprite().ifPresent((targetSprite) -> {
+				System.out.println("weapon reaches target");
 				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			});
 			sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
@@ -175,5 +181,14 @@ public class Position extends Component {
 			}
 		}
 		return target.getLocation();
+	}
+
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[3];
+		parameters[0]=pos.x();
+		parameters[1]=pos.y();
+		parameters[2]=heading;
+		return parameters;
 	}
 }

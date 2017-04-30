@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import bus.EventBus;
+import newengine.events.skill.CheckCostAndBuildEvent;
+import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeScoreEvent;
 import newengine.events.stats.ChangeWealthEvent;
@@ -27,6 +29,17 @@ public class PlayerStatsModel {
 	}
 
 	private void initHandlers() {
+		bus.on(CheckCostAndBuildEvent.ANY, (e) -> {
+			int cost = e.getCost();
+			Player player = e.getPlayer();
+			if (wealth.get(player).get(WealthType.GOLD) >= cost) {
+				e.getBuildCallback().execute();
+			} else {
+				// TODO: send insufficient gold event, 
+				// and use trigger to handle it and play sound (and show text).
+				bus.emit(new SoundEvent(SoundEvent.SOUND_EFFECT, "data/sounds/alert_sound.mp3"));
+			}
+		});
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
 			Player player = e.getPlayer();
 			WealthType type = e.getWealthType();

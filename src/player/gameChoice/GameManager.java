@@ -146,6 +146,8 @@ public class GameManager {
 				levelChoice.show();
 				
 				
+				primaryStage.setScene(game.getScene());
+				
 				// get scene
 				// display
 				// start

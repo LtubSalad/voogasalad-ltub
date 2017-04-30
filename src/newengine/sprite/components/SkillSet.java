@@ -74,4 +74,11 @@ public class SkillSet extends Component {
 		return new SkillSet(skills);
 	}
 
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=skills;
+		return parameters;
+	}
+
 }

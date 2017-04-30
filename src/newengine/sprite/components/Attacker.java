@@ -24,7 +24,6 @@ import newengine.utils.image.LtubImage;
 public class Attacker extends Component {
 
 	public static final ComponentType<Attacker> TYPE = new ComponentType<>(Attacker.class.getName());
-	private Sprite weapon;
 	private double reloadPeriod = 1;
 	private double timeRemaining = 1;
 	
@@ -46,7 +45,6 @@ public class Attacker extends Component {
 //			resetTimeRemaining();
 			Sprite source = e.getSprite();
 			Sprite target = e.getTarget();
-//			Target target = e.getTarget();
 
 			Sprite weapon = new Sprite();
 			LtubImage image1 = new LtubImage("images/skills/bullet.png");
@@ -61,33 +59,29 @@ public class Attacker extends Component {
 			weapon.addComponent(new Speed(100));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
 			weapon.addComponent(new DamageStrength(25));
-			weapon.addComponent(new GameBus());			
+			weapon.addComponent(new GameBus());	
+			weapon.addComponent(new Weapon());
 			
 			List<Sprite> spritesToAdd = new ArrayList<Sprite>();
 			spritesToAdd.add(weapon);
 			
 			sprite.getComponent(GameBus.TYPE).get().getGameBus()
 				.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
+			
+			sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
+				System.out.println(gameBus.getGameBus() == null);
+			});
 
 			moveSkill.setTarget(new Target(target));
 			moveSkill.trigger();
 		});
 	}
-
+	
 	@Override
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
 	}
 
-	private boolean weaponReloaded() {
-		return (timeRemaining < 0);
-	}
-	
-	private void resetTimeRemaining(){
-		timeRemaining = reloadPeriod;
-	}
-	
-	
 	public void onUpdate(double dt){
 		timeRemaining -= dt;
 	}
@@ -98,6 +92,12 @@ public class Attacker extends Component {
 		clone.reloadPeriod = this.reloadPeriod;
 		clone.timeRemaining = this.timeRemaining;
 		return clone;
+	}
+
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

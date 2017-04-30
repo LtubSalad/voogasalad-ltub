@@ -19,10 +19,16 @@ public class Path {
 	
 	public Path() {
 		this("A Nameless Path");
+		makeDefaultPath();
 	}
 	
 	public Path(String name) {
+		this(name, new LinkedList<GamePoint>());
+	}
+	
+	public Path(String name, Queue<GamePoint> path) {
 		this.pathName=name;
+		myPath = path;
 		makeDefaultPath();
 	}
 	
