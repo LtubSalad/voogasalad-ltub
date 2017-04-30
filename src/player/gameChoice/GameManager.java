@@ -140,8 +140,8 @@ public class GameManager {
 				
 				// gameFactory.loadGame(gameFile);
 				// load the game file into the GameFactory
-//				GameCreator gameCreator = new GameCreator(gameFile);
-//				Game game = gameCreator.getGame();
+				GameCreator gameCreator = new GameCreator(gameFile);
+    			Game game = gameCreator.getGame();
 				LevelManager levelChoice = new LevelManager(primaryStage);
 				levelChoice.show();
 				
