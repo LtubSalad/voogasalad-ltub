@@ -47,7 +47,7 @@ public class TowerAuthor extends GameAuthor {
 //		addStep(new DeveloperStep(SET_THE_BACKGROUND,
 //				new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
 		addStep(new DeveloperStep("Sprite creation", new SpriteCreationScreen(myModelData)));
-		addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData, myScreenModelData)));
+		//addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData, myScreenModelData)));
 		addStep(new DeveloperStep("Spawner creation", new SpawnerCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
 //		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
