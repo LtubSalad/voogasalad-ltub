@@ -110,6 +110,7 @@ public class SpriteCreationScreen extends BorderPane {
 
 			Button listSaveButton = new Button("Save SpriteMakerModel to THIS GAME's list of SpriteMakerModels");
 			listSaveButton.setOnMouseClicked((click) -> {
+
 				Alert alert = alertHandler.confirmationPopUp("Are you sure you wish to save?");
 				Optional<ButtonType> result = alert.showAndWait();
 				 if (result.isPresent() && result.get() == ButtonType.CANCEL) {

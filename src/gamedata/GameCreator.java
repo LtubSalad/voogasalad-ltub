@@ -1,6 +1,7 @@
 package gamedata;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
@@ -14,7 +15,6 @@ import newengine.app.Game;
 import newengine.events.SpriteModelEvent;
 import newengine.sprite.Sprite;
 import player.helpers.GameLoadException;
-import utilities.XStreamHandler;
 
 /**
  * @author tahiaemran, Keping
@@ -23,6 +23,7 @@ import utilities.XStreamHandler;
  *
  */
 public class GameCreator {
+
 
 	private XStream xstream; 
 	
@@ -44,10 +45,15 @@ public class GameCreator {
 			//Process Sprites 
 			List<SpriteMakerModel> initialSpriteModels =  gameData.getSprites();
 			System.out.println(initialSpriteModels);
-			TranslationController translator = new TranslationController(initialSpriteModels); 
-			translator.translate();
-			List<Sprite> createdSprites = (List<Sprite>) translator.getTranslated();  
-			
+			//TranslationController translator = new TranslationController(initialSpriteModels);
+			List<Sprite> createdSprites = new ArrayList<Sprite>();
+			for (SpriteMakerModel spriteToCreate : initialSpriteModels) {
+				AuthDataTranslator translator = new AuthDataTranslator(spriteToCreate);
+				createdSprites.add(translator.getSprite());
+			}
+			//translator.translate();
+			//List<Sprite> createdSprites = (List<Sprite>) translator.getTranslated();  
+
 			Game game = new Game(); 
 			EventBus bus = game.getBus();
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, createdSprites));

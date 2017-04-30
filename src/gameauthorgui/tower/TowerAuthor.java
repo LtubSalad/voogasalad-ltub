@@ -43,6 +43,10 @@ public class TowerAuthor extends GameAuthor {
 		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();
 	}
+	
+	public DeveloperData getData() {
+		return myModelData;
+	}
 
 	public void instantiateSteps() {
 		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense", myModelData)));
