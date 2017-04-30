@@ -6,6 +6,7 @@ import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
 public class TowerDefenceTypeInformation extends Component {
+	
 	public enum SpriteType{
 		TOWER,MONSTER,SPAWNER,WEAPON,OTHER
 	}
