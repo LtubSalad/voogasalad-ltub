@@ -193,10 +193,12 @@ public class App extends Application {
 		building.addComponent(new GameBus());
 		building.addComponent(new SkillSet(monsterMap));
 		building.addComponent(new Owner(player));
+		building.addComponent(new Position(new GamePoint(200, 100), 0));
 		building.addComponent(new Images(imageURL));
 		building.addComponent(new Speed(100));
 		building.addComponent(new Health(100));
 		building.addComponent(new EventQueue(new LinkedList<>()));
+		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		return building;
 	}
 	
