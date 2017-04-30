@@ -6,13 +6,14 @@ import java.util.Map;
 
 import bus.BasicEventBus;
 import bus.BusEvent;
-import commons.point.GamePoint;
 import data.SpriteMakerModel;
 import javafx.collections.ObservableList;
 import newengine.events.skill.AddSkillEvent;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.Collidable;
+import newengine.sprite.components.Images;
 import newengine.sprite.components.Position;
 
 /**
@@ -23,27 +24,43 @@ import newengine.sprite.components.Position;
  *
  */
 public class AuthDataTranslator implements Translator<Sprite>{
-	
+
 	//TODO: make a single translator for single sprite translatino 
 	//TODO: instantiate skills 
 
 	private List<SpriteMakerModel> spritesToMake; 
 	private BasicEventBus gameBus = new BasicEventBus(); 
+	private int numRows= 8;
+	private int numCols= 8;
 
 	private List<Sprite> constructedSprites = new ArrayList<Sprite>(); 
 
 	private Sprite constructed; 
-	
+	@Deprecated
 	public AuthDataTranslator(ObservableList<SpriteMakerModel> allObjectsOnScreen) {
 		spritesToMake = new ArrayList<SpriteMakerModel>(allObjectsOnScreen); 
 	}
-
-	public AuthDataTranslator(List<SpriteMakerModel> spriteData){
+	@Deprecated
+	public AuthDataTranslator(List<SpriteMakerModel> allObjectsOnScreen) {
+		spritesToMake = new ArrayList<SpriteMakerModel>(allObjectsOnScreen); 
+	}
+	@Deprecated
+	public AuthDataTranslator(List<SpriteMakerModel> spriteData, int numCols, int numRows){
+		this.numRows = numRows;
+		this.numCols = numCols;
 		spritesToMake = spriteData;
 	}
 
 
-	public AuthDataTranslator(SpriteMakerModel spriteToMake){
+	public AuthDataTranslator(SpriteMakerModel spriteToMake, int numCols, int numRows){
+		this.numRows = numRows;
+		this.numCols = numCols;
+		spritesToMake = new ArrayList<SpriteMakerModel>();
+		spritesToMake.add(spriteToMake);
+		makeSingleSprite(spriteToMake);
+	}
+	
+	public AuthDataTranslator(SpriteMakerModel spriteToMake) {
 		spritesToMake = new ArrayList<SpriteMakerModel>();
 		spritesToMake.add(spriteToMake);
 		makeSingleSprite(spriteToMake);
@@ -53,33 +70,34 @@ public class AuthDataTranslator implements Translator<Sprite>{
 
 	private void makeSingleSprite(SpriteMakerModel spriteToMake) {
 		constructed = handleComponents(spriteToMake.getActualComponents());
-		
+
 	}
 
 	public Sprite getSprite(){
+		System.out.println("constructed: " + constructed);
 		return constructed; 
 	}
-	
+
 	@Override
 	public void translate() {
 		spritesToMake.stream().forEach(model -> {
-			//System.out.println(model.getActualComponents().size());
 			Sprite newSprite = handleComponents(model.getActualComponents());
 			// skills
 			Sprite skilledSprite = handleSkills(newSprite, model.getSkills());
+			constructedSprites.add(skilledSprite);
 			/// triggers 
-			constructedSprites.add(handleEventHandlers(skilledSprite, model.getScriptMap()));	
+			//constructedSprites.add(handleEventHandlers(skilledSprite, model.getScriptMap()));	
 		});
 	}
-	
-	
+
+
 	private Sprite handleSkills(Sprite sprite, List<Skill> skills){
 		skills.stream().forEach(skill-> 
-			sprite.emit(new AddSkillEvent(AddSkillEvent.TYPE, skill)));
+		sprite.emit(new AddSkillEvent(AddSkillEvent.TYPE, skill)));
 		return sprite; 
 	}
-	
-	
+
+
 	private Sprite handleEventHandlers(Sprite newSprite, Map<BusEvent, String> scriptMap ) {
 		// TODO: debate design on this 
 		for (BusEvent event : scriptMap.keySet()){
@@ -95,13 +113,7 @@ public class AuthDataTranslator implements Translator<Sprite>{
 		return newSprite; 
 
 	}
-
 	
-	
-//
-//	public SpriteModel getSprites(){
-//		return constructedModel;
-
 	public List<Sprite> getSprites(){
 		return constructedSprites;
 	}
@@ -109,17 +121,31 @@ public class AuthDataTranslator implements Translator<Sprite>{
 
 	private Sprite handleComponents(List<Component>transferComponents) {
 		Sprite sprite = new Sprite(); 
+		System.out.println("constructed in translate: " + sprite);
+		sprite.addComponent(new Position(100,200,0));
+		transferComponents.stream().forEach( c->{
+			if(c.getType().equals(Position.TYPE)){
+				Position position = (Position)c;
+				double xPerc = position.pos().x();
+				double yPerc = position.pos().y();
+				double xPixel = xPerc * 100 * numCols;
+				double yPixel = yPerc * 100 * numRows;
+				Position newPosition = new Position(xPixel, yPixel, position.heading());
+				sprite.addComponent(newPosition);
+			}
+		});
 		for (Component comp: transferComponents){
 			//System.out.println(comp.getType().getType());
-			sprite.addComponent(comp);
-			if (comp.getType().equals(Position.TYPE)) {
-				Position position = (Position)comp;
-				GamePoint oriPos = position.pos();
-				double xPerc = oriPos.x();
-				double yPerc = oriPos.y();
-				
-			}
+			if (comp.getType().equals(Images.TYPE)){
+				sprite.addComponent(comp);
+				}
 		}
+		transferComponents.stream().forEach(component -> {
+			//if (component.getType() != Position.TYPE || component.getType() != Images.TYPE) {
+				sprite.addComponent(component);
+			//}
+		});
+		
 		return sprite;
 	}
 

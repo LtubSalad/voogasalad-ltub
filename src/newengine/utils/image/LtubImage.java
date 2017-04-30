@@ -49,10 +49,12 @@ public class LtubImage {
 	}
 	
 	public double width() {
-		return image != null ? image.getWidth() : 0;
+		return 100;
+//		return image != null ? image.getWidth() : 0;
 	}
 	public double height() {
-		return image != null ? image.getHeight() : 0;
+		return 100;
+//		return image != null ? image.getHeight() : 0;
 	}
 	public void setImagePivot(GamePoint pivot) {
 		this.pivot = pivot;
