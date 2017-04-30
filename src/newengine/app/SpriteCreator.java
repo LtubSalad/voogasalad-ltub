@@ -42,7 +42,6 @@ public class SpriteCreator {//extends Application {
 	
 	public SpriteMakerModel createNewSprite() {
 		SpriteMakerModel child = new SpriteMakerModel();
-		
 		child.addComponent(new GameBus());
 		child.addComponent(new Owner(player1));
 		child.addComponent(new Position(new GamePoint(300, 50), 0));
