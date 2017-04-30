@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
@@ -12,11 +13,17 @@ public class LevelEditorHolder extends ScrollPane {
 	public static final double PREF_HEIGHT = 600;
 	private ObservableList<LevelData> levelData;
 	private VBox content;
+	private VBox editors;
+	private VBox otherNodes;
 	
 	public LevelEditorHolder(ObservableList<LevelData> data, double prefHeight){
 		this.content = new VBox();
+		this.editors = new VBox();
+		this.otherNodes = new VBox();
+		this.content.getChildren().addAll(otherNodes, editors);
 		this.levelData = data;
 		this.setContent(content);
+	
 		content.setPrefHeight(prefHeight);
 		levelData.addListener(new ListChangeListener<LevelData>(){
 			@Override
@@ -30,12 +37,24 @@ public class LevelEditorHolder extends ScrollPane {
 		this(data, PREF_HEIGHT);
 	}
 
-	private void render(){
-		List<LevelEditor> creators = new ArrayList<LevelEditor>();
-		content.getChildren().clear();
+	public void render(){
+		List<LevelEditor> editorList = new ArrayList<LevelEditor>();
+		editors.getChildren().clear();
 		levelData.stream().forEach(level -> {
-			creators.add(new SpawnerLevelEditor(level));
+			editorList.add(new SpawnerLevelEditor(level));
 		});
-		content.getChildren().addAll(creators);
+		editors.getChildren().addAll(editorList);
+	}
+	
+	public void addNode(Node node){
+		otherNodes.getChildren().add(node);
+	}
+	
+	public ObservableList<LevelData> getLevelData(){
+		return levelData;
+	}
+	
+	public VBox getLevelEditors(){
+		return editors;
 	}
 }

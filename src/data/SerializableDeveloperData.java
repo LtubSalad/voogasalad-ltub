@@ -26,7 +26,7 @@ public class SerializableDeveloperData {
 	
 	DeveloperData dataToTranslate; // TODO: see if this serializes ok 
 	
-	private SerializableDeveloperData(DeveloperData data){
+	public SerializableDeveloperData(DeveloperData data){
 		this.dataToTranslate = data; 
 		this.screenSprites = data.getScreenSprites();
 		configData(); 

@@ -2,18 +2,22 @@ package gameauthorgui.tower;
 
 import java.util.ResourceBundle;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import data.DeveloperData;
 import data.ScreenModelData;
+import data.SerializableDeveloperData;
 import gameDevelopmentInterface.BackgroundSetter;
 import gameDevelopmentInterface.GeneralDataCreator;
 import gameDevelopmentInterface.PathCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
 import gameDevelopmentInterface.spriteCreator.SpriteCreationEnvironment;
-import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import gameauthorgui.DeveloperStep;
 import gameauthorgui.GameAuthor;
 import gameauthorgui.WelcomeScreen;
 import gamecreation.level.LevelCreationPane;
+import utilities.XStreamHandler;
 
 /**
  * 
@@ -35,27 +39,35 @@ public class TowerAuthor extends GameAuthor {
 		super();
 		myModelData=new DeveloperData();
 		myGeneralDataCreator = new GeneralDataCreator(myModelData);
-		myScreenModelData = new ScreenModelData();
+		//myScreenModelData = new ScreenModelData();
 		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();
-	}
-
-	public void instantiateSteps() {
-		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense", myModelData)));
-		addStep(new DeveloperStep("Level Options",
-				new LevelCreationPane(myModelData, getScene().getHeight() - CENTER_OFFSETS)));
-//		addStep(new DeveloperStep(SET_THE_BACKGROUND,
-//				new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
-		addStep(new DeveloperStep("Sprite creation", new SpriteCreationScreen(myModelData)));
-		//addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData, myScreenModelData)));
-		addStep(new DeveloperStep("Spawner creation", new SpawnerCreationScreen(myModelData)));
-		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
-//		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
-//				new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
 	}
 	
 	public DeveloperData getData() {
 		return myModelData;
+	}
+
+	public void instantiateSteps() {
+		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense", myModelData)));
+
+		addStep(new DeveloperStep("Level Options",
+				new LevelCreationPane(myModelData, getScene().getHeight() - CENTER_OFFSETS)));
+//		addStep(new DeveloperStep(SET_THE_BACKGROUND,
+//				new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+		addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData)));
+		addStep(new DeveloperStep("Sprite creation", new SpriteCreationEnvironment(myModelData)));
+		addStep(new DeveloperStep("Spawner Creation", new SpawnerCreationScreen(myModelData)));
+		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
+		//addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
+			//	new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+	}
+
+	@Override
+	public void save() {
+		SerializableDeveloperData data = new SerializableDeveloperData(myModelData);
+		XStreamHandler XSH = new XStreamHandler();
+		XSH.saveToFile(data);
 	}
 
 }

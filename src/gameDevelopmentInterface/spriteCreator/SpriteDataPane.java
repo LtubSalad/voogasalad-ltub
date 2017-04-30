@@ -34,6 +34,24 @@ public class SpriteDataPane extends ScrollPane{
 	private SimpleVariableSetter<String> descriptionSetter;
 	
 	public SpriteDataPane(SpriteMakerModel spriteData, DeveloperData developerData){
+		instantiate(spriteData, developerData);
+		for(Component component:spriteData.getActualComponents()){
+			addComponent(component,true);
+		}
+	}
+	
+	public SpriteDataPane(SpriteMakerModel spriteData, DeveloperData developerData, boolean removableComponents){
+		this.developerData=developerData;
+		myPane=new VBox();
+		this.spriteData=new SpriteMakerModel();
+		descriptor=new SpriteDescriptor();
+		lister=new ComponentLister();
+		myPane.getChildren().addAll(descriptor,lister);
+		this.setContent(myPane);
+		this.setPrefWidth(PREF_WIDTH);
+	}
+	
+	private void instantiate(SpriteMakerModel spriteData, DeveloperData developerData){
 		this.developerData=developerData;
 		myPane=new VBox();
 		this.spriteData=spriteData;
@@ -42,6 +60,7 @@ public class SpriteDataPane extends ScrollPane{
 		myPane.getChildren().addAll(descriptor,lister);
 		this.setContent(myPane);
 		this.setPrefWidth(PREF_WIDTH);
+		
 	}
 	
 	public SimpleVariableSetter<String> getNameSetter(){
@@ -130,6 +149,7 @@ public class SpriteDataPane extends ScrollPane{
 					spriteData.addComponent(component.produceComponent());
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				AlertHandler.errorPopUp(e.getMessage());
 			}
 			
