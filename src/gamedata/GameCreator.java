@@ -56,6 +56,7 @@ public class GameCreator {
 	
 		//Process Levels
 		List<ILevelData> levels = gameData.getLevels();
+		System.out.println(levels.get(0).getName());
 		
 		//Process Sprites 
 		List<SpriteMakerModel> initialSpriteModels =  gameData.getSprites();
