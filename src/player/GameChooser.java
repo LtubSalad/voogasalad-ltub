@@ -9,14 +9,19 @@ import java.util.Map;
 import commons.FileLoader;
 import commons.RunningMode;
 import gamedata.GameCreator;
+import javafx.animation.Animation;
+import javafx.animation.RotateTransition;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import newengine.app.Game;
 import player.helpers.GameLoadException;
 import utilities.GameMetaData;
@@ -30,6 +35,8 @@ import utilities.GameMetaData;
  *
  */
 public class GameChooser {
+	
+	public static final String NEW_GAME= "images/games/new_game.jpg";
 	
 	private Map<String, GameMetaData> presetGames = new HashMap<>(); // hard-coded currently
 	private Stage primaryStage;
@@ -49,12 +56,14 @@ public class GameChooser {
 	}
 	
 	private Scene createScene() {
-		BorderPane borderPane = new BorderPane();
-		Scene scene = new Scene(borderPane, App.WIDTH, App.HEIGHT);
+		Group root = new Group();
+		Scene scene = new Scene(root, App.WIDTH, App.HEIGHT);
 		
 		VBox vBox = new VBox();
-		borderPane.setCenter(vBox);
-
+		//borderPane.setCenter(vBox);
+		root.getChildren().add(vBox);
+		vBox.setLayoutX(250);
+		vBox.setLayoutY(100);
 		vBox.getChildren().addAll(createPresetButtons());
 		vBox.getChildren().add(createGameFileChooserButton());
 		return scene;
@@ -72,14 +81,20 @@ public class GameChooser {
 			button.setOnMouseClicked((e) -> {
 				startGame(gameMeta.getGameFilePath());
 			});
+			getRotation(button);
 			buttons.add(button);
 		}
 		return buttons;
 	}
 	
 	private Button createGameFileChooserButton() {
-		Button button = new Button("Load another Game");
-		button.setWrapText(true);
+		Button button = new Button();
+		Image image = new Image(NEW_GAME);
+		ImageView imageView = new ImageView(image);
+		imageView.setFitWidth(App.WIDTH / 3);
+		imageView.setPreserveRatio(true);
+		button.setGraphic(imageView);
+		//button.setWrapText(true);
 		button.setOnMouseClicked((e) -> {
 			FileLoader fileLoader = new FileLoader(primaryStage);
 			File fileChosen = fileLoader.chooseFile();
@@ -87,6 +102,7 @@ public class GameChooser {
 				startGame(fileChosen);
 			}
 		});
+		getRotation(button);
 		return button;
 	}
 	
@@ -118,5 +134,14 @@ public class GameChooser {
 		}
 	}
 
+	private void getRotation(Button button){
+
+		RotateTransition rotation = new RotateTransition(Duration.seconds(3), button);
+		rotation.setCycleCount(Animation.INDEFINITE);
+		rotation.setByAngle(360);
+		
+		button.setOnMouseEntered(e -> rotation.play());
+		button.setOnMouseExited(e -> rotation.pause());
+	}
 
 }
