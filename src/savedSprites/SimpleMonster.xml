@@ -1,0 +1,42 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Speed</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Speed>
+        <speed>30.0</speed>
+      </newengine.sprite.components.Speed>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Health</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Health>
+        <health>100</health>
+      </newengine.sprite.components.Health>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Images</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Images>
+        <imageFilePath>resources\bahamut_right.png</imageFilePath>
+      </newengine.sprite.components.Images>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>SimpleMonster</spriteName>
+  <spriteDescription>not sure what components you want, but you can build from here.</spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.Images reference="../../myComponents/entry[3]/newengine.sprite.components.Images"/>
+    <newengine.sprite.components.Health reference="../../myComponents/entry[2]/newengine.sprite.components.Health"/>
+    <newengine.sprite.components.Speed reference="../../myComponents/entry/newengine.sprite.components.Speed"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>
