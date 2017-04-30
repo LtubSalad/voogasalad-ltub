@@ -31,6 +31,10 @@ public class PasswordManager{
 	public static final String LOCATION = "resources/password";
 	
 	public static final Writer writer = new PasswordStorage();
+
+	public static final int LENGTH_OF_USER = 8;
+
+	public static final int LENGTH_OF_PASSWORD = 6;
 	private ResourceBundle myResources = ResourceBundle.getBundle(LOCATION);
 	
 	private  ResourceBundle resources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
@@ -142,7 +146,11 @@ public class PasswordManager{
 				
 		tempCheckUser = txtUserName.getText().toString();
 		tempCheckPw = pf.getText().toString();
-		
+		if(tempCheckUser.length() < LENGTH_OF_USER || tempCheckPw.length() < LENGTH_OF_PASSWORD ){
+			UnsuccessRegistration unsuccess = new UnsuccessRegistration();
+			unsuccess.show();
+			return;
+		}
 		usersModel.addUser(tempCheckUser, tempCheckPw);
 		
 		writer.write(tempCheckUser, tempCheckPw);
