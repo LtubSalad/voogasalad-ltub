@@ -26,7 +26,7 @@ public class LtubImage {
 	public LtubImage(String filename) {
 		this.filename = filename;
 		try {
-			image = new Image(getInputStream());
+			image = new Image(filename);
 		} catch (NullPointerException e) {
 			if (RunningMode.DEV_MODE) {
 				System.out.println("DEV MODE stacktrace");
@@ -68,6 +68,7 @@ public class LtubImage {
 			return new GamePoint(width() / 2, height() / 2);
 		}
 	}
+	@Deprecated
 	public InputStream getInputStream() {
 		return getClass().getClassLoader().getResourceAsStream(filename);
 	}
