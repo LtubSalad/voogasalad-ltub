@@ -3,12 +3,12 @@ package newengine.view.camera;
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
-import javafx.scene.Node;
 import newengine.events.camera.CameraEvent;
+
 
 /**
  * Convert between {@code GamePoint} and {@code ViewPoint}.
- * @author Yilin
+ * @author Yilin, Zhiyong
  *
  */
 public class Camera {
@@ -22,7 +22,8 @@ public class Camera {
 	public static final double MIN_FACTOR = 0.5;
 	public static final double MOVE_SPEED_PER_FRAME = 100;
 	
-	public Camera(EventBus bus) {
+
+	public Camera(EventBus bus){
 		this.bus = bus;
 		initHandlers();
 	}
@@ -60,6 +61,7 @@ public class Camera {
 		this.translateY = 0;
 	}
 	
+
 	/**
 	 * Convert a Point on the view to a Point in the game.
 	 * @param viewPoint a {@code ViewPoint} instance
@@ -68,19 +70,14 @@ public class Camera {
 	public GamePoint viewToGame(ViewPoint viewPoint) {
 		return new GamePoint((viewPoint.x() - translateX) / scaleFactor, 
 				(viewPoint.y() - translateY) / scaleFactor);
+
 	}
 	
-	/**
-	 * Convert a Point in the game to a Point on the view.
-	 * @param gamePoint a {@code GamePoint} instance
-	 * @return ViewPoint
-	 */
 	public ViewPoint gameToView(GamePoint gamePoint) {
-		return new ViewPoint(gamePoint.x() * scaleFactor + translateX, 
-				gamePoint.y() * scaleFactor + translateY);
+		return new ViewPoint(gamePoint.x() * scaleFactor + translateX, gamePoint.y() * scaleFactor + translateY);
 	}
-	
+
 	public double getScaleFactor() {
-		return scaleFactor;
+		return this.scaleFactor;
 	}
 }

@@ -1,15 +1,11 @@
 package gameDevelopmentInterface;
 
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-
-import data.AttributeData;
-import data.SpriteMakerModel;
 import commons.point.GamePoint;
+import data.SpriteMakerModel;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Bounds;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -36,31 +32,48 @@ public class ScreenMap extends StackPane {
 	private static final String Y_POSITION = "Y_POSITION";
 	private static final String X_POSITION = "X_POSITION";
 	private static final String IMAGE_HOLDER = "IMAGE_HOLDER";
-	private static final int SCREEN_SIZE = 350;
+	private int CELL_SIZE = 100;
 	private GridPane myGrid;
-	private ScreenModelCreator mySMC;
+	private ScreenModelCreator myScreenModelCreator;
 	private static final String PATH_TO_IMAGE_FILES = "PATH_TO_IMAGE_FILES";
 	private int NUM_ROWS = 10;
 	private int NUM_COLS = 8;
+	private int myScreenHeight = NUM_ROWS*CELL_SIZE;
+	private int myScreenWidth = NUM_COLS*CELL_SIZE;
 	
 	public ScreenMap(ScreenModelCreator smc) {
-		mySMC = smc;
-		mySMC.getScreenData().getAllObjectsOnScreen().addListener(new ListChangeListener<SpriteMakerModel>() {
+		myScreenModelCreator = smc;
+		myScreenModelCreator.getScreenData().getAllObjectsOnScreen().addListener(new ListChangeListener<SpriteMakerModel>() {
 			@Override
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
 				redrawGrid();
 			}
 		});
-		this.setHeight(SCREEN_SIZE);
-		this.setWidth(SCREEN_SIZE);
+		this.setHeight(myScreenHeight);
+		this.setWidth(myScreenWidth);
 		makeGrid();
 	}
+	public void resize(int width, int height) {
+		myScreenModelCreator.getScreenData().getAllObjectsOnScreen().addListener(new ListChangeListener<SpriteMakerModel>() {
+			@Override
+			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
+				redrawGrid();
+			}
+		});
+		myScreenHeight = height;
+		myScreenWidth = width;
+		CELL_SIZE = myScreenHeight/NUM_COLS;
+		makeGrid();
+		redrawGrid();
+	}
+	
 	/**
 	 * Can change number of rows on screen
 	 * @param numRows
 	 */
 	public void setNumRows(int numRows) {
 		NUM_ROWS = numRows;
+		myScreenHeight = NUM_ROWS*CELL_SIZE;
 		makeGrid();
 	}
 	/**
@@ -69,6 +82,7 @@ public class ScreenMap extends StackPane {
 	 */
 	public void setNumCols(int numCols) {
 		NUM_COLS = numCols;
+		myScreenWidth = NUM_COLS*CELL_SIZE;
 		makeGrid();
 	}
 	/**
@@ -85,6 +99,13 @@ public class ScreenMap extends StackPane {
 	public int getNumCols() {
 		return NUM_COLS;
 	}
+	
+	public int getScreenWidth() {
+		return myScreenWidth;
+	}
+	public int getScreenHeight() {
+		return myScreenHeight;
+	}
 	/**
 	 * 
 	 * @return the grid object
@@ -100,8 +121,8 @@ public class ScreenMap extends StackPane {
 	 */
 	public GamePoint getCoordOfMouseHover(double x, double y) {
 		Bounds boundsInScreen = myGrid.localToScreen(myGrid.getBoundsInLocal());
-		int colNum = getColOrRowPlacement(boundsInScreen.getMinX(), myGrid.getWidth(), myGrid.getWidth()/NUM_COLS, x, boundsInScreen);
-		int rowNum = getColOrRowPlacement(boundsInScreen.getMinY(), myGrid.getHeight(), myGrid.getHeight()/NUM_ROWS, y, boundsInScreen);
+		int colNum = getColOrRowPlacement(0, myGrid.getWidth(), myGrid.getWidth()/NUM_COLS, x, boundsInScreen);
+		int rowNum = getColOrRowPlacement(0, myGrid.getHeight(), myGrid.getHeight()/NUM_ROWS, y, boundsInScreen);
 		return new GamePoint(colNum, rowNum);
 	}
 	
@@ -110,25 +131,26 @@ public class ScreenMap extends StackPane {
 		double actualY = (gp.y()*(getGrid().getHeight()/NUM_ROWS)) + ((getGrid().getHeight()/NUM_ROWS)/2);
 		return new GamePoint(actualX, actualY);
 	}
+
 	
 	private void redrawGrid() {
-		Map<SpriteMakerModel, Boolean> onScreenOrNot = mySMC.getScreenData().getIfOnScreen();
+		Map<SpriteMakerModel, Boolean> onScreenOrNot = myScreenModelCreator.getScreenData().getIfOnScreen();
 		for (SpriteMakerModel sprite : onScreenOrNot.keySet()) {
 			if (onScreenOrNot.get(sprite) == false) {
 				onScreenOrNot.put(sprite, true);
-				//List<Component> components = sprite.getComponents();
 				for (Component c : sprite.getComponents().values()) {
 					if (c.getType().equals(Images.TYPE)) {
 						Images imageComponent = (Images) c;
-						Image image = imageComponent.image().getFXImage();
-						ImageView imageView = new ImageView(image);
+						ImageView imageView = new ImageView(imageComponent.image().getFXImage());
+						imageView.setFitHeight(myGrid.getHeight() / getNumRows());
+						imageView.setFitWidth(myGrid.getWidth() / getNumCols());
 						Component possiblePosition = sprite.getComponentByType(Position.TYPE);
 						if (possiblePosition != null) {
 							Position pos = (Position) possiblePosition;
-							GamePoint screenPoint = pos.pos();
-							GamePoint gridPoint = getCoordOfMouseHover(screenPoint.x(), screenPoint.y());
-							Integer xPos = (int) gridPoint.x();
-							Integer yPos = (int) gridPoint.y();
+							GamePoint percentPoint = pos.pos();
+							GamePoint gridCoords = getCoordOfMouseHover(percentPoint.x()*myScreenWidth, percentPoint.y()*myScreenHeight);
+							Integer xPos = (int) gridCoords.x();
+							Integer yPos = (int) gridCoords.y();
 							myGrid.add(imageView, xPos, yPos);
 						}
 					}
@@ -139,10 +161,10 @@ public class ScreenMap extends StackPane {
 	
 	public void addBorderToCoordinate(GamePoint coord) {
 		CoordinateConversion cc = new CoordinateConversion();
-		Pair<Integer, Integer> gridCoord = cc.fromGamePointToPair(coord);
+		Pair<Integer, Integer> gridCoord = cc.fromGamePointToPair(coord, myGrid);
 		Rectangle border = new Rectangle(myGrid.getWidth()/getNumCols(), myGrid.getHeight()/getNumRows());
 		border.setFill(Color.TRANSPARENT);
-		border.setStroke(Color.BLACK);
+		border.setStroke(Color.RED);
 		myGrid.add(border, gridCoord.getKey(), gridCoord.getValue());
 	}
 
@@ -162,19 +184,19 @@ public class ScreenMap extends StackPane {
 	
 	private void makeGrid() {
 		myGrid = new GridPane();
-		myGrid.setMaxHeight(SCREEN_SIZE);
-		myGrid.setMaxWidth(SCREEN_SIZE);
+		myGrid.setMaxHeight(myScreenHeight);
+		myGrid.setMaxWidth(myScreenWidth);
 		for (int i = 0; i < NUM_ROWS; i++) {
-			RowConstraints row = new RowConstraints(SCREEN_SIZE/NUM_ROWS);
+			RowConstraints row = new RowConstraints(myScreenHeight/NUM_ROWS);
 			myGrid.getRowConstraints().add(row);
 		}
 		for (int j = 0; j < NUM_COLS; j++) {
-			ColumnConstraints col = new ColumnConstraints(SCREEN_SIZE/NUM_COLS);
+			ColumnConstraints col = new ColumnConstraints(myScreenWidth/NUM_COLS);
 			myGrid.getColumnConstraints().add(col);
 		}
 		for (int i = 0; i < NUM_ROWS; i++) {
 			for (int j = 0; j < NUM_COLS; j++) {
-				myGrid.add(new Rectangle(SCREEN_SIZE/NUM_COLS, SCREEN_SIZE/NUM_ROWS, Color.WHITESMOKE), j, i);
+				myGrid.add(new Rectangle(CELL_SIZE, CELL_SIZE, Color.WHITESMOKE), j, i);
 			}
 		}
 		this.getChildren().clear();

@@ -1,5 +1,4 @@
 package newengine.view;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +11,11 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import newengine.events.camera.CameraEvent;
 import newengine.events.input.KeyEvent;
@@ -42,14 +39,24 @@ import newengine.view.subview.SkillBox;
 import newengine.view.subview.StateDisplay;
 import newengine.view.subview.UpgradeBtn;
 
-public class View {
-	public static final int WIDTH = 600;
-	public static final int HEIGHT = 500;
-	public static final int CANVAS_WIDTH = 600;
-	public static final int CANVAS_HEIGHT = 300;
-	public static final int STATS_HEIGHT = 100;
-	public static final Paint BACKGROUND = Color.BISQUE;
 
+public class View {
+	public static final Paint BACKGROUND = Color.BISQUE; // Paint is the super class
+	public static final double INIT_WIDTH = 600;
+	public static final double INIT_HEIGHT = 500;
+	public static final double INIT_CANVAS_WIDTH = 600;
+	public static final double INIT_CANVAS_HEIGHT = 300;
+	public static final double INIT_STAT_HEIGHT = 100;
+	public static final double INIT_SELECTION_HEIGHT = 200;
+	
+	private double width = INIT_WIDTH;
+	private double height = INIT_HEIGHT;
+	private double canvasWidth = INIT_CANVAS_WIDTH;
+	private double canvasHeight = INIT_CANVAS_HEIGHT;
+	private double statHeight = INIT_STAT_HEIGHT;
+	private double selectionWidth = width / 2;
+	private double selectionHeight = INIT_SELECTION_HEIGHT;
+	
 	private EventBus bus;
 	private Camera camera;
 	private Scene scene;
@@ -61,21 +68,20 @@ public class View {
 	private SkillBox skillBox;
 	private StateDisplay stateDisplay;
 	private UpgradeBtn upgradeBtn;
-	
-	// TODO: mouse location should belong to player input state
-	private ViewPoint mousePos;
+	private Canvas selectionCanvas; 
 
-	public View(EventBus bus) {
-		System.out.println("OPEN PLS"); //TODO take out
+
+	public View(EventBus bus, Camera camera) {		
 		this.bus = bus;
+		this.camera = camera;
 		VBox root = new VBox();
-		scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND);
-		statsPanel = new HBox();
-		gameWorldCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		scene = new Scene(root, width, height, BACKGROUND);		statsPanel = new HBox();
+		selectionCanvas = new Canvas(selectionWidth, selectionHeight);
+		gameWorldCanvas = new Canvas(canvasWidth, canvasHeight);
 		bottomPane = new HBox();
 		root.getChildren().addAll(statsPanel, gameWorldCanvas, bottomPane);
 		// selected sprite
-		Canvas selectionCanvas = new Canvas(WIDTH / 2, HEIGHT - CANVAS_HEIGHT - STATS_HEIGHT);
+		Canvas selectionCanvas = new Canvas(selectionWidth, selectionHeight);
 		bottomPane.getChildren().add(selectionCanvas);
 		gc = gameWorldCanvas.getGraphicsContext2D();
 		gcSelected = selectionCanvas.getGraphicsContext2D();
@@ -91,7 +97,7 @@ public class View {
 		
 		initHandlers();
 	}
-
+	
 	private void initHandlers() {
 		gameWorldCanvas.setOnMouseClicked(e -> {
 			ViewPoint viewPos = new ViewPoint(e.getX(), e.getY());
@@ -101,13 +107,9 @@ public class View {
 				bus.emit(new MouseEvent(MouseEvent.RIGHT, camera.viewToGame(viewPos)));
 			}
 		});
-		gameWorldCanvas.setOnMouseMoved(e -> {
-			mousePos = new ViewPoint(e.getX(), e.getY());
-			
-		});
 		gameWorldCanvas.setOnScroll((e) -> {
 			// for my mouse, each scroll is 40 pixels
-			// e.getDeltaY() is negative when scorll down (zoom in, increase zoom factor)
+			// e.getDeltaY() is negative when scroll down (zoom in, increase zoom factor)
 			bus.emit(new CameraEvent(CameraEvent.ZOOM, e.getDeltaY() / 400));
 		});
 		scene.setOnKeyPressed(e -> {
@@ -120,46 +122,24 @@ public class View {
 			bus.emit(new KeyEvent(KeyEvent.TYPE, e.getCode()));
 		});
 	}
-
+	
 	public Scene getScene() {
 		return scene;
 	}
-
-	public void clear(){
-		gc.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
-	}
 	
 	public void render(Models models) {
-		render(models.spriteModel());
-		render(models.playerStatsModel(), models.playerRelationModel(), models.selectionModel());
-		render(models.selectionModel(), models.playerRelationModel());
+		renderSprites(models.spriteModel());
+		renderStats(models.playerStatsModel(), models.playerRelationModel(), models.selectionModel());
+		renderBottomPane(models.selectionModel(), models.playerRelationModel());
 	}
 	
-	private void render(SpriteModel model) {
-		// render game cast
-		for (Sprite sprite : model.getSprites()) {
-			if (!sprite.getComponent(Position.TYPE).isPresent() ||
-					!sprite.getComponent(Images.TYPE).isPresent()) {
-				continue;
-			}
-			GamePoint spritePos = sprite.getComponent(Position.TYPE).get().pos();
-			LtubImage image = sprite.getComponent(Images.TYPE).get().image();
-			
-			GamePoint gamePos = new GamePoint(spritePos.x() - image.getImagePivot().x(), 
-					spritePos.y() - image.getImagePivot().y());
-			ViewPoint viewPos = camera.gameToView(gamePos);
-			gc.drawImage(image.getFXImage(), viewPos.x(), viewPos.y(), 
-					image.getFXImage().getWidth() * camera.getScaleFactor(), 
-					image.getFXImage().getHeight() * camera.getScaleFactor());
-		}
 
-	}
-	
-	private void render(PlayerStatsModel playerStatsModel, 
+	private void renderStats(PlayerStatsModel playerStatsModel, 
 			PlayerRelationModel playerRelationModel, SelectionModel selectionModel) {
 		this.statsPanel.getChildren().clear();
 		statsPanel.setSpacing(10);
 		statsPanel.maxHeight(100);
+		statsPanel.getChildren().add(new Text("Game Stats: "));
 		selectionModel.getSelectedSprite().ifPresent((sprite) -> {
 			sprite.getComponent(Owner.TYPE).ifPresent((owner) -> {
 				Player player = owner.player();
@@ -187,14 +167,43 @@ public class View {
 		});
 		return statsLabels;
 	}
+	
+	private void renderSprites(SpriteModel model) {
+		gc.clearRect(0, 0, canvasWidth, canvasHeight);
+		for (Sprite sprite : model.getSprites()) {
+			if (!sprite.getComponent(Position.TYPE).isPresent() ||
+					!sprite.getComponent(Images.TYPE).isPresent()) {
+				continue;
+			}
+			GamePoint spritePos = sprite.getComponent(Position.TYPE).get().pos();
+			LtubImage image = sprite.getComponent(Images.TYPE).get().image();
+			GamePoint gamePos = new GamePoint(spritePos.x() - image.getImagePivot().x(), 
+					spritePos.y() - image.getImagePivot().y());
+			ViewPoint viewPos = camera.gameToView(gamePos);
+			gc.drawImage(image.getFXImage(), viewPos.x(), viewPos.y(), 
+					image.getFXImage().getWidth() * camera.getScaleFactor(), 
+					image.getFXImage().getHeight() * camera.getScaleFactor());
+		}
+	}
 
-	public void render(SelectionModel selectionModel, PlayerRelationModel playerRelationModel) {
-		// render the selected sprite and its skill box
+	private void renderBottomPane(SelectionModel selectionModel, PlayerRelationModel playerRelationModel) {
+		// render the selected skill
+		if (selectionModel.getSelectedSkill().isPresent()) {
+			Skill skill = selectionModel.getSelectedSkill().get();
+			if (skill.getIcon().isPresent()) {
+				Image skillImage = skill.getIcon().get().getFXImage();
+				scene.setCursor(new ImageCursor(skillImage));
+			}
+		} else {
+			scene.setCursor(Cursor.DEFAULT);
+		}
+		
+		// render skill box of the selected sprite
 		if (selectionModel.getSelectedSprite().isPresent()) {
 			Sprite sprite = selectionModel.getSelectedSprite().get();
 			//display sprite in selected canvas
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
-				gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+				clearSelectionCanvas();
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
 			}
 			//fill stats box with stats of selected sprite
@@ -205,7 +214,6 @@ public class View {
 				Player player = sprite.getComponent(Owner.TYPE).get().player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();
 				if (player == mainPlayer) {				
-					
 					//fill skill box with skills of selected sprite
 					if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
 						skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
@@ -217,27 +225,17 @@ public class View {
 				else {
 					skillBox.clear();
 				}
-			}
-			else {
 				skillBox.clear();
 			}
 		}
 		else {
-			gcSelected.clearRect(0, 0, WIDTH, CANVAS_HEIGHT);
+			clearSelectionCanvas();
 			skillBox.clear();
-		}
-		// render the selected skill
-		if (selectionModel.getSelectedSkill().isPresent()) {
-			Skill skill = selectionModel.getSelectedSkill().get();
-			if (skill.getIcon().isPresent()) {
-				Image skillImage = skill.getIcon().get().getFXImage();
-				scene.setCursor(new ImageCursor(skillImage));
-			}
-		}
-		else {
-			scene.setCursor(Cursor.DEFAULT);
 		}
 	}
 	
 
+	private void clearSelectionCanvas() {
+		gcSelected.clearRect(0, 0, width / 2, selectionHeight);
+	}
 }

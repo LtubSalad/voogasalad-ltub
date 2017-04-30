@@ -7,6 +7,11 @@ import newengine.events.debug.SysPrintEvent;
 import newengine.events.game.StartLevelEvent;
 import newengine.events.skill.TriggerSkillEvent;
 import newengine.events.sprite.MoveEvent;
+import java.util.Queue;
+import commons.point.GamePoint;
+import data.SpriteMakerModel;
+import gameDevelopmentInterface.Path;
+import newengine.events.skill.TriggerSkillEvent;
 import newengine.events.timer.PeriodicEvent;
 import newengine.skill.skills.BuildSkill;
 import newengine.sprite.component.Component;
@@ -16,14 +21,15 @@ import newengine.utils.Target;
 public class Spawner extends Component {
 
 	public static final ComponentType<Spawner> TYPE = new ComponentType<>(Spawner.class.getName());
-
-	private double secondsBetween = 1;
-	private int totalNumber = 5;
+	private double secondsBetween;
+	private int totalNumber;
 	private boolean needToSpawn = true;
-
-	public void afterAdded(){
-		//		sprite.emit(new QueueEvent(QueueEvent.ADD, new PeriodicEvent(5, 3.0, () -> sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(new GamePoint(10,20)))))));
-		//		sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
+	private GamePoint startingPosition;
+	
+	public Spawner(int spritesToSpawn, Path pathSpritesFollow, double spawnBetweenTime) {
+		secondsBetween = spawnBetweenTime;
+		totalNumber = spritesToSpawn;
+		startingPosition = pathSpritesFollow.getPath().peek();
 	}
 
 	public void onUpdated(double dt) {
@@ -41,6 +47,7 @@ public class Spawner extends Component {
 		//			needToSpawn = false;
 		//		//}
 
+
 	}
 
 	@Override
@@ -50,6 +57,13 @@ public class Spawner extends Component {
 
 	@Override
 	public Component clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Object[] getParameters() {
 		// TODO Auto-generated method stub
 		return null;
 	}

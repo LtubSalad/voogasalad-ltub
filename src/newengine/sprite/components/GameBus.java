@@ -41,4 +41,10 @@ public class GameBus extends Component {
 	public GameBus clone() {
 		return new GameBus();
 	}
+
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

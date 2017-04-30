@@ -23,7 +23,12 @@ public class Path {
 	}
 	
 	public Path(String name) {
+		this(name, new LinkedList<GamePoint>());
+	}
+	
+	public Path(String name, Queue<GamePoint> path) {
 		this.pathName=name;
+		myPath = path;
 		makeDefaultPath();
 	}
 	

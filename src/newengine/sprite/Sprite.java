@@ -35,6 +35,7 @@ public class Sprite {
 	private EventBus spriteBus = new BasicEventBus();
 	private SpriteID spriteID;
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
+	// TODO: is dis ok for serialization 
 	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
 	
 	private SpriteState myState;
@@ -86,8 +87,8 @@ public class Sprite {
 
 	public <T extends Component> boolean hasComponent(ComponentType<T> type) {
 		return components.containsKey(type);
-	}
-
+	}	
+	
 	/**
 	 * To be called in each frame.
 	 * 
@@ -119,7 +120,7 @@ public class Sprite {
 		BusEventHandler<T> newHandler;
 		
 		newHandler = (onFired) -> {
-			try {
+			try { 
 				scriptHandler.eval(script);
 			} catch (ScriptException e) {
 				// TODO Auto-generated catch block
@@ -127,6 +128,10 @@ public class Sprite {
 			}
 		};
 		on(eventType, newHandler);
+	}
+	
+	public ScriptEngine getScriptHandler(){
+		return scriptHandler; 
 	}
 
 }

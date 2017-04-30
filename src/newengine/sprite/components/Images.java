@@ -1,33 +1,40 @@
 package newengine.sprite.components;
 
+
+
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
 
 public class Images extends Component {
-
 	public static final ComponentType<Images> TYPE = new ComponentType<>(Images.class.getName());
-	private ImageSet imageSet;
+//	private ImageSet imageSet;
+	private String imageFilePath;
 	
-	public Images(ImageSet imageSet) {
-		this.imageSet = imageSet;
+//	public Images(ImageSet imageSet) {
+//		this.imageSet = imageSet;
+//	}
+	
+
+	public Images(String imageFilePath) {
+		this.imageFilePath = imageFilePath;
 	}
-	
+//	
 	@ConstructorForDeveloper
-	public Images(@VariableName(name = "filepath") String filepath){
-		imageSet = new ImageSet(filepath);
-	}
+	public Images(@VariableName(name="Image")LtubImage image){
+		this(image.getFileName());
+	}	
 	
 	public LtubImage image() {
 		double heading = 0;
 		double dist = 100;
 		if (sprite!=null&&sprite.getComponent(Speed.TYPE).isPresent()) {
-			heading = sprite.getComponent(Position.TYPE).get().heading();
+			Position positionComponent = (Position) sprite.getComponent(Position.TYPE).get();
+			heading = positionComponent.heading();
 		}
-		return imageSet.getImage(heading, dist);
+		return new LtubImage(imageFilePath);//imageSet.getImage(heading, dist);
 	}
 	
 	@Override
@@ -37,6 +44,12 @@ public class Images extends Component {
 
 	@Override
 	public Images clone() {
-		return new Images(imageSet);
+		return new Images(imageFilePath);
+	}
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=new LtubImage(imageFilePath);
+		return parameters;
 	}
 }

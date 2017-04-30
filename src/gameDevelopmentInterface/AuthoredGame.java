@@ -11,7 +11,7 @@ public class AuthoredGame {
 	public AuthoredGame() {
 		myGeneralData = new DeveloperData();
 		myScreenData = new ScreenModelData();
-		myPaths = new PathCreator(null);
+		//myPaths = new PathCreator(null);
 	}
 
 	public DeveloperData getGeneralData() {

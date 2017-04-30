@@ -43,4 +43,11 @@ public class Speed extends Component {
 	public Speed clone() {
 		return new Speed(speed);
 	}
+
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=speed;
+		return parameters;
+	}
 }

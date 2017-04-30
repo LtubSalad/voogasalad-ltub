@@ -1,5 +1,7 @@
 package newengine.managers.input;
 
+import java.util.List;
+
 import bus.EventBus;
 import commons.point.GamePoint;
 import javafx.scene.input.KeyCode;
@@ -17,6 +19,8 @@ import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
+import newengine.sprite.component.ComponentType;
+import newengine.sprite.components.Position;
 import newengine.utils.ActionMode;
 import newengine.utils.Target;
 import newengine.utils.checker.SelectionChecker;
@@ -98,16 +102,16 @@ public class InputManager {
 
 	public void update(double dt) {
 		if (keyInputState.isKeyPressed(KeyCode.LEFT)) {
-			bus.emit(new CameraEvent(CameraEvent.MOVE, -Camera.MOVE_SPEED_PER_FRAME * dt, 0));
-		}
-		else if (keyInputState.isKeyPressed(KeyCode.RIGHT)) {
 			bus.emit(new CameraEvent(CameraEvent.MOVE, Camera.MOVE_SPEED_PER_FRAME * dt, 0));
 		}
+		else if (keyInputState.isKeyPressed(KeyCode.RIGHT)) {
+			bus.emit(new CameraEvent(CameraEvent.MOVE, -Camera.MOVE_SPEED_PER_FRAME * dt, 0));
+		}
 		else if (keyInputState.isKeyPressed(KeyCode.UP)) {
-			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, -Camera.MOVE_SPEED_PER_FRAME * dt));
+			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, Camera.MOVE_SPEED_PER_FRAME * dt));
 		}
 		else if (keyInputState.isKeyPressed(KeyCode.DOWN)) {
-			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, Camera.MOVE_SPEED_PER_FRAME * dt));
+			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, -Camera.MOVE_SPEED_PER_FRAME * dt));
 		}
 		else if (keyInputState.isKeyPressed(KeyCode.R)) {
 			bus.emit(new CameraEvent(CameraEvent.RESET));

@@ -1,5 +1,6 @@
 package player.passwordManager;
 
+import java.util.ResourceBundle;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,15 +19,20 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import player.levelChoice.LevelManager;
+import utilities.PopUpMessage;
 
 
 public class PasswordManager{
 
+	public static final String LOCATION = "resources/password";
+	
+	public static final Writer writer = new PasswordStorage();
+	private ResourceBundle myResources = ResourceBundle.getBundle(LOCATION);
+
 	public static final String TITLE = "Login";
 	private Stage primaryStage;
-	String user = "LTUB";
-	String pw = "123456";
 	String checkUser, checkPw;
+	String tempCheckUser = "", tempCheckPw = "";
 	TextField txtUserName;
 	Label lblMessage;
 	PasswordField pf;
@@ -37,6 +43,7 @@ public class PasswordManager{
 		lblMessage = new Label();
 		pf = new PasswordField();
 	}
+	//FIXME: refactor this method into smaller methods 
 	public void show() {
 		primaryStage.setTitle(TITLE);
 		BorderPane bp = new BorderPane();
@@ -53,6 +60,10 @@ public class PasswordManager{
 		Label lblPassword = new Label("Password");		
 		Button btnLogin = new Button("Login");
 		Button btnReset = new Button("Reset");
+		Button btnRegister = new Button("Register");
+		btnLogin.setMaxWidth(Double.MAX_VALUE);
+		btnReset.setMaxWidth(Double.MAX_VALUE);
+		btnRegister.setMaxWidth(Double.MAX_VALUE);
 		//Adding Nodes to GridPane layout
 		gridPane.add(lblUserName, 0, 0);
 		gridPane.add(txtUserName, 1, 0);
@@ -61,6 +72,7 @@ public class PasswordManager{
 		gridPane.add(btnLogin, 2, 0);
 		gridPane.add(btnReset, 2, 1);
 		gridPane.add(lblMessage, 1, 2);
+		gridPane.add(btnRegister, 2, 2);
 		//Reflection for gridPane
 		Reflection r = new Reflection();
 		r.setFraction(0.7f);
@@ -80,6 +92,7 @@ public class PasswordManager{
 		gridPane.setId("root");
 		btnLogin.setId("btnLogin");
 		btnReset.setId("btnReset");
+		btnRegister.setId("btnReset");
 		text.setId("text");
 		//Add HBox and GridPane layout to BorderPane Layout
 		bp.setTop(hb);
@@ -90,27 +103,48 @@ public class PasswordManager{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		//Action for btnLogin
-		btnLogin.setOnAction(e -> buttonLoginAction(primaryStage));
+		btnLogin.setOnAction(e -> buttonLoginAction());
+
+		//Action for btnReset
+		btnReset.setOnAction(e -> buttonResetAction());
 		
-		//Action for btnLogin
-		btnReset.setOnAction(e -> buttonResetAction(primaryStage));
-		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode(), primaryStage));
+		//Action for btnRegister
+		btnRegister.setOnAction(e -> buttonRegisterAction(new SuccessRegistration()));
+				
+				
+		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 	}
-	private void handleKeyInput(KeyCode code, Stage primaryStage) {
+	
+	
+	private void buttonRegisterAction(PopUpMessage p) {
+				
+		tempCheckUser = txtUserName.getText().toString();
+		tempCheckPw = pf.getText().toString();
+		
+		writer.write(tempCheckUser, tempCheckPw);
+		p.show();
+		buttonResetAction();
+		
+		
+	}
+	
+	
+	
+	private void handleKeyInput(KeyCode code) {
 		if(code == KeyCode.ENTER ){
-			buttonLoginAction(primaryStage);
+			buttonLoginAction();
 		}
-		
+
 	}
-	private void buttonLoginAction(Stage primaryStage) {
+	private void buttonLoginAction() {
 		checkUser = txtUserName.getText().toString();
 		checkPw = pf.getText().toString();
-		if(checkUser.equals(user) && checkPw.equals(pw)){
+		if(checkUserAndPassword(checkUser, checkPw) ||((!tempCheckUser.equals("") && !tempCheckPw.equals("")) && checkUser.equals(tempCheckUser) && checkPw.equals(tempCheckPw) )){
 			lblMessage.setText("Congratulations!");
 			lblMessage.setTextFill(Color.GREEN);
 			primaryStage.hide();
-			 LevelManager levelManager = new LevelManager(primaryStage);
-			 levelManager.show();
+			LevelManager levelManager = new LevelManager(primaryStage);
+			levelManager.show();
 		}
 		else{
 			lblMessage.setText("Incorrect user or pw.");
@@ -119,10 +153,17 @@ public class PasswordManager{
 		txtUserName.setText("");
 		pf.setText("");
 	}
-	
-	private void buttonResetAction(Stage primaryStage) {
+
+	private void buttonResetAction() {
 		txtUserName.clear();
 		pf.clear();
 	}
-	
+
+	private boolean checkUserAndPassword(String user, String pw){
+		if(myResources.containsKey(user)){
+			String password = myResources.getString(user);		
+			return password.equals(pw);		
+		}		
+		return false;		
+	}
 }

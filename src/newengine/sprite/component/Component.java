@@ -25,6 +25,13 @@ public abstract class Component {
 
 	public abstract ComponentType<? extends Component> getType();
 	
+
 	public abstract Component clone();
+	
+	/**
+	 * 应该这么implement这个method：。。。
+	 * @return
+	 */
+	public abstract Object[] getParameters();
 	
 }
