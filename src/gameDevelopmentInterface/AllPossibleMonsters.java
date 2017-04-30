@@ -87,7 +87,7 @@ public class AllPossibleMonsters extends ScrollPane {
 				possibleMonster.getComponentByType(Speed.TYPE) != null &&
 				possibleMonster.getComponentByType(Health.TYPE) != null &&
 				possibleMonster.getComponentByType(PathFollower.TYPE) != null &&
-				possibleMonster.getComponentByType(EventQueue.TYPE) != null &&
-				possibleMonster.getComponentByType(GameBus.TYPE) != null);
+				possibleMonster.getComponentByType(EventQueue.TYPE) != null);
+			//	possibleMonster.getComponentByType(GameBus.TYPE) != null);
 	}
 }
