@@ -34,7 +34,7 @@ public class SpriteCreationEnvironment extends BorderPane{
 		this.setCenter(creationScreens);
 	}
 	
-	class TabAdder extends HBox {
+	private class TabAdder extends HBox {
 		private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 		private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
 		private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
@@ -45,6 +45,7 @@ public class SpriteCreationEnvironment extends BorderPane{
 		private TabAdder() {
 			instantiate();
 		}
+		
 		private void instantiate() {
 			SpriteEditorLoader loader=new SpriteEditorLoader();
 			Button spriteButton = new Button(myResources.getString(CREATE_NEW_SPRITE));
@@ -65,7 +66,12 @@ public class SpriteCreationEnvironment extends BorderPane{
 				
 			});
 			Button presetSpawnerButton=new Button("Load Spawner Preset");
-			Button loadSavedSprite=new Button("Load Preset Sprite");
+			Button loadPresetSprite=new Button("Load Preset");
+			Button loadSavedSprite=new Button("Load Saved Sprite");
+			loadSavedSprite.setOnAction((event)->{
+
+			});
+			
 			
 			this.getChildren().addAll(spriteButton, presetTowerButton,  presetMonsterButton, presetSpawnerButton, loadSavedSprite);
 		}

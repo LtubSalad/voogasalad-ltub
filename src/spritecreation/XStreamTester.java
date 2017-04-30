@@ -131,9 +131,9 @@ public class XStreamTester extends Application{
 		SpriteMakerModel fromXML = (SpriteMakerModel) xstream.fromXML(new FileReader(file));
 
 		Sprite sprite2 = new Sprite();
-		for (ComponentType<?> c : fromXML.getComponents().keySet()) {
+		for (ComponentType<?> c : fromXML.getDeprecatedComponents().keySet()) {
 			System.out.println("Component type: " + c);
-			Component componentSaved = fromXML.getComponents().get(c);
+			Component componentSaved = fromXML.getDeprecatedComponents().get(c);
 			sprite2.addComponent(componentSaved);
 		}
 		
