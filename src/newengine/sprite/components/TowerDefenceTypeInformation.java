@@ -39,5 +39,4 @@ public class TowerDefenceTypeInformation extends Component {
 		parameters[0]=myType;
 		return parameters;
 	}
-
 }
