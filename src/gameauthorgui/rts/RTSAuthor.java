@@ -33,7 +33,7 @@ public class RTSAuthor extends GameAuthor{
 		addStep(new DeveloperStep("Welcome", new RTSWelcomeScreen(myModelData)));
 		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
 		addStep(new DeveloperStep("General Data", myGeneralDataCreator));
-		addStep(new DeveloperStep("Screen Setting", new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData )));
+		//addStep(new DeveloperStep("Screen Setting", new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData )));
 	}
 
 	@Override

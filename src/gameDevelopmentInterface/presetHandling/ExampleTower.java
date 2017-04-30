@@ -16,7 +16,7 @@ public class ExampleTower extends SpriteMakerModel {
 		loadComponents();
 	}
 	
-	public void loadComponents(){
+	private void loadComponents(){
 		this.addComponent(new Owner("team 1"));
 		this.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		this.addComponent(new SoundEffect(new File("sounds\\Dnpisd1.wav")));

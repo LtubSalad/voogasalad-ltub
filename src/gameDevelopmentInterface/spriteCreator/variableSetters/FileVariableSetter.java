@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class FileVariableSetter extends VariableSetter<File>{
 	private File selectedFile;
 	private Label fileLabel;
-	private final File baseDirectory =new File(System.getProperty("user.dir")+File.separator+"data");
+	private final File baseDirectory =new File(System.getProperty("user.dir")+File.separator+"src");
 	
 	public FileVariableSetter(String variableName) {
 		super(variableName);
