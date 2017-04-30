@@ -3,6 +3,7 @@ package gameauthorgui;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -32,7 +33,9 @@ public abstract class GameAuthor implements IGameAuthor {
 	
 	private HBox instantiateButtons() {
 		HBox buttons = new HBox(100);
-		buttons.getChildren().addAll(new PreviousStepButton(stepOrganizer), new NextStepButton(stepOrganizer));
+		Button save = new Button("Save");
+		save.setOnAction(e -> save());
+		buttons.getChildren().addAll(new PreviousStepButton(stepOrganizer), new NextStepButton(stepOrganizer), save);
 		buttons.setAlignment(Pos.CENTER);
 		return buttons;
 	}
@@ -61,5 +64,7 @@ public abstract class GameAuthor implements IGameAuthor {
 	public StepOrganizer getStepOrganizer(){
 		return stepOrganizer;
 	}
+	
+	public abstract void save();
 
 }
