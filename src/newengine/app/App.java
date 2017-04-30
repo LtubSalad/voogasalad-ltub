@@ -51,6 +51,7 @@ import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
+import newengine.sprite.components.Upgrade;
 import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
 
@@ -69,7 +70,7 @@ public class App extends Application {
 
 		// sprite 1: the tower
 		Sprite tower = new Sprite();
-		LtubImage image1 = new LtubImage("images/skills/bullet.png");
+		LtubImage image1 = new LtubImage("images/characters/tower2_resized.gif");
 		ImageSet imageSet1 = new ImageSet(image1);
 		Map<SkillType<? extends Skill>, Skill> skillMap1 = new HashMap<>();
 		skillMap1.put(MoveSkill.TYPE, new MoveSkill());
@@ -87,14 +88,10 @@ public class App extends Application {
 		tower.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		tower.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		tower.addComponent(new Range(200));
-		tower.addComponent(new Attacker(25, image1));
+		tower.addComponent(new Attacker(25, new LtubImage("images/skills/bullet.png")));
 		tower.addComponent(new EventQueue(new LinkedList<>()));
 		tower.addComponent(new RangeShootingAI());
-		tower.addComponent(new Upgrade());
-
-
-
-
+		
 		SpriteMakerModel child = new SpriteMakerModel();
 		Map<SkillType<? extends Skill>, Skill> childSkillMap = new HashMap<>();
 		child.addComponent(new GameBus());
@@ -107,10 +104,17 @@ public class App extends Application {
 		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		child.addComponent(new Range(128));
-		child.addComponent(new Attacker(25, image1));
+		child.addComponent(new Attacker(25, new LtubImage("images/skills/bullet.png")));
 		child.addComponent(new Health(100));
 		child.addComponent(new EventQueue(new LinkedList<>()));
 		child.addComponent(new PathFollower(new Path()));
+		
+		tower.addComponent(new Upgrade(child, -55));
+
+
+
+
+		
 
 		
 		Sprite monster = new Sprite();
