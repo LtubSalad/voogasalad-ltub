@@ -28,6 +28,17 @@ public class UserHistory {
 		gameToHistory = new HashMap<String, GameHistory>();
 	}
 		
+	public Map<String, String> getFileMap(){
+		return this.gameToFile;
+	}
+	
+	public List<String> getAuthoredGames(){
+		return authored; 
+	}
+	
+	public List<String> getPlayedGames(){
+		return played; 
+	}
 	
 	public Map<String, GameHistory> getPlayedHistory(){
 		return gameToHistory; 
