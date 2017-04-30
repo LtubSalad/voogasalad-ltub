@@ -69,7 +69,7 @@ public class DefaultComponentSetter<T extends Component> extends ComponentSetter
 			}
 		}	
 		if(ctor==null){
-			AlertHandler.errorPopUp("Constructor not found");//Throw exception
+			AlertHandler.showError("Constructor not found");//Throw exception
 			return;
 		}
 		parameters=ctor.getParameters();
@@ -81,7 +81,7 @@ public class DefaultComponentSetter<T extends Component> extends ComponentSetter
 		List<Object> parameters=new ArrayList<>();
 		for(VariableSetter<?> setter:variableSetters){
 			if(setter.getValue()==null){
-				AlertHandler.errorPopUp("Incomplete field!");
+				AlertHandler.showError("Incomplete field");
 			}
 			parameters.add(setter.getValue());
 		} 
