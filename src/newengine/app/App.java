@@ -128,14 +128,14 @@ public class App extends Application {
 		
 		
 		SpriteMakerModel child = new SpriteMakerModel();
-		Map<SkillType<? extends Skill>, Skill> childSkillMap = new HashMap<>();
+		//Map<SkillType<? extends Skill>, Skill> childSkillMap = new HashMap<>();
 		child.addComponent(new GameBus());
-		child.addComponent(new SkillSet(childSkillMap));
+		//child.addComponent(new SkillSet(childSkillMap));
 		child.addComponent(new Owner(player1));
 		child.addComponent(new Position(new GamePoint(300, 50), 0));
 		//child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		child.addComponent(new Images("images/skills/build.png"));
-		child.addComponent(new Speed(100));
+		child.addComponent(new Speed(1000));
 		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		child.addComponent(new Range(128));
