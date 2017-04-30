@@ -94,25 +94,10 @@ public class SpriteMakerModel {
 	public void addEventHandler(EventHandleData eventHandler) {
 		myEventHandlers.add(eventHandler);
 	}
-//	
-//	public List<Component> getComponents() {
-//		return myComponents;
-//	}
 	
 	public List<EventHandleData> getEventHandlers() {
 		return myEventHandlers;
 	}
-	
-//	public void printComponents() {
-//		for (Component c : myComponents) {
-//			System.out.println(c.getType());
-//		}
-//	}
-
-	
-//	public Map<BusEvent,String> getScriptMap() {
-//		return myScriptMap;
-//	}
 	
 	public Map<String,List<String>> getTransferComponents() {
 		return componentsForTransfer; 
