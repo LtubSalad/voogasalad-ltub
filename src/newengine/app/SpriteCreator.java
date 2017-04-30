@@ -50,7 +50,7 @@ public class SpriteCreator {//extends Application {
 		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		child.addComponent(new Range(128));
-		child.addComponent(new Attacker());
+		//child.addComponent(new Attacker());
 		child.addComponent(new Health(100));
 		child.addComponent(new EventQueue(new LinkedList<>()));
 		child.addComponent(new PathFollower(new Path()));

@@ -11,8 +11,8 @@ import newengine.utils.image.LtubImage;
 public abstract class Skill {
 	
 	protected LtubImage icon;
-	private Sprite source;
-	private Target target;
+	protected Sprite source = new Sprite();
+	protected Target target;
 	
 	public void setSource(Sprite source) {
 		this.source = source;
