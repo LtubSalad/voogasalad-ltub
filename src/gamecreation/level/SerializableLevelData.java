@@ -1,6 +1,10 @@
 package gamecreation.level;
 
-import newengine.managers.conditions.ICondition;
+import java.util.List;
+
+import data.SpriteMakerModel;
+import newengine.managers.conditions.Condition;
+import newengine.managers.conditions.NoMonstersCondition;
 
 /**
  * The necessity of this class is that LevelData in its current implementation is observable for front-end 
@@ -10,9 +14,10 @@ import newengine.managers.conditions.ICondition;
  */
 public class SerializableLevelData implements ILevelData {
 	private String name;
-	private ICondition winning;
-	private ICondition losing;
+	private Condition winning;
+	private Condition losing;
 	private double spawnTime;
+	private List<SpriteMakerModel> spawners;
 	
 	
 	public SerializableLevelData(LevelData data){
@@ -20,6 +25,7 @@ public class SerializableLevelData implements ILevelData {
 		this.winning = data.getWinningCondition();
 		this.losing = data.getLosingCondition();
 		this.spawnTime = data.getSpawnTime();
+		this.spawners = data.getSpawners();
 	}
 
 	@Override
@@ -28,18 +34,23 @@ public class SerializableLevelData implements ILevelData {
 	}
 
 	@Override
-	public ICondition getWinningCondition() {
+	public Condition getWinningCondition() {
 		return winning;
 	}
 
 	@Override
-	public ICondition getLosingCondition() {
+	public Condition getLosingCondition() {
 		return losing;
 	}
 
 	@Override
 	public double getSpawnTime() {
 		return spawnTime;
+	}
+
+	@Override
+	public List<SpriteMakerModel> getSpawners() {
+		return spawners;
 	}
 
 }
