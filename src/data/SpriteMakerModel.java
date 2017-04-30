@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import bus.BusEvent;
-import gameauthorgui.inputhelpers.DataWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
 import javafx.util.Pair;
 import newengine.events.sprite.SpriteKilledEvent;
 import newengine.skill.Skill;
@@ -20,6 +17,7 @@ import newengine.sprite.component.ComponentType;
 public class SpriteMakerModel {
 	private Map<String, String> myCustomEventHandlers;
 
+	
 	private Map<ComponentType<?>,Component> myComponents;
 	private Map<BusEvent, String> myScriptMap;
 	private String spriteName;
@@ -75,7 +73,6 @@ public class SpriteMakerModel {
 		if (!componentsForTransfer.keySet().contains(componentName)) {
 			componentsForTransfer.put(componentName, params);
 		}
-		
 	}
 	
 	
@@ -97,10 +94,10 @@ public class SpriteMakerModel {
 	public void addEventHandler(EventHandleData eventHandler) {
 		myEventHandlers.add(eventHandler);
 	}
-//	
-//	public List<Component> getComponents() {
-//		return myComponents;
-//	}
+	
+	public Map<ComponentType<?>, Component > getComponents() {
+		return myComponents;
+	}
 	
 	public List<EventHandleData> getEventHandlers() {
 		return myEventHandlers;
@@ -142,13 +139,7 @@ public class SpriteMakerModel {
 	 * @param comp
 	 */
 	public void addComponent(Component comp) {
-//		myComponents.forEach((type,component)->{
-//			if(comp.getType().equals(type)){
-//				myComponents.remove(type,component);
-//			}
-//		});
 		actualComponents.add(comp);
-
 		myComponents.put(comp.getType(), comp);
 	}
 	
@@ -160,7 +151,8 @@ public class SpriteMakerModel {
 		return myScriptMap;
 	}
 	
-	public Map<ComponentType<?>,Component> getComponents() {
+	@Deprecated
+	public Map<ComponentType<?>,Component> getDeprecatedComponents() {
 		return myComponents;
 	}
 	
@@ -211,15 +203,14 @@ public class SpriteMakerModel {
 	 * Call this AFTER unserialization to avoid the bus issues
 	 * @return
 	 */
-//	public Sprite produceSprite(){
-//		Sprite sprite=new Sprite();
-//		myComponents.forEach((componentType, component)->{
-//			sprite.addComponent(component);
-//		});
-////		myScriptMap.forEach((event, script)->{
-////			sprite.produceHandler(event.getEventType(), script);
-////		});
-//		return sprite;
-//	}
-
+	public Sprite produceSprite(){
+		Sprite sprite=new Sprite();
+		myComponents.forEach((componentType, component)->{
+			sprite.addComponent(component);
+		});
+		myScriptMap.forEach((event, script)->{
+			sprite.produceHandler(event.getEventType(), script);
+		});
+		return sprite;
+	}
 }

@@ -31,7 +31,7 @@ import utilities.XStreamHandler;
  */
 public class ScreenObjectHolder extends HBox {
 	private ScreenModelCreator myScreenModel;
-	//private List<SpriteMakerModel> myScreenData;
+	private List<SpriteMakerModel> myScreenData;
 	private Map<Pair<String, Image>, SpriteMakerModel> myScreenObjects = new HashMap<Pair<String, Image>, SpriteMakerModel>();
 	private DeveloperData myModel;
 	
@@ -46,6 +46,7 @@ public class ScreenObjectHolder extends HBox {
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
 				myModel.getTilesToDrag().forEach(spriteMakerModel -> {
 					Map<ComponentType<?>, Component> screenObjectComponents = spriteMakerModel.getComponents();
+
 					for (Component c : screenObjectComponents.values()) {
 						ComponentType<?> type = c.getType();
 						if (type.equals(Images.TYPE)) {
@@ -77,7 +78,7 @@ public class ScreenObjectHolder extends HBox {
 	 *            the sprite to add to the HBox
 	 */
 	public void addObject(SpriteMakerModel screenObject) {
-		for (Component c : screenObject.getComponents().values()) {
+		for (Component c : screenObject.getDeprecatedComponents().values()) {
 			ComponentType<?> type = c.getType();
 			if (type.equals(Images.TYPE)) {
 				Images imageComponent = (Images) c;

@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import newengine.app.Game;
 import player.App;
+import player.levelChoice.LevelManager;
 import player.loaderManager.Loader;
 
 /**
@@ -133,10 +134,17 @@ public class GameManager {
 			FileLoader fileLoader = new FileLoader(primaryStage);
 			gameFile = fileLoader.chooseFile();
 			if (gameFile != null) {
+				primaryStage.hide();
+				Loader loader = new Loader(primaryStage);
+				loader.show();
+				
 				// gameFactory.loadGame(gameFile);
 				// load the game file into the GameFactory
 				GameCreator gameCreator = new GameCreator(gameFile);
-				Game game = gameCreator.getGame();
+    			Game game = gameCreator.getGame();
+				LevelManager levelChoice = new LevelManager(primaryStage);
+				levelChoice.show();
+				
 				
 				primaryStage.setScene(game.getScene());
 				
@@ -148,8 +156,6 @@ public class GameManager {
 			// TODO load the corresponding game file into gameFile
 			System.out.println("Game " + button.getTooltip().getText() + " is chosen.");
 		}
-		primaryStage.close();
-		Loader loader = new Loader(primaryStage);
-		loader.show();
+
 	}
 }

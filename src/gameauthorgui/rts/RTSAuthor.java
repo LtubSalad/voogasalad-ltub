@@ -36,4 +36,9 @@ public class RTSAuthor extends GameAuthor{
 		//addStep(new DeveloperStep("Screen Setting", new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData )));
 	}
 
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+	}
+
 }
