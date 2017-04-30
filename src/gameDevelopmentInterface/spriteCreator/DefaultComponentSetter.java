@@ -11,6 +11,7 @@ import gameDevelopmentInterface.developerdata.ComponentSetter;
 import gameDevelopmentInterface.spriteCreator.variableSetters.VariableSetter;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.sprite.component.Component;
+import utilities.AlertHandler;
 /**
  * 
  * @author Daniel
@@ -68,7 +69,7 @@ public class DefaultComponentSetter<T extends Component> extends ComponentSetter
 			}
 		}	
 		if(ctor==null){
-			//Throw exception
+			AlertHandler.showError("Constructor not found");//Throw exception
 			return;
 		}
 		parameters=ctor.getParameters();
@@ -79,6 +80,9 @@ public class DefaultComponentSetter<T extends Component> extends ComponentSetter
 	public T produceComponent() throws Exception{
 		List<Object> parameters=new ArrayList<>();
 		for(VariableSetter<?> setter:variableSetters){
+			if(setter.getValue()==null){
+				AlertHandler.showError("Incomplete field");
+			}
 			parameters.add(setter.getValue());
 		} 
 		return ctor.newInstance(parameters.toArray());

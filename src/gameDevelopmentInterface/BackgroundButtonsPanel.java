@@ -2,6 +2,7 @@ package gameDevelopmentInterface;
 
 import java.util.ResourceBundle;
 
+import data.DeveloperData;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -30,10 +31,11 @@ public class BackgroundButtonsPanel extends TowerSetButtonsPanel {
 	private HBox colsBox;
 	private TextArea myNumRowsInput = new TextArea();
 	private TextArea myNumColsInput = new TextArea();
+	private DeveloperData myData;
 
-	public BackgroundButtonsPanel(ScreenModelCreator smc) {
+	public BackgroundButtonsPanel(ScreenModelCreator smc, DeveloperData data) {
 		super(smc);
-		//makeButtons();
+		myData = data;
 		mySMC = smc;
 		rowsBox = new HBox();
 		colsBox = new HBox();
@@ -46,6 +48,7 @@ public class BackgroundButtonsPanel extends TowerSetButtonsPanel {
 		myNumRowsInput.setMaxWidth(MAX_WIDTH);
 		myNumColsInput.setMaxHeight(MAX_HEIGHT);
 		myNumColsInput.setMaxWidth(MAX_WIDTH);
+
 		sendNumRows = new Button(myResources.getString(SET_NUMBER_OF_ROWS));
 		sendNumCols = new Button(myResources.getString(SET_NUMBER_OF_COLUMNS));
 //		sendNumRows.setOnAction(e -> mySMC.getScreen().setNumRows(Integer.parseInt(myNumRowsInput.getText())));

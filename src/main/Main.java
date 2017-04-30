@@ -24,7 +24,7 @@ public class Main extends Application {
 	private VBox putInRoot = new VBox();
 	private BorderPane root = new BorderPane();
 	private Scene scene = new Scene(root);
-	private TowerAuthor currentTowerGUI = new TowerAuthor();
+	private TowerAuthor currentTowerGUI = new TowerAuthor(); 
 	private XStreamHandler xstream = new XStreamHandler();
 
 	public void start(Stage primaryStage) {

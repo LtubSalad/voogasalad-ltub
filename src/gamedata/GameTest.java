@@ -15,13 +15,10 @@ public class GameTest extends Application {
 		// make a file chooser?
 		// create game from file 
 		
-		String filepath = "src/MorningTest.xml";
-		FileChooser fileChooser = new FileChooser();
-		 fileChooser.setTitle("Open Resource File");
-		 File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
+		String filepath = "data/XMLfiles/trash.xml";
 		GameCreator creator = new GameCreator();
-		Game game = creator.createGame(selectedFile);
+		Game game = creator.createGame(filepath);
 
 		primaryStage.setScene(game.getScene());
 		game.start();
