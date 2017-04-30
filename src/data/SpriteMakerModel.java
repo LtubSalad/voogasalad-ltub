@@ -26,7 +26,6 @@ public class SpriteMakerModel {
 	private String spriteDescription;
 	
 	// Jake and Tahia's DO NOT TOUCH
-	private Map<String, List<String>> componentsForTransfer; 
 	private List<Component> actualComponents; 
 	private List<EventHandleData> myEventHandlers; 
 	List<Skill> skills; 
@@ -69,15 +68,15 @@ public class SpriteMakerModel {
 		skills.add(skill);
 	}
 	
-	
-	public void addComponent(String componentName, List<String> params) {
-		//TODO: modify this method call to pass data correct data structures (Map<String, DataWrapper>) 
-		if (!componentsForTransfer.keySet().contains(componentName)) {
-			componentsForTransfer.put(componentName, params);
-		}
-		
-	}
-	
+//	
+//	public void addComponent(String componentName, List<String> params) {
+//		//TODO: modify this method call to pass data correct data structures (Map<String, DataWrapper>) 
+//		if (!componentsForTransfer.keySet().contains(componentName)) {
+//			componentsForTransfer.put(componentName, params);
+//		}
+//		
+//	}
+//	
 	
 	/**
 	 * @param componentName
@@ -117,9 +116,9 @@ public class SpriteMakerModel {
 //		return myScriptMap;
 //	}
 	
-	public Map<String,List<String>> getTransferComponents() {
-		return componentsForTransfer; 
-	}
+//	public Map<String,List<String>> getTransferComponents() {
+//		return componentsForTransfer; 
+//	}
 	
 //	public SpriteMakerModel(SpriteMakerModel toCopy) {
 //		this.myCustomEventHandlers = toCopy.myCustomEventHandlers;
@@ -183,14 +182,14 @@ public class SpriteMakerModel {
 	}
 	
 
-	public Pair<String, List<String>> getComponentByType(String componentName) {
-		for (String c : componentsForTransfer.keySet()) {
-			if (c.equals(componentName)) {
-				return new Pair<String, List<String>>(c, componentsForTransfer.get(c));
-			}
-		}
-		return null; 
-	}
+//	public Pair<String, List<String>> getComponentByType(String componentName) {
+//		for (String c : componentsForTransfer.keySet()) {
+//			if (c.equals(componentName)) {
+//				return new Pair<String, List<String>>(c, componentsForTransfer.get(c));
+//			}
+//		}
+//		return null; 
+//	}
 	
 	public Component getComponentByType(ComponentType<?> type) {
 		for (Component c : actualComponents) {
