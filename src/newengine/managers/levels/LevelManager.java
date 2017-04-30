@@ -4,13 +4,14 @@ import java.util.List;
 
 import bus.EventBus;
 import gamecreation.level.ILevelData;
-import gamecreation.level.LevelData;
 import newengine.events.conditions.EndConditionTriggeredEvent;
 import newengine.events.conditions.SetEndConditionEvent;
 import newengine.events.levels.InitILevelsEvent;
 import newengine.events.levels.SetLevelEvent;
 import newengine.events.levels.WinGameEvent;
 import newengine.events.spawner.SpawnPrefEvent;
+import newengine.managers.conditions.GoldMinimumCondition;
+import newengine.managers.conditions.NoLivesCondition;
 
 public class LevelManager{
 	private EventBus bus;
@@ -62,8 +63,8 @@ public class LevelManager{
 	}
 	
 	private void loadLevel(ILevelData newLevel){
-		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, newLevel.getWinningCondition()));
-		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, newLevel.getLosingCondition()));
+		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));//newLevel.getWinningCondition()));
+		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));//newLevel.getLosingCondition()));
 		bus.emit(new SpawnPrefEvent(SpawnPrefEvent.SETPREFS, newLevel.getSpawnTime()));	
 	}
 

@@ -35,7 +35,7 @@ public class Sprite {
 	private SpriteID spriteID;
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
 	// TODO: is dis ok for serialization 
-	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
+//	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
 	
 	private SpriteState myState;
 
@@ -119,22 +119,22 @@ public class Sprite {
 		return "sprite(" + spriteID + ")";
 	}
 
-	public <T extends BusEvent> void produceHandler(BusEventType<T> eventType, String script) {
-		BusEventHandler<T> newHandler;
-		
-		newHandler = (onFired) -> {
-			try { 
-				scriptHandler.eval(script);
-			} catch (ScriptException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		};
-		on(eventType, newHandler);
-	}
-	
-	public ScriptEngine getScriptHandler(){
-		return scriptHandler; 
-	}
+//	public <T extends BusEvent> void produceHandler(BusEventType<T> eventType, String script) {
+//		BusEventHandler<T> newHandler;
+//		
+//		newHandler = (onFired) -> {
+//			try { 
+//				scriptHandler.eval(script);
+//			} catch (ScriptException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		};
+//		on(eventType, newHandler);
+//	}
+//	
+//	public ScriptEngine getScriptHandler(){
+//		return scriptHandler; 
+//	}
 
 }

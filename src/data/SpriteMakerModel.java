@@ -189,18 +189,18 @@ public class SpriteMakerModel {
 	
 	
 	
-	/**
-	 * Call this AFTER unserialization to avoid the bus issues
-	 * @return
-	 */
-	public Sprite produceSprite(){
-		Sprite sprite=new Sprite();
-		myComponents.forEach((componentType, component)->{
-			sprite.addComponent(component);
-		});
-		myScriptMap.forEach((event, script)->{
-			sprite.produceHandler(event.getEventType(), script);
-		});
-		return sprite;
-	}
+//	/**
+//	 * Call this AFTER unserialization to avoid the bus issues
+//	 * @return
+//	 */
+//	public Sprite produceSprite(){
+//		Sprite sprite=new Sprite();
+//		myComponents.forEach((componentType, component)->{
+//			sprite.addComponent(component);
+//		});
+//		myScriptMap.forEach((event, script)->{
+//			sprite.produceHandler(event.getEventType(), script);
+//		});
+//		return sprite;
+//	}
 }

@@ -88,6 +88,7 @@ public class GameCreator {
 				
 				bus.emit(new MainPlayerEvent(userPlayer));
 				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
+				System.out.println("Initial gold: " + Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD)));
 				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));
 				
 				//TODO condition factory
