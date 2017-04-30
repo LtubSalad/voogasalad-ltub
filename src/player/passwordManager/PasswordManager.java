@@ -1,9 +1,11 @@
 package player.passwordManager;
 
 import java.util.ResourceBundle;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -17,8 +19,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import player.levelChoice.LevelManager;
+import newengine.utils.Callback;
+import player.App;
+import player.helpers.UserCallback;
+import user.UsersModel;
 import utilities.PopUpMessage;
 
 
@@ -28,24 +32,34 @@ public class PasswordManager{
 	
 	public static final Writer writer = new PasswordStorage();
 	private ResourceBundle myResources = ResourceBundle.getBundle(LOCATION);
+	
+	private  ResourceBundle resources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 
-	public static final String TITLE = "Login";
-	private Stage primaryStage;
-	String checkUser, checkPw;
-	String tempCheckUser = "", tempCheckPw = "";
-	TextField txtUserName;
-	Label lblMessage;
-	PasswordField pf;
+	private String checkUser;
+	private String checkPw;
+	private String tempCheckUser = "";
+	private String tempCheckPw = "";
+	private TextField txtUserName;
+	private Label lblMessage;
+	private PasswordField pf;
+	
+	private UsersModel usersModel; 
+	
+	private Scene scene;
+	private UserCallback onSuccess;
 
-	public PasswordManager(Stage primaryStage){
-		this.primaryStage = primaryStage;
+	public PasswordManager(UsersModel userModel, UserCallback onSuccess){
 		txtUserName = new TextField();
 		lblMessage = new Label();
 		pf = new PasswordField();
+		this.usersModel= userModel; 
+		this.onSuccess = onSuccess;
+		
+		show();
 	}
+	
 	//FIXME: refactor this method into smaller methods 
-	public void show() {
-		primaryStage.setTitle(TITLE);
+	private void show() {
 		BorderPane bp = new BorderPane();
 		bp.setPadding(new Insets(10,50,50,50));
 		HBox hb = new HBox();
@@ -57,7 +71,8 @@ public class PasswordManager{
 		gridPane.setVgap(5);   
 		//Implementing Nodes for GridPane
 		Label lblUserName = new Label("Username");		
-		Label lblPassword = new Label("Password");		
+		Label lblPassword = new Label("Password");
+		Label lblLanguage = new Label("Language");	
 		Button btnLogin = new Button("Login");
 		Button btnReset = new Button("Reset");
 		Button btnRegister = new Button("Register");
@@ -73,6 +88,8 @@ public class PasswordManager{
 		gridPane.add(btnReset, 2, 1);
 		gridPane.add(lblMessage, 1, 2);
 		gridPane.add(btnRegister, 2, 2);
+		gridPane.add(lblLanguage, 0, 3);
+		gridPane.add(createComboBox(), 1 , 3);
 		//Reflection for gridPane
 		Reflection r = new Reflection();
 		r.setFraction(0.7f);
@@ -97,11 +114,12 @@ public class PasswordManager{
 		//Add HBox and GridPane layout to BorderPane Layout
 		bp.setTop(hb);
 		bp.setCenter(gridPane); 
+		
+		
 		//Adding BorderPane to the scene and loading CSS
-		Scene scene = new Scene(bp);
+		scene = new Scene(bp);
 		scene.getStylesheets().setAll("/styleSheets/login.css");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		
 		//Action for btnLogin
 		btnLogin.setOnAction(e -> buttonLoginAction());
 
@@ -115,17 +133,21 @@ public class PasswordManager{
 		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 	}
 	
+	public Scene getScene(){
+		return scene;
+	}
+	
 	
 	private void buttonRegisterAction(PopUpMessage p) {
 				
 		tempCheckUser = txtUserName.getText().toString();
 		tempCheckPw = pf.getText().toString();
 		
+		usersModel.addUser(tempCheckUser, tempCheckPw);
+		
 		writer.write(tempCheckUser, tempCheckPw);
 		p.show();
-		buttonResetAction();
-		
-		
+		buttonResetAction();	
 	}
 	
 	
@@ -136,15 +158,14 @@ public class PasswordManager{
 		}
 
 	}
+	
 	private void buttonLoginAction() {
 		checkUser = txtUserName.getText().toString();
 		checkPw = pf.getText().toString();
 		if(checkUserAndPassword(checkUser, checkPw) ||((!tempCheckUser.equals("") && !tempCheckPw.equals("")) && checkUser.equals(tempCheckUser) && checkPw.equals(tempCheckPw) )){
 			lblMessage.setText("Congratulations!");
 			lblMessage.setTextFill(Color.GREEN);
-			primaryStage.hide();
-			LevelManager levelManager = new LevelManager(primaryStage);
-			levelManager.show();
+			onSuccess.execute(checkUser);
 		}
 		else{
 			lblMessage.setText("Incorrect user or pw.");
@@ -166,4 +187,19 @@ public class PasswordManager{
 		}		
 		return false;		
 	}
+	
+	 private ComboBox createComboBox(){
+		 final ComboBox languageComboBox = new ComboBox();
+		 String number = resources.getString("languageNumber");
+			int n = number.charAt(0)-'0';
+			for(int i = 0 ; i < n; i++){
+				languageComboBox.getItems().add(resources.getString("language" + (i + 1)));
+				//System.out.println("The current language is: " + languageComboBox.getItems().get(i));
+				
+			}
+			languageComboBox.setValue("English");
+		 
+		 return languageComboBox;
+	 }
+	
 }

@@ -1,7 +1,5 @@
 package newengine.sprite.components;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.player.Player;
@@ -13,13 +11,13 @@ public class Owner extends Component {
 	public static final ComponentType<Owner> TYPE = new ComponentType<>(Owner.class.getName());
 	private Player owner;
 	
-	public Owner(Player player) {
-		this.owner = player;
+	@ConstructorForDeveloper
+	public Owner(@VariableName(name= "Team")String player){
+		this(new Player(player));
 	}
 	
-	@ConstructorForDeveloper
-	public Owner(@VariableName(name = "player name") String playerName){
-		this(new Player(playerName));
+	public Owner(Player player) {
+		this.owner = player;
 	}
 	
 	public Player player() {
@@ -39,7 +37,7 @@ public class Owner extends Component {
 	@Override
 	public Object[] getParameters() {
 		Object[] parameters=new Object[1];
-		parameters[0]=owner.getName();
+		parameters[0]=owner.toString();
 		// TODO Auto-generated method stub
 		return parameters;
 	}

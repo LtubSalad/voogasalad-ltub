@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import bus.EventBus;
 import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
@@ -12,7 +15,6 @@ import newengine.app.Game;
 import newengine.events.SpriteModelEvent;
 import newengine.sprite.Sprite;
 import player.helpers.GameLoadException;
-import utilities.XStreamHandler;
 
 /**
  * @author tahiaemran, Keping
@@ -22,11 +24,11 @@ import utilities.XStreamHandler;
  */
 public class GameCreator {
 
-	private XStreamHandler xstream = new XStreamHandler(); 
-	
+
+	private XStream xstream; 
 	
 	public GameCreator() {
-		//xstream = new XStream(new DomDriver());
+		xstream = new XStream(new DomDriver());
 	}
 	
 	public Game createGame(String gameFilePath) throws GameLoadException {
@@ -34,10 +36,9 @@ public class GameCreator {
 	}
 	public Game createGame(File gameFile) throws GameLoadException {
 		try {
-			System.out.println("In the try");
+
 			// Read out the game 
-			SerializableDeveloperData gameData = (SerializableDeveloperData) xstream.getObjectFromFile();//fromXML(gameFile);
-			System.out.println("Got game data");
+			SerializableDeveloperData gameData = (SerializableDeveloperData) xstream.fromXML(gameFile);
 			//Process Levels
 			List<ILevelData> levels = gameData.getLevels();
 			System.out.println(levels.get(0).getName());
@@ -52,7 +53,7 @@ public class GameCreator {
 			}
 			//translator.translate();
 			//List<Sprite> createdSprites = (List<Sprite>) translator.getTranslated();  
-			
+
 			Game game = new Game(); 
 			EventBus bus = game.getBus();
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, createdSprites));

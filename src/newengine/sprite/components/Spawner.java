@@ -5,6 +5,8 @@ import java.util.Queue;
 import commons.point.GamePoint;
 import data.SpriteMakerModel;
 import gameDevelopmentInterface.Path;
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.events.skill.TriggerSkillEvent;
 import newengine.events.timer.PeriodicEvent;
 import newengine.skill.skills.BuildSkill;
@@ -18,17 +20,25 @@ public class Spawner extends Component {
 	private int totalNumber;
 	private boolean needToSpawn = true;
 	private GamePoint startingPosition;
-	
-	public Spawner(int spritesToSpawn, Path pathSpritesFollow, double spawnBetweenTime) {
+
+	// FIXME don't need path actually
+	@ConstructorForDeveloper
+	public Spawner(@VariableName(name = "Monsters") int spritesToSpawn,
+			@VariableName(name = "Followed path") Path pathSpritesFollow,
+			@VariableName(name = "Spawn interval") double spawnBetweenTime) {
 		secondsBetween = spawnBetweenTime;
 		totalNumber = spritesToSpawn;
 		startingPosition = pathSpritesFollow.getPath().peek();
 	}
 
+	public int getNum() {
+		return totalNumber;
+	}
+
 	public void onUpdated(double dt) {
 		if (needToSpawn) {
-			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new PeriodicEvent(totalNumber, secondsBetween, () -> 
-			sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(startingPosition)))));
+			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new PeriodicEvent(totalNumber, secondsBetween,
+					() -> sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(startingPosition)))));
 			needToSpawn = false;
 		}
 	}

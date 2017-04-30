@@ -78,7 +78,7 @@ public class ScreenObjectHolder extends HBox {
 	 *            the sprite to add to the HBox
 	 */
 	public void addObject(SpriteMakerModel screenObject) {
-		for (Component c : screenObject.getComponents().values()) {
+		for (Component c : screenObject.getDeprecatedComponents().values()) {
 			ComponentType<?> type = c.getType();
 			if (type.equals(Images.TYPE)) {
 				Images imageComponent = (Images) c;

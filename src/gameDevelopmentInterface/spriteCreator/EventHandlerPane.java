@@ -31,31 +31,33 @@ import newengine.sprite.component.ComponentType;
  */
 public class EventHandlerPane extends ScrollPane {
 	private VBox myContents;
-	private SpriteMakerModel mySprite;
-	private List<SingleEventHandler> handlerSetters;
+	private ListView<SingleEventHandler> handlerSetters;
 	private final double PREF_WIDTH=300;
 
 	public EventHandlerPane(SpriteMakerModel sprite) {
 		myContents = new VBox();
-		mySprite = sprite;
-		handlerSetters = new ArrayList<>();
-		refreshNodes();
+		handlerSetters = new ListView<SingleEventHandler>();
+		handlerSetters.setPrefWidth(PREF_WIDTH);
+		instantiateNodes(sprite);
 		this.setContent(myContents);
 		this.setPrefWidth(PREF_WIDTH);
 	}
-
-	private void refreshNodes() {
-		myContents.getChildren().clear();
-		for (BusEvent event : mySprite.getListenedEvents()) {
-			handlerSetters.add(new SingleEventHandler(event));
-		}
-		myContents.getChildren().add(new Label("Event Handlers"));
-		myContents.getChildren().addAll(handlerSetters);
+	
+	public void setSprite(SpriteMakerModel sprite){
+		instantiateNodes(sprite);
 	}
 
-	public void updateSprite() {
-		handlerSetters.forEach((handlerSetter) -> {
-			handlerSetter.updateSprite();
+	private void instantiateNodes(SpriteMakerModel mySprite) {
+		handlerSetters.getItems().clear();
+		for (BusEvent event : mySprite.getListenedEvents()) {
+			handlerSetters.getItems().add(new SingleEventHandler(event));
+		}
+		myContents.getChildren().addAll(new Label("Event Handlers"),handlerSetters);
+	}
+
+	public void updateSprite(SpriteMakerModel model) {
+		handlerSetters.getItems().forEach((handlerSetter) -> {
+			handlerSetter.updateSprite(model);
 		});
 	}
 
@@ -79,8 +81,8 @@ public class EventHandlerPane extends ScrollPane {
 			scriptField.setText(scriptField.getText()+script+";"+"\n");
 		}
 
-		private void updateSprite() {
-			mySprite.getScriptMap().put(myEvent, scriptField.getText());
+		private void updateSprite(SpriteMakerModel sprite) {
+			sprite.getScriptMap().put(myEvent, scriptField.getText());
 		}
 
 		private class MethodDisplay extends ComboBox<String> {
@@ -93,27 +95,21 @@ public class EventHandlerPane extends ScrollPane {
 
 				List<String> dumMethods = new ArrayList<>();
 				methods = FXCollections.observableList(dumMethods);
-				registerSprite();
-				updateMethods();
+				//updateMethods();
 				this.setItems(methods);
 				this.getSelectionModel().selectedIndexProperty().addListener((observableValue,oldVal,newVal)->{
 						SingleEventHandler.this.addScript(getSelectionModel().getSelectedItem());	
 					});
 			}
 
-			private void registerSprite() {
-				
-			}
-
-			private void updateMethods() {
+			private void updateMethods(List<Class<? extends Component>> classList) {
 				methods.clear();
 				for (Method method : Sprite.class.getDeclaredMethods()) {
 					if(method.isAnnotationPresent(DeveloperMethod.class)){
 						methods.add(methodToString(method));
 					}
 				}
-				mySprite.getComponents().forEach((type, component) -> {
-					Class<?> clazz = component.getClass();
+				classList.forEach((clazz) -> {
 					for (Method method : clazz.getDeclaredMethods()) {
 						if(method.isAnnotationPresent(DeveloperMethod.class)){
 							methods.add(methodToString(method));

@@ -12,6 +12,7 @@ import newengine.managers.conditions.NoLivesCondition;
 import newengine.managers.conditions.NoMonstersCondition;
 
 
+
 public class LevelData extends Observable implements ILevelData {
 	private String name;
 	private Condition winningCondition;

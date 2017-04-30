@@ -85,6 +85,11 @@ public class MasterDeveloperInterface {
 //						new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, new ScreenModelData()));
 //				developerTabs.getTabs().add(screenTab);
 //			});
+			screenButton.setOnAction((clicked) -> {
+//				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
+//						new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, new ScreenModelData()));
+				//developerTabs.getTabs().add(screenTab);
+			});
 //			attributeButton.setOnAction((clicked) -> {
 //				Tab attributeTab = new Tab(myResources.getString(CREATE_NEW_ATTRIBUTE), new GroundUpAttributeCreator());
 //				developerTabs.getTabs().add(attributeTab);

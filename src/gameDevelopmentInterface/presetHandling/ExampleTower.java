@@ -16,11 +16,10 @@ public class ExampleTower extends SpriteMakerModel {
 		loadComponents();
 	}
 	
-	public void loadComponents(){
-		this.addComponent(new Owner("TowerTeam"));
+	private void loadComponents(){
+		this.addComponent(new Owner("team 1"));
 		this.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		this.addComponent(new SoundEffect(new File("sounds\\Dnpisd1.wav")));
-		this.addComponent(new Images("images\\Mario.jpg"));
+		this.addComponent(new Images("resources\\Mario.jpg"));
 		this.addComponent(new Speed(20));
 		this.addComponent(new Attacker());
 		

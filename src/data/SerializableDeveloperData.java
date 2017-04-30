@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import gamecreation.level.ILevelData;
 import gamecreation.level.LevelData;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 
 /**
  * @author tahiaemran
@@ -28,28 +29,25 @@ public class SerializableDeveloperData {
 	//DeveloperData dataToTranslate; // TODO: see if this serializes ok 
 	
 	public SerializableDeveloperData(DeveloperData data){
-		//this.dataToTranslate = data; 
 		this.screenSprites = data.getScreenSprites();
-		configData(data); 
-		configSprites(data); 
+		configData(data.getAllData()); 
+		configSprites(data.getSprites()); 
 		myLevels = data.getReadOnlyLevelData();
 		
 	}
 
-	private void configSprites(DeveloperData dataToTranslate) {
-		ObservableList<SpriteMakerModel> spriteData = dataToTranslate.getSprites();
+
+	private void configSprites(ObservableList<SpriteMakerModel> data) {
 		mySprites = new ArrayList<SpriteMakerModel>();
-		mySprites = spriteData.stream().collect(Collectors.toList());
+		mySprites = data.stream().collect(Collectors.toList());
 	}
 
-	private void configData(DeveloperData dataToTranslate) {
+
+	private void configData(ObservableMap<String, String> dataToTranslate) {
 		gameData = new HashMap<String, String>();	
-		for (String dataName: dataToTranslate.getAllData().keySet()){
-			gameData.put(dataName, dataToTranslate.getAllData().get(dataName));
+		for (String dataName: dataToTranslate.keySet()){
+			gameData.put(dataName, dataToTranslate.get(dataName));
 		}
-		
-		gameData.put("GAME_NAME", this.gameName);
-		gameData.put("GAME_FILE", this.gameIconFile);
 	}
 	
 	public List<SpriteMakerModel> getSprites(){

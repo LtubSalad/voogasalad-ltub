@@ -13,6 +13,7 @@ public class HelpMenuHandler implements MenuItemHandler{
 	private MenuItem viewHelp;
 	public HelpMenuHandler(String source){
 		viewHelp = new MenuItem(source);
+		viewHelp.setId("menu-item");
 		viewHelp.setAccelerator(new KeyCodeCombination(KeyCode.H, KeyCombination.SHORTCUT_DOWN, KeyCombination.SHIFT_DOWN));
 		viewHelp.setOnAction(e -> handle());
 	}

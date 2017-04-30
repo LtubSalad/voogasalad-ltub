@@ -16,8 +16,7 @@ public class BackgroundSetter extends ScreenModelCreator {
 //		super(spriteModelsToDrag, gdc, screenData);
 //		this.setTop(null);
 //		this.setRight(new BackgroundButtonsPanel(this));
-		addTiles();
-	}
+}
 	
 	private void addTiles() {
 		File defaultTileDirectory = new File("data/defaultTiles");
@@ -26,7 +25,9 @@ public class BackgroundSetter extends ScreenModelCreator {
 			SpriteMakerModel myTile = (SpriteMakerModel) xstream.getAttributeFromFile(f);
 			addPossibleSprite(myTile);
 		}
-//		SpriteMakerModel sprite1 = new SpriteMakerModel();
+
+		
+		//		SpriteMakerModel sprite1 = new SpriteMakerModel();
 //		sprite1.addComponent(new Images("images/characters/Lava.jpg"));
 //		xstream.saveToFile(sprite1);
 //		List<SpriteMakerModel> myTiles = xstream.getScreenModel(defaultTileFile);
