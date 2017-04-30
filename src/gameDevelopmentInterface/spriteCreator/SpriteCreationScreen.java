@@ -7,7 +7,9 @@ import data.DeveloperData;
 import data.SpriteMakerModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -29,23 +31,27 @@ import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
 import newengine.sprite.components.TowerDefenceTypeInformation;
+import utilities.AlertHandler;
 import utilities.XStreamHandler;
 
 public class SpriteCreationScreen extends BorderPane {
-	private SpriteMakerModel spriteData;
 	private SpriteDataPane infoPane;
 	private EventHandlerPane scriptPane;
-	private DeveloperData model;
+	private DeveloperData developerData;
 
-	public SpriteCreationScreen(DeveloperData model) {
-		this.model = model;
-		instantiate();
+	public SpriteCreationScreen(DeveloperData model, SpriteMakerModel spriteData) {
+		this.developerData = model;
+		instantiate(spriteData);
 	}
+	
+	public SpriteCreationScreen(DeveloperData model) {
+		this(model, new SpriteMakerModel());
+	}
+	
 
-	public void instantiate(){
-		spriteData=new SpriteMakerModel();
-		scriptPane=new EventHandlerPane(spriteData);
-		infoPane=new SpriteDataPane(spriteData,model);
+	public void instantiate(SpriteMakerModel sprite){
+		scriptPane=new EventHandlerPane(sprite);
+		infoPane=new SpriteDataPane(sprite,developerData);
 		this.setRight(instantiateSelector());
 		this.setLeft(scriptPane);
 		this.setCenter(infoPane);
@@ -85,33 +91,58 @@ public class SpriteCreationScreen extends BorderPane {
 		XStreamHandler dataHandler = new XStreamHandler();
 
 		public BottomPanel() {
+			AlertHandler alertHandler=new AlertHandler();
 			Button saveButton = new Button("Save SpriteMakerModel to File");
 			saveButton.setOnMouseClicked((click) -> {
 				try {
-					updateSprite();
-					dataHandler.saveToFile(spriteData);
+					dataHandler.saveToFile(produceNewModel());
 				} catch (Exception e) {
 					// FIXME
 					e.printStackTrace();
 				}
 			});
+			
 			Button listSaveButton = new Button("Save SpriteMakerModel to THIS GAME's list of SpriteMakerModels");
 			listSaveButton.setOnMouseClicked((click) -> {
+				Alert alert=alertHandler.confirmationPopUp("Are you sure you wish to save?");
+				alert.showAndWait().ifPresent(response->{
+					if(response==ButtonType.NO){
+						return;
+					}
+				});
+				SpriteMakerModel model;
 				try {
-					System.out.println("Supposed to add to model");
-					updateSprite();
-					model.getSprites().add(spriteData);
+					model=produceNewModel();
 				} catch (Exception e) {
-					// FIXME
-					System.out.println("there was an exception");
+					alertHandler.showError("Model could not be created");
+					return;
 				}
+				String name=model.getName();
+				if(name==null||name.equals("")){
+					alertHandler.showError("Model has no name");
+					return;
+				}
+				for(SpriteMakerModel spriteModel:developerData.getSprites()){
+					if(spriteModel.getName().equals(model.getName())){
+						Alert sameNameAlert=alertHandler.confirmationPopUp("Another sprite in your game data has this name. Overwrite?");
+						sameNameAlert.showAndWait().ifPresent(response->{
+							if(response==ButtonType.NO){
+								return;
+							}
+						});
+					}
+				}
+				developerData.getSprites().add(model);
+				
 			});
 			this.getChildren().addAll(saveButton, listSaveButton);
 		}
 
-		private void updateSprite() throws Exception {
-			scriptPane.updateSprite();
-			infoPane.updateSpriteData();
+		private SpriteMakerModel produceNewModel() throws Exception {
+			SpriteMakerModel sprite=new SpriteMakerModel();
+			scriptPane.updateSprite(sprite);
+			infoPane.updateSpriteData(sprite);
+			return sprite;
 		}
 	}
 

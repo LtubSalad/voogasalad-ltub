@@ -20,12 +20,13 @@ import utilities.AlertHandler;
 /**
  * 
  * @author Daniel
- * Displays what components a sprite possesses and allows them to be set.
+ * Loads up a sprite's components and displays a sprites name. Does not actually modify said spritemakermodel-
+ * allows user to set a new one instead.
+ * Can then be used to produce a new set of components+name info for a brand new sprite.
  *
  */
 public class SpriteDataPane extends ScrollPane{
 	private VBox myPane;
-	private SpriteMakerModel spriteData;
 	private SpriteDescriptor descriptor;
 	private ComponentLister lister;
 	private DeveloperData developerData;
@@ -40,27 +41,29 @@ public class SpriteDataPane extends ScrollPane{
 		}
 	}
 	
-	public SpriteDataPane(SpriteMakerModel spriteData, DeveloperData developerData, boolean removableComponents){
+	private void instantiate(SpriteMakerModel spriteData, DeveloperData developerData){
 		this.developerData=developerData;
 		myPane=new VBox();
-		this.spriteData=new SpriteMakerModel();
 		descriptor=new SpriteDescriptor();
 		lister=new ComponentLister();
+		updateLister(spriteData);
 		myPane.getChildren().addAll(descriptor,lister);
 		this.setContent(myPane);
 		this.setPrefWidth(PREF_WIDTH);
 	}
 	
-	private void instantiate(SpriteMakerModel spriteData, DeveloperData developerData){
-		this.developerData=developerData;
-		myPane=new VBox();
-		this.spriteData=spriteData;
-		descriptor=new SpriteDescriptor();
-		lister=new ComponentLister();
-		myPane.getChildren().addAll(descriptor,lister);
-		this.setContent(myPane);
-		this.setPrefWidth(PREF_WIDTH);
-		
+	private void updateLister(SpriteMakerModel sprite){
+		lister.clear();
+		for(Component component:sprite.getActualComponents()){
+			addComponent(component,true);
+		}
+	}
+	
+	public void setPresetSprite(SpriteMakerModel sprite){
+		lister.clear();
+		for(Component component:sprite.getActualComponents()){
+			addComponent(component,false);
+		}
 	}
 	
 	public SimpleVariableSetter<String> getNameSetter(){
@@ -94,10 +97,10 @@ public class SpriteDataPane extends ScrollPane{
 		}	
 	}
 	
-	public void updateSpriteData() throws Exception{
+	public void updateSpriteData(SpriteMakerModel spriteData) throws Exception{
 		spriteData.setName(nameSetter.getValue());
 		spriteData.setDescription(descriptionSetter.getValue());
-		lister.updateSpriteModel();		
+		lister.updateSpriteModel(spriteData);		
 	}
 	
 	private class SpriteDescriptor extends VBox{	
@@ -108,7 +111,7 @@ public class SpriteDataPane extends ScrollPane{
 				this.getChildren().addAll(new Label("Add Sprite Components"),nameSetter, descriptionSetter);
 			}
 			catch(Exception e){
-				AlertHandler.errorPopUp(e.getMessage());
+				AlertHandler.showError(e.getMessage());
 			}
 		}
 	}
@@ -119,6 +122,11 @@ public class SpriteDataPane extends ScrollPane{
 		public ComponentLister(){
 			componentViews=new ArrayList<>();
 			this.prefWidthProperty().bind(SpriteDataPane.this.prefWidthProperty());
+		}
+		
+		private void clear(){
+			componentViews.clear();
+			this.getChildren().clear();
 		}
 		
 		private void removeComponentView(ComponentSetter<? extends Component> view){
@@ -141,7 +149,7 @@ public class SpriteDataPane extends ScrollPane{
 		 * ONLY CALL WHEN DONE
 		 * @throws Exception
 		 */
-		private void updateSpriteModel(){
+		private void updateSpriteModel(SpriteMakerModel spriteData){
 			try {
 				spriteData.setName(nameSetter.getValue());
 				spriteData.clearComponents();
@@ -150,7 +158,7 @@ public class SpriteDataPane extends ScrollPane{
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				AlertHandler.errorPopUp(e.getMessage());
+				AlertHandler.showError(e.getMessage());
 			}
 			
 		}
