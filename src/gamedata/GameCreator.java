@@ -7,7 +7,7 @@ import java.util.List;
 import bus.EventBus;
 import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
-import gamecreation.level.LevelData;
+import gamecreation.level.ILevelData;
 import newengine.app.Game;
 import newengine.events.SpriteModelEvent;
 import newengine.sprite.Sprite;
@@ -39,7 +39,7 @@ public class GameCreator {
 			SerializableDeveloperData gameData = (SerializableDeveloperData) xstream.getObjectFromFile();//fromXML(gameFile);
 			System.out.println("Got game data");
 			//Process Levels
-			List<LevelData> levels = gameData.getLevels();
+			List<ILevelData> levels = gameData.getLevels();
 			System.out.println(levels.get(0).getName());
 			//Process Sprites 
 			List<SpriteMakerModel> initialSpriteModels =  gameData.getSprites();

@@ -69,10 +69,10 @@ public class App extends Application {
 		XStreamHandler xHandler = new XStreamHandler();
 		XStream xStream = new XStream(new DomDriver());
 		
-		//List<SpriteMakerModel> listSpriteModels = myData.getLevelData().get(0).getSpawners();
+		List<SpriteMakerModel> listSpriteModels = myData.getLevelData().get(0).getSpawners();
 		
-		SpriteCreator jakeTestCreator = new SpriteCreator();
-		List<SpriteMakerModel> listSpriteModels = jakeTestCreator.getSprites();// = translator.getSprites();
+		//SpriteCreator jakeTestCreator = new SpriteCreator();
+		//List<SpriteMakerModel> listSpriteModels = jakeTestCreator.getSprites();// = translator.getSprites();
 		List<Sprite> listSprites = new ArrayList<>();
 		for (SpriteMakerModel smm : listSpriteModels) {
 			AuthDataTranslator translator = new AuthDataTranslator(smm);

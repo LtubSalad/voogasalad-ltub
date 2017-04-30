@@ -41,8 +41,6 @@ public class DeveloperData {
 	private int numCols = 6;
 	private ObservableList<SpriteMakerModel> mySprites; //need
 	private SpritesForScreenUse jakeSprites = new SpritesForScreenUse();  //need
-	private String gameName; //need
-	private String gameIconFilePath;//need
  	
 	public DeveloperData() {
 		List<SpriteMakerModel> list=new ArrayList<SpriteMakerModel>();
@@ -102,7 +100,7 @@ public class DeveloperData {
 	public ObservableList<SpriteMakerModel> getSprites(){
 		return mySprites;
 	}
-	
+	@Deprecated
 	public SpritesForScreenUse getScreenSprites(){
 		return jakeSprites;
 	}
@@ -122,21 +120,7 @@ public class DeveloperData {
 	 * @param data
 	 */
 	public void addData(Pair<String,String> data) {
-		myData.put(data.getKey(), data.getValue());
-//		TODO delete if working later
-//		if(myData.containsKey(NUMBER_OF_LIVES))
-//		System.out.println("Number of Lives :" + myData.get(NUMBER_OF_LIVES));
-//		if(myData.containsKey(BUILD_TOWER))
-//		System.out.println("Build tower: " + myData.get(BUILD_TOWER));
-//		if(myData.containsKey(NUMBER_OF_STARTING_GOLD))
-//		System.out.println("Number of Starting Gold: " + myData.get(NUMBER_OF_STARTING_GOLD));
-//		if(myData.containsKey(LEVEL_COMPLETION_BONUS))
-//		System.out.println("Level completion bonus: " + myData.get(LEVEL_COMPLETION_BONUS));
-//		if(myData.containsKey(GAME_NAME))
-//		System.out.println("Game name: " + myData.get(GAME_NAME));
-//		if(myData.containsKey(GAME_ICON))
-//		System.out.println("Game icon: " + myData.get(GAME_ICON));
-//		
+		myData.put(data.getKey(), data.getValue());	
 	}
 	
 	/**

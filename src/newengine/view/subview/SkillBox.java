@@ -34,6 +34,8 @@ public class SkillBox {
 		for (Skill skill: newSkills) {
 			if (skill.getIcon().isPresent()) {
 				ImageView skillImageView = new ImageView(skill.getIcon().get().getFXImage());
+				skillImageView.setFitWidth(skill.getIcon().get().width());
+				skillImageView.setFitHeight(skill.getIcon().get().height());
 				skillImageView.setOnMouseClicked(e -> {
 					bus.emit(new SelectSkillEvent(SelectSkillEvent.SELECT, skill));
 				});

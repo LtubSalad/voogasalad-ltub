@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import gamecreation.level.ILevelData;
 import gamecreation.level.LevelData;
 import javafx.collections.ObservableList;
 
@@ -19,37 +20,29 @@ import javafx.collections.ObservableList;
 public class SerializableDeveloperData {
 	private Map<String, String> gameData; 
 	private List<SpriteMakerModel> mySprites; 
-	private List<LevelData> myLevels; 
+	private List<ILevelData> myLevels; 
 	private SpritesForScreenUse screenSprites; 
 	private String gameName; 
 	private String gameIconFile; 
 	
-	DeveloperData dataToTranslate; // TODO: see if this serializes ok 
+	//DeveloperData dataToTranslate; // TODO: see if this serializes ok 
 	
 	public SerializableDeveloperData(DeveloperData data){
-		this.dataToTranslate = data; 
+		//this.dataToTranslate = data; 
 		this.screenSprites = data.getScreenSprites();
-		configData(); 
-		configSprites(); 
-		configLevels(); 
+		configData(data); 
+		configSprites(data); 
+		myLevels = data.getReadOnlyLevelData();
 		
 	}
 
-
-	private void configLevels() {
-		ObservableList<LevelData> levels = dataToTranslate.getLevelData();
-		myLevels = new ArrayList<LevelData>();
-		myLevels = levels.stream().collect(Collectors.toList());
-	}
-
-
-	private void configSprites() {
+	private void configSprites(DeveloperData dataToTranslate) {
 		ObservableList<SpriteMakerModel> spriteData = dataToTranslate.getSprites();
 		mySprites = new ArrayList<SpriteMakerModel>();
 		mySprites = spriteData.stream().collect(Collectors.toList());
 	}
 
-	private void configData() {
+	private void configData(DeveloperData dataToTranslate) {
 		gameData = new HashMap<String, String>();	
 		for (String dataName: dataToTranslate.getAllData().keySet()){
 			gameData.put(dataName, dataToTranslate.getAllData().get(dataName));
@@ -63,7 +56,7 @@ public class SerializableDeveloperData {
 		return Collections.unmodifiableList(mySprites); 
 	}
 	
-	public List<LevelData> getLevels(){
+	public List<ILevelData> getLevels(){
 		return Collections.unmodifiableList(myLevels);
 	}
 	
