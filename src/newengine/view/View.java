@@ -23,6 +23,7 @@ import newengine.events.input.MouseEvent;
 import newengine.model.Models;
 import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
+import newengine.model.PlayerStatsModel.WealthType;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
 import newengine.player.Player;
@@ -35,6 +36,8 @@ import newengine.sprite.components.SkillSet;
 import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
+import newengine.view.subview.StateDisplay;
+import newengine.view.subview.UpgradeBtn;
 
 
 public class View {
@@ -57,32 +60,42 @@ public class View {
 	private EventBus bus;
 	private Camera camera;
 	private Scene scene;
-	
-	private HBox statsPanel = new HBox();
-	private Canvas gameWorldCanvas = new Canvas(canvasWidth, canvasHeight);
-	private GraphicsContext gc = gameWorldCanvas.getGraphicsContext2D();
-	private HBox bottomPane = new HBox();
-	private Canvas selectionCanvas = new Canvas(selectionWidth, selectionHeight);
-	private GraphicsContext gcSelected = selectionCanvas.getGraphicsContext2D();
+	private Canvas gameWorldCanvas;
+	private GraphicsContext gc;
+	private HBox bottomPane;
+	private HBox statsPanel;
+	private GraphicsContext gcSelected;
 	private SkillBox skillBox;
+	private StateDisplay stateDisplay;
+	private UpgradeBtn upgradeBtn;
+	private Canvas selectionCanvas; 
 
 
 	public View(EventBus bus, Camera camera) {		
 		this.bus = bus;
 		this.camera = camera;
-		initNodes();
-		initHandlers();
-	}
-	
-	private void initNodes() {
 		VBox root = new VBox();
-		scene = new Scene(root, width, height, BACKGROUND);
-		root.getChildren().addAll(
-				statsPanel, gameWorldCanvas, bottomPane);
-		skillBox = new SkillBox(this.bus);
-		bottomPane.getChildren().addAll(
-				selectionCanvas, (new TowersButton(bus)).getNode(), skillBox.getBox());
+		scene = new Scene(root, width, height, BACKGROUND);		statsPanel = new HBox();
+		selectionCanvas = new Canvas(selectionWidth, selectionHeight);
+		gameWorldCanvas = new Canvas(canvasWidth, canvasHeight);
+		bottomPane = new HBox();
+		root.getChildren().addAll(statsPanel, gameWorldCanvas, bottomPane);
+		// selected sprite
+		Canvas selectionCanvas = new Canvas(selectionWidth, selectionHeight);
+		bottomPane.getChildren().add(selectionCanvas);
+		gc = gameWorldCanvas.getGraphicsContext2D();
+		gcSelected = selectionCanvas.getGraphicsContext2D();
+		// skill box
+		stateDisplay = new StateDisplay();
+		skillBox = new SkillBox(bus);
+		upgradeBtn = new UpgradeBtn();
+		bottomPane.getChildren().add(upgradeBtn.getBox());
+		bottomPane.getChildren().add(stateDisplay.getBox());
+		bottomPane.getChildren().add(skillBox.getBox());
+
+		this.camera = new Camera(bus);
 		
+		initHandlers();
 	}
 	
 	private void initHandlers() {
@@ -120,17 +133,7 @@ public class View {
 		renderBottomPane(models.selectionModel(), models.playerRelationModel());
 	}
 	
-	private List<Text> createText(PlayerStatsModel playerStatsModel, Player player) {
-		// TODO map to resource file.
-		List<Text> statsLabels = new ArrayList<Text>();
-		playerStatsModel.getLives(player).ifPresent((life) -> {
-			statsLabels.add(new Text("Lives:" + life));
-		});
-		playerStatsModel.getScore(player).ifPresent((score) -> {
-			statsLabels.add(new Text("Scores:" + score));
-		});
-		return statsLabels;
-	}
+
 	private void renderStats(PlayerStatsModel playerStatsModel, 
 			PlayerRelationModel playerRelationModel, SelectionModel selectionModel) {
 		this.statsPanel.getChildren().clear();
@@ -141,11 +144,28 @@ public class View {
 			sprite.getComponent(Owner.TYPE).ifPresent((owner) -> {
 				Player player = owner.player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();
-				if (player == mainPlayer) {
+				//if (player == mainPlayer) {
 					createText(playerStatsModel, player).stream().forEach(e -> statsPanel.getChildren().add(e));
-				}
+				//}
 			});			
 		});
+	}
+	
+	private List<Text> createText(PlayerStatsModel playerStatsModel, Player player) {
+		List<Text> statsLabels = new ArrayList<Text>();
+		playerStatsModel.getWealth(player).ifPresent((wealthMap) -> {
+			for (WealthType type: wealthMap.keySet()) {
+				statsLabels.add(new Text(type + ": " + wealthMap.get(type)));
+			}
+		});
+		//TODO map to resource file
+		playerStatsModel.getLives(player).ifPresent((life) -> {
+			statsLabels.add(new Text("Lives:" + life));
+		});
+		playerStatsModel.getScore(player).ifPresent((score) -> {
+			statsLabels.add(new Text("Scores:" + score));
+		});
+		return statsLabels;
 	}
 	
 	private void renderSprites(SpriteModel model) {
@@ -184,18 +204,31 @@ public class View {
 		// render skill box of the selected sprite
 		if (selectionModel.getSelectedSprite().isPresent()) {
 			Sprite sprite = selectionModel.getSelectedSprite().get();
+			//display sprite in selected canvas
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
 				clearSelectionCanvas();
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0,
 						sprite.getComponent(Images.TYPE).get().image().width(), 
 						sprite.getComponent(Images.TYPE).get().image().height());
 			}
+			//fill stats box with stats of selected sprite
+			upgradeBtn.render(sprite);
+			stateDisplay.render(sprite);
+			
 			if (sprite.getComponent(Owner.TYPE).isPresent()) {
 				Player player = sprite.getComponent(Owner.TYPE).get().player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();
-				if (player == mainPlayer && sprite.getComponent(SkillSet.TYPE).isPresent()) {
-					skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
-					return;
+				if (player == mainPlayer) {				
+					//fill skill box with skills of selected sprite
+					if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
+						skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
+					}
+					else {
+						skillBox.clear();
+					}
+				}
+				else {
+					skillBox.clear();
 				}
 				skillBox.clear();
 			}
@@ -205,6 +238,7 @@ public class View {
 			skillBox.clear();
 		}
 	}
+	
 
 	private void clearSelectionCanvas() {
 		gcSelected.clearRect(0, 0, width / 2, selectionHeight);

@@ -20,6 +20,8 @@ import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.sprite.StateChangeEvent;
+import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.timer.DelayedEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
@@ -27,7 +29,7 @@ import newengine.sprite.component.ComponentType;
 import newengine.utils.Target;
 public class Position extends Component {
 	public static final ComponentType<Position> TYPE = new ComponentType<>(Position.class.getName());
-	private GamePoint pos;
+	private GamePoint pos = new GamePoint();
 	private double heading;
 	@XStreamOmitField
 	private Target target;
@@ -59,7 +61,6 @@ public class Position extends Component {
 			});
 		});
 		sprite.on(MoveEvent.START_SPRITE, (e) -> {
-			System.out.println("lol hi");
 			moveTo(e.getTarget());
 			followingSprite();
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
@@ -68,12 +69,25 @@ public class Position extends Component {
 				});
 			});
 		});
-		sprite.on(MoveEvent.STOP, (Serializable & BusEventHandler<MoveEvent>) (e) -> {
-			stopMoving();
+		sprite.on(MoveEvent.STOP, (e) -> {
+			if (e.getSprite().getComponent(Weapon.TYPE).isPresent()){
+				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, e.getSprite()));
+			}
 		});
+
 	}
 	@Override
 	public void onUpdated(double dt) {
+		sprite.getComponent(PathFollower.TYPE).ifPresent((pathFollower) -> {
+			GamePoint finalPoint = pathFollower.getFinalPoint();
+			if (MathUtils.doubleEquals(pos.x(), finalPoint.x()) && MathUtils.doubleEquals(pos.y(), finalPoint.y())){
+				if (sprite.getComponent(EventQueue.TYPE).get().isEmpty()){
+					System.out.println("sprite has stopped moving and reached end of path");
+					sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new ChangeLivesEvent(ChangeLivesEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), -3));
+					sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
+				}
+			}
+		});
 		if (!isMoving()) {
 			return;
 		}
@@ -81,18 +95,17 @@ public class Position extends Component {
 		updateMovePosition(dt, pDest);
 	}
 	private void updateMovePosition(double dt, GamePoint pDest) {
+		if (!sprite.getComponent(Speed.TYPE).isPresent()){
+			return;
+		}
+		
 		double xDest = pDest.x();
 		double yDest = pDest.y();
 		double x = pos.x();
 		double y = pos.y();
-		if (MathUtils.doubleEquals(x, xDest) && MathUtils.doubleEquals(y, yDest)) {
-			if (sprite.getComponent(Weapon.TYPE).isPresent()){
-				System.out.println("weapon reaches target");
-				sprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
-			}
-			stopMoving();
-			return;
-		}
+		
+
+		
 		double xDiff = xDest - x;
 		double yDiff = yDest - y;
 		double dist = pos.distFrom(pDest);
@@ -104,6 +117,7 @@ public class Position extends Component {
 			target.getSprite().ifPresent((targetSprite) -> {
 				System.out.println("weapon reaches target");
 				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+				isMoving = false;
 			});
 			sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
 			return;
@@ -120,6 +134,8 @@ public class Position extends Component {
 			vy = speed / dist * yDiff;
 		}
 		pos = new GamePoint(x + vx * dt, y + vy * dt);
+		sprite.emit(new StateChangeEvent(StateChangeEvent.XPOS, sprite, pos.x()));
+		sprite.emit(new StateChangeEvent(StateChangeEvent.YPOS, sprite, pos.y()));		
 		return;
 	}
 
@@ -135,6 +151,16 @@ public class Position extends Component {
 	public GamePoint pos() {
 		return pos;
 	}
+	
+	public double xPos() {
+		return pos.x();
+	}
+	
+	public double yPos() {
+		return pos.y();
+	}
+
+
 	public double heading() {
 		return heading;
 	}
@@ -162,11 +188,7 @@ public class Position extends Component {
 	private void followingSprite() {
 		followingSprite = true;
 	}
-
-	private void followingPosition() {
-		followingSprite = false;
-	}
-
+	
 	private boolean isFollowingSprite() {
 		return followingSprite;
 	}

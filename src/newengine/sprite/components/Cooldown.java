@@ -25,7 +25,7 @@ public class Cooldown extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(ResetSkillCooldownEvent.RESET, (Serializable & BusEventHandler<ResetSkillCooldownEvent>) (e) -> {
+		sprite.on(ResetSkillCooldownEvent.RESET, (e) -> {
 			SkillType skillType = e.getSkillType();
 			resetCooldown(skillType);
 		});
