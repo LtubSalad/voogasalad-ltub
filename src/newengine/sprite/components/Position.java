@@ -29,7 +29,7 @@ import newengine.sprite.component.ComponentType;
 import newengine.utils.Target;
 public class Position extends Component {
 	public static final ComponentType<Position> TYPE = new ComponentType<>(Position.class.getName());
-	private GamePoint pos;
+	private GamePoint pos = new GamePoint();
 	private double heading;
 	@XStreamOmitField
 	private Target target;

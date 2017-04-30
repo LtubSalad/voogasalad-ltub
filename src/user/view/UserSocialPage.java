@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -88,7 +89,6 @@ public class UserSocialPage extends BorderPane{
 		profileView = new BorderPane();
 		VBox profileInfo = new VBox(10);
 		ImageView img = new ImageView(myUser.getImage());
-		System.out.println("did add the image");
 		
 		Text name = new Text(myUser.getName());
 		name.setFont(new Font(18));

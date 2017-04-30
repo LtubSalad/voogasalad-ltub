@@ -17,7 +17,7 @@ public class PathFollower extends Component{
 
 	public static final ComponentType<PathFollower> TYPE = new ComponentType<>(PathFollower.class.getName());
 	private Path path;
-	private GamePoint finalPoint;
+	private GamePoint finalPoint = new GamePoint();
 	
 	@ConstructorForDeveloper
 	public PathFollower(@VariableName(name = "SelectedPath") Path path){

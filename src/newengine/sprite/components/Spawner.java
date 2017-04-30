@@ -26,10 +26,14 @@ public class Spawner extends Component {
 	private boolean needToSpawn = true;
 	private GamePoint startingPosition;
 	
+	//FIXME don't need path actually
 	public Spawner(int spritesToSpawn, Path pathSpritesFollow, double spawnBetweenTime) {
 		secondsBetween = spawnBetweenTime;
 		totalNumber = spritesToSpawn;
 		startingPosition = pathSpritesFollow.getPath().peek();
+	}
+	public int getNum() {
+		return totalNumber;
 	}
 
 	public void onUpdated(double dt) {
