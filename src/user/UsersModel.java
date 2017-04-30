@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import user.serializabledata.SerializableUserModel;
+
 public class UsersModel {
 
 	/**
@@ -69,7 +71,22 @@ public class UsersModel {
 
 
 
+	public SerializableUserModel getSerializable(){
+		return new SerializableUserModel(this);
+	}
 
+	public Map<String, String> getUserPasswordData() {
+		return userToPass; 
+	}
+
+	public Map<String, User> getUserData() {
+		return usernameToData; 
+	}
+
+	public List<String> getVerificationStructure() {
+		return passwordVerify; 
+	}
+	
 
 
 }
