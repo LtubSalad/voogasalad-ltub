@@ -18,7 +18,7 @@ public class TowersButton {
 	
 	private void initHandlers() {
 		button.setOnMouseClicked((e) -> {
-			bus.emit(new SelectSpriteEvent(new SpriteID("__TOWER_BUILDER")));
+			bus.emit(new SelectSpriteEvent(SpriteID.TOWER_BUILDER_ID));
 		});
 	}
 	
