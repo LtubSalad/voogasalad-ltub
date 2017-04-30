@@ -34,14 +34,30 @@ public class SpriteDataPane extends ScrollPane{
 	private SimpleVariableSetter<String> descriptionSetter;
 	
 	public SpriteDataPane(SpriteMakerModel spriteData, DeveloperData developerData){
+		instantiate(developerData);
+	}
+	
+	public SpriteDataPane(SpriteMakerModel spriteData, DeveloperData developerData, boolean removableComponents){
 		this.developerData=developerData;
 		myPane=new VBox();
-		this.spriteData=spriteData;
+		this.spriteData=new SpriteMakerModel();
 		descriptor=new SpriteDescriptor();
 		lister=new ComponentLister();
 		myPane.getChildren().addAll(descriptor,lister);
 		this.setContent(myPane);
 		this.setPrefWidth(PREF_WIDTH);
+	}
+	
+	private void instantiate(DeveloperData developerData){
+		this.developerData=developerData;
+		myPane=new VBox();
+		this.spriteData=new SpriteMakerModel();
+		descriptor=new SpriteDescriptor();
+		lister=new ComponentLister();
+		myPane.getChildren().addAll(descriptor,lister);
+		this.setContent(myPane);
+		this.setPrefWidth(PREF_WIDTH);
+		
 	}
 	
 	public SimpleVariableSetter<String> getNameSetter(){
