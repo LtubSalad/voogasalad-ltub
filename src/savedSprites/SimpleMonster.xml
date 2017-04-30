@@ -31,8 +31,8 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>Harry</spriteName>
-  <spriteDescription></spriteDescription>
+  <spriteName>SimpleMonster</spriteName>
+  <spriteDescription>not sure what components you want, but you can build from here.</spriteDescription>
   <actualComponents>
     <newengine.sprite.components.Images reference="../../myComponents/entry[3]/newengine.sprite.components.Images"/>
     <newengine.sprite.components.Health reference="../../myComponents/entry[2]/newengine.sprite.components.Health"/>

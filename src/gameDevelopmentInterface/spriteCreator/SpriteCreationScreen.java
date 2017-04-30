@@ -104,6 +104,7 @@ public class SpriteCreationScreen extends BorderPane {
 				if(modelToSave!=null){
 					XStreamHandler handler=new XStreamHandler();
 					handler.saveToFile(modelToSave);
+					AlertHandler.showMessage("Saved successfully");
 				}
 			});
 
@@ -131,6 +132,7 @@ public class SpriteCreationScreen extends BorderPane {
 					}
 				
 					developerData.getSprites().add(modelToSave);
+					AlertHandler.showMessage("Saved successfully");
 				}
 
 			});
