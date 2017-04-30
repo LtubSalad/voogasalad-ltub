@@ -75,12 +75,14 @@ public class Game {
 		Camera camera = new Camera(bus);
 		view = new View(bus, camera);
 		
+		bindStats();
+		
 		gameLoop = new FXGameLoop(bus);
 		
 		CollisionManager collisionManager = new CollisionManager(bus); // TODO
 		RangeManager rangeManager = new RangeManager(bus); // TODO
 		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
-		SoundManager soundManager = new SoundManager(bus);
+//		SoundManager soundManager = new SoundManager(bus);
 		DebugManager debugManager = new DebugManager(bus);
 		TriggerManager triggerManager = new TriggerManager(bus, models);
 		TimerManager timerManager = new TimerManager(bus);
@@ -95,6 +97,10 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 		gameLoop.addLoopComponent((dt) -> timerManager.update(dt));
 		gameLoop.addLoopComponent((dt) -> inputManager.update(dt));
+	}
+	
+	private void bindStats(){
+		
 	}
 	
 	public void addTrigger(Trigger trigger) {
