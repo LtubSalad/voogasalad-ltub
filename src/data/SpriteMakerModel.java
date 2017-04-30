@@ -16,7 +16,6 @@ import newengine.sprite.component.ComponentType;
 
 public class SpriteMakerModel {
 	private Map<String, String> myCustomEventHandlers;
-
 	
 	private Map<ComponentType<?>,Component> myComponents;
 	private Map<BusEvent, String> myScriptMap;
