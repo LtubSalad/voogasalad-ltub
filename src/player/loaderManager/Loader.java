@@ -102,8 +102,8 @@ public class Loader {
 	private void eventHandle(){
 		primaryStage.hide();
 		 
-		PasswordManager password = new PasswordManager(primaryStage);
-		password.show();
+//		PasswordManager password = new PasswordManager(primaryStage);
+//		password.show();
 		 
 		
 	}
