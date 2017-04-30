@@ -5,17 +5,17 @@ import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
-public class SpriteTypeInformation extends Component {
+public class TowerDefenceTypeInformation extends Component {
 	public enum SpriteType{
-		TOWER,MONSTER,SPAWNER,OTHER
+		TOWER,MONSTER,SPAWNER,WEAPON,OTHER
 	}
 	
 	private SpriteType myType;
 	
-	public final ComponentType<Selectable> TYPE = new ComponentType<>(SpriteTypeInformation.class.getName());
+	public final ComponentType<Selectable> TYPE = new ComponentType<>(TowerDefenceTypeInformation.class.getName());
 
 	@ConstructorForDeveloper
-	public SpriteTypeInformation(@VariableName(name="Type")SpriteType type){
+	public TowerDefenceTypeInformation(@VariableName(name="Type")SpriteType type){
 		myType=type;
 	}
 	
@@ -30,7 +30,7 @@ public class SpriteTypeInformation extends Component {
 
 	@Override
 	public Component clone() {
-		return new SpriteTypeInformation(myType);
+		return new TowerDefenceTypeInformation(myType);
 	}
 
 	@Override
