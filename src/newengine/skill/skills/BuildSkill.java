@@ -50,18 +50,33 @@ public class BuildSkill extends Skill {
 	
 	@Override
 	public void trigger() {
+		
 		AuthDataTranslator translator = new AuthDataTranslator(mySpriteModel);
 		Sprite spriteToCreate = translator.getSprite();
-		if (spriteToCreate.getComponent(Cost.TYPE).isPresent()) {
-			int cost = spriteToCreate.getComponent(Cost.TYPE).get().getCost();
-			Player player = getSource().get().getComponent(Owner.TYPE).get().player();
-			getSource().get().getComponent(GameBus.TYPE).ifPresent((gameBusComponent) -> {
-				gameBusComponent.getGameBus().emit(
-						new CheckCostAndBuildEvent(cost, player, () -> {
-							buildSprite(spriteToCreate, player, cost);
-						}));
-			});
+		System.out.println("Build skill triggered");
+		Target target = this.getTarget().get();
+		// can override previous Position component
+		spriteToCreate.addComponent(new Position(target.getLocation(), 0));
+		if (this.getSource().get().getComponent(GameBus.TYPE).isPresent()) {
+			List<Sprite> spritesToCreate = new ArrayList<>();
+			spritesToCreate.add(spriteToCreate.clone());
+			this.getSource().get().getComponent(GameBus.TYPE).get().getGameBus()
+					.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToCreate));
 		}
+
+		
+//		AuthDataTranslator translator = new AuthDataTranslator(mySpriteModel);
+//		Sprite spriteToCreate = translator.getSprite();
+//		if (spriteToCreate.getComponent(Cost.TYPE).isPresent()) {
+//			int cost = spriteToCreate.getComponent(Cost.TYPE).get().getCost();
+//			Player player = getSource().get().getComponent(Owner.TYPE).get().player();
+//			getSource().get().getComponent(GameBus.TYPE).ifPresent((gameBusComponent) -> {
+//				gameBusComponent.getGameBus().emit(
+//						new CheckCostAndBuildEvent(cost, player, () -> {
+//							buildSprite(spriteToCreate, player, cost);
+//						}));
+//			});
+//		}
 	}
 	
 	private void buildSprite(Sprite spriteToCreate, Player player, int cost) {

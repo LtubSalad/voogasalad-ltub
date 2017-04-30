@@ -19,7 +19,7 @@ public class Path {
 	
 	public Path() {
 		this("A Nameless Path");
-		makeDefaultPath();
+		//makeDefaultPath();
 	}
 	
 	public Path(String name) {
@@ -29,7 +29,7 @@ public class Path {
 	public Path(String name, Queue<GamePoint> path) {
 		this.pathName=name;
 		myPath = path;
-		makeDefaultPath();
+		//makeDefaultPath();
 	}
 	
 	/**
@@ -97,15 +97,15 @@ public class Path {
 		nextCoord = myPath.poll();
 	}
 	
-	private void makeDefaultPath() {
-		myPath.add(new GamePoint(500,200));
-		myPath.add(new GamePoint(100,0));
-		myPath.add(new GamePoint(100,100));
-		myPath.add(new GamePoint(0,300));
-		myPath.add(new GamePoint(300,300));
-	
-	}	
-	
+//	private void makeDefaultPath() {
+//		myPath.add(new GamePoint(500,200));
+//		myPath.add(new GamePoint(100,0));
+//		myPath.add(new GamePoint(100,100));
+//		myPath.add(new GamePoint(0,300));
+//		myPath.add(new GamePoint(300,300));
+//	
+//	}	
+//	
 	public String getName(){
 		return pathName;
 	}
