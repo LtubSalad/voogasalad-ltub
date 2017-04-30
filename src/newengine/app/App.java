@@ -112,18 +112,18 @@ public class App extends Application {
 
 		
 		Sprite monster = new Sprite();
-		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
-		ImageSet imageSet2 = new ImageSet(image2);
-		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
-		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
-		skillMap2.put(BuildSkill.TYPE, new BuildSkill(child));
-		FireProjectileSkill fireSkill2 = new FireProjectileSkill();
-		fireSkill2.setCooldown(3); // add cooldown to the fireProjectilSkill
-		monster.addComponent(new Cooldown());
+//		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
+//		ImageSet imageSet2 = new ImageSet(image2);
+//		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
+//		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
+//		skillMap2.put(BuildSkill.TYPE, new BuildSkill(child));
+//		FireProjectileSkill fireSkill2 = new FireProjectileSkill();
+//		fireSkill2.setCooldown(3); // add cooldown to the fireProjectilSkill
+//		monster.addComponent(new Cooldown());
 //		skillMap2.put(FireProjectileSkill.TYPE, fireSkill2);
 		monster.addComponent(new GameBus());
 		monster.addComponent(new EventQueue(new LinkedList<>()));
-		monster.addComponent(new SkillSet(skillMap2));
+//		monster.addComponent(new SkillSet(skillMap2));
 		monster.addComponent(new Owner(player2));
 		monster.addComponent(new PathFollower(new Path()));
 		monster.addComponent(new Position(new GamePoint(100, 100), 0));
