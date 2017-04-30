@@ -10,6 +10,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import bus.EventBus;
+import commons.RunningMode;
 import data.DeveloperData;
 import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
@@ -100,6 +101,9 @@ public class GameCreator {
 
 			return game;
 		} catch (Exception e) {
+			if (RunningMode.DEV_MODE) {
+				e.printStackTrace();
+			}
 			throw new GameLoadException("Fail to load game: " + gameFile);
 		}
 	}
