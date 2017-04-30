@@ -7,13 +7,13 @@ import java.util.Observer;
 
 import data.SpriteMakerModel;
 import javafx.beans.property.StringProperty;
-import newengine.managers.conditions.ICondition;
-import newengine.sprite.components.Spawner;
+import newengine.managers.conditions.Condition;
+
 
 public class LevelData extends Observable implements ILevelData {
 	private String name;
-	private ICondition winningCondition;
-	private ICondition losingCondition;
+	private Condition winningCondition;
+	private Condition losingCondition;
 	private double spawnTime;
 	private List<SpriteMakerModel> spawners;
 
@@ -42,17 +42,23 @@ public class LevelData extends Observable implements ILevelData {
 		return spawnTime;
 	}
 
-	public void setWinningCondition(ICondition condition) {
+	public void setWinningCondition(Condition condition){
 		this.winningCondition = condition;
 	}
-
+	
+	public void setLosingCondition(Condition condition){
+		this.losingCondition = condition;
+	}
+	
 	@Override
-	public ICondition getWinningCondition() {
+	public Condition getWinningCondition() {
+		//return new NoMonstersCondition();
 		return winningCondition;
 	}
 
 	@Override
-	public ICondition getLosingCondition() {
+	public Condition getLosingCondition() {
+		//return new NoLivesCondition();
 		return losingCondition;
 	}
 
