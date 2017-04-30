@@ -7,6 +7,7 @@ public class AlertHandler {
 	public static void errorPopUp(String message){
 		Alert errorAlert=new Alert(AlertType.ERROR);
 		errorAlert.setHeaderText(message);
+		errorAlert.showAndWait();
 	}
 	
 	
