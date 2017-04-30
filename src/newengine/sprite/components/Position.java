@@ -1,6 +1,9 @@
 package newengine.sprite.components;
 
 import java.io.Serializable;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+import java.io.Serializable;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -23,9 +26,7 @@ import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.Target;
-
 public class Position extends Component {
-
 	public static final ComponentType<Position> TYPE = new ComponentType<>(Position.class.getName());
 	private GamePoint pos;
 	private double heading;
@@ -59,6 +60,7 @@ public class Position extends Component {
 			});
 		});
 		sprite.on(MoveEvent.START_SPRITE, (e) -> {
+			System.out.println("lol hi");
 			moveTo(e.getTarget());
 			followingSprite();
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
@@ -69,13 +71,11 @@ public class Position extends Component {
 		});
 		sprite.on(MoveEvent.STOP, (e) -> {
 			if (e.getSprite().getComponent(Weapon.TYPE).isPresent()){
-				System.out.println("the weapon reached dest so we remove it");
-				//sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, sprite.getComponent(DamageStrength.TYPE).get().getStrength()));
 				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, e.getSprite()));
 			}
 		});
-	}
 
+	}
 	@Override
 	public void onUpdated(double dt) {
 		if (!isMoving()) {
@@ -84,7 +84,6 @@ public class Position extends Component {
 		GamePoint pDest = getFollowingPoint();
 		updateMovePosition(dt, pDest);
 	}
-
 	private void updateMovePosition(double dt, GamePoint pDest) {
 		if (!sprite.getComponent(Speed.TYPE).isPresent()){
 			return;
@@ -106,6 +105,7 @@ public class Position extends Component {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
 			target.getSprite().ifPresent((targetSprite) -> {
+				System.out.println("weapon reaches target");
 				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 			});
 			sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
@@ -137,7 +137,6 @@ public class Position extends Component {
 	public Position clone() {
 		return new Position(pos, heading);
 	}
-
 	public GamePoint pos() {
 		return pos;
 	}
@@ -149,6 +148,7 @@ public class Position extends Component {
 	public double yPos() {
 		return pos.y();
 	}
+
 
 	public double heading() {
 		return heading;
@@ -177,11 +177,7 @@ public class Position extends Component {
 	private void followingSprite() {
 		followingSprite = true;
 	}
-
-	private void followingPosition() {
-		followingSprite = false;
-	}
-
+	
 	private boolean isFollowingSprite() {
 		return followingSprite;
 	}
@@ -196,5 +192,14 @@ public class Position extends Component {
 			}
 		}
 		return target.getLocation();
+	}
+
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[3];
+		parameters[0]=pos.x();
+		parameters[1]=pos.y();
+		parameters[2]=heading;
+		return parameters;
 	}
 }

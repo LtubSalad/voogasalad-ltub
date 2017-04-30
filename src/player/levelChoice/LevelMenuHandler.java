@@ -18,6 +18,8 @@ public class LevelMenuHandler implements MenuItemHandler{
 
 	@Override
 	public void handle() {
+		//TODO : change to the level levelID
+		System.out.println("level test:The current level is " + levelID);
 		
 		
 	}

@@ -28,7 +28,7 @@ import player.passwordManager.PasswordManager;
 public class Loader {
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 300;
-	public static final Integer STARTTIME = 11;
+	public static final Integer STARTTIME = 2;
 	private Stage primaryStage;
 	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	private Label timerLabel = new Label();
@@ -77,6 +77,7 @@ public class Loader {
 		root.getChildren().add(vb);
 		scene.getStylesheets().setAll("/styleSheets/login.css");
 		primaryStage.setScene(scene);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.show();
 
 

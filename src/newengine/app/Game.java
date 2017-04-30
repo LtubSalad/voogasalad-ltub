@@ -1,7 +1,9 @@
 package newengine.app;
+import java.util.List;
 
 import bus.BasicEventBus;
 import bus.EventBus;
+import gamecreation.level.LevelData;
 import javafx.scene.Scene;
 import newengine.events.GameInitializationEvent;
 import newengine.events.trigger.AddTriggerEvent;
@@ -11,6 +13,7 @@ import newengine.managers.collision.CollisionManager;
 import newengine.managers.conditions.ConditionManager;
 import newengine.managers.debug.DebugManager;
 import newengine.managers.input.InputManager;
+import newengine.managers.levels.LevelManager;
 import newengine.managers.range.RangeManager;
 import newengine.managers.sound.SoundManager;
 import newengine.managers.timer.TimerManager;
@@ -22,14 +25,46 @@ import newengine.model.SpriteModel;
 import newengine.trigger.Trigger;
 import newengine.trigger.TriggerManager;
 import newengine.view.View;
-
+import newengine.view.camera.Camera;
 public class Game {
-
 	private EventBus bus = new BasicEventBus();
 	private GameLoop gameLoop;
 	private View view;
 	private boolean mapInitialized = false;
-	 
+	
+	public Game(List<LevelData> levels){
+		SpriteModel spriteModel = new SpriteModel(bus);
+		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
+		PlayerRelationModel playerRelationModel = new PlayerRelationModel(bus);
+		SelectionModel selectionModel = new SelectionModel(bus);
+		Models models = new Models(bus, spriteModel, playerStatsModel, playerRelationModel, selectionModel);
+		
+		Camera camera = new Camera(bus);
+		view = new View(bus, camera);
+		
+		gameLoop = new FXGameLoop(bus);
+		
+		CollisionManager collisionManager = new CollisionManager(bus); // TODO
+		RangeManager rangeManager = new RangeManager(bus); // TODO
+		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
+		SoundManager soundManager = new SoundManager(bus);
+		DebugManager debugManager = new DebugManager(bus);
+		TriggerManager triggerManager = new TriggerManager(bus, models);
+		TimerManager timerManager = new TimerManager(bus);
+		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel, playerRelationModel);
+		LevelManager levelManager = new LevelManager(bus, levels);
+		
+		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
+		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
+		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
+		gameLoop.addLoopComponent((dt) -> view.render(models));
+		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
+		gameLoop.addLoopComponent((dt) -> timerManager.update(dt));
+		gameLoop.addLoopComponent((dt) -> inputManager.update(dt));
+	}
+	
+	
+	
 	public Game() {
 		SpriteModel spriteModel = new SpriteModel(bus);
 		PlayerStatsModel playerStatsModel = new PlayerStatsModel(bus); // TODO CONNECT PLAYER AND PLAYERSTATSMODEL
@@ -37,7 +72,8 @@ public class Game {
 		SelectionModel selectionModel = new SelectionModel(bus);
 		Models models = new Models(bus, spriteModel, playerStatsModel, playerRelationModel, selectionModel);
 		
-		view = new View(bus);
+		Camera camera = new Camera(bus);
+		view = new View(bus, camera);
 		
 		bindStats();
 		
@@ -45,15 +81,15 @@ public class Game {
 		
 		CollisionManager collisionManager = new CollisionManager(bus); // TODO
 		RangeManager rangeManager = new RangeManager(bus); // TODO
-
 		InputManager inputManager = new InputManager(bus, spriteModel, playerStatsModel, selectionModel);
 //		SoundManager soundManager = new SoundManager(bus);
 		DebugManager debugManager = new DebugManager(bus);
 		TriggerManager triggerManager = new TriggerManager(bus, models);
 		TimerManager timerManager = new TimerManager(bus);
-		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel);
+		ConditionManager conditionManager = new ConditionManager(bus,spriteModel, playerStatsModel, playerRelationModel);
+		LevelManager levelManager = new LevelManager(bus, null);
 		
-		gameLoop.addLoopComponent((dt) -> view.clear());
+//		gameLoop.addLoopComponent((dt) -> view.clearGameWorldCanvas());
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
@@ -90,3 +126,4 @@ public class Game {
 	}
 	
 }
+

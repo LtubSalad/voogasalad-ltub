@@ -7,7 +7,7 @@ import java.util.List;
 
 import bus.BusEvent;
 import exception.UnsupportedTypeException;
-import gameDevelopmentInterface.spriteCreator.SimpleComponentSetter;
+import gameDevelopmentInterface.spriteCreator.DefaultComponentSetter;
 import helperAnnotations.DeveloperMethod;
 import newengine.sprite.component.Component;
 

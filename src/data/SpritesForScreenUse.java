@@ -18,14 +18,14 @@ public class SpritesForScreenUse {
 	 * 
 	 * @param newData a possible new sprite the user can place on the screen
 	 */
-	public void addComponent(SpriteMakerModel newSprite) {
+	public void addPossibleSprite(SpriteMakerModel newSprite) {
 		allPossibleScreenAttributes.add(newSprite);
 	}
 	/**
 	 * 
 	 * @return all sprites that have been placed on the bottom of the screen for clicking and dragging
 	 */
-	public ObservableList<SpriteMakerModel> getScreenAttributes() {
+	public ObservableList<SpriteMakerModel> getSpriteMakerModels() {
 		return allPossibleScreenAttributes;
 	}
 

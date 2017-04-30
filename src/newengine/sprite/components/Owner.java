@@ -35,5 +35,13 @@ public class Owner extends Component {
 	public Owner clone() {
 		return new Owner(owner);
 	}
+
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=owner.getName();
+		// TODO Auto-generated method stub
+		return parameters;
+	}
 	
 }

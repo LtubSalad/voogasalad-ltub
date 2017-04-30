@@ -1,5 +1,7 @@
 package newengine.sprite.components;
 
+import java.io.File;
+
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.sprite.component.Component;
@@ -10,9 +12,15 @@ public class SoundEffect extends Component {
 	public static final ComponentType<SoundEffect> TYPE = new ComponentType<>(SoundEffect.class.getName());
 	
 	private String moveSoundFile;
+
 	
 	@ConstructorForDeveloper
-	public SoundEffect( @VariableName(name = "SoundFile") String moveSoundFile) {
+	public SoundEffect(@VariableName(name = "Sound file") File soundFile){
+		this(soundFile.toURI().toString());
+		System.out.println(soundFile.toURI().toString());
+	}
+	
+	public SoundEffect(String moveSoundFile) {
 		this.moveSoundFile = moveSoundFile;
 	}
 	
@@ -28,5 +36,12 @@ public class SoundEffect extends Component {
 	@Override
 	public SoundEffect clone() {
 		return new SoundEffect(moveSoundFile);
+	}
+
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=new File(moveSoundFile);
+		return parameters;
 	}
 }

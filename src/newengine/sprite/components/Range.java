@@ -1,8 +1,5 @@
 package newengine.sprite.components;
 
-import java.io.Serializable;
-
-import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.range.InRangeEvent;
@@ -57,6 +54,13 @@ public class Range extends Component {
 	@Override
 	public Range clone() {
 		return new Range(range);
+	}
+
+	@Override
+	public Object[] getParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=range;
+		return parameters;
 	}
 
 	

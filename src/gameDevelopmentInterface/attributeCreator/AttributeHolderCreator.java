@@ -56,7 +56,7 @@
 //	/**
 //	 * Produce XML file for this class' data.
 //	 */
-//	private void createClassData() {
+//  private void createClassData() {
 //		attributeCustomizerPane.updateAttribute();
 //		dataHandler.saveToFile(attributeHolder);
 //	}
