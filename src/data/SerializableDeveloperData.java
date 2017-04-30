@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import gamecreation.level.ILevelData;
-import gamecreation.level.LevelData;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import newengine.player.Player;
 
 /**
  * @author tahiaemran
@@ -36,6 +36,10 @@ public class SerializableDeveloperData {
 		
 	}
 
+	public Player getUserPlayer() {
+		// TODO
+		return null;
+	}
 
 	private void configSprites(ObservableList<SpriteMakerModel> data) {
 		mySprites = new ArrayList<SpriteMakerModel>();

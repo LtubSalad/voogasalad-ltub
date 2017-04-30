@@ -24,12 +24,12 @@ import javafx.util.Pair;
  * Also tracks info such as available paths and sprites that can be added to a screen for developer purposes. 
  */
 public class DeveloperData {
-	private static final String NUMBER_OF_LIVES = "NUM_LIVES";
-	private static final String BUILD_TOWER = "BUILD_IN_GAME";
-	private static final String NUMBER_OF_STARTING_GOLD = "NUM_GOLD";
-	private static final String LEVEL_COMPLETION_BONUS = "LEVEL_COMPLETION";
-	private static final String GAME_NAME = "GAME_NAME";
-	private static final String GAME_ICON = "GAME_ICON";
+	public static final String NUMBER_OF_LIVES = "NUM_LIVES";
+	public static final String BUILD_TOWER = "BUILD_IN_GAME";
+	public static final String NUMBER_OF_STARTING_GOLD = "NUM_GOLD";
+	public static final String LEVEL_COMPLETION_BONUS = "LEVEL_COMPLETION";
+	public static final String GAME_NAME = "GAME_NAME";
+	public static final String GAME_ICON = "GAME_ICON";
 	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
 	private ObservableList<LevelData> levelData; // need 
 	private ObservableList<Path> myPaths;
