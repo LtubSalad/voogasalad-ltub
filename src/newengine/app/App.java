@@ -104,6 +104,9 @@ public class App extends Application {
 		
 		
 		
+
+		//EventBus bus = game.getBus();
+
 		// sprite 1: the tower
 		Sprite tower = new Sprite();
 		LtubImage image1 = new LtubImage("images/skills/bullet.png");
@@ -141,6 +144,12 @@ public class App extends Application {
 		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		child.addComponent(new Range(128));
 		//child.addComponent(new Attacker());
+		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
+		child.addComponent(new Images("images/characters/bahamut_left.png"));
+		child.addComponent(new Speed(100));
+		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		child.addComponent(new Range(128));
 		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		child.addComponent(new Images("images/characters/bahamut_left.png"));
 		child.addComponent(new Speed(100));
@@ -217,7 +226,7 @@ public class App extends Application {
 
 		
 		
-		//listSprites.add(sprite2);
+
 		List<Sprite> spritesToAdd = new ArrayList<>();
 		spritesToAdd.add(tower);
 		spritesToAdd.add(monster);
