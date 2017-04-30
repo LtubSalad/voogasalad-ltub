@@ -2,8 +2,8 @@ package player;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import player.gameChoice.GameManager;
 import player.passwordManager.PasswordManager;
+import user.UsersModel;
 
 /**
  * The entering point for the game player is to ask the player
@@ -21,8 +21,10 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//new GameManager(primaryStage);
-		PasswordManager p = new PasswordManager(primaryStage);
+		UsersModel userModel = new UsersModel();
+		PasswordManager p = new PasswordManager(primaryStage, userModel);
 		p.show();
+		
 	}
 
 	public static void main(String[] args) {
