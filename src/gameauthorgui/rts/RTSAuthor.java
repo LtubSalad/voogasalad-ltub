@@ -21,8 +21,8 @@ public class RTSAuthor extends GameAuthor{
 	
 	public RTSAuthor(){
 		super();
-		myGeneralDataCreator = new GeneralDataCreator();
 		myModelData = new DeveloperData();
+		myGeneralDataCreator = new GeneralDataCreator(myModelData);
 		myScreenModelData = new ScreenModelData();
 		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();
@@ -30,7 +30,7 @@ public class RTSAuthor extends GameAuthor{
 
 	@Override
 	public void instantiateSteps() {
-		addStep(new DeveloperStep("Welcome", new RTSWelcomeScreen()));
+		addStep(new DeveloperStep("Welcome", new RTSWelcomeScreen(myModelData)));
 		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
 		addStep(new DeveloperStep("General Data", myGeneralDataCreator));
 		addStep(new DeveloperStep("Screen Setting", new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData )));

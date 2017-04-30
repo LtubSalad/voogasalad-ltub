@@ -1,0 +1,23 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Images</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Images>
+        <imageFilePath>images/marioGif.gif</imageFilePath>
+      </newengine.sprite.components.Images>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>Jake2</spriteName>
+  <actualComponents>
+    <newengine.sprite.components.Images reference="../../myComponents/entry/newengine.sprite.components.Images"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>

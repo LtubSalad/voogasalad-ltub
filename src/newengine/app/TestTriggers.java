@@ -64,10 +64,10 @@ public class TestTriggers {
 	
 	private Trigger printWhenSpriteMoves() {
 		TriggerEvent triggerEvent = TriggerEvent.createSpriteAllTriggerEvent(MoveEvent.START_POSITION);
-		TriggerAction triggerAction = TriggerAction.createSpriteTriggeringUnitTriggerAction(
-				new ChangeHealthEvent(ChangeHealthEvent.ANY, -20));
+		//TriggerAction triggerAction = TriggerAction.createSpriteTriggeringUnitTriggerAction(
+		//		new ChangeHealthEvent(ChangeHealthEvent.ANY, -20));
 		Trigger trigger = new Trigger(triggerEvent);
-		trigger.addAction(triggerAction);
+		//trigger.addAction(triggerAction);
 		return trigger;
 	}
 	

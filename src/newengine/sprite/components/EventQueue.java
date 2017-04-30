@@ -26,10 +26,10 @@ public class EventQueue extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(QueueEvent.ADD, (Serializable & BusEventHandler<QueueEvent>)(e) -> {
+		sprite.on(QueueEvent.ADD, (e) -> {
 			addEvent(e.getEvent());
 		});
-		sprite.on(QueueEvent.NEXT, (Serializable & BusEventHandler<QueueEvent>)(e) -> {
+		sprite.on(QueueEvent.NEXT, (e) -> {
 			eventFinished = true;
 		});
 	}
@@ -66,5 +66,11 @@ public class EventQueue extends Component {
 	@Override
 	public EventQueue clone() {
 		return new EventQueue((LinkedList<BusEvent>) events.clone());
+	}
+
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

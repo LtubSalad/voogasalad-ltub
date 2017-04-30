@@ -1,0 +1,36 @@
+.root{
+	-fx-font-size: 10pt;
+	-fx-font-family: "Lucida Grande";
+	-fx-base: rgb(176,222,232);
+	-fx-background: rgb(234,	234, 232);
+	-fx-text-fill: white;
+}
+
+.borderpane{
+	-fx-background-color: #919191;
+	-fx-text-fill: white;
+}
+
+.hbox{
+	-fx-background-color: #919191;
+	-fx-padding: 15;
+	-fx-padding: 20;
+	-fx-border-style: solid;
+	-fx-border-width: 2;
+	-fx-border-color: black
+}
+
+.vbox{
+	-fx-background-color: #b0dee8;
+}
+
+.statsbox{
+	-fx-background-color: #ededed;
+	-fx-border-style: solid; 
+	-fx-border-width: 2; 
+	-fx-border-color: #bcbcbc;
+}
+
+.textfill{
+	-fx-text-fill: white;
+}
