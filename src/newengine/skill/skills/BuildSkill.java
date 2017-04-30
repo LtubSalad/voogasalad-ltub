@@ -68,6 +68,20 @@ public class BuildSkill extends Skill {
 		} else {
 			buildSprite(spriteToCreate, player, 0); // cost 0
 		}
+
+		
+//		AuthDataTranslator translator = new AuthDataTranslator(mySpriteModel);
+//		Sprite spriteToCreate = translator.getSprite();
+//		if (spriteToCreate.getComponent(Cost.TYPE).isPresent()) {
+//			int cost = spriteToCreate.getComponent(Cost.TYPE).get().getCost();
+//			Player player = getSource().get().getComponent(Owner.TYPE).get().player();
+//			getSource().get().getComponent(GameBus.TYPE).ifPresent((gameBusComponent) -> {
+//				gameBusComponent.getGameBus().emit(
+//						new CheckCostAndBuildEvent(cost, player, () -> {
+//							buildSprite(spriteToCreate, player, cost);
+//						}));
+//			});
+//		}
 	}
 	
 	private void buildSprite(Sprite spriteToCreate, Player player, int cost) {
