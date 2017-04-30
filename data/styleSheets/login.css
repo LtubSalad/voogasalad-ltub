@@ -49,3 +49,21 @@
 	-fx-background-radius:5, 4, 3;
 	-fx-font-size: 20px;
 }
+
+#main-button
+{
+    -fx-background-radius: 30, 30, 29, 28;
+    -fx-padding: 3px 10px 3px 10px;
+    -fx-background-color: linear-gradient(orange, orangered );
+}
+
+#vbox{
+	-fx-background-color:blue;
+	-fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-background-radius: 5.0; 
+    -fx-border-color: #2e8b57;
+     -fx-background-size: 96, 205;
+    -fx-border-width: 2px;
+    -fx-font-family:  "Helvetica";
+}
