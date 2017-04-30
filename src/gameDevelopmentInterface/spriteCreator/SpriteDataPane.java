@@ -149,6 +149,7 @@ public class SpriteDataPane extends ScrollPane{
 					spriteData.addComponent(component.produceComponent());
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				AlertHandler.errorPopUp(e.getMessage());
 			}
 			
