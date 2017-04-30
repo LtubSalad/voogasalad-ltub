@@ -5,8 +5,6 @@ import java.util.ResourceBundle;
 
 import data.DeveloperData;
 import data.SpriteMakerModel;
-import gameDevelopmentInterface.presetHandling.ExampleTower;
-import gameDevelopmentInterface.presetHandling.SpriteEditorLoader;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;

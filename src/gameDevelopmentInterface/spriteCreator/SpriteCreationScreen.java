@@ -39,6 +39,7 @@ public class SpriteCreationScreen extends BorderPane {
 	private SpriteDataPane infoPane;
 	private EventHandlerPane scriptPane;
 	private DeveloperData developerData;
+	private SpriteDescriptorPane descriptorPane;
 
 	public SpriteCreationScreen(DeveloperData model, SpriteMakerModel spriteData) {
 		this.developerData = model;
@@ -52,10 +53,11 @@ public class SpriteCreationScreen extends BorderPane {
 	public void instantiate(SpriteMakerModel sprite) {
 		scriptPane = new EventHandlerPane(sprite);
 		infoPane = new SpriteDataPane(sprite, developerData);
+		descriptorPane=new SpriteDescriptorPane(sprite);
 		this.setRight(instantiateSelector());
 		this.setLeft(scriptPane);
 		this.setCenter(infoPane);
-		this.setTop(new Label("NEW SPRITE"));
+		this.setTop(descriptorPane);
 		this.setBottom(new BottomPanel());
 	}
 
@@ -84,7 +86,7 @@ public class SpriteCreationScreen extends BorderPane {
 		observableComponents.add(Spawner.class);
 		observableComponents.add(TowerDefenceTypeInformation.class);
 
-		return new ComponentSelectorPane("Add components and set parameters", observableComponents, infoPane);
+		return new ComponentSelectorPane("Add components", observableComponents, infoPane);
 	}
 
 	public class BottomPanel extends HBox {
@@ -92,7 +94,7 @@ public class SpriteCreationScreen extends BorderPane {
 
 		public BottomPanel() {
 			AlertHandler alertHandler = new AlertHandler();
-			Button saveButton = new Button("Save SpriteMakerModel to File");
+			Button saveButton = new Button("Save Sprite to File");
 			saveButton.setOnMouseClicked((click) -> {
 				Alert alert = alertHandler.confirmationPopUp("Are you sure you wish to save?");
 				Optional<ButtonType> result = alert.showAndWait();
@@ -108,7 +110,7 @@ public class SpriteCreationScreen extends BorderPane {
 				}
 			});
 
-			Button listSaveButton = new Button("Save SpriteMakerModel to THIS GAME's list of SpriteMakerModels");
+			Button listSaveButton = new Button("Save Sprite to this game's Sprites");
 			listSaveButton.setOnMouseClicked((click) -> {
 				Alert alert = alertHandler.confirmationPopUp("Are you sure you wish to save?");
 				Optional<ButtonType> result = alert.showAndWait();
@@ -144,6 +146,7 @@ public class SpriteCreationScreen extends BorderPane {
 			try {
 				scriptPane.updateSprite(sprite);
 				infoPane.updateSpriteData(sprite);
+				descriptorPane.updateSpriteData(sprite);
 			} catch (Exception e) {
 				AlertHandler.showError("Model could not be created");
 				return null;
