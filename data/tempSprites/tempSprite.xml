@@ -5,11 +5,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-<<<<<<< HEAD
         <imageFilePath>images/characters/Lava.jpg</imageFilePath>
-=======
-        <imageFilePath>images/characters/Snow.jpg</imageFilePath>
->>>>>>> 5ad0beeddac5a0f686645126f101fcd2c37ca757
       </newengine.sprite.components.Images>
     </entry>
   </myComponents>

@@ -147,6 +147,8 @@ public class GameManager {
 				
 				
 				primaryStage.setScene(game.getScene());
+				primaryStage.show();
+				
 				
 				// get scene
 				// display

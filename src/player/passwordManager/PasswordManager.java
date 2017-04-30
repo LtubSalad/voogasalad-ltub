@@ -42,12 +42,17 @@ public class PasswordManager{
 	TextField txtUserName;
 	Label lblMessage;
 	PasswordField pf;
+	
+	UsersModel model; 
 
 	public PasswordManager(Stage primaryStage){
 		this.primaryStage = primaryStage;
 		txtUserName = new TextField();
 		lblMessage = new Label();
 		pf = new PasswordField();
+	}
+	public PasswordManager(Stage primaryStage2, UsersModel userModel) {
+		this.model= userModel; 
 	}
 	//FIXME: refactor this method into smaller methods 
 	public void show() {
@@ -132,8 +137,7 @@ public class PasswordManager{
 		tempCheckUser = txtUserName.getText().toString();
 		tempCheckPw = pf.getText().toString();
 		
-		UsersModel usersModel = new UsersModel();
-		usersModel.addUser(tempCheckUser, tempCheckPw);
+		model.addUser(tempCheckUser, tempCheckPw);
 		
 		writer.write(tempCheckUser, tempCheckPw);
 		p.show();
