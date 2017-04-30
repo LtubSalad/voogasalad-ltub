@@ -72,4 +72,8 @@ public class User {
 		return messages.getDisplayableMessages();
 	}
 
+	public MessagingHistory getMessagingHistory() {
+		return this.messages;
+	}
+
 }
