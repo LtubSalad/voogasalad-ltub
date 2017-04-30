@@ -70,7 +70,10 @@ public class AllPossibleMonsters extends ScrollPane {
 				ImageView iv = new ImageView(imageComp.image().getFXImage());
 				iv.setFitWidth(100);
 				iv.setFitHeight(100);
-				iv.setOnMouseClicked(click -> setCurrentMonster(monster, new ImageView(imageComp.image().getFXImage())));
+				iv.setOnMouseClicked(click -> {
+					setCurrentMonster(monster, new ImageView(imageComp.image().getFXImage()));
+					mySpawnerInfo.setCurrentMonsterToSpawn(monster);
+				});
 				monsterImages.getChildren().add(iv);
 			}
 		}
