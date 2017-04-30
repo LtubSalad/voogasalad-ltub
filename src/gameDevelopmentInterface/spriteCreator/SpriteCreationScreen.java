@@ -100,7 +100,7 @@ public class SpriteCreationScreen extends BorderPane {
 				try {
 					System.out.println("Supposed to add to model");
 					updateSprite();
-					model.addSprite(spriteData);
+					model.getSprites().add(spriteData);
 				} catch (Exception e) {
 					// FIXME
 					System.out.println("there was an exception");

@@ -87,6 +87,14 @@ public class GameStatsView extends VBox implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		GameHistory newHistory = (GameHistory) o; 
+		makeStatsPane(newHistory.getStats());
+		reconfigure();
+		//FIXME: FINISH ME FIRST
 
+	}
+
+	private void reconfigure() {
+		this.getChildren().clear();
+		configure(myName);
 	}
 }
