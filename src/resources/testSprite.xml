@@ -5,7 +5,7 @@
         <typename>newengine.sprite.components.Speed</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Speed>
-        <speed>100.0</speed>
+        <speed>200.0</speed>
       </newengine.sprite.components.Speed>
     </entry>
     <entry>
@@ -14,32 +14,16 @@
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Owner>
         <owner>
-          <name>Jake</name>
+          <name>ower</name>
         </owner>
       </newengine.sprite.components.Owner>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Health</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Health>
-        <health>100</health>
-      </newengine.sprite.components.Health>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Range</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Range>
-        <range>128.0</range>
-      </newengine.sprite.components.Range>
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>images/marioCropped.gif</imageFilePath>
+        <imageFilePath>resources/bahamut_right.png</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
@@ -52,42 +36,33 @@
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Attacker</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Attacker>
-        <reloadPeriod>1.0</reloadPeriod>
-        <timeRemaining>1.0</timeRemaining>
-      </newengine.sprite.components.Attacker>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.PathFollower</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.PathFollower>
         <path>
           <myPath class="linked-list">
             <commons.point.GamePoint>
-              <x>0.9166666666666666</x>
+              <x>0.5833333333333334</x>
               <y>0.9166666666666666</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>0.9166666666666666</x>
+              <x>0.5833333333333334</x>
               <y>0.75</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>0.9166666666666666</x>
+              <x>0.5833333333333334</x>
               <y>0.5833333333333334</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>0.9166666666666666</x>
+              <x>0.5833333333333334</x>
               <y>0.4166666666666667</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>0.9166666666666666</x>
+              <x>0.5833333333333334</x>
               <y>0.25</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>0.9166666666666666</x>
+              <x>0.5833333333333334</x>
               <y>0.08333333333333333</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
@@ -111,8 +86,12 @@
               <y>300.0</y>
             </commons.point.GamePoint>
           </myPath>
-          <pathName>Test path</pathName>
+          <pathName>path</pathName>
         </path>
+        <finalPoint>
+          <x>0.0</x>
+          <y>0.0</y>
+        </finalPoint>
       </newengine.sprite.components.PathFollower>
     </entry>
     <entry>
@@ -140,19 +119,16 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>Monster</spriteName>
-  <spriteDescription>try</spriteDescription>
+  <spriteName>matt</spriteName>
+  <spriteDescription></spriteDescription>
   <actualComponents>
+    <newengine.sprite.components.Collidable reference="../../myComponents/entry[7]/newengine.sprite.components.Collidable"/>
+    <newengine.sprite.components.EventQueue reference="../../myComponents/entry[6]/newengine.sprite.components.EventQueue"/>
+    <newengine.sprite.components.Images reference="../../myComponents/entry[3]/newengine.sprite.components.Images"/>
     <newengine.sprite.components.Owner reference="../../myComponents/entry[2]/newengine.sprite.components.Owner"/>
-    <newengine.sprite.components.Images reference="../../myComponents/entry[5]/newengine.sprite.components.Images"/>
+    <newengine.sprite.components.PathFollower reference="../../myComponents/entry[5]/newengine.sprite.components.PathFollower"/>
+    <newengine.sprite.components.Selectable reference="../../myComponents/entry[4]/newengine.sprite.components.Selectable"/>
     <newengine.sprite.components.Speed reference="../../myComponents/entry/newengine.sprite.components.Speed"/>
-    <newengine.sprite.components.Collidable reference="../../myComponents/entry[10]/newengine.sprite.components.Collidable"/>
-    <newengine.sprite.components.Selectable reference="../../myComponents/entry[6]/newengine.sprite.components.Selectable"/>
-    <newengine.sprite.components.Range reference="../../myComponents/entry[4]/newengine.sprite.components.Range"/>
-    <newengine.sprite.components.Attacker reference="../../myComponents/entry[7]/newengine.sprite.components.Attacker"/>
-    <newengine.sprite.components.Health reference="../../myComponents/entry[3]/newengine.sprite.components.Health"/>
-    <newengine.sprite.components.EventQueue reference="../../myComponents/entry[9]/newengine.sprite.components.EventQueue"/>
-    <newengine.sprite.components.PathFollower reference="../../myComponents/entry[8]/newengine.sprite.components.PathFollower"/>
   </actualComponents>
   <skills/>
 </data.SpriteMakerModel>
