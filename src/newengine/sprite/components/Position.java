@@ -21,6 +21,7 @@ import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.events.sprite.StateChangeEvent;
+import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.timer.DelayedEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
@@ -60,7 +61,6 @@ public class Position extends Component {
 			});
 		});
 		sprite.on(MoveEvent.START_SPRITE, (e) -> {
-			System.out.println("lol hi");
 			moveTo(e.getTarget());
 			followingSprite();
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
@@ -78,6 +78,16 @@ public class Position extends Component {
 	}
 	@Override
 	public void onUpdated(double dt) {
+		sprite.getComponent(PathFollower.TYPE).ifPresent((pathFollower) -> {
+			GamePoint finalPoint = pathFollower.getFinalPoint();
+			if (MathUtils.doubleEquals(pos.x(), finalPoint.x()) && MathUtils.doubleEquals(pos.y(), finalPoint.y())){
+				if (sprite.getComponent(EventQueue.TYPE).get().isEmpty()){
+					System.out.println("sprite has stopped moving and reached end of path");
+					sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new ChangeLivesEvent(ChangeLivesEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), -3));
+					sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
+				}
+			}
+		});
 		if (!isMoving()) {
 			return;
 		}
@@ -107,6 +117,7 @@ public class Position extends Component {
 			target.getSprite().ifPresent((targetSprite) -> {
 				System.out.println("weapon reaches target");
 				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
+				isMoving = false;
 			});
 			sprite.emit(new QueueEvent(QueueEvent.NEXT, new BusEvent(BusEvent.ANY)));
 			return;

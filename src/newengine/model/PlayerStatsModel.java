@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import newengine.events.conditions.EndConditionTriggeredEvent;
 import newengine.events.skill.CheckCostAndBuildEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
@@ -45,31 +46,6 @@ public class PlayerStatsModel {
 				// TODO: send insufficient gold event, 
 				// and use trigger to handle it and play sound (and show text).
 				bus.emit(new SoundEvent(SoundEvent.SOUND_EFFECT, "data/sounds/alert_sound.mp3"));
-			}
-		});
-		bus.on(InsufficientGoldEvent.CHECK, e -> {
-			Player player = e.getPlayer();
-			WealthType type = e.getType();
-			System.out.println("insufficient gold event handled");
-
-			if (wealth.containsKey(player)) {
-				Map<WealthType, Integer> wealths = wealth.get(player);
-				if (wealths.containsKey(type)) {
-					if (wealths.get(type) <= 0){
-						System.out.println("insufficient gold warning popup");
-						Stage warning = new Stage();
-						VBox root = new VBox();
-						Scene scene = new Scene(root);
-						Text  text = new Text("You don't have enough gold for this update. Sorry!");
-						Button close = new Button("close");
-						close.setOnAction(f -> {
-							warning.close();
-						});
-						root.getChildren().addAll(text, close);
-						warning.setScene(scene);
-						warning.show();
-					}
-				}
 			}
 		});
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
@@ -107,10 +83,16 @@ public class PlayerStatsModel {
 			}
 		});
 		bus.on(ChangeLivesEvent.CHANGE, (e) ->{
+			
 			Player player = e.getPlayer();
+			System.out.println("LIVES CHANGED! from: " + lives.get(player));
 			if (lives.containsKey(player)) {
 				lives.put(player, lives.get(player) + e.getAmountChanged());
+				if (lives.get(player) == 0){
+					System.out.println("OUT OF LIVES!");
+				}
 			}
+			System.out.println("LIVES CHANGED! to: " + lives.get(player));
 		});
 		bus.on(ChangeLivesEvent.SET, (e) ->{
 			Player player = e.getPlayer();
