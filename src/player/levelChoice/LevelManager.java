@@ -11,6 +11,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import newengine.animation.ImageAnimationTest;
@@ -59,13 +60,17 @@ public class LevelManager {
 		
 		scene.getStylesheets().setAll("/styleSheets/login.css");
 		
-		//HBox
+		HBox hBox = new HBox();
+		hBox.getChildren().add(im.getImageView());
+		hBox.setLayoutX(300);
+		hBox.setLayoutY(200);
+		root.getChildren().add(hBox);
 
 		Button starting = new Button("Start A Game of Random Level");
 		
 		
-		starting.setLayoutX(300);
-		starting.setLayoutY(300);
+		starting.setLayoutX(500);
+		starting.setLayoutY(600);
 		starting.setId("starting");
 		starting.setMinWidth(100);
 		starting.setMinHeight(100);

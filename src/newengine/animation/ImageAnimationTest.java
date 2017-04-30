@@ -11,8 +11,8 @@ import javafx.util.Duration;
 
 public class ImageAnimationTest {
 
-	private static final int WIDTH    = 100;
-	private static final int HEIGHT   = 100;
+	private static final int WIDTH    = 200;
+	private static final int HEIGHT   = 200;
 
 	private static final Image IMAGE = new Image("resources/gold.jpeg", WIDTH, HEIGHT, true,true);
 	private static final Image IMAGE1 = new Image("resources/health.jpg", WIDTH, HEIGHT, true,true);
