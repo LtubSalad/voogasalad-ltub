@@ -50,14 +50,18 @@ public class Main extends Application {
 		});
 		play_game = new Button(PLAY_A_GAME);
 		play_game.setOnAction(e -> {
+<<<<<<< HEAD
 			// TODO: pop up file chooser + read in the game u wanna make + launch it 
 			//SerializableDeveloperData data = (SerializableDeveloperData) xstream.getObjectFromFile();
+=======
+			XStreamHandler xstream = new XStreamHandler();
+			SerializableDeveloperData tester = (SerializableDeveloperData) xstream.getObjectFromFile();
+>>>>>>> 572b8e99640280ca390c7140a9eb199690e4b22c
 			
-			App runScreen = new App(currentTowerGUI.getData());
+			App runScreen = new App(tester);
 			try {
 				runScreen.start(ps);
 			} catch (Exception e1) {
-				//TODO remove this
 				e1.printStackTrace();
 			}
 		});

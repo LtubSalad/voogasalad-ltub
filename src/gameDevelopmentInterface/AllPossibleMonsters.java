@@ -34,9 +34,15 @@ public class AllPossibleMonsters extends ScrollPane {
 	
 	public void getMonstersOnScreen() {
 		monstersAlreadyInBox.clear();
+<<<<<<< HEAD
 		List<SpriteMakerModel> allSprites = 
 				new ArrayList<SpriteMakerModel>(myData.getSprites());
 		System.out.println(allSprites.size());
+=======
+		List<SpriteMakerModel> allSprites = new ArrayList<SpriteMakerModel>(myData.getSprites());
+		System.out.println("size: " + allSprites.size());
+		System.out.println("images: " + allSprites.get(0).getComponentByType(Images.TYPE));
+>>>>>>> 572b8e99640280ca390c7140a9eb199690e4b22c
 		List<SpriteMakerModel> onlyMonsters = new ArrayList<>();
 		for (SpriteMakerModel possibleMonster : allSprites) {
 			if (isMonster(possibleMonster)) {
