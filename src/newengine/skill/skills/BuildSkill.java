@@ -72,6 +72,7 @@ public class BuildSkill extends Skill {
 		Sprite spriteToCreate = translator.getSprite();
 		Player player = getSource().get().getComponent(Owner.TYPE).get().player();
 		if (spriteToCreate.getComponent(Cost.TYPE).isPresent()) {
+			System.out.println("cost monney");
 			int cost = spriteToCreate.getComponent(Cost.TYPE).get().getCost();
 			getSource().get().getComponent(GameBus.TYPE).ifPresent((gameBusComponent) -> {
 				gameBusComponent.getGameBus().emit(
@@ -80,6 +81,7 @@ public class BuildSkill extends Skill {
 						}));
 			});
 		} else {
+			System.out.println("FREE");
 			buildSprite(spriteToCreate, player, 0); // cost 0
 		}
 
