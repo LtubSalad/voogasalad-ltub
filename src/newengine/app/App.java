@@ -31,9 +31,11 @@ import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.BuildSkill;
+import newengine.skill.skills.BuildSkillFactory;
 import newengine.skill.skills.FireProjectileSkill;
 import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
+import newengine.sprite.SpriteID;
 import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
@@ -87,7 +89,13 @@ public class App extends Application {
 			//System.out.println(s.getComponent(SkillSet.TYPE).get().skills());
 		}
 		
-				
+		Sprite towerBuilder = new Sprite(new SpriteID("__TOWER_BUILDER"));
+		towerBuilder.addComponent(new GameBus());
+		towerBuilder.addComponent(new Owner(player1));
+		towerBuilder.addComponent(createTowerBuilderSkillSet(player1));
+		towerBuilder.addComponent(new Images("images/characters/bahamut_right.png"));
+		listSprites.add(towerBuilder);
+		
 		
 		Sprite spawner = new Sprite();
 		Map<SkillType<? extends Skill>, Skill> skillMap1 = new HashMap<>();
@@ -175,6 +183,39 @@ public class App extends Application {
 		game.start();
 		stage.show();
 		
+	}
+	
+	
+	private SpriteMakerModel createSampleSpriteMakerModel(Player player, String imageURL) {
+		SpriteMakerModel building = new SpriteMakerModel();
+		Map<SkillType<? extends Skill>, Skill> monsterMap = new HashMap<>();
+		monsterMap.put(MoveSkill.TYPE, new MoveSkill());
+		building.addComponent(new GameBus());
+		building.addComponent(new SkillSet(monsterMap));
+		building.addComponent(new Owner(player));
+		building.addComponent(new Position(new GamePoint(200, 100), 0));
+		building.addComponent(new Images(imageURL));
+		building.addComponent(new Speed(100));
+		building.addComponent(new Health(100));
+		building.addComponent(new EventQueue(new LinkedList<>()));
+		building.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		return building;
+	}
+	
+	private SkillSet createTowerBuilderSkillSet(Player player) {
+		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
+		
+		SpriteMakerModel[] spriteMakerModels = new SpriteMakerModel[] {
+				createSampleSpriteMakerModel(player, "images/characters/bahamut_right.png"),
+				createSampleSpriteMakerModel(player, "images/characters/bahamut_left.png"),
+				createSampleSpriteMakerModel(player, "images/characters/tower2_resized.gif")
+		};
+		for (SpriteMakerModel spriteMakerModel : spriteMakerModels) {
+			BuildSkill build = BuildSkillFactory.createBuildSkill(spriteMakerModel);
+			skillMap.put(build.getType(), build);
+		}
+		
+		return new SkillSet(skillMap);
 	}
 
 	public static void main(String[] args) {

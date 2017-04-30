@@ -8,7 +8,6 @@ import java.util.Optional;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import bus.BasicEventBus;
 import bus.BusEvent;
@@ -21,11 +20,18 @@ import newengine.sprite.component.ComponentType;
 
 public class Sprite {
 	private EventBus spriteBus = new BasicEventBus();
-	private SpriteID spriteID = IDGenerator.generateID();
+	private SpriteID spriteID;
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
 	// TODO: is dis ok for serialization 
 	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
 
+	public Sprite() {
+		this(IDGenerator.generateID());
+	}
+	public Sprite(SpriteID spriteID) {
+		this.spriteID = spriteID;
+	}
+	
 	public EventBus getSpriteBus() {
 		return spriteBus;
 	}
