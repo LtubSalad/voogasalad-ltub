@@ -9,7 +9,6 @@ import gameDevelopmentInterface.GeneralDataCreator;
 import gameDevelopmentInterface.PathCreator;
 import gameDevelopmentInterface.ScreenModelCreator;
 import gameDevelopmentInterface.spriteCreator.SpriteCreationEnvironment;
-import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import gameauthorgui.DeveloperStep;
 import gameauthorgui.GameAuthor;
 import gameauthorgui.WelcomeScreen;
@@ -46,7 +45,7 @@ public class TowerAuthor extends GameAuthor {
 				new LevelCreationPane(myModelData, getScene().getHeight() - CENTER_OFFSETS)));
 		addStep(new DeveloperStep(SET_THE_BACKGROUND,
 				new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
-		addStep(new DeveloperStep("Sprite creation", new SpriteCreationScreen(myModelData)));
+		addStep(new DeveloperStep("Sprite creation", new SpriteCreationEnvironment(myModelData)));
 		addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData, myScreenModelData)));
 		addStep(new DeveloperStep("Spawner creation", new SpawnerCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));

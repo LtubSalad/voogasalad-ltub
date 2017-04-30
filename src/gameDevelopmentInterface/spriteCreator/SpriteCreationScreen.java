@@ -28,6 +28,7 @@ import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
+import newengine.sprite.components.SpriteTypeInformation;
 import utilities.XStreamHandler;
 
 public class SpriteCreationScreen extends BorderPane {
@@ -75,6 +76,7 @@ public class SpriteCreationScreen extends BorderPane {
 		observableComponents.add(Speed.class);
 		observableComponents.add(SkillSet.class);
 		observableComponents.add(Spawner.class);
+		observableComponents.add(SpriteTypeInformation.class);
 
 		return new ComponentSelectorPane("Add components and set parameters", observableComponents, infoPane);
 	}
