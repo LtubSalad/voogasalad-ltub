@@ -12,8 +12,8 @@ public class GameTest extends Application {
 		// make a file chooser?
 		// create game from file 
 		String filepath = "data/XMLfiles/game_test.xml";
-		GameCreator creator = new GameCreator(filepath);
-		Game game = creator.getGame();
+		GameCreator creator = new GameCreator();
+		Game game = creator.createGame(filepath);
 		
 		primaryStage.setScene(game.getScene());
 		game.start();
