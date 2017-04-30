@@ -56,4 +56,20 @@ public class MessagingHistory {
 		return dispMessages; 
 	}
 
+	public String getUsername() {
+		return myUserName; 
+	}
+
+	public List<Message> getRecievedPosts() {
+		return myRecievedPosts; 
+	}
+
+	public List<Message> getSentMessages() {
+		return mySentMessages;
+	}
+
+	public Map<String, List<Message>> getPrivateMessages() {
+		return myPrivateMessages; 
+	}
+
 }

@@ -76,4 +76,8 @@ public class GameHistory {
 		stats.incrementLikes();
 	}
 	
+	public GameStats getStatsForSerialization(){
+		return stats; 
+	}
+	
 }
