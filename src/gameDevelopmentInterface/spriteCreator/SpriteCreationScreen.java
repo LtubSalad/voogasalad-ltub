@@ -28,6 +28,7 @@ import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
+import newengine.sprite.components.TowerDefenceTypeInformation;
 import utilities.XStreamHandler;
 
 public class SpriteCreationScreen extends BorderPane {
@@ -75,6 +76,7 @@ public class SpriteCreationScreen extends BorderPane {
 		observableComponents.add(Speed.class);
 		observableComponents.add(SkillSet.class);
 		observableComponents.add(Spawner.class);
+		observableComponents.add(TowerDefenceTypeInformation.class);
 
 		return new ComponentSelectorPane("Add components and set parameters", observableComponents, infoPane);
 	}
@@ -98,7 +100,7 @@ public class SpriteCreationScreen extends BorderPane {
 				try {
 					System.out.println("Supposed to add to model");
 					updateSprite();
-					model.addSprite(spriteData);
+					model.getSprites().add(spriteData);
 				} catch (Exception e) {
 					// FIXME
 					System.out.println("there was an exception");

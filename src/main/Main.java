@@ -1,10 +1,10 @@
 package main;
 
-import data.DeveloperData;
 import gameauthorgui.tower.TowerAuthor;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -19,15 +19,17 @@ public class Main extends Application {
 	private Text welcome = new Text(WELCOME);
 	private Button create_game;
 	private Button play_game;
-	private VBox root = new VBox();
+	private VBox putInRoot = new VBox();
+	private BorderPane root = new BorderPane();
 	private Scene scene = new Scene(root);
 	private TowerAuthor currentTowerGUI = new TowerAuthor();
 
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle(HOME_SCREEN);
 		makeButtons(primaryStage);
-		root.setPrefSize(250, 250);
-		root.getChildren().addAll(welcome, create_game, play_game);
+		root.setPrefSize(500, 500);
+		putInRoot.getChildren().addAll(welcome, create_game, play_game);
+		root.setCenter(putInRoot);
 		scene.getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		primaryStage.setScene(scene);
 		primaryStage.show();
