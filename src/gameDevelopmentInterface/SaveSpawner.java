@@ -15,11 +15,11 @@ public class SaveSpawner extends HBox {
 	private DeveloperData myModel;
 	
 	public SaveSpawner(DeveloperData data, SpawnerCreation spawnCreation, MonsterAdder monsterAdder) {
-		myModel = data;
-		myMonsterAdder = monsterAdder;
-		mySpawnerCreation = spawnCreation;
-		makeButtons();
-		this.getChildren().addAll(saveSpawnerToFile, saveSpawnerToData);
+//		myModel = data;
+//		myMonsterAdder = monsterAdder;
+//		mySpawnerCreation = spawnCreation;
+//		makeButtons();
+//		this.getChildren().addAll(saveSpawnerToFile, saveSpawnerToData);
 	}
 	
 	private void makeButtons() {
