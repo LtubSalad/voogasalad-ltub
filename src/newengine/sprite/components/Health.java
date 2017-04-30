@@ -29,7 +29,6 @@ public class Health extends Component {
 	public Health(@VariableName(name="health")int health){
 		this.initHealth = health;
 		this.health = health;
-		sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, sprite, health));
 	}
 	
 	@Override

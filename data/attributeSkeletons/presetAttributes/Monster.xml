@@ -1,2 +1,0 @@
-<Monster><ConstantActor function_run="move(50)"></ConstantActor><HealthHolder function_adjustHealth_value="health+=value;" variable_health="100"></HealthHolder>
-<ImageHolder variable_xPosition="0" variable_yPosition="0" variable_image="Monster_Image_3.gif" function_getImage="return image" variable_displayPriority="1"></ImageHolder></Monster>
