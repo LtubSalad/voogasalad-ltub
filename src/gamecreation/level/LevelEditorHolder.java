@@ -37,7 +37,7 @@ public class LevelEditorHolder extends ScrollPane {
 		this(data, PREF_HEIGHT);
 	}
 
-	private void render(){
+	public void render(){
 		List<LevelEditor> editorList = new ArrayList<LevelEditor>();
 		editors.getChildren().clear();
 		levelData.stream().forEach(level -> {
@@ -52,5 +52,9 @@ public class LevelEditorHolder extends ScrollPane {
 	
 	public ObservableList<LevelData> getLevelData(){
 		return levelData;
+	}
+	
+	public VBox getLevelEditors(){
+		return editors;
 	}
 }

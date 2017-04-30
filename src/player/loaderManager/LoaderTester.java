@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.VLineTo;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import player.gameChoice.GameManager;
+import player.GameChooser;
 import utilities.ImageManager;
 
 public class LoaderTester extends Application {
@@ -35,7 +35,7 @@ public class LoaderTester extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 //	    Loader loader = new Loader();
-		GameManager gameManager = new GameManager(primaryStage);
+		GameChooser gameManager = new GameChooser(primaryStage);
 //		loader.show();
 		
 
