@@ -27,7 +27,6 @@ public class SkillBox {
 	}
 	
 	public void render(List<Skill> newSkills) {
-		System.out.println("render skill box");
 		if (sameSkills(oldSkills, newSkills)) {return;}
 		oldSkills = newSkills;
 		box.getChildren().clear();
