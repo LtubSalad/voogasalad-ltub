@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import user.GameHistory;
+import user.MessagingHistory;
 import user.User;
 
 public class UserSocialPage extends BorderPane{
@@ -37,6 +38,7 @@ public class UserSocialPage extends BorderPane{
 		
 	}
 
+	//TODO CONFIG OBSERVABLEZ
 	private void configure() {
 		contents.getChildren().addAll(playHistory, authoredHistory, messages);
 		contents.fillHeightProperty().setValue(true);
@@ -50,8 +52,9 @@ public class UserSocialPage extends BorderPane{
 	}
 
 	private VBox configMessageBox() {
-			// TODO finish this 
 			MessagingView MV = new MessagingView(myUser);
+			MessagingHistory MH = myUser.getMessagingHistory();
+			MH.addObserver(MV);
 			return MV; 
 		}
 

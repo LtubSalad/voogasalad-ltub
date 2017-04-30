@@ -24,7 +24,7 @@ public class SerializableUserModel {
 		Map<String, SerializableUser> serializeMe = new HashMap<String, SerializableUser>();
 		userData.keySet().stream().forEach(name -> {
 			SerializableUser newUser = new SerializableUser(userData.get(name));
-			serializeMe.put(name, newUser);
+			serializeMe.put(name, newUser);	
 		});
 		return serializeMe; 
 	}
