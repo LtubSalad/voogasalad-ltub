@@ -3,7 +3,7 @@ package user;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import user.view.UserSocialPage;
+import user.view.SocialCenterView;
 
 public class UserTest extends Application {
 
@@ -28,7 +28,9 @@ public class UserTest extends Application {
 		me.recordAuthored("test game auth", "yike.xml");
 		me.recordGamePlayed("test play", "yike.xml");
 		
-		UserSocialPage page = new UserSocialPage(me);
+		model.setCurrentUser("me");
+		
+		SocialCenterView page = new SocialCenterView(model);
 		
 		Scene scene = new Scene(page, 600, 600);
 		primaryStage.setScene(scene);
