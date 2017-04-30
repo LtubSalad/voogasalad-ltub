@@ -22,14 +22,12 @@ public class SerializableDeveloperData {
 	private Map<String, String> gameData; 
 	private List<SpriteMakerModel> mySprites; 
 	private List<ILevelData> myLevels; 
-	private SpritesForScreenUse screenSprites; 
 	private String gameName; 
 	private String gameIconFile; 
 	
 	//DeveloperData dataToTranslate; // TODO: see if this serializes ok 
 	
 	public SerializableDeveloperData(DeveloperData data){
-		this.screenSprites = data.getScreenSprites();
 		configData(data.getAllData()); 
 		configSprites(data.getSprites()); 
 		myLevels = data.getReadOnlyLevelData();
@@ -37,8 +35,8 @@ public class SerializableDeveloperData {
 	}
 
 	public Player getUserPlayer() {
-		// TODO
-		return null;
+		//TODO
+		return new Player("USER");
 	}
 
 	private void configSprites(ObservableList<SpriteMakerModel> data) {
@@ -64,10 +62,6 @@ public class SerializableDeveloperData {
 	
 	public Map<String, String> getGameData(){
 		return Collections.unmodifiableMap(gameData);
-	}
-	
-	public SpritesForScreenUse getScreenSprites(){
-		return this.screenSprites;
 	}
 	
 
