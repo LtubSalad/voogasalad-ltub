@@ -8,10 +8,12 @@ import java.util.Map;
 
 import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
 import newengine.events.debug.SysPrintEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.StateChangeEvent;
+import newengine.events.sprite.UpgradeEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.MoveSkill;
@@ -28,18 +30,26 @@ public class Attacker extends Component {
 	public static final ComponentType<Attacker> TYPE = new ComponentType<>(Attacker.class.getName());
 	private double reloadPeriod = 1;
 	private double timeRemaining = 1;
+	private int damageStrength;
 	
 //	public Attacker(Sprite weapon) {
 //		this.weapon = weapon;
 //	}
 	
 	@ConstructorForDeveloper
-	public Attacker(){
+	public Attacker(@VariableName(name="damageStrength")int damageStrength){
+		this.damageStrength = damageStrength;
 		sprite.emit(new StateChangeEvent(StateChangeEvent.ATTACKER, sprite, true));
 	}
 
 	@Override
 	public void afterAdded() {
+		
+		sprite.on(UpgradeEvent.DOUBLE, e -> {
+			System.out.println("before upgrade damage strength " + damageStrength);
+			damageStrength = damageStrength*2;
+			System.out.println("after upgrade damage strength " + damageStrength);
+		});
 		
 		sprite.on(FireProjectileEvent.SPECIFIC, e -> {
 			Sprite source = e.getSprite();
@@ -57,7 +67,7 @@ public class Attacker extends Component {
 			weapon.addComponent(new Images(imageSet1));
 			weapon.addComponent(new Speed(400));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
-			weapon.addComponent(new DamageStrength(55));
+			weapon.addComponent(new DamageStrength(damageStrength));
 			weapon.addComponent(new GameBus());	
 			weapon.addComponent(new Weapon());
 			
@@ -80,6 +90,10 @@ public class Attacker extends Component {
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
 	}
+	
+	public int getDamageStrength(){
+		return damageStrength;
+	}
 
 	public void onUpdate(double dt){
 		timeRemaining -= dt;
@@ -87,7 +101,7 @@ public class Attacker extends Component {
 
 	@Override
 	public Component clone() {
-		Attacker clone = new Attacker();
+		Attacker clone = new Attacker(damageStrength);
 		clone.reloadPeriod = this.reloadPeriod;
 		clone.timeRemaining = this.timeRemaining;
 		return clone;

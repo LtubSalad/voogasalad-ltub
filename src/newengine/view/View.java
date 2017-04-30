@@ -40,6 +40,7 @@ import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
 import newengine.view.subview.StateDisplay;
+import newengine.view.subview.UpgradeBtn;
 
 public class View {
 	public static final int WIDTH = 600;
@@ -59,6 +60,7 @@ public class View {
 	private GraphicsContext gcSelected;
 	private SkillBox skillBox;
 	private StateDisplay stateDisplay;
+	private UpgradeBtn upgradeBtn;
 	
 	// TODO: mouse location should belong to player input state
 	private ViewPoint mousePos;
@@ -78,8 +80,10 @@ public class View {
 		gc = gameWorldCanvas.getGraphicsContext2D();
 		gcSelected = selectionCanvas.getGraphicsContext2D();
 		// skill box
-		skillBox = new SkillBox(bus);
 		stateDisplay = new StateDisplay();
+		skillBox = new SkillBox(bus);
+		upgradeBtn = new UpgradeBtn();
+		bottomPane.getChildren().add(upgradeBtn.getBox());
 		bottomPane.getChildren().add(stateDisplay.getBox());
 		bottomPane.getChildren().add(skillBox.getBox());
 
@@ -160,9 +164,9 @@ public class View {
 			sprite.getComponent(Owner.TYPE).ifPresent((owner) -> {
 				Player player = owner.player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();
-				if (player == mainPlayer) {
+				//if (player == mainPlayer) {
 					createText(playerStatsModel, player).stream().forEach(e -> statsPanel.getChildren().add(e));
-				}
+				//}
 			});			
 		});
 	}
@@ -194,7 +198,9 @@ public class View {
 				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
 			}
 			//fill stats box with stats of selected sprite
+			upgradeBtn.render(sprite);
 			stateDisplay.render(sprite);
+			
 			if (sprite.getComponent(Owner.TYPE).isPresent()) {
 				Player player = sprite.getComponent(Owner.TYPE).get().player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();

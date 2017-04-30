@@ -60,8 +60,9 @@ public class StateChangeEvent extends BusEvent {
 		this.newDouble = newDouble;
 	}
 	
-	public StateChangeEvent(BusEventType<? extends BusEvent> busEventType, int newInt) {
+	public StateChangeEvent(BusEventType<? extends BusEvent> busEventType, Sprite sprite, int newInt) {
 		super(busEventType);
+		this.sprite = sprite;
 		this.newInt = newInt;
 	}
 	

@@ -14,6 +14,7 @@ import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.events.sprite.StateChangeEvent;
+import newengine.events.sprite.UpgradeEvent;
 import newengine.events.stats.ChangeWealthEvent;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
@@ -25,11 +26,14 @@ import newengine.utils.Target;
 public class Health extends Component {
 
 	public static final ComponentType<Health> TYPE = new ComponentType<>(Health.class.getName());
+	private int initHealth;
 	private int health;
 
 	@ConstructorForDeveloper
 	public Health(@VariableName(name="health")int health){
+		this.initHealth = health;
 		this.health = health;
+		sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, sprite, health));
 	}
 	
 	@Override
@@ -41,10 +45,19 @@ public class Health extends Component {
 		return health;
 	}
 	
+	public int getInitHealth(){
+		return initHealth;
+	}
+	
 	@Override
 	public void afterAdded(){
 		sprite.on(ChangeHealthEvent.ANY, e -> {
-			changeHealth(e.getChange());
+			changeHealth(e.getValue());
+		});
+		sprite.on(UpgradeEvent.RESET, e -> {
+			health = e.getValue();
+			sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, e.getSprite(), health));
+			System.out.println("health was upgraded and reset to " + e.getValue());
 		});
 		sprite.on(MoveEvent.STOP, (e) -> {
 			if (!e.getSprite().getComponent(Weapon.TYPE).isPresent()){
@@ -71,7 +84,7 @@ public class Health extends Component {
 	@DeveloperMethod
 	private void changeHealth(int change) {
 		health += change;
-		sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, health));
+		sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, sprite, health));
 		checkForDeath();
 	}
 	

@@ -8,6 +8,7 @@ import helperAnnotations.VariableName;
 import newengine.events.range.InRangeEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.StateChangeEvent;
+import newengine.events.sprite.UpgradeEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -40,6 +41,11 @@ public class Range extends Component {
 				Target target = new Target(detectee);
 //				System.out.println("In range received?");
 			}
+		});
+		sprite.on(UpgradeEvent.DOUBLE, e -> {
+			System.out.println("before upgrade range " + range);
+			range = range*2;
+			System.out.println("after upgrade range " + range);
 		});
 	}
 	

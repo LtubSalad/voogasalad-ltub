@@ -1,7 +1,15 @@
 package newengine.view.subview;
 
 import javafx.scene.layout.VBox;
+import newengine.skill.skills.BuildSkill;
 import newengine.sprite.Sprite;
+import newengine.sprite.components.Attacker;
+import newengine.sprite.components.DamageStrength;
+import newengine.sprite.components.Health;
+import newengine.sprite.components.Position;
+import newengine.sprite.components.Range;
+import newengine.sprite.components.SkillSet;
+import newengine.sprite.components.Speed;
 
 public class StateDisplay {
 	
@@ -22,32 +30,38 @@ public class StateDisplay {
 	}
 	
 	public void render(Sprite sprite){
+		
 		this.sprite = sprite;
 		box.getChildren().clear();
-		makeSingleStat("Sprite ID", sprite.getState().getID(), sprite);
-		makeSingleStat("Player", sprite.getState().getPlayer(), sprite);
-		makeSingleStat("Is Attacker?", sprite.getState().isAttacker(), sprite);
-		makeSingleStat("Cooldown time", sprite.getState().getCooldown(), sprite);
-		makeSingleStat("Damage Strength", sprite.getState().getDamageStrength(), sprite);
-		makeSingleStat("Health", sprite.getState().getHealth(), sprite);
-		makeSingleStat("X Position", sprite.getState().getXPos(), sprite);
-		makeSingleStat("Y Position", sprite.getState().getYPos(), sprite);
-		makeSingleStat("Range", sprite.getState().getRange(), sprite);
-		makeSingleStat("Speed", sprite.getState().getSpeed(), sprite);
+		sprite.getComponent(SkillSet.TYPE).ifPresent((skillSet) -> {
+			if (skillSet.getSkill(BuildSkill.TYPE) != null) {
+			makeSingleStat("Cooldown time", skillSet.getSkill(BuildSkill.TYPE).getCooldown(), sprite);
+			}
+		});
+		sprite.getComponent(Attacker.TYPE).ifPresent((attacker) -> {
+			makeSingleStat("Damage Strength", attacker.getDamageStrength(), sprite);
+
+		});
+		sprite.getComponent(Health.TYPE).ifPresent((health) -> {
+			makeSingleStat("Health", health.getHealth(), sprite);
+		});
+		sprite.getComponent(Position.TYPE).ifPresent((position) -> {
+			makeSingleStat("X Position", Math.round(position.xPos()), sprite);
+			makeSingleStat("Y Position", Math.round(position.yPos()), sprite);
+		});
+		sprite.getComponent(Range.TYPE).ifPresent((range) -> {
+			makeSingleStat("Range", range.range(), sprite);
+		});
+		sprite.getComponent(Speed.TYPE).ifPresent((speed) -> {
+			makeSingleStat("Speed", speed.speed(), sprite);
+		});
 	}
 	
 	private void makeSingleStat(String label, Object value, Sprite sprite) {
 		SingleStat singleStat = new SingleStat(label, value, sprite);
-		//singleStat.addUpgradeBtn();
 		box.getChildren().add(singleStat);
 	}
-	
-	private void makeStatandUpgrade(String label, Object value, Sprite sprite){
-		SingleStat singleStat = new SingleStat(label, value, sprite);
-		singleStat.addUpgradeBtn();
-		box.getChildren().add(singleStat);
-	}
-	
+		
 	public VBox getBox() {
 		return box;
 	}

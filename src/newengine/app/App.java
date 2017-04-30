@@ -93,9 +93,7 @@ public class App extends Application {
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite1.addComponent(new Range(200));
-		sprite1.addComponent(new Attacker());
-		sprite1.addComponent(new Speed(100));
-		sprite1.addComponent(new Health(200));
+		sprite1.addComponent(new Attacker(25));
 		sprite1.addComponent(new EventQueue(new LinkedList<>()));
 		sprite1.addComponent(new RangeShootingAI());
 
@@ -114,7 +112,7 @@ public class App extends Application {
 		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		child.addComponent(new Range(128));
-		child.addComponent(new Attacker());
+		child.addComponent(new Attacker(25));
 		child.addComponent(new Health(100));
 		child.addComponent(new EventQueue(new LinkedList<>()));
 		child.addComponent(new PathFollower(new Path()));
@@ -142,7 +140,7 @@ public class App extends Application {
 		sprite2.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite2.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite2.addComponent(new EventQueue(new LinkedList<>()));
-		sprite2.addComponent(new Attacker());
+		sprite2.addComponent(new Attacker(25));
 		sprite2.addComponent(new Spawner());
 		sprite2.addComponent(new Health(600));
 		sprite2.addComponent(new PathFollower(new Path()));
@@ -165,7 +163,7 @@ public class App extends Application {
 		spawner.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		spawner.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		spawner.addComponent(new Range(128));
-		spawner.addComponent(new Attacker());
+		spawner.addComponent(new Attacker(25));
 		spawner.addComponent(new Health(200));
 		spawner.addComponent(new EventQueue(new LinkedList<>()));
 
