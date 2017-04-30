@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 import javafx.util.Pair;
 
-public class MessagingHistory {
+public class MessagingHistory extends Observable {
 	
 	private String myUserName; 
 	
@@ -25,6 +26,10 @@ public class MessagingHistory {
 	public void recieve(String sender, String message){
 		Message newMessage = new Message(sender, message);
 		myRecievedPosts.add(newMessage);
+		
+		// TODO: is this how this works lol 
+		setChanged();
+		notifyObservers(); 
 	}
 	
 	public void addSent(String recipient, String message){
@@ -54,6 +59,22 @@ public class MessagingHistory {
 			dispMessages.put(m.getKey(), m.getValue());
 		});
 		return dispMessages; 
+	}
+
+	public String getUsername() {
+		return myUserName; 
+	}
+
+	public List<Message> getRecievedPosts() {
+		return myRecievedPosts; 
+	}
+
+	public List<Message> getSentMessages() {
+		return mySentMessages;
+	}
+
+	public Map<String, List<Message>> getPrivateMessages() {
+		return myPrivateMessages; 
 	}
 
 }
