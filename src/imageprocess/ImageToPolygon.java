@@ -34,14 +34,10 @@ public class ImageToPolygon {
 	public Polygon getPolygon(){
 		ImageTransformation transformation = new ImageTransformation();
 		Set<Point2D> set = transformation.getMask(image);
-
-		//choose one of the convexhull or hull to get the hull points
-
-
-		//This is the Hull class
+		//Get the hull of the image
 		List<Point2D> convexHullPointTemp =  Hull.getHull(set); 
 		
-		//This is the convexHull class
+		//get the convex hull of the hull points
 		List<Point2D> convexHullPoint =  ConvexHull.convex_hull(convexHullPointTemp); 
 		double[] pointsToDraw = new double[2 * convexHullPoint.size()];
 		int k = 0;
