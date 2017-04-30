@@ -27,7 +27,7 @@ public class SpawnerCreation extends BorderPane {
 		this.setLeft(myPossibleMonsters);
 		this.setCenter(mySpawnerInfo);
 		this.setTop(myMonsterAdder);
-		this.setBottom(new SaveSpawner(this, myMonsterAdder));
+		this.setBottom(new SaveSpawner(model, this, myMonsterAdder));
 	}
 	
 	public void saveSpawnerToModel() {
