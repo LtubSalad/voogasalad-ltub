@@ -119,7 +119,7 @@ public class XStreamTester extends Application{
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite1.addComponent(new Range(128));
-		sprite1.addComponent(new Attacker(25));
+		sprite1.addComponent(new Attacker(25, image1));
 		sprite1.addComponent(new Health(200));
 		sprite1.addComponent(new EventQueue(new LinkedList<>()));
 //		

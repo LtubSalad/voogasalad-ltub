@@ -31,14 +31,16 @@ public class Attacker extends Component {
 	private double reloadPeriod = 1;
 	private double timeRemaining = 1;
 	private int damageStrength;
+	private LtubImage ltubImage;
 	
 //	public Attacker(Sprite weapon) {
 //		this.weapon = weapon;
 //	}
 	
 	@ConstructorForDeveloper
-	public Attacker(@VariableName(name="damageStrength")int damageStrength){
+	public Attacker(@VariableName(name="damageStrength")int damageStrength, @VariableName(name="LtubImage")LtubImage ltubImage){
 		this.damageStrength = damageStrength;
+		this.ltubImage = ltubImage;
 		sprite.emit(new StateChangeEvent(StateChangeEvent.ATTACKER, sprite, true));
 	}
 
@@ -63,7 +65,7 @@ public class Attacker extends Component {
 			weapon.addComponent(new SkillSet(skillMap));
 			weapon.addComponent(new Owner(source.getComponent(Owner.TYPE).get().player()));
 			weapon.addComponent(new Position(source.getComponent(Position.TYPE).get().pos(), source.getComponent(Position.TYPE).get().heading()));
-			weapon.addComponent(new Images("images/skills/bullet.png"));
+			weapon.addComponent(new Images(ltubImage.getFileName()));
 			weapon.addComponent(new Speed(400));
 			weapon.addComponent(new Collidable(CollisionBoundType.IMAGE));
 			weapon.addComponent(new DamageStrength(damageStrength));
@@ -100,7 +102,7 @@ public class Attacker extends Component {
 
 	@Override
 	public Component clone() {
-		Attacker clone = new Attacker(damageStrength);
+		Attacker clone = new Attacker(damageStrength, ltubImage);
 		clone.reloadPeriod = this.reloadPeriod;
 		clone.timeRemaining = this.timeRemaining;
 		return clone;

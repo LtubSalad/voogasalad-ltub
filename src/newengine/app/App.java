@@ -69,7 +69,7 @@ public class App extends Application {
 
 		// sprite 1: the tower
 		Sprite tower = new Sprite();
-		LtubImage image1 = new LtubImage("images/characters/tower2_resized.gif");
+		LtubImage image1 = new LtubImage("images/skills/bullet.png");
 		ImageSet imageSet1 = new ImageSet(image1);
 		Map<SkillType<? extends Skill>, Skill> skillMap1 = new HashMap<>();
 		skillMap1.put(MoveSkill.TYPE, new MoveSkill());
@@ -87,7 +87,7 @@ public class App extends Application {
 		tower.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		tower.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		tower.addComponent(new Range(200));
-		tower.addComponent(new Attacker(25));
+		tower.addComponent(new Attacker(25, image1));
 		tower.addComponent(new EventQueue(new LinkedList<>()));
 		tower.addComponent(new RangeShootingAI());
 
@@ -98,7 +98,7 @@ public class App extends Application {
 		Map<SkillType<? extends Skill>, Skill> childSkillMap = new HashMap<>();
 		child.addComponent(new GameBus());
 		child.addComponent(new SkillSet(childSkillMap));
-		child.addComponent(new Owner(player2));
+		child.addComponent(new Owner(player1));
 		child.addComponent(new Position(new GamePoint(300, 50), 0));
 		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		child.addComponent(new Images("images/characters/bahamut_left.png"));
@@ -106,7 +106,6 @@ public class App extends Application {
 		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		child.addComponent(new Range(128));
-		child.addComponent(new Attacker(25));
 		child.addComponent(new Health(100));
 		child.addComponent(new EventQueue(new LinkedList<>()));
 		child.addComponent(new PathFollower(new Path()));

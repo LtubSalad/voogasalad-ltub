@@ -128,7 +128,7 @@ public class ScreenObjectHolder extends HBox {
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite1.addComponent(new Range(200));
-		sprite1.addComponent(new Attacker(25));
+		sprite1.addComponent(new Attacker(25, image1));
 		sprite1.addComponent(new Health(200));
 		sprite1.addComponent(new EventQueue(new LinkedList<>()));
 		sprite1.addComponent(new RangeShootingAI());
@@ -147,7 +147,7 @@ public class ScreenObjectHolder extends HBox {
 		sprite2.addComponent(new Images("images/characters/bahamut_right.png"));
 		sprite2.addComponent(new Speed(100));
 		sprite2.addComponent(new EventQueue(new LinkedList<>()));
-		sprite2.addComponent(new Attacker(25));
+		sprite2.addComponent(new Attacker(25, image2));
 		sprite2.addComponent(new Health(60));
 
 		// spawned sprite
@@ -162,7 +162,7 @@ public class ScreenObjectHolder extends HBox {
 		child.addComponent(new Images("images/characters/bahamut_left.png"));
 		child.addComponent(new Speed(200));
 		child.addComponent(new Range(128));
-		child.addComponent(new Attacker(25));
+		child.addComponent(new Attacker(25, childImage));
 		child.addComponent(new Health(200));
 		child.addComponent(new EventQueue(new LinkedList<>()));
 
@@ -176,7 +176,7 @@ public class ScreenObjectHolder extends HBox {
 		spawner.addComponent(new Images("images/characters/tower2_resized.gif"));
 		spawner.addComponent(new Speed(200));
 		spawner.addComponent(new Range(128));
-		spawner.addComponent(new Attacker(25));
+		spawner.addComponent(new Attacker(25, image1));
 		spawner.addComponent(new Health(200));
 		spawner.addComponent(new EventQueue(new LinkedList<>()));
 

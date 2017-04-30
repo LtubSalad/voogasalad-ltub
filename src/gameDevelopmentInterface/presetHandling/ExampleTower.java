@@ -8,6 +8,7 @@ import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
+import newengine.utils.image.LtubImage;
 import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
 
@@ -21,7 +22,7 @@ public class ExampleTower extends SpriteMakerModel {
 		this.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		this.addComponent(new Images("resources\\Mario.jpg"));
 		this.addComponent(new Speed(20));
-		this.addComponent(new Attacker(25));
+		this.addComponent(new Attacker(25, new LtubImage("images/characters/tower2_resized.gif")));
 		
 	}
 	
