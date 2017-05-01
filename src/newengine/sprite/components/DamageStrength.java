@@ -22,11 +22,12 @@ public class DamageStrength extends Component {
 	@ConstructorForDeveloper
 	public DamageStrength(@VariableName(name = "Damage")int strength){
 		this.strength = strength;
-		sprite.emit(new StateChangeEvent(StateChangeEvent.DAMAGESTRENGTH, sprite, strength));
 	}
 	
 	@Override
 	public void afterAdded() {
+		sprite.emit(new StateChangeEvent(StateChangeEvent.DAMAGESTRENGTH, sprite, strength));
+		
 		sprite.on(MoveEvent.STOP, (e) -> {
 			sprite.getComponent(Position.TYPE).ifPresent((position) -> {
 				if (position.isMoving() == false) {

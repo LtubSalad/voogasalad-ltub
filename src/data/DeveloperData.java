@@ -24,12 +24,12 @@ import javafx.util.Pair;
  * Also tracks info such as available paths and sprites that can be added to a screen for developer purposes. 
  */
 public class DeveloperData {
-	private static final String NUMBER_OF_LIVES = "NUM_LIVES";
-	private static final String BUILD_TOWER = "BUILD_IN_GAME";
-	private static final String NUMBER_OF_STARTING_GOLD = "NUM_GOLD";
-	private static final String LEVEL_COMPLETION_BONUS = "LEVEL_COMPLETION";
-	private static final String GAME_NAME = "GAME_NAME";
-	private static final String GAME_ICON = "GAME_ICON";
+	public static final String NUMBER_OF_LIVES = "NUM_LIVES";
+	public static final String BUILD_TOWER = "BUILD_IN_GAME";
+	public static final String NUMBER_OF_STARTING_GOLD = "NUM_GOLD";
+	public static final String LEVEL_COMPLETION_BONUS = "LEVEL_COMPLETION";
+	public static final String GAME_NAME = "GAME_NAME";
+	public static final String GAME_ICON = "GAME_ICON";
 	private ObservableMap<String,String> myData = FXCollections.observableHashMap();
 	private ObservableList<LevelData> levelData; // need 
 	private ObservableList<Path> myPaths;
@@ -41,8 +41,6 @@ public class DeveloperData {
 	private int numCols = 6;
 	private ObservableList<SpriteMakerModel> mySprites; //need
 	private SpritesForScreenUse jakeSprites = new SpritesForScreenUse();  //need
-	private String gameName; //need
-	private String gameIconFilePath;//need
  	
 	public DeveloperData() {
 		List<SpriteMakerModel> list=new ArrayList<SpriteMakerModel>();
@@ -102,7 +100,7 @@ public class DeveloperData {
 	public ObservableList<SpriteMakerModel> getSprites(){
 		return mySprites;
 	}
-	
+	@Deprecated
 	public SpritesForScreenUse getScreenSprites(){
 		return jakeSprites;
 	}
@@ -122,21 +120,7 @@ public class DeveloperData {
 	 * @param data
 	 */
 	public void addData(Pair<String,String> data) {
-		myData.put(data.getKey(), data.getValue());
-//		TODO delete if working later
-//		if(myData.containsKey(NUMBER_OF_LIVES))
-//		System.out.println("Number of Lives :" + myData.get(NUMBER_OF_LIVES));
-//		if(myData.containsKey(BUILD_TOWER))
-//		System.out.println("Build tower: " + myData.get(BUILD_TOWER));
-//		if(myData.containsKey(NUMBER_OF_STARTING_GOLD))
-//		System.out.println("Number of Starting Gold: " + myData.get(NUMBER_OF_STARTING_GOLD));
-//		if(myData.containsKey(LEVEL_COMPLETION_BONUS))
-//		System.out.println("Level completion bonus: " + myData.get(LEVEL_COMPLETION_BONUS));
-//		if(myData.containsKey(GAME_NAME))
-//		System.out.println("Game name: " + myData.get(GAME_NAME));
-//		if(myData.containsKey(GAME_ICON))
-//		System.out.println("Game icon: " + myData.get(GAME_ICON));
-//		
+		myData.put(data.getKey(), data.getValue());	
 	}
 	
 	/**

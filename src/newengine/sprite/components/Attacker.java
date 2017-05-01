@@ -41,11 +41,11 @@ public class Attacker extends Component {
 	public Attacker(@VariableName(name="damageStrength")int damageStrength, @VariableName(name="LtubImage")LtubImage ltubImage){
 		this.damageStrength = damageStrength;
 		this.ltubImage = ltubImage;
-		sprite.emit(new StateChangeEvent(StateChangeEvent.ATTACKER, sprite, true));
 	}
 
 	@Override
 	public void afterAdded() {
+		sprite.emit(new StateChangeEvent(StateChangeEvent.ATTACKER, sprite, true));
 		
 		sprite.on(UpgradeEvent.DOUBLE, e -> {
 			System.out.println("before upgrade damage strength " + damageStrength);

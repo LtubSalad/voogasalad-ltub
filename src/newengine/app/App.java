@@ -5,23 +5,22 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 import bus.EventBus;
 import commons.point.GamePoint;
+import data.DeveloperData;
 import data.SpriteMakerModel;
 import gameDevelopmentInterface.Path;
+import gamedata.AuthDataTranslator;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
 import newengine.events.SpriteModelEvent;
 import newengine.events.conditions.SetEndConditionEvent;
-import newengine.events.game.StartLevelEvent;
 import newengine.events.player.MainPlayerEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
-import newengine.events.timer.PeriodicEvent;
 import newengine.managers.conditions.GoldMinimumCondition;
 import newengine.managers.conditions.NoLivesCondition;
 import newengine.model.PlayerStatsModel.WealthType;
@@ -32,6 +31,7 @@ import newengine.skill.skills.BuildSkill;
 import newengine.skill.skills.FireProjectileSkill;
 import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
+import newengine.sprite.SpriteID;
 import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
@@ -49,23 +49,61 @@ import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
 import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.SoundEffect;
-import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
 import newengine.utils.image.ImageSet;
 import newengine.utils.image.LtubImage;
 
 public class App extends Application {
+	DeveloperData myData;
+	
+	public App(DeveloperData mainData) {
+		myData = mainData;
+	}
+	
 
 	@Override
 	public void start(Stage stage) throws Exception {
 
 		Game game = new Game();
 		Player player1 = new Player("Player 1");
+
+
+//		XStreamHandler xHandler = new XStreamHandler();
+//		XStream xStream = new XStream(new DomDriver());
+		
+		List<SpriteMakerModel> listSpriteModels = myData.getLevelData().get(0).getSpawners();
+		
+		//SpriteCreator jakeTestCreator = new SpriteCreator();
+		//List<SpriteMakerModel> listSpriteModels = jakeTestCreator.getSprites();// = translator.getSprites();
+		List<Sprite> listSprites = new ArrayList<>();
+		for (SpriteMakerModel smm : listSpriteModels) {
+			AuthDataTranslator translator = new AuthDataTranslator(smm);
+			listSprites.add(translator.getSprite());
+		}
 		Player player2 = new Player("Player 2");
 
 
 
 		EventBus bus = game.getBus();
+
+		//List<Sprite> listSprites = spriteModel.getSprites();
+		//System.out.println(listSprites.size());
+		for (Sprite s : listSprites) {
+			//System.out.println(s.getComponent(SkillSet.TYPE).get().skills());
+		}
+		
+		Sprite towerBuilder = new Sprite(new SpriteID("__TOWER_BUILDER"));
+		towerBuilder.addComponent(new GameBus());
+		towerBuilder.addComponent(new Owner(player1));
+		//towerBuilder.addComponent(createTowerBuilderSkillSet(player1));
+		towerBuilder.addComponent(new Images("images/characters/bahamut_right.png"));
+		listSprites.add(towerBuilder);
+		
+		
+		
+		
+
+		//EventBus bus = game.getBus();
 
 		// sprite 1: the tower
 		Sprite tower = new Sprite();
@@ -95,11 +133,21 @@ public class App extends Application {
 
 
 		SpriteMakerModel child = new SpriteMakerModel();
-		Map<SkillType<? extends Skill>, Skill> childSkillMap = new HashMap<>();
 		child.addComponent(new GameBus());
-		child.addComponent(new SkillSet(childSkillMap));
 		child.addComponent(new Owner(player1));
 		child.addComponent(new Position(new GamePoint(300, 50), 0));
+		child.addComponent(new Images("images/skills/build.png"));
+		child.addComponent(new Speed(1000));
+		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		child.addComponent(new Range(128));
+		//child.addComponent(new Attacker());
+		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
+		child.addComponent(new Images("images/characters/bahamut_left.png"));
+		child.addComponent(new Speed(100));
+		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		child.addComponent(new Range(128));
 		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		child.addComponent(new Images("images/characters/bahamut_left.png"));
 		child.addComponent(new Speed(100));
@@ -110,13 +158,15 @@ public class App extends Application {
 		child.addComponent(new EventQueue(new LinkedList<>()));
 		child.addComponent(new PathFollower(new Path()));
 
+
+
 		
 		Sprite monster = new Sprite();
 		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
 		ImageSet imageSet2 = new ImageSet(image2);
 		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
-		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
 		skillMap2.put(BuildSkill.TYPE, new BuildSkill(child));
+
 		FireProjectileSkill fireSkill2 = new FireProjectileSkill();
 		fireSkill2.setCooldown(3); // add cooldown to the fireProjectilSkill
 		monster.addComponent(new Cooldown());
@@ -174,6 +224,7 @@ public class App extends Application {
 
 		
 		
+
 		List<Sprite> spritesToAdd = new ArrayList<>();
 		spritesToAdd.add(tower);
 		spritesToAdd.add(monster);
@@ -190,7 +241,6 @@ public class App extends Application {
 			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player2, WealthType.GOLD, 100));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
-			bus.emit(new PeriodicEvent(10, 5.0, () -> new StartLevelEvent(StartLevelEvent.START)));
 		});
 		
 		stage.setScene(game.getScene());

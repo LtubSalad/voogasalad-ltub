@@ -36,6 +36,7 @@ public class UpgradeBtn extends Button{
 	}
 	
 	public void render(Sprite sprite) {
+		if (this.sprite == sprite) {return;}
 		sprite.getComponent(GameBus.TYPE).get().getGameBus().on(InsufficientGoldEvent.ANY, e -> {
 			canUpdate = false;
 		});

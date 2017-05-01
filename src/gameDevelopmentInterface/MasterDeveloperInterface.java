@@ -80,6 +80,11 @@ public class MasterDeveloperInterface {
 						new SpriteCreationScreen(myModelData));
 				developerTabs.getTabs().add(spriteTab);
 			});
+//			screenButton.setOnAction((clicked) -> {
+//				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
+//						new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, new ScreenModelData()));
+//				developerTabs.getTabs().add(screenTab);
+//			});
 			screenButton.setOnAction((clicked) -> {
 //				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
 //						new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, new ScreenModelData()));
