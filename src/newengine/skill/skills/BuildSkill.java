@@ -47,14 +47,13 @@ public class BuildSkill extends Skill {
 		}
 	}
 	
-	public SpriteMakerModel getModel(){
+	public SpriteMakerModel getSpriteMakerModel(){
 		return mySpriteMakerModel;
 	}
 	
 	public void setModel(SpriteMakerModel model){
 		this.mySpriteMakerModel = model;
 	}
-	
 	
 	@Override
 	public void trigger() {
