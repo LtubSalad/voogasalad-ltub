@@ -7,6 +7,7 @@ import newengine.events.sprite.StateChangeEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.sprite.Sprite;
+import newengine.sprite.components.Owner;
 import newengine.utils.Target;
 import newengine.utils.image.LtubImage;
 
@@ -39,6 +40,7 @@ public class FireProjectileSkill extends Skill {
 		Sprite source = this.getSource().get();
 		Target target = this.getTarget().get();
 		target.getSprite().ifPresent((targetSprite) -> {
+			if (!targetSprite.getComponent(Owner.TYPE).get().player().isEnemyWith((source.getComponent(Owner.TYPE).get().player()))) return;
 			source.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, source, targetSprite));
 		});
 	}

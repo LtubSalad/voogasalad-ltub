@@ -17,9 +17,9 @@ public class Spawner extends Component {
 	
 
 	public static final ComponentType<Spawner> TYPE = new ComponentType<>(Spawner.class.getName());
-	private double secondsBetween;
-	private int totalNumber;
-	private int monsterLeft;
+
+	private double secondsBetween = 1.5;
+	private int totalNumber = 5;
 	private boolean needToSpawn = true;
 	private GamePoint startingPosition;
 
@@ -30,7 +30,6 @@ public class Spawner extends Component {
 			@VariableName(name = "Spawn interval") double spawnBetweenTime) {
 		secondsBetween = spawnBetweenTime;
 		totalNumber = spritesToSpawn;
-		monsterLeft= spritesToSpawn;
 		startingPosition = pathSpritesFollow.getPath().peek();
 	}
 
@@ -64,6 +63,10 @@ public class Spawner extends Component {
 	public Object[] getGUIParameters() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setSpawnTime(double spawnTime){
+		this.secondsBetween = spawnTime;
 	}
 
 }

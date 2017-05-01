@@ -64,7 +64,7 @@ public class Health extends Component {
 			Sprite weapon = e.getSprite();
 			Sprite target = e.getTarget().getSprite().get();
 			weapon.getComponent(Owner.TYPE).ifPresent((weaponOwner) -> {
-					if (weaponOwner.player() != target.getComponent(Owner.TYPE).get().player()) {
+					if (weaponOwner.player().isEnemyWith((target.getComponent(Owner.TYPE).get().player()))) {
 						weapon.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
 							int damage = damageStrength.getStrength();
 							sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, -damage));
