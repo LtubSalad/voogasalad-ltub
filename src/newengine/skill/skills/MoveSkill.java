@@ -33,4 +33,10 @@ public class MoveSkill extends Skill{
 	public SkillType<? extends Skill> getType() {
 		return TYPE;
 	}
+
+	@Override
+	public Object[] getGUIParameters() {
+		Object[] parameters= new Object[0];
+		return parameters;
+	}
 }
