@@ -14,7 +14,7 @@ public class Upgrade extends Component {
 	private int cost;
 	
 	@ConstructorForDeveloper
-	public Upgrade(@VariableName(name="SpriteUpgrade")SpriteMakerModel smm, @VariableName(name="Cost")int cost){
+	public Upgrade(@VariableName(name="Upgrade")SpriteMakerModel smm, @VariableName(name="Cost")int cost){
 		this.smm = smm;
 		this.cost = cost;
 	}
@@ -30,8 +30,11 @@ public class Upgrade extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
-		return null;
+	public Object[] getGUIParameters() {
+		Object[] parameters = new Object[2];
+		parameters[0]=smm;
+		parameters[1]=cost;
+		return parameters;
 	}
 	
 	public SpriteMakerModel getSMM() {
