@@ -10,6 +10,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
@@ -20,7 +21,6 @@ import javafx.scene.text.Text;
 import newengine.events.camera.CameraEvent;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
-import newengine.events.stats.ChangeWealthEvent;
 import newengine.model.Models;
 import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
@@ -71,12 +71,12 @@ public class View {
 	private UpgradeBtn upgradeBtn;
 	private Canvas selectionCanvas; 
 
-
 	public View(EventBus bus, Camera camera) {		
 		this.bus = bus;
 		this.camera = camera;
 		VBox root = new VBox();
-		scene = new Scene(root, width, height, BACKGROUND);		statsPanel = new HBox();
+		scene = new Scene(root, width, height, BACKGROUND);		
+		statsPanel = new HBox();
 		selectionCanvas = new Canvas(selectionWidth, selectionHeight);
 		gameWorldCanvas = new Canvas(canvasWidth, canvasHeight);
 		bottomPane = new HBox();
