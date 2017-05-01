@@ -40,6 +40,9 @@ public class ScreenModelCreator extends BorderPane {
 		this.setCenter(new ScrollingEnvironmentSetter(myScreen));
 		this.setRight(myButtonsPanel);
 	}
+	public ScreenModelCreator(SpritesForScreenUse screenSprites, GeneralDataCreator gdc, ObservableList<SpriteMakerModel> sprites) {
+
+	}
 	/**
 	 * Adds a new sprite to the screen
 	 * @param attr

@@ -20,4 +20,10 @@ public class Weapon extends Component {
 		return new Weapon();
 	}
 
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

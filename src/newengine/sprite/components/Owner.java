@@ -12,14 +12,20 @@ public class Owner extends Component {
 
 	public static final ComponentType<Owner> TYPE = new ComponentType<>(Owner.class.getName());
 	private Player owner;
+	private TeamType myType;
 	
-	public Owner(Player player) {
-		this.owner = player;
+	public enum TeamType{
+		TEAM_1, TEAM_2, TEAM_3, TEAM_4, TEAM_5, TEAM_6
 	}
 	
 	@ConstructorForDeveloper
-	public Owner(@VariableName(name = "player name") String playerName){
-		this(new Player(playerName));
+	public Owner(@VariableName(name= "Team")TeamType team){
+		this(new Player(team.toString()));
+		myType=team;
+	}
+	
+	public Owner(Player player) {
+		this.owner = player;
 	}
 	
 	public Player player() {
@@ -33,13 +39,13 @@ public class Owner extends Component {
 
 	@Override
 	public Owner clone() {
-		return new Owner(owner);
+		return new Owner(myType);
 	}
 
 	@Override
 	public Object[] getParameters() {
 		Object[] parameters=new Object[1];
-		parameters[0]=owner.getName();
+		parameters[0]=myType;
 		// TODO Auto-generated method stub
 		return parameters;
 	}

@@ -1,7 +1,8 @@
 package gameauthorgui.tower;
 
 import data.DeveloperData;
-import gamecreation.level.LevelEditorHolder;
+import gameDevelopmentInterface.SpawnerCreation;
+import gamecreation.level.SpawnerLevelEditorHolder;
 import javafx.scene.layout.BorderPane;
 
 public class SpawnerCreationScreen extends BorderPane {
@@ -10,8 +11,8 @@ public class SpawnerCreationScreen extends BorderPane {
 	public SpawnerCreationScreen(DeveloperData modelData){
 		super();
 		this.modelData = modelData;
-		this.setRight(new LevelEditorHolder(modelData.getLevelData()));
-		//this.setCenter(WHATEVER JAKE IS USING);
+		this.setRight(new SpawnerLevelEditorHolder(modelData.getLevelData(), 600));
+		this.setCenter(new SpawnerCreation(modelData));
 	}
 
 }

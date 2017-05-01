@@ -110,7 +110,7 @@ public class AuthDataTranslator implements Translator<Sprite>{
 	private Sprite handleComponents(List<Component>transferComponents) {
 		Sprite sprite = new Sprite(); 
 		for (Component comp: transferComponents){
-			System.out.println(comp.getType().getType());
+			//System.out.println(comp.getType().getType());
 			sprite.addComponent(comp);
 			if (comp.getType().equals(Position.TYPE)) {
 				Position position = (Position)comp;

@@ -1,12 +1,14 @@
 package gamecreation.level;
 
-import javafx.beans.property.StringProperty;
+import java.util.List;
+
+import data.SpriteMakerModel;
 import newengine.managers.conditions.ICondition;
 
 public interface ILevelData{
 	public String getName();
-	public StringProperty getNameTextProperty();
 	public ICondition getWinningCondition();
 	public ICondition getLosingCondition();
 	public double getSpawnTime();
+	public List<SpriteMakerModel> getSpawners();
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import data.ScreenModelData;
 import data.SpriteMakerModel;
 import data.SpritesForScreenUse;
+import newengine.sprite.components.Images;
 import utilities.XStreamHandler;
 
 public class BackgroundSetter extends ScreenModelCreator {
@@ -19,9 +20,17 @@ public class BackgroundSetter extends ScreenModelCreator {
 	}
 	
 	private void addTiles() {
-		File defaultTileFile = new File("data/attributeSkeletons/userCreatedAttributes/AllThreeFromApp.xml");//"defaultTiles/defaultTiles.xml");
-		List<SpriteMakerModel> myTiles = xstream.getScreenModel(defaultTileFile);
-		myTiles.forEach(spriteModel -> addPossibleSprite(spriteModel));
+		File defaultTileDirectory = new File("data/defaultTiles");
+		File[] tileFiles = defaultTileDirectory.listFiles();
+		for (File f : tileFiles) {
+			SpriteMakerModel myTile = (SpriteMakerModel) xstream.getAttributeFromFile(f);
+			addPossibleSprite(myTile);
+		}
+//		SpriteMakerModel sprite1 = new SpriteMakerModel();
+//		sprite1.addComponent(new Images("images/characters/Lava.jpg"));
+//		xstream.saveToFile(sprite1);
+//		List<SpriteMakerModel> myTiles = xstream.getScreenModel(defaultTileFile);
+//		myTiles.forEach(spriteModel -> addPossibleSprite(spriteModel));
 	}
 
 }
