@@ -49,7 +49,7 @@ public class View {
 	public static final double INIT_CANVAS_HEIGHT = 300;
 	public static final double INIT_STAT_HEIGHT = 100;
 	public static final double INIT_SELECTION_HEIGHT = 200;
-	public static final String CSS_LOCATION = "/styleSheets/login.css";
+
 	private double width = INIT_WIDTH;
 	private double height = INIT_HEIGHT;
 	private double canvasWidth = INIT_CANVAS_WIDTH;
@@ -76,9 +76,7 @@ public class View {
 		this.bus = bus;
 		this.camera = camera;
 		VBox root = new VBox();
-		scene = new Scene(root, width, height, BACKGROUND);		
-		scene.getStylesheets().add(CSS_LOCATION);
-		statsPanel = new HBox();
+		scene = new Scene(root, width, height, BACKGROUND);		statsPanel = new HBox();
 		selectionCanvas = new Canvas(selectionWidth, selectionHeight);
 		gameWorldCanvas = new Canvas(canvasWidth, canvasHeight);
 		bottomPane = new HBox();
@@ -153,22 +151,15 @@ public class View {
 		List<Text> statsLabels = new ArrayList<Text>();
 		playerStatsModel.getWealth(player).ifPresent((wealthMap) -> {
 			for (WealthType type: wealthMap.keySet()) {
-				Text typeText = new Text(type + ": " + wealthMap.get(type));
-				typeText.setId("fancytext");
-				statsLabels.add(typeText);
-				
+				statsLabels.add(new Text(type + ": " + wealthMap.get(type)));
 			}
 		});
 		//TODO map to resource file
 		playerStatsModel.getLives(player).ifPresent((life) -> {
-			Text lifeText = new Text("Lives:" + life);
-			lifeText.setId("fancytext");
-			statsLabels.add(lifeText);
+			statsLabels.add(new Text("Lives:" + life));
 		});
 		playerStatsModel.getScore(player).ifPresent((score) -> {
-			Text scoreText = new Text("Scores:" + score);
-			scoreText.setId("fancytext");
-			statsLabels.add(scoreText);
+			statsLabels.add(new Text("Scores:" + score));
 		});
 		return statsLabels;
 	}
@@ -226,13 +217,20 @@ public class View {
 			if (sprite.getComponent(Owner.TYPE).isPresent()) {
 				Player player = sprite.getComponent(Owner.TYPE).get().player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();
-				if (player == mainPlayer && sprite.getComponent(SkillSet.TYPE).isPresent()) {
-					skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
-					return;
+				if (player == mainPlayer) {				
+					//fill skill box with skills of selected sprite
+					if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
+						skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
+					}
+					else {
+						skillBox.clear();
+					}
+				}
+				else {
+					skillBox.clear();
 				}
 				skillBox.clear();
 			}
-
 		}
 		else {
 			clearSelectionCanvas();

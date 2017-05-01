@@ -53,7 +53,6 @@ public class LevelManager{
 			loadLevel(data.get(currentLevel-1));
 			return;
 		}
-			System.out.println("YOU WIN");
 			new WinPresentation();
 			
 			bus.emit(new WinGameEvent(WinGameEvent.WIN));
