@@ -35,6 +35,7 @@ public class ConditionManager {
 	
 	private void checkWinningCondition(){
 		if(winning != null && winning.check()){
+			System.out.println("WINNING TRIGGERED");
 			bus.emit(new EndConditionTriggeredEvent(EndConditionTriggeredEvent.WIN));
 		}
 	}
