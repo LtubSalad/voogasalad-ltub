@@ -43,7 +43,7 @@ public class EventQueue extends Component {
 	private void addEvent(BusEvent event) {
 		events.addLast(event);
 	}
-	private boolean isEmpty() {
+	public boolean isEmpty() {
 		return events.isEmpty();
 	}
 	
@@ -69,7 +69,7 @@ public class EventQueue extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		// TODO Auto-generated method stub
 		return null;
 	}

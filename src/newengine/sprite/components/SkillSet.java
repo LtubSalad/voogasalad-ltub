@@ -1,14 +1,11 @@
 package newengine.sprite.components;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
-import helperAnnotations.DeveloperMethod;
 import helperAnnotations.VariableName;
 import newengine.events.skill.AddSkillEvent;
 import newengine.events.skill.ResetSkillCooldownEvent;
@@ -40,6 +37,7 @@ public class SkillSet extends Component {
 		return skills.get(type);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void afterAdded() {
 		for (Skill skill: skills.values()) {
@@ -75,7 +73,7 @@ public class SkillSet extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[1];
 		parameters[0]=skills;
 		return parameters;

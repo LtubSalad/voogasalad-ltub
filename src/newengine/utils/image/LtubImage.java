@@ -11,7 +11,7 @@ public class LtubImage {
 	public static final LtubImage EMPTY_IMAGE = new LtubImage();
 	
 	private String filename;
-	private Image image;
+	//private Image image;
 	/**
 	 * {@code pivot} is the assigned center of an image.
 	 * It is a relative position to the upper-left point of the image.
@@ -25,15 +25,6 @@ public class LtubImage {
 	
 	public LtubImage(String filename) {
 		this.filename = filename;
-		try {
-			image = new Image(filename);
-		} catch (NullPointerException e) {
-			if (RunningMode.DEV_MODE) {
-				System.out.println("DEV MODE stacktrace");
-				System.out.println(this.filename);
-				e.printStackTrace();
-			}
-		}
 	}
 
 	public boolean isEmpty() {
@@ -45,14 +36,25 @@ public class LtubImage {
 	}
 	
 	public Image getFXImage() {
-		return image;
+		try {
+			return new Image(filename);
+		} catch (NullPointerException e) {
+			if (RunningMode.DEV_MODE) {
+				System.out.println("DEV MODE stacktrace");
+				System.out.println(this.filename);
+				e.printStackTrace();
+			}
+		}	
+		return null;
 	}
 	
 	public double width() {
-		return image != null ? image.getWidth() : 0;
+		return 100;
+//		return image != null ? image.getWidth() : 0;
 	}
 	public double height() {
-		return image != null ? image.getHeight() : 0;
+		return 100;
+//		return image != null ? image.getHeight() : 0;
 	}
 	public void setImagePivot(GamePoint pivot) {
 		this.pivot = pivot;

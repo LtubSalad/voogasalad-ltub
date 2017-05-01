@@ -27,13 +27,14 @@ public class SkillBox {
 	}
 	
 	public void render(List<Skill> newSkills) {
-		System.out.println("render skill box");
 		if (sameSkills(oldSkills, newSkills)) {return;}
 		oldSkills = newSkills;
 		box.getChildren().clear();
 		for (Skill skill: newSkills) {
 			if (skill.getIcon().isPresent()) {
 				ImageView skillImageView = new ImageView(skill.getIcon().get().getFXImage());
+				skillImageView.setFitWidth(skill.getIcon().get().width());
+				skillImageView.setFitHeight(skill.getIcon().get().height());
 				skillImageView.setOnMouseClicked(e -> {
 					bus.emit(new SelectSkillEvent(SelectSkillEvent.SELECT, skill));
 				});

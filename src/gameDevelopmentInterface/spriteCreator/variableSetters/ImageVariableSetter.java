@@ -21,7 +21,7 @@ public class ImageVariableSetter extends VariableSetter<LtubImage>{
 	private StringProperty myImagePath;
 	private double PREF_IMAGE_WIDTH=300;
 	private double PREF_IMAGE_HEIGHT=300;
-	private final File base =new File(System.getProperty("user.dir")+File.separator+"data");
+	private final File base =new File(System.getProperty("user.dir")+File.separator+"src");
 	
 	public ImageVariableSetter(String variableName) {
 		super(variableName);
@@ -36,10 +36,12 @@ public class ImageVariableSetter extends VariableSetter<LtubImage>{
 			if(imageFile!=null){
 				File relativePath=new File(base.toURI().relativize(imageFile.toURI()).getPath());
 				myImagePath.set(relativePath.toString());
+				System.out.println(relativePath);
 			}
 		});
 		myContents.getChildren().addAll(new ImageDisplay(),button);
 		myContents.setSpacing(20);
+		System.out.println(base);
 	}
 
 	@Override

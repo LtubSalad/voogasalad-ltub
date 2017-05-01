@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  */
 
 public class ImageTester extends Application{
-	public static final String IMAGE_DIRECTORY = "resources/home.png";
+	public static final String IMAGE_DIRECTORY = "resources/bahamut_left.png";
 	public static void main(String[] args){
 		launch(args);
 		}

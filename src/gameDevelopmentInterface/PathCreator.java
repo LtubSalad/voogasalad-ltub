@@ -21,12 +21,10 @@ public class PathCreator extends BorderPane {
 	private Path myPath;
 	private Queue<GamePoint> replacementPath = new LinkedList<GamePoint>();
 	private DeveloperData myDeveloperData;
-	private ScreenModelData myScreenData;
 	private ScreenMap target;
 	
-	public PathCreator(DeveloperData developerData, ScreenModelData screenData) {
+	public PathCreator(DeveloperData developerData) {
 		myDeveloperData = developerData;
-		myScreenData = screenData;
 		myPath = new Path();
 		clearPath();
 	}
@@ -38,16 +36,12 @@ public class PathCreator extends BorderPane {
 	}
 	public void clearPath() {
 		this.getChildren().clear();
-		target = new ScreenMap(new ScreenModelCreator(myDeveloperData.getScreenSprites(), new GeneralDataCreator(myDeveloperData), myScreenData));
+		target = new ScreenMap(myDeveloperData);
 		target.resize(350, 350);
 		this.setCenter(target);
-		this.setRight(new PathButtonsPanel(this, target));
+		this.setRight(new PathButtonsPanel(myDeveloperData, this, target));
 	}
-	public void refreshScreen(int rows, int columns) {
-		target.setNumRows(rows);
-		target.setNumCols(columns);
-		this.setCenter(target);
-	}
+	
 	/**
 	 * 
 	 * @return the replacement path

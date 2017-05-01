@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import newengine.app.Game;
 import player.App;
+import player.helpers.GameLoadException;
 import player.loaderManager.Loader;
 
 /**
@@ -135,8 +136,14 @@ public class GameManager {
 			if (gameFile != null) {
 				// gameFactory.loadGame(gameFile);
 				// load the game file into the GameFactory
-				GameCreator gameCreator = new GameCreator(gameFile);
-				Game game = gameCreator.getGame();
+				GameCreator gameCreator = new GameCreator();
+				Game game = new Game();
+				try {
+					game = gameCreator.createGame(gameFile);
+				} catch (GameLoadException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				primaryStage.setScene(game.getScene());
 				

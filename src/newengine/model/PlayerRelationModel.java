@@ -1,6 +1,7 @@
 package newengine.model;
 
 import bus.EventBus;
+import newengine.events.GameInitializationEvent;
 import newengine.events.player.MainPlayerEvent;
 import newengine.player.Player;
 

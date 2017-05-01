@@ -39,23 +39,28 @@ public class TowerAuthor extends GameAuthor {
 		super();
 		myModelData=new DeveloperData();
 		myGeneralDataCreator = new GeneralDataCreator(myModelData);
-		myScreenModelData = new ScreenModelData();
+		//myScreenModelData = new ScreenModelData();
 		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();
+	}
+	
+	public DeveloperData getData() {
+		return myModelData;
 	}
 
 	public void instantiateSteps() {
 		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense", myModelData)));
+
 		addStep(new DeveloperStep("Level Options",
 				new LevelCreationPane(myModelData, getScene().getHeight() - CENTER_OFFSETS)));
-		addStep(new DeveloperStep(SET_THE_BACKGROUND,
-				new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+//		addStep(new DeveloperStep(SET_THE_BACKGROUND,
+//				new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+		addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData)));
 		addStep(new DeveloperStep("Sprite creation", new SpriteCreationEnvironment(myModelData)));
-		addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData, myScreenModelData)));
 		addStep(new DeveloperStep("Spawner Creation", new SpawnerCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
-		addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
-				new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
+		//addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
+			//	new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
 	}
 
 	@Override

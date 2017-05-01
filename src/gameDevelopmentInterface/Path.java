@@ -19,7 +19,8 @@ public class Path {
 	
 	public Path() {
 		this("A Nameless Path");
-		makeDefaultPath();
+		myPath.add(new GamePoint(5,3));
+		//makeDefaultPath();
 	}
 	
 	public Path(String name) {
@@ -105,7 +106,7 @@ public class Path {
 		myPath.add(new GamePoint(300,300));
 	
 	}	
-	
+
 	public String getName(){
 		return pathName;
 	}

@@ -7,6 +7,9 @@ import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.MoveEvent;
+import newengine.events.sprite.StateChangeEvent;
+import newengine.player.Player;
+
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -23,6 +26,7 @@ public class DamageStrength extends Component {
 	
 	@Override
 	public void afterAdded() {
+		sprite.emit(new StateChangeEvent(StateChangeEvent.DAMAGESTRENGTH, sprite, strength));
 		sprite.on(MoveEvent.STOP, (e) -> {
 			sprite.getComponent(Position.TYPE).ifPresent((position) -> {
 				if (position.isMoving() == false) {
@@ -52,7 +56,7 @@ public class DamageStrength extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters= new Object[1];
 		parameters[0]=strength;
 		return parameters;

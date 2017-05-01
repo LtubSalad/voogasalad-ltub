@@ -3,13 +3,13 @@ import java.io.File;
 //import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import commons.point.GamePoint;
-import data.ScreenModelData;
+import data.DeveloperData;
 import data.SpriteMakerModel;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableMap;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -54,26 +54,23 @@ import utilities.XStreamHandler;
  *
  */
 public class ScreenObjectHolder extends HBox {
-//	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
-//	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
-//	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
-//	private static final String IMAGE_HOLDER = "IMAGE_HOLDER";
-//	private static final String IMAGE = "IMAGE";
-//	private static final String Y_POSITION = "Y_POSITION";
-//	private static final String X_POSITION = "X_POSITION";
-//	private static final String PATH_TO_IMAGE_FILES = "PATH_TO_IMAGE_FILES";
 	private ScreenModelCreator myScreenModel;
-	private ScreenModelData myScreenData;
+	private List<SpriteMakerModel> myScreenData;
 	private Map<Pair<String, Image>, SpriteMakerModel> myScreenObjects = new HashMap<Pair<String, Image>, SpriteMakerModel>();
-	
-	public ScreenObjectHolder(ScreenModelCreator smc, ScreenModelData smd) {
+	private DeveloperData myModel;
+
+	public ScreenObjectHolder(DeveloperData model, ScreenModelCreator smc) {
 		myScreenModel = smc;
-		myScreenData = smd;
-		myScreenModel.getPossibleSprites().addListener(new ListChangeListener<SpriteMakerModel>() {
+		myModel = model;
+
+		//		myScreenModel = ;
+		//myScreenData = myModel.getBackgroundTiles();
+		myModel.getTilesToDrag().addListener(new ListChangeListener<SpriteMakerModel>() {
 			@Override
 			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
-				myScreenModel.getPossibleSprites().forEach(spriteMakerModel -> {
+				myModel.getTilesToDrag().forEach(spriteMakerModel -> {
 					Map<ComponentType<?>, Component> screenObjectComponents = spriteMakerModel.getComponents();
+
 					for (Component c : screenObjectComponents.values()) {
 						ComponentType<?> type = c.getType();
 						if (type.equals(Images.TYPE)) {
@@ -97,16 +94,16 @@ public class ScreenObjectHolder extends HBox {
 				});
 			}
 		});
-		
+
 		Player player1 = new Player("Player 1");
 		Player player2 = new Player("Player 2");
-		
+
 		// building
 		SpriteMakerModel building = new SpriteMakerModel();
 		LtubImage buildingImage = new LtubImage("images/skills/build.png");
 		ImageSet imageSetBuildSkill = new ImageSet(buildingImage);
 		building.addComponent(new Images("images/skills/build.png"));	
-		
+
 		// sprite 1: the tower
 		SpriteMakerModel sprite1 = new SpriteMakerModel();
 		LtubImage image1 = new LtubImage("images/characters/tower2_resized.gif");
@@ -131,11 +128,11 @@ public class ScreenObjectHolder extends HBox {
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite1.addComponent(new Range(200));
-		sprite1.addComponent(new Attacker());
+		sprite1.addComponent(new Attacker(25, image1));
 		sprite1.addComponent(new Health(200));
 		sprite1.addComponent(new EventQueue(new LinkedList<>()));
 		sprite1.addComponent(new RangeShootingAI());
-			
+
 		// sprite 2
 		SpriteMakerModel sprite2 = new SpriteMakerModel();
 		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
@@ -150,9 +147,9 @@ public class ScreenObjectHolder extends HBox {
 		sprite2.addComponent(new Images("images/characters/bahamut_right.png"));
 		sprite2.addComponent(new Speed(100));
 		sprite2.addComponent(new EventQueue(new LinkedList<>()));
-		sprite2.addComponent(new Attacker());
+		sprite2.addComponent(new Attacker(25, image2));
 		sprite2.addComponent(new Health(60));
-		
+
 		// spawned sprite
 		SpriteMakerModel child = new SpriteMakerModel();
 		LtubImage childImage = new LtubImage("images/characters/bahamut_left.png");
@@ -165,10 +162,10 @@ public class ScreenObjectHolder extends HBox {
 		child.addComponent(new Images("images/characters/bahamut_left.png"));
 		child.addComponent(new Speed(200));
 		child.addComponent(new Range(128));
-		child.addComponent(new Attacker());
+		child.addComponent(new Attacker(25, childImage));
 		child.addComponent(new Health(200));
 		child.addComponent(new EventQueue(new LinkedList<>()));
-		
+
 		// The spawner
 		SpriteMakerModel spawner = new SpriteMakerModel();
 		Map<SkillType<? extends Skill>, Skill> spawnerSkillMap = new HashMap<>();
@@ -179,25 +176,26 @@ public class ScreenObjectHolder extends HBox {
 		spawner.addComponent(new Images("images/characters/tower2_resized.gif"));
 		spawner.addComponent(new Speed(200));
 		spawner.addComponent(new Range(128));
-		spawner.addComponent(new Attacker());
+		spawner.addComponent(new Attacker(25, image1));
 		spawner.addComponent(new Health(200));
 		spawner.addComponent(new EventQueue(new LinkedList<>()));
 
 		addObject(sprite1);
 		//addObject(sprite2);
 		//addObject(spawner);
-		
-//		List<Sprite> spritesToAdd = new ArrayList<>();
-//		spritesToAdd.add(sprite1);
-//		spritesToAdd.add(sprite2);
-////		spritesToAdd.add(child);
-//		spritesToAdd.add(spawner);
 
-//		addObject(sprite2);
-//		addObject(spawner);
+		//		List<Sprite> spritesToAdd = new ArrayList<>();
+		//		spritesToAdd.add(sprite1);
+		//		spritesToAdd.add(sprite2);
+		////		spritesToAdd.add(child);
+		//		spritesToAdd.add(spawner);
 
-		
-	}
+		//		addObject(sprite2);
+		//		addObject(spawner);
+
+
+	}	
+
 	/**
 	 * Add a created sprite to the screen object selector
 	 * 
@@ -205,7 +203,7 @@ public class ScreenObjectHolder extends HBox {
 	 *            the sprite to add to the HBox
 	 */
 	public void addObject(SpriteMakerModel screenObject) {
-		for (Component c : screenObject.getComponents().values()) {
+		for (Component c : screenObject.getDeprecatedComponents().values()) {
 			ComponentType<?> type = c.getType();
 			if (type.equals(Images.TYPE)) {
 				Images imageComponent = (Images) c;
@@ -223,10 +221,10 @@ public class ScreenObjectHolder extends HBox {
 	 * Make an attribute data object from a file
 	 * @param file
 	 */
-//	public void addObject(File file) {
-//		addObject(new SpriteMakerModelFactory().produceAttribute(file));
-//	}
-	
+	//	public void addObject(File file) {
+	//		addObject(new SpriteMakerModelFactory().produceAttribute(file));
+	//	}
+
 	private void dragAndDrop(ImageView source) {
 		ScreenMap target = myScreenModel.getScreen();
 		source.setOnDragDetected(e -> sourceSetOnDragDetected(source, e));
@@ -251,7 +249,7 @@ public class ScreenObjectHolder extends HBox {
 					xstream.saveToFile(myScreenObjects.get(p), tempSpriteFile);
 					SpriteMakerModel xmlSprite = (SpriteMakerModel) xstream.getAttributeFromFile(tempSpriteFile);
 					xmlSprite.addComponent(new Position(gameCoords, 0)); //heading 0 because all sprites default to this
-					myScreenData.addObjectData(xmlSprite);
+					myModel.addBackgroundTile(xmlSprite);
 					break;
 				}
 			}

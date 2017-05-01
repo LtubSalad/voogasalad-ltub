@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import gamecreation.level.LevelData;
+import gamecreation.level.ILevelData;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import newengine.managers.conditions.Condition;
+import newengine.player.Player;
 
 /**
  * @author tahiaemran
@@ -19,51 +22,38 @@ import javafx.collections.ObservableList;
 public class SerializableDeveloperData {
 	private Map<String, String> gameData; 
 	private List<SpriteMakerModel> mySprites; 
-	private List<LevelData> myLevels; 
-	private SpritesForScreenUse screenSprites; 
-	private String gameName; 
-	private String gameIconFile; 
-	
-	DeveloperData dataToTranslate; // TODO: see if this serializes ok 
+	private List<ILevelData> myLevels; 
 	
 	public SerializableDeveloperData(DeveloperData data){
-		this.dataToTranslate = data; 
-		this.screenSprites = data.getScreenSprites();
-		configData(); 
-		configSprites(); 
-		configLevels(); 
+		configData(data.getAllData()); 
+		configSprites(data.getSprites()); 
+		myLevels = data.getReadOnlyLevelData();
 		
 	}
 
-
-	private void configLevels() {
-		ObservableList<LevelData> levels = dataToTranslate.getLevelData();
-		myLevels = new ArrayList<LevelData>();
-		myLevels = levels.stream().collect(Collectors.toList());
+	public Player getUserPlayer() {
+		//TODO
+		return new Player("alison");
 	}
 
-
-	private void configSprites() {
-		ObservableList<SpriteMakerModel> spriteData = dataToTranslate.getSprites();
+	private void configSprites(ObservableList<SpriteMakerModel> data) {
 		mySprites = new ArrayList<SpriteMakerModel>();
-		mySprites = spriteData.stream().collect(Collectors.toList());
+		mySprites = data.stream().collect(Collectors.toList());
 	}
 
-	private void configData() {
+
+	private void configData(ObservableMap<String, String> dataToTranslate) {
 		gameData = new HashMap<String, String>();	
-		for (String dataName: dataToTranslate.getAllData().keySet()){
-			gameData.put(dataName, dataToTranslate.getAllData().get(dataName));
+		for (String dataName: dataToTranslate.keySet()){
+			gameData.put(dataName, dataToTranslate.get(dataName));
 		}
-		
-		gameData.put("GAME_NAME", this.gameName);
-		gameData.put("GAME_FILE", this.gameIconFile);
 	}
 	
 	public List<SpriteMakerModel> getSprites(){
 		return Collections.unmodifiableList(mySprites); 
 	}
 	
-	public List<LevelData> getLevels(){
+	public List<ILevelData> getLevels(){
 		return Collections.unmodifiableList(myLevels);
 	}
 	
@@ -71,10 +61,5 @@ public class SerializableDeveloperData {
 		return Collections.unmodifiableMap(gameData);
 	}
 	
-	public SpritesForScreenUse getScreenSprites(){
-		return this.screenSprites;
-	}
-	
-
 	
 }
