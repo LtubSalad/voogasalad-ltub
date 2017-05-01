@@ -48,8 +48,8 @@ public class SavePanel extends HBox {
 		AlertHandler alertHandler = new AlertHandler();
 		Button listSaveButton = new Button("Save Sprite to this game's Sprites");
 		listSaveButton.setOnMouseClicked((click) -> {
-			Alert alert = alertHandler.confirmationPopUp("Are you sure you wish to save?");
-			Optional<ButtonType> result = alert.showAndWait();
+			Alert certaintyAlert = alertHandler.confirmationPopUp("Are you sure you wish to save?");
+			Optional<ButtonType> result = certaintyAlert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.CANCEL) {
 			     return;
 			}
@@ -62,7 +62,7 @@ public class SavePanel extends HBox {
 					if (spriteModel.getName().equals(modelToSave.getName())) {
 						Alert sameNameAlert = alertHandler
 								.confirmationPopUp("Another sprite in your game data has this name. Overwrite?");
-						Optional<ButtonType> response = alert.showAndWait();
+						Optional<ButtonType> response = sameNameAlert.showAndWait();
 						if (response.isPresent() && response.get() == ButtonType.CANCEL) {
 						     return;
 						}
