@@ -68,6 +68,7 @@ public class SpriteModel {
 			});
 		});
 	}
+	
 	private void addSprite(List<Sprite> sprites) {
 		for (Sprite sprite : sprites) {
 			if (!(this.sprites.contains(sprite))) {

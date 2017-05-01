@@ -12,7 +12,7 @@ public class SkillSetter<T extends Skill> extends ObjectSetter<T>{
 	private HBox box;
 	private DefaultObjectSetter<T> setter;
 	
-	public SkillSetter(Class<T> skill, DeveloperData data) throws UnsupportedTypeException{
+	public SkillSetter(Class<? extends T> skill, DeveloperData data) throws UnsupportedTypeException{
 		super(skill);
 		instantiate();
 		setter=new DefaultObjectSetter(skill, data);
