@@ -30,7 +30,7 @@ public class Upgrade extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters = new Object[2];
 		parameters[0]=smm;
 		parameters[1]=cost;

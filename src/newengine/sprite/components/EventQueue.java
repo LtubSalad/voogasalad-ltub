@@ -69,7 +69,7 @@ public class EventQueue extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		// TODO Auto-generated method stub
 		return null;
 	}

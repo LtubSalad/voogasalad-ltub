@@ -95,6 +95,7 @@ public class View {
 		upgradeBtn = new UpgradeBtn();
 		bottomPane.getChildren().add(upgradeBtn.getBox());
 		bottomPane.getChildren().add(stateDisplay.getBox());
+		bottomPane.getChildren().add(new TowersButton(bus).getNode());
 		bottomPane.getChildren().add(skillBox.getBox());
 
 		this.camera = new Camera(bus);
