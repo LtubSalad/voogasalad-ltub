@@ -13,7 +13,7 @@ public class Owner extends Component {
 	private TeamNumber teamNumber;
 	
 	public enum TeamNumber{
-		TEAM_1, TEAM_2, TEAM_3, TEAM_4, TEAM_5
+		HUMANS, COMPUTER
 	}
 	
 	@ConstructorForDeveloper
@@ -53,7 +53,7 @@ public class Owner extends Component {
 				return parameters;
 			}
 		}
-		parameters[0]=TeamNumber.TEAM_1;
+		parameters[0]=TeamNumber.HUMANS;
 		return parameters;
 	}
 	

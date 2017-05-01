@@ -1,10 +1,8 @@
 package newengine.sprite.components;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.skill.ResetSkillCooldownEvent;
 import newengine.skill.Skill;
