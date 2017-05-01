@@ -3,6 +3,9 @@ package newengine.sprite.components;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.range.InRangeEvent;
+import newengine.events.sprite.FireProjectileEvent;
+import newengine.events.sprite.StateChangeEvent;
+import newengine.events.sprite.UpgradeEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -29,11 +32,16 @@ public class Range extends Component {
 
 	@Override
 	public void afterAdded() {
-		sprite.on(InRangeEvent.ANY,  (e) -> {
+		sprite.on(InRangeEvent.ANY, (e) -> {
 			for (Sprite detectee: e.getDetectees()) {
 				Target target = new Target(detectee);
 //				System.out.println("In range received?");
 			}
+		});
+		sprite.on(UpgradeEvent.DOUBLE, e -> {
+			System.out.println("before upgrade range " + range);
+			range = range*2;
+			System.out.println("after upgrade range " + range);
 		});
 	}
 	
@@ -48,7 +56,7 @@ public class Range extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[1];
 		parameters[0]=range;
 		return parameters;

@@ -1,10 +1,8 @@
 package newengine.sprite.components;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.skill.ResetSkillCooldownEvent;
 import newengine.skill.Skill;
@@ -25,7 +23,7 @@ public class Cooldown extends Component {
 	
 	@Override
 	public void afterAdded() {
-		sprite.on(ResetSkillCooldownEvent.RESET, (Serializable & BusEventHandler<ResetSkillCooldownEvent>) (e) -> {
+		sprite.on(ResetSkillCooldownEvent.RESET, (e) -> {
 			SkillType skillType = e.getSkillType();
 			resetCooldown(skillType);
 		});
@@ -73,7 +71,7 @@ public class Cooldown extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		// TODO Auto-generated method stub
 		return null;
 	}

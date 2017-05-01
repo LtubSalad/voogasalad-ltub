@@ -35,6 +35,12 @@ public class XStreamHandler {
 		return object;
 	}
 	
+	public <T> T getObjectFromFile(File file){
+		XStream xstream = new XStream(new DomDriver());
+		T object = (T)xstream.fromXML(file);
+		return object;
+	}
+	
 	public <T> T getObjectFromFile(){
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();

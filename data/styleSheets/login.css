@@ -25,4 +25,52 @@
 	-fx-font-size: 20px;
 	-fx-text-fill: orange;
 }
+.menu-bar .label{
+	-fx-text-fill: blue;
+	-fx-font-size: 30px;
+	-fx-padding: 8px 16px;
+	-fx-background-color: linear-gradient(orange, orangered);
+	-fx-font-family:"Comic Sans MS", cursive, sans-serif;
+}
 
+.menu-item .label{
+	-fx-text-fill: greenyellow;
+	-fx-background-color: linear-gradient(orange, orangered);
+	-fx-font-size: 20px;
+}
+
+#starting:focused{
+	-fx-focus-color:red;
+	-fx-faint-focus-color:green;
+	-fx-inner-border:blue;
+	-fx-body-color:orange;
+	-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+	-fx-background-insets:0, 1, 2;
+	-fx-background-radius:5, 4, 3;
+	-fx-font-size: 20px;
+}
+
+#main-button
+{
+    -fx-background-radius: 30, 30, 29, 28;
+    -fx-padding: 3px 10px 3px 10px;
+    -fx-background-color: linear-gradient(orange, orangered );
+}
+
+#vbox{
+	-fx-background-color:cyan;
+	-fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-background-radius: 5.0; 
+    -fx-border-color: #2e8b57;
+     -fx-background-size: 96, 205;
+    -fx-border-width: 2px;
+    -fx-font-family:  "Helvetica";
+}
+
+#fancytext {
+    -fx-font: 20px Tahoma;
+    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}

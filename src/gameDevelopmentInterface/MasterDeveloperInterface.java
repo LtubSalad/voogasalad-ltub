@@ -46,10 +46,10 @@ public class MasterDeveloperInterface {
 		developerTabs = new TabPane();
 		Tab spriteCreation = new Tab("Sprite creation",new SpriteCreationScreen(myModelData));
 		Tab GeneralDataTab = new Tab(myResources.getString(GENERAL_DATA), myGeneralDataCreator);
-		Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, new ScreenModelData()));
+		//Tab ScreenSettingView = new Tab(myResources.getString(SCREEN_SETTING), new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, new ScreenModelData()));
 
 		ObservableList<Tab> myTabs = developerTabs.getTabs();
-		myTabs.addAll(spriteCreation,GeneralDataTab, ScreenSettingView);
+		//myTabs.addAll(spriteCreation,GeneralDataTab, ScreenSettingView);
 	}
 	private void instantiate() {
 		view = new BorderPane();
@@ -80,10 +80,15 @@ public class MasterDeveloperInterface {
 						new SpriteCreationScreen(myModelData));
 				developerTabs.getTabs().add(spriteTab);
 			});
+//			screenButton.setOnAction((clicked) -> {
+//				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
+//						new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, new ScreenModelData()));
+//				developerTabs.getTabs().add(screenTab);
+//			});
 			screenButton.setOnAction((clicked) -> {
-				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
-						new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, new ScreenModelData()));
-				developerTabs.getTabs().add(screenTab);
+//				Tab screenTab = new Tab(myResources.getString(CREATE_NEW_SCREEN),
+//						new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, new ScreenModelData()));
+				//developerTabs.getTabs().add(screenTab);
 			});
 //			attributeButton.setOnAction((clicked) -> {
 //				Tab attributeTab = new Tab(myResources.getString(CREATE_NEW_ATTRIBUTE), new GroundUpAttributeCreator());

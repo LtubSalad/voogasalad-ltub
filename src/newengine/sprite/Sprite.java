@@ -15,19 +15,35 @@ import bus.BusEventHandler;
 import bus.BusEventType;
 import bus.EventBus;
 import helperAnnotations.DeveloperMethod;
+import javafx.beans.property.ReadOnlyListWrapper;
+import javafx.collections.FXCollections;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
+import newengine.sprite.components.Attacker;
+import newengine.sprite.components.Cooldown;
+import newengine.sprite.components.DamageStrength;
+import newengine.sprite.components.Health;
+import newengine.sprite.components.Owner;
+import newengine.sprite.components.Position;
+import newengine.sprite.components.Range;
+import newengine.sprite.components.SkillSet;
+import newengine.sprite.components.Speed;
+import newengine.sprite.state.SpriteState;
 
 public class Sprite {
 	private EventBus spriteBus = new BasicEventBus();
 	private SpriteID spriteID;
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
 	// TODO: is dis ok for serialization 
-	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
+//	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
+	
+	private SpriteState myState;
 
 	public Sprite() {
-		this(IDGenerator.generateID());
+		myState = new SpriteState(this);
+		spriteID = IDGenerator.generateID();
 	}
+
 	public Sprite(SpriteID spriteID) {
 		this.spriteID = spriteID;
 	}
@@ -47,6 +63,10 @@ public class Sprite {
 
 	public SpriteID getID() {
 		return spriteID;
+	}
+	
+	public SpriteState getState(){
+		return myState;
 	}
 
 	public void addComponent(Component component) {
@@ -99,22 +119,22 @@ public class Sprite {
 		return "sprite(" + spriteID + ")";
 	}
 
-	public <T extends BusEvent> void produceHandler(BusEventType<T> eventType, String script) {
-		BusEventHandler<T> newHandler;
-		
-		newHandler = (onFired) -> {
-			try { 
-				scriptHandler.eval(script);
-			} catch (ScriptException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		};
-		on(eventType, newHandler);
-	}
-	
-	public ScriptEngine getScriptHandler(){
-		return scriptHandler; 
-	}
+//	public <T extends BusEvent> void produceHandler(BusEventType<T> eventType, String script) {
+//		BusEventHandler<T> newHandler;
+//		
+//		newHandler = (onFired) -> {
+//			try { 
+//				scriptHandler.eval(script);
+//			} catch (ScriptException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		};
+//		on(eventType, newHandler);
+//	}
+//	
+//	public ScriptEngine getScriptHandler(){
+//		return scriptHandler; 
+//	}
 
 }

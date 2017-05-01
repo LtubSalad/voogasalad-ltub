@@ -3,12 +3,12 @@ package gamecreation.level;
 import java.util.List;
 
 import data.SpriteMakerModel;
-import newengine.managers.conditions.ICondition;
+import newengine.managers.conditions.Condition;
 
 public interface ILevelData{
 	public String getName();
-	public ICondition getWinningCondition();
-	public ICondition getLosingCondition();
+	public Condition getWinningCondition();
+	public Condition getLosingCondition();
 	public double getSpawnTime();
 	public List<SpriteMakerModel> getSpawners();
 }

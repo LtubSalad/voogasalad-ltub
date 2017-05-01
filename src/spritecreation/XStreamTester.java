@@ -119,7 +119,7 @@ public class XStreamTester extends Application{
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite1.addComponent(new Range(128));
-		sprite1.addComponent(new Attacker());
+		sprite1.addComponent(new Attacker(25, image1));
 		sprite1.addComponent(new Health(200));
 		sprite1.addComponent(new EventQueue(new LinkedList<>()));
 //		
@@ -131,9 +131,9 @@ public class XStreamTester extends Application{
 		SpriteMakerModel fromXML = (SpriteMakerModel) xstream.fromXML(new FileReader(file));
 
 		Sprite sprite2 = new Sprite();
-		for (ComponentType<?> c : fromXML.getComponents().keySet()) {
+		for (ComponentType<?> c : fromXML.getDeprecatedComponents().keySet()) {
 			System.out.println("Component type: " + c);
-			Component componentSaved = fromXML.getComponents().get(c);
+			Component componentSaved = fromXML.getDeprecatedComponents().get(c);
 			sprite2.addComponent(componentSaved);
 		}
 		
