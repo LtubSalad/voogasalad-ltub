@@ -218,17 +218,10 @@ public class View {
 			if (sprite.getComponent(Owner.TYPE).isPresent()) {
 				Player player = sprite.getComponent(Owner.TYPE).get().player();
 				Player mainPlayer = playerRelationModel.getMainPlayer();
-				if (player == mainPlayer) {				
-					//fill skill box with skills of selected sprite
-					if (sprite.getComponent(SkillSet.TYPE).isPresent()) {
-						skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
-					}
-					else {
-						skillBox.clear();
-					}
-				}
-				else {
-					skillBox.clear();
+				
+				if (player.equals(mainPlayer) && sprite.getComponent(SkillSet.TYPE).isPresent()) {
+					skillBox.render(sprite.getComponent(SkillSet.TYPE).get().skills());
+					return;
 				}
 				skillBox.clear();
 			}

@@ -23,6 +23,7 @@ import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Cooldown;
 import newengine.sprite.components.DamageStrength;
 import newengine.sprite.components.Health;
+import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.Range;
@@ -72,6 +73,9 @@ public class Sprite {
 	public void addComponent(Component component) {
 		if (component == null) {
 			System.out.println("component is null");
+		}
+		if (component.getType().equals(Images.TYPE)) {
+			System.out.println("Images component is getting added to the sprite");
 		}
 		components.put(component.getType(), component);
 		component.onAdded(this);
