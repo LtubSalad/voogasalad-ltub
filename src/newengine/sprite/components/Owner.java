@@ -10,9 +10,19 @@ public class Owner extends Component {
 
 	public static final ComponentType<Owner> TYPE = new ComponentType<>(Owner.class.getName());
 	private Player owner;
+	private TeamNumber teamNumber;
+	
+	public enum TeamNumber{
+		HUMANS, COMPUTER
+	}
 	
 	@ConstructorForDeveloper
-	public Owner(@VariableName(name= "Team")String player){
+	public Owner(@VariableName(name= "Team") TeamNumber team){
+		this(team.toString());
+		teamNumber=team;
+	}
+
+	public Owner(String player){
 		this(new Player(player));
 	}
 	
@@ -35,10 +45,15 @@ public class Owner extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[1];
-		parameters[0]=owner.toString();
-		// TODO Auto-generated method stub
+		for(TeamNumber team:TeamNumber.values()){
+			if(owner.toString().equals(team.toString())){
+				parameters[0]=teamNumber;
+				return parameters;
+			}
+		}
+		parameters[0]=TeamNumber.HUMANS;
 		return parameters;
 	}
 	

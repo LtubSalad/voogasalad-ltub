@@ -14,7 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
-import newengine.animation.ImageAnimationTest;
+import newengine.animation.AnimationImage;
 import player.App;
 
 /**
@@ -49,7 +49,7 @@ public class LevelManager {
 		primaryStage.setTitle("Game Level Choice");
 		Group root = new Group();
 		
-		ImageAnimationTest im = new ImageAnimationTest();
+		AnimationImage im = new AnimationImage();
 		
 		
 		root.getChildren().add(menuBar);

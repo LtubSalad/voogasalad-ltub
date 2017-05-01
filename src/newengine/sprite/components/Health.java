@@ -29,7 +29,6 @@ public class Health extends Component {
 	public Health(@VariableName(name="health")int health){
 		this.initHealth = health;
 		this.health = health;
-		
 	}
 	
 	@Override
@@ -47,7 +46,6 @@ public class Health extends Component {
 	
 	@Override
 	public void afterAdded(){
-		sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, sprite, health));
 		sprite.on(ChangeHealthEvent.ANY, e -> {
 			changeHealth(e.getValue());
 		});
@@ -102,7 +100,7 @@ public class Health extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[1];
 		parameters[0]=health;
 		return parameters;
