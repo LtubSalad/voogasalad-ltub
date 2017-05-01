@@ -82,58 +82,29 @@ public class GameCreator {
 			// enemy: the monsters
 			Player userPlayer = myData.getUserPlayer();
 			
-			List<SpriteMakerModel> spriteMakerModels = myData.getLevels().get(0).getSpawners();
+		
 			List<Sprite> sprites = new ArrayList<>();
-			sprites.addAll(spriteMakerModels.stream().map((spriteMakerModel) -> {
-				return (new AuthDataTranslator(spriteMakerModel)).getSprite();
-			}).collect(Collectors.toList()));
-			System.out.println("see my datax");
-			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites()));
+			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites().stream().filter((s) -> {
+				return isTower(s);
+			}).collect(Collectors.toList())));
 
 
-			List<Sprite> pathSprites = new ArrayList<>();
-			SkillSet skillSet = (SkillSet) spriteMakerModels.get(0).getComponentByType(SkillSet.TYPE);
-			BuildSkill buildSkill = (BuildSkill) skillSet.getSkill(BuildSkill.TYPE);
-			PathFollower pathFollowerComponent = (PathFollower) buildSkill.getSpriteMakerModel().getComponentByType(PathFollower.TYPE);
-			List<GamePoint> points = new ArrayList<> (pathFollowerComponent.getPath().getPath());
-			for (int i = 0; i < points.size()-1; i++) {
-				GamePoint point1 = points.get(i);
-				GamePoint point2 = points.get(i+1);
-				double dist = point1.distFrom(point2);
-				double dx = point2.x() - point1.x();
-				double dy = point2.y() - point1.y();
-				double tileInterval = 30;
-				for (int j = 0; j <= dist / tileInterval; j++) {
-					GamePoint pathPoint = new GamePoint(
-							point1.x() + tileInterval * dx / dist * j,
-							point1.y() + tileInterval * dy / dist * j);
-					Sprite step = new Sprite();
-					step.addComponent(new Position(pathPoint));
-					LtubImage ltubimage = new LtubImage("images/characters/Stone.jpg");
-					step.addComponent(new Images(ltubimage));
-					step.addComponent(new GameBus());
-					step.addComponent(new Owner(Player.NATURE));
-					pathSprites.add(step);
-				}
-			}
-
-			
 			EventBus bus = game.getBus();
 			bus.on(GameInitializationEvent.ANY, (e) -> {
 				bus.emit(new InitILevelsEvent(myData.getLevels()));
 				bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
 				bus.emit(new MainPlayerEvent(userPlayer));
-				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, pathSprites));
+				//bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, pathSprites));
 
-//				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
-				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, 20)); // Hard-coded
-//				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));
-				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, 200));
+				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(SerializableDeveloperData.NUMBER_OF_LIVES))));
+				//bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, 20)); // Hard-coded
+				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(SerializableDeveloperData.NUMBER_OF_STARTING_GOLD))));
+				//bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, 200));
 				
-				//TODO condition factory
-				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
-				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
+//				//TODO condition factory
+//				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
+//				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 			});
 
 			return game;
@@ -143,6 +114,11 @@ public class GameCreator {
 			}
 			throw new GameLoadException("Fail to load game: " + gameFile);
 		}
+	}
+	
+	private boolean isTower(SpriteMakerModel smm){
+		Owner owner = (Owner) smm.getComponentByType(Owner.TYPE);
+		return owner.player().getName().equals("TOWERS");
 	}
 	
 	private List<Sprite> makePathSprites(List<Sprite> sprites){

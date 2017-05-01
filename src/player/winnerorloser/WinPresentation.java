@@ -58,9 +58,11 @@ public class WinPresentation implements ResultPresentation{
 		vbButtons.getChildren().add(playButton);
 		vbButtons.getChildren().add(exitButton);
 		
-		vbTexts.getChildren().add(getText("For this game:    " + result.getGameName()));
-		vbTexts.getChildren().add(getText("You get the score:   " + result.getPoint()));
-		vbTexts.getChildren().add(getText("Your health is:    " + result.getHealth()));
+		vbTexts.getChildren().add(getText("Congratulations!"));
+		
+//		vbTexts.getChildren().add(getText("For this game:    " + result.getGameName()));
+//		vbTexts.getChildren().add(getText("You get the score:   " + result.getPoint()));
+//		vbTexts.getChildren().add(getText("Your health is:    " + result.getHealth()));
 		root.getChildren().add(vbTexts);
 		
 		root.getChildren().addAll(vbButtons);

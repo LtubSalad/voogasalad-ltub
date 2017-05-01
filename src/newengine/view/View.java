@@ -34,6 +34,7 @@ import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.SkillSet;
+import newengine.sprite.components.Upgrade;
 import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
@@ -210,7 +211,9 @@ public class View {
 						sprite.getComponent(Images.TYPE).get().image().height());
 			}
 			//fill stats box with stats of selected sprite
-			if (sprite.getComponent(Owner.TYPE).get().player().getName().equals(playerRelationModel.getMainPlayer().getName())){
+			
+			if (sprite.getComponent(Upgrade.TYPE).isPresent() && 
+					sprite.getComponent(Owner.TYPE).get().player().getName().equals(playerRelationModel.getMainPlayer().getName())){
 				upgradeBtn.render(sprite);
 			}
 			stateDisplay.render(sprite);
