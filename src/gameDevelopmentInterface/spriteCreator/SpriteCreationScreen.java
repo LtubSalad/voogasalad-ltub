@@ -59,7 +59,7 @@ public class SpriteCreationScreen extends BorderPane {
 		this.setLeft(scriptPane);
 		this.setCenter(infoPane);
 		this.setTop(descriptorPane);
-		this.setBottom(new BottomPanel());
+		this.setBottom(new SavePanel(this,developerData));
 	}
 
 	public SpriteDataPane getInfoPane() {
@@ -91,68 +91,7 @@ public class SpriteCreationScreen extends BorderPane {
 		return new ComponentSelectorPane("Add components", observableComponents, infoPane);
 	}
 
-	public class BottomPanel extends HBox {
-		XStreamHandler dataHandler = new XStreamHandler();
-
-		public BottomPanel() {
-			this.getChildren().addAll(saveToFileButton(), saveToGameSpriteButton());
-		}
-
-		private Button saveToFileButton(){
-			AlertHandler alertHandler = new AlertHandler();
-			Button saveButton = new Button("Save Sprite to File");
-			saveButton.setOnMouseClicked((click) -> {
-				Alert alert = alertHandler.confirmationPopUp("Are you sure you wish to save?");
-				Optional<ButtonType> result = alert.showAndWait();
-				 if (result.isPresent() && result.get() == ButtonType.CANCEL) {
-				     return;
-				 }
-				
-				SpriteMakerModel modelToSave = produceNewModel();
-				if(modelToSave!=null){
-					XStreamHandler handler=new XStreamHandler();
-					handler.saveToFile(modelToSave);
-					AlertHandler.showMessage("Saved successfully");
-				}
-			});
-			return saveButton;
-		}
-		
-		private Button saveToGameSpriteButton(){
-			AlertHandler alertHandler = new AlertHandler();
-			Button listSaveButton = new Button("Save Sprite to this game's Sprites");
-			listSaveButton.setOnMouseClicked((click) -> {
-				Alert alert = alertHandler.confirmationPopUp("Are you sure you wish to save?");
-				Optional<ButtonType> result = alert.showAndWait();
-				if (result.isPresent() && result.get() == ButtonType.CANCEL) {
-				     return;
-				}
-
-				SpriteMakerModel modelToSave = produceNewModel();
-				if(modelToSave==null){
-					return;
-				}
-				for (SpriteMakerModel spriteModel : developerData.getSprites()) {
-						if (spriteModel.getName().equals(modelToSave.getName())) {
-							Alert sameNameAlert = alertHandler
-									.confirmationPopUp("Another sprite in your game data has this name. Overwrite?");
-							Optional<ButtonType> response = alert.showAndWait();
-							if (response.isPresent() && response.get() == ButtonType.CANCEL) {
-							     return;
-							}
-							developerData.getSprites().remove(spriteModel);			
-						}
-				}
-				
-				developerData.getSprites().add(modelToSave);
-				AlertHandler.showMessage("Saved successfully");
-			});
-			return listSaveButton;
-		}
-	}
-	
-
-	private SpriteMakerModel produceNewModel() {
+	public SpriteMakerModel produceNewModel() {
 		SpriteMakerModel sprite = new SpriteMakerModel();
 		try {
 			scriptPane.updateSprite(sprite);
