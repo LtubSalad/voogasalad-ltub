@@ -1,9 +1,6 @@
 package gamedata;
 
-import java.io.File;
-
 import javafx.application.Application;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import newengine.app.Game;
 
