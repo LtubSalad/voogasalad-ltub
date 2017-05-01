@@ -85,6 +85,7 @@ public class Position extends Component {
 					System.out.println("sprite has stopped moving and reached end of path");
 					sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new ChangeLivesEvent(ChangeLivesEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), -3));
 					sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
+					System.out.println(sprite.getComponent(Owner.TYPE).get().player().getName());
 				}
 			}
 		});
