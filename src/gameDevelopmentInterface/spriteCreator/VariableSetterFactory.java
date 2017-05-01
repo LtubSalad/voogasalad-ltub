@@ -5,6 +5,7 @@ import java.lang.reflect.Parameter;
 import java.util.HashMap;
 
 import data.DeveloperData;
+import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
 import gameDevelopmentInterface.Path;
 import gameDevelopmentInterface.spriteCreator.variableSetters.EnumSetter;
@@ -13,6 +14,7 @@ import gameDevelopmentInterface.spriteCreator.variableSetters.ImageVariableSette
 import gameDevelopmentInterface.spriteCreator.variableSetters.PathSetter;
 import gameDevelopmentInterface.spriteCreator.variableSetters.SimpleVariableSetter;
 import gameDevelopmentInterface.spriteCreator.variableSetters.SkillMapSetter;
+import gameDevelopmentInterface.spriteCreator.variableSetters.SpriteVariableSelector;
 import gameDevelopmentInterface.spriteCreator.variableSetters.VariableSetter;
 import helperAnnotations.VariableName;
 import newengine.skill.Skill;
@@ -42,6 +44,9 @@ public class VariableSetterFactory {
 		}
 		else if(parameter.getType().isAssignableFrom(File.class)){
 			return new FileVariableSetter(name);
+		}
+		else if(parameter.getType().isAssignableFrom(SpriteMakerModel.class)){
+			return new SpriteVariableSelector(name,data);
 		}
 		else if(name.equals("Skills")){
 			return new SkillMapSetter(name, data);

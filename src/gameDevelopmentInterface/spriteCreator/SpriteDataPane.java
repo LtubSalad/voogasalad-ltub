@@ -27,12 +27,9 @@ import utilities.AlertHandler;
  */
 public class SpriteDataPane extends ScrollPane{
 	private VBox myPane;
-	private SpriteDescriptor descriptor;
 	private ComponentLister lister;
 	private DeveloperData developerData;
 	private double PREF_WIDTH=600;
-	private SimpleVariableSetter<String> nameSetter;
-	private SimpleVariableSetter<String> descriptionSetter;
 	
 	public SpriteDataPane(SpriteMakerModel spriteData, DeveloperData developerData){
 		instantiate(spriteData, developerData);
@@ -55,12 +52,10 @@ public class SpriteDataPane extends ScrollPane{
 	private void instantiate(SpriteMakerModel spriteData, DeveloperData developerData){
 		this.developerData=developerData;
 		myPane=new VBox();
-		descriptor=new SpriteDescriptor();
 		lister=new ComponentLister();
 		updateLister(spriteData);
-		nameSetter.setField(spriteData.getName());
-		descriptionSetter.setField(spriteData.getDescription());
-		myPane.getChildren().addAll(descriptor,lister);
+		myPane.getChildren().addAll(new Label("Sprite Components"), lister);
+		myPane.setPrefWidth(PREF_WIDTH);
 		this.setContent(myPane);
 		this.setPrefWidth(PREF_WIDTH);
 		
@@ -78,14 +73,6 @@ public class SpriteDataPane extends ScrollPane{
 		for(Component component:sprite.getActualComponents()){
 			addComponent(component,false);
 		}
-	}
-	
-	public SimpleVariableSetter<String> getNameSetter(){
-		return nameSetter;
-	}
-	
-	public SimpleVariableSetter<String> getDescriptionSetter(){
-		return descriptionSetter;
 	}
 	
 	public <T extends Component> void addComponent(T component, boolean removable){
@@ -112,22 +99,7 @@ public class SpriteDataPane extends ScrollPane{
 	}
 	
 	public void updateSpriteData(SpriteMakerModel spriteData) throws Exception{
-		spriteData.setName(nameSetter.getValue());
-		spriteData.setDescription(descriptionSetter.getValue());
 		lister.updateSpriteModel(spriteData);		
-	}
-	
-	private class SpriteDescriptor extends VBox{	
-		private SpriteDescriptor(){
-			try{
-				nameSetter=new SimpleVariableSetter<String>(String.class, "Sprite name:");
-				descriptionSetter= new SimpleVariableSetter<String>(String.class, "Description:");
-				this.getChildren().addAll(new Label("Add Sprite Components"),nameSetter, descriptionSetter);
-			}
-			catch(Exception e){
-				AlertHandler.showError(e.getMessage());
-			}
-		}
 	}
 	
 	private class ComponentLister extends VBox{
@@ -165,7 +137,6 @@ public class SpriteDataPane extends ScrollPane{
 		 */
 		private void updateSpriteModel(SpriteMakerModel spriteData){
 			try {
-				spriteData.setName(nameSetter.getValue());
 				spriteData.clearComponents();
 				for(ComponentSetter<? extends Component> component: componentViews){
 					spriteData.addComponent(component.produceComponent());
