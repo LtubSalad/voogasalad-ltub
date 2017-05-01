@@ -45,7 +45,7 @@ public class Owner extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[1];
 		for(TeamNumber team:TeamNumber.values()){
 			if(owner.toString().equals(team.toString())){
