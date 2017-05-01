@@ -90,20 +90,33 @@ public class GameCreator {
 			System.out.println("see my datax");
 			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites()));
 
-//			List<Sprite> pathSprites = new ArrayList<>();
-//			SkillSet skillSet = (SkillSet) spriteMakerModels.get(0).getComponentByType(SkillSet.TYPE);
-//			BuildSkill buildSkill = (BuildSkill) skillSet.getSkill(BuildSkill.TYPE);
-//			PathFollower pathFollowerComponent = (PathFollower) buildSkill.getSpriteMakerModel().getComponentByType(PathFollower.TYPE);
-//			List<GamePoint> points = new ArrayList<> (pathFollowerComponent.getPath().getPath());
-//			for (GamePoint pathPoint : points) {
-//				Sprite step = new Sprite();
-//				step.addComponent(new Position(pathPoint));
-//				LtubImage ltubimage = new LtubImage("images/characters/Stone.jpg");
-//				step.addComponent(new Images(ltubimage));
-//				step.addComponent(new GameBus());
-//				step.addComponent(new Owner(Player.NATURE));
-//				pathSprites.add(step);
-//			}
+
+			List<Sprite> pathSprites = new ArrayList<>();
+			SkillSet skillSet = (SkillSet) spriteMakerModels.get(0).getComponentByType(SkillSet.TYPE);
+			BuildSkill buildSkill = (BuildSkill) skillSet.getSkill(BuildSkill.TYPE);
+			PathFollower pathFollowerComponent = (PathFollower) buildSkill.getSpriteMakerModel().getComponentByType(PathFollower.TYPE);
+			List<GamePoint> points = new ArrayList<> (pathFollowerComponent.getPath().getPath());
+			for (int i = 0; i < points.size()-1; i++) {
+				GamePoint point1 = points.get(i);
+				GamePoint point2 = points.get(i+1);
+				double dist = point1.distFrom(point2);
+				double dx = point2.x() - point1.x();
+				double dy = point2.y() - point1.y();
+				double tileInterval = 30;
+				for (int j = 0; j <= dist / tileInterval; j++) {
+					GamePoint pathPoint = new GamePoint(
+							point1.x() + tileInterval * dx / dist * j,
+							point1.y() + tileInterval * dy / dist * j);
+					Sprite step = new Sprite();
+					step.addComponent(new Position(pathPoint));
+					LtubImage ltubimage = new LtubImage("images/characters/Stone.jpg");
+					step.addComponent(new Images(ltubimage));
+					step.addComponent(new GameBus());
+					step.addComponent(new Owner(Player.NATURE));
+					pathSprites.add(step);
+				}
+			}
+
 			
 			EventBus bus = game.getBus();
 			bus.on(GameInitializationEvent.ANY, (e) -> {
@@ -111,7 +124,7 @@ public class GameCreator {
 				bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
 				bus.emit(new MainPlayerEvent(userPlayer));
-//				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, pathSprites));
+				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, pathSprites));
 
 //				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
 				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, 20)); // Hard-coded
