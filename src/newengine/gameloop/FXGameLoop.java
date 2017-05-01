@@ -5,6 +5,7 @@ import java.util.List;
 
 import bus.EventBus;
 import javafx.animation.AnimationTimer;
+import newengine.events.game.GamePauseResumeEvent;
 
 public class FXGameLoop implements GameLoop {
 
@@ -12,6 +13,7 @@ public class FXGameLoop implements GameLoop {
 	private List<LoopComponent> loopComponents;
 	private AnimationTimer timer;
 	private long prevNanos;
+	private boolean isRunning = false;
 	
 	public FXGameLoop(EventBus bus) {
 		this.bus = bus;
@@ -36,6 +38,18 @@ public class FXGameLoop implements GameLoop {
 			}
 			
 		};
+		initHandlers();
+	}
+	
+	private void initHandlers() {
+		bus.on(GamePauseResumeEvent.TOGGLE, (e) -> {
+			if (isRunning) {
+				pause();
+			}
+			else {
+				start();
+			}
+		});
 	}
 
 	@Override
@@ -47,11 +61,13 @@ public class FXGameLoop implements GameLoop {
 	
 	@Override
 	public void start() {
+		isRunning = true;
 		timer.start();
 	}
 
 	@Override
 	public void pause() {
+		isRunning = false;
 		timer.stop();
 	}
 

@@ -61,7 +61,7 @@ public class LevelManager {
 		scene.getStylesheets().setAll("/styleSheets/login.css");
 		
 		HBox hBox = new HBox();
-		hBox.getChildren().add(im.getImageView());
+		hBox.getChildren().add(im.getImageView(2));
 		hBox.setLayoutX(300);
 		hBox.setLayoutY(200);
 		root.getChildren().add(hBox);

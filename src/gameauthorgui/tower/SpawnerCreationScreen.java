@@ -13,5 +13,4 @@ public class SpawnerCreationScreen extends BorderPane {
 		this.modelData = modelData;
 		this.setCenter(new SpawnerCreation(modelData));
 	}
-
 }
