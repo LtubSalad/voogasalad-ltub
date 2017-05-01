@@ -15,8 +15,8 @@ import newengine.utils.Target;
 public class Spawner extends Component {
 
 	public static final ComponentType<Spawner> TYPE = new ComponentType<>(Spawner.class.getName());
-	private double secondsBetween;
-	private int totalNumber;
+	private double secondsBetween = 1.5;
+	private int totalNumber = 5;
 	private boolean needToSpawn = true;
 	private GamePoint startingPosition;
 
@@ -57,9 +57,13 @@ public class Spawner extends Component {
 
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setSpawnTime(double spawnTime){
+		this.secondsBetween = spawnTime;
 	}
 
 }

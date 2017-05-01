@@ -3,7 +3,9 @@ package gameDevelopmentInterface.spriteCreator.variableSetters;
 import exception.UnsupportedTypeException;
 import gameDevelopmentInterface.spriteCreator.PrimitiveConverter;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
 /**
  * 
@@ -17,10 +19,12 @@ public class SimpleVariableSetter<T> extends VariableSetter<T>{
 	
 	public SimpleVariableSetter(Class<T> type,String descriptor) throws UnsupportedTypeException{
 		super(type, descriptor);
+		HBox box =new HBox();
 		this.type=type;
 		value=new TextField();
-		this.getChildren().add(value);
-		this.setSpacing(20);
+		this.getChildren().add(box);
+		box.getChildren().addAll(value);
+		box.setSpacing(50);
 	}
 	
 	public T getValue() throws UnsupportedTypeException{

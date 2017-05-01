@@ -1,11 +1,14 @@
 package newengine.view.subview;
 
+import bus.EventBus;
+import gamedata.AuthDataTranslator;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import newengine.events.SpriteModelEvent;
 import newengine.events.sprite.ChangeHealthEvent;
 import newengine.events.sprite.UpgradeEvent;
 import newengine.events.stats.ChangeWealthEvent;
@@ -15,6 +18,7 @@ import newengine.sprite.Sprite;
 import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Health;
 import newengine.sprite.components.Owner;
+import newengine.sprite.components.Upgrade;
 
 public class UpgradeBtn extends Button{
 
@@ -25,7 +29,7 @@ public class UpgradeBtn extends Button{
 
 	public UpgradeBtn(){
 		box = new VBox();
-		button = new Button("UPGRADE THIS SPRITE :)");
+		button = new Button("UPGRADE THIS SPRITE");
 		//initHandlers();
 	}
 
@@ -52,13 +56,19 @@ public class UpgradeBtn extends Button{
 			HBox options = new HBox();
 			Button yes = new Button ("yes");
 			yes.setOnAction(f -> {
-				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new ChangeWealthEvent
-						(ChangeWealthEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), WealthType.GOLD, -55, canUpdate));
+				System.out.println(sprite.getComponent(Owner.TYPE).isPresent());
+				EventBus bus = sprite.getComponent(GameBus.TYPE).get().getGameBus();
+				System.out.println(sprite.getComponent(Owner.TYPE).get().player().getName());
+//				bus.emit(new ChangeWealthEvent
+//						(ChangeWealthEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), WealthType.GOLD, sprite.getComponent(Upgrade.TYPE).get().getCost(), canUpdate));
 				if (canUpdate) {
 					sprite.getComponent(Health.TYPE).ifPresent((health) -> {
 						sprite.emit(new UpgradeEvent(UpgradeEvent.RESET, sprite, sprite.getComponent(Health.TYPE).get().getInitHealth()));
 					});
 					sprite.emit(new UpgradeEvent(UpgradeEvent.DOUBLE, sprite));
+//					AuthDataTranslator adt = new AuthDataTranslator(sprite.getComponent(Upgrade.TYPE).get().getSMM());
+//					bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, adt.getSprite()));
+//					bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
 				}
 				msgStage.close();
 			});

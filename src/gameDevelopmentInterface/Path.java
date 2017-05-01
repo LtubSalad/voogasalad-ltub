@@ -19,6 +19,7 @@ public class Path {
 	
 	public Path() {
 		this("A Nameless Path");
+		myPath.add(new GamePoint(5,3));
 		//makeDefaultPath();
 	}
 	

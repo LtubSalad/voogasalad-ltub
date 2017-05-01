@@ -6,6 +6,8 @@ import java.util.List;
 import bus.EventBus;
 import data.SpriteMakerModel;
 import gamedata.AuthDataTranslator;
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
 import newengine.events.skill.CheckCostAndBuildEvent;
 import newengine.events.stats.ChangeWealthEvent;
@@ -29,8 +31,8 @@ public class BuildSkill extends Skill {
 
 	private SkillType<BuildSkill> skillType;
 	
-	
-	public BuildSkill(SpriteMakerModel spriteMakerModel) {
+	@ConstructorForDeveloper
+	public BuildSkill(@VariableName(name = "Sprite") SpriteMakerModel spriteMakerModel) {
 		this(spriteMakerModel, TYPE);
 	}
 	
@@ -40,17 +42,18 @@ public class BuildSkill extends Skill {
 		if (spriteMakerModel.getComponentByType(Images.TYPE) != null) {
 			Images imageComponent = (Images) spriteMakerModel.getComponentByType(Images.TYPE);
 			this.icon = imageComponent.image();
+		} else {
+			System.out.println("sprite maker model has no images component");
 		}
 	}
 	
-	public SpriteMakerModel getModel(){
+	public SpriteMakerModel getSpriteMakerModel(){
 		return mySpriteMakerModel;
 	}
 	
 	public void setModel(SpriteMakerModel model){
 		this.mySpriteMakerModel = model;
 	}
-	
 	
 	@Override
 	public void trigger() {
@@ -119,6 +122,13 @@ public class BuildSkill extends Skill {
 	@Override
 	public SkillType<? extends Skill> getType() {
 		return skillType;
+	}
+
+	@Override
+	public Object[] getGUIParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=mySpriteMakerModel;
+		return parameters;
 	}
 
 }

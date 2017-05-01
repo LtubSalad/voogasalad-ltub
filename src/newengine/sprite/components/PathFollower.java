@@ -59,14 +59,16 @@ public class PathFollower extends Component{
 		return new PathFollower(path);
 	}
 
-	@Override
-	public Object[] getParameters() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public GamePoint getFinalPoint() {
 		return finalPoint;
+	}
+
+
+	@Override
+	public Object[] getGUIParameters() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

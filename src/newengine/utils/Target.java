@@ -14,7 +14,9 @@ public class Target {
 	
 	public Target(Sprite sprite) {
 		this.sprite = sprite;
-		this.location = sprite.getComponent(Position.TYPE).get().pos();
+		sprite.getComponent(Position.TYPE).ifPresent((position) -> {
+			this.location = position.pos();
+		});
 	}
 	public Target(GamePoint location) {
 		this.location = location;

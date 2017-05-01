@@ -1,5 +1,6 @@
 package newengine.skill.skills;
 
+import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.sprite.MoveEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
@@ -11,6 +12,7 @@ public class MoveSkill extends Skill{
 
 	public static final SkillType<MoveSkill> TYPE = new SkillType<>(MoveSkill.class.getName());
 
+	@ConstructorForDeveloper
 	public MoveSkill() {
 		icon = new LtubImage("images/skills/walk.png");
 	}
@@ -30,5 +32,11 @@ public class MoveSkill extends Skill{
 	@Override
 	public SkillType<? extends Skill> getType() {
 		return TYPE;
+	}
+
+	@Override
+	public Object[] getGUIParameters() {
+		Object[] parameters= new Object[0];
+		return parameters;
 	}
 }
