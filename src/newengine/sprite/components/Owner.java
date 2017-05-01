@@ -13,7 +13,7 @@ public class Owner extends Component {
 	private TeamNumber teamNumber;
 	
 	public enum TeamNumber{
-		TEAM_1, TEAM_2, TEAM_3, TEAM_4, TEAM_5
+		TOWERS, MONSTERS
 	}
 	
 	@ConstructorForDeveloper
@@ -45,7 +45,7 @@ public class Owner extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[1];
 		for(TeamNumber team:TeamNumber.values()){
 			if(owner.toString().equals(team.toString())){
@@ -53,7 +53,7 @@ public class Owner extends Component {
 				return parameters;
 			}
 		}
-		parameters[0]=TeamNumber.TEAM_1;
+		parameters[0]=TeamNumber.TOWERS;
 		return parameters;
 	}
 	
