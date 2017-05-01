@@ -17,7 +17,6 @@ import newengine.events.SpriteModelEvent;
 import newengine.events.conditions.SetEndConditionEvent;
 import newengine.events.levels.InitILevelsEvent;
 import newengine.events.player.MainPlayerEvent;
-import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
 import newengine.managers.conditions.GoldMinimumCondition;
@@ -31,6 +30,7 @@ import newengine.skill.skills.BuildSkillFactory;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
 import newengine.sprite.components.GameBus;
+import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.SkillSet;
 import player.helpers.GameLoadException;
@@ -48,13 +48,14 @@ public class GameCreator {
 	private Sprite createTowerBuilder(Player player, List<SpriteMakerModel> availableTowers) {
 		Sprite towerBuilder = new Sprite(SpriteID.TOWER_BUILDER_ID);
 		towerBuilder.addComponent(new GameBus());
+		towerBuilder.addComponent(new Owner(player));
 		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 		for (SpriteMakerModel availableTower : availableTowers) {
 			BuildSkill buildSkill = BuildSkillFactory.createBuildSkill(availableTower);
 			skillMap.put(buildSkill.getType(), buildSkill);
 		}
 		towerBuilder.addComponent(new SkillSet(skillMap));
-		// currently no image
+		towerBuilder.addComponent(new Images("images/characters/bahamut_left.png"));
 		return towerBuilder;
 	}
 	
