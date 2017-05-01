@@ -122,8 +122,7 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		private ChoiceBox<SpriteMakerModel> availableSprites;
 		public SpriteCreatorSelector() {
 			super(BuildSkill.class);
-			availableSprites=new ChoiceBox<>(data.getScreenSprites().getSpriteMakerModels());
-			availableSprites.getItems().add(new SpriteMakerModel());
+			availableSprites=new ChoiceBox<>(data.getSprites());
 			this.getChildren().add(availableSprites);
 		}
 		
