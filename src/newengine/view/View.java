@@ -176,13 +176,17 @@ public class View {
 				continue;
 			}
 			GamePoint spritePos = sprite.getComponent(Position.TYPE).get().pos();
-			LtubImage image = sprite.getComponent(Images.TYPE).get().image();
-			GamePoint gamePos = new GamePoint(spritePos.x() - image.getImagePivot().x(), 
-					spritePos.y() - image.getImagePivot().y());
-			ViewPoint viewPos = camera.gameToView(gamePos);
-			gc.drawImage(image.getFXImage(), viewPos.x(), viewPos.y(), 
-					image.getFXImage().getWidth() * camera.getScaleFactor(), 
-					image.getFXImage().getHeight() * camera.getScaleFactor());
+
+			sprite.getComponent(Images.TYPE).ifPresent((imagesComponent) -> {
+				LtubImage image = imagesComponent.image();
+				GamePoint gamePos = new GamePoint(spritePos.x() - image.getImagePivot().x(), 
+						spritePos.y() - image.getImagePivot().y());
+				ViewPoint viewPos = camera.gameToView(gamePos);
+				gc.drawImage(image.getFXImage(), viewPos.x(), viewPos.y(), 
+						image.getFXImage().getWidth() * camera.getScaleFactor(), 
+						image.getFXImage().getHeight() * camera.getScaleFactor());
+			});
+
 		}
 	}
 
@@ -204,7 +208,9 @@ public class View {
 			//display sprite in selected canvas
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
 				clearSelectionCanvas();
-				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0);
+				gcSelected.drawImage(sprite.getComponent(Images.TYPE).get().image().getFXImage(), 20, 0,
+						sprite.getComponent(Images.TYPE).get().image().width(), 
+						sprite.getComponent(Images.TYPE).get().image().height());
 			}
 			//fill stats box with stats of selected sprite
 			upgradeBtn.render(sprite);

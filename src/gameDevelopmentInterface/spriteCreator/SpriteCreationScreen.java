@@ -100,6 +100,7 @@ public class SpriteCreationScreen extends BorderPane {
 		} catch (Exception e) {
 			AlertHandler.showError("Model could not be created");
 			return null;
+
 		}
 
 		String name = sprite.getName();
