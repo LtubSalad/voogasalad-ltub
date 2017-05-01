@@ -29,7 +29,6 @@ public class Health extends Component {
 	public Health(@VariableName(name="health")int health){
 		this.initHealth = health;
 		this.health = health;
-		
 	}
 	
 	@Override
@@ -47,7 +46,6 @@ public class Health extends Component {
 	
 	@Override
 	public void afterAdded(){
-		sprite.emit(new StateChangeEvent(StateChangeEvent.HEALTH, sprite, health));
 		sprite.on(ChangeHealthEvent.ANY, e -> {
 			changeHealth(e.getValue());
 		});
@@ -66,7 +64,7 @@ public class Health extends Component {
 			Sprite weapon = e.getSprite();
 			Sprite target = e.getTarget().getSprite().get();
 			weapon.getComponent(Owner.TYPE).ifPresent((weaponOwner) -> {
-					if (weaponOwner.player() != target.getComponent(Owner.TYPE).get().player()) {
+					if (weaponOwner.player().isEnemyWith((target.getComponent(Owner.TYPE).get().player()))) {
 						weapon.getComponent(DamageStrength.TYPE).ifPresent((damageStrength) -> {
 							int damage = damageStrength.getStrength();
 							sprite.emit(new ChangeHealthEvent(ChangeHealthEvent.ANY, -damage));
@@ -91,6 +89,7 @@ public class Health extends Component {
 			spritesToRemove.add(sprite);
 			sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
 				gameBus.getGameBus().emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, spritesToRemove));
+				gameBus.getGameBus().emit(new ChangeWealthEvent(ChangeWealthEvent.REWARD, new Player(" "), WealthType.GOLD, 10));
 				System.out.println("REMOVE SPRITE " + spritesToRemove);
 			});
 		}
@@ -102,7 +101,7 @@ public class Health extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[1];
 		parameters[0]=health;
 		return parameters;

@@ -14,6 +14,7 @@ import newengine.events.skill.AddSkillEvent;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.Cooldown;
 import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Images;
@@ -76,7 +77,8 @@ public class AuthDataTranslator implements Translator<Sprite> {
 	private void makeSingleSprite(SpriteMakerModel spriteToMake) {
 		constructed = handleComponents(spriteToMake.getActualComponents());
 		constructed.addComponent(new GameBus());
-		// constructed.addComponent(new EventQueue());
+//		constructed.addComponent(new EventQueue(new LinkedList<>()));
+		constructed.addComponent(new Cooldown());
 
 	}
 
@@ -101,36 +103,23 @@ public class AuthDataTranslator implements Translator<Sprite> {
 	private Sprite handleSkills(Sprite sprite, List<Skill> skills) {
 		skills.stream().forEach(skill -> sprite.emit(new AddSkillEvent(AddSkillEvent.TYPE, skill)));
 		return sprite;
-	}
+}
 
-	// private Sprite handleEventHandlers(Sprite newSprite, Map<BusEvent,
-	// String> scriptMap ) {
-	// // TODO: debate design on this
-	// for (BusEvent event : scriptMap.keySet()){
-	// newSprite.getSpriteBus().on(event.getEventType(), e ->{
-	// try{
-	// newSprite.getScriptHandler().eval(scriptMap.get(event));
-	// }
-	// catch (Exception exception){
-	// System.out.println("hi yes scripting does not work properly here" );
-	// }
-	// });
-	// }
-	// return newSprite;
-	//
-	// }
+
 
 	public List<Sprite> getSprites() {
 		return constructedSprites;
 	}
 
 	private Sprite handleComponents(List<Component> transferComponents) {
-		Sprite sprite = new Sprite();
+		Sprite sprite = new Sprite(); 
+		transferComponents.add(0, new EventQueue());
 		System.out.println("constructed in translate: " + sprite);
-		sprite.addComponent(new Position(100, 200, 0));
-		transferComponents.stream().forEach(c -> {
-			if (c.getType().equals(Position.TYPE)) {
-				Position position = (Position) c;
+		sprite.addComponent(new Position(100,200,0));
+		sprite.addComponent(new EventQueue());
+		transferComponents.stream().forEach( c->{
+			if(c.getType().equals(Position.TYPE)){
+				Position position = (Position)c;
 				double xPerc = position.pos().x();
 				double yPerc = position.pos().y();
 				double xPixel = xPerc * 100 * numCols;
@@ -139,42 +128,20 @@ public class AuthDataTranslator implements Translator<Sprite> {
 				sprite.addComponent(newPosition);
 			}
 		});
-		for (Component comp : transferComponents) {
-			// System.out.println(comp.getType().getType());
-			if (comp.getType().equals(Images.TYPE)) {
+		for (Component comp: transferComponents){
+			//System.out.println(comp.getType().getType());
+			if (comp.getType().equals(Images.TYPE)){
 				sprite.addComponent(comp);
-			}
+				}
 		}
-//		transferComponents.stream().forEach(component -> {
-//			if (component.getType().equals(PathFollower.TYPE)) {
-////				PathFollower pf = (PathFollower) comp;
-////			Queue<GamePoint> percentPoints = pf.getPath().getPath();
-////			List<GamePoint> realPoints = new ArrayList<>();
-////			percentPoints.forEach(gp -> {
-////				double xPerc = gp.x();
-////				double yPerc = gp.y();
-////				double xPixel = xPerc * 100 * numCols;
-////				double yPixel = yPerc * 100 * numRows;
-////				realPoints.add(new GamePoint(xPixel, yPixel));
-////			});
-////			Path newPath = new Path("realPoints", new LinkedList<>(realPoints));
-////			PathFollower newPF = new PathFollower(newPath);
-////			//sprite.addComponent(new EventQueue(new LinkedList<>()));
-////			System.out.println(pf.getPath().getPath());
-//				System.out.println("the first for loop.");
-//			sprite.addComponent(component);
-//			}
-//		});
 		transferComponents.stream().forEach(component -> {
-			// if (component.getType() != Position.TYPE || component.getType()
-			// != Images.TYPE) {
-			//if (!component.getType().equals(PathFollower.TYPE)) {
+			//if (component.getType() != Position.TYPE || component.getType() != Images.TYPE) {
 				sprite.addComponent(component);
 			//}
-			// }
 		});
-
+		
 		return sprite;
+
 	}
 
 	@Override

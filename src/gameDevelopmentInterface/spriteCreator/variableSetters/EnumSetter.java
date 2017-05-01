@@ -6,6 +6,7 @@ import java.util.List;
 import exception.UnsupportedTypeException;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.HBox;
 
 /**
  * 
@@ -15,9 +16,13 @@ import javafx.scene.control.ChoiceBox;
  */
 public class EnumSetter<T extends Enum<?>> extends VariableSetter<T>{
 	private ChoiceBox<T> enumChoices;
+	private HBox myItems;
 	
 	public EnumSetter(Class<T> clazz,String description){
 		super(clazz,description);
+		myItems=new HBox();
+		this.getChildren().add(myItems);
+		
 		T[] enumConstants=clazz.getEnumConstants();
 		List<T> list=new ArrayList<>();
 		for(int i=0; i< enumConstants.length;i++){

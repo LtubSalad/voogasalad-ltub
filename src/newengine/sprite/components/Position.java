@@ -41,6 +41,10 @@ public class Position extends Component {
 		this.pos = pos;
 		this.heading = heading;
 	}
+	
+	public Position(GamePoint pos){
+		this.pos = pos;
+	}
 
 	@ConstructorForDeveloper
 	public Position(@VariableName(name = "xPosition") double xPos, @VariableName(name = "yPosition") double yPos,
@@ -81,7 +85,9 @@ public class Position extends Component {
 
 	@Override
 	public void onUpdated(double dt) {
+		
 		sprite.getComponent(PathFollower.TYPE).ifPresent((pathFollower) -> {
+			
 			if (sprite.getComponent(EventQueue.TYPE).get().isEmpty()) {
 				System.out.println("sprite has stopped moving and reached end of path");
 				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new ChangeLivesEvent(ChangeLivesEvent.CHANGE,
@@ -101,6 +107,7 @@ public class Position extends Component {
 		if (!sprite.getComponent(Speed.TYPE).isPresent()) {
 			return;
 		}
+		System.out.println(pos.x() + " " + pos.y());
 
 		double xDest = pDest.x();
 		double yDest = pDest.y();
@@ -207,11 +214,12 @@ public class Position extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
-		Object[] parameters = new Object[3];
-		parameters[0] = pos.x();
-		parameters[1] = pos.y();
-		parameters[2] = heading;
+
+	public Object[] getGUIParameters() {
+		Object[] parameters=new Object[3];
+		parameters[0]=pos.x();
+		parameters[1]=pos.y();
+		parameters[2]=heading;
 		return parameters;
 	}
 }

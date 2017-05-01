@@ -7,20 +7,20 @@ import java.util.List;
 import java.util.Map;
 
 import data.DeveloperData;
-import data.SpriteMakerModel;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
+import exception.UnsupportedTypeException;
+import gameDevelopmentInterface.spriteCreator.SkillSetter;
 import javafx.scene.layout.VBox;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.BuildSkill;
 import newengine.skill.skills.FireProjectileSkill;
 import newengine.skill.skills.MoveSkill;
+import utilities.AlertHandler;
 
 public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill>, Skill>> {
 	private DeveloperData data;
 	private VBox displayContents;
-	private List<SkillSelector<? extends Skill>> skillSelectors;
+	private List<SkillSetter<? extends Skill>> skillSelectors;
 
 	public SkillMapSetter(String variableName, DeveloperData data) {
 		super(variableName);
@@ -31,20 +31,21 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		availableSkills.add(BuildSkill.class);
 		availableSkills.add(FireProjectileSkill.class);
 		availableSkills.add(MoveSkill.class);
+		
 		skillSelectors=skillsToSelectors(availableSkills);
 		skillSelectors.forEach((selector)->{
 			displayContents.getChildren().add(selector);
 		});
 	}
 	
-	public List<SkillSelector<? extends Skill>> skillsToSelectors(Collection<Class<? extends Skill>> classes){
-		List<SkillSelector<? extends Skill>> selectors=new ArrayList<>();
+	public List<SkillSetter<? extends Skill>> skillsToSelectors(Collection<Class<? extends Skill>> classes){
+		List<SkillSetter<? extends Skill>> selectors=new ArrayList<>();
 		classes.forEach((clazz)->{
-			if(clazz.isAssignableFrom(BuildSkill.class)){
-				selectors.add(new SpriteCreatorSelector());
-			}else{
-				selectors.add(new SkillSelector(clazz));
-			}
+			try {
+				selectors.add(new SkillSetter(clazz, data));
+			} catch (UnsupportedTypeException e) {
+				AlertHandler.showError("Skill could not be set");
+			}			
 		});
 		return selectors;
 	}
@@ -52,9 +53,9 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 	@Override
 	public Map<SkillType<? extends Skill>, Skill> getValue() throws Exception {
 		Map<SkillType<? extends Skill>, Skill> skillMap=new HashMap<>();
-		for(SkillSelector<?> selector:skillSelectors){
-			if(selector.getValue()!=null){
-				skillMap.put(selector.getValue().getType(), selector.getValue());
+		for(SkillSetter<?> selector:skillSelectors){
+			if(selector.produceObject()!=null){
+				skillMap.put(selector.produceObject().getType(), selector.produceObject());
 			}
 		}
 		return skillMap;
@@ -62,87 +63,18 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 
 	@Override
 	public void setField(Map<SkillType<? extends Skill>, Skill> initialValue) {
+		displayContents.getChildren().clear();
 		skillSelectors.clear();
 		initialValue.values().forEach((skill)->{
-			SkillSelector selector;
-			if(skill instanceof BuildSkill){
-				selector=new SpriteCreatorSelector();
-				selector.setField((BuildSkill)skill);
-				skillSelectors.add(new SpriteCreatorSelector());
+			SkillSetter<?> setter;
+			try {
+				setter = new SkillSetter(skill,data);
+				skillSelectors.add(setter);
+				this.getChildren().add(setter);
+			} catch (UnsupportedTypeException e) {
+				AlertHandler.showError("Skill type cannot be read");
 			}
-			else{
-				selector=new SkillSelector(skill.getClass());
-				selector.setField(skill);
-				skillSelectors.add(selector);
-			}
-			this.getChildren().add(selector);
 		});
 	}
 	
-	private class SkillSelector<T extends Skill> extends VariableSetter<T>{
-		private CheckBox checkbox;
-		private Class<T> clazz;
-		
-		public SkillSelector(Class<T> skill){
-			super(skill, skill.getSimpleName());
-			clazz=skill;
-			checkbox=new CheckBox();
-			checkbox.setAllowIndeterminate(false);	
-			this.getChildren().add(checkbox);
-		}
-		
-		protected boolean isSelected(){
-			return checkbox.isSelected();
-		}
-		
-		protected void setSelected(boolean selected){
-			checkbox.setSelected(selected);
-		}
-		
-		@Override
-		public T getValue() throws Exception {
-			if(isSelected()){
-				System.out.println(clazz.getSimpleName());
-				return clazz.newInstance();
-			}
-			return null;
-		}
-
-		@Override
-		public void setField(T initialValue) {
-			checkbox.setSelected(initialValue!=null);
-		}
-		
-		public Class<? extends Skill> getType(){
-			return clazz;
-		}
-	}
-	
-	private class SpriteCreatorSelector extends SkillSelector<BuildSkill>{
-		private ChoiceBox<SpriteMakerModel> availableSprites;
-		public SpriteCreatorSelector() {
-			super(BuildSkill.class);
-			availableSprites=new ChoiceBox<>(data.getScreenSprites().getSpriteMakerModels());
-			availableSprites.getItems().add(new SpriteMakerModel());
-			this.getChildren().add(availableSprites);
-		}
-		
-		@Override
-		public BuildSkill getValue(){
-			if(isSelected()&&availableSprites.getValue()!=null){
-				return new BuildSkill(availableSprites.getValue());
-			}else{
-				return null;
-			}
-		}
-		
-		@Override
-		public void setField(BuildSkill buildSkill){
-			setSelected(buildSkill!=null);
-			availableSprites.getItems().add(buildSkill.getModel());
-			availableSprites.setValue(buildSkill.getModel());
-		}
-		
-	}
-
 }

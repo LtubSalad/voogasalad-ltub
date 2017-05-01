@@ -3,6 +3,7 @@ package newengine.sprite.components;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.events.range.InRangeEvent;
 import newengine.events.skill.TriggerSkillEvent;
+import newengine.events.sprite.FireProjectileEvent;
 import newengine.skill.skills.FireProjectileSkill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
@@ -24,13 +25,14 @@ public class RangeShootingAI extends Component {
 			Sprite shootTarget = null;
 			for (Sprite detectee: e.getDetectees()) {
 				if (detectee.getComponent(Owner.TYPE).get().player().isEnemyWith(
-						sprite.getComponent(Owner.TYPE).get().player())) {
+						sprite.getComponent(Owner.TYPE).get().player()) && !detectee.getComponent(Weapon.TYPE).isPresent()) {
 					shootTarget = detectee;
 					break;
 				}
 			}
 			if (shootTarget != null) {
 				sprite.emit(new TriggerSkillEvent(FireProjectileSkill.TYPE, new Target(shootTarget)));
+				//sprite.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, e.getDetector(), shootTarget));
 			}
 		});
 	}
@@ -46,7 +48,7 @@ public class RangeShootingAI extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		// TODO Auto-generated method stub
 		return new Object[] {};
 	}
