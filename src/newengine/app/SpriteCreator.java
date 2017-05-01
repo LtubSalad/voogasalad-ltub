@@ -13,7 +13,6 @@ import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.skill.skills.BuildSkill;
-import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
 import newengine.sprite.components.EventQueue;
