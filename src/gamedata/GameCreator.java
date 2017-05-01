@@ -20,8 +20,6 @@ import newengine.events.player.MainPlayerEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
-import newengine.managers.conditions.GoldMinimumCondition;
-import newengine.managers.conditions.NoLivesCondition;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.skill.Skill;
@@ -92,8 +90,8 @@ public class GameCreator {
 				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));
 				
 				//TODO condition factory
-				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
-				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
+				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, myData.getLevels().get(0).getWinningCondition()));
+				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, myData.getLevels().get(0).getLosingCondition()));
 			});
 
 			return game;
