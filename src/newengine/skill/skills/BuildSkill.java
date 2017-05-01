@@ -42,6 +42,8 @@ public class BuildSkill extends Skill {
 		if (spriteMakerModel.getComponentByType(Images.TYPE) != null) {
 			Images imageComponent = (Images) spriteMakerModel.getComponentByType(Images.TYPE);
 			this.icon = imageComponent.image();
+		} else {
+			System.out.println("sprite maker model has no images component");
 		}
 	}
 	
@@ -121,6 +123,13 @@ public class BuildSkill extends Skill {
 	@Override
 	public SkillType<? extends Skill> getType() {
 		return skillType;
+	}
+
+	@Override
+	public Object[] getGUIParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=mySpriteMakerModel;
+		return parameters;
 	}
 
 }

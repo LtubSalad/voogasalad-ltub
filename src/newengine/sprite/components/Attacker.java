@@ -10,7 +10,6 @@ import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
-import newengine.events.debug.SysPrintEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.StateChangeEvent;
 import newengine.events.sprite.UpgradeEvent;
@@ -53,7 +52,7 @@ public class Attacker extends Component {
 		});
 		
 		sprite.on(FireProjectileEvent.SPECIFIC, e -> {
-
+			System.out.println("FIRE WEAPON FIRE WEAPON FIRE WEAPON FIRE WEAPON");
 			Sprite source = e.getSprite();
 			Sprite target = e.getTarget();
 
@@ -108,11 +107,11 @@ public class Attacker extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[2];
 		parameters[0]=damageStrength;
 		parameters[1]=ltubImage;
-		return null;
+		return parameters;
 	}
 
 

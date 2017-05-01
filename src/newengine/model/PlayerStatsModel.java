@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import newengine.events.conditions.EndConditionTriggeredEvent;
+import newengine.events.player.MainPlayerEvent;
 import newengine.events.skill.CheckCostAndBuildEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
@@ -31,16 +32,21 @@ public class PlayerStatsModel {
 	private Map<Player, Integer> lives = new HashMap<>();
 	private Map<Player, Integer> scores = new HashMap<>();
 	
+	private Player mainPlayer;
+	
 	public PlayerStatsModel(EventBus bus) {
 		this.bus = bus;
 		initHandlers();
 	}
 
 	private void initHandlers() {
+		bus.on(MainPlayerEvent.ANY, e -> {
+			mainPlayer = e.getPlayer();
+		});
 		bus.on(CheckCostAndBuildEvent.ANY, (e) -> {
+			if (isNotMainPlayer(e.getPlayer())) return;
 			int cost = e.getCost();
-			Player player = e.getPlayer();
-			if (wealth.get(player).get(WealthType.GOLD) >= cost) {
+			if (wealth.get(mainPlayer).get(WealthType.GOLD) >= cost) {
 				e.getBuildCallback().execute();
 			} else {
 				// TODO: send insufficient gold event, 
@@ -49,12 +55,12 @@ public class PlayerStatsModel {
 			}
 		});
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
-			Player player = e.getPlayer();
+			if (isNotMainPlayer(e.getPlayer())) return;
 			WealthType type = e.getWealthType();
-			if (wealth.containsKey(player)) {
-				Map<WealthType, Integer> wealths = wealth.get(player);
+			if (wealth.containsKey(mainPlayer)) {
+				Map<WealthType, Integer> wealths = wealth.get(mainPlayer);
 				if (wealths.containsKey(type)) {
-					System.out.println(wealths.get(type));
+					//System.out.println(wealths.get(type));
 					if (wealths.get(type) < 0 || wealths.get(type) < Math.abs(e.getAmountChanged())){
 						System.out.println("insufficient gold warning popup");
 						bus.emit(new InsufficientGoldEvent(InsufficientGoldEvent.ANY));
@@ -80,37 +86,41 @@ public class PlayerStatsModel {
 			else {
 				Map<WealthType, Integer> wealths = new HashMap<>();
 				wealths.put(e.getWealthType(), e.getAmountChanged());
-				wealth.put(player, wealths);
+				wealth.put(mainPlayer, wealths);
 			}
 		});
 		bus.on(ChangeLivesEvent.CHANGE, (e) ->{
-			
-			Player player = e.getPlayer();
-			System.out.println("LIVES CHANGED! from: " + lives.get(player));
-			if (lives.containsKey(player)) {
-				lives.put(player, lives.get(player) + e.getAmountChanged());
-				if (lives.get(player) == 0){
+			if (isNotMainPlayer(e.getPlayer())) return;
+			System.out.println("LIVES CHANGED! from: " + lives.get(mainPlayer));
+			if (lives.containsKey(mainPlayer)) {
+				lives.put(mainPlayer, lives.get(mainPlayer) + e.getAmountChanged());
+				if (lives.get(mainPlayer) == 0){
 					System.out.println("OUT OF LIVES!");
 				}
 			}
-			System.out.println("LIVES CHANGED! to: " + lives.get(player));
+			System.out.println("LIVES CHANGED! to: " + lives.get(mainPlayer));
 		});
 		bus.on(ChangeLivesEvent.SET, (e) ->{
-			Player player = e.getPlayer();
-			lives.put(player, e.getAmountChanged()); // TODO if this is an appropriate way
+			if (isNotMainPlayer(e.getPlayer())) return;
+			lives.put(mainPlayer, e.getAmountChanged()); // TODO if this is an appropriate way
 		});
 		bus.on(ChangeScoreEvent.CHANGE, (e) ->{
-			Player player = e.getPlayer();
-			if (scores.containsKey(player)) {
-				scores.put(player, scores.get(player) + e.getAmountChanged());
+			if (isNotMainPlayer(e.getPlayer())) return;
+			if (scores.containsKey(mainPlayer)) {
+				scores.put(mainPlayer, scores.get(mainPlayer) + e.getAmountChanged());
 			}
 		});
 		bus.on(ChangeScoreEvent.SET, (e) ->{
+			if (isNotMainPlayer(e.getPlayer())) return;
 			Player player = e.getPlayer();
 			scores.put(player, e.getAmountChanged());  // TODO
 		});
 	}
 
+	private boolean isNotMainPlayer(Player player){
+		return (!mainPlayer.getName().equals(player.getName()));
+	}
+	
 	public Optional<Map<WealthType, Integer>> getWealth(Player player){
 		return Optional.ofNullable(wealth.get(player));
 	}
