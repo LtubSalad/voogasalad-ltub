@@ -1,6 +1,7 @@
 package gamedata;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import newengine.events.SpriteModelEvent;
 import newengine.events.conditions.SetEndConditionEvent;
 import newengine.events.levels.InitILevelsEvent;
 import newengine.events.player.MainPlayerEvent;
+import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
 import newengine.managers.conditions.GoldMinimumCondition;
@@ -30,7 +32,6 @@ import newengine.skill.skills.BuildSkillFactory;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
 import newengine.sprite.components.GameBus;
-import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.SkillSet;
 import player.helpers.GameLoadException;
@@ -55,7 +56,6 @@ public class GameCreator {
 			skillMap.put(buildSkill.getType(), buildSkill);
 		}
 		towerBuilder.addComponent(new SkillSet(skillMap));
-		towerBuilder.addComponent(new Images("images/characters/bahamut_left.png"));
 		return towerBuilder;
 	}
 	
@@ -76,10 +76,13 @@ public class GameCreator {
 			// enemy: the monsters
 			Player userPlayer = myData.getUserPlayer();
 			
-			List<Sprite> sprites = myData.getLevels().get(0).getSpawners().stream().map(
-					(spriteMakerModel) -> (new AuthDataTranslator(spriteMakerModel)).getSprite()
-			).collect(Collectors.toList());
-			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getLevels().get(0).getSpawners()));
+			List<SpriteMakerModel> spriteMakerModels = myData.getLevels().get(0).getSpawners();
+			List<Sprite> sprites = new ArrayList<>();
+			sprites.addAll(spriteMakerModels.stream().map((spriteMakerModel) -> {
+				return (new AuthDataTranslator(spriteMakerModel)).getSprite();
+			}).collect(Collectors.toList()));
+			System.out.println("see my datax");
+			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites()));
 			
 
 			EventBus bus = game.getBus();
@@ -91,9 +94,10 @@ public class GameCreator {
 				
 				System.out.println(userPlayer.getName());
 				
-				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
-				System.out.println("Initial gold: " + Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD)));
-				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));
+//				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
+				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, 20)); // Hard-coded
+//				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));
+				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, 200));
 				
 				//TODO condition factory
 				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
