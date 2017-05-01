@@ -3,7 +3,6 @@ package gameauthorgui.inputhelpers;
 import java.util.List;
 
 import javafx.beans.property.ObjectProperty;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -13,7 +12,7 @@ public class ComboBoxParameterInput extends HBox implements ParameterInput<Strin
 	public static final int TEXT_INPUT_MAX_WIDTH = 100;
 	private String varName;
 	private ComboBox<String> combo;
-	private ButtonStringParameterInput text;
+	private StringParameterInput text;
 	private boolean textAppended = false;
 	
 	public ComboBoxParameterInput(String varName, List<String> options){
@@ -23,7 +22,6 @@ public class ComboBoxParameterInput extends HBox implements ParameterInput<Strin
 		text.setMaxWidth(TEXT_INPUT_MAX_WIDTH);
 		createCombo(options);
 		createBox();
-		appendTextInput();
 	}
 	
 	private void createCombo(List<String> options){
@@ -35,7 +33,7 @@ public class ComboBoxParameterInput extends HBox implements ParameterInput<Strin
 	}
 	
 	private void createText(){
-		text = new ButtonStringParameterInput("");
+		text = new StringParameterInput("");
 	}
 	
 	private void createBox(){
@@ -53,6 +51,10 @@ public class ComboBoxParameterInput extends HBox implements ParameterInput<Strin
 			textAppended = false;
 		}
 	}
+	
+	public ComboBox<String> getComboBox(){
+		return combo;
+	}
 
 	@Override
 	public String getValue() {
@@ -60,11 +62,7 @@ public class ComboBoxParameterInput extends HBox implements ParameterInput<Strin
 	}
 	
 	public String getTextInput(){
-		return text.getText();
-	}
-	
-	public Button getDoneButton(){
-		return text.getDoneButton();
+		return text.getValue();
 	}
 	
 	public ObjectProperty<String> getValueProperty(){
