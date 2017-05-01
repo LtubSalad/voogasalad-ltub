@@ -107,7 +107,7 @@ public class PlayerStatsModel {
 			}
 		});
 		bus.on(ChangeLivesEvent.CHANGE, (e) ->{
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			System.out.println("LIVES CHANGED! from: " + lives.get(mainPlayer));
 			if (lives.containsKey(mainPlayer)) {
 				lives.put(mainPlayer, lives.get(mainPlayer) + e.getAmountChanged());
@@ -118,7 +118,7 @@ public class PlayerStatsModel {
 			System.out.println("LIVES CHANGED! to: " + lives.get(mainPlayer));
 		});
 		bus.on(ChangeLivesEvent.SET, (e) ->{
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			lives.put(mainPlayer, e.getAmountChanged()); // TODO if this is an appropriate way
 		});
 		bus.on(ChangeScoreEvent.CHANGE, (e) ->{
