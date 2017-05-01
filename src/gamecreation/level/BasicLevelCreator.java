@@ -1,6 +1,5 @@
 package gamecreation.level;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +7,8 @@ import java.util.ResourceBundle;
 
 import gameauthorgui.inputhelpers.ComboBoxParameterInput;
 import gameauthorgui.inputhelpers.StringParameterInput;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import newengine.managers.conditions.Condition;
@@ -50,7 +51,18 @@ public class BasicLevelCreator extends LevelCreator{
 		title.getTextProperty().addListener(e -> BasicLevelCreator.this.getData().setName(title.getValue()));
 		
 		winningCondition = new ComboBoxParameterInput(myResources.getString("winningCondition"), new ArrayList<String>(winningConditions.keySet()));
+		winningCondition.getComboBox().setValue(winningCondition.getComboBox().getItems().get(1));
 		losingCondition = new ComboBoxParameterInput(myResources.getString("losingCondition"), new ArrayList<String> (losingConditions.keySet()));
+		winningCondition.getValueProperty().addListener(e -> {
+			if(winningCondition.getValue().contains("(Input)")){
+				winningCondition.appendTextInput();
+			}
+			else{
+				winningCondition.removeTextInput();
+			}
+		});
+	
+		
 		Button saveCondition = new Button("Save Conditions");
 		saveCondition.setOnAction(e -> createConditions());
 		
@@ -62,17 +74,26 @@ public class BasicLevelCreator extends LevelCreator{
 	}
 	
 	private void createConditions(){
-		getData().setWinningCondition(createCondition(winningCondition, winningConditions));
-		getData().setLosingCondition(createCondition(losingCondition, losingConditions));
+		Condition winning = createCondition(winningCondition, winningConditions);
+		Condition losing = createCondition(losingCondition, losingConditions);
+		if(winning != null && losing != null){
+			getData().setWinningCondition(winning);
+			getData().setLosingCondition(losing);
+			Alert confirmAlert=new Alert(AlertType.CONFIRMATION);
+			confirmAlert.setHeaderText("Successful Save!");
+			confirmAlert.show();
+		}
 	}
 	
 	private Condition createCondition(ComboBoxParameterInput conditionBox, Map<String, Class<? extends Condition>> map){
+		Alert errorAlert=new Alert(AlertType.ERROR);
+		errorAlert.setHeaderText("Error in saving condition");
 		if(conditionBox.getValue().contains("(Input)")){
 			try {
 				System.out.println(map.get(conditionBox.getValue()).getConstructor(int.class).newInstance(Integer.parseInt(conditionBox.getTextInput())).getClass().getName());
 				return map.get(conditionBox.getValue()).getConstructor(int.class).newInstance(Integer.parseInt(conditionBox.getTextInput()));
 			} catch (Exception e) {
-				e.printStackTrace();
+				errorAlert.showAndWait();
 			}
 		}
 		else{
@@ -80,7 +101,7 @@ public class BasicLevelCreator extends LevelCreator{
 				System.out.println( map.get(conditionBox.getValue()).newInstance().getClass().getName());
 				return map.get(conditionBox.getValue()).newInstance();
 			} catch (Exception e) {
-				e.printStackTrace();
+				errorAlert.showAndWait();
 			}
 		}
 		return null;
