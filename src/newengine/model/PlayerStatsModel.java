@@ -44,7 +44,7 @@ public class PlayerStatsModel {
 			mainPlayer = e.getPlayer();
 		});
 		bus.on(CheckCostAndBuildEvent.ANY, (e) -> {
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			int cost = e.getCost();
 			if (wealth.get(mainPlayer).get(WealthType.GOLD) >= cost) {
 				e.getBuildCallback().execute();
@@ -55,7 +55,7 @@ public class PlayerStatsModel {
 			}
 		});
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			WealthType type = e.getWealthType();
 			if (wealth.containsKey(mainPlayer)) {
 				Map<WealthType, Integer> wealths = wealth.get(mainPlayer);
@@ -122,13 +122,13 @@ public class PlayerStatsModel {
 			lives.put(mainPlayer, e.getAmountChanged()); // TODO if this is an appropriate way
 		});
 		bus.on(ChangeScoreEvent.CHANGE, (e) ->{
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			if (scores.containsKey(mainPlayer)) {
 				scores.put(mainPlayer, scores.get(mainPlayer) + e.getAmountChanged());
 			}
 		});
 		bus.on(ChangeScoreEvent.SET, (e) ->{
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			Player player = e.getPlayer();
 			scores.put(player, e.getAmountChanged());  // TODO
 		});
