@@ -7,7 +7,7 @@ import java.util.List;
 import data.DeveloperData;
 import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
-import gameDevelopmentInterface.developerdata.ComponentSetter;
+import gameDevelopmentInterface.developerdata.ObjectSetter;
 import gameDevelopmentInterface.spriteCreator.variableSetters.SimpleVariableSetter;
 import gameauthorgui.inputhelpers.StringParameterInput;
 import javafx.scene.control.Button;
@@ -77,7 +77,7 @@ public class SpriteDataPane extends ScrollPane{
 	
 	public <T extends Component> void addComponent(T component, boolean removable){
 		try{
-			ComponentSetter<T> setter=new DefaultComponentSetter<T>(component,developerData);
+			ObjectSetter<T> setter=new DefaultObjectSetter<T>(component,developerData);
 			if(!removable){
 				lister.addComponentView(setter);
 			}else{
@@ -91,7 +91,7 @@ public class SpriteDataPane extends ScrollPane{
 	
 	public <T extends Component> void  addComponent(Class<T> clazz){
 		try {
-			ComponentSetter<T> setter=new DefaultComponentSetter<T>(clazz,developerData);
+			ObjectSetter<T> setter=new DefaultObjectSetter<T>(clazz,developerData);
 			lister.addComponentView(lister.new RemovableComponentViewer<T>(setter));
 		} catch (UnsupportedTypeException e) {
 			e.printStackTrace();
@@ -103,7 +103,7 @@ public class SpriteDataPane extends ScrollPane{
 	}
 	
 	private class ComponentLister extends VBox{
-		private List<ComponentSetter<? extends Component>> componentViews;
+		private List<ObjectSetter<? extends Component>> componentViews;
 		
 		public ComponentLister(){
 			componentViews=new ArrayList<>();
@@ -115,14 +115,14 @@ public class SpriteDataPane extends ScrollPane{
 			this.getChildren().clear();
 		}
 		
-		private void removeComponentView(ComponentSetter<? extends Component> view){
+		private void removeComponentView(ObjectSetter<? extends Component> view){
 			componentViews.remove(view);
 			this.getChildren().remove(view);
 		}
 		
-		private void addComponentView(ComponentSetter<? extends Component> view){
-			for(ComponentSetter<? extends Component> viewer: componentViews){
-				if(view.getComponentType().equals(viewer.getComponentType())){
+		private void addComponentView(ObjectSetter<? extends Component> view){
+			for(ObjectSetter<? extends Component> viewer: componentViews){
+				if(view.getObjectType().equals(viewer.getObjectType())){
 					return;
 				}
 			}
@@ -138,8 +138,8 @@ public class SpriteDataPane extends ScrollPane{
 		private void updateSpriteModel(SpriteMakerModel spriteData){
 			try {
 				spriteData.clearComponents();
-				for(ComponentSetter<? extends Component> component: componentViews){
-					spriteData.addComponent(component.produceComponent());
+				for(ObjectSetter<? extends Component> component: componentViews){
+					spriteData.addComponent(component.produceObject());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -148,10 +148,10 @@ public class SpriteDataPane extends ScrollPane{
 			
 		}
 		
-		private class RemovableComponentViewer<T extends Component> extends ComponentSetter<T>{
-			private ComponentSetter<T> mySetter;
-			private RemovableComponentViewer(ComponentSetter<T> mySetter){
-				super(mySetter.getComponentType());
+		private class RemovableComponentViewer<T extends Component> extends ObjectSetter<T>{
+			private ObjectSetter<T> mySetter;
+			private RemovableComponentViewer(ObjectSetter<T> mySetter){
+				super(mySetter.getObjectType());
 				//this.setStyle("-fx-background-color: cyan;-fx-border-color:red");
 				this.mySetter=mySetter;
 				this.getChildren().addAll(mySetter);
@@ -167,9 +167,9 @@ public class SpriteDataPane extends ScrollPane{
 				ComponentLister.this.removeComponentView(this);
 			}
 
-			public T produceComponent() throws Exception{
+			public T produceObject() throws Exception{
 				try {
-					return mySetter.produceComponent();
+					return mySetter.produceObject();
 				} catch (UnsupportedTypeException e) {
 					e.printStackTrace();
 				}
