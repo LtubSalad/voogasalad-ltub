@@ -52,7 +52,7 @@ public class Attacker extends Component {
 		});
 		
 		sprite.on(FireProjectileEvent.SPECIFIC, e -> {
-
+			System.out.println("FIRE WEAPON FIRE WEAPON FIRE WEAPON FIRE WEAPON");
 			Sprite source = e.getSprite();
 			Sprite target = e.getTarget();
 
@@ -111,7 +111,7 @@ public class Attacker extends Component {
 		Object[] parameters=new Object[2];
 		parameters[0]=damageStrength;
 		parameters[1]=ltubImage;
-		return null;
+		return parameters;
 	}
 
 

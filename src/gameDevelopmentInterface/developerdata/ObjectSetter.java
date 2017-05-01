@@ -1,9 +1,9 @@
 package gameDevelopmentInterface.developerdata;
 
 
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import newengine.sprite.component.Component;
 
 public abstract class ObjectSetter<T> extends VBox {
 	private Class<? extends T> myType;

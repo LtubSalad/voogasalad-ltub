@@ -44,6 +44,7 @@ public class PlayerStatsModel {
 			mainPlayer = e.getPlayer();
 		});
 		bus.on(CheckCostAndBuildEvent.ANY, (e) -> {
+			if (isNotMainPlayer(e.getPlayer())) return;
 			int cost = e.getCost();
 			if (wealth.get(mainPlayer).get(WealthType.GOLD) >= cost) {
 				e.getBuildCallback().execute();
@@ -54,6 +55,7 @@ public class PlayerStatsModel {
 			}
 		});
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
+			if (isNotMainPlayer(e.getPlayer())) return;
 			WealthType type = e.getWealthType();
 			if (wealth.containsKey(mainPlayer)) {
 				Map<WealthType, Integer> wealths = wealth.get(mainPlayer);
@@ -88,6 +90,7 @@ public class PlayerStatsModel {
 			}
 		});
 		bus.on(ChangeLivesEvent.CHANGE, (e) ->{
+			if (isNotMainPlayer(e.getPlayer())) return;
 			System.out.println("LIVES CHANGED! from: " + lives.get(mainPlayer));
 			if (lives.containsKey(mainPlayer)) {
 				lives.put(mainPlayer, lives.get(mainPlayer) + e.getAmountChanged());
@@ -98,19 +101,26 @@ public class PlayerStatsModel {
 			System.out.println("LIVES CHANGED! to: " + lives.get(mainPlayer));
 		});
 		bus.on(ChangeLivesEvent.SET, (e) ->{
+			if (isNotMainPlayer(e.getPlayer())) return;
 			lives.put(mainPlayer, e.getAmountChanged()); // TODO if this is an appropriate way
 		});
 		bus.on(ChangeScoreEvent.CHANGE, (e) ->{
+			if (isNotMainPlayer(e.getPlayer())) return;
 			if (scores.containsKey(mainPlayer)) {
 				scores.put(mainPlayer, scores.get(mainPlayer) + e.getAmountChanged());
 			}
 		});
 		bus.on(ChangeScoreEvent.SET, (e) ->{
+			if (isNotMainPlayer(e.getPlayer())) return;
 			Player player = e.getPlayer();
 			scores.put(player, e.getAmountChanged());  // TODO
 		});
 	}
 
+	private boolean isNotMainPlayer(Player player){
+		return (!mainPlayer.getName().equals(player.getName()));
+	}
+	
 	public Optional<Map<WealthType, Integer>> getWealth(Player player){
 		return Optional.ofNullable(wealth.get(player));
 	}

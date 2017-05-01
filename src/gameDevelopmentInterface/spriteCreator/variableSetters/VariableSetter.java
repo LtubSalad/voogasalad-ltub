@@ -1,6 +1,7 @@
 package gameDevelopmentInterface.spriteCreator.variableSetters;
 
 import exception.UnsupportedTypeException;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 

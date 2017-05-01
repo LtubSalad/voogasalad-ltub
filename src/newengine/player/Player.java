@@ -32,7 +32,7 @@ public class Player {
 	
 	public boolean isEnemyWith(Player other) {
 		// currently all other players are enemy. TODO
-		return other != this;
+		return !other.getName().equals(this.name);
 	}
 	
 	@Override
