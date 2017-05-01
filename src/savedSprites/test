@@ -1,0 +1,27 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Owner</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Owner>
+        <owner>
+          <name>TEAM_1</name>
+        </owner>
+        <teamNumber>TEAM_1</teamNumber>
+      </newengine.sprite.components.Owner>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>t</spriteName>
+  <spriteDescription></spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.Owner reference="../../myComponents/entry/newengine.sprite.components.Owner"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>

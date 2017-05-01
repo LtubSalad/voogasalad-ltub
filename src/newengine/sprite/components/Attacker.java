@@ -109,7 +109,9 @@ public class Attacker extends Component {
 
 	@Override
 	public Object[] getParameters() {
-		// TODO Auto-generated method stub
+		Object[] parameters=new Object[2];
+		parameters[0]=damageStrength;
+		parameters[1]=ltubImage;
 		return null;
 	}
 
