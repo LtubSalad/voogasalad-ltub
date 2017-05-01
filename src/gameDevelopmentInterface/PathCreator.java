@@ -73,9 +73,9 @@ public class PathCreator extends BorderPane {
 		double mouseY = point.getY();
 		GamePoint coords = target.getCoordOfMouseHover(mouseX, mouseY);
 		GamePoint actualGameLocation = target.getActualLocationOfSprite(coords);
-		GamePoint percentLocation = new GamePoint(actualGameLocation.x()/target.getScreenWidth(), actualGameLocation.y()/target.getScreenHeight());
-		if (!coordAlreadyInPath(percentLocation)) {
-			replacementPath.add(percentLocation);
+		//GamePoint percentLocation = new GamePoint(actualGameLocation.x()/target.getScreenWidth(), actualGameLocation.y()/target.getScreenHeight());
+		if (!coordAlreadyInPath(actualGameLocation)) {
+			replacementPath.add(actualGameLocation);
 			target.addBorderToCoordinate(coords);
 		}
 		e.consume();
