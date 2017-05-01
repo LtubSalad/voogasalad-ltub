@@ -9,12 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class ImageAnimationTest {
+public class AnimationImage {
 
 	private static final int WIDTH    = 200;
 	private static final int HEIGHT   = 200;
 
-	private static final Image IMAGE = new Image("resources/gold.jpeg", WIDTH, HEIGHT, true,true);
+	private static final Image IMAGE = new Image("resources/Mario.jpeg", WIDTH, HEIGHT, true,true);
 	private static final Image IMAGE1 = new Image("resources/health.jpg", WIDTH, HEIGHT, true,true);
 	private static final Image IMAGE2 = new Image("resources/bahamut_left.png", WIDTH, HEIGHT, true,true);
 	private static final Image IMAGE3 = new Image("resources/bahamut_right.png", WIDTH, HEIGHT, true,true);

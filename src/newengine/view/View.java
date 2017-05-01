@@ -49,6 +49,8 @@ public class View {
 	public static final double INIT_STAT_HEIGHT = 100;
 	public static final double INIT_SELECTION_HEIGHT = 200;
 	
+	public static final String CSS_LOCATION = "/styleSheets/login.css";
+	
 	private double width = INIT_WIDTH;
 	private double height = INIT_HEIGHT;
 	private double canvasWidth = INIT_CANVAS_WIDTH;
@@ -75,7 +77,9 @@ public class View {
 		this.bus = bus;
 		this.camera = camera;
 		VBox root = new VBox();
-		scene = new Scene(root, width, height, BACKGROUND);		statsPanel = new HBox();
+		scene = new Scene(root, width, height, BACKGROUND);		
+		scene.getStylesheets().add(CSS_LOCATION);
+		statsPanel = new HBox();
 		selectionCanvas = new Canvas(selectionWidth, selectionHeight);
 		gameWorldCanvas = new Canvas(canvasWidth, canvasHeight);
 		bottomPane = new HBox();
@@ -139,7 +143,9 @@ public class View {
 		this.statsPanel.getChildren().clear();
 		statsPanel.setSpacing(10);
 		statsPanel.maxHeight(100);
-		statsPanel.getChildren().add(new Text("Game Stats: "));
+		Text text = new Text("Game Stats: ");
+		statsPanel.getChildren().add(text);
+		text.setId("fancytext");
 		selectionModel.getSelectedSprite().ifPresent((sprite) -> {
 			sprite.getComponent(Owner.TYPE).ifPresent((owner) -> {
 				Player player = owner.player();
@@ -155,15 +161,22 @@ public class View {
 		List<Text> statsLabels = new ArrayList<Text>();
 		playerStatsModel.getWealth(player).ifPresent((wealthMap) -> {
 			for (WealthType type: wealthMap.keySet()) {
-				statsLabels.add(new Text(type + ": " + wealthMap.get(type)));
+				Text typeText = new Text(type + ": " + wealthMap.get(type));
+				typeText.setId("fancytext");
+				statsLabels.add(typeText);
+				
 			}
 		});
 		//TODO map to resource file
 		playerStatsModel.getLives(player).ifPresent((life) -> {
-			statsLabels.add(new Text("Lives:" + life));
+			Text lifeText = new Text("Lives:" + life);
+			lifeText.setId("fancytext");
+			statsLabels.add(lifeText);
 		});
 		playerStatsModel.getScore(player).ifPresent((score) -> {
-			statsLabels.add(new Text("Scores:" + score));
+			Text scoreText = new Text("Scores:" + score);
+			scoreText.setId("fancytext");
+			statsLabels.add(scoreText);
 		});
 		return statsLabels;
 	}
