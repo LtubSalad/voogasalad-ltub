@@ -48,6 +48,7 @@ public class GameCreator {
 	private Sprite createTowerBuilder(Player player, List<SpriteMakerModel> availableTowers) {
 		Sprite towerBuilder = new Sprite(SpriteID.TOWER_BUILDER_ID);
 		towerBuilder.addComponent(new GameBus());
+		towerBuilder.addComponent(new Owner(player));
 		Map<SkillType<? extends Skill>, Skill> skillMap = new HashMap<>();
 		for (SpriteMakerModel availableTower : availableTowers) {
 			BuildSkill buildSkill = BuildSkillFactory.createBuildSkill(availableTower);
@@ -78,16 +79,18 @@ public class GameCreator {
 			List<Sprite> sprites = myData.getLevels().get(0).getSpawners().stream().map(
 					(spriteMakerModel) -> (new AuthDataTranslator(spriteMakerModel)).getSprite()
 			).collect(Collectors.toList());
-			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites()));
+			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getLevels().get(0).getSpawners()));
 			
 
 			EventBus bus = game.getBus();
 			bus.on(GameInitializationEvent.ANY, (e) -> {
 				bus.emit(new InitILevelsEvent(myData.getLevels()));
-				//bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
+				bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
-				System.out.println(userPlayer.getName());
 				bus.emit(new MainPlayerEvent(userPlayer));
+				
+				System.out.println(userPlayer.getName());
+				
 				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
 				System.out.println("Initial gold: " + Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD)));
 				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));
