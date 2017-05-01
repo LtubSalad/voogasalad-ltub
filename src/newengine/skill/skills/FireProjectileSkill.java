@@ -40,7 +40,6 @@ public class FireProjectileSkill extends Skill {
 		Sprite source = this.getSource().get();
 		Target target = this.getTarget().get();
 		target.getSprite().ifPresent((targetSprite) -> {
-			if (source.getComponent(Owner.TYPE).get().player().getName().equals(target.getComponent(Owner.TYPE).get().player().getName()))
 			source.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, source, targetSprite));
 		});
 	}
