@@ -1,15 +1,14 @@
 package player;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import gameauthorgui.tower.TowerAuthor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import newengine.animation.AnimationImage;
 import user.UsersModel;
@@ -17,8 +16,6 @@ import user.UsersModel;
 public class MainMenu {
 	
 	public static final String CSS_LOCATION = "/styleSheets/login.css";
-
-	public static final String STATIC_IMAGE = "/resources/health.jpg";
 
 	private Stage primaryStage;
 	private UsersModel usersModel;
@@ -43,15 +40,16 @@ public class MainMenu {
 		playGame.setId("main-button");
 		authorGame.setId("main-button");
 		socialCenter.setId("main-button");
-		root.setCenter(buttons);
+		root.setCenter(buttons);		
+		HBox hBox1 = getHBox(1, 200,200);
+		HBox hBox2 = getHBox(2, 400,200);
+		HBox hBox3 = getHBox(3, 200,400);
+		HBox hBox4 = getHBox(4, 400,400);
+		HBox[] h = {hBox1, hBox2, hBox3, hBox4};
 		
-//		AnimationImage im = new AnimationImage();
-		
-		HBox hBox = new HBox();
-		hBox.getChildren().add(new ImageView(new Image(STATIC_IMAGE)));//im.getImageView());
-		hBox.setLayoutX(300);
-		hBox.setLayoutY(200);
-		root.getChildren().add(hBox);
+
+root.getChildren().addAll(new ArrayList<HBox>(Arrays.asList(h)));
+
 		initHandlers();
 		scene = new Scene(root, App.WIDTH, App.HEIGHT);
 		scene.getStylesheets().setAll(CSS_LOCATION);
@@ -74,6 +72,16 @@ public class MainMenu {
 	
 	public Scene getScene() {
 		return scene;
+	}
+	
+	private HBox getHBox( int seed, int x, int y){
+		AnimationImage imageView = new AnimationImage();	
+		HBox hBox = new HBox();
+		hBox.getChildren().add(imageView.getImageView(seed));
+		hBox.setLayoutX(x);
+		hBox.setLayoutY(y);
+		
+		return hBox;
 	}
 	
 }
