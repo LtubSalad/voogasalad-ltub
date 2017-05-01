@@ -5,6 +5,7 @@ import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import user.User;
 import user.UsersModel;
@@ -37,8 +38,7 @@ public class SocialCenterView extends TabPane {
 	private Button makeButton(String username, User user) {
 		Button b = new Button(username);
 		b.setOnMouseClicked(e ->{
-			Tab newTab = new Tab(username);
-			newTab.setContent(new UserSocialPage(user));
+			BorderPane newTab = new Tab((new UserSocialPage(user)));
 			this.getTabs().add(newTab);
 			renderOtherUsersPane();
 		});
@@ -47,10 +47,9 @@ public class SocialCenterView extends TabPane {
 
 	private void renderMainUserPage() {
 		UserSocialPage myUserPage = new UserSocialPage(current);
-		Tab myTab = new Tab(current.getName());
-		myTab.setContent(myUserPage);
-		myTab.setClosable(true);
-		this.getTabs().add(myTab);
+		myUserPage.setClosable(true);
+		this.getTabs().add(myUserPage);
+		this.getSelectionModel().select(myUserPage);
 	}
 	
 	// make the pane with all online users (Setbottom)  
