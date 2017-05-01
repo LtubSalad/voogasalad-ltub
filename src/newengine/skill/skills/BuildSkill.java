@@ -123,4 +123,11 @@ public class BuildSkill extends Skill {
 		return skillType;
 	}
 
+	@Override
+	public Object[] getGUIParameters() {
+		Object[] parameters=new Object[1];
+		parameters[0]=mySpriteMakerModel;
+		return parameters;
+	}
+
 }

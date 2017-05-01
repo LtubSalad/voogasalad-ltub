@@ -111,7 +111,7 @@ public class Attacker extends Component {
 		Object[] parameters=new Object[2];
 		parameters[0]=damageStrength;
 		parameters[1]=ltubImage;
-		return null;
+		return parameters;
 	}
 
 
