@@ -6,6 +6,8 @@ import java.util.List;
 import bus.EventBus;
 import data.SpriteMakerModel;
 import gamedata.AuthDataTranslator;
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
 import newengine.events.skill.CheckCostAndBuildEvent;
 import newengine.events.stats.ChangeWealthEvent;
@@ -29,8 +31,8 @@ public class BuildSkill extends Skill {
 
 	private SkillType<BuildSkill> skillType;
 	
-	
-	public BuildSkill(SpriteMakerModel spriteMakerModel) {
+	@ConstructorForDeveloper
+	public BuildSkill(@VariableName(name = "Sprite") SpriteMakerModel spriteMakerModel) {
 		this(spriteMakerModel, TYPE);
 	}
 	
