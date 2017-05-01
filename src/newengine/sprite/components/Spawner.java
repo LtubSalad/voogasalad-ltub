@@ -1,6 +1,7 @@
 package newengine.sprite.components;
 
 import commons.point.GamePoint;
+import data.SpriteMakerModel;
 import gameDevelopmentInterface.Path;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
@@ -23,10 +24,11 @@ public class Spawner extends Component {
 	@ConstructorForDeveloper
 	public Spawner(@VariableName(name = "Monsters") int spritesToSpawn,
 			@VariableName(name = "Followed path") Path pathSpritesFollow,
-			@VariableName(name = "Spawn interval") double spawnBetweenTime) {
+			@VariableName(name = "Spawn interval") double spawnBetweenTime, SpriteMakerModel spriteToSpawn) {
 		secondsBetween = spawnBetweenTime;
 		totalNumber = spritesToSpawn;
-		startingPosition = pathSpritesFollow.getPath().peek();
+		PathFollower pf = (PathFollower) spriteToSpawn.getComponentByType(PathFollower.TYPE);
+		startingPosition = pf.getPath().getPath().peek();
 	}
 
 	public int getNum() {
@@ -35,7 +37,9 @@ public class Spawner extends Component {
 
 	public void onUpdated(double dt) {
 		if (needToSpawn) {
-			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new PeriodicEvent(5, 3.0, () -> sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(new GamePoint(10,20))))));
+			sprite.getComponent(GameBus.TYPE).get().getGameBus()
+			.emit(new PeriodicEvent(5, 3.0, () -> 
+			sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(startingPosition)))));
 			needToSpawn = false;
 		}
 	}

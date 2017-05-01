@@ -1,14 +1,16 @@
 package newengine.sprite.components;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 import commons.point.GamePoint;
 import gameDevelopmentInterface.Path;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.DeveloperMethod;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
-import newengine.events.debug.SysPrintEvent;
 import newengine.events.sprite.MoveEvent;
-import newengine.events.stats.ChangeLivesEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.Target;
@@ -34,18 +36,17 @@ public class PathFollower extends Component{
 	}
 	
 	public void afterAdded(){
-		if (path.getPath().poll() == null){
+		if (path.getPath().peek() == null){
 			return;
 		}
 		GamePoint curr = new GamePoint();
+		Stack<GamePoint> holder = new Stack<>();
 		while (!path.getPath().isEmpty()){
 			curr = path.getPath().poll();
+			holder.push(curr);
 			sprite.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite, new Target(curr))));
-		}
-		finalPoint = curr;
-		System.out.println("the final point is " + finalPoint.x() + " " + finalPoint.y());
-		
-		
+			System.out.println(curr.x() + " " + curr.y());
+		}		
 	}
 	
 	@Override
