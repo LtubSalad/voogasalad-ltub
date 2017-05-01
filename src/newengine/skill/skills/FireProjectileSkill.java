@@ -7,6 +7,7 @@ import newengine.events.sprite.StateChangeEvent;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
 import newengine.sprite.Sprite;
+import newengine.sprite.components.Owner;
 import newengine.utils.Target;
 import newengine.utils.image.LtubImage;
 
