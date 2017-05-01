@@ -94,6 +94,7 @@ public class AuthDataTranslator implements Translator<Sprite>{
 	private Sprite handleSkills(Sprite sprite, List<Skill> skills){
 		skills.stream().forEach(skill-> 
 		sprite.emit(new AddSkillEvent(AddSkillEvent.TYPE, skill)));
+		
 		return sprite; 
 	}
 

@@ -152,7 +152,6 @@ public class SpriteDataPane extends ScrollPane{
 			private ObjectSetter<T> mySetter;
 			private RemovableComponentViewer(ObjectSetter<T> mySetter){
 				super(mySetter.getObjectType());
-				//this.setStyle("-fx-background-color: cyan;-fx-border-color:red");
 				this.mySetter=mySetter;
 				this.getChildren().addAll(mySetter);
 				Button removeButton =new Button("Remove component");
@@ -160,7 +159,6 @@ public class SpriteDataPane extends ScrollPane{
 					removeMe();
 				});
 				this.getChildren().add(removeButton);
-				this.prefWidthProperty().bind(ComponentLister.this.prefWidthProperty());
 			}
 			
 			private void removeMe(){

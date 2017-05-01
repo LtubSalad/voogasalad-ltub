@@ -1,0 +1,25 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Health</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Health>
+        <initHealth>23</initHealth>
+        <health>23</health>
+      </newengine.sprite.components.Health>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>test</spriteName>
+  <spriteDescription></spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.Health reference="../../myComponents/entry/newengine.sprite.components.Health"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>

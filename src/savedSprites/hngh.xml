@@ -1,0 +1,49 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Health</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Health>
+        <initHealth>3</initHealth>
+        <health>3</health>
+      </newengine.sprite.components.Health>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Attacker</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Attacker>
+        <reloadPeriod>1.0</reloadPeriod>
+        <timeRemaining>1.0</timeRemaining>
+        <damageStrength>4</damageStrength>
+        <ltubImage>
+          <filename>resources\bahamut_right.png</filename>
+        </ltubImage>
+      </newengine.sprite.components.Attacker>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Collidable</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Collidable>
+        <boundType>POLYGON</boundType>
+        <bound/>
+      </newengine.sprite.components.Collidable>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>3</spriteName>
+  <spriteDescription></spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.Attacker reference="../../myComponents/entry[2]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.Collidable reference="../../myComponents/entry[3]/newengine.sprite.components.Collidable"/>
+    <newengine.sprite.components.Health reference="../../myComponents/entry/newengine.sprite.components.Health"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>

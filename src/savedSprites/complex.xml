@@ -1,0 +1,58 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Health</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Health>
+        <initHealth>3</initHealth>
+        <health>3</health>
+      </newengine.sprite.components.Health>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Images</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Images>
+        <imageFilePath>resources\Mario.jpg</imageFilePath>
+      </newengine.sprite.components.Images>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Attacker</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Attacker>
+        <reloadPeriod>1.0</reloadPeriod>
+        <timeRemaining>1.0</timeRemaining>
+        <damageStrength>3</damageStrength>
+        <ltubImage>
+          <filename>resources\bahamut_left.png</filename>
+        </ltubImage>
+      </newengine.sprite.components.Attacker>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Collidable</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Collidable>
+        <boundType>POLYGON</boundType>
+        <bound/>
+      </newengine.sprite.components.Collidable>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>test</spriteName>
+  <spriteDescription></spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.Attacker reference="../../myComponents/entry[3]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.Collidable reference="../../myComponents/entry[4]/newengine.sprite.components.Collidable"/>
+    <newengine.sprite.components.Health reference="../../myComponents/entry/newengine.sprite.components.Health"/>
+    <newengine.sprite.components.Images reference="../../myComponents/entry[2]/newengine.sprite.components.Images"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>
