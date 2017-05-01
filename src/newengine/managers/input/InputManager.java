@@ -1,12 +1,11 @@
 package newengine.managers.input;
 
-import java.util.List;
-
 import bus.EventBus;
 import commons.point.GamePoint;
 import javafx.scene.input.KeyCode;
 import newengine.events.QueueEvent;
 import newengine.events.camera.CameraEvent;
+import newengine.events.game.GamePauseResumeEvent;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
 import newengine.events.selection.SelectSkillEvent;
@@ -19,8 +18,6 @@ import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
-import newengine.sprite.component.ComponentType;
-import newengine.sprite.components.Position;
 import newengine.utils.ActionMode;
 import newengine.utils.Target;
 import newengine.utils.checker.SelectionChecker;
@@ -61,6 +58,12 @@ public class InputManager {
 	private void initHandlers() {
 		bus.on(KeyEvent.PRESS, e -> {
 			keyInputState.pressKey(e.getCode());
+			if (keyInputState.isKeyPressed(KeyCode.P)) {
+				bus.emit(new GamePauseResumeEvent());
+			}
+			else if (keyInputState.isKeyPressed(KeyCode.R)) {
+				bus.emit(new CameraEvent(CameraEvent.RESET));
+			}
 		});
 		bus.on(KeyEvent.RELEASE, e -> {
 			keyInputState.releaseKey(e.getCode());
@@ -112,9 +115,6 @@ public class InputManager {
 		}
 		else if (keyInputState.isKeyPressed(KeyCode.DOWN)) {
 			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, -Camera.MOVE_SPEED_PER_FRAME * dt));
-		}
-		else if (keyInputState.isKeyPressed(KeyCode.R)) {
-			bus.emit(new CameraEvent(CameraEvent.RESET));
 		}
 	}
 }
