@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import bus.EventBus;
 import commons.RunningMode;
-import data.DeveloperData;
 import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
 import newengine.app.Game;
@@ -32,6 +31,7 @@ import newengine.skill.skills.BuildSkillFactory;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
 import newengine.sprite.components.GameBus;
+import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.SkillSet;
 import player.helpers.GameLoadException;
@@ -56,6 +56,7 @@ public class GameCreator {
 			skillMap.put(buildSkill.getType(), buildSkill);
 		}
 		towerBuilder.addComponent(new SkillSet(skillMap));
+		towerBuilder.addComponent(new Images("images/characters/bahamut_left.png"));
 		return towerBuilder;
 	}
 	
@@ -83,7 +84,7 @@ public class GameCreator {
 			}).collect(Collectors.toList()));
 			System.out.println("see my datax");
 			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites()));
-			
+
 
 			EventBus bus = game.getBus();
 			bus.on(GameInitializationEvent.ANY, (e) -> {
@@ -91,8 +92,6 @@ public class GameCreator {
 				bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
 				bus.emit(new MainPlayerEvent(userPlayer));
-				
-				System.out.println(userPlayer.getName());
 				
 //				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
 				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, 20)); // Hard-coded

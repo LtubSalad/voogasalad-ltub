@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import gamecreation.level.ILevelData;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import newengine.managers.conditions.Condition;
 import newengine.player.Player;
 
 /**
@@ -22,10 +23,6 @@ public class SerializableDeveloperData {
 	private Map<String, String> gameData; 
 	private List<SpriteMakerModel> mySprites; 
 	private List<ILevelData> myLevels; 
-	private String gameName; 
-	private String gameIconFile; 
-	
-	//DeveloperData dataToTranslate; // TODO: see if this serializes ok 
 	
 	public SerializableDeveloperData(DeveloperData data){
 		configData(data.getAllData()); 
@@ -64,6 +61,5 @@ public class SerializableDeveloperData {
 		return Collections.unmodifiableMap(gameData);
 	}
 	
-
 	
 }
