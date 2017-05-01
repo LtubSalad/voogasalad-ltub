@@ -5,10 +5,11 @@ import java.util.Optional;
 import newengine.model.PlayerRelationModel;
 import newengine.skill.skills.BuildSkill;
 import newengine.sprite.Sprite;
+import newengine.sprite.component.GUISettableObject;
 import newengine.utils.Target;
 import newengine.utils.image.LtubImage;
 
-public abstract class Skill {
+public abstract class Skill implements GUISettableObject {
 	
 	protected LtubImage icon;
 	protected Sprite source;
@@ -30,6 +31,7 @@ public abstract class Skill {
 		return Optional.ofNullable(icon);
 	}
 	public abstract void trigger();
+	
 	public abstract SkillType<? extends Skill> getType();
 	
 	/**

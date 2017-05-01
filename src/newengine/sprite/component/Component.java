@@ -28,10 +28,6 @@ public abstract class Component implements GUISettableObject {
 
 	public abstract Component clone();
 	
-	/**
-	 * 应该这么implement这个method：。。。
-	 * @return
-	 */
-	public abstract Object[] getGUIParameters();
+	
 	
 }
