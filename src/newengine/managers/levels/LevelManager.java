@@ -66,6 +66,7 @@ public class LevelManager{
 		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));//newLevel.getWinningCondition()));
 		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));//newLevel.getLosingCondition()));
 		bus.emit(new SpawnPrefEvent(SpawnPrefEvent.SETPREFS, newLevel.getSpawnTime()));	
+		
 	}
 
 }
