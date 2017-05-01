@@ -1,7 +1,9 @@
 package newengine.animation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import javafx.animation.Animation;
 
@@ -13,33 +15,49 @@ public class AnimationImage {
 
 	private static final int WIDTH    = 200;
 	private static final int HEIGHT   = 200;
+	public static final int NUMBER_OF_IMAGE = 6;
 
-	private static final Image IMAGE = new Image("resources/Mario.jpeg", WIDTH, HEIGHT, true,true);
-	private static final Image IMAGE1 = new Image("resources/health.jpg", WIDTH, HEIGHT, true,true);
-	private static final Image IMAGE2 = new Image("resources/bahamut_left.png", WIDTH, HEIGHT, true,true);
-	private static final Image IMAGE3 = new Image("resources/bahamut_right.png", WIDTH, HEIGHT, true,true);
-
-	public ImageView getImageView() {
+	public ImageView getImageView(int seed) {
 
 		final ImageView imageView = new ImageView();
 		//imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH , HEIGHT));
 
+		int[] numberList = new int[6];
+		for(int i = 0; i < NUMBER_OF_IMAGE; i++){
+			numberList[i] = i;
+		}
+
+		shuffleArray(seed, numberList);
+
+
 		List<Image> list = new ArrayList<>();
-		list.add(IMAGE);
-		list.add(IMAGE1);
-		list.add(IMAGE2);
-		list.add(IMAGE3);
+
+		for(int j =0; j < NUMBER_OF_IMAGE; j++){
+			list.add(getImage(numberList[j]));
+		}
 
 
-		final Animation animation = new ImageAnimation(
-				list,
-				imageView,
-				Duration.millis(1000),
-				WIDTH, HEIGHT
-				);
+		final Animation animation = new ImageAnimation(list, imageView, Duration.millis(5000), WIDTH, HEIGHT);
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.play();
 
 		return imageView;
+	}
+
+	private Image getImage(int i){
+		return new Image("resources/Bahamut" + i +".png", WIDTH, HEIGHT, true,true);
+	}
+
+	private void shuffleArray(int seed, int[] array)
+	{
+		int index, temp;
+		Random random = new Random(seed);
+		for (int i = array.length - 1; i > 0; i--)
+		{
+			index = random.nextInt(i + 1);
+			temp = array[index];
+			array[index] = array[i];
+			array[i] = temp;
+		}
 	}
 }
