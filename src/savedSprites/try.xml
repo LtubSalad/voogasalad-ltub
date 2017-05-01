@@ -1,0 +1,62 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.SkillSet</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.SkillSet>
+        <skills>
+          <entry>
+            <newengine.skill.SkillType>
+              <type>newengine.skill.skills.BuildSkill</type>
+            </newengine.skill.SkillType>
+            <newengine.skill.skills.BuildSkill>
+              <mySpriteMakerModel>
+                <myComponents>
+                  <entry>
+                    <newengine.sprite.component.ComponentType>
+                      <typename>newengine.sprite.components.Attacker</typename>
+                    </newengine.sprite.component.ComponentType>
+                    <newengine.sprite.components.Attacker>
+                      <reloadPeriod>1.0</reloadPeriod>
+                      <timeRemaining>1.0</timeRemaining>
+                      <damageStrength>32</damageStrength>
+                      <ltubImage>
+                        <filename>resources\bahamut_left.png</filename>
+                      </ltubImage>
+                    </newengine.sprite.components.Attacker>
+                  </entry>
+                </myComponents>
+                <myScriptMap>
+                  <entry>
+                    <null/>
+                    <string></string>
+                  </entry>
+                </myScriptMap>
+                <spriteName>e</spriteName>
+                <spriteDescription></spriteDescription>
+                <actualComponents>
+                  <newengine.sprite.components.Attacker reference="../../myComponents/entry/newengine.sprite.components.Attacker"/>
+                </actualComponents>
+                <skills/>
+              </mySpriteMakerModel>
+              <skillType reference="../../newengine.skill.SkillType"/>
+            </newengine.skill.skills.BuildSkill>
+          </entry>
+        </skills>
+      </newengine.sprite.components.SkillSet>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>test</spriteName>
+  <spriteDescription></spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.SkillSet reference="../../myComponents/entry/newengine.sprite.components.SkillSet"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>
