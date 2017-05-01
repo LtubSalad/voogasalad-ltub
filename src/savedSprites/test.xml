@@ -1,0 +1,33 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.SkillSet</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.SkillSet>
+        <skills>
+          <entry>
+            <newengine.skill.SkillType>
+              <type>newengine.skill.skills.FireProjectileSkill</type>
+            </newengine.skill.SkillType>
+            <newengine.skill.skills.FireProjectileSkill>
+              <cooldown>3.0</cooldown>
+            </newengine.skill.skills.FireProjectileSkill>
+          </entry>
+        </skills>
+      </newengine.sprite.components.SkillSet>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>e</spriteName>
+  <spriteDescription></spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.SkillSet reference="../../myComponents/entry/newengine.sprite.components.SkillSet"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>
