@@ -1,6 +1,7 @@
 package gamedata;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,6 @@ import java.util.stream.Collectors;
 
 import bus.EventBus;
 import commons.RunningMode;
-import data.DeveloperData;
 import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
 import newengine.app.Game;
@@ -20,6 +20,8 @@ import newengine.events.player.MainPlayerEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
+import newengine.managers.conditions.GoldMinimumCondition;
+import newengine.managers.conditions.NoLivesCondition;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.skill.Skill;
@@ -29,6 +31,7 @@ import newengine.skill.skills.BuildSkillFactory;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
 import newengine.sprite.components.GameBus;
+import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.SkillSet;
 import player.helpers.GameLoadException;
@@ -53,7 +56,7 @@ public class GameCreator {
 			skillMap.put(buildSkill.getType(), buildSkill);
 		}
 		towerBuilder.addComponent(new SkillSet(skillMap));
-		// currently no image
+		towerBuilder.addComponent(new Images("images/characters/bahamut_left.png"));
 		return towerBuilder;
 	}
 	
@@ -74,26 +77,30 @@ public class GameCreator {
 			// enemy: the monsters
 			Player userPlayer = myData.getUserPlayer();
 			
-//			List<Sprite> sprites = myData.getLevels().get(0).getSpawners().stream().map(
-//					(spriteMakerModel) -> (new AuthDataTranslator(spriteMakerModel)).getSprite()
-//			).collect(Collectors.toList());
-//			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites()));
-//			
+			List<SpriteMakerModel> spriteMakerModels = myData.getLevels().get(0).getSpawners();
+			List<Sprite> sprites = new ArrayList<>();
+			sprites.addAll(spriteMakerModels.stream().map((spriteMakerModel) -> {
+				return (new AuthDataTranslator(spriteMakerModel)).getSprite();
+			}).collect(Collectors.toList()));
+			System.out.println("see my datax");
+			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites()));
 
 
 			EventBus bus = game.getBus();
 			bus.on(GameInitializationEvent.ANY, (e) -> {
 				bus.emit(new InitILevelsEvent(myData.getLevels()));
 				bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
-
-				//bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
-
+				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
 				bus.emit(new MainPlayerEvent(userPlayer));
 				
-				System.out.println(userPlayer.getName());
+//				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
+				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, 20)); // Hard-coded
+//				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));
+				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, 200));
 				
-				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
-				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));
+				//TODO condition factory
+				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
+				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 			});
 
 			return game;
