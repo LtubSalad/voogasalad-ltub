@@ -25,14 +25,14 @@ public class SaveSpawner extends HBox {
 	private void makeButtons() {
 		saveSpawnerToFile.setOnAction(click -> {
 			SpriteMakerModel spawner = mySpawnerCreation.getSpawner();
-			spawner.addComponent(new Spawner(myMonsterAdder.getNumMonsters(), mySpawnerCreation.getPath(), mySpawnerCreation.getSpawnBetweenTime()));
+			//spawner.addComponent(new Spawner(myMonsterAdder.getNumMonsters(), mySpawnerCreation.getPath(), mySpawnerCreation.getSpawnBetweenTime()));
 			XStreamHandler xstream = new XStreamHandler();
 			xstream.saveToFile(spawner);
 		});
 		
 		saveSpawnerToData.setOnAction(click -> {
 			SpriteMakerModel spawner = mySpawnerCreation.getSpawner();
-			spawner.addComponent(new Spawner(myMonsterAdder.getNumMonsters(), mySpawnerCreation.getPath(), mySpawnerCreation.getSpawnBetweenTime()));
+			//spawner.addComponent(new Spawner(myMonsterAdder.getNumMonsters(), mySpawnerCreation.getPath(), mySpawnerCreation.getSpawnBetweenTime()));
 			mySpawnerCreation.saveSpawnerToModel();
 		});
 	}

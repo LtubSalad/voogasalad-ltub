@@ -59,8 +59,8 @@ public class UpgradeBtn extends Button{
 				System.out.println(sprite.getComponent(Owner.TYPE).isPresent());
 				EventBus bus = sprite.getComponent(GameBus.TYPE).get().getGameBus();
 				System.out.println(sprite.getComponent(Owner.TYPE).get().player().getName());
-//				bus.emit(new ChangeWealthEvent
-//						(ChangeWealthEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), WealthType.GOLD, sprite.getComponent(Upgrade.TYPE).get().getCost(), canUpdate));
+				bus.emit(new ChangeWealthEvent
+						(ChangeWealthEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), WealthType.GOLD, 55, canUpdate));
 				if (canUpdate) {
 					sprite.getComponent(Health.TYPE).ifPresent((health) -> {
 						sprite.emit(new UpgradeEvent(UpgradeEvent.RESET, sprite, sprite.getComponent(Health.TYPE).get().getInitHealth()));
