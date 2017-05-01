@@ -10,7 +10,6 @@ import bus.BusEventHandler;
 import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.VariableName;
 import newengine.events.SpriteModelEvent;
-import newengine.events.debug.SysPrintEvent;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.StateChangeEvent;
 import newengine.events.sprite.UpgradeEvent;
@@ -108,8 +107,10 @@ public class Attacker extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
-		// TODO Auto-generated method stub
+	public Object[] getGUIParameters() {
+		Object[] parameters=new Object[2];
+		parameters[0]=damageStrength;
+		parameters[1]=ltubImage;
 		return null;
 	}
 

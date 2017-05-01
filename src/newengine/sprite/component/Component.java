@@ -2,7 +2,7 @@ package newengine.sprite.component;
 
 import newengine.sprite.Sprite;
 
-public abstract class Component {
+public abstract class Component implements GUISettableObject {
 
 	protected Sprite sprite;
 	
@@ -32,6 +32,6 @@ public abstract class Component {
 	 * 应该这么implement这个method：。。。
 	 * @return
 	 */
-	public abstract Object[] getParameters();
+	public abstract Object[] getGUIParameters();
 	
 }

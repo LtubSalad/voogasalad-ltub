@@ -207,7 +207,7 @@ public class Position extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[3];
 		parameters[0]=pos.x();
 		parameters[1]=pos.y();

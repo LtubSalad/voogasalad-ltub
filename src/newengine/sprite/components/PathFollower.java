@@ -27,8 +27,13 @@ public class PathFollower extends Component{
 	
 	@DeveloperMethod
 	public void followPath(){
-		
+		GamePoint curr = new GamePoint();
+		if (!path.getPath().isEmpty()){
+			curr = path.getPath().poll();
+			sprite.emit(new QueueEvent(QueueEvent.ADD, new MoveEvent(MoveEvent.START_POSITION, sprite, new Target(curr))));
+		}
 	}
+	
 	public Path getPath() {
 		return this.path;
 	}
@@ -59,7 +64,7 @@ public class PathFollower extends Component{
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		// TODO Auto-generated method stub
 		return null;
 	}

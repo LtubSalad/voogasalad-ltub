@@ -1,5 +1,7 @@
 package newengine.skill.skills;
 
+import helperAnnotations.ConstructorForDeveloper;
+import helperAnnotations.VariableName;
 import newengine.events.sprite.FireProjectileEvent;
 import newengine.events.sprite.StateChangeEvent;
 import newengine.skill.Skill;
@@ -18,7 +20,8 @@ public class FireProjectileSkill extends Skill {
 		icon = new LtubImage("images/skills/crosshairs.png");
 	}
 
-	public FireProjectileSkill(double cooldown){
+	@ConstructorForDeveloper
+	public FireProjectileSkill(@VariableName(name = "Cooldown") double cooldown){
 		this.cooldown = cooldown;
 	}
 
