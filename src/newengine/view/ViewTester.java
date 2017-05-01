@@ -23,7 +23,7 @@ public class ViewTester extends Application{
 //		
 //		Scene scene = new Scene((HBox)m.getNode(), 800,500);
 		AnimationImage t = new AnimationImage();
-		Group root = new Group(t.getImageView());
+		Group root = new Group(t.getImageView(2));
 		Scene scene = new Scene(root);
 		System.out.println("good");
 		stage.setScene(scene);
