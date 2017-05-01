@@ -14,8 +14,9 @@
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Owner>
         <owner>
-          <name>owner</name>
+          <name>HUMANS</name>
         </owner>
+        <teamNumber>HUMANS</teamNumber>
       </newengine.sprite.components.Owner>
     </entry>
     <entry>
@@ -96,15 +97,6 @@
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.EventQueue</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.EventQueue>
-        <events/>
-        <eventFinished>true</eventFinished>
-      </newengine.sprite.components.EventQueue>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.Collidable</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Collidable>
@@ -119,11 +111,10 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>path</spriteName>
-  <spriteDescription></spriteDescription>
+  <spriteName>matt</spriteName>
+  <spriteDescription>matt</spriteDescription>
   <actualComponents>
-    <newengine.sprite.components.Collidable reference="../../myComponents/entry[7]/newengine.sprite.components.Collidable"/>
-    <newengine.sprite.components.EventQueue reference="../../myComponents/entry[6]/newengine.sprite.components.EventQueue"/>
+    <newengine.sprite.components.Collidable reference="../../myComponents/entry[6]/newengine.sprite.components.Collidable"/>
     <newengine.sprite.components.Images reference="../../myComponents/entry[3]/newengine.sprite.components.Images"/>
     <newengine.sprite.components.Owner reference="../../myComponents/entry[2]/newengine.sprite.components.Owner"/>
     <newengine.sprite.components.PathFollower reference="../../myComponents/entry[5]/newengine.sprite.components.PathFollower"/>

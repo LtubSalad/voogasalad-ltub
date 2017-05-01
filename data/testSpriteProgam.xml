@@ -2,7 +2,7 @@
   <gameData>
     <entry>
       <string>LEVEL_COMPLETION</string>
-      <string>10</string>
+      <string>100</string>
     </entry>
     <entry>
       <string>GAME_ICON</string>
@@ -28,12 +28,12 @@
   <mySprites/>
   <myLevels>
     <gamecreation.level.SerializableLevelData>
-      <name>Untitled Level</name>
+      <name>game</name>
       <winning class="newengine.managers.conditions.GoldMinimumCondition">
         <goldMin>10</goldMin>
       </winning>
       <losing class="newengine.managers.conditions.NoLivesCondition"/>
-      <spawnTime>1.9834710743801653</spawnTime>
+      <spawnTime>1.190082770733794</spawnTime>
       <spawners>
         <data.SpriteMakerModel>
           <myComponents>
