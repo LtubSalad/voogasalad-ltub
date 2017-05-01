@@ -203,7 +203,7 @@ public class PasswordManager{
 			for(int i = 0 ; i < n; i++){
 				languageComboBox.getItems().add(resources.getString("language" + (i + 1)));
 				//System.out.println("The current language is: " + languageComboBox.getItems().get(i));
-				
+				//TODO: change the language setting in the backend
 			}
 			languageComboBox.setValue("English");
 		 
