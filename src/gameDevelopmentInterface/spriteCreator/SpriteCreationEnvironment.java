@@ -66,12 +66,6 @@ public class SpriteCreationEnvironment extends BorderPane{
 				creationScreens.getTabs().add(spriteTab);
 				creationScreens.getSelectionModel().select(spriteTab);
 			});
-			Button presetSpawnerButton=new Button("Load Spawner Preset");
-			Button loadPresetSprite=new Button("Load Preset");
-		//	Button loadSavedSprite=new Button("Load Saved Sprite");
-			loadSavedSprite.setOnAction((event)->{
-
-			});
 			
 			
 			

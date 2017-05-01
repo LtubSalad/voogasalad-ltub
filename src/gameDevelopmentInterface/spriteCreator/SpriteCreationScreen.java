@@ -32,7 +32,7 @@ import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Spawner;
 import newengine.sprite.components.Speed;
 import newengine.sprite.components.TowerDefenceTypeInformation;
-import newengine.sprite.components.Upgradeable;
+import newengine.sprite.components.Upgrade;
 import utilities.AlertHandler;
 import utilities.XStreamHandler;
 
@@ -71,9 +71,6 @@ public class SpriteCreationScreen extends BorderPane {
 		ObservableList<Class<? extends Component>> observableComponents = FXCollections.observableList(basicComponents);
 		observableComponents.add(Attacker.class);
 		observableComponents.add(Collidable.class);
-		observableComponents.add(Cooldown.class);
-		observableComponents.add(DamageStrength.class);
-		observableComponents.add(EventQueue.class);
 		observableComponents.add(Health.class);
 		observableComponents.add(Images.class);
 		observableComponents.add(Owner.class);
@@ -84,9 +81,8 @@ public class SpriteCreationScreen extends BorderPane {
 		observableComponents.add(SoundEffect.class);
 		observableComponents.add(Speed.class);
 		observableComponents.add(SkillSet.class);
-		observableComponents.add(Spawner.class);
 		observableComponents.add(TowerDefenceTypeInformation.class);
-		observableComponents.add(Upgradeable.class);
+		observableComponents.add(Upgrade.class);
 
 		return new ComponentSelectorPane("Add components", observableComponents, infoPane);
 	}
