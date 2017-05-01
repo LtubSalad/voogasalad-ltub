@@ -48,5 +48,13 @@ public class FireProjectileSkill extends Skill {
 		return TYPE;
 	}
 
+	@Override
+	public Object[] getGUIParameters() {
+		Object[] parameters = new Object[1];
+		parameters[0]=cooldown;
+		// TODO Auto-generated method stub
+		return parameters;
+	}
+
 }
 
