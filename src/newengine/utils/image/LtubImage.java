@@ -37,7 +37,7 @@ public class LtubImage {
 	
 	public Image getFXImage() {
 		try {
-			return new Image(filename);
+			return ImageCache.CACHE.getImage(filename);
 		} catch (NullPointerException e) {
 			if (RunningMode.DEV_MODE) {
 				System.out.println("DEV MODE stacktrace");
@@ -49,12 +49,22 @@ public class LtubImage {
 	}
 	
 	public double width() {
-		return 100;
-//		return image != null ? image.getWidth() : 0;
+		Image image = getFXImage();
+		if (image != null) {
+			return (image.getWidth() >= 100) ? 100 : image.getWidth();
+		}
+		else {
+			return 0;
+		}
 	}
 	public double height() {
-		return 100;
-//		return image != null ? image.getHeight() : 0;
+		Image image = getFXImage();
+		if (image != null) {
+			return (image.getHeight() >= 100) ? 100 : image.getHeight();
+		}
+		else {
+			return 0;
+		}
 	}
 	public void setImagePivot(GamePoint pivot) {
 		this.pivot = pivot;

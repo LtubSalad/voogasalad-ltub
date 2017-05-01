@@ -40,6 +40,10 @@ public class Position extends Component {
 		this.pos = pos;
 		this.heading = heading;
 	}
+	
+	public Position(GamePoint pos){
+		this.pos = pos;
+	}
 
 	@ConstructorForDeveloper
 	public Position(@VariableName(name = "xPosition") double xPos, @VariableName(name = "yPosition") double yPos,

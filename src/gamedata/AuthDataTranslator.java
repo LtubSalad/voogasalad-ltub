@@ -10,6 +10,7 @@ import newengine.events.skill.AddSkillEvent;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
+import newengine.sprite.components.Cooldown;
 import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Images;
@@ -70,6 +71,7 @@ public class AuthDataTranslator implements Translator<Sprite>{
 	private void makeSingleSprite(SpriteMakerModel spriteToMake) {
 		constructed = handleComponents(spriteToMake.getActualComponents());
 		constructed.addComponent(new GameBus());
+		constructed.addComponent(new Cooldown());
 
 	}
 
