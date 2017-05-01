@@ -3,7 +3,7 @@ package user;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import user.view.SocialCenterView;
+import user.view.UserSocialPage;
 
 public class UserTest extends Application {
 
@@ -30,7 +30,9 @@ public class UserTest extends Application {
 		
 		model.setCurrentUser("me");
 		
-		SocialCenterView page = new SocialCenterView(model);
+		//SocialCenterView page = new SocialCenterView(model);
+		
+		UserSocialPage page = new UserSocialPage(me);
 		
 		Scene scene = new Scene(page, 600, 600);
 		primaryStage.setScene(scene);
