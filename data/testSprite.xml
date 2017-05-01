@@ -1,0 +1,40 @@
+<data.SerializableDeveloperData>
+  <gameData>
+    <entry>
+      <string>LEVEL_COMPLETION</string>
+      <string>100</string>
+    </entry>
+    <entry>
+      <string>GAME_ICON</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>NUM_LIVES</string>
+      <string>10</string>
+    </entry>
+    <entry>
+      <string>NUM_GOLD</string>
+      <string>100</string>
+    </entry>
+    <entry>
+      <string>BUILD_IN_GAME</string>
+      <string>false</string>
+    </entry>
+    <entry>
+      <string>GAME_NAME</string>
+      <string></string>
+    </entry>
+  </gameData>
+  <mySprites/>
+  <myLevels>
+    <gamecreation.level.SerializableLevelData>
+      <name>Untitled Level</name>
+      <winning class="newengine.managers.conditions.GoldMinimumCondition">
+        <goldMin>5</goldMin>
+      </winning>
+      <losing class="newengine.managers.conditions.NoLivesCondition"/>
+      <spawnTime>0.0</spawnTime>
+      <spawners/>
+    </gamecreation.level.SerializableLevelData>
+  </myLevels>
+</data.SerializableDeveloperData>
