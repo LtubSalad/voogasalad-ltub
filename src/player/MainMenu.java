@@ -65,7 +65,7 @@ public class MainMenu {
 		authorGame.setOnMouseClicked((event) -> {
 			TowerAuthor developerView = new TowerAuthor();
 			primaryStage.setScene(developerView.getScene());
-			primaryStage.setFullScreen(true);
+			//primaryStage.setFullScreen(true);
 		});
 		socialCenter.setOnMouseClicked((event) -> {
 			primaryStage.setScene(usersModel.getUserSocialPage());
