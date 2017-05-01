@@ -27,7 +27,6 @@ public class DamageStrength extends Component {
 	@Override
 	public void afterAdded() {
 		sprite.emit(new StateChangeEvent(StateChangeEvent.DAMAGESTRENGTH, sprite, strength));
-		
 		sprite.on(MoveEvent.STOP, (e) -> {
 			sprite.getComponent(Position.TYPE).ifPresent((position) -> {
 				if (position.isMoving() == false) {

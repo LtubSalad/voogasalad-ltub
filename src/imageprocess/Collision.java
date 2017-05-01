@@ -14,7 +14,7 @@ import newengine.sprite.components.Position;
  */
 public class Collision {
 	
-	public boolean isCollided(Sprite s1, Sprite s2){
+	public static boolean isCollided(Sprite s1, Sprite s2){
 		
 		Image image1 = s1.getComponent(Images.TYPE).get().image().getFXImage();
 		Image image2 = s2.getComponent(Images.TYPE).get().image().getFXImage();

@@ -6,10 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import newengine.animation.AnimationImage;
 import user.UsersModel;
 
 public class MainMenu {
@@ -43,22 +45,17 @@ public class MainMenu {
 		socialCenter.setId("main-button");
 		root.setCenter(buttons);
 		
-		Rectangle rec = getRectangle();
-		rec.setLayoutX(300);
-		rec.setLayoutY(200);
-		root.getChildren().add(rec);
+//		AnimationImage im = new AnimationImage();
+		
+		HBox hBox = new HBox();
+		hBox.getChildren().add(new ImageView(new Image(STATIC_IMAGE)));//im.getImageView());
+		hBox.setLayoutX(300);
+		hBox.setLayoutY(200);
+		root.getChildren().add(hBox);
 		initHandlers();
 		scene = new Scene(root, App.WIDTH, App.HEIGHT);
 		scene.getStylesheets().setAll(CSS_LOCATION);
 		primaryStage.setScene(scene);
-	}
-	
-	private Rectangle getRectangle() {
-		Rectangle rec = new Rectangle(200,200);
-		Image image = new Image(STATIC_IMAGE);
-		ImagePattern imagePattern = new ImagePattern(image);		
-		rec.setFill(imagePattern);		
-		return rec;
 	}
 
 	private void initHandlers() {

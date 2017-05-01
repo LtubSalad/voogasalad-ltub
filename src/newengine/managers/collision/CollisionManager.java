@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import bus.EventBus;
+import imageprocess.Collision;
 import newengine.events.collision.CollisionEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Collidable;
@@ -25,6 +26,10 @@ public class CollisionManager {
 		for (Sprite s1 : collidableSprites) {
 			for (Sprite s2 : collidableSprites) {
 				if (s1 == s2) { continue; }
+				
+				//TODO: can change the if statement as the following condtion
+				//This will use the convex hull of the image to check collision
+				//if (Collision.isCollided(s1, s2)
 				if (CollisionChecker.collides(s1, s2)) {
 					// both sprites will receive this collision event. 
 					s1.emit(new CollisionEvent(CollisionEvent.ANY, s1, s2));
