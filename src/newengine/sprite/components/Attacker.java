@@ -46,7 +46,6 @@ public class Attacker extends Component {
 	@Override
 	public void afterAdded() {
 		sprite.emit(new StateChangeEvent(StateChangeEvent.ATTACKER, sprite, true));
-		
 		sprite.on(UpgradeEvent.DOUBLE, e -> {
 			System.out.println("before upgrade damage strength " + damageStrength);
 			damageStrength = damageStrength*2;
