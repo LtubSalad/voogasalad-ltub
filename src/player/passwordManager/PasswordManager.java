@@ -149,6 +149,9 @@ public class PasswordManager{
 		if(tempCheckUser.length() < LENGTH_OF_USER || tempCheckPw.length() < LENGTH_OF_PASSWORD ){
 			UnsuccessRegistration unsuccess = new UnsuccessRegistration();
 			unsuccess.show();
+			tempCheckUser="";
+			tempCheckPw = "";
+			buttonResetAction();
 			return;
 		}
 		usersModel.addUser(tempCheckUser, tempCheckPw);

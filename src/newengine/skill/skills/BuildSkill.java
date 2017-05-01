@@ -42,6 +42,8 @@ public class BuildSkill extends Skill {
 		if (spriteMakerModel.getComponentByType(Images.TYPE) != null) {
 			Images imageComponent = (Images) spriteMakerModel.getComponentByType(Images.TYPE);
 			this.icon = imageComponent.image();
+		} else {
+			System.out.println("sprite maker model has no images component");
 		}
 	}
 	

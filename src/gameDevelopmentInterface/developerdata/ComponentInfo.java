@@ -6,8 +6,6 @@ import java.util.Collection;
 import java.util.List;
 
 import bus.BusEvent;
-import exception.UnsupportedTypeException;
-import gameDevelopmentInterface.spriteCreator.DefaultObjectSetter;
 import helperAnnotations.DeveloperMethod;
 import newengine.sprite.component.Component;
 

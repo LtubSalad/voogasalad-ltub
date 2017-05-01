@@ -1,6 +1,5 @@
 package gameDevelopmentInterface.spriteCreator;
 
-import java.io.File;
 import java.util.ResourceBundle;
 
 import data.DeveloperData;
