@@ -90,6 +90,7 @@ public class GameCreator {
 			System.out.println("see my datax");
 			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites()));
 
+
 			List<Sprite> pathSprites = new ArrayList<>();
 			SkillSet skillSet = (SkillSet) spriteMakerModels.get(0).getComponentByType(SkillSet.TYPE);
 			BuildSkill buildSkill = (BuildSkill) skillSet.getSkill(BuildSkill.TYPE);
