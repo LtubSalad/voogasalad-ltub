@@ -41,6 +41,7 @@ public class ConditionManager {
 	
 	private void checkLosingCondition(){
 		if(losing != null && losing.check()){
+			System.out.println("YOU LOSE");
 			bus.emit(new EndConditionTriggeredEvent(EndConditionTriggeredEvent.LOSE));
 		}
 	}

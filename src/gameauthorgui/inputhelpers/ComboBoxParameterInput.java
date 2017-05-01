@@ -23,6 +23,7 @@ public class ComboBoxParameterInput extends HBox implements ParameterInput<Strin
 		text.setMaxWidth(TEXT_INPUT_MAX_WIDTH);
 		createCombo(options);
 		createBox();
+		appendTextInput();
 	}
 	
 	private void createCombo(List<String> options){

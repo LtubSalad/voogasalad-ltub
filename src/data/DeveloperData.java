@@ -9,13 +9,11 @@ import gameDevelopmentInterface.Path;
 import gamecreation.level.ILevelData;
 import gamecreation.level.LevelData;
 import gamecreation.level.SerializableLevelData;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.util.Pair;
+import newengine.managers.conditions.Condition;
 /**
  * 
  * @author Jake, Daniel
@@ -145,7 +143,6 @@ public class DeveloperData {
 	public void setNumCols(int numCols) {
 		this.numCols=numCols;
 	}
-	
 	
 	
 }
