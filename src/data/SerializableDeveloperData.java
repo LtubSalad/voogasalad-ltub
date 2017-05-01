@@ -26,11 +26,9 @@ public class SerializableDeveloperData {
 	
 	DeveloperData dataToTranslate; // TODO: see if this serializes ok 
 	
-	private SerializableDeveloperData(DeveloperData data){
+	public SerializableDeveloperData(DeveloperData data){
 		this.dataToTranslate = data; 
 		this.screenSprites = data.getScreenSprites();
-		this.gameName = data.getGameName();
-		this.gameIconFile = data.getGameIcon();
 		configData(); 
 		configSprites(); 
 		configLevels(); 
@@ -57,7 +55,6 @@ public class SerializableDeveloperData {
 			gameData.put(dataName, dataToTranslate.getAllData().get(dataName));
 		}
 		
-		//TODO: Delete when matt fixes 
 		gameData.put("GAME_NAME", this.gameName);
 		gameData.put("GAME_FILE", this.gameIconFile);
 	}

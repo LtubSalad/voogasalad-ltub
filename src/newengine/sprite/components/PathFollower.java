@@ -6,6 +6,9 @@ import helperAnnotations.ConstructorForDeveloper;
 import helperAnnotations.DeveloperMethod;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
+import newengine.events.debug.SysPrintEvent;
+import newengine.events.sprite.MoveEvent;
+import newengine.events.timer.DelayedEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -20,10 +23,14 @@ public class PathFollower extends Component{
 	public PathFollower(@VariableName(name = "SelectedPath") Path path){
 		this.path=path;
 	}
+
 	
 	@DeveloperMethod
 	public void followPath(){
 		
+	}
+	public Path getPath() {
+		return this.path;
 	}
 	
 	public void afterAdded(){
@@ -50,10 +57,8 @@ public class PathFollower extends Component{
 
 	@Override
 	public Object[] getParameters() {
-		Object[] parameters=new Object[1];
-		parameters[0]=path;
 		// TODO Auto-generated method stub
-		return parameters;
+		return null;
 	}
 
 }

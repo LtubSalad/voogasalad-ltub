@@ -32,7 +32,7 @@ public class ScreenMap extends StackPane {
 	private static final String Y_POSITION = "Y_POSITION";
 	private static final String X_POSITION = "X_POSITION";
 	private static final String IMAGE_HOLDER = "IMAGE_HOLDER";
-	private static final int CELL_SIZE = 100;
+	private int CELL_SIZE = 100;
 	private GridPane myGrid;
 	private ScreenModelCreator myScreenModelCreator;
 	private static final String PATH_TO_IMAGE_FILES = "PATH_TO_IMAGE_FILES";
@@ -53,6 +53,20 @@ public class ScreenMap extends StackPane {
 		this.setWidth(myScreenWidth);
 		makeGrid();
 	}
+	public void resize(int width, int height) {
+		myScreenModelCreator.getScreenData().getAllObjectsOnScreen().addListener(new ListChangeListener<SpriteMakerModel>() {
+			@Override
+			public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
+				redrawGrid();
+			}
+		});
+		myScreenHeight = height;
+		myScreenWidth = width;
+		CELL_SIZE = myScreenHeight/NUM_COLS;
+		makeGrid();
+		redrawGrid();
+	}
+	
 	/**
 	 * Can change number of rows on screen
 	 * @param numRows

@@ -17,6 +17,7 @@ public class SoundEffect extends Component {
 	@ConstructorForDeveloper
 	public SoundEffect(@VariableName(name = "Sound file") File soundFile){
 		this(soundFile.toURI().toString());
+		System.out.println(soundFile.toURI().toString());
 	}
 	
 	public SoundEffect(String moveSoundFile) {

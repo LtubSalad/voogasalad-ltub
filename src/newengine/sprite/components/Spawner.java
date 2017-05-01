@@ -1,9 +1,11 @@
 package newengine.sprite.components;
 
+import java.util.Queue;
+
 import commons.point.GamePoint;
-import helperAnnotations.ConstructorForDeveloper;
+import data.SpriteMakerModel;
+import gameDevelopmentInterface.Path;
 import newengine.events.skill.TriggerSkillEvent;
-import newengine.events.spawner.SpawnPrefEvent;
 import newengine.events.timer.PeriodicEvent;
 import newengine.skill.skills.BuildSkill;
 import newengine.sprite.component.Component;
@@ -11,25 +13,24 @@ import newengine.sprite.component.ComponentType;
 import newengine.utils.Target;
 
 public class Spawner extends Component {
-	public static final ComponentType<SoundEffect> TYPE = new ComponentType<>(Spawner.class.getName());
+	public static final ComponentType<Spawner> TYPE = new ComponentType<>(Spawner.class.getName());
 	private double secondsBetween;
 	private int totalNumber;
-
-	@ConstructorForDeveloper
-	public Spawner(){
-		
-	}
+	private boolean needToSpawn = true;
+	private GamePoint startingPosition;
 	
-	@Override
-	public void afterAdded() { 
-		//sprite.on(SpawnPrefEvent.SETPREFS, e -> {
-			System.out.println("Made the event spawner");
-			this.totalNumber = 10;//e.getTotalNumber();
-			this.secondsBetween = 10;// e.getSecondBetween();
+	public Spawner(int spritesToSpawn, Path pathSpritesFollow, double spawnBetweenTime) {
+		secondsBetween = spawnBetweenTime;
+		totalNumber = spritesToSpawn;
+		startingPosition = pathSpritesFollow.getPath().peek();
+	}
+
+	public void onUpdated(double dt) {
+		if (needToSpawn) {
 			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new PeriodicEvent(totalNumber, secondsBetween, () -> 
-			//System.out.println("clock is working");
-			sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(new GamePoint(10,20))))));//sprite.getComponent(Position.TYPE).get().pos())))));
-		//});
+			sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(startingPosition)))));
+			needToSpawn = false;
+		}
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class Spawner extends Component {
 	@Override
 	public Component clone() {
 		// TODO Auto-generated method stub
-		return new Spawner();
+		return null;
 	}
 
 	@Override

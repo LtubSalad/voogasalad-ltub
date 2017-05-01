@@ -61,18 +61,9 @@ public class InputManager {
 	private void initHandlers() {
 		bus.on(KeyEvent.PRESS, e -> {
 			keyInputState.pressKey(e.getCode());
-			
-			
-			
-			
 		});
 		bus.on(KeyEvent.RELEASE, e -> {
 			keyInputState.releaseKey(e.getCode());
-			
-			
-			
-			
-			
 		});
 		bus.on(MouseEvent.LEFT, e -> {
 			if (selectionModel.getSelectedSkill().isPresent()) {

@@ -1,8 +1,11 @@
 package gamecreation.level;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import data.SpriteMakerModel;
 import javafx.beans.property.StringProperty;
 import newengine.managers.conditions.ICondition;
 
@@ -11,9 +14,11 @@ public class LevelData extends Observable implements ILevelData {
 	private ICondition winningCondition;
 	private ICondition losingCondition;
 	private double spawnTime;
+	private List<SpriteMakerModel> spawners;
 
 	public LevelData(){
 		this.name = "Untitled Level";
+		spawners = new ArrayList<SpriteMakerModel>();
 	}
 	
 	public void setName(String name){
@@ -50,13 +55,23 @@ public class LevelData extends Observable implements ILevelData {
 		return losingCondition;
 	}
 
-	@Override
+
 	public StringProperty getNameTextProperty() {
 		return null;
 	}
 
 	public void subscribe(Observer o){
 		this.addObserver(o);
+	}
+	
+	
+	public void addSpawner(SpriteMakerModel spawner){
+		spawners.add(spawner);
+	}
+
+	@Override
+	public List<SpriteMakerModel> getSpawners() {
+		return spawners;
 	}
 
 
