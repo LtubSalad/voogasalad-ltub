@@ -24,7 +24,7 @@ public class RangeShootingAI extends Component {
 			Sprite shootTarget = null;
 			for (Sprite detectee: e.getDetectees()) {
 				if (detectee.getComponent(Owner.TYPE).get().player().isEnemyWith(
-						sprite.getComponent(Owner.TYPE).get().player())) {
+						sprite.getComponent(Owner.TYPE).get().player()) && !detectee.getComponent(Weapon.TYPE).isPresent()) {
 					shootTarget = detectee;
 					break;
 				}
