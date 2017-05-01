@@ -70,7 +70,8 @@ public class AuthDataTranslator implements Translator<Sprite>{
 	private void makeSingleSprite(SpriteMakerModel spriteToMake) {
 		constructed = handleComponents(spriteToMake.getActualComponents());
 		constructed.addComponent(new GameBus());
-		//constructed.addComponent(new EventQueue());
+		constructed.addComponent(new EventQueue());
+		
 
 	}
 

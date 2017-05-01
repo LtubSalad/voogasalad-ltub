@@ -29,6 +29,7 @@ import newengine.skill.skills.BuildSkillFactory;
 import newengine.sprite.Sprite;
 import newengine.sprite.SpriteID;
 import newengine.sprite.components.GameBus;
+import newengine.sprite.components.Owner;
 import newengine.sprite.components.SkillSet;
 import player.helpers.GameLoadException;
 import utilities.XStreamHandler;
@@ -83,7 +84,6 @@ public class GameCreator {
 				bus.emit(new InitILevelsEvent(myData.getLevels()));
 				bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 				//bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
-				
 				bus.emit(new MainPlayerEvent(userPlayer));
 				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
 				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));

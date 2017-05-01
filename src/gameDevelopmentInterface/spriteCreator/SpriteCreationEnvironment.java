@@ -5,16 +5,12 @@ import java.util.ResourceBundle;
 
 import data.DeveloperData;
 import data.SpriteMakerModel;
-import gameDevelopmentInterface.presetHandling.ExampleTower;
-import gameDevelopmentInterface.presetHandling.SpriteEditorLoader;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import utilities.XStreamHandler;
 
 public class SpriteCreationEnvironment extends BorderPane{
@@ -69,12 +65,6 @@ public class SpriteCreationEnvironment extends BorderPane{
 						new SpriteCreationScreen(developerData, model));
 				creationScreens.getTabs().add(spriteTab);
 				creationScreens.getSelectionModel().select(spriteTab);
-			});
-			Button presetSpawnerButton=new Button("Load Spawner Preset");
-			Button loadPresetSprite=new Button("Load Preset");
-		//	Button loadSavedSprite=new Button("Load Saved Sprite");
-			loadSavedSprite.setOnAction((event)->{
-
 			});
 			
 			
