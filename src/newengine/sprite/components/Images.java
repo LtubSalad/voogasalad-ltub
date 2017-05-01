@@ -47,7 +47,7 @@ public class Images extends Component {
 		return new Images(imageFilePath);
 	}
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[1];
 		parameters[0]=new LtubImage(imageFilePath);
 		return parameters;

@@ -46,7 +46,7 @@ public class RangeShootingAI extends Component {
 	}
 
 	@Override
-	public Object[] getParameters() {
+	public Object[] getGUIParameters() {
 		// TODO Auto-generated method stub
 		return new Object[] {};
 	}
