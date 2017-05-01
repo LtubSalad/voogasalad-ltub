@@ -70,8 +70,7 @@ public class AuthDataTranslator implements Translator<Sprite>{
 	private void makeSingleSprite(SpriteMakerModel spriteToMake) {
 		constructed = handleComponents(spriteToMake.getActualComponents());
 		constructed.addComponent(new GameBus());
-		constructed.addComponent(new EventQueue());
-		
+		//constructed.addComponent(new EventQueue());
 
 	}
 
@@ -125,6 +124,7 @@ public class AuthDataTranslator implements Translator<Sprite>{
 		Sprite sprite = new Sprite(); 
 		System.out.println("constructed in translate: " + sprite);
 		sprite.addComponent(new Position(100,200,0));
+		sprite.addComponent(new EventQueue());
 		transferComponents.stream().forEach( c->{
 			if(c.getType().equals(Position.TYPE)){
 				Position position = (Position)c;

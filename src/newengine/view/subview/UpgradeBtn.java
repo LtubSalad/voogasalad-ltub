@@ -29,7 +29,7 @@ public class UpgradeBtn extends Button{
 
 	public UpgradeBtn(){
 		box = new VBox();
-		button = new Button("UPGRADE THIS SPRITE :)");
+		button = new Button("UPGRADE THIS SPRITE");
 		//initHandlers();
 	}
 
@@ -56,18 +56,19 @@ public class UpgradeBtn extends Button{
 			HBox options = new HBox();
 			Button yes = new Button ("yes");
 			yes.setOnAction(f -> {
+				System.out.println(sprite.getComponent(Owner.TYPE).isPresent());
 				EventBus bus = sprite.getComponent(GameBus.TYPE).get().getGameBus();
-				
-				bus.emit(new ChangeWealthEvent
-						(ChangeWealthEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), WealthType.GOLD, sprite.getComponent(Upgrade.TYPE).get().getCost(), canUpdate));
+				System.out.println(sprite.getComponent(Owner.TYPE).get().player().getName());
+//				bus.emit(new ChangeWealthEvent
+//						(ChangeWealthEvent.CHANGE, sprite.getComponent(Owner.TYPE).get().player(), WealthType.GOLD, sprite.getComponent(Upgrade.TYPE).get().getCost(), canUpdate));
 				if (canUpdate) {
-//					sprite.getComponent(Health.TYPE).ifPresent((health) -> {
-//						sprite.emit(new UpgradeEvent(UpgradeEvent.RESET, sprite, sprite.getComponent(Health.TYPE).get().getInitHealth()));
-//					});
-//					sprite.emit(new UpgradeEvent(UpgradeEvent.DOUBLE, sprite));
-					AuthDataTranslator adt = new AuthDataTranslator(sprite.getComponent(Upgrade.TYPE).get().getSMM());
-					bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, adt.getSprite()));
-					bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
+					sprite.getComponent(Health.TYPE).ifPresent((health) -> {
+						sprite.emit(new UpgradeEvent(UpgradeEvent.RESET, sprite, sprite.getComponent(Health.TYPE).get().getInitHealth()));
+					});
+					sprite.emit(new UpgradeEvent(UpgradeEvent.DOUBLE, sprite));
+//					AuthDataTranslator adt = new AuthDataTranslator(sprite.getComponent(Upgrade.TYPE).get().getSMM());
+//					bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, adt.getSprite()));
+//					bus.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
 				}
 				msgStage.close();
 			});
