@@ -89,6 +89,23 @@ public class PlayerStatsModel {
 				wealth.put(mainPlayer, wealths);
 			}
 		});
+		bus.on(ChangeWealthEvent.REWARD, (e) ->{
+			WealthType type = e.getWealthType();
+			if (wealth.containsKey(mainPlayer)) {
+				Map<WealthType, Integer> wealths = wealth.get(mainPlayer);
+				if (wealths.containsKey(type)) {
+					wealths.put(type, wealths.get(type) + e.getAmountChanged());
+				}
+				else {
+					wealths.put(type, e.getAmountChanged());
+				}
+			}
+			else {
+				Map<WealthType, Integer> wealths = new HashMap<>();
+				wealths.put(e.getWealthType(), e.getAmountChanged());
+				wealth.put(mainPlayer, wealths);
+			}
+		});
 		bus.on(ChangeLivesEvent.CHANGE, (e) ->{
 			if (isNotMainPlayer(e.getPlayer())) return;
 			System.out.println("LIVES CHANGED! from: " + lives.get(mainPlayer));

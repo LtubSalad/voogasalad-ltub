@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 import bus.EventBus;
 import commons.RunningMode;
+import commons.point.GamePoint;
 import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
 import newengine.app.Game;
@@ -33,7 +35,10 @@ import newengine.sprite.SpriteID;
 import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
+import newengine.sprite.components.PathFollower;
+import newengine.sprite.components.Position;
 import newengine.sprite.components.SkillSet;
+import newengine.utils.image.LtubImage;
 import player.helpers.GameLoadException;
 import utilities.XStreamHandler;
 
@@ -85,14 +90,41 @@ public class GameCreator {
 			System.out.println("see my datax");
 			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites()));
 
+			List<Sprite> pathSprites = new ArrayList<>();
+			SkillSet skillSet = (SkillSet) spriteMakerModels.get(0).getComponentByType(SkillSet.TYPE);
+			BuildSkill buildSkill = (BuildSkill) skillSet.getSkill(BuildSkill.TYPE);
+			PathFollower pathFollowerComponent = (PathFollower) buildSkill.getSpriteMakerModel().getComponentByType(PathFollower.TYPE);
+			List<GamePoint> points = new ArrayList<> (pathFollowerComponent.getPath().getPath());
+			for (int i = 0; i < points.size()-1; i++) {
+				GamePoint point1 = points.get(i);
+				GamePoint point2 = points.get(i+1);
+				double dist = point1.distFrom(point2);
+				double dx = point2.x() - point1.x();
+				double dy = point2.y() - point1.y();
+				double tileInterval = 30;
+				for (int j = 0; j <= dist / tileInterval; j++) {
+					GamePoint pathPoint = new GamePoint(
+							point1.x() + tileInterval * dx / dist * j,
+							point1.y() + tileInterval * dy / dist * j);
+					Sprite step = new Sprite();
+					step.addComponent(new Position(pathPoint));
+					LtubImage ltubimage = new LtubImage("images/characters/Stone.jpg");
+					step.addComponent(new Images(ltubimage));
+					step.addComponent(new GameBus());
+					step.addComponent(new Owner(Player.NATURE));
+					pathSprites.add(step);
+				}
+			}
 
+			
 			EventBus bus = game.getBus();
 			bus.on(GameInitializationEvent.ANY, (e) -> {
 				bus.emit(new InitILevelsEvent(myData.getLevels()));
 				bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
 				bus.emit(new MainPlayerEvent(userPlayer));
-				
+				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, pathSprites));
+
 //				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
 				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, 20)); // Hard-coded
 //				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));
@@ -110,6 +142,32 @@ public class GameCreator {
 			}
 			throw new GameLoadException("Fail to load game: " + gameFile);
 		}
+	}
+	
+	private List<Sprite> makePathSprites(List<Sprite> sprites){
+		List<Sprite> pathSprites = new ArrayList<>();
+		
+		
+		
+//		List<GamePoint> alreadyAdded = new ArrayList<>();
+//		for (Sprite sprite : sprites) {
+//			System.out.println("sprites path is being added " + sprite.getID());
+//			System.out.println(sprite.hasComponent(PathFollower.TYPE));
+//			sprite.getComponent(PathFollower.TYPE).ifPresent((pathFollower) -> {
+//				System.out.println("has path follower and makes points queue");
+//				Queue<GamePoint> points = pathFollower.getPath().getPath();
+//				while (!points.isEmpty()){
+//					if (alreadyAdded.contains(points.peek())) continue;
+//					Sprite step = new Sprite();
+//					step.addComponent(new Position(points.poll()));
+//					LtubImage ltubimage = new LtubImage("images/characters/Grass.jpg");
+//					step.addComponent(new Images(ltubimage));
+//					step.addComponent(new GameBus());
+//					pathSprites.add(step);
+//				}
+//			});
+//		}
+		return pathSprites;
 	}
 
 }
