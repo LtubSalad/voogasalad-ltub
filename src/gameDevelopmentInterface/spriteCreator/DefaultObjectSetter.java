@@ -7,28 +7,29 @@ import java.util.List;
 
 import data.DeveloperData;
 import exception.UnsupportedTypeException;
-import gameDevelopmentInterface.developerdata.ComponentSetter;
+import gameDevelopmentInterface.developerdata.ObjectSetter;
 import gameDevelopmentInterface.spriteCreator.variableSetters.VariableSetter;
 import helperAnnotations.ConstructorForDeveloper;
 import newengine.sprite.component.Component;
+import newengine.sprite.component.GUISettableObject;
 import utilities.AlertHandler;
 /**
  * 
  * @author Daniel
- * A GUI component that allows the user to instantiate any component.
- * Looks for a method marked ConstructorForDeveloper, and and creates 
+ * A GUI component that allows the user to instantiate any object with the proper annotations.
+ * Looks for a method annotated by ConstructorForDeveloper, and and creates 
  * GUI setters to instantiate a class using the constructor's parameters.
  * 
  * @param <T>
  */
-public class DefaultComponentSetter<T extends Component> extends ComponentSetter<T>{
+public class DefaultObjectSetter<T extends GUISettableObject> extends ObjectSetter<T>{
 	private Constructor<? extends T> ctor;
 	private Parameter[] parameters;
 	private DeveloperData data;
 	private List<VariableSetter<?>> variableSetters;
 	private VariableSetterFactory setterFactory;
 	
-	public DefaultComponentSetter(Class<? extends T> myComponent, DeveloperData data) throws UnsupportedTypeException{
+	public DefaultObjectSetter(Class<? extends T> myComponent, DeveloperData data) throws UnsupportedTypeException{
 		super(myComponent);
 		addDefaultLabel();
 		updateFactoryData(myComponent,data);
@@ -40,11 +41,11 @@ public class DefaultComponentSetter<T extends Component> extends ComponentSetter
 		}
 	}
 
-	public <U> DefaultComponentSetter(T component, DeveloperData data) throws UnsupportedTypeException{
+	public <U> DefaultObjectSetter(T component, DeveloperData data) throws UnsupportedTypeException{
 		super((Class<? extends T>)component.getClass());
 		addDefaultLabel();
-		updateFactoryData(getComponentType(),data);
-		Object[] currentFields=component.getParameters();
+		updateFactoryData(getObjectType(),data);
+		Object[] currentFields=component.getGUIParameters();
 		
 		for(int i=0;i<parameters.length;i++){
 			VariableSetter<U> fieldSetter = setterFactory.setterFromParameter(parameters[i]);
@@ -77,7 +78,7 @@ public class DefaultComponentSetter<T extends Component> extends ComponentSetter
 	}
 
 	@Override
-	public T produceComponent() throws Exception{
+	public T produceObject() throws Exception{
 		List<Object> parameters=new ArrayList<>();
 		for(VariableSetter<?> setter:variableSetters){
 			if(setter.getValue()==null){
