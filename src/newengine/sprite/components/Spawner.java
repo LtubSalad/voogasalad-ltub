@@ -14,8 +14,8 @@ import newengine.utils.Target;
 public class Spawner extends Component {
 
 	public static final ComponentType<Spawner> TYPE = new ComponentType<>(Spawner.class.getName());
-	private double secondsBetween;
-	private int totalNumber;
+	private double secondsBetween = 1.5;
+	private int totalNumber = 5;
 	private boolean needToSpawn = true;
 	private GamePoint startingPosition;
 
@@ -35,7 +35,7 @@ public class Spawner extends Component {
 
 	public void onUpdated(double dt) {
 		if (needToSpawn) {
-			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new PeriodicEvent(5, 3.0, () -> sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(new GamePoint(10,20))))));
+			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new PeriodicEvent(totalNumber, secondsBetween, () -> sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(new GamePoint(10,20))))));
 			needToSpawn = false;
 		}
 	}
@@ -56,6 +56,10 @@ public class Spawner extends Component {
 	public Object[] getParameters() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setSpawnTime(double spawnTime){
+		this.secondsBetween = spawnTime;
 	}
 
 }

@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import newengine.events.camera.CameraEvent;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
+import newengine.events.stats.ChangeWealthEvent;
 import newengine.model.Models;
 import newengine.model.PlayerRelationModel;
 import newengine.model.PlayerStatsModel;
@@ -128,6 +129,7 @@ public class View {
 	}
 	
 	public void render(Models models) {
+		bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, models.playerRelationModel().getMainPlayer(), WealthType.GOLD, 100 ));
 		renderSprites(models.spriteModel());
 		renderStats(models.playerStatsModel(), models.playerRelationModel(), models.selectionModel());
 		renderBottomPane(models.selectionModel(), models.playerRelationModel());
