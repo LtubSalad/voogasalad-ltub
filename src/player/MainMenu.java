@@ -14,7 +14,7 @@ import newengine.animation.AnimationImage;
 import user.UsersModel;
 
 public class MainMenu {
-	
+
 	public static final String CSS_LOCATION = "/styleSheets/login.css";
 
 	private Stage primaryStage;
@@ -23,7 +23,7 @@ public class MainMenu {
 	private Button playGame = new Button("Play Game");
 	private Button authorGame = new Button("Author Game");
 	private Button socialCenter = new Button("Social Center");
-	
+
 	public MainMenu(Stage primaryStage, UsersModel usersModel){	
 		this.primaryStage = primaryStage;
 		this.usersModel = usersModel;
@@ -31,12 +31,12 @@ public class MainMenu {
 		VBox buttons = new VBox();
 		buttons.setId("vbox");
 		buttons.getChildren().addAll(playGame, authorGame, socialCenter);
-		
+
 		playGame.setMaxWidth(Double.MAX_VALUE);
 		authorGame.setMaxWidth(Double.MAX_VALUE);
 		socialCenter.setMaxWidth(Double.MAX_VALUE);
-		
-		
+
+
 		playGame.setId("main-button");
 		authorGame.setId("main-button");
 		socialCenter.setId("main-button");
@@ -46,9 +46,9 @@ public class MainMenu {
 		HBox hBox3 = getHBox(3, 200,400);
 		HBox hBox4 = getHBox(4, 400,400);
 		HBox[] h = {hBox1, hBox2, hBox3, hBox4};
-		
 
-root.getChildren().addAll(new ArrayList<HBox>(Arrays.asList(h)));
+
+		root.getChildren().addAll(new ArrayList<HBox>(Arrays.asList(h)));
 
 		initHandlers();
 		scene = new Scene(root, App.WIDTH, App.HEIGHT);
@@ -69,19 +69,19 @@ root.getChildren().addAll(new ArrayList<HBox>(Arrays.asList(h)));
 			primaryStage.setScene(usersModel.getUserSocialPage());
 		});
 	}
-	
+
 	public Scene getScene() {
 		return scene;
 	}
-	
+
 	private HBox getHBox( int seed, int x, int y){
 		AnimationImage imageView = new AnimationImage();	
 		HBox hBox = new HBox();
 		hBox.getChildren().add(imageView.getImageView(seed));
 		hBox.setLayoutX(x);
 		hBox.setLayoutY(y);
-		
+
 		return hBox;
 	}
-	
+
 }
