@@ -1,15 +1,16 @@
 package main;
 
-import data.SerializableDeveloperData;
 import gameauthorgui.tower.TowerAuthor;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import newengine.app.App;
+import utilities.CustomAlert;
 import utilities.XStreamHandler;
 
 public class Main extends Application {
@@ -57,8 +58,7 @@ public class Main extends Application {
 			try {
 				runScreen.start(ps);
 			} catch (Exception e1) {
-				//TODO remove this
-				e1.printStackTrace();
+				new CustomAlert(AlertType.ERROR, "Problem with running the screen in main").show();
 			}
 		});
 	}
