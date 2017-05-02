@@ -5,25 +5,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.stream.Collectors;
 
 import bus.EventBus;
 import commons.RunningMode;
-import commons.point.GamePoint;
 import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
+import javafx.scene.control.Alert.AlertType;
 import newengine.app.Game;
 import newengine.events.GameInitializationEvent;
 import newengine.events.SpriteModelEvent;
-import newengine.events.conditions.SetEndConditionEvent;
 import newengine.events.levels.InitILevelsEvent;
 import newengine.events.player.MainPlayerEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
-import newengine.managers.conditions.GoldMinimumCondition;
-import newengine.managers.conditions.NoLivesCondition;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.skill.Skill;
@@ -35,11 +31,9 @@ import newengine.sprite.SpriteID;
 import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
-import newengine.sprite.components.PathFollower;
-import newengine.sprite.components.Position;
 import newengine.sprite.components.SkillSet;
-import newengine.utils.image.LtubImage;
 import player.helpers.GameLoadException;
+import utilities.CustomAlert;
 import utilities.XStreamHandler;
 
 /**
@@ -102,15 +96,12 @@ public class GameCreator {
 				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(SerializableDeveloperData.NUMBER_OF_STARTING_GOLD))));
 				//bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, 200));
 				
-//				//TODO condition factory
-//				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
-//				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 			});
 
 			return game;
 		} catch (Exception e) {
 			if (RunningMode.DEV_MODE) {
-				e.printStackTrace();
+				new CustomAlert(AlertType.ERROR, "Unable to create the game in GameCreator");
 			}
 			throw new GameLoadException("Fail to load game: " + gameFile);
 		}

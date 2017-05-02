@@ -5,37 +5,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
 import bus.BasicEventBus;
 import bus.BusEvent;
 import bus.BusEventHandler;
 import bus.BusEventType;
 import bus.EventBus;
 import helperAnnotations.DeveloperMethod;
-import javafx.beans.property.ReadOnlyListWrapper;
-import javafx.collections.FXCollections;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
-import newengine.sprite.components.Attacker;
-import newengine.sprite.components.Cooldown;
-import newengine.sprite.components.DamageStrength;
-import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
-import newengine.sprite.components.Owner;
-import newengine.sprite.components.Position;
-import newengine.sprite.components.Range;
-import newengine.sprite.components.SkillSet;
-import newengine.sprite.components.Speed;
 import newengine.sprite.state.SpriteState;
 
 public class Sprite {
 	private EventBus spriteBus = new BasicEventBus();
 	private SpriteID spriteID;
 	private Map<ComponentType<? extends Component>, Component> components = new HashMap<>();
-	// TODO: is dis ok for serialization 
 //	private final ScriptEngine scriptHandler = new ScriptEngineManager().getEngineByName("groovy");
 	
 	private SpriteState myState;
@@ -130,8 +114,7 @@ public class Sprite {
 //			try { 
 //				scriptHandler.eval(script);
 //			} catch (ScriptException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
+//				new CustomAlert(AlertType.ERROR, "Problem with Script").show();
 //			}
 //		};
 //		on(eventType, newHandler);

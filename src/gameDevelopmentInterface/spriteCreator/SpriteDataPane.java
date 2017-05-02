@@ -169,9 +169,9 @@ public class SpriteDataPane extends ScrollPane{
 				try {
 					return mySetter.produceObject();
 				} catch (UnsupportedTypeException e) {
-					e.printStackTrace();
+					return null;
 				}
-				return null;
+				
 			}
 		}
 	}	
