@@ -123,8 +123,6 @@ public class GameChooser {
 			game = gameCreator.createGame(gameFile);
 		} catch (GameLoadException e) {
 			if (RunningMode.DEV_MODE) {
-				System.out.println("Development mode stack trace:");
-				e.printStackTrace();
 				alertLoadError(gameFile.getName());
 			}
 		}
