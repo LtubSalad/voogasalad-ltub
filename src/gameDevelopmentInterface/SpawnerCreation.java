@@ -53,14 +53,15 @@ public class SpawnerCreation extends BorderPane {
 		spriteToSpawn = monster;
 	}
 	
-	public SpriteMakerModel getSpawner() {
+	public SpriteMakerModel getSpawner(double spawnBetweenTime) {
+		spawnerData = new SpriteMakerModel();
 		Map<SkillType<? extends Skill>, Skill> spawnerSkills = new HashMap<>();
 		spawnerSkills.put(BuildSkill.TYPE, new BuildSkill(spriteToSpawn));
 		spawnerData.addComponent(new GameBus());
 		spawnerData.addComponent(new SkillSet(spawnerSkills));
-		spawnerData.addComponent(new Owner(new Player("Spawner")));
+		spawnerData.addComponent(new Owner(new Player("TOWERS")));
 		spawnerData.addComponent(new Position(new GamePoint(0.1, 0.1), 0));
-		spawnerData.addComponent(new Spawner(myMonsterAdder.getNumMonsters(), new Path(), 0.5, spriteToSpawn));
+		spawnerData.addComponent(new Spawner(myMonsterAdder.getNumMonsters(), new Path(), spawnBetweenTime, spriteToSpawn));
 		return spawnerData;
 	}
 	

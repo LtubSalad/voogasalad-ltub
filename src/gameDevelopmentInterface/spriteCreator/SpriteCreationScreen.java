@@ -31,6 +31,7 @@ public class SpriteCreationScreen extends BorderPane {
 	private EventHandlerPane scriptPane;
 	private DeveloperData developerData;
 	private SpriteDescriptorPane descriptorPane;
+	private SavePanel savePanel;
 
 	public SpriteCreationScreen(DeveloperData model, SpriteMakerModel spriteData) {
 		this.developerData = model;
@@ -45,11 +46,12 @@ public class SpriteCreationScreen extends BorderPane {
 		scriptPane = new EventHandlerPane(sprite);
 		infoPane = new SpriteDataPane(sprite, developerData);
 		descriptorPane = new SpriteDescriptorPane(sprite);
+		savePanel=new SavePanel(this,developerData);
 		this.setRight(instantiateSelector());
 		this.setLeft(scriptPane);
 		this.setCenter(infoPane);
 		this.setTop(descriptorPane);
-		this.setBottom(new SavePanel(this,developerData));
+		this.setBottom(savePanel);
 	}
 
 	public SpriteDataPane getInfoPane() {

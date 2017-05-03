@@ -66,10 +66,14 @@ public class XStreamHandler {
 		return attribute;
 	}
 	
-	public void saveToFile(Object data) {
+	public boolean saveToFile(Object data) {
 		FileChooser chooser = new FileChooser();
 		File location = chooser.showSaveDialog(new Stage());
+		if(location==null){
+			return false;
+		}
 		saveToFile(data,location);
+		return true;
 	}
 	
 	public void saveToFile(Object data, File location){

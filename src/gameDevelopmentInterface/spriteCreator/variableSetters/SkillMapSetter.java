@@ -8,7 +8,6 @@ import java.util.Map;
 
 import data.DeveloperData;
 import exception.UnsupportedTypeException;
-import gameDevelopmentInterface.spriteCreator.SkillSetter;
 import javafx.scene.layout.VBox;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
@@ -68,14 +67,15 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 		skillSelectors.clear();
 		for(Class<? extends Skill> clazz:availableSkills){
 			boolean inMap=false;
-			for(Skill skill:initialValue.values()){
+			SkillSetter<?> setter;
+			for(Skill skill:initialValue.values()){				
 				if(skill.getClass().equals(clazz)){
-					inMap=true;
-					
+					inMap=true;					
 					try {
-						SkillSetter<?> setter= new SkillSetter(skill,data);
+						setter= new SkillSetter(skill,data);
 						skillSelectors.add(setter);
 						displayContents.getChildren().add(setter);
+						setter.setSelected(true);
 					} catch (UnsupportedTypeException e) {
 						AlertHandler.showError("Could not make skill setter");
 					}
@@ -84,9 +84,10 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 			}
 			if(!inMap){
 				try {
-					SkillSetter<?> setter= new SkillSetter(clazz,data);
+					setter= new SkillSetter(clazz,data);
 					skillSelectors.add(setter);
 					displayContents.getChildren().add(setter);
+					
 				} catch (UnsupportedTypeException e) {
 					AlertHandler.showError("Could not make skill setter");
 				}

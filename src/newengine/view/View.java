@@ -11,10 +11,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -82,11 +81,15 @@ public class View {
 		scene = new Scene(root, width, height, BACKGROUND);		
 		statsPanel = new HBox();
 		selectionCanvas = new Canvas(selectionWidth, selectionHeight);
+		StackPane holder = new StackPane();
 		gameWorldCanvas = new Canvas(canvasWidth, canvasHeight);
+		holder.getChildren().add(gameWorldCanvas);
+		holder.setStyle("-fx-background-color: darkgreen");
 		bottomPane = new HBox();
 		root.getChildren().addAll(
 				statsPanel, 
-				gameWorldCanvas, 
+				//gameWorldCanvas, 
+				holder,
 				splittingRule(),
 				bottomPane);
 		// selected sprite

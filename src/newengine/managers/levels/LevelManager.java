@@ -90,6 +90,7 @@ public class LevelManager{
 		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, newLevel.getLosingCondition()));
 		
 		List<SpriteMakerModel> spriteMakerModels = newLevel.getSpawners();
+		//System.out.println("Number of spawners: " + spriteMakerModels.size());
 		List<Sprite> sprites = new ArrayList<>();
 		sprites.addAll(spriteMakerModels.stream().map((spriteMakerModel) -> {
 			return (new AuthDataTranslator(spriteMakerModel)).getSprite();
@@ -99,36 +100,39 @@ public class LevelManager{
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
 		
 		
-		/**
-		 * This code assumes that only one sprite is initially added, and that sprite is a spawner. 
-		 */
 		List<Sprite> pathSprites = new ArrayList<>();
-		SkillSet skillSet = (SkillSet) spriteMakerModels.get(0).getComponentByType(SkillSet.TYPE);
-		BuildSkill buildSkill = (BuildSkill) skillSet.getSkill(BuildSkill.TYPE);
-		PathFollower pathFollowerComponent = (PathFollower) buildSkill.getSpriteMakerModel().getComponentByType(PathFollower.TYPE);
-		List<GamePoint> points = new ArrayList<> (pathFollowerComponent.getPath().getPath());
-		for (int i = 0; i < points.size()-1; i++) {
-			GamePoint point1 = points.get(i);
-			GamePoint point2 = points.get(i+1);
-			double dist = point1.distFrom(point2);
-			double dx = point2.x() - point1.x();
-			double dy = point2.y() - point1.y();
-			double tileInterval = 30;
-			for (int j = 0; j <= dist / tileInterval; j++) {
-				GamePoint pathPoint = new GamePoint(
-						point1.x() + tileInterval * dx / dist * j,
-						point1.y() + tileInterval * dy / dist * j);
-				Sprite step = new Sprite();
-				step.addComponent(new Position(pathPoint));
-				LtubImage ltubimage = new LtubImage("images/characters/Stone.jpg");
-				step.addComponent(new Images(ltubimage));
-				step.addComponent(new GameBus());
-				step.addComponent(new Owner(Player.NATURE));
-				pathSprites.add(step);
-			}
+		for (int m = 0; m < spriteMakerModels.size(); m++) {
+			SkillSet skillSet = (SkillSet) spriteMakerModels.get(m).getComponentByType(SkillSet.TYPE);
+			BuildSkill buildSkill = (BuildSkill) skillSet.getSkill(BuildSkill.TYPE);
+			PathFollower pathFollowerComponent = (PathFollower) buildSkill.getSpriteMakerModel().getComponentByType(PathFollower.TYPE);
+			List<GamePoint> points = new ArrayList<> (pathFollowerComponent.getPath().getPath());
+			points.forEach(e -> {
+				System.out.println(e.x() + " " + e.y());
+			});
+			for (int i = 0; i < points.size()-1; i++) {
+				GamePoint point1 = points.get(i);
+				GamePoint point2 = points.get(i+1);
+				double dist = point1.distFrom(point2);
+				double dx = point2.x() - point1.x();
+				double dy = point2.y() - point1.y();
+				double tileInterval = 30;
+				for (int j = 0; j <= dist / tileInterval; j++) {
+					GamePoint pathPoint = new GamePoint(
+							point1.x() + tileInterval * dx / dist * j,
+							point1.y() + tileInterval * dy / dist * j);
+					Sprite step = new Sprite();
+					step.addComponent(new Position(pathPoint));
+					LtubImage ltubimage = new LtubImage("images/characters/Stone.jpg");
+					step.addComponent(new Images(ltubimage));
+					step.addComponent(new GameBus());
+					step.addComponent(new Owner(Player.NATURE));
+					pathSprites.add(step);
+				}
+			}	
 		}
-		
+		System.out.println("Size of pathSprites: "+pathSprites.size());
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, pathSprites));
+		
 	}
 
 }

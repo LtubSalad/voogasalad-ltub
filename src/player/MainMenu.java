@@ -69,11 +69,18 @@ public class MainMenu {
 		});
 		authorGame.setOnMouseClicked((event) -> {
 			TowerAuthor developerView = new TowerAuthor();
-			primaryStage.setScene(developerView.getScene());
+			Stage authorStage=new Stage();
+			authorStage.setScene(developerView.getScene());
+			authorStage.setHeight(600);
+			authorStage.setResizable(true);
+			authorStage.show();
 			//primaryStage.setFullScreen(true);
 		});
+		
 		socialCenter.setOnMouseClicked((event) -> {
-			primaryStage.setScene(usersModel.getUserSocialPage());
+			Stage socialStage=new Stage();
+			socialStage.setScene(usersModel.getUserSocialPage());
+			socialStage.show();
 		});
 	}
 	
@@ -109,7 +116,9 @@ public class MainMenu {
 			}
 		}
 		if (game != null) {
-			primaryStage.setScene(game.getScene());
+			Stage gameStage=new Stage();
+			gameStage.setScene(game.getScene());
+			gameStage.show();
 			game.start();
 		}
 	}

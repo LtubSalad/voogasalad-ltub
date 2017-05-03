@@ -31,7 +31,9 @@ public class PathButtonsPanel extends VBox {
 		makeButtons();
 		rowsBox.getChildren().addAll(rowsInput, sendNumRows);
 		colsBox.getChildren().addAll(colsInput, sendNumCols);
-		this.getChildren().addAll(startPath, checkPath, clearScreen, refresh, rowsBox, colsBox);
+		this.getChildren().addAll(startPath, checkPath, 
+				clearScreen, //refresh, 
+				rowsBox, colsBox);
 	}
 	
 	private void makeButtons() {
@@ -43,7 +45,7 @@ public class PathButtonsPanel extends VBox {
 		sendNumRows = new Button("Reset number of rows");
 		startPath.setOnAction(e -> {
 			myPathCreator.makePath();
-			myPathCreator.replacePath();
+			//myPathCreator.replacePath();
 		});
 		checkPath.setOnAction(e -> {
 			TextInputDialog dialog = new TextInputDialog("Name of path");
@@ -53,11 +55,8 @@ public class PathButtonsPanel extends VBox {
 			// Traditional way to get the response value.
 			Optional<String> result = dialog.showAndWait();
 			if (result.isPresent()){
-				myPathCreator.getDeveloperData().addPath(new Path(result.get(), myPathCreator.getReplacementPath()));
-			}
-			
-			//myPathCreator.getDeveloperData().addPath(new Path("TestPath", myPathCreator.getReplacementPath()));
-			
+				myPathCreator.getDeveloperData().addPath(new Path(result.get(), myPathCreator.getPath()));
+			}			
 			myPathCreator.getReplacementPath().forEach(gamePoint -> System.out.println(gamePoint.x() + " " + gamePoint.y()));
 		});
 		clearScreen.setOnAction(e -> {

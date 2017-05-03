@@ -1,10 +1,5 @@
 package gameDevelopmentInterface.spriteCreator.variableSetters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import gameDevelopmentInterface.Path;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -18,8 +13,7 @@ public class PathSetter extends VariableSetter<Path> {
 	
 	public PathSetter(ObservableList<Path> paths, String variableName){
 		super(Path.class,variableName);
-		this.myPaths=paths;
-		
+		this.myPaths=paths;		
 		
 		pathChoices= new ComboBox<>(myPaths);
 		

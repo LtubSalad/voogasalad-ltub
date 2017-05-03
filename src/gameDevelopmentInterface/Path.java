@@ -19,7 +19,7 @@ public class Path {
 	
 	public Path() {
 		this("A Nameless Path");
-		myPath.add(new GamePoint(5,3));
+		//myPath.add(new GamePoint(5,3));
 		//makeDefaultPath();
 	}
 	
@@ -47,6 +47,10 @@ public class Path {
 	 */
 	public void changePath(Queue<GamePoint> replacementPath) {
 		myPath = replacementPath;
+		System.out.println("Current myPath: ");
+		myPath.forEach(gp -> {
+			System.out.println(gp.x() + " "+ gp.y());
+		});
 	}
 	/**
 	 * 
