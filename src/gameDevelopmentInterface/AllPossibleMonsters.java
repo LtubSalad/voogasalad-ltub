@@ -18,63 +18,55 @@ import newengine.sprite.components.Speed;
 import utilities.AlertHandler;
 
 public class AllPossibleMonsters extends ScrollPane {
+	private static final int IMAGE_SIZE = 100;
 	private DeveloperData myData;
-	private List<String> monstersAlreadyInBox;
 	private SpawnerCreation mySpawnerInfo;
 	private SpawnerInfoPane mySpawnerInfoPane;
 	private VBox monsterImages;
-	
+
 	public AllPossibleMonsters(SpawnerCreation spawnerInfo, DeveloperData data, SpawnerInfoPane spawnerInfoPane) {
 		mySpawnerInfoPane = spawnerInfoPane;
 		mySpawnerInfo = spawnerInfo;
 		myData = data;
-		monstersAlreadyInBox = new ArrayList<String>();
-		monsterImages = new VBox();	
+		monsterImages = new VBox();
 		this.setContent(monsterImages);
 	}
-	
+
 	public void getMonstersOnScreen() {
-		monstersAlreadyInBox.clear();
 		List<SpriteMakerModel> allSprites = new ArrayList<SpriteMakerModel>(myData.getSprites());
 		System.out.println("size: " + allSprites.size());
 		System.out.println("images: " + allSprites.get(0).getComponentByType(Images.TYPE));
 		List<SpriteMakerModel> onlyMonsters = new ArrayList<>();
 		for (SpriteMakerModel possibleMonster : allSprites) {
 			if (isMonster(possibleMonster)) {
-				onlyMonsters.add(possibleMonster);			
+				onlyMonsters.add(possibleMonster);
 			}
 		}
 		for (SpriteMakerModel monster : onlyMonsters) {
-				monstersAlreadyInBox.add(monster.getSpriteName());
-				System.out.println("Got here");
-				Images imageComp = (Images) monster.getComponentByType(Images.TYPE);
-				ImageView iv = new ImageView(imageComp.image().getFXImage());
-				iv.setFitWidth(100);
-				iv.setFitHeight(100);
-				iv.setOnMouseClicked(click -> {
-					setCurrentMonster(monster, new ImageView(imageComp.image().getFXImage()));
-					mySpawnerInfo.setCurrentMonsterToSpawn(monster);
-				});
-				monsterImages.getChildren().add(iv);
-//			}
+			Images imageComp = (Images) monster.getComponentByType(Images.TYPE);
+			ImageView iv = new ImageView(imageComp.image().getFXImage());
+			iv.setFitWidth(100);
+			iv.setFitHeight(100);
+			iv.setOnMouseClicked(click -> {
+				setCurrentMonster(monster, new ImageView(imageComp.image().getFXImage()));
+				mySpawnerInfo.setCurrentMonsterToSpawn(monster);
+			});
+			monsterImages.getChildren().add(iv);
 		}
 	}
-	
+
 	public void loadFromFile(SpriteMakerModel monster) {
 		if (isMonster(monster)) {
-			if (!monstersAlreadyInBox.contains(monster.getSpriteName())) {
-				monstersAlreadyInBox.add(monster.getSpriteName());
-				Images imageComp = (Images) monster.getComponentByType(Images.TYPE);
-				System.out.println(imageComp.image().getFileName());
-				ImageView iv = new ImageView(imageComp.image().getFXImage());
-				iv.setFitWidth(100);
-				iv.setFitHeight(100);
-				iv.setOnMouseClicked(click -> {
-					setCurrentMonster(monster, new ImageView(imageComp.image().getFXImage()));
-					mySpawnerInfo.setCurrentMonsterToSpawn(monster);
-				});
-				monsterImages.getChildren().add(iv);
-			}
+			Images imageComp = (Images) monster.getComponentByType(Images.TYPE);
+			System.out.println(imageComp.image().getFileName());
+			ImageView iv = new ImageView(imageComp.image().getFXImage());
+			iv.setFitWidth(IMAGE_SIZE);
+			iv.setFitHeight(IMAGE_SIZE);
+			iv.setOnMouseClicked(click -> {
+				setCurrentMonster(monster, new ImageView(imageComp.image().getFXImage()));
+				mySpawnerInfo.setCurrentMonsterToSpawn(monster);
+			});
+			monsterImages.getChildren().add(iv);
 		}
 	}
 
@@ -82,13 +74,13 @@ public class AllPossibleMonsters extends ScrollPane {
 		mySpawnerInfo.setCurrentMonsterToSpawn(monster);
 		mySpawnerInfoPane.setImage((Images) monster.getComponentByType(Images.TYPE));
 	}
-	
+
 	private boolean isMonster(SpriteMakerModel possibleMonster) {
-				return (possibleMonster.getComponentByType(Images.TYPE) != null);// &&
-//				possibleMonster.getComponentByType(Speed.TYPE) != null &&
-//				possibleMonster.getComponentByType(Health.TYPE) != null &&
-//				possibleMonster.getComponentByType(PathFollower.TYPE) != null &&
-//				possibleMonster.getComponentByType(EventQueue.TYPE) != null);
-			//	possibleMonster.getComponentByType(GameBus.TYPE) != null);
+		return (possibleMonster.getComponentByType(Images.TYPE) != null);// &&
+		// possibleMonster.getComponentByType(Speed.TYPE) != null &&
+		// possibleMonster.getComponentByType(Health.TYPE) != null &&
+		// possibleMonster.getComponentByType(PathFollower.TYPE) != null &&
+		// possibleMonster.getComponentByType(EventQueue.TYPE) != null);
+		// possibleMonster.getComponentByType(GameBus.TYPE) != null);
 	}
 }

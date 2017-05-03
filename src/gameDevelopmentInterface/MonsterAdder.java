@@ -19,7 +19,7 @@ public class MonsterAdder extends HBox {
 		loadMonster.setOnAction(click -> {
 			XStreamHandler xstream = new XStreamHandler();
 			SpriteMakerModel monster = (SpriteMakerModel) xstream.getAttributeFromFile();
-			possibleMonsters.loadFromFile(monster);
+			myPossibleMonsters.loadFromFile(monster);
 		});
 		
 		refresh = new Button("Refresh");
