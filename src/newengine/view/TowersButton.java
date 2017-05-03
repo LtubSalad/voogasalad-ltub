@@ -2,14 +2,14 @@ package newengine.view;
 
 import bus.EventBus;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import newengine.events.selection.SelectSpriteEvent;
 import newengine.sprite.SpriteID;
 
 public class TowersButton {
 
 	private EventBus bus;
-	private Label button = new Label("towers");
+	private Button button = new Button("towers");
 	
 	public TowersButton(EventBus bus) {
 		this.bus = bus;
