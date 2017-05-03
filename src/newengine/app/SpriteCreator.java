@@ -45,7 +45,7 @@ public class SpriteCreator {//extends Application {
 		child.addComponent(new Owner(player1));
 		child.addComponent(new Position(new GamePoint(300, 50), 0));
 		child.addComponent(new Images("images/skills/build.png"));
-		child.addComponent(new Speed(1000));
+		child.addComponent(new Speed(1000, 0));
 		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		child.addComponent(new Range(128));

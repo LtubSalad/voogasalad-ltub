@@ -1,21 +1,16 @@
 package newengine.app;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import bus.EventBus;
 import commons.point.GamePoint;
-import data.DeveloperData;
-import data.SpriteMakerModel;
-import gameDevelopmentInterface.Path;
-import gamedata.AuthDataTranslator;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import newengine.events.GameInitializationEvent;
 import newengine.events.SpriteModelEvent;
+import newengine.events.camera.CameraEvent;
+import newengine.events.collision.CollisionEvent;
 import newengine.events.conditions.SetEndConditionEvent;
 import newengine.events.player.MainPlayerEvent;
 import newengine.events.sound.SoundEvent;
@@ -25,222 +20,176 @@ import newengine.managers.conditions.GoldMinimumCondition;
 import newengine.managers.conditions.NoLivesCondition;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
-import newengine.skill.Skill;
-import newengine.skill.SkillType;
-import newengine.skill.skills.BuildSkill;
-import newengine.skill.skills.FireProjectileSkill;
-import newengine.skill.skills.MoveSkill;
 import newengine.sprite.Sprite;
-import newengine.sprite.SpriteID;
-import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
-import newengine.sprite.components.Cooldown;
-import newengine.sprite.components.EventQueue;
 import newengine.sprite.components.GameBus;
-import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
-import newengine.sprite.components.Owner;
-import newengine.sprite.components.PathFollower;
 import newengine.sprite.components.Position;
-import newengine.sprite.components.Range;
-import newengine.sprite.components.RangeShootingAI;
 import newengine.sprite.components.Selectable;
 import newengine.sprite.components.Selectable.SelectionBoundType;
-import newengine.sprite.components.SkillSet;
-import newengine.sprite.components.SoundEffect;
 import newengine.sprite.components.Speed;
-import newengine.utils.image.ImageSet;
-import newengine.utils.image.LtubImage;
 
 public class App extends Application {
-	DeveloperData myData;
-	
-	public App(DeveloperData mainData) {
-		myData = mainData;
-	}
-	
 
 	@Override
 	public void start(Stage stage) throws Exception {
 
 		Game game = new Game();
 		Player player1 = new Player("Player 1");
-
-
-//		XStreamHandler xHandler = new XStreamHandler();
-//		XStream xStream = new XStream(new DomDriver());
-		
-		List<SpriteMakerModel> listSpriteModels = myData.getLevelData().get(0).getSpawners();
-		
-		//SpriteCreator jakeTestCreator = new SpriteCreator();
-		//List<SpriteMakerModel> listSpriteModels = jakeTestCreator.getSprites();// = translator.getSprites();
-		List<Sprite> listSprites = new ArrayList<>();
-		for (SpriteMakerModel smm : listSpriteModels) {
-			AuthDataTranslator translator = new AuthDataTranslator(smm);
-			listSprites.add(translator.getSprite());
-		}
-		Player player2 = new Player("Player 2");
-
-
-
 		EventBus bus = game.getBus();
-
-		//List<Sprite> listSprites = spriteModel.getSprites();
-		//System.out.println(listSprites.size());
-		for (Sprite s : listSprites) {
-			//System.out.println(s.getComponent(SkillSet.TYPE).get().skills());
-		}
 		
-		Sprite towerBuilder = new Sprite(new SpriteID("__TOWER_BUILDER"));
-		towerBuilder.addComponent(new GameBus());
-		towerBuilder.addComponent(new Owner(player1));
-		//towerBuilder.addComponent(createTowerBuilderSkillSet(player1));
-		towerBuilder.addComponent(new Images("images/characters/bahamut_right.png"));
-		listSprites.add(towerBuilder);
+		Sprite tree1 = new Sprite();
+		tree1.addComponent(new Position(new GamePoint(0,0)));
+		tree1.addComponent(new Images("images/characters/tree.png"));
+		tree1.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree2 = new Sprite();
+		tree2.addComponent(new Position(new GamePoint(100,0)));
+		tree2.addComponent(new Images("images/characters/tree.png"));
+		tree2.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree3 = new Sprite();
+		tree3.addComponent(new Position(new GamePoint(200,0)));
+		tree3.addComponent(new Images("images/characters/tree.png"));
+		tree3.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree4 = new Sprite();
+		tree4.addComponent(new Position(new GamePoint(200,-100)));
+		tree4.addComponent(new Images("images/characters/tree.png"));
+		tree4.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree5 = new Sprite();
+		tree5.addComponent(new Position(new GamePoint(200,-200)));
+		tree5.addComponent(new Images("images/characters/tree.png"));
+		tree5.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree6 = new Sprite();
+		tree6.addComponent(new Position(new GamePoint(200,-300)));
+		tree6.addComponent(new Images("images/characters/tree.png"));
+		tree6.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree7 = new Sprite();
+		tree7.addComponent(new Position(new GamePoint(200,-400)));
+		tree7.addComponent(new Images("images/characters/tree.png"));
+		tree7.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree8 = new Sprite();
+		tree8.addComponent(new Position(new GamePoint(200,-500)));
+		tree8.addComponent(new Images("images/characters/tree.png"));
+		tree8.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree9 = new Sprite();
+		tree9.addComponent(new Position(new GamePoint(400,0)));
+		tree9.addComponent(new Images("images/characters/tree.png"));
+		tree9.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree10 = new Sprite();
+		tree10.addComponent(new Position(new GamePoint(400,-100)));
+		tree10.addComponent(new Images("images/characters/tree.png"));
+		tree10.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree11 = new Sprite();
+		tree11.addComponent(new Position(new GamePoint(400,-200)));
+		tree11.addComponent(new Images("images/characters/tree.png"));
+		tree11.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree12 = new Sprite();
+		tree12.addComponent(new Position(new GamePoint(400,-300)));
+		tree12.addComponent(new Images("images/characters/tree.png"));
+		tree12.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree13 = new Sprite();
+		tree13.addComponent(new Position(new GamePoint(400,-400)));
+		tree13.addComponent(new Images("images/characters/tree.png"));
+		tree13.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree14 = new Sprite();
+		tree14.addComponent(new Position(new GamePoint(400,-500)));
+		tree14.addComponent(new Images("images/characters/tree.png"));
+		tree14.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree15 = new Sprite();
+		tree15.addComponent(new Position(new GamePoint(500,0)));
+		tree15.addComponent(new Images("images/characters/tree.png"));
+		tree15.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree16 = new Sprite();
+		tree16.addComponent(new Position(new GamePoint(600,0)));
+		tree16.addComponent(new Images("images/characters/tree.png"));
+		tree16.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree17 = new Sprite();
+		tree17.addComponent(new Position(new GamePoint(700,0)));
+		tree17.addComponent(new Images("images/characters/tree.png"));
+		tree17.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		
+		Sprite tree18 = new Sprite();
+		tree18.addComponent(new Position(new GamePoint(0,200)));
+		tree18.addComponent(new Images("images/characters/tree.png"));
+		tree18.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree19 = new Sprite();
+		tree19.addComponent(new Position(new GamePoint(100,200)));
+		tree19.addComponent(new Images("images/characters/tree.png"));
+		tree19.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree20 = new Sprite();
+		tree20.addComponent(new Position(new GamePoint(200,200)));
+		tree20.addComponent(new Images("images/characters/tree.png"));
+		tree20.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree21 = new Sprite();
+		tree21.addComponent(new Position(new GamePoint(300,200)));
+		tree21.addComponent(new Images("images/characters/tree.png"));
+		tree21.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree22 = new Sprite();
+		tree22.addComponent(new Position(new GamePoint(400,200)));
+		tree22.addComponent(new Images("images/characters/tree.png"));
+		tree22.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree23 = new Sprite();
+		tree23.addComponent(new Position(new GamePoint(500,200)));
+		tree23.addComponent(new Images("images/characters/tree.png"));
+		tree23.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree24 = new Sprite();
+		tree24.addComponent(new Position(new GamePoint(600,200)));
+		tree24.addComponent(new Images("images/characters/tree.png"));
+		tree24.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		Sprite tree25 = new Sprite();
+		tree25.addComponent(new Position(new GamePoint(700,200)));
+		tree25.addComponent(new Images("images/characters/tree.png"));
+		tree25.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		
+		Sprite car = new Sprite();
+		car.addComponent(new Position(new GamePoint(0,100)));
+		car.addComponent(new Speed(0, 30));
+		car.addComponent(new Images("images/characters/car.png"));
+		car.addComponent(new Selectable(SelectionBoundType.IMAGE));
+		car.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		car.addComponent(new GameBus());
+		car.on(CollisionEvent.ANY, (e) -> {
+			car.getComponent(GameBus.TYPE).get().getGameBus().emit(
+					new SoundEvent(SoundEvent.SOUND_EFFECT, "data/sounds/Alpissd1.wav"));
+		});
 		
-		
-
-		//EventBus bus = game.getBus();
-
-		// sprite 1: the tower
-		Sprite tower = new Sprite();
-		LtubImage image1 = new LtubImage("images/skills/bullet.png");
-		ImageSet imageSet1 = new ImageSet(image1);
-		Map<SkillType<? extends Skill>, Skill> skillMap1 = new HashMap<>();
-		skillMap1.put(MoveSkill.TYPE, new MoveSkill());
-		FireProjectileSkill fireSkill1 = new FireProjectileSkill();
-		fireSkill1.setCooldown(3); // add cooldown to the fireProjectilSkill
-		tower.addComponent(new Cooldown());
-		skillMap1.put(FireProjectileSkill.TYPE, fireSkill1);
-		tower.addComponent(new GameBus());
-		tower.addComponent(new SkillSet(skillMap1));
-		tower.addComponent(new Owner(player1));
-		tower.addComponent(new Position(new GamePoint(200, 100), 0));
-		//		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		tower.addComponent(new Images("images/characters/tower2_resized.gif"));
-		//		sprite1.addComponent(new Speed(200));
-		tower.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		tower.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		tower.addComponent(new Range(200));
-		tower.addComponent(new Attacker(25, image1));
-		tower.addComponent(new EventQueue(new LinkedList<>()));
-		tower.addComponent(new RangeShootingAI());
-
-
-
-
-		SpriteMakerModel child = new SpriteMakerModel();
-		child.addComponent(new GameBus());
-		child.addComponent(new Owner(player1));
-		child.addComponent(new Position(new GamePoint(300, 50), 0));
-		child.addComponent(new Images("images/skills/build.png"));
-		child.addComponent(new Speed(1000));
-		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		child.addComponent(new Range(128));
-		//child.addComponent(new Attacker());
-		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		child.addComponent(new Images("images/characters/bahamut_left.png"));
-		child.addComponent(new Speed(100));
-		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		child.addComponent(new Range(128));
-		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		child.addComponent(new Images("images/characters/bahamut_left.png"));
-		child.addComponent(new Speed(100));
-		child.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		child.addComponent(new Selectable(SelectionBoundType.IMAGE));
-		child.addComponent(new Range(128));
-		child.addComponent(new Health(100));
-		child.addComponent(new EventQueue(new LinkedList<>()));
-		child.addComponent(new PathFollower(new Path()));
-
-
-
-		
-		Sprite monster = new Sprite();
-		LtubImage image2 = new LtubImage("images/characters/bahamut_right.png");
-		ImageSet imageSet2 = new ImageSet(image2);
-		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
-		skillMap2.put(BuildSkill.TYPE, new BuildSkill(child));
-
-		FireProjectileSkill fireSkill2 = new FireProjectileSkill();
-		fireSkill2.setCooldown(3); // add cooldown to the fireProjectilSkill
-		monster.addComponent(new Cooldown());
-//		skillMap2.put(FireProjectileSkill.TYPE, fireSkill2);
-		monster.addComponent(new GameBus());
-		monster.addComponent(new EventQueue(new LinkedList<>()));
-		monster.addComponent(new SkillSet(skillMap2));
-		monster.addComponent(new Owner(player2));
-		monster.addComponent(new PathFollower(new Path()));
-		monster.addComponent(new Position(new GamePoint(100, 100), 0));
-		monster.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
-		monster.addComponent(new Images("images/characters/bahamut_right.png"));
-		monster.addComponent(new Speed(100));
-		monster.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		monster.addComponent(new Selectable(SelectionBoundType.IMAGE));
-//		sprite2.addComponent(new Attacker(25));
-//		sprite2.addComponent(new Spawner());
-		monster.addComponent(new Health(600));
-		
-
-
-		SpriteMakerModel building = new SpriteMakerModel();
-		Map<SkillType<? extends Skill>, Skill> monsterMap = new HashMap<>();
-		monsterMap.put(MoveSkill.TYPE, new MoveSkill());
-		building.addComponent(new GameBus());
-		building.addComponent(new SkillSet(monsterMap));
-		building.addComponent(new Owner(player1));
-		building.addComponent(new Images("images/characters/bahamut_right.png"));
-		building.addComponent(new Speed(100));
-		building.addComponent(new Health(100));
-		building.addComponent(new EventQueue(new LinkedList<>()));
-		building.addComponent(new PathFollower(new Path()));
-		
-	
-
-		
-		
-//		Sprite sprite2 = new Sprite();
-//		Map<SkillType<? extends Skill>, Skill> skillMap2 = new HashMap<>();
-//		skillMap2.put(MoveSkill.TYPE, new MoveSkill());
-//		skillMap2.put(BuildSkill.TYPE, new BuildSkill(child));
-//		FireProjectileSkill fireSkill2 = new FireProjectileSkill();
-//		fireSkill2.setCooldown(3); // add cooldown to the fireProjectilSkill
-//		sprite2.addComponent(new Cooldown());
-//		skillMap2.put(FireProjectileSkill.TYPE, fireSkill2);
-//		sprite2.addComponent(new GameBus());
-//		sprite2.addComponent(new SkillSet(skillMap2));
-//
-//		sprite2.addComponent(new Owner(player1));
-//		sprite2.addComponent(new Position(new GamePoint(100, 100), 0));
-//		
-//		sprite2.addComponent(new Spawner(100, new Path(), 0.01));
-//		sprite2.addComponent(new Spawner(10, new Path(), 0.1));
-
-
-		
-		
-
 		List<Sprite> spritesToAdd = new ArrayList<>();
-		spritesToAdd.add(tower);
-		spritesToAdd.add(monster);
-
-		
+		spritesToAdd.add(tree1);
+		spritesToAdd.add(tree2);
+		spritesToAdd.add(tree3);
+		spritesToAdd.add(tree4);
+		spritesToAdd.add(tree5);
+		spritesToAdd.add(tree6);
+		spritesToAdd.add(tree7);
+		spritesToAdd.add(tree8);
+		spritesToAdd.add(tree9);
+		spritesToAdd.add(tree10);
+		spritesToAdd.add(tree11);
+		spritesToAdd.add(tree12);
+		spritesToAdd.add(tree13);
+		spritesToAdd.add(tree14);
+		spritesToAdd.add(tree15);
+		spritesToAdd.add(tree16);
+		spritesToAdd.add(tree17);
+		spritesToAdd.add(tree18);
+		spritesToAdd.add(tree19);
+		spritesToAdd.add(tree20);
+		spritesToAdd.add(tree21);
+		spritesToAdd.add(tree22);
+		spritesToAdd.add(tree23);
+		spritesToAdd.add(tree24);
+		spritesToAdd.add(tree25);
+		spritesToAdd.add(car);
 		
 		bus.on(GameInitializationEvent.ANY, (e) -> {
 			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
 			bus.emit(new MainPlayerEvent(player1));
 			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 3));
-			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player2, 3));
 			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player1, WealthType.GOLD, 100));
-			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player2, WealthType.GOLD, 100));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
 			bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
+			bus.emit(new CameraEvent(CameraEvent.LOCK));
 		});
 		
 		stage.setScene(game.getScene());

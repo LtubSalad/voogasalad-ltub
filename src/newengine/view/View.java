@@ -9,16 +9,18 @@ import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
 import newengine.events.camera.CameraEvent;
 import newengine.events.input.KeyEvent;
 import newengine.events.input.MouseEvent;
@@ -47,10 +49,10 @@ public class View {
 	private static final String CSS_LOCATION = "/styleSheets/engine-view.css";
 	
 	public static final Paint BACKGROUND = Color.BISQUE; // Paint is the super class
-	public static final double INIT_WIDTH = 600;
-	public static final double INIT_HEIGHT = 500;
-	public static final double INIT_CANVAS_WIDTH = 600;
-	public static final double INIT_CANVAS_HEIGHT = 300;
+	public static final double INIT_WIDTH = 1000;
+	public static final double INIT_HEIGHT = 800;
+	public static final double INIT_CANVAS_WIDTH = 1000;
+	public static final double INIT_CANVAS_HEIGHT = 600;
 	public static final double INIT_STAT_HEIGHT = 100;
 	public static final double INIT_SELECTION_HEIGHT = 200;
 
@@ -190,20 +192,27 @@ public class View {
 				continue;
 			}
 			GamePoint spritePos = sprite.getComponent(Position.TYPE).get().pos();
+			double heading = sprite.getComponent(Position.TYPE).get().heading();
 
 			sprite.getComponent(Images.TYPE).ifPresent((imagesComponent) -> {
 				LtubImage image = imagesComponent.image();
 				GamePoint gamePos = new GamePoint(spritePos.x() - image.getImagePivot().x(), 
 						spritePos.y() - image.getImagePivot().y());
 				ViewPoint viewPos = camera.gameToView(gamePos);
-				gc.drawImage(image.getFXImage(), viewPos.x(), viewPos.y(), 
-						image.width() * camera.getScaleFactor(), 
-						image.height() * camera.getScaleFactor());
+				// rotate image
+				ImageView imageView = new ImageView(image.getFXImage());
+				imageView.setRotate(heading);
+				imageView.setRotationAxis(Rotate.Z_AXIS);
+				SnapshotParameters params = new SnapshotParameters();
+				params.setFill(Color.TRANSPARENT);
+				Image drawnImage = imageView.snapshot(params, null);
+				gc.drawImage(drawnImage, viewPos.x(), viewPos.y(), 
+						drawnImage.getWidth() * camera.getScaleFactor(), 
+						drawnImage.getHeight() * camera.getScaleFactor());
 			});
-
 		}
 	}
-
+	
 	private void renderBottomPane(SelectionModel selectionModel, PlayerRelationModel playerRelationModel) {
 		// render the selected skill
 		if (selectionModel.getSelectedSkill().isPresent()) {

@@ -11,6 +11,8 @@ import newengine.events.input.MouseEvent;
 import newengine.events.selection.SelectSkillEvent;
 import newengine.events.selection.SelectSpriteEvent;
 import newengine.events.skill.TriggerSkillEvent;
+import newengine.events.sprite.ChangeSpeedEvent;
+import newengine.events.sprite.MoveEvent;
 import newengine.model.PlayerStatsModel;
 import newengine.model.SelectionModel;
 import newengine.model.SpriteModel;
@@ -121,6 +123,30 @@ public class InputManager {
 		}
 		else if (keyInputState.isKeyPressed(KeyCode.SPACE)) {
 			bus.emit(new CameraEvent(CameraEvent.FOCUS));
+		}
+		else if (keyInputState.isKeyPressed(KeyCode.S)) {
+			// speed up
+			selectionModel.getSelectedSprite().ifPresent((sprite) -> {
+				sprite.emit(new ChangeSpeedEvent(ChangeSpeedEvent.SPEED, -dt));
+			});
+		}
+		else if (keyInputState.isKeyPressed(KeyCode.W)) {
+			// slow down
+			selectionModel.getSelectedSprite().ifPresent((sprite) -> {
+				sprite.emit(new ChangeSpeedEvent(ChangeSpeedEvent.SPEED, dt));
+			});
+		}
+		else if (keyInputState.isKeyPressed(KeyCode.D)) {
+			// turn left
+			selectionModel.getSelectedSprite().ifPresent((sprite) -> {
+				sprite.emit(new ChangeSpeedEvent(ChangeSpeedEvent.DIRECTION, dt));
+			});
+		}
+		else if (keyInputState.isKeyPressed(KeyCode.A)) {
+			// turn right
+			selectionModel.getSelectedSprite().ifPresent((sprite) -> {
+				sprite.emit(new ChangeSpeedEvent(ChangeSpeedEvent.DIRECTION, -dt));
+			});
 		}
 	}
 }

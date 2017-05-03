@@ -124,7 +124,7 @@ public class ScreenObjectHolder extends HBox {
 		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
 		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite1.addComponent(new Images("images/characters/tower2_resized.gif"));
-		sprite1.addComponent(new Speed(200));
+		sprite1.addComponent(new Speed(200, 0));
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite1.addComponent(new Range(200));
@@ -145,7 +145,7 @@ public class ScreenObjectHolder extends HBox {
 		sprite2.addComponent(new Owner(player2));
 		sprite2.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite2.addComponent(new Images("images/characters/bahamut_right.png"));
-		sprite2.addComponent(new Speed(100));
+		sprite2.addComponent(new Speed(100, 0));
 		sprite2.addComponent(new EventQueue(new LinkedList<>()));
 		sprite2.addComponent(new Attacker(25, image2));
 		sprite2.addComponent(new Health(60));
@@ -160,7 +160,7 @@ public class ScreenObjectHolder extends HBox {
 		child.addComponent(new Owner(player2));
 		child.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		child.addComponent(new Images("images/characters/bahamut_left.png"));
-		child.addComponent(new Speed(200));
+		child.addComponent(new Speed(200, 0));
 		child.addComponent(new Range(128));
 		child.addComponent(new Attacker(25, childImage));
 		child.addComponent(new Health(200));
@@ -174,7 +174,7 @@ public class ScreenObjectHolder extends HBox {
 		spawner.addComponent(new Owner(player1));
 		spawner.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		spawner.addComponent(new Images("images/characters/tower2_resized.gif"));
-		spawner.addComponent(new Speed(200));
+		spawner.addComponent(new Speed(200, 0));
 		spawner.addComponent(new Range(128));
 		spawner.addComponent(new Attacker(25, image1));
 		spawner.addComponent(new Health(200));

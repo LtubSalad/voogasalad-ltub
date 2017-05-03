@@ -4,7 +4,6 @@ import bus.BusEvent;
 import bus.BusEventType;
 import newengine.events.HasTriggeringSprite;
 import newengine.sprite.Sprite;
-import newengine.sprite.components.Owner;
 import newengine.utils.Target;
 
 public class MoveEvent extends BusEvent implements HasTriggeringSprite {
@@ -15,6 +14,8 @@ public class MoveEvent extends BusEvent implements HasTriggeringSprite {
 			MoveEvent.class.getName() + "SPRITE");
 	public static final BusEventType<MoveEvent> STOP = new BusEventType<>(
 			MoveEvent.class.getName() + "STOP");
+	public static final BusEventType<MoveEvent> START_AUTO = new BusEventType<>(
+			MoveEvent.class.getName() + "START_AUTO");
 	
 	private Sprite sprite;
 	private Target target;
@@ -23,6 +24,10 @@ public class MoveEvent extends BusEvent implements HasTriggeringSprite {
 		super(busEventType);
 		this.sprite = sprite;
 		this.target = target;
+	}
+	
+	public MoveEvent(BusEventType<? extends BusEvent> busEventType) {
+		super(busEventType);
 	}
 
 	@Override
