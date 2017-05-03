@@ -22,12 +22,10 @@ public class App extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		//new GameManager(primaryStage);
 		UsersModel userModel = new UsersModel();
-		PasswordManager passwordManager = new PasswordManager(userModel, (username) -> {
-			userModel.setCurrentUser(username);
-			new MainMenu(primaryStage, userModel); // go to the chooser screen
-		});
-		primaryStage.setScene(passwordManager.getScene());
+		userModel.setCurrentUser("Player 1");
+		primaryStage.setResizable(false);
 		primaryStage.show();
+		new MainMenu(primaryStage, userModel); // go to the chooser screen
 	}
 
 	public static void main(String[] args) {
