@@ -31,7 +31,9 @@ public class PathButtonsPanel extends VBox {
 		makeButtons();
 		rowsBox.getChildren().addAll(rowsInput, sendNumRows);
 		colsBox.getChildren().addAll(colsInput, sendNumCols);
-		this.getChildren().addAll(startPath, checkPath, clearScreen, refresh, rowsBox, colsBox);
+		this.getChildren().addAll(startPath, checkPath, 
+				clearScreen, //refresh, 
+				rowsBox, colsBox);
 	}
 	
 	private void makeButtons() {

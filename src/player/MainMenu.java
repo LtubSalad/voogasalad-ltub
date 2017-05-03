@@ -70,6 +70,8 @@ public class MainMenu {
 		authorGame.setOnMouseClicked((event) -> {
 			TowerAuthor developerView = new TowerAuthor();
 			primaryStage.setScene(developerView.getScene());
+			primaryStage.setHeight(600);
+			primaryStage.setResizable(true);
 			//primaryStage.setFullScreen(true);
 		});
 		socialCenter.setOnMouseClicked((event) -> {
