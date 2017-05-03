@@ -38,108 +38,24 @@ public class App extends Application {
 		Game game = new Game();
 		Player player1 = new Player("Player 1");
 		EventBus bus = game.getBus();
+
+		List<Sprite> spritesToAdd = new ArrayList<>();
 		
-		Sprite tree1 = new Sprite();
-		tree1.addComponent(new Position(new GamePoint(0,0)));
-		tree1.addComponent(new Images("images/characters/tree.png"));
-		tree1.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree2 = new Sprite();
-		tree2.addComponent(new Position(new GamePoint(100,0)));
-		tree2.addComponent(new Images("images/characters/tree.png"));
-		tree2.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree3 = new Sprite();
-		tree3.addComponent(new Position(new GamePoint(200,0)));
-		tree3.addComponent(new Images("images/characters/tree.png"));
-		tree3.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree4 = new Sprite();
-		tree4.addComponent(new Position(new GamePoint(200,-100)));
-		tree4.addComponent(new Images("images/characters/tree.png"));
-		tree4.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree5 = new Sprite();
-		tree5.addComponent(new Position(new GamePoint(200,-200)));
-		tree5.addComponent(new Images("images/characters/tree.png"));
-		tree5.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree6 = new Sprite();
-		tree6.addComponent(new Position(new GamePoint(200,-300)));
-		tree6.addComponent(new Images("images/characters/tree.png"));
-		tree6.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree7 = new Sprite();
-		tree7.addComponent(new Position(new GamePoint(200,-400)));
-		tree7.addComponent(new Images("images/characters/tree.png"));
-		tree7.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree8 = new Sprite();
-		tree8.addComponent(new Position(new GamePoint(200,-500)));
-		tree8.addComponent(new Images("images/characters/tree.png"));
-		tree8.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree9 = new Sprite();
-		tree9.addComponent(new Position(new GamePoint(400,0)));
-		tree9.addComponent(new Images("images/characters/tree.png"));
-		tree9.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree10 = new Sprite();
-		tree10.addComponent(new Position(new GamePoint(400,-100)));
-		tree10.addComponent(new Images("images/characters/tree.png"));
-		tree10.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree11 = new Sprite();
-		tree11.addComponent(new Position(new GamePoint(400,-200)));
-		tree11.addComponent(new Images("images/characters/tree.png"));
-		tree11.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree12 = new Sprite();
-		tree12.addComponent(new Position(new GamePoint(400,-300)));
-		tree12.addComponent(new Images("images/characters/tree.png"));
-		tree12.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree13 = new Sprite();
-		tree13.addComponent(new Position(new GamePoint(400,-400)));
-		tree13.addComponent(new Images("images/characters/tree.png"));
-		tree13.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree14 = new Sprite();
-		tree14.addComponent(new Position(new GamePoint(400,-500)));
-		tree14.addComponent(new Images("images/characters/tree.png"));
-		tree14.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree15 = new Sprite();
-		tree15.addComponent(new Position(new GamePoint(500,0)));
-		tree15.addComponent(new Images("images/characters/tree.png"));
-		tree15.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree16 = new Sprite();
-		tree16.addComponent(new Position(new GamePoint(600,0)));
-		tree16.addComponent(new Images("images/characters/tree.png"));
-		tree16.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree17 = new Sprite();
-		tree17.addComponent(new Position(new GamePoint(700,0)));
-		tree17.addComponent(new Images("images/characters/tree.png"));
-		tree17.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		double[][] points = new double[][] {
+			{0, 0}, {100, 0}, {200,0}, {200, -100}, {200, -200}, {200, -300},
+			{200, -400}, {200, -500}, {400, 0}, {400, -100}, {400, -200}, {400, -300}, 
+			{400, -500}, {500, 0}, {600, 0}, {700, 0}, 
+			{0, 200}, {100, 200}, {200,200}, {300, 200}, {400, 200}, {500, 200}, {600, 200}, {700, 200}, 
+		};
 		
-		Sprite tree18 = new Sprite();
-		tree18.addComponent(new Position(new GamePoint(0,200)));
-		tree18.addComponent(new Images("images/characters/tree.png"));
-		tree18.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree19 = new Sprite();
-		tree19.addComponent(new Position(new GamePoint(100,200)));
-		tree19.addComponent(new Images("images/characters/tree.png"));
-		tree19.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree20 = new Sprite();
-		tree20.addComponent(new Position(new GamePoint(200,200)));
-		tree20.addComponent(new Images("images/characters/tree.png"));
-		tree20.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree21 = new Sprite();
-		tree21.addComponent(new Position(new GamePoint(300,200)));
-		tree21.addComponent(new Images("images/characters/tree.png"));
-		tree21.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree22 = new Sprite();
-		tree22.addComponent(new Position(new GamePoint(400,200)));
-		tree22.addComponent(new Images("images/characters/tree.png"));
-		tree22.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree23 = new Sprite();
-		tree23.addComponent(new Position(new GamePoint(500,200)));
-		tree23.addComponent(new Images("images/characters/tree.png"));
-		tree23.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree24 = new Sprite();
-		tree24.addComponent(new Position(new GamePoint(600,200)));
-		tree24.addComponent(new Images("images/characters/tree.png"));
-		tree24.addComponent(new Collidable(CollisionBoundType.IMAGE));
-		Sprite tree25 = new Sprite();
-		tree25.addComponent(new Position(new GamePoint(700,200)));
-		tree25.addComponent(new Images("images/characters/tree.png"));
-		tree25.addComponent(new Collidable(CollisionBoundType.IMAGE));
+		for (double[] p : points) {
+			GamePoint gamePoint = new GamePoint(p[0],p[1]);
+			Sprite tree = new Sprite();
+			tree.addComponent(new Position(gamePoint));
+			tree.addComponent(new Images("images/characters/tree.png"));
+			tree.addComponent(new Collidable(CollisionBoundType.IMAGE));
+			spritesToAdd.add(tree);
+		}
 		
 		Sprite car = new Sprite();
 		car.addComponent(new Position(new GamePoint(0,100)));
@@ -153,32 +69,6 @@ public class App extends Application {
 					new SoundEvent(SoundEvent.SOUND_EFFECT, "data/sounds/Alpissd1.wav"));
 		});
 		
-		List<Sprite> spritesToAdd = new ArrayList<>();
-		spritesToAdd.add(tree1);
-		spritesToAdd.add(tree2);
-		spritesToAdd.add(tree3);
-		spritesToAdd.add(tree4);
-		spritesToAdd.add(tree5);
-		spritesToAdd.add(tree6);
-		spritesToAdd.add(tree7);
-		spritesToAdd.add(tree8);
-		spritesToAdd.add(tree9);
-		spritesToAdd.add(tree10);
-		spritesToAdd.add(tree11);
-		spritesToAdd.add(tree12);
-		spritesToAdd.add(tree13);
-		spritesToAdd.add(tree14);
-		spritesToAdd.add(tree15);
-		spritesToAdd.add(tree16);
-		spritesToAdd.add(tree17);
-		spritesToAdd.add(tree18);
-		spritesToAdd.add(tree19);
-		spritesToAdd.add(tree20);
-		spritesToAdd.add(tree21);
-		spritesToAdd.add(tree22);
-		spritesToAdd.add(tree23);
-		spritesToAdd.add(tree24);
-		spritesToAdd.add(tree25);
 		spritesToAdd.add(car);
 		
 		bus.on(GameInitializationEvent.ANY, (e) -> {
