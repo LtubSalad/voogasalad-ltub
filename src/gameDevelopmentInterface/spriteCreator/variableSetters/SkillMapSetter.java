@@ -8,7 +8,6 @@ import java.util.Map;
 
 import data.DeveloperData;
 import exception.UnsupportedTypeException;
-import gameDevelopmentInterface.spriteCreator.SkillSetter;
 import javafx.scene.layout.VBox;
 import newengine.skill.Skill;
 import newengine.skill.SkillType;
