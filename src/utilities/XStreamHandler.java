@@ -45,8 +45,11 @@ public class XStreamHandler {
 		XStream xstream = new XStream(new DomDriver());
 		FileChooser chooser = new FileChooser();
 		File file = chooser.showOpenDialog(new Stage());
-		T object = (T)xstream.fromXML(file);
-		return object;
+		if(file!=null){
+			T object = (T)xstream.fromXML(file);
+			return object;
+		}
+		return null;
 	}
 	
 	public List<SpriteMakerModel> getScreenModelFile() {

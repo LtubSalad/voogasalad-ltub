@@ -13,24 +13,15 @@ import javafx.scene.control.ListView;
 import javafx.util.Callback;
 
 public class PathSetter extends VariableSetter<Path> {
-	private Map<String,Path> pathMap;
 	ComboBox<Path> pathChoices;
-	ObservableList<Path> paths;
+	ObservableList<Path> myPaths;
 	
 	public PathSetter(ObservableList<Path> paths, String variableName){
 		super(Path.class,variableName);
-		pathMap=new HashMap<>();
-	
-		paths.forEach((path)->{
-			pathMap.put(path.getName(),path);
-		});
+		this.myPaths=paths;
 		
-		List<String> pathNames=new ArrayList<>();
-		pathMap.forEach((name,path)->{
-			pathNames.add(name);
-		});
 		
-		pathChoices= new ComboBox<>(paths);
+		pathChoices= new ComboBox<>(myPaths);
 		
 		pathChoices.setCellFactory(new Callback<ListView<Path>, ListCell<Path>>(){
 			@Override
@@ -74,8 +65,8 @@ public class PathSetter extends VariableSetter<Path> {
 
 	@Override
 	public void setField(Path initialValue) {
-		if(!paths.contains(initialValue)){
-			paths.add(initialValue);
+		if(!myPaths.contains(initialValue)){
+			myPaths.add(initialValue);
 		}
 		pathChoices.setValue(initialValue);
 	}

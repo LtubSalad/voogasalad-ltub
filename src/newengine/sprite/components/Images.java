@@ -25,7 +25,7 @@ public class Images extends Component {
 	@ConstructorForDeveloper
 	public Images(@VariableName(name="Image")LtubImage image){
 		this(image.getFileName());
-	}	
+	}
 	
 	public LtubImage image() {
 		double heading = 0;

@@ -1,0 +1,29 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Attacker</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Attacker>
+        <reloadPeriod>1.0</reloadPeriod>
+        <timeRemaining>1.0</timeRemaining>
+        <damageStrength>2</damageStrength>
+        <ltubImage>
+          <filename>resources\Bahamut1.png</filename>
+        </ltubImage>
+      </newengine.sprite.components.Attacker>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>t</spriteName>
+  <spriteDescription></spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.Attacker reference="../../myComponents/entry/newengine.sprite.components.Attacker"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>
