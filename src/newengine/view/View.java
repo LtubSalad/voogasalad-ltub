@@ -7,6 +7,7 @@ import commons.point.GamePoint;
 import commons.point.ViewPoint;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -43,6 +44,8 @@ import newengine.view.subview.UpgradeBtn;
 
 
 public class View {
+	private static final String CSS_LOCATION = "/styleSheets/engine-view.css";
+	
 	public static final Paint BACKGROUND = Color.BISQUE; // Paint is the super class
 	public static final double INIT_WIDTH = 600;
 	public static final double INIT_HEIGHT = 500;
@@ -81,7 +84,11 @@ public class View {
 		selectionCanvas = new Canvas(selectionWidth, selectionHeight);
 		gameWorldCanvas = new Canvas(canvasWidth, canvasHeight);
 		bottomPane = new HBox();
-		root.getChildren().addAll(statsPanel, gameWorldCanvas, bottomPane);
+		root.getChildren().addAll(
+				statsPanel, 
+				gameWorldCanvas, 
+				splittingRule(),
+				bottomPane);
 		// selected sprite
 		Canvas selectionCanvas = new Canvas(selectionWidth, selectionHeight);
 		bottomPane.getChildren().add(selectionCanvas);
@@ -95,12 +102,21 @@ public class View {
 		bottomPane.getChildren().add(stateDisplay.getBox());
 		bottomPane.getChildren().add(new TowersButton(bus).getNode());
 		bottomPane.getChildren().add(skillBox.getBox());
+		bottomPane.getStyleClass().add("bottom-pane");
 
 		this.camera = new Camera(bus);
 
+		scene.getStylesheets().setAll(CSS_LOCATION);
 		initHandlers();
 	}
 
+	private Node splittingRule() {
+		VBox rule = new VBox();
+//		rule.getChildren().add(new Button("rule"));
+		rule.getStyleClass().add("rule");
+		return rule;
+	}
+	
 	private void initHandlers() {
 		gameWorldCanvas.setOnMouseClicked(e -> {
 			ViewPoint viewPos = new ViewPoint(e.getX(), e.getY());
