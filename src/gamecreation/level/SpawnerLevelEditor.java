@@ -21,8 +21,10 @@ public class SpawnerLevelEditor extends LevelEditor{
 		spawnTime = new DoubleParameterInput("Time between spawn (sec)",0, 10);
 		spawnTime.getDoubleProperty().addListener(e -> getData().setSpawnTime(spawnTime.getValue()));
 		Button addSpawner = new Button("Add this Spawner to this Level");
-		addSpawner.setOnMouseClicked(e -> {System.out.println("spawn " + spawnerCreation.getSpawner() == null);getData().addSpawner(spawnerCreation.getSpawner());});
-		
+		addSpawner.setOnMouseClicked(e -> {
+			System.out.println("spawn " + spawnerCreation.getSpawner(spawnTime.getValue()) == null);
+			getData().addSpawner(spawnerCreation.getSpawner(spawnTime.getValue()));
+		});
 		content.getChildren().addAll(spawnTime, addSpawner);
 		this.setContent(content);
 	}

@@ -15,10 +15,10 @@ public class SpawnerLevelEditorHolder extends LevelEditorHolder{
 
 	private void createSpawnerButton(){
 		Button spawnerButton = new Button("Add Spawner to all levels");
-		spawnerButton.setOnAction(action -> getLevelData().stream().forEach(level -> {
-			level.addSpawner(myCreationSpawner.getSpawner());
-		}));
-		addNode(spawnerButton);
+//		spawnerButton.setOnAction(action -> getLevelData().stream().forEach(level -> {
+//			level.addSpawner(myCreationSpawner.getSpawner());
+//		}));
+//		addNode(spawnerButton);
 	}
 	
 	@Override
