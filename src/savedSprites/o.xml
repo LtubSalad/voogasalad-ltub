@@ -2,23 +2,6 @@
   <myComponents>
     <entry>
       <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.SkillSet</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.SkillSet>
-        <skills>
-          <entry>
-            <newengine.skill.SkillType>
-              <type>newengine.skill.skills.FireProjectileSkill</type>
-            </newengine.skill.SkillType>
-            <newengine.skill.skills.FireProjectileSkill>
-              <cooldown>3.0</cooldown>
-            </newengine.skill.skills.FireProjectileSkill>
-          </entry>
-        </skills>
-      </newengine.sprite.components.SkillSet>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.PathFollower</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.PathFollower>
@@ -44,8 +27,12 @@
               <x>350.0</x>
               <y>450.0</y>
             </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>350.0</x>
+              <y>550.0</y>
+            </commons.point.GamePoint>
           </myPath>
-          <pathName>df</pathName>
+          <pathName>89898</pathName>
         </path>
         <finalPoint>
           <x>0.0</x>
@@ -60,11 +47,10 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>test</spriteName>
+  <spriteName>o</spriteName>
   <spriteDescription></spriteDescription>
   <actualComponents>
-    <newengine.sprite.components.SkillSet reference="../../myComponents/entry/newengine.sprite.components.SkillSet"/>
-    <newengine.sprite.components.PathFollower reference="../../myComponents/entry[2]/newengine.sprite.components.PathFollower"/>
+    <newengine.sprite.components.PathFollower reference="../../myComponents/entry/newengine.sprite.components.PathFollower"/>
   </actualComponents>
   <skills/>
 </data.SpriteMakerModel>

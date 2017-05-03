@@ -1,0 +1,56 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Health</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Health>
+        <initHealth>3</initHealth>
+        <health>3</health>
+      </newengine.sprite.components.Health>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Owner</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Owner>
+        <owner>
+          <name>TOWERS</name>
+        </owner>
+        <teamNumber>TOWERS</teamNumber>
+      </newengine.sprite.components.Owner>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Images</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Images>
+        <imageFilePath>resources\Bahamut3.png</imageFilePath>
+      </newengine.sprite.components.Images>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Collidable</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Collidable>
+        <boundType>POLYGON</boundType>
+        <bound/>
+      </newengine.sprite.components.Collidable>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>t</spriteName>
+  <spriteDescription></spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.Collidable reference="../../myComponents/entry[4]/newengine.sprite.components.Collidable"/>
+    <newengine.sprite.components.Health reference="../../myComponents/entry/newengine.sprite.components.Health"/>
+    <newengine.sprite.components.Images reference="../../myComponents/entry[3]/newengine.sprite.components.Images"/>
+    <newengine.sprite.components.Owner reference="../../myComponents/entry[2]/newengine.sprite.components.Owner"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>

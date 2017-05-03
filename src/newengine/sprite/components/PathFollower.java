@@ -68,7 +68,9 @@ public class PathFollower extends Component{
 	@Override
 	public Object[] getGUIParameters() {
 		// TODO Auto-generated method stub
-		return null;
+		Object[] parameters=new Object[1];
+		parameters[0]=path;
+		return parameters;
 	}
 	
 }

@@ -27,7 +27,7 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>T</spriteName>
+  <spriteName>path</spriteName>
   <spriteDescription></spriteDescription>
   <actualComponents>
     <newengine.sprite.components.PathFollower reference="../../myComponents/entry/newengine.sprite.components.PathFollower"/>

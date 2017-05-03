@@ -60,10 +60,12 @@ public class SpriteCreationEnvironment extends BorderPane{
 			loadSavedSprite.setOnAction((event)->{
 				XStreamHandler handler=new XStreamHandler();
 				SpriteMakerModel model=handler.<SpriteMakerModel>getObjectFromFile();
-				Tab spriteTab = new Tab(myResources.getString(CREATE_NEW_SPRITE),
-						new SpriteCreationScreen(developerData, model));
-				creationScreens.getTabs().add(spriteTab);
-				creationScreens.getSelectionModel().select(spriteTab);
+				if(model!=null){
+					Tab spriteTab = new Tab(myResources.getString(CREATE_NEW_SPRITE),
+							new SpriteCreationScreen(developerData, model));
+					creationScreens.getTabs().add(spriteTab);
+					creationScreens.getSelectionModel().select(spriteTab);
+				}
 			});
 			
 			

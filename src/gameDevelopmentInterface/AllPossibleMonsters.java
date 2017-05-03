@@ -15,6 +15,7 @@ import newengine.sprite.components.Images;
 import newengine.sprite.components.PathFollower;
 import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.Speed;
+import utilities.AlertHandler;
 
 public class AllPossibleMonsters extends ScrollPane {
 	private DeveloperData myData;
@@ -80,6 +81,7 @@ public class AllPossibleMonsters extends ScrollPane {
 	private void setCurrentMonster(SpriteMakerModel monster, ImageView iv) {
 		mySpawnerInfo.setCurrentMonsterToSpawn(monster);
 		mySpawnerInfoPane.setImage((Images) monster.getComponentByType(Images.TYPE));
+		AlertHandler.showMessage("Sprite added");
 	}
 	
 	private boolean isMonster(SpriteMakerModel possibleMonster) {

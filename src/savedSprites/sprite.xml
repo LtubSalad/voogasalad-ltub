@@ -1,0 +1,24 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Cost</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Cost>
+        <cost>89</cost>
+      </newengine.sprite.components.Cost>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>t</spriteName>
+  <spriteDescription></spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.Cost reference="../../myComponents/entry/newengine.sprite.components.Cost"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>
