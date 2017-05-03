@@ -1,10 +1,5 @@
 package gameDevelopmentInterface.spriteCreator.variableSetters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import gameDevelopmentInterface.Path;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
