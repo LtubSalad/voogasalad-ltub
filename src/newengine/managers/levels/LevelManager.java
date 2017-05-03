@@ -79,6 +79,7 @@ public class LevelManager{
 		}
 			new WinPresentation().show(new ResultAccessor());;
 			bus.emit(new WinGameEvent(WinGameEvent.WIN));
+			bus.emit(new GamePauseResumeEvent());
 
 	}
 	
