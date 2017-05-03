@@ -69,6 +69,7 @@ public class FXGameLoop implements GameLoop {
 	public void pause() {
 		isRunning = false;
 		timer.stop();
+		prevNanos = 0;
 	}
 
 

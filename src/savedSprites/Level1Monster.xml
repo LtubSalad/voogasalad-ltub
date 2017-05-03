@@ -5,7 +5,7 @@
         <typename>newengine.sprite.components.Speed</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Speed>
-        <speed>15.0</speed>
+        <speed>100.0</speed>
       </newengine.sprite.components.Speed>
     </entry>
     <entry>
@@ -33,7 +33,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/monsterImages/pvzzombie3.png</imageFilePath>
+        <imageFilePath>resources/monsterImages/pvzzombie2.png</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
@@ -44,43 +44,31 @@
         <path>
           <myPath class="linked-list">
             <commons.point.GamePoint>
-              <x>850.0</x>
-              <y>250.0</y>
+              <x>450.0</x>
+              <y>550.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>750.0</x>
-              <y>250.0</y>
+              <x>450.0</x>
+              <y>450.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>650.0</x>
-              <y>250.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>550.0</x>
-              <y>250.0</y>
+              <x>450.0</x>
+              <y>350.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>450.0</x>
               <y>250.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>350.0</x>
-              <y>250.0</y>
+              <x>450.0</x>
+              <y>150.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>250.0</x>
-              <y>250.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>150.0</x>
-              <y>250.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>50.0</x>
-              <y>250.0</y>
+              <x>450.0</x>
+              <y>50.0</y>
             </commons.point.GamePoint>
           </myPath>
-          <pathName>3</pathName>
+          <pathName>1</pathName>
         </path>
         <finalPoint>
           <x>0.0</x>
@@ -104,8 +92,8 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>3</spriteName>
-  <spriteDescription>monster</spriteDescription>
+  <spriteName>1</spriteName>
+  <spriteDescription></spriteDescription>
   <actualComponents>
     <newengine.sprite.components.Collidable reference="../../myComponents/entry[6]/newengine.sprite.components.Collidable"/>
     <newengine.sprite.components.Health reference="../../myComponents/entry[2]/newengine.sprite.components.Health"/>

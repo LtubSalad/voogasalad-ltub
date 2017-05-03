@@ -54,6 +54,7 @@ public class SpawnerCreation extends BorderPane {
 	}
 	
 	public SpriteMakerModel getSpawner(double spawnBetweenTime) {
+		spawnerData = new SpriteMakerModel();
 		Map<SkillType<? extends Skill>, Skill> spawnerSkills = new HashMap<>();
 		spawnerSkills.put(BuildSkill.TYPE, new BuildSkill(spriteToSpawn));
 		spawnerData.addComponent(new GameBus());

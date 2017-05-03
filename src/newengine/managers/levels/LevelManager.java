@@ -9,6 +9,8 @@ import commons.point.GamePoint;
 import data.SpriteMakerModel;
 import gamecreation.level.ILevelData;
 import gamedata.AuthDataTranslator;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import newengine.events.SpriteModelEvent;
 import newengine.events.conditions.EndConditionTriggeredEvent;
 import newengine.events.conditions.SetEndConditionEvent;
@@ -29,6 +31,7 @@ import newengine.utils.image.LtubImage;
 import player.winnerorloser.LosePresentation;
 import player.winnerorloser.ResultAccessor;
 import player.winnerorloser.WinPresentation;
+import utilities.CustomAlert;
 
 public class LevelManager{
 	private EventBus bus;
@@ -64,6 +67,10 @@ public class LevelManager{
 
 	public void nextLevel(){
 		if(!(currentLevel == numLevels)){
+			Alert winAlert = new CustomAlert(AlertType.CONFIRMATION, "You beat the level!");
+			winAlert.setOnCloseRequest(e -> bus.emit(new GamePauseResumeEvent()));
+			winAlert.show();
+			bus.emit(new GamePauseResumeEvent());
 			System.out.println("next level loading");
 			currentLevel++;
 			System.out.println("Current level: " + currentLevel);
@@ -72,7 +79,7 @@ public class LevelManager{
 		}
 			new WinPresentation().show(new ResultAccessor());;
 			bus.emit(new WinGameEvent(WinGameEvent.WIN));
-			bus.emit(new GamePauseResumeEvent());
+
 	}
 	
 	public void resetLevel(){
@@ -90,25 +97,25 @@ public class LevelManager{
 		bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, newLevel.getLosingCondition()));
 		
 		List<SpriteMakerModel> spriteMakerModels = newLevel.getSpawners();
-		//System.out.println("Number of spawners: " + spriteMakerModels.size());
 		List<Sprite> sprites = new ArrayList<>();
 		sprites.addAll(spriteMakerModels.stream().map((spriteMakerModel) -> {
 			return (new AuthDataTranslator(spriteMakerModel)).getSprite();
 		}).collect(Collectors.toList()));
-		
-
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
 		
 		
+		makePathTiles(spriteMakerModels);
+		
+	}
+
+	private void makePathTiles(List<SpriteMakerModel> spriteMakerModels) {
 		List<Sprite> pathSprites = new ArrayList<>();
 		for (int m = 0; m < spriteMakerModels.size(); m++) {
 			SkillSet skillSet = (SkillSet) spriteMakerModels.get(m).getComponentByType(SkillSet.TYPE);
 			BuildSkill buildSkill = (BuildSkill) skillSet.getSkill(BuildSkill.TYPE);
 			PathFollower pathFollowerComponent = (PathFollower) buildSkill.getSpriteMakerModel().getComponentByType(PathFollower.TYPE);
 			List<GamePoint> points = new ArrayList<> (pathFollowerComponent.getPath().getPath());
-			points.forEach(e -> {
-				System.out.println(e.x() + " " + e.y());
-			});
+			
 			for (int i = 0; i < points.size()-1; i++) {
 				GamePoint point1 = points.get(i);
 				GamePoint point2 = points.get(i+1);
@@ -130,9 +137,6 @@ public class LevelManager{
 				}
 			}	
 		}
-		System.out.println("Size of pathSprites: "+pathSprites.size());
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, pathSprites));
-		
 	}
-
 }

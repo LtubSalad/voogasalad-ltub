@@ -33,7 +33,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/MonsterTruck1.jpg</imageFilePath>
+        <imageFilePath>resources/monsterImages/MonsterTruck1.jpg</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
