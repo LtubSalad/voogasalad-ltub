@@ -1,22 +1,33 @@
 package player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.File;
 
+import commons.FileLoader;
+import commons.RunningMode;
 import gameauthorgui.tower.TowerAuthor;
+import gamedata.GameCreator;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import newengine.animation.AnimationImage;
+import newengine.app.Game;
+import player.helpers.GameLoadException;
 import user.UsersModel;
 
 public class MainMenu {
 
 	public static final String CSS_LOCATION = "/styleSheets/login.css";
-
+	private static String backgroundImage = "images/ltub.jpeg";
+	
+	
 	private Stage primaryStage;
 	private UsersModel usersModel;
 	private Scene scene;
@@ -30,25 +41,17 @@ public class MainMenu {
 		BorderPane root = new BorderPane();
 		VBox buttons = new VBox();
 		buttons.setId("vbox");
-		buttons.getChildren().addAll(playGame, authorGame, socialCenter);
-
-		playGame.setMaxWidth(Double.MAX_VALUE);
-		authorGame.setMaxWidth(Double.MAX_VALUE);
-		socialCenter.setMaxWidth(Double.MAX_VALUE);
-
+		buttons.setAlignment(Pos.CENTER);
+		buttons.getChildren().addAll(
+				backgroundImage(),
+				playGame, 
+				authorGame, 
+				socialCenter);
 
 		playGame.setId("main-button");
 		authorGame.setId("main-button");
 		socialCenter.setId("main-button");
 		root.setCenter(buttons);		
-		HBox hBox1 = getHBox(1, 200,200);
-		HBox hBox2 = getHBox(2, 400,200);
-		HBox hBox3 = getHBox(3, 200,400);
-		HBox hBox4 = getHBox(4, 400,400);
-		HBox[] h = {hBox1, hBox2, hBox3, hBox4};
-
-
-		root.getChildren().addAll(new ArrayList<HBox>(Arrays.asList(h)));
 
 		initHandlers();
 		scene = new Scene(root, App.WIDTH, App.HEIGHT);
@@ -58,7 +61,11 @@ public class MainMenu {
 
 	private void initHandlers() {
 		playGame.setOnMouseClicked((event) -> {
-			new GameChooser(primaryStage);
+			FileLoader fileLoader = new FileLoader(primaryStage);
+			File fileChosen = fileLoader.chooseFile();
+			if (fileChosen != null) {
+				startGame(fileChosen);
+			}
 		});
 		authorGame.setOnMouseClicked((event) -> {
 			TowerAuthor developerView = new TowerAuthor();
@@ -69,19 +76,43 @@ public class MainMenu {
 			primaryStage.setScene(usersModel.getUserSocialPage());
 		});
 	}
+	
+	private Node backgroundImage() {
+		Pane pane = new StackPane();
+		ImageView image = new ImageView(backgroundImage);
+		image.setPreserveRatio(true);
+		image.setFitWidth(300);
+		pane.getChildren().add(image);
+		pane.getStyleClass().add("ltub-background");
+		return pane;
+	}
 
 	public Scene getScene() {
 		return scene;
 	}
-
-	private HBox getHBox( int seed, int x, int y){
-		AnimationImage imageView = new AnimationImage();	
-		HBox hBox = new HBox();
-		hBox.getChildren().add(imageView.getImageView(seed));
-		hBox.setLayoutX(x);
-		hBox.setLayoutY(y);
-
-		return hBox;
+	
+	private void alertLoadError(String failedGameFilePath) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Game Load Failure");
+		alert.setContentText("Failed to load game: "+failedGameFilePath);
+		alert.showAndWait();
 	}
+	
+	private void startGame(File gameFile) {
+		GameCreator gameCreator = new GameCreator();
+		Game game = null;
+		try {
+			game = gameCreator.createGame(gameFile);
+		} catch (GameLoadException e) {
+			if (RunningMode.DEV_MODE) {
+				alertLoadError(gameFile.getName());
+			}
+		}
+		if (game != null) {
+			primaryStage.setScene(game.getScene());
+			game.start();
+		}
+	}
+
 
 }
