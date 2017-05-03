@@ -3,6 +3,7 @@ package newengine.view.camera;
 import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
+import newengine.events.SpriteModelEvent;
 import newengine.events.camera.CameraEvent;
 import newengine.events.selection.SelectSpriteEvent;
 import newengine.sprite.Sprite;
@@ -19,10 +20,10 @@ public class Camera {
 
 	private EventBus bus;
 	private Sprite selectedSprite;
-	private ViewPoint prePos;
 	private double scaleFactor = 1;
 	private double translateX = 0;
 	private double translateY = 0;
+	private boolean locked = false;
 	
 	public static final double MAX_FACTOR = 100;
 	public static final double MIN_FACTOR = 0.01;
@@ -32,6 +33,12 @@ public class Camera {
 	public Camera(EventBus bus){
 		this.bus = bus;
 		initHandlers();
+	}
+	
+	public void update(double dt) {
+		if (locked) {
+			bus.emit(new CameraEvent(CameraEvent.FOCUS));
+		}
 	}
 	
 	private void initHandlers() {
@@ -46,10 +53,18 @@ public class Camera {
 		});
 		bus.on(SelectSpriteEvent.SINGLE, (e) -> {
 			this.selectedSprite = e.getSprite();
-			centerOn();
+			center();
+		});
+		bus.on(SpriteModelEvent.REMOVE, (e) -> {
+			if (this.selectedSprite == e.getSprites()) {
+				this.selectedSprite = null;
+			}
 		});
 		bus.on(CameraEvent.FOCUS, (e) -> {
-			centerOn();
+			center();
+		});
+		bus.on(CameraEvent.LOCK, (e) -> {
+			locked = !locked;
 		});
 	}
 
@@ -68,25 +83,20 @@ public class Camera {
 		this.translateY += e.getTranslateYValue();
 	}
 	
-	private void centerOn() {
+	private void center() {
 		if (selectedSprite != null){
-			double x = 0;
-			double y = 0;
 			if (selectedSprite.getComponent(Position.TYPE).isPresent()) {
 				Position position = selectedSprite.getComponent(Position.TYPE).get();
-				prePos = gameToView(position.pos());
-				x = (View.INIT_CANVAS_WIDTH / 2 - position.xPos() * scaleFactor) ;
-				y = (View.INIT_CANVAS_HEIGHT / 2 - position.yPos() * scaleFactor);
-			}
-			this.translateX = x;
-			this.translateY = y;			
+				translateX = (View.INIT_CANVAS_WIDTH / 2 - position.xPos() * scaleFactor) ;
+				translateY = (View.INIT_CANVAS_HEIGHT / 2 - position.yPos() * scaleFactor);
+			}		
 		}
 	}
 	
 	private void reset() {
 		scaleFactor = 1;
-		this.translateX = 0;
-		this.translateY = 0;
+		translateX = 0;
+		translateY = 0;
 	}	
 
 	/**

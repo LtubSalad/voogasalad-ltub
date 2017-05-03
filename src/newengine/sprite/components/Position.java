@@ -107,7 +107,6 @@ public class Position extends Component {
 		if (!sprite.getComponent(Speed.TYPE).isPresent()) {
 			return;
 		}
-		System.out.println(pos.x() + " " + pos.y());
 
 		double xDest = pDest.x();
 		double yDest = pDest.y();
@@ -123,7 +122,6 @@ public class Position extends Component {
 			// arrives at destination at this frame.
 			pos = new GamePoint(xDest, yDest);
 			target.getSprite().ifPresent((targetSprite) -> {
-				System.out.println("weapon reaches target");
 				targetSprite.emit(new MoveEvent(MoveEvent.STOP, sprite, target));
 				isMoving = false;
 			});
