@@ -44,7 +44,7 @@ public class PlayerStatsModel {
 			mainPlayer = e.getPlayer();
 		});
 		bus.on(CheckCostAndBuildEvent.ANY, (e) -> {
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			int cost = e.getCost();
 			if (wealth.get(mainPlayer).get(WealthType.GOLD) >= cost) {
 				e.getBuildCallback().execute();
@@ -55,7 +55,7 @@ public class PlayerStatsModel {
 			}
 		});
 		bus.on(ChangeWealthEvent.CHANGE, (e) ->{
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			WealthType type = e.getWealthType();
 			if (wealth.containsKey(mainPlayer)) {
 				Map<WealthType, Integer> wealths = wealth.get(mainPlayer);
@@ -89,8 +89,25 @@ public class PlayerStatsModel {
 				wealth.put(mainPlayer, wealths);
 			}
 		});
+		bus.on(ChangeWealthEvent.REWARD, (e) ->{
+			WealthType type = e.getWealthType();
+			if (wealth.containsKey(mainPlayer)) {
+				Map<WealthType, Integer> wealths = wealth.get(mainPlayer);
+				if (wealths.containsKey(type)) {
+					wealths.put(type, wealths.get(type) + e.getAmountChanged());
+				}
+				else {
+					wealths.put(type, e.getAmountChanged());
+				}
+			}
+			else {
+				Map<WealthType, Integer> wealths = new HashMap<>();
+				wealths.put(e.getWealthType(), e.getAmountChanged());
+				wealth.put(mainPlayer, wealths);
+			}
+		});
 		bus.on(ChangeLivesEvent.CHANGE, (e) ->{
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			System.out.println("LIVES CHANGED! from: " + lives.get(mainPlayer));
 			if (lives.containsKey(mainPlayer)) {
 				lives.put(mainPlayer, lives.get(mainPlayer) + e.getAmountChanged());
@@ -101,17 +118,17 @@ public class PlayerStatsModel {
 			System.out.println("LIVES CHANGED! to: " + lives.get(mainPlayer));
 		});
 		bus.on(ChangeLivesEvent.SET, (e) ->{
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			lives.put(mainPlayer, e.getAmountChanged()); // TODO if this is an appropriate way
 		});
 		bus.on(ChangeScoreEvent.CHANGE, (e) ->{
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			if (scores.containsKey(mainPlayer)) {
 				scores.put(mainPlayer, scores.get(mainPlayer) + e.getAmountChanged());
 			}
 		});
 		bus.on(ChangeScoreEvent.SET, (e) ->{
-			if (isNotMainPlayer(e.getPlayer())) return;
+//			if (isNotMainPlayer(e.getPlayer())) return;
 			Player player = e.getPlayer();
 			scores.put(player, e.getAmountChanged());  // TODO
 		});

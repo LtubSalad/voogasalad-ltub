@@ -67,7 +67,7 @@ public class SpriteCreator {//extends Application {
 		sprite2.addComponent(new SkillSet(skillMap2));
 		sprite2.addComponent(new Owner(player1));
 		sprite2.addComponent(new Position(new GamePoint(100, 100), 0));
-		sprite2.addComponent(new Spawner(100, new Path(), 0.01));
+		//sprite2.addComponent(new Spawner(100, new Path(), 0.01));
 		XStreamHandler xstream = new XStreamHandler();
 		xstream.saveToFile(sprite2);
 		SpriteMakerModel spawner = (SpriteMakerModel) xstream.getAttributeFromFile();

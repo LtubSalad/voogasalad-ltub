@@ -52,7 +52,6 @@ public class Attacker extends Component {
 		});
 		
 		sprite.on(FireProjectileEvent.SPECIFIC, e -> {
-			System.out.println("FIRE WEAPON FIRE WEAPON FIRE WEAPON FIRE WEAPON");
 			Sprite source = e.getSprite();
 			Sprite target = e.getTarget();
 

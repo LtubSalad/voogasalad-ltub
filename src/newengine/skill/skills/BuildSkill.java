@@ -47,14 +47,13 @@ public class BuildSkill extends Skill {
 		}
 	}
 	
-	public SpriteMakerModel getModel(){
+	public SpriteMakerModel getSpriteMakerModel(){
 		return mySpriteMakerModel;
 	}
 	
 	public void setModel(SpriteMakerModel model){
 		this.mySpriteMakerModel = model;
 	}
-	
 	
 	@Override
 	public void trigger() {
@@ -114,7 +113,7 @@ public class BuildSkill extends Skill {
 			EventBus bus = this.getSource().get().getComponent(GameBus.TYPE).get().getGameBus();
 			// emit change wealth event besides check cost and build event, 
 			// only to utilize the already existing change wealth event handling 
-			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player, WealthType.GOLD, cost));
+			bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, player, WealthType.GOLD, -cost));
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToCreate));
 		}
 	}

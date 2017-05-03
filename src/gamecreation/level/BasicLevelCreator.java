@@ -15,7 +15,15 @@ import newengine.managers.conditions.Condition;
 import newengine.managers.conditions.GoldMinimumCondition;
 import newengine.managers.conditions.NoLivesCondition;
 import newengine.managers.conditions.NoMonstersCondition;
+import utilities.CustomAlert;
 
+/**
+ * Concrete implementation of LevelCreator class. This class takes in a LevelData and will
+ * set specific values. In this case, it edits level title, winning condition, and losing condition
+ * for the level
+ * @author Matthew Tribby
+ *
+ */
 public class BasicLevelCreator extends LevelCreator{
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
@@ -25,6 +33,8 @@ public class BasicLevelCreator extends LevelCreator{
 	private Map<String, Class<? extends Condition>> losingConditions;
 	private ComboBoxParameterInput winningCondition;
 	private ComboBoxParameterInput losingCondition;
+	private Button saveCondition;
+	private Button remove;
 	
 
 	public BasicLevelCreator(int i, LevelCreatorHolder parent, LevelData data) {
@@ -42,11 +52,13 @@ public class BasicLevelCreator extends LevelCreator{
 		losingConditions.put(myResources.getString("noLives"), NoLivesCondition.class);
 	}
 	
+	/**
+	 * Creates the actual content of creator
+	 */
 	@Override
 	public void createContent() {
 		content = new VBox();
 		initConditions();
-		//TODO resource file
 		StringParameterInput title = new StringParameterInput(myResources.getString("levelTitle"));
 		title.getTextProperty().addListener(e -> BasicLevelCreator.this.getData().setName(title.getValue()));
 		
@@ -62,15 +74,19 @@ public class BasicLevelCreator extends LevelCreator{
 			}
 		});
 	
-		
-		Button saveCondition = new Button("Save Conditions");
-		saveCondition.setOnAction(e -> createConditions());
-		
-		Button remove = new Button(myResources.getString("remove"));
-		remove.setOnAction(e -> super.remove(this));
+		createButtons();
 		
 		content.getChildren().addAll(title, winningCondition, losingCondition, saveCondition, remove);
 		this.setContent(content);
+	}
+	
+	private void createButtons(){
+		saveCondition = new Button("Save Conditions");
+		saveCondition.setOnAction(e -> createConditions());
+		
+		remove = new Button(myResources.getString("remove"));
+		remove.setOnAction(e -> super.remove());
+		
 	}
 	
 	private void createConditions(){
@@ -79,9 +95,7 @@ public class BasicLevelCreator extends LevelCreator{
 		if(winning != null && losing != null){
 			getData().setWinningCondition(winning);
 			getData().setLosingCondition(losing);
-			Alert confirmAlert=new Alert(AlertType.CONFIRMATION);
-			confirmAlert.setHeaderText("Successful Save!");
-			confirmAlert.show();
+			new CustomAlert(AlertType.CONFIRMATION, "Successful Save!").show();
 		}
 	}
 	
@@ -90,7 +104,6 @@ public class BasicLevelCreator extends LevelCreator{
 		errorAlert.setHeaderText("Error in saving condition");
 		if(conditionBox.getValue().contains("(Input)")){
 			try {
-				System.out.println(map.get(conditionBox.getValue()).getConstructor(int.class).newInstance(Integer.parseInt(conditionBox.getTextInput())).getClass().getName());
 				return map.get(conditionBox.getValue()).getConstructor(int.class).newInstance(Integer.parseInt(conditionBox.getTextInput()));
 			} catch (Exception e) {
 				errorAlert.showAndWait();
@@ -98,7 +111,6 @@ public class BasicLevelCreator extends LevelCreator{
 		}
 		else{
 			try {
-				System.out.println( map.get(conditionBox.getValue()).newInstance().getClass().getName());
 				return map.get(conditionBox.getValue()).newInstance();
 			} catch (Exception e) {
 				errorAlert.showAndWait();
@@ -106,38 +118,5 @@ public class BasicLevelCreator extends LevelCreator{
 		}
 		return null;
 	}
-	
-//	private class ComboListener implements ChangeListener<String> {
-//		private ComboBoxParameterInput input;
-//		
-//		public ComboListener(ComboBoxParameterInput input){
-//			this.input = input;
-//		}
-//
-//		@Override
-//		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//			if(input.getValue().contains("(Input)")){
-//				input.appendTextInput();
-//				input.getDoneButton().setOnAction(e -> createCondition());
-//			}
-//			else{
-//				input.removeTextInput();
-//				createCondition();
-//			}
-//		}
-//		
-//		private void createCondition(){
-//			try {
-//				if(input.getValue().contains("(Input)")
-//				
-//				getData().setWinningCondition(winningConditions.get(input.getValue()).newInstance());
-//			} catch(Exception exc){
-//				//FIXME
-//				exc.printStackTrace();
-//				System.out.println("Not a valid condition");
-//			}
-//		}
-//			
-//	}
 
 }

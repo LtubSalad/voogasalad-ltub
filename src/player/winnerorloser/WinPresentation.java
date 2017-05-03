@@ -6,6 +6,7 @@ package player.winnerorloser;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -13,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import player.App;
+import utilities.CustomAlert;
 
 /**
  * @author Zhiyong
@@ -58,9 +60,11 @@ public class WinPresentation implements ResultPresentation{
 		vbButtons.getChildren().add(playButton);
 		vbButtons.getChildren().add(exitButton);
 		
-		vbTexts.getChildren().add(getText("For this game:    " + result.getGameName()));
-		vbTexts.getChildren().add(getText("You get the score:   " + result.getPoint()));
-		vbTexts.getChildren().add(getText("Your health is:    " + result.getHealth()));
+		vbTexts.getChildren().add(getText("Congratulations!"));
+		
+//		vbTexts.getChildren().add(getText("For this game:    " + result.getGameName()));
+//		vbTexts.getChildren().add(getText("You get the score:   " + result.getPoint()));
+//		vbTexts.getChildren().add(getText("Your health is:    " + result.getHealth()));
 		root.getChildren().add(vbTexts);
 		
 		root.getChildren().addAll(vbButtons);
@@ -79,12 +83,11 @@ public class WinPresentation implements ResultPresentation{
 
 	private void restartAction() {
 		App app = new App();
-		try {
-			app.start(primaryStage);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			try {
+				app.start(primaryStage);
+			} catch (Exception e) {
+				new CustomAlert(AlertType.ERROR, "Can't Restart Action after Win").show();
+			}
 		
 	}
 	

@@ -1,0 +1,65 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Images</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Images>
+        <imageFilePath>resources/crosshairs.png</imageFilePath>
+      </newengine.sprite.components.Images>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.PathFollower</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.PathFollower>
+        <path>
+          <myPath class="linked-list">
+            <commons.point.GamePoint>
+              <x>500.0</x>
+              <y>200.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>100.0</x>
+              <y>0.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>100.0</x>
+              <y>100.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>0.0</x>
+              <y>300.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>300.0</x>
+              <y>300.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>5.0</x>
+              <y>3.0</y>
+            </commons.point.GamePoint>
+          </myPath>
+          <pathName>A Nameless Path</pathName>
+        </path>
+        <finalPoint>
+          <x>0.0</x>
+          <y>0.0</y>
+        </finalPoint>
+      </newengine.sprite.components.PathFollower>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>mover</spriteName>
+  <spriteDescription>mover</spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.PathFollower reference="../../myComponents/entry[2]/newengine.sprite.components.PathFollower"/>
+    <newengine.sprite.components.Images reference="../../myComponents/entry/newengine.sprite.components.Images"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>

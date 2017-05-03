@@ -21,13 +21,14 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 	private DeveloperData data;
 	private VBox displayContents;
 	private List<SkillSetter<? extends Skill>> skillSelectors;
+	List<Class<? extends Skill>> availableSkills;
 
 	public SkillMapSetter(String variableName, DeveloperData data) {
 		super(variableName);
 		this.data=data;
 		displayContents=new VBox();
 		this.getChildren().add(displayContents);
-		List<Class<? extends Skill>> availableSkills= new ArrayList<>();
+		availableSkills= new ArrayList<>();
 		availableSkills.add(BuildSkill.class);
 		availableSkills.add(FireProjectileSkill.class);
 		availableSkills.add(MoveSkill.class);
@@ -65,16 +66,33 @@ public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill
 	public void setField(Map<SkillType<? extends Skill>, Skill> initialValue) {
 		displayContents.getChildren().clear();
 		skillSelectors.clear();
-		initialValue.values().forEach((skill)->{
-			SkillSetter<?> setter;
-			try {
-				setter = new SkillSetter(skill,data);
-				skillSelectors.add(setter);
-				this.getChildren().add(setter);
-			} catch (UnsupportedTypeException e) {
-				AlertHandler.showError("Skill type cannot be read");
+		for(Class<? extends Skill> clazz:availableSkills){
+			boolean inMap=false;
+			for(Skill skill:initialValue.values()){
+				if(skill.getClass().equals(clazz)){
+					inMap=true;
+					
+					try {
+						SkillSetter<?> setter= new SkillSetter(skill,data);
+						skillSelectors.add(setter);
+						displayContents.getChildren().add(setter);
+					} catch (UnsupportedTypeException e) {
+						AlertHandler.showError("Could not make skill setter");
+					}
+					break;
+				}
 			}
-		});
+			if(!inMap){
+				try {
+					SkillSetter<?> setter= new SkillSetter(clazz,data);
+					skillSelectors.add(setter);
+					displayContents.getChildren().add(setter);
+				} catch (UnsupportedTypeException e) {
+					AlertHandler.showError("Could not make skill setter");
+				}
+			}
+		}
+		
 	}
 	
 }
