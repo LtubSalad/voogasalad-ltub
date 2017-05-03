@@ -209,8 +209,12 @@ public class View {
 		if (selectionModel.getSelectedSkill().isPresent()) {
 			Skill skill = selectionModel.getSelectedSkill().get();
 			if (skill.getIcon().isPresent()) {
-				Image skillImage = skill.getIcon().get().getFXImage();
-				scene.setCursor(new ImageCursor(skillImage));
+				LtubImage skillImage = skill.getIcon().get();
+				ImageCursor imageCursor = new ImageCursor(
+						skillImage.getFXImage(), 
+						skillImage.width() / 2,
+						skillImage.height() / 2);
+				scene.setCursor(imageCursor);
 			}
 		} else {
 			scene.setCursor(Cursor.DEFAULT);
