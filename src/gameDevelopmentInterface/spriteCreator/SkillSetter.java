@@ -38,7 +38,7 @@ public class SkillSetter<T extends Skill> extends ObjectSetter<T>{
 		return checkbox.isSelected();
 	}
 	
-	protected void setSelected(boolean selected){
+	public void setSelected(boolean selected){
 		checkbox.setSelected(selected);
 	}
 	

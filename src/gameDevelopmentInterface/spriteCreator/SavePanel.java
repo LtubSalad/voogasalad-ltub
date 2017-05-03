@@ -37,8 +37,9 @@ public class SavePanel extends HBox {
 			SpriteMakerModel modelToSave = screen.produceNewModel();
 			if(modelToSave!=null){
 				XStreamHandler handler=new XStreamHandler();
-				handler.saveToFile(modelToSave);
-				AlertHandler.showMessage("Saved successfully");
+				if(handler.saveToFile(modelToSave)){
+					AlertHandler.showMessage("Saved successfully");
+				}
 			}
 		});
 		return saveButton;

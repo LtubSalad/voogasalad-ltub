@@ -30,10 +30,10 @@ public class SpriteVariableSelector extends VariableSetter<SpriteMakerModel> {
 		@Override
 		public void updateItem(SpriteMakerModel item, boolean empty) {
 			super.updateItem(item, empty);
-			if (item != null) {
+			if(empty||item==null){
+				setText("");
+			}else{
 				setText(item.getName());
-			} else {
-				setText(null);
 			}
 		}
 	}

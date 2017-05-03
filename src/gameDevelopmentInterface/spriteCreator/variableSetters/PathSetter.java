@@ -18,8 +18,7 @@ public class PathSetter extends VariableSetter<Path> {
 	
 	public PathSetter(ObservableList<Path> paths, String variableName){
 		super(Path.class,variableName);
-		this.myPaths=paths;
-		
+		this.myPaths=paths;		
 		
 		pathChoices= new ComboBox<>(myPaths);
 		
