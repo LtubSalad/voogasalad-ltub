@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bus.EventBus;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import newengine.events.sound.SoundEvent;
+import utilities.CustomAlert;
 
 public class SoundManager {
 
@@ -43,9 +45,7 @@ public class SoundManager {
 			bgm.setVolume(bgmVolume);
 			bgm.play();
 		}catch (MediaException e) {
-			if (DEV_MODE) {
-				e.printStackTrace();
-			}
+			new CustomAlert(AlertType.ERROR, "Sound Manager Error").show();
 		}
 	}
 	
@@ -57,9 +57,7 @@ public class SoundManager {
 			soundEffect.play();
 			soundPlayers.add(soundEffect);
 		}catch (MediaException e) {
-			if (DEV_MODE) {
-				e.printStackTrace();
-			}
+			new CustomAlert(AlertType.ERROR, "Sound Manager Error").show();
 		}		
 	}
 	

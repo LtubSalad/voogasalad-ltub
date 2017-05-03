@@ -34,6 +34,7 @@ import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
 import newengine.sprite.components.SkillSet;
+import newengine.sprite.components.Upgrade;
 import newengine.utils.image.LtubImage;
 import newengine.view.camera.Camera;
 import newengine.view.subview.SkillBox;
@@ -159,9 +160,9 @@ public class View {
 		playerStatsModel.getLives(player).ifPresent((life) -> {
 			statsLabels.add(new Text("Lives:" + life));
 		});
-		playerStatsModel.getScore(player).ifPresent((score) -> {
-			statsLabels.add(new Text("Scores:" + score));
-		});
+//		playerStatsModel.getScore(player).ifPresent((score) -> {
+//			statsLabels.add(new Text("Scores:" + score));
+//		});
 		return statsLabels;
 	}
 
@@ -180,8 +181,8 @@ public class View {
 						spritePos.y() - image.getImagePivot().y());
 				ViewPoint viewPos = camera.gameToView(gamePos);
 				gc.drawImage(image.getFXImage(), viewPos.x(), viewPos.y(), 
-						image.getFXImage().getWidth() * camera.getScaleFactor(), 
-						image.getFXImage().getHeight() * camera.getScaleFactor());
+						image.width() * camera.getScaleFactor(), 
+						image.height() * camera.getScaleFactor());
 			});
 
 		}
@@ -210,7 +211,9 @@ public class View {
 						sprite.getComponent(Images.TYPE).get().image().height());
 			}
 			//fill stats box with stats of selected sprite
-			if (sprite.getComponent(Owner.TYPE).get().player().getName().equals(playerRelationModel.getMainPlayer().getName())){
+			
+			if (sprite.getComponent(Upgrade.TYPE).isPresent() && 
+					sprite.getComponent(Owner.TYPE).get().player().getName().equals(playerRelationModel.getMainPlayer().getName())){
 				upgradeBtn.render(sprite);
 			}
 			stateDisplay.render(sprite);

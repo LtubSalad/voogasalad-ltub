@@ -7,6 +7,7 @@ import commons.FileLoader;
 import gamedata.GameCreator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -19,6 +20,7 @@ import newengine.app.Game;
 import player.App;
 import player.helpers.GameLoadException;
 import player.loaderManager.Loader;
+import utilities.CustomAlert;
 
 /**
  * The first stage of the Game Player to choose a game to play. After the user
@@ -36,8 +38,6 @@ public class GameManager {
 
 	private File gameFile;
 
-	// private GameFactory gameFactory;
-	// TODO: I commented out gameFactory to prevent compile error.
 
 	/**
 	 * Constructor of the {@code player.gameChoice}
@@ -47,7 +47,6 @@ public class GameManager {
 	public GameManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		numberOfDefaultGames = Integer.parseInt(myResources.getString("numberOfDefaultGames"));
-		// gameFactory = new GameFactory();
 		show();
 	}
 
@@ -141,8 +140,7 @@ public class GameManager {
 				try {
 					game = gameCreator.createGame(gameFile);
 				} catch (GameLoadException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					new CustomAlert(AlertType.ERROR, "Can't load game file in Game Manager").show();
 				}
 				
 				primaryStage.setScene(game.getScene());

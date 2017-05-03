@@ -18,8 +18,8 @@ public class Camera {
 	private double translateX = 0;
 	private double translateY = 0;
 	
-	public static final double MAX_FACTOR = 2.5;
-	public static final double MIN_FACTOR = 0.5;
+	public static final double MAX_FACTOR = 100;
+	public static final double MIN_FACTOR = 0.01;
 	public static final double MOVE_SPEED_PER_FRAME = 100;
 	
 

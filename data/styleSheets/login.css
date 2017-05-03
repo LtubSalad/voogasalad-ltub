@@ -8,7 +8,6 @@
 
 #bp {
  -fx-background-color:  linear-gradient(gray,DimGrey );
-
 }
 
 #btnLogin, #btnReset{
@@ -56,17 +55,15 @@
     -fx-font-size: 20px;
     -fx-padding: 3px 10px 3px 10px;
     -fx-background-radius: 3,2,1;
-    -fx-background-color: linear-gradient(orange, orangered );
+    -fx-background-color: #101010;
 }
 
 #vbox{
-	-fx-background-color:cyan;
+	-fx-background-color: #D3D3D3;
 	-fx-padding: 15;
     -fx-spacing: 10;
-    -fx-background-radius: 5.0; 
-    -fx-border-color: #2e8b57;
-     -fx-background-size: 96, 205;
-    -fx-border-width: 2px;
+    -fx-background-size: 96, 205;
+    -fx-border-width: 0px;
     -fx-font-family:  "Helvetica";
 }
 

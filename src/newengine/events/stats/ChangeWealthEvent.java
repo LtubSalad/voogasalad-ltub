@@ -7,6 +7,7 @@ import newengine.player.Player;
 
 public class ChangeWealthEvent extends ChangeStatsEvent {
 	public static final BusEventType<ChangeWealthEvent> CHANGE = new BusEventType<>(ChangeWealthEvent.class.getName() + "CHANGE");
+	public static final BusEventType<ChangeWealthEvent> REWARD = new BusEventType<>(ChangeWealthEvent.class.getName() + "REWARD");
 	private WealthType wealthType;
 	private boolean canUpdate;
 	

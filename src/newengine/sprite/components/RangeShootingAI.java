@@ -31,7 +31,6 @@ public class RangeShootingAI extends Component {
 				}
 			}
 			if (shootTarget != null) {
-				System.out.println("SHOOT SHOOT SHOOT SHOOT SHOOT SHOOT SHOOT SHOOT SHOOT SHOOT SHOOT SHOOT");
 				sprite.emit(new TriggerSkillEvent(FireProjectileSkill.TYPE, new Target(shootTarget)));
 				//sprite.emit(new FireProjectileEvent(FireProjectileEvent.SPECIFIC, e.getDetector(), shootTarget));
 			}

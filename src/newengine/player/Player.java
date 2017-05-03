@@ -32,6 +32,9 @@ public class Player {
 	
 	public boolean isEnemyWith(Player other) {
 		// currently all other players are enemy. TODO
+		if (other.equals(NATURE) || this.equals(NATURE)) {
+			return false;
+		}
 		return !this.equals(other);
 	}
 	

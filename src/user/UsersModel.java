@@ -42,8 +42,6 @@ public class UsersModel {
 		passwordVerify = new ArrayList<String>();
 	}
 
-	// TODO: handle loading data
-	
 	private void sendAMessage(String sender, String message, String username){
 		System.out.println("handler working");
 		User reciever = usernameToData.get(username);

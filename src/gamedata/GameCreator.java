@@ -11,17 +11,15 @@ import bus.EventBus;
 import commons.RunningMode;
 import data.SerializableDeveloperData;
 import data.SpriteMakerModel;
+import javafx.scene.control.Alert.AlertType;
 import newengine.app.Game;
 import newengine.events.GameInitializationEvent;
 import newengine.events.SpriteModelEvent;
-import newengine.events.conditions.SetEndConditionEvent;
 import newengine.events.levels.InitILevelsEvent;
 import newengine.events.player.MainPlayerEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.events.stats.ChangeWealthEvent;
-import newengine.managers.conditions.GoldMinimumCondition;
-import newengine.managers.conditions.NoLivesCondition;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.skill.Skill;
@@ -35,6 +33,7 @@ import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.SkillSet;
 import player.helpers.GameLoadException;
+import utilities.CustomAlert;
 import utilities.XStreamHandler;
 
 /**
@@ -77,13 +76,11 @@ public class GameCreator {
 			// enemy: the monsters
 			Player userPlayer = myData.getUserPlayer();
 			
-			List<SpriteMakerModel> spriteMakerModels = myData.getLevels().get(0).getSpawners();
+		
 			List<Sprite> sprites = new ArrayList<>();
-			sprites.addAll(spriteMakerModels.stream().map((spriteMakerModel) -> {
-				return (new AuthDataTranslator(spriteMakerModel)).getSprite();
-			}).collect(Collectors.toList()));
-			System.out.println("see my datax");
-			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites()));
+			sprites.add(createTowerBuilder(myData.getUserPlayer(), myData.getSprites().stream().filter((s) -> {
+				return isTower(s);
+			}).collect(Collectors.toList())));
 
 
 			EventBus bus = game.getBus();
@@ -92,24 +89,53 @@ public class GameCreator {
 				bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
 				bus.emit(new MainPlayerEvent(userPlayer));
+				//bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, pathSprites));
+
+				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(SerializableDeveloperData.NUMBER_OF_LIVES))));
+				//bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, 20)); // Hard-coded
+				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(SerializableDeveloperData.NUMBER_OF_STARTING_GOLD))));
+				//bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, 200));
 				
-//				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_LIVES))));
-				bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, userPlayer, 20)); // Hard-coded
-//				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, Integer.parseInt(myData.getGameData().get(DeveloperData.NUMBER_OF_STARTING_GOLD))));
-				bus.emit(new ChangeWealthEvent(ChangeWealthEvent.CHANGE, userPlayer, WealthType.GOLD, 200));
-				
-				//TODO condition factory
-				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETWIN, new GoldMinimumCondition(1000)));
-				bus.emit(new SetEndConditionEvent(SetEndConditionEvent.SETLOSE, new NoLivesCondition()));
 			});
 
 			return game;
 		} catch (Exception e) {
 			if (RunningMode.DEV_MODE) {
-				e.printStackTrace();
+				new CustomAlert(AlertType.ERROR, "Unable to create the game in GameCreator");
 			}
 			throw new GameLoadException("Fail to load game: " + gameFile);
 		}
+	}
+	
+	private boolean isTower(SpriteMakerModel smm){
+		Owner owner = (Owner) smm.getComponentByType(Owner.TYPE);
+		return owner.player().getName().equals("TOWERS");
+	}
+	
+	private List<Sprite> makePathSprites(List<Sprite> sprites){
+		List<Sprite> pathSprites = new ArrayList<>();
+		
+		
+		
+//		List<GamePoint> alreadyAdded = new ArrayList<>();
+//		for (Sprite sprite : sprites) {
+//			System.out.println("sprites path is being added " + sprite.getID());
+//			System.out.println(sprite.hasComponent(PathFollower.TYPE));
+//			sprite.getComponent(PathFollower.TYPE).ifPresent((pathFollower) -> {
+//				System.out.println("has path follower and makes points queue");
+//				Queue<GamePoint> points = pathFollower.getPath().getPath();
+//				while (!points.isEmpty()){
+//					if (alreadyAdded.contains(points.peek())) continue;
+//					Sprite step = new Sprite();
+//					step.addComponent(new Position(points.poll()));
+//					LtubImage ltubimage = new LtubImage("images/characters/Grass.jpg");
+//					step.addComponent(new Images(ltubimage));
+//					step.addComponent(new GameBus());
+//					pathSprites.add(step);
+//				}
+//			});
+//		}
+		return pathSprites;
 	}
 
 }
