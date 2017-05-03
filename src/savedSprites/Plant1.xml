@@ -30,7 +30,7 @@
         <typename>newengine.sprite.components.Range</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Range>
-        <range>200.0</range>
+        <range>250.0</range>
       </newengine.sprite.components.Range>
     </entry>
     <entry>
@@ -73,7 +73,7 @@
       <newengine.sprite.components.Attacker>
         <reloadPeriod>1.0</reloadPeriod>
         <timeRemaining>1.0</timeRemaining>
-        <damageStrength>25</damageStrength>
+        <damageStrength>75</damageStrength>
         <ltubImage>
           <filename>resources/pvzbullet.png</filename>
         </ltubImage>

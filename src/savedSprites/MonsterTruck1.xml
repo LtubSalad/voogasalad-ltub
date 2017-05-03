@@ -5,7 +5,7 @@
         <typename>newengine.sprite.components.Speed</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Speed>
-        <speed>25.0</speed>
+        <speed>10.0</speed>
       </newengine.sprite.components.Speed>
     </entry>
     <entry>
@@ -13,8 +13,8 @@
         <typename>newengine.sprite.components.Health</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Health>
-        <initHealth>50</initHealth>
-        <health>50</health>
+        <initHealth>100</initHealth>
+        <health>100</health>
       </newengine.sprite.components.Health>
     </entry>
     <entry>
@@ -33,7 +33,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/pvzzombie1.png</imageFilePath>
+        <imageFilePath>resources/MonsterTruck1.jpg</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
@@ -43,6 +43,66 @@
       <newengine.sprite.components.PathFollower>
         <path>
           <myPath class="linked-list">
+            <commons.point.GamePoint>
+              <x>550.0</x>
+              <y>550.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>550.0</x>
+              <y>450.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>450.0</x>
+              <y>450.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>350.0</x>
+              <y>450.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>250.0</x>
+              <y>450.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>150.0</x>
+              <y>450.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>50.0</x>
+              <y>450.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>50.0</x>
+              <y>350.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>50.0</x>
+              <y>250.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>150.0</x>
+              <y>250.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>250.0</x>
+              <y>250.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>350.0</x>
+              <y>250.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>450.0</x>
+              <y>250.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>550.0</x>
+              <y>250.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>550.0</x>
+              <y>150.0</y>
+            </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>550.0</x>
               <y>50.0</y>
@@ -68,7 +128,7 @@
               <y>50.0</y>
             </commons.point.GamePoint>
           </myPath>
-          <pathName>1</pathName>
+          <pathName>Tap Defense Path</pathName>
         </path>
         <finalPoint>
           <x>0.0</x>
