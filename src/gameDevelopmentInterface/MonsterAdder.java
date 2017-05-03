@@ -27,7 +27,8 @@ public class MonsterAdder extends HBox {
 			myPossibleMonsters.getMonstersOnScreen();
 		});
 		
-		this.getChildren().addAll(new Text("Create a spawner"), loadMonster, refresh, numberOfMonsters);		
+		this.getChildren().addAll(new Text("Create a spawner"), loadMonster, //refresh, 
+				numberOfMonsters);		
 	}
 	
 	public int getNumMonsters() {

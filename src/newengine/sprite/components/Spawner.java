@@ -42,7 +42,7 @@ public class Spawner extends Component {
 	public void onUpdated(double dt) {		
 		if (needToSpawn) {
 			sprite.getComponent(GameBus.TYPE).get().getGameBus()
-			.emit(new PeriodicEvent(5, 3.0, () -> 
+			.emit(new PeriodicEvent(totalNumber, secondsBetween, () -> 
 			sprite.emit(new TriggerSkillEvent(BuildSkill.TYPE, new Target(startingPosition)))));
 			needToSpawn = false;
 			sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new DelayedEvent(DelayedEvent.ANY, totalNumber * secondsBetween + 10, 
