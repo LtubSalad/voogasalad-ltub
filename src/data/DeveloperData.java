@@ -16,7 +16,7 @@ import javafx.util.Pair;
 import newengine.managers.conditions.Condition;
 /**
  * 
- * @author Jake, Daniel
+ * @author Jake
  * Stores the information needed to specify how an entire game should be run, though it needs to be converted
  * to serializable version before xstream.
  * Also tracks info such as available paths and sprites that can be added to a screen for developer purposes. 
@@ -98,6 +98,7 @@ public class DeveloperData {
 	public ObservableList<SpriteMakerModel> getSprites(){
 		return mySprites;
 	}
+	
 	@Deprecated
 	public SpritesForScreenUse getScreenSprites(){
 		return jakeSprites;

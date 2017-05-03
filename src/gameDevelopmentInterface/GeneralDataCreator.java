@@ -84,7 +84,8 @@ public class GeneralDataCreator extends BorderPane{
 	}
 
 	private void placeTiles() {
-		content.getChildren().addAll(numLives, numGold, levelCompletionBonus, towerBuild);
+		content.getChildren().addAll(numLives, numGold);
+		//towerBuild, levelcompletion bonus removed, really sorry about this
 	}
 	
 	private void sendNumLives() {
