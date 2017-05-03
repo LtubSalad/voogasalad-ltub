@@ -116,5 +116,8 @@ public class InputManager {
 		else if (keyInputState.isKeyPressed(KeyCode.DOWN)) {
 			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, -Camera.MOVE_SPEED_PER_FRAME * dt));
 		}
+		else if (keyInputState.isKeyPressed(KeyCode.SPACE)) {
+			bus.emit(new CameraEvent(CameraEvent.FOCUS));
+		}
 	}
 }
