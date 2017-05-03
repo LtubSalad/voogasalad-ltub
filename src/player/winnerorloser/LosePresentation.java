@@ -6,6 +6,7 @@ package player.winnerorloser;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -13,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import player.App;
+import utilities.CustomAlert;
 
 /**
  * @author Zhiyong
@@ -80,8 +82,7 @@ public class LosePresentation implements ResultPresentation{
 		try {
 			app.start(primaryStage);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new CustomAlert(AlertType.ERROR, "Can't Restart Action after Loss").show();
 		}
 		
 	}

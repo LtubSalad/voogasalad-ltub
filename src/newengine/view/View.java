@@ -160,9 +160,9 @@ public class View {
 		playerStatsModel.getLives(player).ifPresent((life) -> {
 			statsLabels.add(new Text("Lives:" + life));
 		});
-		playerStatsModel.getScore(player).ifPresent((score) -> {
-			statsLabels.add(new Text("Scores:" + score));
-		});
+//		playerStatsModel.getScore(player).ifPresent((score) -> {
+//			statsLabels.add(new Text("Scores:" + score));
+//		});
 		return statsLabels;
 	}
 
