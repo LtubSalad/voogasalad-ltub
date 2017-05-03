@@ -33,7 +33,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/pvzzombie2.png</imageFilePath>
+        <imageFilePath>resources/monsterImages/pvzzombie2.png</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
@@ -44,28 +44,40 @@
         <path>
           <myPath class="linked-list">
             <commons.point.GamePoint>
+              <x>850.0</x>
+              <y>150.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>750.0</x>
+              <y>150.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>650.0</x>
+              <y>150.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
               <x>550.0</x>
-              <y>250.0</y>
+              <y>150.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>450.0</x>
-              <y>250.0</y>
+              <y>150.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>350.0</x>
-              <y>250.0</y>
+              <y>150.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>250.0</x>
-              <y>250.0</y>
+              <y>150.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>150.0</x>
-              <y>250.0</y>
+              <y>150.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>50.0</x>
-              <y>250.0</y>
+              <y>150.0</y>
             </commons.point.GamePoint>
           </myPath>
           <pathName>2</pathName>

@@ -22,7 +22,7 @@
         <typename>newengine.sprite.components.Cost</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Cost>
-        <cost>50</cost>
+        <cost>100</cost>
       </newengine.sprite.components.Cost>
     </entry>
     <entry>
@@ -30,7 +30,7 @@
         <typename>newengine.sprite.components.Range</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Range>
-        <range>200.0</range>
+        <range>250.0</range>
       </newengine.sprite.components.Range>
     </entry>
     <entry>
@@ -44,7 +44,7 @@
               <type>newengine.skill.skills.FireProjectileSkill</type>
             </newengine.skill.SkillType>
             <newengine.skill.skills.FireProjectileSkill>
-              <cooldown>1.0</cooldown>
+              <cooldown>3.0</cooldown>
             </newengine.skill.skills.FireProjectileSkill>
           </entry>
         </skills>
@@ -55,7 +55,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/Tank2.jpg</imageFilePath>
+        <imageFilePath>resources/towerImages/Tank2.jpg</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
@@ -73,9 +73,9 @@
       <newengine.sprite.components.Attacker>
         <reloadPeriod>1.0</reloadPeriod>
         <timeRemaining>1.0</timeRemaining>
-        <damageStrength>100</damageStrength>
+        <damageStrength>1705</damageStrength>
         <ltubImage>
-          <filename>resources/bullet.png</filename>
+          <filename>resources/bulletImages/bullet.png</filename>
         </ltubImage>
       </newengine.sprite.components.Attacker>
     </entry>
@@ -86,7 +86,7 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>2</spriteName>
+  <spriteName>3</spriteName>
   <spriteDescription>tower</spriteDescription>
   <actualComponents>
     <newengine.sprite.components.Cost reference="../../myComponents/entry[3]/newengine.sprite.components.Cost"/>
