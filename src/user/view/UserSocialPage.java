@@ -18,6 +18,8 @@ import user.MessagingHistory;
 import user.User;
 
 public class UserSocialPage extends BorderPane{
+	
+	//BorderPane myPageView; 
 
 	private User myUser; 
 

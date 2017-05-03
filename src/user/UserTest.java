@@ -28,6 +28,10 @@ public class UserTest extends Application {
 		me.recordAuthored("test game auth", "yike.xml");
 		me.recordGamePlayed("test play", "yike.xml");
 		
+		model.setCurrentUser("me");
+		
+		//SocialCenterView page = new SocialCenterView(model);
+		
 		UserSocialPage page = new UserSocialPage(me);
 		
 		Scene scene = new Scene(page, 600, 600);
