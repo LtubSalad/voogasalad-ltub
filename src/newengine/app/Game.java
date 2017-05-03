@@ -53,10 +53,11 @@ public class Game {
 		gameLoop.addLoopComponent((dt) -> collisionManager.checkCollisions(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> rangeManager.checkRanges(spriteModel.getSprites()));
 		gameLoop.addLoopComponent((dt) -> spriteModel.update(dt));
+		gameLoop.addLoopComponent((dt) -> inputManager.update(dt));
+		gameLoop.addLoopComponent((dt) -> camera.update(dt));
 		gameLoop.addLoopComponent((dt) -> view.render(models));
 		gameLoop.addLoopComponent((dt) -> conditionManager.checkConditions());
 		gameLoop.addLoopComponent((dt) -> timerManager.update(dt));
-		gameLoop.addLoopComponent((dt) -> inputManager.update(dt));
 	}
 
 	public void addTrigger(Trigger trigger) {
