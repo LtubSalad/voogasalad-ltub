@@ -1,14 +1,8 @@
 package newengine.sprite.components;
 
-import java.io.Serializable;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-import java.io.Serializable;
-
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import bus.BusEvent;
-import bus.BusEventHandler;
 import commons.MathUtils;
 import commons.point.GamePoint;
 import helperAnnotations.ConstructorForDeveloper;
@@ -17,12 +11,10 @@ import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
 import newengine.events.SpriteModelEvent;
 import newengine.events.sound.SoundEvent;
-import newengine.events.sprite.ChangeHealthEvent;
-import newengine.events.sprite.FireProjectileEvent;
+import newengine.events.sprite.ChangeSpeedEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.events.sprite.StateChangeEvent;
 import newengine.events.stats.ChangeLivesEvent;
-import newengine.events.timer.DelayedEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
@@ -32,6 +24,7 @@ public class Position extends Component {
 	public static final ComponentType<Position> TYPE = new ComponentType<>(Position.class.getName());
 	private GamePoint pos = new GamePoint();
 	private double heading;
+	private static final double TURN_AROUND_SPEED = 20;
 	@XStreamOmitField
 	private Target target;
 	private boolean isMoving = false;
@@ -43,7 +36,7 @@ public class Position extends Component {
 	}
 	
 	public Position(GamePoint pos){
-		this.pos = pos;
+		this(pos, 0);
 	}
 
 	@ConstructorForDeveloper
@@ -58,9 +51,6 @@ public class Position extends Component {
 			moveTo(e.getTarget());
 			sprite.getComponent(SoundEffect.TYPE).ifPresent((sound) -> {
 				sprite.getComponent(GameBus.TYPE).ifPresent((bus) -> {
-					if (bus.getGameBus() == null) {
-						System.out.println("main bus is null");
-					}
 					bus.getGameBus().emit(new SoundEvent(SoundEvent.SOUND_EFFECT, sound.getMoveSoundFile()));
 				});
 			});
@@ -75,21 +65,24 @@ public class Position extends Component {
 			});
 		});
 		sprite.on(MoveEvent.STOP, (e) -> {
+			stopMoving();
 			if (e.getSprite().getComponent(Weapon.TYPE).isPresent()) {
 				sprite.getComponent(GameBus.TYPE).get().getGameBus()
 						.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, e.getSprite()));
 			}
 		});
-
+		sprite.on(MoveEvent.START_AUTO, (e) -> {
+			startMoving();
+		});
+		sprite.on(ChangeSpeedEvent.DIRECTION, (e) -> {
+			changeHeading(e.dt());
+		});
 	}
 
 	@Override
 	public void onUpdated(double dt) {
-		
 		sprite.getComponent(PathFollower.TYPE).ifPresent((pathFollower) -> {
-			
 			if (sprite.getComponent(EventQueue.TYPE).get().isEmpty()) {
-				System.out.println("sprite has stopped moving and reached end of path");
 				sprite.getComponent(GameBus.TYPE).get().getGameBus().emit(new ChangeLivesEvent(ChangeLivesEvent.CHANGE,
 						sprite.getComponent(Owner.TYPE).get().player(), -1));
 				sprite.getComponent(GameBus.TYPE).get().getGameBus()
@@ -100,13 +93,16 @@ public class Position extends Component {
 			return;
 		}
 		GamePoint pDest = getFollowingPoint();
-		updateMovePosition(dt, pDest);
+		if (pDest != null) {
+			updatePosition(dt, pDest);
+		}
+		else {
+			updateTime(dt);
+		}
 	}
 
-	private void updateMovePosition(double dt, GamePoint pDest) {
-		if (!sprite.getComponent(Speed.TYPE).isPresent()) {
-			return;
-		}
+	private void updatePosition(double dt, GamePoint pDest) {
+		if (!sprite.getComponent(Speed.TYPE).isPresent()) { return;	}
 
 		double xDest = pDest.x();
 		double yDest = pDest.y();
@@ -143,6 +139,18 @@ public class Position extends Component {
 		sprite.emit(new StateChangeEvent(StateChangeEvent.XPOS, sprite, pos.x()));
 		sprite.emit(new StateChangeEvent(StateChangeEvent.YPOS, sprite, pos.y()));
 		return;
+	}
+	
+	private void updateTime(double dt) {
+		if (!sprite.getComponent(Speed.TYPE).isPresent()) {return;}
+		
+		double speed = sprite.getComponent(Speed.TYPE).get().speed();
+		double x = pos.x();
+		double y = pos.y();
+		// TODO heading
+		double xSpeed = speed * Math.cos(Math.toRadians(heading));
+		double ySpeed = speed * Math.sin(Math.toRadians(heading));
+		pos = new GamePoint(x + dt * xSpeed, y + dt * ySpeed);
 	}
 
 	@Override
@@ -186,6 +194,10 @@ public class Position extends Component {
 	private void stopMoving() {
 		isMoving = false;
 	}
+	
+	private void changeHeading(double dt) {
+		heading += TURN_AROUND_SPEED * dt;
+	}
 
 	public boolean isMoving() {
 		return isMoving;
@@ -208,11 +220,13 @@ public class Position extends Component {
 				}
 			}
 		}
-		return target.getLocation();
+		if (target != null) {
+			return target.getLocation();
+		}
+		return null;
 	}
 
 	@Override
-
 	public Object[] getGUIParameters() {
 		Object[] parameters=new Object[3];
 		parameters[0]=pos.x();

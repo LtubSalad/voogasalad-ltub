@@ -115,7 +115,7 @@ public class XStreamTester extends Application{
 		sprite1.addComponent(new Position(new GamePoint(200, 100), 0));
 		sprite1.addComponent(new SoundEffect("data/sounds/Psyessr4.wav"));
 		sprite1.addComponent(new Images("images/characters/bahamut_left.png"));
-		sprite1.addComponent(new Speed(200));
+		sprite1.addComponent(new Speed(200, 0));
 		sprite1.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		sprite1.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		sprite1.addComponent(new Range(128));
