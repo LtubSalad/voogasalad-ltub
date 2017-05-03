@@ -1,11 +1,11 @@
 package gameDevelopmentInterface;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import commons.point.GamePoint;
 import data.DeveloperData;
-import data.ScreenModelData;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -18,14 +18,14 @@ import javafx.scene.layout.BorderPane;
  */
 public class PathCreator extends BorderPane {
 	private static final double close_bounds = 0.0001;
-	private Path myPath;
+	private Queue<GamePoint> myPath;
 	private Queue<GamePoint> replacementPath = new LinkedList<GamePoint>();
 	private DeveloperData myDeveloperData;
 	private ScreenMap target;
 	
 	public PathCreator(DeveloperData developerData) {
 		myDeveloperData = developerData;
-		myPath = new Path();
+		//myPath = new Path();
 		clearPath();
 	}
 	public ScreenMap getScreen() {
@@ -36,7 +36,7 @@ public class PathCreator extends BorderPane {
 	}
 	public void clearPath() {
 		this.getChildren().clear();
-		myPath.getPath().clear();
+		//myPath.getPath().clear();
 		target = new ScreenMap(myDeveloperData);
 		target.resize(350, 350);
 		this.setCenter(target);
@@ -54,38 +54,42 @@ public class PathCreator extends BorderPane {
 	 * Called by the buttons panel
 	 */
 	public void makePath() {
+		Queue<GamePoint> newPath = new LinkedList<GamePoint>();
 		target.setOnMouseEntered(e -> target.getGrid().setGridLinesVisible(true));
 		target.setOnMouseExited(e -> target.getGrid().setGridLinesVisible(false));
-		target.setOnMouseDragged(e -> targetSetOnMouseDragged(target, e));
+		target.setOnMouseDragged(e -> targetSetOnMouseDragged(target, e, newPath));
+		target.setOnMouseReleased(e -> replacePath(newPath));
 	}
 	
 	/**
 	 * Called by the buttons panel
 	 */
-	public void replacePath() {
-		if (isValidPath(new LinkedList<GamePoint>(replacementPath))) {
-			myPath.changePath(replacementPath);
-		}
+	public void replacePath(Queue<GamePoint> newPath) {
+		myPath = newPath;
 	}
 	
-	private void targetSetOnMouseDragged(ScreenMap target, MouseEvent e) {
+	public Queue<GamePoint> getPath() {
+		return myPath;
+	}
+	
+	private void targetSetOnMouseDragged(ScreenMap target, MouseEvent e, Queue<GamePoint> newPath) {
 		Point2D point = target.sceneToLocal(e.getSceneX(), e.getSceneY());
 		double mouseX = point.getX();
 		double mouseY = point.getY();
 		GamePoint coords = target.getCoordOfMouseHover(mouseX, mouseY);
 		GamePoint actualGameLocation = target.getActualLocationOfSprite(coords);
-		//GamePoint percentLocation = new GamePoint(actualGameLocation.x()/target.getScreenWidth(), actualGameLocation.y()/target.getScreenHeight());
-		if (!coordAlreadyInPath(actualGameLocation)) {
-			replacementPath.add(actualGameLocation);
+		if (!coordAlreadyInPath(actualGameLocation, newPath)) {
+			newPath.add(actualGameLocation);
 			target.addBorderToCoordinate(coords);
 		}
+		
 		e.consume();
 	}
 	
-	private boolean coordAlreadyInPath(GamePoint coords) {
+	private boolean coordAlreadyInPath(GamePoint coords, Queue<GamePoint> path) {
 		double testX = coords.x();
 		double testY = coords.y();
-		for (GamePoint gp : replacementPath) {
+		for (GamePoint gp : path) {
 			double alreadyX = gp.x();
 			double alreadyY = gp.y();
 			if (Math.abs(testX - alreadyX) < close_bounds && Math.abs(testY - alreadyY) < close_bounds) {

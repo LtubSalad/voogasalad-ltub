@@ -89,6 +89,13 @@ public class DeveloperData {
 	
 	public void addPath(Path path){
 		myPaths.add(path);
+		System.out.println("Current paths list: ");
+		for (Path p : myPaths) {
+			System.out.println();
+			p.getPath().forEach(gp -> {
+				System.out.println(gp.x() + " "+ gp.y());
+			});
+		}
 	}
 	
 	public ObservableList<Path> getPaths(){
