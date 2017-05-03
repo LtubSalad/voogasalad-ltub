@@ -23,6 +23,7 @@ public class App extends Application {
 		//new GameManager(primaryStage);
 		UsersModel userModel = new UsersModel();
 		userModel.setCurrentUser("Player 1");
+		primaryStage.setResizable(false);
 		primaryStage.show();
 		new MainMenu(primaryStage, userModel); // go to the chooser screen
 	}

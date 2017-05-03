@@ -1,0 +1,9 @@
+.rule {
+	 -fx-background-color: #0A0A0A;
+	 -fx-min-height: 3;
+	 -fx-pref-height: 3;
+}
+
+.bottom-pane {
+	-fx-background-color: #D3D3D3;
+}

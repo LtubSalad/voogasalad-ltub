@@ -44,7 +44,7 @@ public class GameChooser {
 	public GameChooser(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		// gameFactory = new GameFactory();
-		initPresetGameChoices();
+//		initPresetGameChoices();
 		Scene scene = createScene();
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -64,7 +64,7 @@ public class GameChooser {
 		root.getChildren().add(vBox);
 		vBox.setLayoutX(250);
 		vBox.setLayoutY(100);
-		vBox.getChildren().addAll(createPresetButtons());
+//		vBox.getChildren().addAll(createPresetButtons());
 		vBox.getChildren().add(createGameFileChooserButton());
 		return scene;
 	}
@@ -102,7 +102,7 @@ public class GameChooser {
 				startGame(fileChosen);
 			}
 		});
-		getRotation(button);
+//		getRotation(button);
 		return button;
 	}
 	

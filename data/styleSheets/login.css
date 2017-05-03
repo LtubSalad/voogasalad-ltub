@@ -56,6 +56,7 @@
     -fx-padding: 3px 10px 3px 10px;
     -fx-background-radius: 3,2,1;
     -fx-background-color: #101010;
+    -fx-pref-width: 230px;
 }
 
 #vbox{
@@ -112,4 +113,8 @@
 .button:default {
     -fx-background-color: -fx-focus-color;
     -fx-text-fill: #ffffff;
+}
+
+.ltub-background {
+	-fx-padding: 30;
 }
