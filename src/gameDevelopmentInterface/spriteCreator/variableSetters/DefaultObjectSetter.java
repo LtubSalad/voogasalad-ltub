@@ -1,4 +1,4 @@
-package gameDevelopmentInterface.spriteCreator;
+package gameDevelopmentInterface.spriteCreator.variableSetters;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
