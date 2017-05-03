@@ -44,6 +44,16 @@ public class UsersModel {
 
 	// TODO: handle loading data
 	
+	public void setCurrentUser(String username){
+		if(usernameToData.containsKey(username)){
+			this.currentUser = usernameToData.get(username);
+		}
+	}
+	
+	public User getCurrentUser(){
+		return this.currentUser;
+	}
+	
 	private void sendAMessage(String sender, String message, String username){
 		System.out.println("handler working");
 		User reciever = usernameToData.get(username);
