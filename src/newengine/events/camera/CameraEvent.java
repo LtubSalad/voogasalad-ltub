@@ -13,6 +13,8 @@ public class CameraEvent extends BusEvent{
 			CameraEvent.class.getName() + "RESET");
 	public static final BusEventType<CameraEvent> FOCUS = new BusEventType<>(
 			CameraEvent.class.getName() + "FOCUS");
+	public static final BusEventType<CameraEvent> LOCK = new BusEventType<>(
+			CameraEvent.class.getName() + "LOCK");
 	
 	private double scaleFactor;
 	private double translateXValue;

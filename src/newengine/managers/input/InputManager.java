@@ -64,6 +64,9 @@ public class InputManager {
 			else if (keyInputState.isKeyPressed(KeyCode.R)) {
 				bus.emit(new CameraEvent(CameraEvent.RESET));
 			}
+			else if (keyInputState.isKeyPressed(KeyCode.L)) {
+				bus.emit(new CameraEvent(CameraEvent.LOCK));
+			}
 		});
 		bus.on(KeyEvent.RELEASE, e -> {
 			keyInputState.releaseKey(e.getCode());
