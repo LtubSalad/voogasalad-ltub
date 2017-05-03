@@ -118,6 +118,7 @@ public class MainMenu {
 		if (game != null) {
 			Stage gameStage=new Stage();
 			gameStage.setScene(game.getScene());
+			gameStage.show();
 			game.start();
 		}
 	}
