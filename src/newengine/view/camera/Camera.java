@@ -4,16 +4,22 @@ import bus.EventBus;
 import commons.point.GamePoint;
 import commons.point.ViewPoint;
 import newengine.events.camera.CameraEvent;
+import newengine.events.selection.SelectSpriteEvent;
+import newengine.sprite.Sprite;
+import newengine.sprite.components.Position;
+import newengine.view.View;
 
 
 /**
  * Convert between {@code GamePoint} and {@code ViewPoint}.
- * @author Yilin, Zhiyong
+ * @author Yilin
  *
  */
 public class Camera {
 
 	private EventBus bus;
+	private Sprite selectedSprite;
+	private ViewPoint prePos;
 	private double scaleFactor = 1;
 	private double translateX = 0;
 	private double translateY = 0;
@@ -38,6 +44,13 @@ public class Camera {
 		bus.on(CameraEvent.RESET, (e) -> {
 			reset();
 		});
+		bus.on(SelectSpriteEvent.SINGLE, (e) -> {
+			this.selectedSprite = e.getSprite();
+			centerOn();
+		});
+		bus.on(CameraEvent.FOCUS, (e) -> {
+			centerOn();
+		});
 	}
 
 	private void zoom(CameraEvent e) {
@@ -55,12 +68,26 @@ public class Camera {
 		this.translateY += e.getTranslateYValue();
 	}
 	
+	private void centerOn() {
+		if (selectedSprite != null){
+			double x = 0;
+			double y = 0;
+			if (selectedSprite.getComponent(Position.TYPE).isPresent()) {
+				Position position = selectedSprite.getComponent(Position.TYPE).get();
+				prePos = gameToView(position.pos());
+				x = (View.INIT_CANVAS_WIDTH / 2 - position.xPos() * scaleFactor) ;
+				y = (View.INIT_CANVAS_HEIGHT / 2 - position.yPos() * scaleFactor);
+			}
+			this.translateX = x;
+			this.translateY = y;			
+		}
+	}
+	
 	private void reset() {
 		scaleFactor = 1;
 		this.translateX = 0;
 		this.translateY = 0;
-	}
-	
+	}	
 
 	/**
 	 * Convert a Point on the view to a Point in the game.
