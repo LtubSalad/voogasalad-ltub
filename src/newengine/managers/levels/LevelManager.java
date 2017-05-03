@@ -98,6 +98,10 @@ public class LevelManager{
 
 		bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
 		
+		
+		/**
+		 * This code assumes that only one sprite is initially added, and that sprite is a spawner. 
+		 */
 		List<Sprite> pathSprites = new ArrayList<>();
 		SkillSet skillSet = (SkillSet) spriteMakerModels.get(0).getComponentByType(SkillSet.TYPE);
 		BuildSkill buildSkill = (BuildSkill) skillSet.getSkill(BuildSkill.TYPE);
