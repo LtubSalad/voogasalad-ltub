@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import newengine.sprite.component.Component;
 import newengine.sprite.components.Attacker;
 import newengine.sprite.components.Collidable;
+import newengine.sprite.components.Cost;
 import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
@@ -58,6 +59,7 @@ public class SpriteCreationScreen extends BorderPane {
 	private ComponentSelectorPane instantiateSelector() {
 		List<Class<? extends Component>> basicComponents = new ArrayList<>();
 		ObservableList<Class<? extends Component>> observableComponents = FXCollections.observableList(basicComponents);
+		observableComponents.add(Cost.class);
 		observableComponents.add(Attacker.class);
 		observableComponents.add(Collidable.class);
 		observableComponents.add(Health.class);
