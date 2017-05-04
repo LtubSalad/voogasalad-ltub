@@ -19,6 +19,7 @@ import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.Spawner;
 
 public class SpawnerCreation extends BorderPane {
+	private static final String TOWERS = "TOWERS";
 	private SpriteMakerModel spawnerData;
 	private SpriteMakerModel spriteToSpawn;
 	private DeveloperData model;
@@ -59,7 +60,7 @@ public class SpawnerCreation extends BorderPane {
 		spawnerSkills.put(BuildSkill.TYPE, new BuildSkill(spriteToSpawn));
 		spawnerData.addComponent(new GameBus());
 		spawnerData.addComponent(new SkillSet(spawnerSkills));
-		spawnerData.addComponent(new Owner(new Player("TOWERS")));
+		spawnerData.addComponent(new Owner(new Player(TOWERS)));
 		spawnerData.addComponent(new Position(new GamePoint(0.1, 0.1), 0));
 		spawnerData.addComponent(new Spawner(myMonsterAdder.getNumMonsters(), new Path(), spawnBetweenTime, spriteToSpawn));
 		return spawnerData;

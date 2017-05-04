@@ -55,7 +55,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/Tank1.png</imageFilePath>
+        <imageFilePath>resources/towerImages/Tank1.png</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
@@ -75,7 +75,7 @@
         <timeRemaining>1.0</timeRemaining>
         <damageStrength>75</damageStrength>
         <ltubImage>
-          <filename>resources/bullet.png</filename>
+          <filename>resources/bulletImages/bullet.png</filename>
         </ltubImage>
       </newengine.sprite.components.Attacker>
     </entry>
@@ -86,7 +86,7 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>1</spriteName>
+  <spriteName>tank 1</spriteName>
   <spriteDescription>tower</spriteDescription>
   <actualComponents>
     <newengine.sprite.components.Cost reference="../../myComponents/entry[3]/newengine.sprite.components.Cost"/>
