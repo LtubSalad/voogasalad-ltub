@@ -68,7 +68,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/towerImages/RedFromPokemon.png</imageFilePath>
+        <imageFilePath>resources/towerImages/Ash.png</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>

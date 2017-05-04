@@ -10,11 +10,11 @@
     </entry>
     <entry>
       <string>NUM_LIVES</string>
-      <string>11</string>
+      <string>1</string>
     </entry>
     <entry>
       <string>NUM_GOLD</string>
-      <string>11</string>
+      <string>1100</string>
     </entry>
     <entry>
       <string>BUILD_IN_GAME</string>
