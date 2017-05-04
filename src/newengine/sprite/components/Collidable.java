@@ -17,51 +17,56 @@ public class Collidable extends Component {
 
 	public static final ComponentType<Collidable> TYPE = new ComponentType<>(Collidable.class.getName());
 	private final CollisionBoundType boundType;
-	private final List<GamePoint> bound = new ArrayList<>();
-	
+
 	@ConstructorForDeveloper
 	public Collidable(@VariableName(name = "Bound type") CollisionBoundType boundType) {
 		this.boundType = boundType; // TODO different kinds of points
 	}
-	
-	@Override
-	public void afterAdded() { // TODO bound for multiple images
-		if (CollisionBoundType.IMAGE == boundType) {
-			LtubImage image = sprite.getComponent(Images.TYPE).get().image();
-			double w = image.width();
-			double h = image.height();
-			bound.add(new GamePoint(0, 0));
-			bound.add(new GamePoint(w, 0));
-			bound.add(new GamePoint(w, h));
-			bound.add(new GamePoint(0, h));
-		}
-		else {
-			// TODO
-		}
-	}
-	
+
 	/**
 	 * Get a list of points representing the polygon collision bound.
 	 */
 	public List<GamePoint> boundPoints() {
+		List<GamePoint> bound = new ArrayList<>();
+		if (CollisionBoundType.IMAGE == boundType) {
+			LtubImage image = sprite.getComponent(Images.TYPE).get().image();
+			double w = image.width();
+			double h = image.height();
+			double heading = sprite.getComponent(Position.TYPE).get().heading();
+			GamePoint pivot = new GamePoint(w / 2, h / 2);
+			bound.add(rotatedPoint(new GamePoint(0, 0), heading, pivot));
+			bound.add(rotatedPoint(new GamePoint(w, 0), heading, pivot));
+			bound.add(rotatedPoint(new GamePoint(w, h), heading, pivot));
+			bound.add(rotatedPoint(new GamePoint(0, h), heading, pivot));
+		} else {
+			// TODO
+		}
 		return bound;
 	}
-	
+
+	private GamePoint rotatedPoint(GamePoint p, double heading, GamePoint pivot) {
+		p = new GamePoint(p.x() - pivot.x(), p.y() - pivot.y());
+		p = new GamePoint(Math.cos(Math.toRadians(heading)) * p.x() + Math.sin(Math.toRadians(heading)) * p.y(),
+				-Math.sin(Math.toRadians(heading)) * p.x() + Math.cos(Math.toRadians(heading)) * p.y());
+		p = new GamePoint(p.x() + pivot.x(), p.y() - pivot.y());
+		return p;
+	}
+
 	@Override
 	public ComponentType<? extends Component> getType() {
 		return TYPE;
 	}
-	
+
 	@Override
 	public Collidable clone() {
-		return new Collidable(boundType);		
+		return new Collidable(boundType);
 	}
 
 	@Override
 	public Object[] getGUIParameters() {
 		// TODO Auto-generated method stub
-		Object[] parameters= new Object[1];
-		parameters[0]=boundType;
+		Object[] parameters = new Object[1];
+		parameters[0] = boundType;
 		return parameters;
 	}
 

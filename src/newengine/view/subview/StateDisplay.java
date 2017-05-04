@@ -34,29 +34,8 @@ public class StateDisplay {
 		
 		this.sprite = sprite;
 		box.getChildren().clear();
-		sprite.getComponent(SkillSet.TYPE).ifPresent((skillSet) -> {
-			if (skillSet.getSkill(FireProjectileSkill.TYPE) != null) {
-			makeSingleStat("Cooldown time", skillSet.getSkill(FireProjectileSkill.TYPE).getCooldown(), sprite);
-			}
-		});
-		sprite.getComponent(Attacker.TYPE).ifPresent((attacker) -> {
-			makeSingleStat("Damage Strength", attacker.getDamageStrength(), sprite);
-
-		});
-		sprite.getComponent(Health.TYPE).ifPresent((health) -> {
-			makeSingleStat("Health", health.getHealth(), sprite);
-		});
-		sprite.getComponent(Position.TYPE).ifPresent((position) -> {
-			makeSingleStat("X Position", Math.round(position.xPos()), sprite);
-			makeSingleStat("Y Position", Math.round(position.yPos()), sprite);
-			makeSingleStat("Heading", Math.round(position.heading()), sprite);
-		});
-		sprite.getComponent(Range.TYPE).ifPresent((range) -> {
-			makeSingleStat("Range", range.range(), sprite);
-		});
 		sprite.getComponent(Speed.TYPE).ifPresent((speed) -> {
-			makeSingleStat("Speed", Math.round(speed.speed()), sprite);
-			makeSingleStat("Accelerated Speed", speed.acceleratedSpeed(), sprite);
+			makeSingleStat("Speed", Math.round(speed.speed()) / 4, sprite);
 		});
 	}
 	
