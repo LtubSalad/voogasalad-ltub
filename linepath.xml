@@ -1,0 +1,56 @@
+<data.SerializableDeveloperData>
+  <gameData>
+    <entry>
+      <string>LEVEL_COMPLETION</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>GAME_ICON</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>NUM_LIVES</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>NUM_GOLD</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>BUILD_IN_GAME</string>
+      <string>false</string>
+    </entry>
+    <entry>
+      <string>GAME_NAME</string>
+      <string>TDTester</string>
+    </entry>
+  </gameData>
+  <mySprites/>
+  <myLevels>
+    <gamecreation.level.SerializableLevelData>
+      <name>level 1</name>
+      <winning class="newengine.managers.conditions.NoMonstersCondition"/>
+      <losing class="newengine.managers.conditions.NoLivesCondition"/>
+      <spawnTime>5.289256277163167</spawnTime>
+      <spawners/>
+    </gamecreation.level.SerializableLevelData>
+    <gamecreation.level.SerializableLevelData>
+      <name>level 2</name>
+      <winning class="newengine.managers.conditions.GoldMinimumCondition">
+        <goldMin>10</goldMin>
+      </winning>
+      <losing class="newengine.managers.conditions.NoLivesCondition"/>
+      <spawnTime>0.0</spawnTime>
+      <spawners/>
+    </gamecreation.level.SerializableLevelData>
+    <gamecreation.level.SerializableLevelData>
+      <name>level 3</name>
+      <winning class="newengine.managers.conditions.GoldMinimumCondition">
+        <goldMin>50</goldMin>
+      </winning>
+      <losing class="newengine.managers.conditions.NoLivesCondition"/>
+      <spawnTime>0.0</spawnTime>
+      <spawners/>
+    </gamecreation.level.SerializableLevelData>
+  </myLevels>
+</data.SerializableDeveloperData>

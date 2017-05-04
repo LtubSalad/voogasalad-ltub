@@ -1,0 +1,58 @@
+<data.SerializableDeveloperData>
+  <gameData>
+    <entry>
+      <string>LEVEL_COMPLETION</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>GAME_ICON</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>NUM_LIVES</string>
+      <string>100</string>
+    </entry>
+    <entry>
+      <string>NUM_GOLD</string>
+      <string>50</string>
+    </entry>
+    <entry>
+      <string>BUILD_IN_GAME</string>
+      <string>false</string>
+    </entry>
+    <entry>
+      <string>GAME_NAME</string>
+      <string>huluwa</string>
+    </entry>
+  </gameData>
+  <mySprites/>
+  <myLevels>
+    <gamecreation.level.SerializableLevelData>
+      <name>base</name>
+      <winning class="newengine.managers.conditions.GoldMinimumCondition">
+        <goldMin>10</goldMin>
+      </winning>
+      <losing class="newengine.managers.conditions.NoLivesCondition"/>
+      <spawnTime>2.8154269131747163</spawnTime>
+      <spawners/>
+    </gamecreation.level.SerializableLevelData>
+    <gamecreation.level.SerializableLevelData>
+      <name>medium</name>
+      <winning class="newengine.managers.conditions.GoldMinimumCondition">
+        <goldMin>20</goldMin>
+      </winning>
+      <losing class="newengine.managers.conditions.NoLivesCondition"/>
+      <spawnTime>3.1955923915894564</spawnTime>
+      <spawners/>
+    </gamecreation.level.SerializableLevelData>
+    <gamecreation.level.SerializableLevelData>
+      <name>hard</name>
+      <winning class="newengine.managers.conditions.GoldMinimumCondition">
+        <goldMin>30</goldMin>
+      </winning>
+      <losing class="newengine.managers.conditions.NoLivesCondition"/>
+      <spawnTime>2.9752067100903217</spawnTime>
+      <spawners/>
+    </gamecreation.level.SerializableLevelData>
+  </myLevels>
+</data.SerializableDeveloperData>

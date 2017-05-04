@@ -45,7 +45,7 @@ public class AnimationImage {
 	}
 
 	private Image getImage(int i){
-		return new Image("resources/Bahamut" + i +".png", WIDTH, HEIGHT, true,true);
+		return new Image("resources/monsterImages/Bahamut" + i +".png", WIDTH, HEIGHT, true,true);
 	}
 
 	private void shuffleArray(int seed, int[] array)
