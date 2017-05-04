@@ -2,17 +2,19 @@
   <myComponents>
     <entry>
       <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.RangeShootingAI</typename>
+        <typename>newengine.sprite.components.Speed</typename>
       </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.RangeShootingAI/>
+      <newengine.sprite.components.Speed>
+        <speed>200.0</speed>
+      </newengine.sprite.components.Speed>
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.Health</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Health>
-        <initHealth>100</initHealth>
-        <health>100</health>
+        <initHealth>500</initHealth>
+        <health>500</health>
       </newengine.sprite.components.Health>
     </entry>
     <entry>
@@ -21,9 +23,9 @@
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Owner>
         <owner>
-          <name>MONSTERS</name>
+          <name>TOWERS</name>
         </owner>
-        <teamNumber>MONSTERS</teamNumber>
+        <teamNumber>TOWERS</teamNumber>
       </newengine.sprite.components.Owner>
     </entry>
     <entry>
@@ -40,6 +42,16 @@
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.SkillSet>
         <skills>
+          <entry>
+            <newengine.skill.SkillType>
+              <type>newengine.skill.skills.MoveSkill</type>
+            </newengine.skill.SkillType>
+            <newengine.skill.skills.MoveSkill>
+              <icon>
+                <filename>images/skills/walk.png</filename>
+              </icon>
+            </newengine.skill.skills.MoveSkill>
+          </entry>
           <entry>
             <newengine.skill.SkillType>
               <type>newengine.skill.skills.FireProjectileSkill</type>
@@ -74,7 +86,7 @@
       <newengine.sprite.components.Attacker>
         <reloadPeriod>1.0</reloadPeriod>
         <timeRemaining>1.0</timeRemaining>
-        <damageStrength>10</damageStrength>
+        <damageStrength>100</damageStrength>
         <ltubImage>
           <filename>resources/bulletImages/fireball.png</filename>
         </ltubImage>
@@ -103,11 +115,11 @@
     <newengine.sprite.components.Collidable reference="../../myComponents/entry[9]/newengine.sprite.components.Collidable"/>
     <newengine.sprite.components.Health reference="../../myComponents/entry[2]/newengine.sprite.components.Health"/>
     <newengine.sprite.components.Images reference="../../myComponents/entry[6]/newengine.sprite.components.Images"/>
-    <newengine.sprite.components.Owner reference="../../myComponents/entry[3]/newengine.sprite.components.Owner"/>
     <newengine.sprite.components.Range reference="../../myComponents/entry[4]/newengine.sprite.components.Range"/>
-    <newengine.sprite.components.RangeShootingAI reference="../../myComponents/entry/newengine.sprite.components.RangeShootingAI"/>
     <newengine.sprite.components.Selectable reference="../../myComponents/entry[7]/newengine.sprite.components.Selectable"/>
     <newengine.sprite.components.SkillSet reference="../../myComponents/entry[5]/newengine.sprite.components.SkillSet"/>
+    <newengine.sprite.components.Speed reference="../../myComponents/entry/newengine.sprite.components.Speed"/>
+    <newengine.sprite.components.Owner reference="../../myComponents/entry[3]/newengine.sprite.components.Owner"/>
   </actualComponents>
   <skills/>
 </data.SpriteMakerModel>
