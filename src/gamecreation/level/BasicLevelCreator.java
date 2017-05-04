@@ -47,7 +47,7 @@ public class BasicLevelCreator extends LevelCreator{
 	private void initConditions(){
 		winningConditions = new HashMap<String, Class<? extends Condition>>();
 		losingConditions = new HashMap<String, Class<? extends Condition>>();
-		winningConditions.put(myResources.getString("noMonsters"), NoMonstersCondition.class);
+		//winningConditions.put(myResources.getString("noMonsters"), NoMonstersCondition.class);
 		winningConditions.put(myResources.getString("goldMin"), GoldMinimumCondition.class);
 		losingConditions.put(myResources.getString("noLives"), NoLivesCondition.class);
 	}
@@ -63,16 +63,16 @@ public class BasicLevelCreator extends LevelCreator{
 		title.getTextProperty().addListener(e -> BasicLevelCreator.this.getData().setName(title.getValue()));
 		
 		winningCondition = new ComboBoxParameterInput(myResources.getString("winningCondition"), new ArrayList<String>(winningConditions.keySet()));
-		winningCondition.getComboBox().setValue(winningCondition.getComboBox().getItems().get(1));
+		winningCondition.appendTextInput();
 		losingCondition = new ComboBoxParameterInput(myResources.getString("losingCondition"), new ArrayList<String> (losingConditions.keySet()));
-		winningCondition.getValueProperty().addListener(e -> {
-			if(winningCondition.getValue().contains("(Input)")){
-				winningCondition.appendTextInput();
-			}
-			else{
-				winningCondition.removeTextInput();
-			}
-		});
+//		winningCondition.getValueProperty().addListener(e -> {
+//			if(winningCondition.getValue().contains("(Input)")){
+//				winningCondition.appendTextInput();
+//			}
+//			else{
+//				winningCondition.removeTextInput();
+//			}
+//		});
 	
 		createButtons();
 		

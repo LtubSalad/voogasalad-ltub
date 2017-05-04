@@ -1,0 +1,112 @@
+<data.SpriteMakerModel>
+  <myComponents>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Speed</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Speed>
+        <speed>400.0</speed>
+      </newengine.sprite.components.Speed>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.RangeShootingAI</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.RangeShootingAI/>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Owner</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Owner>
+        <owner>
+          <name>TOWERS</name>
+        </owner>
+        <teamNumber>TOWERS</teamNumber>
+      </newengine.sprite.components.Owner>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Range</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Range>
+        <range>300.0</range>
+      </newengine.sprite.components.Range>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.SkillSet</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.SkillSet>
+        <skills>
+          <entry>
+            <newengine.skill.SkillType>
+              <type>newengine.skill.skills.MoveSkill</type>
+            </newengine.skill.SkillType>
+            <newengine.skill.skills.MoveSkill>
+              <icon>
+                <filename>images/skills/walk.png</filename>
+              </icon>
+            </newengine.skill.skills.MoveSkill>
+          </entry>
+          <entry>
+            <newengine.skill.SkillType>
+              <type>newengine.skill.skills.FireProjectileSkill</type>
+            </newengine.skill.SkillType>
+            <newengine.skill.skills.FireProjectileSkill>
+              <cooldown>0.3</cooldown>
+            </newengine.skill.skills.FireProjectileSkill>
+          </entry>
+        </skills>
+      </newengine.sprite.components.SkillSet>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Images</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Images>
+        <imageFilePath>resources/squirrel.png</imageFilePath>
+      </newengine.sprite.components.Images>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Selectable</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Selectable>
+        <boundType>IMAGE</boundType>
+      </newengine.sprite.components.Selectable>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Attacker</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Attacker>
+        <reloadPeriod>1.0</reloadPeriod>
+        <timeRemaining>1.0</timeRemaining>
+        <damageStrength>20</damageStrength>
+        <ltubImage>
+          <filename>resources/acorn.png</filename>
+        </ltubImage>
+      </newengine.sprite.components.Attacker>
+    </entry>
+  </myComponents>
+  <myScriptMap>
+    <entry>
+      <null/>
+      <string></string>
+    </entry>
+  </myScriptMap>
+  <spriteName>ecoshooter</spriteName>
+  <spriteDescription></spriteDescription>
+  <actualComponents>
+    <newengine.sprite.components.Attacker reference="../../myComponents/entry[8]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.Images reference="../../myComponents/entry[6]/newengine.sprite.components.Images"/>
+    <newengine.sprite.components.Owner reference="../../myComponents/entry[3]/newengine.sprite.components.Owner"/>
+    <newengine.sprite.components.Range reference="../../myComponents/entry[4]/newengine.sprite.components.Range"/>
+    <newengine.sprite.components.RangeShootingAI reference="../../myComponents/entry[2]/newengine.sprite.components.RangeShootingAI"/>
+    <newengine.sprite.components.Selectable reference="../../myComponents/entry[7]/newengine.sprite.components.Selectable"/>
+    <newengine.sprite.components.Speed reference="../../myComponents/entry/newengine.sprite.components.Speed"/>
+    <newengine.sprite.components.SkillSet reference="../../myComponents/entry[5]/newengine.sprite.components.SkillSet"/>
+  </actualComponents>
+  <skills/>
+</data.SpriteMakerModel>

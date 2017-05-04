@@ -8,8 +8,8 @@ public class GoldMinimumCondition extends Condition{
 	
 	public GoldMinimumCondition(int minimumGold){
 		this.goldMin = minimumGold;
-	}
-
+	}                                                                     
+      
 	@Override
 	public boolean check() {
 		if (this.getPlayerStatsModel().getWealth(this.getPlayerRelationModel().getMainPlayer()).isPresent()) {
