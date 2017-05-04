@@ -218,7 +218,7 @@
         <typename>newengine.sprite.components.SoundEffect</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.SoundEffect>
-        <moveSoundFile>file:/E:/courses/tensemester/COMPSCI308/voogasalad_ltub/file:/E:/courses/tensemester/COMPSCI308/voogasalad_ltub/gamemaker/song.mp3</moveSoundFile>
+        <moveSoundFile>file:/E:/courses/tensemester/COMPSCI308/voogasalad_ltub/file:/E:/courses/tensemester/COMPSCI308/voogasalad_ltub/file:/E:/courses/tensemester/COMPSCI308/voogasalad_ltub/gamemaker/song.mp3</moveSoundFile>
       </newengine.sprite.components.SoundEffect>
     </entry>
     <entry>

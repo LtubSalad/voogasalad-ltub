@@ -2,6 +2,14 @@
   <myComponents>
     <entry>
       <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Speed</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Speed>
+        <speed>20.0</speed>
+      </newengine.sprite.components.Speed>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.Health</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Health>
@@ -57,14 +65,6 @@
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Images</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Images>
-        <imageFilePath>E:\courses\tensemester\COMPSCI308\voogasalad_ltub\gamemaker\shejing.jpg</imageFilePath>
-      </newengine.sprite.components.Images>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.Selectable</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Selectable>
@@ -73,14 +73,22 @@
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Images</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Images>
+        <imageFilePath>gamemaker\shejing.jpg</imageFilePath>
+      </newengine.sprite.components.Images>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.Attacker</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Attacker>
         <reloadPeriod>1.0</reloadPeriod>
         <timeRemaining>1.0</timeRemaining>
-        <damageStrength>10</damageStrength>
+        <damageStrength>15</damageStrength>
         <ltubImage>
-          <filename>E:\courses\tensemester\COMPSCI308\voogasalad_ltub\gamemaker\shandian.jpg</filename>
+          <filename>gamemaker\shandian.jpg</filename>
         </ltubImage>
       </newengine.sprite.components.Attacker>
     </entry>
@@ -94,13 +102,14 @@
   <spriteName>shejing</spriteName>
   <spriteDescription></spriteDescription>
   <actualComponents>
-    <newengine.sprite.components.Attacker reference="../../myComponents/entry[7]/newengine.sprite.components.Attacker"/>
-    <newengine.sprite.components.Health reference="../../myComponents/entry/newengine.sprite.components.Health"/>
-    <newengine.sprite.components.Images reference="../../myComponents/entry[5]/newengine.sprite.components.Images"/>
-    <newengine.sprite.components.Owner reference="../../myComponents/entry[2]/newengine.sprite.components.Owner"/>
-    <newengine.sprite.components.Range reference="../../myComponents/entry[3]/newengine.sprite.components.Range"/>
+    <newengine.sprite.components.Health reference="../../myComponents/entry[2]/newengine.sprite.components.Health"/>
+    <newengine.sprite.components.Owner reference="../../myComponents/entry[3]/newengine.sprite.components.Owner"/>
+    <newengine.sprite.components.Range reference="../../myComponents/entry[4]/newengine.sprite.components.Range"/>
     <newengine.sprite.components.Selectable reference="../../myComponents/entry[6]/newengine.sprite.components.Selectable"/>
-    <newengine.sprite.components.SkillSet reference="../../myComponents/entry[4]/newengine.sprite.components.SkillSet"/>
+    <newengine.sprite.components.SkillSet reference="../../myComponents/entry[5]/newengine.sprite.components.SkillSet"/>
+    <newengine.sprite.components.Speed reference="../../myComponents/entry/newengine.sprite.components.Speed"/>
+    <newengine.sprite.components.Attacker reference="../../myComponents/entry[8]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.Images reference="../../myComponents/entry[7]/newengine.sprite.components.Images"/>
   </actualComponents>
   <skills/>
 </data.SpriteMakerModel>
