@@ -34,6 +34,7 @@ import player.winnerorloser.WinPresentation;
 import utilities.CustomAlert;
 
 public class LevelManager{
+	private static final String STONE_FILE_PATH = "images/characters/Stone.jpg";
 	private EventBus bus;
 	private List<ILevelData> data;
 	private int numLevels;
@@ -71,9 +72,9 @@ public class LevelManager{
 			winAlert.setOnCloseRequest(e -> bus.emit(new GamePauseResumeEvent()));
 			winAlert.show();
 			bus.emit(new GamePauseResumeEvent());
-			System.out.println("next level loading");
+			///System.out.println("next level loading");
 			currentLevel++;
-			System.out.println("Current level: " + currentLevel);
+			//System.out.println("Current level: " + currentLevel);
 			loadLevel(data.get(currentLevel-1));
 			return;
 		}
@@ -130,7 +131,7 @@ public class LevelManager{
 							point1.y() + tileInterval * dy / dist * j);
 					Sprite step = new Sprite();
 					step.addComponent(new Position(pathPoint));
-					LtubImage ltubimage = new LtubImage("images/characters/Stone.jpg");
+					LtubImage ltubimage = new LtubImage(STONE_FILE_PATH);
 					step.addComponent(new Images(ltubimage));
 					step.addComponent(new GameBus());
 					step.addComponent(new Owner(Player.NATURE));
