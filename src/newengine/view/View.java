@@ -201,7 +201,9 @@ public class View {
 				ViewPoint viewPos = camera.gameToView(gamePos);
 				// rotate image
 				ImageView imageView = new ImageView(image.getFXImage());
-				imageView.setRotate(heading);
+//				imageView.setRotate(heading);
+				imageView.getTransforms().add(new Rotate(heading, image.getImagePivot().x(), 
+						image.getImagePivot().y(), 0, Rotate.Z_AXIS));
 				imageView.setRotationAxis(Rotate.Z_AXIS);
 				SnapshotParameters params = new SnapshotParameters();
 				params.setFill(Color.TRANSPARENT);
