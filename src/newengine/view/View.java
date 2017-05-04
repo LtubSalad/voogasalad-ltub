@@ -33,6 +33,7 @@ import newengine.model.SpriteModel;
 import newengine.player.Player;
 import newengine.skill.Skill;
 import newengine.sprite.Sprite;
+import newengine.sprite.SpriteID;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.Owner;
 import newengine.sprite.components.Position;
@@ -87,7 +88,7 @@ public class View {
 		gameWorldCanvas = new Canvas(canvasWidth, canvasHeight);
 		bottomPane = new HBox();
 		root.getChildren().addAll(
-				statsPanel, 
+//				statsPanel, 
 				gameWorldCanvas, 
 				splittingRule(),
 				bottomPane);
@@ -102,7 +103,7 @@ public class View {
 		upgradeBtn = new UpgradeBtn();
 		bottomPane.getChildren().add(upgradeBtn.getBox());
 		bottomPane.getChildren().add(stateDisplay.getBox());
-		bottomPane.getChildren().add(new TowersButton(bus).getNode());
+//		bottomPane.getChildren().add(new TowersButton(bus).getNode());
 		bottomPane.getChildren().add(skillBox.getBox());
 		bottomPane.getStyleClass().add("bottom-pane");
 
@@ -199,18 +200,18 @@ public class View {
 				GamePoint gamePos = new GamePoint(spritePos.x() - image.getImagePivot().x(), 
 						spritePos.y() - image.getImagePivot().y());
 				ViewPoint viewPos = camera.gameToView(gamePos);
-				// rotate image
-				ImageView imageView = new ImageView(image.getFXImage());
-//				imageView.setRotate(heading);
-				imageView.getTransforms().add(new Rotate(heading, image.getImagePivot().x(), 
-						image.getImagePivot().y(), 0, Rotate.Z_AXIS));
-				imageView.setRotationAxis(Rotate.Z_AXIS);
-				SnapshotParameters params = new SnapshotParameters();
-				params.setFill(Color.TRANSPARENT);
-				Image drawnImage = imageView.snapshot(params, null);
-				gc.drawImage(drawnImage, viewPos.x(), viewPos.y(), 
-						drawnImage.getWidth() * camera.getScaleFactor(), 
-						drawnImage.getHeight() * camera.getScaleFactor());
+				if (0 - 200 < viewPos.x() && viewPos.x() < canvasWidth + 200 &&
+						0 - 200 < viewPos.y() && viewPos.y() < canvasHeight + 200) {
+					// rotate image
+					ImageView imageView = new ImageView(image.getFXImage());
+					imageView.setRotate(heading);
+					SnapshotParameters params = new SnapshotParameters();
+					params.setFill(Color.TRANSPARENT);
+					Image drawnImage = imageView.snapshot(params, null);
+					gc.drawImage(drawnImage, viewPos.x(), viewPos.y(), 
+							drawnImage.getWidth() * camera.getScaleFactor(), 
+							drawnImage.getHeight() * camera.getScaleFactor());
+				}
 			});
 		}
 	}

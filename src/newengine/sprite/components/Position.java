@@ -10,21 +10,25 @@ import helperAnnotations.DeveloperMethod;
 import helperAnnotations.VariableName;
 import newengine.events.QueueEvent;
 import newengine.events.SpriteModelEvent;
+import newengine.events.collision.CollisionEvent;
+import newengine.events.sound.EngineSoundEvent;
 import newengine.events.sound.SoundEvent;
 import newengine.events.sprite.ChangeSpeedEvent;
 import newengine.events.sprite.MoveEvent;
 import newengine.events.sprite.StateChangeEvent;
 import newengine.events.stats.ChangeLivesEvent;
 import newengine.sprite.Sprite;
+import newengine.sprite.SpriteID;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 import newengine.utils.Target;
+import newengine.utils.checker.CollisionChecker;
 
 public class Position extends Component {
 	public static final ComponentType<Position> TYPE = new ComponentType<>(Position.class.getName());
 	private GamePoint pos = new GamePoint();
 	private double heading;
-	private static final double TURN_AROUND_SPEED = 20;
+	private static final double TURN_AROUND_SPEED = 80;
 	@XStreamOmitField
 	private Target target;
 	private boolean isMoving = false;
@@ -72,12 +76,29 @@ public class Position extends Component {
 			}
 		});
 		sprite.on(MoveEvent.START_AUTO, (e) -> {
+			sprite.getComponent(GameBus.TYPE).ifPresent((gameBus) -> {
+				gameBus.getGameBus().emit(new EngineSoundEvent(EngineSoundEvent.START_ENGINE, -1, -1));
+			});
 			startMoving();
 		});
 		sprite.on(ChangeSpeedEvent.DIRECTION, (e) -> {
 			changeHeading(e.dt());
 		});
+		sprite.on(CollisionEvent.ANY, (e) -> {
+			if (sprite.getID().equals(SpriteID.CAR_ID)) {
+				Sprite tree = e.getSprite2();
+				GamePoint posCar = pos;
+				GamePoint posTree = tree.getComponent(Position.TYPE).get().pos();
+				double dist = posCar.distFrom(posTree);
+				double sepDist = CollisionChecker.findSepExtraDist(sprite, tree);
+				pos = new GamePoint(
+						posTree.x() + (posCar.x() - posTree.x()) / dist * (dist + sepDist),
+						posTree.y() + (posCar.y() - posTree.y()) / dist * (dist + sepDist)
+						);
+			}
+		});
 	}
+	
 
 	@Override
 	public void onUpdated(double dt) {
@@ -89,9 +110,9 @@ public class Position extends Component {
 						.emit(new SpriteModelEvent(SpriteModelEvent.REMOVE, sprite));
 			}
 		});
-		if (!isMoving()) {
-			return;
-		}
+//		if (!isMoving()) {
+//			return;
+//		}
 		GamePoint pDest = getFollowingPoint();
 		if (pDest != null) {
 			updatePosition(dt, pDest);

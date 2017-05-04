@@ -1,7 +1,9 @@
 package newengine.app;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import bus.EventBus;
 import commons.point.GamePoint;
@@ -21,6 +23,7 @@ import newengine.managers.conditions.NoLivesCondition;
 import newengine.model.PlayerStatsModel.WealthType;
 import newengine.player.Player;
 import newengine.sprite.Sprite;
+import newengine.sprite.SpriteID;
 import newengine.sprite.components.Collidable;
 import newengine.sprite.components.Collidable.CollisionBoundType;
 import newengine.sprite.components.GameBus;
@@ -41,12 +44,38 @@ public class App extends Application {
 
 		List<Sprite> spritesToAdd = new ArrayList<>();
 		
-		double[][] points = new double[][] {
+		List<double[]> points = new ArrayList<>();
+		points.addAll(Arrays.asList(new double[][] {
 			{0, 0}, {100, 0}, {200,0}, {200, -100}, {200, -200}, {200, -300},
-			{200, -400}, {200, -500}, {400, 0}, {400, -100}, {400, -200}, {400, -300}, 
-			{400, -500}, {500, 0}, {600, 0}, {700, 0}, 
-			{0, 200}, {100, 200}, {200,200}, {300, 200}, {400, 200}, {500, 200}, {600, 200}, {700, 200}, 
-		};
+			{200, -400}, {200, -500}, {600, 0}, {600, -100}, {600, -200}, {600, -300}, 
+			{600, -500}, {700, 0}, {800, 0}, {900, 0}, 
+			{0, 400}, {100, 400}, {200,400}, {300, 400}, {400, 400}, {500, 400}, 
+			{600, 400}, {700, 400}, {800, 400}, {900, 400}
+		}));
+		Random rand = new Random();
+		for (double x = 1000; x <= 8000; x += 100) {
+			if (rand.nextFloat() < 0.8) {
+				points.add(new double[] {x, 0});
+			}
+			if (rand.nextFloat() < 0.8) {
+				points.add(new double[] {x, 400});
+			}
+		}
+		points.add(new double[] {8100, 400});
+		points.add(new double[] {8200, 400});
+		points.add(new double[] {8300, 400});
+		points.add(new double[] {8300, 300});
+		points.add(new double[] {8300, 200});
+		points.add(new double[] {8300, 100});
+		points.add(new double[] {8300,   0});
+		for (double y = -100; y >= -8000; y += - 100) {
+			if (rand.nextFloat() < 0.6) {
+				points.add(new double[] {8000, y});
+			}
+			if (rand.nextFloat() < 0.8) {
+				points.add(new double[] {8300, y});
+			}
+		}
 		
 		for (double[] p : points) {
 			GamePoint gamePoint = new GamePoint(p[0],p[1]);
@@ -57,22 +86,22 @@ public class App extends Application {
 			spritesToAdd.add(tree);
 		}
 		
-		Sprite car = new Sprite();
-		car.addComponent(new Position(new GamePoint(0,100)));
-		car.addComponent(new Speed(0, 30));
+		Sprite car = new Sprite(SpriteID.CAR_ID);
+		car.addComponent(new Position(new GamePoint(0,200)));
+		car.addComponent(new Speed(0, 120));
 		car.addComponent(new Images("images/characters/car.png"));
 		car.addComponent(new Selectable(SelectionBoundType.IMAGE));
 		car.addComponent(new Collidable(CollisionBoundType.IMAGE));
 		car.addComponent(new GameBus());
 		car.on(CollisionEvent.ANY, (e) -> {
-			car.getComponent(GameBus.TYPE).get().getGameBus().emit(
-					new SoundEvent(SoundEvent.SOUND_EFFECT, "data/sounds/Alpissd1.wav"));
+//			car.getComponent(GameBus.TYPE).get().getGameBus().emit(
+//					new SoundEvent(SoundEvent.SOUND_EFFECT, "data/sounds/Alpissd1.wav"));
 		});
 		
 		spritesToAdd.add(car);
 		
 		bus.on(GameInitializationEvent.ANY, (e) -> {
-			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
+//			bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/break_them.mp3"));
 			bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, spritesToAdd));
 			bus.emit(new MainPlayerEvent(player1));
 			bus.emit(new ChangeLivesEvent(ChangeLivesEvent.SET, player1, 3));

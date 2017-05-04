@@ -1,11 +1,10 @@
 package newengine.view.subview;
 
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import newengine.events.stats.ChangeWealthEvent;
@@ -28,6 +27,8 @@ public class SingleStat extends HBox {
 		this.name = name;
 		this.label = new Text(name + ": ");
 		this.value = new Text("" + value);
+		this.label.setFont(Font.font(30));
+		this.value.setFont(Font.font(30));
 		this.setMaxWidth(200);
 		this.setMaxHeight(25);
 		this.getChildren().addAll(this.label, this.value);
