@@ -7,6 +7,7 @@ import bus.EventBus;
 import imageprocess.Collision;
 import newengine.events.collision.CollisionEvent;
 import newengine.sprite.Sprite;
+import newengine.sprite.SpriteID;
 import newengine.sprite.components.Collidable;
 import newengine.utils.checker.CollisionChecker;
 
@@ -24,6 +25,7 @@ public class CollisionManager {
 		}).collect(Collectors.toList());
 
 		for (Sprite s1 : collidableSprites) {
+			if (!s1.getID().equals(SpriteID.CAR_ID)) { continue; }
 			for (Sprite s2 : collidableSprites) {
 				if (s1 == s2) { continue; }
 				
