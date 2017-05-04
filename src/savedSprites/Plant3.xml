@@ -55,7 +55,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/pvzturret3.png</imageFilePath>
+        <imageFilePath>resources/towerImages/pvzturret2.png</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
@@ -73,9 +73,9 @@
       <newengine.sprite.components.Attacker>
         <reloadPeriod>1.0</reloadPeriod>
         <timeRemaining>1.0</timeRemaining>
-        <damageStrength>30</damageStrength>
+        <damageStrength>45</damageStrength>
         <ltubImage>
-          <filename>resources/pvzbullet.png</filename>
+          <filename>resources/bulletImages/pvzbullet.png</filename>
         </ltubImage>
       </newengine.sprite.components.Attacker>
     </entry>

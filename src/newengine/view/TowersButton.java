@@ -8,8 +8,9 @@ import newengine.sprite.SpriteID;
 
 public class TowersButton {
 
+	private static final String SHOW_TOWERS = "Show Towers";
 	private EventBus bus;
-	private Button button = new Button("towers");
+	private Button button = new Button(SHOW_TOWERS);
 	
 	public TowersButton(EventBus bus) {
 		this.bus = bus;

@@ -55,7 +55,7 @@ public class GameCreator {
 			skillMap.put(buildSkill.getType(), buildSkill);
 		}
 		towerBuilder.addComponent(new SkillSet(skillMap));
-		towerBuilder.addComponent(new Images("images/characters/bahamut_left.png"));
+		towerBuilder.addComponent(new Images("images/characters/EiffelTower.jpg"));
 		return towerBuilder;
 	}
 	

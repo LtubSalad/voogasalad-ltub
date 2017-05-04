@@ -5,7 +5,7 @@
         <typename>newengine.sprite.components.Speed</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Speed>
-        <speed>15.0</speed>
+        <speed>125.0</speed>
       </newengine.sprite.components.Speed>
     </entry>
     <entry>
@@ -13,8 +13,8 @@
         <typename>newengine.sprite.components.Health</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Health>
-        <initHealth>200</initHealth>
-        <health>200</health>
+        <initHealth>100</initHealth>
+        <health>100</health>
       </newengine.sprite.components.Health>
     </entry>
     <entry>
@@ -33,7 +33,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/MonsterTruck3.jpg</imageFilePath>
+        <imageFilePath>resources/monsterImages/MonsterTruck3.jpg</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
@@ -44,12 +44,8 @@
         <path>
           <myPath class="linked-list">
             <commons.point.GamePoint>
-              <x>550.0</x>
+              <x>450.0</x>
               <y>550.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>550.0</x>
-              <y>450.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>450.0</x>
@@ -152,7 +148,7 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>3</spriteName>
+  <spriteName>truck 3</spriteName>
   <spriteDescription>monster</spriteDescription>
   <actualComponents>
     <newengine.sprite.components.Collidable reference="../../myComponents/entry[6]/newengine.sprite.components.Collidable"/>
