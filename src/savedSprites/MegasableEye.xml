@@ -8,29 +8,30 @@
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Health</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Health>
+        <initHealth>500</initHealth>
+        <health>500</health>
+      </newengine.sprite.components.Health>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.Owner</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Owner>
         <owner>
-          <name>TOWERS</name>
+          <name>MONSTERS</name>
         </owner>
-        <teamNumber>TOWERS</teamNumber>
+        <teamNumber>MONSTERS</teamNumber>
       </newengine.sprite.components.Owner>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Cost</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Cost>
-        <cost>50</cost>
-      </newengine.sprite.components.Cost>
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.Range</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Range>
-        <range>200.0</range>
+        <range>350.0</range>
       </newengine.sprite.components.Range>
     </entry>
     <entry>
@@ -44,7 +45,7 @@
               <type>newengine.skill.skills.FireProjectileSkill</type>
             </newengine.skill.SkillType>
             <newengine.skill.skills.FireProjectileSkill>
-              <cooldown>2.0</cooldown>
+              <cooldown>3.0</cooldown>
             </newengine.skill.skills.FireProjectileSkill>
           </entry>
         </skills>
@@ -55,7 +56,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/towerImages/pvzturret3.png</imageFilePath>
+        <imageFilePath>resources/monsterImages/MegaSableEye.png</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
@@ -75,9 +76,18 @@
         <timeRemaining>1.0</timeRemaining>
         <damageStrength>150</damageStrength>
         <ltubImage>
-          <filename>resources/bulletImages/pvzbullet.png</filename>
+          <filename>resources/bulletImages/willowwisps.png</filename>
         </ltubImage>
       </newengine.sprite.components.Attacker>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Collidable</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Collidable>
+        <boundType>IMAGE</boundType>
+        <bound/>
+      </newengine.sprite.components.Collidable>
     </entry>
   </myComponents>
   <myScriptMap>
@@ -86,13 +96,14 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>2</spriteName>
-  <spriteDescription>tower</spriteDescription>
+  <spriteName>Megasable eye</spriteName>
+  <spriteDescription>tower-monster</spriteDescription>
   <actualComponents>
-    <newengine.sprite.components.Cost reference="../../myComponents/entry[3]/newengine.sprite.components.Cost"/>
     <newengine.sprite.components.Attacker reference="../../myComponents/entry[8]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.Collidable reference="../../myComponents/entry[9]/newengine.sprite.components.Collidable"/>
+    <newengine.sprite.components.Health reference="../../myComponents/entry[2]/newengine.sprite.components.Health"/>
     <newengine.sprite.components.Images reference="../../myComponents/entry[6]/newengine.sprite.components.Images"/>
-    <newengine.sprite.components.Owner reference="../../myComponents/entry[2]/newengine.sprite.components.Owner"/>
+    <newengine.sprite.components.Owner reference="../../myComponents/entry[3]/newengine.sprite.components.Owner"/>
     <newengine.sprite.components.Range reference="../../myComponents/entry[4]/newengine.sprite.components.Range"/>
     <newengine.sprite.components.RangeShootingAI reference="../../myComponents/entry/newengine.sprite.components.RangeShootingAI"/>
     <newengine.sprite.components.Selectable reference="../../myComponents/entry[7]/newengine.sprite.components.Selectable"/>

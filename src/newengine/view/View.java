@@ -45,6 +45,10 @@ import newengine.view.subview.UpgradeBtn;
 
 
 public class View {
+	private static final String LIVES = "Lives:";
+
+	private static final String PAUSE2 = "Pause";
+
 	private static final String CSS_LOCATION = "/styleSheets/engine-view.css";
 	
 	public static final Paint BACKGROUND = Color.BISQUE; // Paint is the super class
@@ -103,7 +107,7 @@ public class View {
 		stateDisplay = new StateDisplay();
 		skillBox = new SkillBox(bus);
 		upgradeBtn = new UpgradeBtn();
-		Button pause = new Button("Pause");
+		Button pause = new Button(PAUSE2);
 		pause.setOnAction(e -> bus.emit(new GamePauseResumeEvent()));
 		bottomPane.getChildren().addAll(upgradeBtn.getBox(), stateDisplay.getBox(), new TowersButton(bus).getNode(),skillBox.getBox(), pause);
 		bottomPane.getStyleClass().add("bottom-pane");
@@ -178,7 +182,7 @@ public class View {
 		});
 		//TODO map to resource file
 		playerStatsModel.getLives(player).ifPresent((life) -> {
-			statsLabels.add(new Text("Lives:" + life));
+			statsLabels.add(new Text(LIVES + life));
 		});
 //		playerStatsModel.getScore(player).ifPresent((score) -> {
 //			statsLabels.add(new Text("Scores:" + score));

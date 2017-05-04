@@ -13,8 +13,8 @@
         <typename>newengine.sprite.components.Health</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Health>
-        <initHealth>100</initHealth>
-        <health>100</health>
+        <initHealth>250</initHealth>
+        <health>250</health>
       </newengine.sprite.components.Health>
     </entry>
     <entry>
@@ -44,12 +44,8 @@
         <path>
           <myPath class="linked-list">
             <commons.point.GamePoint>
-              <x>550.0</x>
+              <x>450.0</x>
               <y>550.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>550.0</x>
-              <y>450.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>450.0</x>
@@ -152,7 +148,7 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>1</spriteName>
+  <spriteName>truck 1</spriteName>
   <spriteDescription>monster</spriteDescription>
   <actualComponents>
     <newengine.sprite.components.Collidable reference="../../myComponents/entry[6]/newengine.sprite.components.Collidable"/>

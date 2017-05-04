@@ -34,8 +34,6 @@ public class AllPossibleMonsters extends ScrollPane {
 
 	public void getMonstersOnScreen() {
 		List<SpriteMakerModel> allSprites = new ArrayList<SpriteMakerModel>(myData.getSprites());
-		System.out.println("size: " + allSprites.size());
-		System.out.println("images: " + allSprites.get(0).getComponentByType(Images.TYPE));
 		List<SpriteMakerModel> onlyMonsters = new ArrayList<>();
 		for (SpriteMakerModel possibleMonster : allSprites) {
 			if (isMonster(possibleMonster)) {
@@ -58,7 +56,6 @@ public class AllPossibleMonsters extends ScrollPane {
 	public void loadFromFile(SpriteMakerModel monster) {
 		if (isMonster(monster)) {
 			Images imageComp = (Images) monster.getComponentByType(Images.TYPE);
-			System.out.println(imageComp.image().getFileName());
 			ImageView iv = new ImageView(imageComp.image().getFXImage());
 			iv.setFitWidth(IMAGE_SIZE);
 			iv.setFitHeight(IMAGE_SIZE);

@@ -44,7 +44,7 @@
               <type>newengine.skill.skills.FireProjectileSkill</type>
             </newengine.skill.SkillType>
             <newengine.skill.skills.FireProjectileSkill>
-              <cooldown>3.0</cooldown>
+              <cooldown>4.0</cooldown>
             </newengine.skill.skills.FireProjectileSkill>
           </entry>
         </skills>
@@ -73,7 +73,7 @@
       <newengine.sprite.components.Attacker>
         <reloadPeriod>1.0</reloadPeriod>
         <timeRemaining>1.0</timeRemaining>
-        <damageStrength>1705</damageStrength>
+        <damageStrength>500</damageStrength>
         <ltubImage>
           <filename>resources/bulletImages/bullet.png</filename>
         </ltubImage>
@@ -86,7 +86,7 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>3</spriteName>
+  <spriteName>tank 2</spriteName>
   <spriteDescription>tower</spriteDescription>
   <actualComponents>
     <newengine.sprite.components.Cost reference="../../myComponents/entry[3]/newengine.sprite.components.Cost"/>
