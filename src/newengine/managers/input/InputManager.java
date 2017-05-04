@@ -112,37 +112,37 @@ public class InputManager {
 		if (keyInputState.isKeyPressed(KeyCode.LEFT)) {
 			bus.emit(new CameraEvent(CameraEvent.MOVE, Camera.MOVE_SPEED_PER_FRAME * dt, 0));
 		}
-		else if (keyInputState.isKeyPressed(KeyCode.RIGHT)) {
+		if (keyInputState.isKeyPressed(KeyCode.RIGHT)) {
 			bus.emit(new CameraEvent(CameraEvent.MOVE, -Camera.MOVE_SPEED_PER_FRAME * dt, 0));
 		}
-		else if (keyInputState.isKeyPressed(KeyCode.UP)) {
+		if (keyInputState.isKeyPressed(KeyCode.UP)) {
 			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, Camera.MOVE_SPEED_PER_FRAME * dt));
 		}
-		else if (keyInputState.isKeyPressed(KeyCode.DOWN)) {
+		if (keyInputState.isKeyPressed(KeyCode.DOWN)) {
 			bus.emit(new CameraEvent(CameraEvent.MOVE, 0, -Camera.MOVE_SPEED_PER_FRAME * dt));
 		}
-		else if (keyInputState.isKeyPressed(KeyCode.SPACE)) {
+		if (keyInputState.isKeyPressed(KeyCode.SPACE)) {
 			bus.emit(new CameraEvent(CameraEvent.FOCUS));
 		}
-		else if (keyInputState.isKeyPressed(KeyCode.S)) {
+		if (keyInputState.isKeyPressed(KeyCode.S)) {
 			// speed up
 			selectionModel.getSelectedSprite().ifPresent((sprite) -> {
 				sprite.emit(new ChangeSpeedEvent(ChangeSpeedEvent.SPEED, -dt));
 			});
 		}
-		else if (keyInputState.isKeyPressed(KeyCode.W)) {
+		if (keyInputState.isKeyPressed(KeyCode.W)) {
 			// slow down
 			selectionModel.getSelectedSprite().ifPresent((sprite) -> {
 				sprite.emit(new ChangeSpeedEvent(ChangeSpeedEvent.SPEED, dt));
 			});
 		}
-		else if (keyInputState.isKeyPressed(KeyCode.D)) {
+		if (keyInputState.isKeyPressed(KeyCode.D)) {
 			// turn left
 			selectionModel.getSelectedSprite().ifPresent((sprite) -> {
 				sprite.emit(new ChangeSpeedEvent(ChangeSpeedEvent.DIRECTION, dt));
 			});
 		}
-		else if (keyInputState.isKeyPressed(KeyCode.A)) {
+		if (keyInputState.isKeyPressed(KeyCode.A)) {
 			// turn right
 			selectionModel.getSelectedSprite().ifPresent((sprite) -> {
 				sprite.emit(new ChangeSpeedEvent(ChangeSpeedEvent.DIRECTION, -dt));

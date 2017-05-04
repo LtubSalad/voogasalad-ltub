@@ -51,7 +51,7 @@ public class LtubImage {
 	public double width() {
 		Image image = getFXImage();
 		if (image != null) {
-			return (image.getWidth() >= 100) ? 100 : image.getWidth();
+			return image.getWidth(); // (image.getWidth() >= 100) ? 100 : image.getWidth();
 		}
 		else {
 			return 0;
@@ -60,7 +60,7 @@ public class LtubImage {
 	public double height() {
 		Image image = getFXImage();
 		if (image != null) {
-			return (image.getHeight() >= 100) ? 100 : image.getHeight();
+			return image.getHeight(); // (image.getHeight() >= 100) ? 100 : image.getHeight();
 		}
 		else {
 			return 0;
