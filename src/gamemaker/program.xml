@@ -14,7 +14,7 @@
     </entry>
     <entry>
       <string>NUM_GOLD</string>
-      <string>50</string>
+      <string>80</string>
     </entry>
     <entry>
       <string>BUILD_IN_GAME</string>
@@ -28,12 +28,12 @@
   <mySprites/>
   <myLevels>
     <gamecreation.level.SerializableLevelData>
-      <name>base</name>
+      <name>easy</name>
       <winning class="newengine.managers.conditions.GoldMinimumCondition">
         <goldMin>10</goldMin>
       </winning>
       <losing class="newengine.managers.conditions.NoLivesCondition"/>
-      <spawnTime>2.8154269131747163</spawnTime>
+      <spawnTime>3.9173556556386395</spawnTime>
       <spawners/>
     </gamecreation.level.SerializableLevelData>
     <gamecreation.level.SerializableLevelData>
@@ -42,16 +42,16 @@
         <goldMin>20</goldMin>
       </winning>
       <losing class="newengine.managers.conditions.NoLivesCondition"/>
-      <spawnTime>3.1955923915894564</spawnTime>
+      <spawnTime>2.589531654168752</spawnTime>
       <spawners/>
     </gamecreation.level.SerializableLevelData>
     <gamecreation.level.SerializableLevelData>
       <name>hard</name>
       <winning class="newengine.managers.conditions.GoldMinimumCondition">
-        <goldMin>30</goldMin>
+        <goldMin>25</goldMin>
       </winning>
       <losing class="newengine.managers.conditions.NoLivesCondition"/>
-      <spawnTime>2.9752067100903217</spawnTime>
+      <spawnTime>1.1570248327964594</spawnTime>
       <spawners/>
     </gamecreation.level.SerializableLevelData>
   </myLevels>

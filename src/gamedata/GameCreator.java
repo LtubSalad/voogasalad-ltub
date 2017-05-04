@@ -86,7 +86,7 @@ public class GameCreator {
 			EventBus bus = game.getBus();
 			bus.on(GameInitializationEvent.ANY, (e) -> {
 				bus.emit(new InitILevelsEvent(myData.getLevels()));
-				bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
+				//bus.emit(new SoundEvent(SoundEvent.BACKGROUND_MUSIC, "data/sounds/01-dark-covenant.mp3"));
 				bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, sprites));
 				bus.emit(new MainPlayerEvent(userPlayer));
 				//bus.emit(new SpriteModelEvent(SpriteModelEvent.ADD, pathSprites));
