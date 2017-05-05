@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import bus.EventBus;
-import imageprocess.Collision;
 import newengine.events.collision.CollisionEvent;
 import newengine.sprite.Sprite;
 import newengine.sprite.components.Collidable;
