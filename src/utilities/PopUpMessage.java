@@ -15,6 +15,6 @@ public interface PopUpMessage {
 	/**
 	 * show the message in some form, like stage or printing in some form
 	 */
-	public void show();
+	public void show(String message);
 
 }

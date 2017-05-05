@@ -18,6 +18,11 @@ import javafx.util.Duration;
 import player.GameChooser;
 import utilities.ImageManager;
 
+/**
+ * @author Zhiyong
+ * This class is used to test the Loader page
+ *
+ */
 public class LoaderTester extends Application {
 
 	private ImageManager lim = new ImageManager(230,460);
@@ -34,11 +39,7 @@ public class LoaderTester extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-//	    Loader loader = new Loader();
-		GameChooser gameManager = new GameChooser(primaryStage);
-//		loader.show();
-		
-
+		GameChooser gameManager = new GameChooser(primaryStage);		
 		primaryStage.setScene(makeScene());
 		primaryStage.setFullScreenExitHint("");
 		primaryStage.setFullScreenExitKeyCombination(null);
@@ -55,9 +56,6 @@ public class LoaderTester extends Application {
         Animation myAnimation2 = makeAnimation(myActor2,100,240,140);
         // start animation
         myAnimation2.play();
-
-
-
 	}
 	
     private Animation makeAnimation (Node agent, int x, int y, int z) {

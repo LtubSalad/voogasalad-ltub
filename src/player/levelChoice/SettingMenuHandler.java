@@ -4,14 +4,18 @@ import javafx.scene.control.MenuItem;
 
 /**
  * @author Zhiyong
+ * This is an abstract class to handle the Setting Menu in the main page
  *
  */
 public abstract class SettingMenuHandler implements MenuItemHandler{
 	private MenuItem setting;
-	//add optional shortcutcode for the setting
+	
+	/**
+	 * @param source of the MenuItem
+	 * Set the name of the MenuItem as the source
+	 */
 	public SettingMenuHandler(String source){
 		setting = new MenuItem(source);
-//		setting.setAccelerator(new KeyCodeCombination(keyCode, shortcut));
 		setting.setOnAction(e -> handle());
 	}
 
@@ -20,7 +24,6 @@ public abstract class SettingMenuHandler implements MenuItemHandler{
 
 	@Override
 	public MenuItem getMenuItem() {
-
 		return setting;
 	}
 	

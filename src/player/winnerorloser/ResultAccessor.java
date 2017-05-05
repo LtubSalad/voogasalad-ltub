@@ -5,19 +5,38 @@ package player.winnerorloser;
 
 /**
  * @author Zhiyong
- *
+ *get the result of the game in the end of a game
  */
 public class ResultAccessor {
+	private String name;
+	public ResultAccessor(){
+		
+	}
+	public ResultAccessor(String name){
+		this.name  = name;
+	}	
 	
-	//TODO : get result from the game
-	
-	double getHealth() {
+	/**
+	 * @return health
+	 * get the health of sprites
+	 */
+	public double getHealth() {
 		return 0;
 	}
-	double getPoint() {
+	
+	/**
+	 * @return point
+	 * get the points of sprites
+	 */
+	public double getPoint() {
 		return 0;
 	}
-	String getGameName() {
-		return "Tower Defense Game";
+	
+	/**
+	 * @return gamename
+	 * get the name of the game
+	 */
+	public String getGameName() {
+		return name;
 	}
 }

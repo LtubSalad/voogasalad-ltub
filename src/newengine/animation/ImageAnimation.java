@@ -1,6 +1,5 @@
 package newengine.animation;
 
-
 import java.util.List;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
@@ -17,13 +16,11 @@ import javafx.util.Duration;
  */
 public class ImageAnimation extends Transition {
 
-	private final List<Image> imageList;
-
-	private final int width;
-	private final int height;
+	private List<Image> imageList;
+	private int width;
+	private int height;
 	private ImageView imageView;
 	private int count;
-
 	private int index;
 
 	public ImageAnimation( List<Image> imageList, ImageView imageView, Duration duration, int width,   int height) {
@@ -44,7 +41,5 @@ public class ImageAnimation extends Transition {
 			index++;
 			index = index % count;
 		}
-
 	}
-
 }

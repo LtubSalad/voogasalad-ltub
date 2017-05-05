@@ -25,9 +25,13 @@ public class NodeProcessor {
 		WritableImage snapshot = node.snapshot(new SnapshotParameters(), null);
 		BufferedImage buffImg= SwingFXUtils.fromFXImage(snapshot, null);
 		return buffImg;
-
 	}
 
+	/**
+	 * @param node
+	 * @return angle
+	 * get an angle of a node given as an argument
+	 */
 	double getAngle(Node node){
 		double xx = node.getLocalToSceneTransform().getMxx();
 		double xy = node.getLocalToSceneTransform().getMxy();
@@ -36,7 +40,5 @@ public class NodeProcessor {
 		angle = Math.toDegrees(angle);
 		//angle = angle < 0 ? angle +360 : angle;
 		return angle;
-
 	}
-
 }

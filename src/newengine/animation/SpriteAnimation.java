@@ -14,24 +14,26 @@ import newengine.sprite.components.Images;
 
 /**
  * @author Zhiyong
+ * Given a list of sprites with Image components,
+ * This  class will return  slide show of he images for the sprites
  *
  */
 public class SpriteAnimation {
-	
+
 	public static final int WIDTH    = 200;
 	public static final int HEIGHT   = 200;
-	
+
 	private List<Sprite> sprites;
-	
+
 	public SpriteAnimation(List<Sprite> sprites){
 		this.sprites = sprites;
 	}
-	
+
 	public ImageView getImageView() {
 
 		final ImageView imageView = new ImageView();		
 		List<Image> list = getSpriteImage();
-	
+
 		final Animation animation = new ImageAnimation(
 				list,
 				imageView,
@@ -39,19 +41,17 @@ public class SpriteAnimation {
 				WIDTH, HEIGHT
 				);
 		animation.setCycleCount(Animation.INDEFINITE);
-		animation.play();
-		
+		animation.play();	
 		return imageView;
 	}
-	
+
 	private List<Image> getSpriteImage() {
 		List<Image> list = new ArrayList<>();
-		
+
 		for(Sprite sprite : sprites){
 			if (sprite.getComponent(Images.TYPE).isPresent()) {
 				list.add(sprite.getComponent(Images.TYPE).get().image().getFXImage());
-			}
-			
+			}			
 		}
 		return list;
 	}
@@ -59,5 +59,4 @@ public class SpriteAnimation {
 	public List<Sprite> getSprites(){
 		return sprites;
 	}
-
 }

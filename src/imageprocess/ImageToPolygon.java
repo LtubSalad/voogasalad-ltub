@@ -3,9 +3,9 @@
  */
 package imageprocess;
 
+import java.awt.Color;
 import java.util.List;
 import java.util.Set;
-
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Polygon;
@@ -22,8 +22,11 @@ import javafx.scene.shape.Polygon;
 public class ImageToPolygon {
 
 	private Image image;
-	public ImageToPolygon(Image image){
+	//the background color
+    private Color color;
+	public ImageToPolygon(Image image, Color color){
 		this.image =image;
+		this.color = color;
 	}
 
 	/**
@@ -33,12 +36,10 @@ public class ImageToPolygon {
 	 */
 	public Polygon getPolygon(){
 		ImageTransformation transformation = new ImageTransformation();
-		Set<Point2D> set = transformation.getMask(image);
-		//Get the hull of the image
-		List<Point2D> convexHullPointTemp =  Hull.getHull(set); 
+		Set<Point2D> set = transformation.getMask(image, color);
 		
-		//get the convex hull of the hull points
-		List<Point2D> convexHullPoint =  ConvexHull.convex_hull(convexHullPointTemp); 
+		//Get the convex hull point of the outline of the image
+		List<Point2D> convexHullPoint =  ConvexHull.convex_hull(ConvexHull.getHull(set)); 
 		double[] pointsToDraw = new double[2 * convexHullPoint.size()];
 		int k = 0;
 		for(Point2D p : convexHullPoint){

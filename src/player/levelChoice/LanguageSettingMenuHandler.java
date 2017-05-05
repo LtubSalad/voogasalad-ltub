@@ -2,22 +2,23 @@ package player.levelChoice;
 
 /**
  * @author Zhiyong
- *
+ *Set the MenuItem for the language choice
  */
 public class LanguageSettingMenuHandler extends SettingMenuHandler {
 	
 	private String language;
 
+	/**
+	 * @param language
+	 * Set the name of the item as the language
+	 */
 	public LanguageSettingMenuHandler(String language) {		
-		super(language);
-		
+		super(language);		
 		this.language = language;
 	}
 
 	@Override
 	public void handle() {
-		// TODO change the language of the backend play
-		System.out.println(language);
 		
 	}
 	
