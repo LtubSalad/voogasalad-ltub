@@ -5,22 +5,16 @@
         <typename>newengine.sprite.components.Speed</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Speed>
-        <speed>20.0</speed>
+        <speed>30.0</speed>
       </newengine.sprite.components.Speed>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.RangeShootingAI</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.RangeShootingAI/>
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.Health</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Health>
-        <initHealth>50</initHealth>
-        <health>50</health>
+        <initHealth>1000</initHealth>
+        <health>1000</health>
       </newengine.sprite.components.Health>
     </entry>
     <entry>
@@ -36,10 +30,18 @@
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Cost</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Cost>
+        <cost>10</cost>
+      </newengine.sprite.components.Cost>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.Range</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Range>
-        <range>30.0</range>
+        <range>50.0</range>
       </newengine.sprite.components.Range>
     </entry>
     <entry>
@@ -63,7 +65,7 @@
               <type>newengine.skill.skills.FireProjectileSkill</type>
             </newengine.skill.SkillType>
             <newengine.skill.skills.FireProjectileSkill>
-              <cooldown>4.0</cooldown>
+              <cooldown>2.0</cooldown>
             </newengine.skill.skills.FireProjectileSkill>
           </entry>
         </skills>
@@ -79,11 +81,16 @@
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Selectable</typename>
+        <typename>newengine.sprite.components.Attacker</typename>
       </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Selectable>
-        <boundType>IMAGE</boundType>
-      </newengine.sprite.components.Selectable>
+      <newengine.sprite.components.Attacker>
+        <reloadPeriod>1.0</reloadPeriod>
+        <timeRemaining>1.0</timeRemaining>
+        <damageStrength>10</damageStrength>
+        <ltubImage>
+          <filename>gamemaker\hulu.jpg</filename>
+        </ltubImage>
+      </newengine.sprite.components.Attacker>
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
@@ -117,24 +124,8 @@
               <y>50.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>650.0</x>
-              <y>50.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>750.0</x>
-              <y>50.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>750.0</x>
+              <x>550.0</x>
               <y>150.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>750.0</x>
-              <y>250.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>650.0</x>
-              <y>250.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>550.0</x>
@@ -181,8 +172,8 @@
               <y>450.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
-              <x>450.0</x>
-              <y>450.0</y>
+              <x>350.0</x>
+              <y>550.0</y>
             </commons.point.GamePoint>
             <commons.point.GamePoint>
               <x>450.0</x>
@@ -191,18 +182,6 @@
             <commons.point.GamePoint>
               <x>550.0</x>
               <y>550.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>650.0</x>
-              <y>550.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>750.0</x>
-              <y>550.0</y>
-            </commons.point.GamePoint>
-            <commons.point.GamePoint>
-              <x>750.0</x>
-              <y>650.0</y>
             </commons.point.GamePoint>
           </myPath>
           <pathName>path</pathName>
@@ -218,7 +197,7 @@
         <typename>newengine.sprite.components.SoundEffect</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.SoundEffect>
-        <moveSoundFile>file:/E:/courses/tensemester/COMPSCI308/voogasalad_ltub/file:/E:/courses/tensemester/COMPSCI308/voogasalad_ltub/file:/E:/courses/tensemester/COMPSCI308/voogasalad_ltub/gamemaker/song.mp3</moveSoundFile>
+        <moveSoundFile>file:/E:/courses/tensemester/COMPSCI308/voogasalad_ltub/gamemaker/song.mp3</moveSoundFile>
       </newengine.sprite.components.SoundEffect>
     </entry>
     <entry>
@@ -237,20 +216,20 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>hu1</spriteName>
+  <spriteName>hulu1</spriteName>
   <spriteDescription></spriteDescription>
   <actualComponents>
-    <newengine.sprite.components.Images reference="../../myComponents/entry[7]/newengine.sprite.components.Images"/>
+    <newengine.sprite.components.Cost reference="../../myComponents/entry[4]/newengine.sprite.components.Cost"/>
+    <newengine.sprite.components.Attacker reference="../../myComponents/entry[8]/newengine.sprite.components.Attacker"/>
     <newengine.sprite.components.Collidable reference="../../myComponents/entry[11]/newengine.sprite.components.Collidable"/>
-    <newengine.sprite.components.Health reference="../../myComponents/entry[3]/newengine.sprite.components.Health"/>
-    <newengine.sprite.components.Owner reference="../../myComponents/entry[4]/newengine.sprite.components.Owner"/>
+    <newengine.sprite.components.Health reference="../../myComponents/entry[2]/newengine.sprite.components.Health"/>
+    <newengine.sprite.components.Images reference="../../myComponents/entry[7]/newengine.sprite.components.Images"/>
+    <newengine.sprite.components.Owner reference="../../myComponents/entry[3]/newengine.sprite.components.Owner"/>
     <newengine.sprite.components.PathFollower reference="../../myComponents/entry[9]/newengine.sprite.components.PathFollower"/>
     <newengine.sprite.components.Range reference="../../myComponents/entry[5]/newengine.sprite.components.Range"/>
     <newengine.sprite.components.SoundEffect reference="../../myComponents/entry[10]/newengine.sprite.components.SoundEffect"/>
-    <newengine.sprite.components.SkillSet reference="../../myComponents/entry[6]/newengine.sprite.components.SkillSet"/>
     <newengine.sprite.components.Speed reference="../../myComponents/entry/newengine.sprite.components.Speed"/>
-    <newengine.sprite.components.RangeShootingAI reference="../../myComponents/entry[2]/newengine.sprite.components.RangeShootingAI"/>
-    <newengine.sprite.components.Selectable reference="../../myComponents/entry[8]/newengine.sprite.components.Selectable"/>
+    <newengine.sprite.components.SkillSet reference="../../myComponents/entry[6]/newengine.sprite.components.SkillSet"/>
   </actualComponents>
   <skills/>
 </data.SpriteMakerModel>

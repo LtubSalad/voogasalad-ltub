@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Zhiyong
+ * test the result showing method
  *
  */
 public class WinTester extends Application{
@@ -19,10 +20,6 @@ public class WinTester extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		ResultAccessor r = new ResultAccessor();
 		ResultPresentation res = new LosePresentation();
-		res.show(r);
-		
+		res.show(r);		
 	}
-	
-	
-
 }

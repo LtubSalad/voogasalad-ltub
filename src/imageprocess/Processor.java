@@ -16,7 +16,6 @@ public interface Processor<T> {
 	 */
 	T resize(T t, double scale);
 
-
 	/**
 	 * @param t
 	 * @param targetWidth
@@ -29,6 +28,4 @@ public interface Processor<T> {
 	 * and height ratio
 	 */
 	T resize(T t, double targetWidth, double targetHeight, boolean preserveRatio);
-
-
 }

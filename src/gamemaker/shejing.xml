@@ -5,7 +5,7 @@
         <typename>newengine.sprite.components.Speed</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Speed>
-        <speed>20.0</speed>
+        <speed>50.0</speed>
       </newengine.sprite.components.Speed>
     </entry>
     <entry>
@@ -23,53 +23,10 @@
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Owner>
         <owner>
-          <name>TOWERS</name>
+          <name>MONSTERS</name>
         </owner>
-        <teamNumber>TOWERS</teamNumber>
+        <teamNumber>MONSTERS</teamNumber>
       </newengine.sprite.components.Owner>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Range</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Range>
-        <range>12.0</range>
-      </newengine.sprite.components.Range>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.SkillSet</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.SkillSet>
-        <skills>
-          <entry>
-            <newengine.skill.SkillType>
-              <type>newengine.skill.skills.MoveSkill</type>
-            </newengine.skill.SkillType>
-            <newengine.skill.skills.MoveSkill>
-              <icon>
-                <filename>images/skills/walk.png</filename>
-              </icon>
-            </newengine.skill.skills.MoveSkill>
-          </entry>
-          <entry>
-            <newengine.skill.SkillType>
-              <type>newengine.skill.skills.FireProjectileSkill</type>
-            </newengine.skill.SkillType>
-            <newengine.skill.skills.FireProjectileSkill>
-              <cooldown>2.0</cooldown>
-            </newengine.skill.skills.FireProjectileSkill>
-          </entry>
-        </skills>
-      </newengine.sprite.components.SkillSet>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Selectable</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Selectable>
-        <boundType>IMAGE</boundType>
-      </newengine.sprite.components.Selectable>
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
@@ -81,16 +38,68 @@
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Attacker</typename>
+        <typename>newengine.sprite.components.PathFollower</typename>
       </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Attacker>
-        <reloadPeriod>1.0</reloadPeriod>
-        <timeRemaining>1.0</timeRemaining>
-        <damageStrength>15</damageStrength>
-        <ltubImage>
-          <filename>gamemaker\shandian.jpg</filename>
-        </ltubImage>
-      </newengine.sprite.components.Attacker>
+      <newengine.sprite.components.PathFollower>
+        <path>
+          <myPath class="linked-list">
+            <commons.point.GamePoint>
+              <x>50.0</x>
+              <y>550.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>50.0</x>
+              <y>350.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>50.0</x>
+              <y>250.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>50.0</x>
+              <y>150.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>50.0</x>
+              <y>50.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>150.0</x>
+              <y>50.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>250.0</x>
+              <y>50.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>350.0</x>
+              <y>50.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>450.0</x>
+              <y>50.0</y>
+            </commons.point.GamePoint>
+            <commons.point.GamePoint>
+              <x>550.0</x>
+              <y>50.0</y>
+            </commons.point.GamePoint>
+          </myPath>
+          <pathName>1</pathName>
+        </path>
+        <finalPoint>
+          <x>0.0</x>
+          <y>0.0</y>
+        </finalPoint>
+      </newengine.sprite.components.PathFollower>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Collidable</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Collidable>
+        <boundType>IMAGE</boundType>
+        <bound/>
+      </newengine.sprite.components.Collidable>
     </entry>
   </myComponents>
   <myScriptMap>
@@ -99,17 +108,15 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>shejing</spriteName>
-  <spriteDescription></spriteDescription>
+  <spriteName>1</spriteName>
+  <spriteDescription>1</spriteDescription>
   <actualComponents>
+    <newengine.sprite.components.Collidable reference="../../myComponents/entry[6]/newengine.sprite.components.Collidable"/>
     <newengine.sprite.components.Health reference="../../myComponents/entry[2]/newengine.sprite.components.Health"/>
+    <newengine.sprite.components.Images reference="../../myComponents/entry[4]/newengine.sprite.components.Images"/>
     <newengine.sprite.components.Owner reference="../../myComponents/entry[3]/newengine.sprite.components.Owner"/>
-    <newengine.sprite.components.Range reference="../../myComponents/entry[4]/newengine.sprite.components.Range"/>
-    <newengine.sprite.components.Selectable reference="../../myComponents/entry[6]/newengine.sprite.components.Selectable"/>
-    <newengine.sprite.components.SkillSet reference="../../myComponents/entry[5]/newengine.sprite.components.SkillSet"/>
+    <newengine.sprite.components.PathFollower reference="../../myComponents/entry[5]/newengine.sprite.components.PathFollower"/>
     <newengine.sprite.components.Speed reference="../../myComponents/entry/newengine.sprite.components.Speed"/>
-    <newengine.sprite.components.Attacker reference="../../myComponents/entry[8]/newengine.sprite.components.Attacker"/>
-    <newengine.sprite.components.Images reference="../../myComponents/entry[7]/newengine.sprite.components.Images"/>
   </actualComponents>
   <skills/>
 </data.SpriteMakerModel>
