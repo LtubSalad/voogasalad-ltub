@@ -95,7 +95,6 @@ public class ConvexHull {
 	 * @param O initial point
 	 * @param A a new point
 	 * @param B another new point
-	 * @return
 	 * calculate the cross product the vector AO and BO
 	 */
 	private double cross(Point2D O, Point2D A, Point2D B) {
