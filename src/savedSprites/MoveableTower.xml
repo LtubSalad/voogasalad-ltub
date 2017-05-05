@@ -2,9 +2,20 @@
   <myComponents>
     <entry>
       <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.RangeShootingAI</typename>
+        <typename>newengine.sprite.components.Speed</typename>
       </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.RangeShootingAI/>
+      <newengine.sprite.components.Speed>
+        <speed>200.0</speed>
+      </newengine.sprite.components.Speed>
+    </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Health</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Health>
+        <initHealth>300</initHealth>
+        <health>300</health>
+      </newengine.sprite.components.Health>
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
@@ -27,24 +38,26 @@
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Range</typename>
-      </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Range>
-        <range>250.0</range>
-      </newengine.sprite.components.Range>
-    </entry>
-    <entry>
-      <newengine.sprite.component.ComponentType>
         <typename>newengine.sprite.components.SkillSet</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.SkillSet>
         <skills>
           <entry>
             <newengine.skill.SkillType>
+              <type>newengine.skill.skills.MoveSkill</type>
+            </newengine.skill.SkillType>
+            <newengine.skill.skills.MoveSkill>
+              <icon>
+                <filename>images/skills/walk.png</filename>
+              </icon>
+            </newengine.skill.skills.MoveSkill>
+          </entry>
+          <entry>
+            <newengine.skill.SkillType>
               <type>newengine.skill.skills.FireProjectileSkill</type>
             </newengine.skill.SkillType>
             <newengine.skill.skills.FireProjectileSkill>
-              <cooldown>2.0</cooldown>
+              <cooldown>1.0</cooldown>
             </newengine.skill.skills.FireProjectileSkill>
           </entry>
         </skills>
@@ -55,7 +68,7 @@
         <typename>newengine.sprite.components.Images</typename>
       </newengine.sprite.component.ComponentType>
       <newengine.sprite.components.Images>
-        <imageFilePath>resources/towerImages/pvsturret1.png</imageFilePath>
+        <imageFilePath>resources/monsterImages/Charizard.png</imageFilePath>
       </newengine.sprite.components.Images>
     </entry>
     <entry>
@@ -73,19 +86,20 @@
       <newengine.sprite.components.Attacker>
         <reloadPeriod>1.0</reloadPeriod>
         <timeRemaining>1.0</timeRemaining>
-        <damageStrength>75</damageStrength>
+        <damageStrength>100</damageStrength>
         <ltubImage>
-          <filename>resources/bulletImages/pvzbullet.png</filename>
+          <filename>resources/bulletImages/fireball.png</filename>
         </ltubImage>
       </newengine.sprite.components.Attacker>
     </entry>
     <entry>
       <newengine.sprite.component.ComponentType>
-        <typename>newengine.sprite.components.Upgrade</typename>
+        <typename>newengine.sprite.components.Collidable</typename>
       </newengine.sprite.component.ComponentType>
-      <newengine.sprite.components.Upgrade>
-        <cost>100</cost>
-      </newengine.sprite.components.Upgrade>
+      <newengine.sprite.components.Collidable>
+        <boundType>IMAGE</boundType>
+        <bound/>
+      </newengine.sprite.components.Collidable>
     </entry>
   </myComponents>
   <myScriptMap>
@@ -94,18 +108,18 @@
       <string></string>
     </entry>
   </myScriptMap>
-  <spriteName>1</spriteName>
-  <spriteDescription>tower</spriteDescription>
+  <spriteName>Tower</spriteName>
+  <spriteDescription>tower-movable</spriteDescription>
   <actualComponents>
-    <newengine.sprite.components.Cost reference="../../myComponents/entry[3]/newengine.sprite.components.Cost"/>
+    <newengine.sprite.components.Cost reference="../../myComponents/entry[4]/newengine.sprite.components.Cost"/>
     <newengine.sprite.components.Attacker reference="../../myComponents/entry[8]/newengine.sprite.components.Attacker"/>
+    <newengine.sprite.components.Collidable reference="../../myComponents/entry[9]/newengine.sprite.components.Collidable"/>
+    <newengine.sprite.components.Health reference="../../myComponents/entry[2]/newengine.sprite.components.Health"/>
     <newengine.sprite.components.Images reference="../../myComponents/entry[6]/newengine.sprite.components.Images"/>
-    <newengine.sprite.components.Owner reference="../../myComponents/entry[2]/newengine.sprite.components.Owner"/>
-    <newengine.sprite.components.Range reference="../../myComponents/entry[4]/newengine.sprite.components.Range"/>
-    <newengine.sprite.components.RangeShootingAI reference="../../myComponents/entry/newengine.sprite.components.RangeShootingAI"/>
+    <newengine.sprite.components.Owner reference="../../myComponents/entry[3]/newengine.sprite.components.Owner"/>
     <newengine.sprite.components.Selectable reference="../../myComponents/entry[7]/newengine.sprite.components.Selectable"/>
+    <newengine.sprite.components.Speed reference="../../myComponents/entry/newengine.sprite.components.Speed"/>
     <newengine.sprite.components.SkillSet reference="../../myComponents/entry[5]/newengine.sprite.components.SkillSet"/>
-    <newengine.sprite.components.Upgrade reference="../../myComponents/entry[9]/newengine.sprite.components.Upgrade"/>
   </actualComponents>
   <skills/>
 </data.SpriteMakerModel>

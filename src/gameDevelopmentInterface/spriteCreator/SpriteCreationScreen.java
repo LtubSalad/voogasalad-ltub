@@ -48,7 +48,7 @@ public class SpriteCreationScreen extends BorderPane {
 		descriptorPane = new SpriteDescriptorPane(sprite);
 		savePanel=new SavePanel(this,developerData);
 		this.setRight(instantiateSelector());
-		this.setLeft(scriptPane);
+		//this.setLeft(scriptPane);
 		this.setCenter(infoPane);
 		this.setTop(descriptorPane);
 		this.setBottom(savePanel);
