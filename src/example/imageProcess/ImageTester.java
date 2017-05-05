@@ -3,13 +3,13 @@
  */
 package example.imageProcess;
 
-import java.awt.Color;
 import imageprocess.ImageToPolygon;
 import imageprocess.ImageTransformation;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  */
 
 public class ImageTester extends Application{
-	public static final String IMAGE_DIRECTORY = "resources/bahamut_left.png";
+	public static final String IMAGE_DIRECTORY = "resources/home.png";
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -44,6 +44,7 @@ public class ImageTester extends Application{
 		Polygon pol = im.getPolygon();
 		pol.setLayoutX(100);
 		pol.setLayoutY(100);
+		pol.setFill(Color.RED);
 		root.getChildren().add(pol);
 		primaryStage.setScene(scene);
 		primaryStage.show();

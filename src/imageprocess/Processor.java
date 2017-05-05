@@ -1,11 +1,11 @@
-/**
- * 
- */
+// This entire file is part of my masterpiece.
+// Zhiyong Zhao
 package imageprocess;
 
 /**
  * @author Zhiyong
- *
+ *Process Object of type T
+ *Resize T to a given scale
  */
 public interface Processor<T> {
 

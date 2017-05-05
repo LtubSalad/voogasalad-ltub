@@ -112,6 +112,7 @@ public class LevelManager {
 		}
 		languageMenu.getItems().addAll(list);
 	}
+	
 	private Menu initLevelMenu() {
 
 		MenuItemHandler[] levelList = new MenuItemHandler[numberOfLevel];
@@ -122,7 +123,6 @@ public class LevelManager {
 		}
 		return new Menu(myResources.getString("level"), null, levelMenuList);
 	}
-
 
 	public MenuBar getMenuBar(){
 		return menuBar;
