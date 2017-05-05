@@ -15,7 +15,6 @@ import javafx.scene.image.WritableImage;
  *
  */
 public class NodeProcessor {
-
 	/**
 	 * @param node
 	 * @return

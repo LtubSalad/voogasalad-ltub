@@ -3,11 +3,11 @@
  */
 package imageprocess;
 
-import java.awt.Color;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -41,6 +41,7 @@ public class ImageTester extends Application{
 		Polygon pol = im.getPolygon();
 		pol.setLayoutX(200);
 		pol.setLayoutY(200);
+		pol.setFill(Color.BLUE);
 		root.getChildren().add(pol);
 		primaryStage.setScene(scene);
 		primaryStage.show();
