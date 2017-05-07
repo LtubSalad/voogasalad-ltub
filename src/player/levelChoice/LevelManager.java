@@ -10,7 +10,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
@@ -19,69 +18,77 @@ import player.App;
 
 /**
  * @author Zhiyong
+ * 
+ * This is create the level choice for the player
+ * In this levelManager, the developer will use
+ * the {@code player.levelChoice.LevelMenuHandler}
  *
  */
 public class LevelManager {
-	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
+	
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 300;
+	public static final String CSS_LOCATION = "/styleSheets/login.css";
+	public static final String TITLE = "Game Level Choice";
+	public static final int SEED = 2;
+	
+	private  ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
 	private Stage primaryStage;
 	private int numberOfLevel;
 	private MenuBar menuBar;
-
-	//TODO : add voice search like google
 
 
 	public LevelManager(Stage primaryStage){
 		numberOfLevel = 2;
 		this.primaryStage = primaryStage;
-
-
 	}
+	
+	/**
+	 * show the Level MenuItem to the player
+	 * The player can choose a level to start a game or choose a random game
+	 */
 	public void show(){
+		//Stage primaryStage = new Stage();
+		primaryStage.setTitle(TITLE);
+		Group root = new Group();
 
 		Menu level = initLevelMenu();
 		Menu setting = initSettingMenu();
 		Menu help = initHelpMenu();
 		menuBar = new MenuBar(level, setting, help);
-
-		Stage primaryStage = new Stage();
-		primaryStage.setTitle("Game Level Choice");
-		Group root = new Group();
-		
-		AnimationImage im = new AnimationImage();
-		
-		
 		root.getChildren().add(menuBar);
-		Scene scene = new Scene(root);
-
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString("levelChoiceImagePath")));
-		scene.setFill(new ImagePattern(image));
 		
-		scene.getStylesheets().setAll("/styleSheets/login.css");
+		AnimationImage im = new AnimationImage();		
+		
+		Scene scene = new Scene(root);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(myResources.getString("levelChoiceImagePath")));
+		scene.setFill(new ImagePattern(image));		
+		scene.getStylesheets().setAll(CSS_LOCATION);
 		
 		HBox hBox = new HBox();
-		hBox.getChildren().add(im.getImageView(2));
+		hBox.getChildren().add(im.getImageView(SEED));
 		hBox.setLayoutX(300);
 		hBox.setLayoutY(200);
 		root.getChildren().add(hBox);
 
-		Button starting = new Button("Start A Game of Random Level");
+		Button starting = createButton();		
+		root.getChildren().add(starting);
 		
-		
+		primaryStage.setScene(scene);
+		primaryStage.setFullScreen(true);
+		primaryStage.setFullScreenExitHint("");
+		primaryStage.setFullScreenExitKeyCombination(null);
+		primaryStage.show();
+	}
+	
+	private Button createButton() {
+		Button starting = new Button("Start A Game of Random Level");				
 		starting.setLayoutX(500);
 		starting.setLayoutY(600);
 		starting.setId("starting");
 		starting.setMinWidth(100);
 		starting.setMinHeight(100);
-		root.getChildren().add(starting);
-		
-		primaryStage.setScene(scene);
-		//primaryStage.initStyle(StageStyle.UNDECORATED);
-		primaryStage.setFullScreen(true);
-		primaryStage.setFullScreenExitHint("");
-		primaryStage.setFullScreenExitKeyCombination(null);
-		primaryStage.show();
+		return starting;
 	}
 
 	private Menu initHelpMenu() {		
@@ -105,6 +112,7 @@ public class LevelManager {
 		}
 		languageMenu.getItems().addAll(list);
 	}
+	
 	private Menu initLevelMenu() {
 
 		MenuItemHandler[] levelList = new MenuItemHandler[numberOfLevel];
@@ -115,7 +123,6 @@ public class LevelManager {
 		}
 		return new Menu(myResources.getString("level"), null, levelMenuList);
 	}
-
 
 	public MenuBar getMenuBar(){
 		return menuBar;

@@ -17,7 +17,6 @@ import javafx.stage.Stage;
  * @author Zhiyong
  *
  *Test the convex_hull or Hull methods by providing an image
- *
  *Usage: please change the name of the image directory: "resources/home.png"
  */
 
@@ -27,8 +26,6 @@ public class ImageTester extends Application{
 		launch(args);
 	}
 
-
-
 	public void start(Stage primaryStage){
 		primaryStage = new Stage();
 		primaryStage.setTitle("Test Image");
@@ -36,22 +33,17 @@ public class ImageTester extends Application{
 		Scene scene = new Scene(root, 800, 800);
 
 		Image image = new Image(IMAGE_DIRECTORY);
-
 		Rectangle r = new Rectangle(image.getWidth(),image.getHeight());
 		r.setFill(new ImagePattern(image));
 
-		//ImageTransformation it = new ImageTransformation();
-
 		root.getChildren().addAll(r);
-
-		ImageToPolygon im = new ImageToPolygon(image);
+		ImageToPolygon im = new ImageToPolygon(image, Color.WHITE);
 		Polygon pol = im.getPolygon();
 		pol.setLayoutX(200);
 		pol.setLayoutY(200);
-		pol.setFill(Color.RED);
+		pol.setFill(Color.BLUE);
 		root.getChildren().add(pol);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-
 }

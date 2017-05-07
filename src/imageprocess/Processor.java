@@ -1,11 +1,11 @@
-/**
- * 
- */
+// This entire file is part of my masterpiece.
+// Zhiyong Zhao
 package imageprocess;
 
 /**
  * @author Zhiyong
- *
+ *Process Object of type T
+ *Resize T to a given scale
  */
 public interface Processor<T> {
 
@@ -15,7 +15,6 @@ public interface Processor<T> {
 	 * resize the element t by given the scale of the second argument
 	 */
 	T resize(T t, double scale);
-
 
 	/**
 	 * @param t
@@ -29,6 +28,4 @@ public interface Processor<T> {
 	 * and height ratio
 	 */
 	T resize(T t, double targetWidth, double targetHeight, boolean preserveRatio);
-
-
 }

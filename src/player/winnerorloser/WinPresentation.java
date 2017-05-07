@@ -21,21 +21,19 @@ import utilities.CustomAlert;
  *
  */
 public class WinPresentation implements ResultPresentation{
-	
-	//add the buttons on the VBox so that they have the same appearance
-	
+
 	private VBox vbButtons;
-	
+
 	private VBox vbTexts;
 	private Stage primaryStage = new Stage();
-	
+
 	public WinPresentation(){
 		vbButtons = new VBox(20);
 		vbButtons.setLayoutY(200);
 		vbButtons.setLayoutX(500);
 		vbButtons.setSpacing(20);
 		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
-		
+
 		vbTexts = new VBox(20);
 		vbTexts.setLayoutY(20);
 		vbButtons.setLayoutX(100);
@@ -50,54 +48,48 @@ public class WinPresentation implements ResultPresentation{
 		Button playButton = new Button("restart");
 		playButton.setMaxWidth(Double.MAX_VALUE);
 		playButton.setOnAction( e -> restartAction());
-		
+
 		Button exitButton = new Button("exit");
 		exitButton.setMaxWidth(Double.MAX_VALUE);
 		exitButton.setOnAction(e -> exitAction());
-		
 
-		
 		vbButtons.getChildren().add(playButton);
 		vbButtons.getChildren().add(exitButton);
-		
+
 		vbTexts.getChildren().add(getText("Congratulations!"));
-		
-//		vbTexts.getChildren().add(getText("For this game:    " + result.getGameName()));
-//		vbTexts.getChildren().add(getText("You get the score:   " + result.getPoint()));
-//		vbTexts.getChildren().add(getText("Your health is:    " + result.getHealth()));
+
+		vbTexts.getChildren().add(getText("For this game:    " + result.getGameName()));
+		vbTexts.getChildren().add(getText("You get the score:   " + result.getPoint()));
+		vbTexts.getChildren().add(getText("Your health is:    " + result.getHealth()));
 		root.getChildren().add(vbTexts);
-		
+
 		root.getChildren().addAll(vbButtons);
 		//TODO : add animation and background
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.show();
-		
+		primaryStage.show();		
 	}
 
 	private void exitAction() {
-		// TODO Auto-generated method stub
 		primaryStage.close();
-		
+
 	}
 
 	private void restartAction() {
 		App app = new App();
-			try {
-				app.start(primaryStage);
-			} catch (Exception e) {
-				new CustomAlert(AlertType.ERROR, "Can't Restart Action after Win").show();
-			}
-		
+		try {
+			app.start(primaryStage);
+		} catch (Exception e) {
+			new CustomAlert(AlertType.ERROR, "Can't Restart Action after Win").show();
+		}	
 	}
-	
+
 	private Text getText(String message){
 		Text splash = new Text();
-		
+
 		splash = new Text(10,50,message);
 		splash.setFont(Font.font(25));
 		splash.setFill(Color.DARKVIOLET);
 		return splash;
 	}
-
 }

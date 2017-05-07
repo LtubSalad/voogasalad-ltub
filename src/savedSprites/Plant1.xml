@@ -79,6 +79,14 @@
         </ltubImage>
       </newengine.sprite.components.Attacker>
     </entry>
+    <entry>
+      <newengine.sprite.component.ComponentType>
+        <typename>newengine.sprite.components.Upgrade</typename>
+      </newengine.sprite.component.ComponentType>
+      <newengine.sprite.components.Upgrade>
+        <cost>100</cost>
+      </newengine.sprite.components.Upgrade>
+    </entry>
   </myComponents>
   <myScriptMap>
     <entry>
@@ -97,6 +105,7 @@
     <newengine.sprite.components.RangeShootingAI reference="../../myComponents/entry/newengine.sprite.components.RangeShootingAI"/>
     <newengine.sprite.components.Selectable reference="../../myComponents/entry[7]/newengine.sprite.components.Selectable"/>
     <newengine.sprite.components.SkillSet reference="../../myComponents/entry[5]/newengine.sprite.components.SkillSet"/>
+    <newengine.sprite.components.Upgrade reference="../../myComponents/entry[9]/newengine.sprite.components.Upgrade"/>
   </actualComponents>
   <skills/>
 </data.SpriteMakerModel>

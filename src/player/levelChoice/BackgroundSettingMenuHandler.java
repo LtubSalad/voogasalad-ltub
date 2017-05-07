@@ -18,51 +18,56 @@ import player.App;
 
 /**
  * @author Zhiyong
- *
+ * Handle the background color or image of the player page
+ * This class implements the interface {@code player.levelChoice.SettingMenuHandler}
  */
 public class BackgroundSettingMenuHandler extends SettingMenuHandler{
-	
+
+	public static final String CSS_LOCATION = "/styleSheets/login.css";
 	private ResourceBundle myResources = ResourceBundle.getBundle(App.RESOURCES_LOCATION);
+	private Stage stage;
 
 	public BackgroundSettingMenuHandler(String source) {
 		super(source);
-		// TODO Auto-generated constructor stub
+		stage = new Stage();
 	}
 
 	@Override
-	public void handle() {
-		Stage stage = new Stage();		
+	public void handle() {				
 		Pane root = new Pane();
-		
+		Text splash = createText();
+		ColorPicker colorPicker = new ColorPicker();
+		Circle circle = new Circle(100,100,30);
+		circle.setFill(colorPicker.getValue());
+		colorPicker.setOnAction(e -> circle.setFill(colorPicker.getValue()));
+
+		Button okayButton = createButton(root, colorPicker);
+
+		root.getChildren().addAll(circle, colorPicker, okayButton, splash);		
+
+		Scene scene = new Scene(root,400,200);
+		scene.getStylesheets().setAll(CSS_LOCATION);
+		stage.setScene(scene);		
+		stage.show();			
+	}
+
+	private Text createText() {
 		Text splash = new Text();		
 		splash = new Text(10,50, myResources.getString("BackgroundSetting"));
 		splash.setFont(Font.font(25));
 		splash.setFill(Color.DARKVIOLET);
-		
-		ColorPicker colorPicker = new ColorPicker();
-        Circle circle = new Circle(100,100,30);
-        circle.setFill(colorPicker.getValue());
-        colorPicker.setOnAction(e -> circle.setFill(colorPicker.getValue()));
-        
-        Button okayButton = new Button(myResources.getString("OkayButton"));
-        okayButton.setLayoutX(200);
-        okayButton.setLayoutY(100);
-        okayButton.setId("btnLogin");
-        okayButton.setOnAction(e -> {
-        	root.setBackground(new Background(new BackgroundFill(colorPicker.getValue(), CornerRadii.EMPTY, Insets.EMPTY)));
-        	
-        	//TODO: need to change the background of the playpane
-        	
-        	stage.close();
-        });
-		
-        root.getChildren().addAll(circle, colorPicker, okayButton, splash);		
-
-		Scene scene = new Scene(root,400,200);
-		scene.getStylesheets().setAll("/styleSheets/login.css");
-		stage.setScene(scene);		
-		stage.show();	
-		
+		return splash;
 	}
 
+	private Button createButton(Pane root, ColorPicker colorPicker) {
+		Button okayButton = new Button(myResources.getString("OkayButton"));
+		okayButton.setLayoutX(200);
+		okayButton.setLayoutY(100);
+		okayButton.setId("btnLogin");
+		okayButton.setOnAction(e -> {
+			root.setBackground(new Background(new BackgroundFill(colorPicker.getValue(), CornerRadii.EMPTY, Insets.EMPTY)));
+			stage.close();
+		});
+		return okayButton;
+	}
 }
