@@ -20,7 +20,8 @@ import gamecreation.level.LevelCreationPane;
 import utilities.XStreamHandler;
 
 /**
- * 
+ * This is the GUI for a Tower Defense Authoring Environment
+ * @author Matthew Tribby
  */
 public class TowerAuthor extends GameAuthor {
 	private static final String SET_THE_BACKGROUND = "Set the background";
@@ -35,34 +36,42 @@ public class TowerAuthor extends GameAuthor {
 	private DeveloperData myModelData;
 	private ScreenModelData myScreenModelData;
 
+	/**
+	 * Instantiates the Tower Authoring Environment and adds the steps in instantiateSteps
+	 */
 	public TowerAuthor() {
 		super();
 		myModelData=new DeveloperData();
 		myGeneralDataCreator = new GeneralDataCreator(myModelData);
-		//myScreenModelData = new ScreenModelData();
 		getScene().getStylesheets().setAll(PATH_TO_STYLE_SHEETS);
 		instantiateSteps();
 	}
 	
+	/**
+	 * Returns the data which is stored within the authoring environment for transportation
+	 * @return DeveloperData
+	 */
 	public DeveloperData getData() {
 		return myModelData;
 	}
 
+	/**
+	 * Adds steps to the GUI
+	 */
 	public void instantiateSteps() {
 		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense", myModelData)));
 
 		addStep(new DeveloperStep("Level Options",
 				new LevelCreationPane(myModelData, getScene().getHeight() - CENTER_OFFSETS)));
-//		addStep(new DeveloperStep(SET_THE_BACKGROUND,
-//				new BackgroundSetter(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
 		addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData)));
 		addStep(new DeveloperStep("Sprite creation", new SpriteCreationEnvironment(myModelData)));
 		addStep(new DeveloperStep("Spawner Creation", new SpawnerCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
-		//addStep(new DeveloperStep(myResources.getString(SCREEN_SETTING),
-			//	new ScreenModelCreator(myModelData.getScreenSprites(), myGeneralDataCreator, myScreenModelData)));
 	}
 
+	/**
+	 * Saves the current state to XML
+	 */
 	@Override
 	public void save() {
 		SerializableDeveloperData data = new SerializableDeveloperData(myModelData);

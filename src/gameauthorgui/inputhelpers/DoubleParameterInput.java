@@ -8,17 +8,26 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+/**
+ * Parameter input that takes in a double on a slider with a name attached to it
+ * @author Matthew Tribby 
+ */
 public class DoubleParameterInput extends HBox implements ParameterInput<Double>{
 	public static final String TYPE = "Double";
 	private String varName;
 	private Slider slide;
 
+	/**
+	 * Creates parameter input with given range
+	 * @param varName String name of variable
+	 * @param startRange Start of range
+	 * @param endRange End of range
+	 */
 	public DoubleParameterInput(String varName, double startRange, double endRange){
 		super(10);
 		this.varName = varName;
 		createBox(startRange, endRange);
 	}
-	
 	private void createBox(double startRange, double endRange){
 		slide = new CustomSlider(startRange, endRange, startRange);
 		Label value = new Label(Double.toString(startRange));
@@ -33,6 +42,9 @@ public class DoubleParameterInput extends HBox implements ParameterInput<Double>
 	}
 	
 	@Override
+	/**
+	 * Gets value
+	 */
 	public Double getValue() {
 		return slide.getValue();
 	}
@@ -46,6 +58,9 @@ public class DoubleParameterInput extends HBox implements ParameterInput<Double>
 	}
 
 	@Override
+	/**
+	 * Gets type of ParameterInput
+	 */
 	public String getType() {
 		return TYPE;
 	}

@@ -12,6 +12,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Pair;
 
+/**
+ * Creates a welcome screen foundation for extension
+ * @author Matthew Tribby
+ */
 public class WelcomeScreen extends VBox {
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
@@ -21,6 +25,11 @@ public class WelcomeScreen extends VBox {
 	private Font titleFont = new Font(50);
 	private DeveloperData modelData;
 	
+	/**
+	 * Creates welcome screen, with given name and a data to build from
+	 * @param genreName
+	 * @param modelData
+	 */
 	public WelcomeScreen(String genreName, DeveloperData modelData){
 		super(VERTICAL_GAP);
 		this.modelData = modelData;
@@ -38,6 +47,9 @@ public class WelcomeScreen extends VBox {
 		createUserData();
 	}
 	
+	/**
+	 * Creates user data and the input for that data
+	 */
 	public void createUserData(){
 		StringParameterInput gameName = new StringParameterInput(myResources.getString("GAME_NAME"));
 		gameName.setAlignment(Pos.CENTER);
