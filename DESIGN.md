@@ -3,9 +3,9 @@
 ## Design Update
 ### Changing sprite design
 
-We’ll stick the idea of components over inheritance of sprite. But we want to make the sprites API to be closed. We’ll basically make sprite have a map of attributes containing mutable data (identified by type classes for compile time checking), and a map of controls to modify the data. We also intend to let each sprite have a list of high level skills, which are basically compositions of basic controls.
+Initially, we designed sprites to contain refrences to "Attribute" classes. These Attributes were designed to store data concerning the functionalities of each Sprite, and specified how the game engine should handle various different sprites. Functionality, how ever, was largely delegated to various "Manager" classes, instead of within the Attributes themselves.
 
-Sprite design is changed so that each sprite has its own "SpriteBus", and video game designers can have some degree of control over a sprite's response to events. This works as follows:
+Midway through the project, we changed the design of the Sprite and its relationship to its various attribute so that each sprite stored an internal eventbus, and video game designers can have some degree of control over a sprite's response to events. This works as follows:
 
 Aside from storing private variables and preset functions they can perform, a sprite's subattributes(we used "components" to describe them in the meeting) should now also specify what kind of (preset) events the Sprite wants to listen to. For example, a Collidable attribute allows the Sprite holding it to handle a "Collision" event, which is fired whenever the CollisionManager figures out that a Collidable has bumped into another Collidable. 
 (All sprites, regardless of how few attributes they have, can handle "instantiation" and "death" events, which would be fired when a sprite is added/removed.)
@@ -14,6 +14,7 @@ Depending on which attributes(components) a Sprite possesses, it can listen for 
 The idea of this is that this makes it easy for the video game designer to define more complex functionalities using basic features, and requiring less hard code. (i.e. instead of having the Tower implement a preset, tower-specific Attacker attribute, we can ask the Tower to check for monsters in range with a RangeChecker, then fire a bullet with SpriteSpawner if it finds something and it's been more than 3 seconds since the last shot.)
 
 ### Passing Data
+The classes that Sprites use to define various features of their functionality- which were initially described as "Attributes", and are now refered to as "Components", are no longer converted to "Data" classes before being saved to XML files. Instead, since we find that Components were already suitable for conversion through XStream, we decided to simply instantiate actual components from the developer side and then convert their XStream-equivalent files for use by the game engine.
 
 The data passed to the game engine will consist of an DeveloperData class that tracks LevelData, SpriteMakerModels, and GeneralGameData.
 
