@@ -35,6 +35,27 @@ The game player part is the part to show the game environment, he logging of the
 * Files to start the project : 
 
 App.java in the player package
+* any books, papers, online, or human resources that you used in developing the project
+
+We would each like to thank our TAs for their guidance and help throughout the project. Additionally, we cite the following:
+- http://www.programcreek.com/java-api-examples/index.php?api=javafx.scene.control.ScrollPane
+- http://stackoverflow.com/questions/20708358/convert-from-queue-to-arraylist
+- http://stackoverflow.com/questions/14413040/converting-integer-to-observablevalueinteger-in-javafx
+- http://stackoverflow.com/questions/27785917/javafx-mouseposition
+- http://stackoverflow.com/questions/8736378/what-is-a-callback-in-java
+- http://stackoverflow.com/questions/6175883/xstream-errors-for-serializing-deserializing
+- http://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.16
+- http://stackoverflow.com/questions/64036/how-do-you-make-a-deep-copy-of-an-object-in-java
+- http://stackoverflow.com/questions/16739438/javafx-draganddrop-with-custom-dataformat
+- http://www.oodesign.com/
+- https://docs.oracle.com/javafx/2/api/javafx/collections/MapChangeListener.Change.html
+- https://docs.oracle.com/javafx/2/api/javafx/beans/value/ObservableValue.html
+- http://www.javaworld.com/article/2077462/learn-java/java-tip-10--implement-callback-routines-in-java.html
+- https://docs.oracle.com/javase/tutorial/reflect/member/ctorLocation.html
+- https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/GridPane.html
+- https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/TextInputDialog.html
+- https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html
+
 * files for testing: 
 
 One can find tester files in the package savedSprites to load up example towers and monsters. These are all of the file format "xml." Additionally, some sample games can be found in the top level directory with names like FinalPlantsVsZonbies.xml, Planets.xml, or 2paths2levels.xml. Finally, we have some Java tester classes in src.spritecreation and src.gameDevelopmentDemo
