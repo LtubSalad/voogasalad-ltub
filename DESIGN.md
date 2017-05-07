@@ -1,6 +1,6 @@
 # Design
 
-## Design Updat
+## Design Update
 ###Changing sprite design
 
 We’ll stick the idea of components over inheritance of sprite. But we want to make the sprites API to be closed. We’ll basically make sprite have a map of attributes containing mutable data (identified by type classes for compile time checking), and a map of controls to modify the data. We also intend to let each sprite have a list of high level skills, which are basically compositions of basic controls.
@@ -14,19 +14,13 @@ Depending on which attributes(components) a Sprite possesses, it can listen for 
 The idea of this is that this makes it easy for the video game designer to define more complex functionalities using basic features, and requiring less hard code. (i.e. instead of having the Tower implement a preset, tower-specific Attacker attribute, we can ask the Tower to check for monsters in range with a RangeChecker, then fire a bullet with SpriteSpawner if it finds something and it's been more than 3 seconds since the last shot.)
 
 ### Passing Data
-The AttributeDatas that are currently passed to sprites will now allow for the storage of variables aside from strings so that typecasting is reduced.
 
-The data passed to the game engine will consist of an AuthoredGame class that tracks GeneralModelData, ScreenModelData, and PathData.
+The data passed to the game engine will consist of an DeveloperData class that tracks LevelData, SpriteMakerModels, and GeneralGameData.
 
 ## Utility: Image Processor
-This should allow the game to take images and trim out the transparent regions. Zhiyong is working on this.
-
-## Original Design
-To represent your design at a reasonably high level and provide an organization to the plan document, break it into modules rather than all the classes you can think of. A module is a concept in your program that may be represented by a single class or a group of classes related in some standard way, such as set of subclasses, that has a purpose with regards to the program's functionality and collaborates with other modules.
+This allows the game to take images and trim out the transparent regions.
 	
 Game Engine:
-* Map
-* Tile
 * Screen - the different pages for the view 
 * Sprite 
 * Model
@@ -39,12 +33,10 @@ Game Data:
 * Files (GIFs, XML, MP3s) 
 
 Game Authoring Environment:
-* Map Design
-* Avatar Design
-* Scripting
-* Screen Design - general screen layout
+* Path Design
+* Sprite Design
+* Spawner Design
 * Model Design - initial user-defined data (lives you start off with, time limit, how many monsters we start on the screen) 
-* View  
 * XML Writer (shared component)
 
 Game Player (Runner):
@@ -55,15 +47,11 @@ Utility - Resource Loader:
 * XML Writer 
 * Heads Up Display Utility - points, lives → make it super extendable
 
+Some of these modules will simply be used by other modules, but some will be more complex
 
+The game authoring framework that users can use will be a combination of the sprite designer, path designer, and spawner designer. Another framework that our code will provide is the event bus. This class will have a few public methods like on(ActionEvent), off(ActionEvent), and emit(EventType, EventHandler) which will take a generic event and propagate it to all parts of our program that could possibly handle that event. For example, consider the case in which we have written a bullet class that can fire its own event on every update of the screen. It will send this event to the bus and the bus can place this event in the model so the position can be updated and then the view will listen to these changes and update the screen. Imagine this is all the bullet can do. Now, we can add a new type of bullet with new events like collideEvent that are also put on the bus when triggered. Perhaps this event will be written such that it not only changes the model to update the bullet’s position, but also the firing of the collideEvent will trigger a sound from the SoundSystem. Maybe it will also inflict damage on the object with which it collided. This will be left up to the class. The point is it still uses the bus framework we have provided but the new class will customize the events that it can fire. 
 
-
-Some of these modules will simply be used by other modules, but some will be more complex   frameworks. A framework means that your code is in control and users of your design must fit into the extension, or plug in, points you provide. Thus it is important that you describe these extension points in English and provide examples of their use in addition to listing the classes and methods you expect to implement.
-
-The game authoring framework that users can use will be a combination of the avatar designer and model designer. See the next question for a discussion of how this will be implemented. Another framework that our code will provide is the event bus. This class will have a few public methods like on(ActionEvent) and off(ActionEvent) which will take a generic event and propagate it to all parts of our program that could possibly handle that event. For example, consider the case in which we have written a bullet class that can fire its own event on every update of the screen. It will send this event to the bus and the bus can place this event in the model so the position can be updated and then the view will listen to these changes and update the screen. Imagine this is all the bullet can do. Now, we can add a new type of bullet with new events like collideEvent that are also put on the bus when triggered. Perhaps this event will be written such that it not only changes the model to update the bullet’s position, but also the firing of the collideEvent will trigger a sound from the SoundSystem. Maybe it will also inflict damage on the object with which it collided. This will be left up to the class. The point is it still uses the bus framework we have provided but the new class will customize the events that it can fire. 
-
-
-One primary framework you will be creating is an architecture to support building games, i.e., a series of events, different states, all possible collisions, levels of rules, smart actors, plans, etc. This architecture might be based on something that simplifies your design (yet is very flexible), a distinguishing feature of the game genre, the user interface you want to present, etc. You will need to explain how to use this structure to actually design a game and how you will present this structure to the game designer through your authoring environment.
+One primary framework you will be creating is an architecture to support building games, i.e., a series of events, different states, all possible collisions, levels of rules, sprites with components and skills, plans, etc. This architecture might be based on something that simplifies your design (yet is very flexible), a distinguishing feature of the game genre, the user interface you want to present, etc. You will need to explain how to use this structure to actually design a game and how you will present this structure to the game designer through your authoring environment.
 
 Complex object interactions
 Classes which are supposed to perform actions, such as towers which shoot monsters, or monsters which move down a line, should all implement the actor interface. This means they have an act() method which is called regularly by the game loop, and they are instantiated with access to a portion of the Model- a data structure that keeps track of the data that is specific to each playthrough of a game. They are also given access to the EventBus, which is a class that has access to the model and can modify the various components of the game. In such a fashion, in each game loop, the run() methods of Actors are called. Actors can then need to call the Model to receive the data they need, then pass events to the EventBus so that the Actors can modify other components of the games. 
