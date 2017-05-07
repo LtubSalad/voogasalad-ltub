@@ -10,6 +10,10 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * ParameterInput made to take in images
+ * @author Matthew Tribby
+ */
 public class ImageParameterInput extends HBox implements ParameterInput<String>{
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
@@ -19,7 +23,10 @@ public class ImageParameterInput extends HBox implements ParameterInput<String>{
 	private Button fileChoose;
 	private TextField imagePath;
 	
-	
+	/**
+	 * Creates a image parameter input with the given variable name
+	 * @param varName
+	 */
 	public ImageParameterInput(String varName){
 		super();
 		imagePath = new TextField();
@@ -37,16 +44,26 @@ public class ImageParameterInput extends HBox implements ParameterInput<String>{
 
 
 	@Override
+	/**
+	 * Gets path of image in string
+	 */
 	public String getValue() {
 		return imagePath.getText();
 	}
 	
+	/**
+	 * Gets text property to connect to listeners
+	 * @return StringProperty
+	 */
 	public StringProperty getTextProperty(){
 		return imagePath.textProperty();
 	}
 	
 	
 	@Override
+	/**
+	 * Gets type of ParameterInput
+	 */
 	public String getType() {
 		return TYPE;
 	}

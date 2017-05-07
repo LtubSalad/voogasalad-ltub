@@ -10,6 +10,11 @@ import gameDevelopmentInterface.spriteCreator.SpriteCreationScreen;
 import gameauthorgui.DeveloperStep;
 import gameauthorgui.GameAuthor;
 
+/**
+ * Implementation of Game Author, built as a basic version of an RTS game authoring environment
+ * This was created as an example of the extensibility of our game GUI
+ * @author Matthew Tribby
+ */
 public class RTSAuthor extends GameAuthor{
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
@@ -19,6 +24,9 @@ public class RTSAuthor extends GameAuthor{
 	private DeveloperData myModelData;
 	private ScreenModelData myScreenModelData;
 	
+	/**
+	 * Creates the GUI with the steps that are made in instantiateSteps
+	 */
 	public RTSAuthor(){
 		super();
 		myModelData = new DeveloperData();
@@ -28,17 +36,22 @@ public class RTSAuthor extends GameAuthor{
 		instantiateSteps();
 	}
 
+	/**
+	 * Adds the Developer steps which will be shown. DeveloperSteps are the different steps in the process
+	 */
 	@Override
 	public void instantiateSteps() {
 		addStep(new DeveloperStep("Welcome", new RTSWelcomeScreen(myModelData)));
 		addStep(new DeveloperStep("Sprite creation",new SpriteCreationScreen(myModelData)));
 		addStep(new DeveloperStep("General Data", myGeneralDataCreator));
-		//addStep(new DeveloperStep("Screen Setting", new ScreenModelCreator(myModelData.getScreenSprites(),myGeneralDataCreator, myScreenModelData )));
 	}
 
+	/**
+	 * Currently not implemented but will save the game state of the RTS author to transport to back-end
+	 */
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
+		
 	}
 
 }

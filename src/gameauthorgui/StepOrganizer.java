@@ -9,6 +9,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * StepOrganizer is meant to hold DeveloperStep objects. It organizes the objects in a central place. The goal of
+ * this to act as a foundation for a step-based creation process, which links a GUI step to a node that will
+ * fill the screen
+ * @author Matthew Tribby
+ */
 public class StepOrganizer extends VBox {
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
@@ -19,6 +25,11 @@ public class StepOrganizer extends VBox {
 	private int nextIndex;
 	private IGameAuthor author;
 	
+	/**
+	 * Creates a StepOrganizer linked to an IGameAuthor environment which sets forward the GUI's relationship
+	 * with the StepOrganizer
+	 * @param author
+	 */
 	public StepOrganizer(IGameAuthor author){
 		super();
 		this.author = author;
@@ -43,14 +54,27 @@ public class StepOrganizer extends VBox {
 		this.getChildren().addAll(stepTitle, stepHolder);
 	}
 	
+	/**
+	 * Adds a list of steps to the organizer
+	 * @param steps DeveloperSteps to add
+	 */
 	public void addSteps(List<DeveloperStep> steps){
 		steps.stream().forEach(e -> addStep(e));
 	}
 	
+	/**
+	 * Adds a single step to the organizer
+	 * @param step DeveloperStep
+	 */
 	public void addStep(DeveloperStep step){
 		addStep(this.getChildren().size(), step);
 	}
 	
+	/**
+	 * Adds step at a certain index
+	 * @param index
+	 * @param step DeveloperSteps
+	 */
 	public void addStep(int index, DeveloperStep step){
 		stepHolder.getChildren().add(index, step);
 		steps.add(index, step);
@@ -63,14 +87,25 @@ public class StepOrganizer extends VBox {
 		});
 	}
 	
+	/**
+	 * Returns a list of steps in the organizer
+	 * @return the steps
+	 */
 	public List<DeveloperStep> getSteps(){
 		return steps;
 	}
 	
+	/**
+	 * Gets the number of steps
+	 * @return number of steps
+	 */
 	public int getNumberSteps(){
 		return steps.size();
 	}
 	
+	/**
+	 * Progresses to the next step
+	 */
 	public void nextStep(){
 		if(currentIndex != steps.size() -1){
 			nextIndex = currentIndex + 1;
@@ -78,6 +113,9 @@ public class StepOrganizer extends VBox {
 		}
 	}
 	
+	/**
+	 * Goes back to the previous step
+	 */
 	public void previousStep(){
 		if(currentIndex != 0){
 			nextIndex = currentIndex - 1;
@@ -85,10 +123,11 @@ public class StepOrganizer extends VBox {
 		}
 	}
 	
+	/**
+	 * Set the base color for all steps inside
+	 */
 	public void setBaseColor(){
 		steps.stream().forEach(e -> e.setBaseColor());
 	}
-
-	
 
 }
