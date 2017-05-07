@@ -1,7 +1,7 @@
 # Design
 
 ## Design Update
-###Changing sprite design
+### Changing sprite design
 
 We’ll stick the idea of components over inheritance of sprite. But we want to make the sprites API to be closed. We’ll basically make sprite have a map of attributes containing mutable data (identified by type classes for compile time checking), and a map of controls to modify the data. We also intend to let each sprite have a list of high level skills, which are basically compositions of basic controls.
 
@@ -67,9 +67,9 @@ The key features of a tower defense game include: attackers, towers, a path, pla
 
 ********************************************************************************
 
-#DESIGN for analysis
+# DESIGN for analysis
 
-#provides the high-level design goals of your project
+# provides the high-level design goals of your project
 
  * Describe the problem your team is trying to solve:
 
@@ -92,7 +92,7 @@ We chose the tower defense genre of games. This genre has a map with different p
 
 Our project is split up into four primary components: the Game Engine, the Game Authoring Environment, Game Data, and the Game Player. The Game Engine is the bulk of the back-end of our program. It is where the modules that encompass the actual thinking of the game are created, and where they are capable of interacting with one another. This includes the characters of the games, the map, and the data related to the games. The Game Authoring Environment is the user interface where users will have the power to configure their levels, design their characters, choose the starting parameters of the game, etc. The Game Player isthe window that allows users to look into the actual game; it’s where the animation and playing actually happens. Finally, the Game Data is where information extracted from the user in the game authoring environment is translated into classes that the game engine can act upon (like sprite, level, game, etc.)
 
-#explains, in detail, how to add new features to your project
+# explains, in detail, how to add new features to your project
 
  * Game Engine:
 
@@ -117,7 +117,7 @@ Furthermore, if one wanted to add or take away steps needed to completely author
 
 We provide the IView interface to other developers to write their own view components that could visualize our game in their own way. Our current view can be found in View.java, but we also concocted example classes like RTSView and TDView that both implement the IView interface to show how to extend our game player to handle other types of game visualization. All one needs to do it render the sprites, stats, and the “bottom pane” which is where clickable sprites and items that can be used in game play are held.
 
-#justifies major design choices, including trade-offs (i.e., pros and cons), made in your project
+# justifies major design choices, including trade-offs (i.e., pros and cons), made in your project
 
 * Sprites with components
 
@@ -132,5 +132,5 @@ The idea of Sprites being defined by their components facilitated a relatively s
 
 Since the Components that a Sprite needed to have could be defined by an arbitrary number of variables of arbitrary type, the people working on the developer side decided to annotate the constructors of the components so that reflection could allow for the game author to input the needed parameters to make a fully formed component of a specific type. Some cons of this method: we had to go in and annotate all new components that were added before they could be used in the front end, and we had to make some exceptions for various types of components that took parameters that were not easy to input from the authoring environment like the Spawner. Some pros were that it saved us from having to create a factory class that needed to have a large chain of conditions to ensure the correct type of user friendly input was available in the authoring environment for each component type and our team learned how to use developer annotations! 
 
-#states any assumptions or decisions made to simplify or resolve ambiguities in your the project's functionality
+# states any assumptions or decisions made to simplify or resolve ambiguities in your the project's functionality
 
