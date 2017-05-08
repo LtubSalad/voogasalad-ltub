@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 /**
  * 
  * @author Daniel
- * An interface designed to produce an arbitrary variable.
+ * An GUI designed to produce and return a generic variable.
  * @param <T>
  */
 public abstract class VariableSetter<T> extends HBox{

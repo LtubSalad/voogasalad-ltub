@@ -1,7 +1,10 @@
 package gameDevelopmentInterface.developerdata;
 
+/**
+ * A generic class that is used to provide a GUI to instantiate arbitrary objects.
+ * Daniel
+ */
 
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 

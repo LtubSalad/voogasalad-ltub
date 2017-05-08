@@ -6,7 +6,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
-
+/**
+ * A GUI component that lets the user select a Path object out of the observable collection of Paths that are currently 
+ * stored within the DeveloperData class.
+ * @author Daniel
+ *
+ */
 public class PathSetter extends VariableSetter<Path> {
 	ComboBox<Path> pathChoices;
 	ObservableList<Path> myPaths;

@@ -4,11 +4,17 @@ import data.DeveloperData;
 import data.SpriteMakerModel;
 import exception.UnsupportedTypeException;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
+
+/**
+ * A GUI component that allows the user to select and get back a SpriteMakerModel from the collection of 
+ * SpriteMakerModels that have currently been saved to the DeveloperData object's list of SpriteMakerModels.
+ * @author Daniel
+ *
+ */
 
 public class SpriteVariableSelector extends VariableSetter<SpriteMakerModel> {
 	private ComboBox<SpriteMakerModel> availableSprites;

@@ -2,7 +2,7 @@ package gameDevelopmentInterface.spriteCreator.variableSetters;
 
 import exception.UnsupportedTypeException;
 /**
- * Hide that code smell
+ * Converts Strings to strings or other primitives based on the specified type.
  * @author Daniel
  *
  */

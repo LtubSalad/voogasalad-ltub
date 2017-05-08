@@ -2,7 +2,6 @@ package gameDevelopmentInterface.spriteCreator.variableSetters;
 
 import java.io.File;
 import java.lang.reflect.Parameter;
-import java.util.HashMap;
 
 import data.DeveloperData;
 import data.SpriteMakerModel;
@@ -17,10 +16,14 @@ import gameDevelopmentInterface.spriteCreator.variableSetters.SkillMapSetter;
 import gameDevelopmentInterface.spriteCreator.variableSetters.SpriteVariableSelector;
 import gameDevelopmentInterface.spriteCreator.variableSetters.VariableSetter;
 import helperAnnotations.VariableName;
-import newengine.skill.Skill;
-import newengine.skill.SkillType;
 import newengine.utils.image.LtubImage;
 
+/**
+ * A factory class that produces variable setters depending on what parameter it takes in.
+ * Used on the constructors of components to produce component setters at runtime.
+ * @author Daniel
+ *
+ */
 public class VariableSetterFactory {
 	private DeveloperData data;
 	

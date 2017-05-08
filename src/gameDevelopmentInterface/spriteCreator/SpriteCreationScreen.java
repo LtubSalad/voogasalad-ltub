@@ -27,6 +27,15 @@ import newengine.sprite.components.TowerDefenceTypeInformation;
 import newengine.sprite.components.Upgrade;
 import utilities.AlertHandler;
 
+/**
+ * This is a screen with various panes that allow the user to add components to a sprite, specify 
+ * the parameters of those components, write scripts to handle events received by sprites, and save 
+ * sprites to a file.
+ * Can be used to either load up a preexisting sprite, or instantiate a completely new sprite.
+ * 
+ * @author Daniel
+ * 
+ */
 public class SpriteCreationScreen extends BorderPane {
 	private SpriteDataPane infoPane;
 	private EventHandlerPane scriptPane;

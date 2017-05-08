@@ -27,7 +27,8 @@ import newengine.sprite.component.ComponentType;
 /**
  * 
  * @author Daniel Uses reflection and annotation to create scripts to handle the
- *         events listened to by a given sprite
+ *         events listened to by a given sprite. Not used any more because people did not have time 
+ *         to finish dealing with xstream.
  */
 public class EventHandlerPane extends ScrollPane {
 	private VBox myContents;
