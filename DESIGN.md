@@ -1,6 +1,6 @@
 # Design
 
-## Design Update
+## Design Updates
 ### Changing sprite design
 
 Initially, we designed sprites to contain refrences to "Attribute" classes. These Attributes were designed to store data concerning the functionalities of each Sprite, and specified how the game engine should handle various different sprites. Functionality, how ever, was largely delegated to various "Manager" classes, instead of within the Attributes themselves.
@@ -141,9 +141,11 @@ These are both code smells. However, we could not implement a flexible generics-
 
 
 # State any assumptions or decisions made to simplify or resolve ambiguities in the project's functionality
-One of the most important decisions that we made with regards to the design of the project was to design a class that was not in fact written to accomodate any particular form of game entity. No assumptions whatsoever were made about the functionality that a Sprite would provide, aside from the fact that it would store a collection of components which added functionalities of their own. This decision was made in part because it seemed wise to design our code to be as flexible as possible, but we also had practical motivations since there were many members of the team who wished to create games in genres aside from tower defence.
+One of the most important decisions that we made with regards to the design of the project was to design a class that was not in fact written to accomodate any particular form of game entity. No assumptions whatsoever were made about the functionality that a Sprite would provide, aside from the fact that it would store a collection of components which added functionalities of their own. This decision was made in part because it seemed wise to design our code to be as flexible as possible, but we also had more concrete motivations since there were many members of the team who wished to create games in genres aside from tower defence.
 
-Another decision made during the late stages of the project was to remove the development interface's ability to specify how objects should placed on the screen. This was to simplify some of the challenges concerning passing data in the face of incoming deadlines. Similarly, though the design of the game engine and the development interface was such that it supported script-defined event handlers within the Sprite classes' internal buses, team members ran into bugs when trying to convert game data files if Sprites held internal script engines. Because of incoming deadlines and the apparent intractability of data conversion with scripting, the scripting functionality was also removed from the project.
+Another decision made during the late stages of the project was to make each Spawner object only capable of intantiating a single type of Sprite. This decision was made because programmers were under time pressure, and there was already preexisting code to support such functionalities. Moreover, this limitation could be largely circumvented by adding multiple spawners to the map, that instantiated different types of sprites.
+
+We decided that since most tower defence games only required sprites to be added to the screen either by the spawner or by the tower shop, it was unnecessary to use an interface to allow the developer to add arbitrary sprites to each level screen (though we did write code for it.)
 
 
 
