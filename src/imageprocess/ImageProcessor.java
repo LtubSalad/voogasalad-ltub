@@ -1,5 +1,6 @@
 // This entire file is part of my masterpiece.
 // Zhiyong Zhao
+
 package imageprocess;
 
 import java.util.Set;
