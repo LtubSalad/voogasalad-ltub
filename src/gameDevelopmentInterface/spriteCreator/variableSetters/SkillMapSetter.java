@@ -16,6 +16,13 @@ import newengine.skill.skills.FireProjectileSkill;
 import newengine.skill.skills.MoveSkill;
 import utilities.AlertHandler;
 
+/**
+ * Allows the user to specify a hashmap of skills for sprites to use in a graphical fashion.
+ * Shows every possible skill a Sprite can have and sets them using the SkillSetter class.
+ * @author Daniel
+ *
+ */
+
 public class SkillMapSetter extends VariableSetter<Map<SkillType<? extends Skill>, Skill>> {
 	private DeveloperData data;
 	private VBox displayContents;

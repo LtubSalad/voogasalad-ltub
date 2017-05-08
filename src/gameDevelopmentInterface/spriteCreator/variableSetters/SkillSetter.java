@@ -6,7 +6,14 @@ import gameDevelopmentInterface.developerdata.ObjectSetter;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
 import newengine.skill.Skill;
-
+/**
+ * 
+ * Uses a DefaultObjectSetter to provide the option to customize and get back a Skill object from the developer side.
+ * Also has a checkbox so that an object is returned only when it is ticked.
+ * @author Daniel
+ *
+ * @param <T>
+ */
 public class SkillSetter<T extends Skill> extends ObjectSetter<T>{
 	private CheckBox checkbox;
 	private HBox box;
