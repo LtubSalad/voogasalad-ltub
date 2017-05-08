@@ -59,13 +59,13 @@ public class TowerAuthor extends GameAuthor {
 	 * Adds steps to the GUI
 	 */
 	public void instantiateSteps() {
-		addStep(new DeveloperStep("Welcome", new WelcomeScreen("Tower Defense", myModelData)));
+		addStep(new DeveloperStep(myResources.getString("WELCOME"), new WelcomeScreen(myResources.getString("towerDefense"), myModelData)));
 
-		addStep(new DeveloperStep("Level Options",
+		addStep(new DeveloperStep(myResources.getString("LEVEL_CREATION"),
 				new LevelCreationPane(myModelData, getScene().getHeight() - CENTER_OFFSETS)));
-		addStep(new DeveloperStep("Path Creation", new PathCreator(myModelData)));
-		addStep(new DeveloperStep("Sprite creation", new SpriteCreationEnvironment(myModelData)));
-		addStep(new DeveloperStep("Spawner Creation", new SpawnerCreationScreen(myModelData)));
+		addStep(new DeveloperStep(myResources.getString("PATH_CREATION"), new PathCreator(myModelData)));
+		addStep(new DeveloperStep(myResources.getString("SPRITE_CREATION"), new SpriteCreationEnvironment(myModelData)));
+		addStep(new DeveloperStep(myResources.getString("SPAWNER_CREATION"), new SpawnerCreationScreen(myModelData)));
 		addStep(new DeveloperStep(myResources.getString(GENERAL_DATA), myGeneralDataCreator));
 	}
 

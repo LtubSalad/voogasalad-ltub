@@ -1,5 +1,7 @@
 package gameauthorgui;
 
+import java.util.ResourceBundle;
+
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -16,6 +18,9 @@ import javafx.scene.layout.HBox;
  * @author Matthew Tribby
  */
 public abstract class GameAuthor implements IGameAuthor {
+	public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	public static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
+	private static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 800;
 	private StepOrganizer stepOrganizer;
@@ -48,7 +53,7 @@ public abstract class GameAuthor implements IGameAuthor {
 	
 	private HBox instantiateButtons() {
 		HBox buttons = new HBox(100);
-		Button save = new Button("Save");
+		Button save = new Button(myResources.getString("save"));
 		save.setOnAction(e -> save());
 		buttons.getChildren().addAll(new PreviousStepButton(stepOrganizer), new NextStepButton(stepOrganizer), save);
 		buttons.setAlignment(Pos.CENTER);
