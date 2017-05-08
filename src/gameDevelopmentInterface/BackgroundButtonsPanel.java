@@ -26,17 +26,13 @@ public class BackgroundButtonsPanel extends TowerSetButtonsPanel {
 	private static final String SET_NUMBER_OF_ROWS = "SET_NUMBER_OF_ROWS";
 	private Button sendNumRows;
 	private Button sendNumCols;
-	private ScreenModelCreator mySMC;
 	private HBox rowsBox;
 	private HBox colsBox;
 	private TextArea myNumRowsInput = new TextArea();
 	private TextArea myNumColsInput = new TextArea();
-	private DeveloperData myData;
 
 	public BackgroundButtonsPanel(ScreenModelCreator smc, DeveloperData data) {
 		super(smc);
-		myData = data;
-		mySMC = smc;
 		rowsBox = new HBox();
 		colsBox = new HBox();
 		makeRowColSetters();
@@ -53,7 +49,7 @@ public class BackgroundButtonsPanel extends TowerSetButtonsPanel {
 		sendNumCols = new Button(myResources.getString(SET_NUMBER_OF_COLUMNS));
 //		sendNumRows.setOnAction(e -> mySMC.getScreen().setNumRows(Integer.parseInt(myNumRowsInput.getText())));
 //		sendNumCols.setOnAction(e -> mySMC.getScreen().setNumCols(Integer.parseInt(myNumColsInput.getText())));
-//		rowsBox.getChildren().addAll(myNumRowsInput, sendNumRows);
+		rowsBox.getChildren().addAll(myNumRowsInput, sendNumRows);
 		colsBox.getChildren().addAll(myNumColsInput, sendNumCols);
 	}
 }

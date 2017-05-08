@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 import commons.point.GamePoint;
 import data.DeveloperData;
 import data.SpriteMakerModel;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Bounds;
 import javafx.scene.image.ImageView;

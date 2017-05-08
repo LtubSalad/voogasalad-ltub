@@ -33,10 +33,6 @@ public class CoordinateConversion {
 	 * @return the coordinates of the sprite on the grid in ScreenMap
 	 */
 	public Pair<Integer, Integer> fromGamePointToPair(GamePoint gameCoord, GridPane grid) {
-		Pair<Integer, Integer> toReturn;
-		
-		
-		
 		Double dx = gameCoord.x();
 		Double dy = gameCoord.y();
 		Integer x = dx.intValue();

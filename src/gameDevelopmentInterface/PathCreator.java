@@ -1,9 +1,7 @@
 package gameDevelopmentInterface;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
-
 import commons.point.GamePoint;
 import data.DeveloperData;
 import javafx.geometry.Point2D;
@@ -25,7 +23,6 @@ public class PathCreator extends BorderPane {
 	
 	public PathCreator(DeveloperData developerData) {
 		myDeveloperData = developerData;
-		//myPath = new Path();
 		clearPath();
 	}
 	public ScreenMap getScreen() {
@@ -89,6 +86,7 @@ public class PathCreator extends BorderPane {
 	private boolean coordAlreadyInPath(GamePoint coords, Queue<GamePoint> path) {
 		double testX = coords.x();
 		double testY = coords.y();
+		// in a for-loop so returning true is a clean way to handle this logic
 		for (GamePoint gp : path) {
 			double alreadyX = gp.x();
 			double alreadyY = gp.y();
@@ -98,44 +96,4 @@ public class PathCreator extends BorderPane {
 		}
 		return false;
 	}
-
-	private boolean isValidPath(Queue<GamePoint> path) {
-//		int numCols = myScreenModel.getScreen().getNumCols();
-//		int numRows = myScreenModel.getScreen().getNumRows();
-//		GamePoint currCoord = path.poll();
-//		int index = 0;
-//		while (path.size() > 1) {
-//			if (outOfBounds(numCols, numRows, currCoord)) {
-//				return false;
-//			}
-//			if (index == 0 && !atBoundary(currCoord, numCols, numRows)) {
-//				return false;
-//			}
-//			if (!possibleTransition(currCoord, path.peek())) {
-//				return false;
-//			}
-//			currCoord = path.poll();
-//			index += 1;
-//		}
-//		if (!atBoundary(path.poll(), numCols, numRows)) {
-//			return false;
-//		}
-		return true;
-	}
-	private boolean outOfBounds(int numCols, int numRows, GamePoint currCoord) {
-		return currCoord.x() < 0 ||
-				currCoord.y() < 0 ||
-				currCoord.x() > numCols ||
-				currCoord.y() > numRows;
-	}
-	private boolean atBoundary(GamePoint coord, int numCols, int numRows) {
-		return (coord.x() == 0 || coord.x() == numCols-1 || coord.y() == 0 || coord.y() == numRows-1);
-	}
-	private boolean possibleTransition(GamePoint currCoord, GamePoint nextCoord) {
-		return ((nextCoord.x() == currCoord.x() && nextCoord.y()+1 == currCoord.y()) ||
-				(nextCoord.x() == currCoord.x() && nextCoord.y()-1 == currCoord.y()) ||
-				(nextCoord.x()-1 == currCoord.x() && nextCoord.y() == currCoord.y()) ||
-				(nextCoord.x()+1 == currCoord.x() && nextCoord.y() == currCoord.y()));
-	}
-	
 }

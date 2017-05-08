@@ -1,7 +1,5 @@
 package gameDevelopmentInterface;
 
-import data.ScreenModelData;
-import data.SpritesForScreenUse;
 import javafx.scene.layout.BorderPane;
 
 public class TowerDefenseGUI extends BorderPane {

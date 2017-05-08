@@ -1,5 +1,10 @@
 package data;
 
+/**
+ * This class holds all of the data needed to reconstruct a sprite in the
+ * game engine. 
+ */
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,12 +15,10 @@ import bus.BusEvent;
 import javafx.util.Pair;
 import newengine.events.sprite.SpriteKilledEvent;
 import newengine.skill.Skill;
-import newengine.sprite.Sprite;
 import newengine.sprite.component.Component;
 import newengine.sprite.component.ComponentType;
 
 public class SpriteMakerModel {
-	private Map<String, String> myCustomEventHandlers;
 	
 	private Map<ComponentType<?>,Component> myComponents;
 	private Map<BusEvent, String> myScriptMap;
@@ -30,8 +33,6 @@ public class SpriteMakerModel {
 	List<Pair<BusEvent, BusEvent>> triggers; // event + Action for the trigger (custom event handling) 	
 	
 	public SpriteMakerModel() {
-		Map<ComponentType<?>, Component >componentMap=new HashMap<>();
-		Map<BusEvent, String> handlers=new HashMap<>();
 		myComponents=new HashMap<>();
 		myScriptMap=new HashMap<>();
 		actualComponents = new ArrayList<Component>(); 
@@ -186,21 +187,5 @@ public class SpriteMakerModel {
 	public List<Skill> getSkills(){
 		return skills; 
 	}
-	
-	
-	
-//	/**
-//	 * Call this AFTER unserialization to avoid the bus issues
-//	 * @return
-//	 */
-//	public Sprite produceSprite(){
-//		Sprite sprite=new Sprite();
-//		myComponents.forEach((componentType, component)->{
-//			sprite.addComponent(component);
-//		});
-//		myScriptMap.forEach((event, script)->{
-//			sprite.produceHandler(event.getEventType(), script);
-//		});
-//		return sprite;
-//	}
+
 }

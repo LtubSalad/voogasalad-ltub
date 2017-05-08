@@ -1,5 +1,11 @@
 package gameDevelopmentInterface;
-
+/**
+ * This is the buttons that are on the right side of the 
+ * path creation screen and allow for the user to set the 
+ * number of rows and columns seen on the screen as well as
+ * allowing the user to start and add paths to the model
+ * Jake
+ */
 import java.util.Optional;
 
 import data.DeveloperData;
@@ -15,7 +21,6 @@ public class PathButtonsPanel extends VBox {
 	private Button clearScreen;
 	private Button refresh;
 	private PathCreator myPathCreator;
-	private ScreenMap myScreenMap;
 	private Button sendNumRows;
 	private Button sendNumCols;
 	private HBox rowsBox = new HBox();
@@ -27,7 +32,6 @@ public class PathButtonsPanel extends VBox {
 	public PathButtonsPanel(DeveloperData model, PathCreator pathCreator, ScreenMap screenMap) {
 		myModel = model;
 		myPathCreator = pathCreator;
-		myScreenMap = screenMap;
 		makeButtons();
 		rowsBox.getChildren().addAll(rowsInput, sendNumRows);
 		colsBox.getChildren().addAll(colsInput, sendNumCols);
