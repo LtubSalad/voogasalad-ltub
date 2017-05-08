@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 /**
  * 
  * @author Daniel
- * Set an enum.
+ * A GUI component that allows the developer to get and set an enum.
  * @param <T>
  */
 public class EnumSetter<T extends Enum<?>> extends VariableSetter<T>{

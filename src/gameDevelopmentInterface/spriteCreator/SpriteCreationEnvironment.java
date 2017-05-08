@@ -11,18 +11,18 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import utilities.XStreamHandler;
-
+/**
+ * Represents a single screen where
+ * @author Daniel
+ *
+ */
 public class SpriteCreationEnvironment extends BorderPane{
 	private TabPane creationScreens;
 	private DeveloperData developerData;
 	private final double MAX_WIDTH=1000;
 	private final double MAX_HEIGHT=500;
-	public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	public static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
-	private static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
 	
 	public SpriteCreationEnvironment(DeveloperData data){
-		
 		developerData=data;
 		instantiateTabs();
 		this.setBottom(new TabAdder());
@@ -31,7 +31,7 @@ public class SpriteCreationEnvironment extends BorderPane{
 	
 	private void instantiateTabs() {
 		creationScreens = new TabPane();
-		Tab generalSpriteCreation = new Tab(myResources.getString("SPRITE_CREATION"),new SpriteCreationScreen(developerData));
+		Tab generalSpriteCreation = new Tab("Sprite creation",new SpriteCreationScreen(developerData));
 		
 		ObservableList<Tab> myTabs = creationScreens.getTabs();
 		myTabs.addAll(generalSpriteCreation);
@@ -60,7 +60,7 @@ public class SpriteCreationEnvironment extends BorderPane{
 			});
 
 			
-			Button loadSavedSprite=new Button(myResources.getString("loadSavedSprite"));
+			Button loadSavedSprite=new Button("Load Saved Sprite");
 			loadSavedSprite.setOnAction((event)->{
 				XStreamHandler handler=new XStreamHandler();
 				SpriteMakerModel model=handler.<SpriteMakerModel>getObjectFromFile();

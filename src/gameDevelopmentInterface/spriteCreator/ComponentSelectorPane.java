@@ -9,7 +9,13 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import newengine.sprite.component.Component;
 
-
+/**
+ * Takes in a list of classes that extend Component and lists them in a listview.
+ * When list entries are selected, the data pane adds a component setter to its scrollpane that corresponds to 
+ * the class of the component selected.
+ * @author Daniel
+ *
+ */
 public class ComponentSelectorPane extends VBox{
 	private SpriteDataPane infoPane;
 	private double PREF_WIDTH=300;

@@ -9,7 +9,9 @@ import javafx.scene.layout.HBox;
 /**
  * 
  * @author Daniel
- * Only works for primitive variables and strings.
+ * A GUI component that sets the value of a variable of form String or primitive based on the user's 
+ * text inputs.
+ * 
  * @param <T>
  */
 public class SimpleVariableSetter<T> extends VariableSetter<T>{
