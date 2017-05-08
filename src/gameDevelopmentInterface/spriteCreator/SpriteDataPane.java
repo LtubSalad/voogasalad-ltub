@@ -3,6 +3,7 @@ package gameDevelopmentInterface.spriteCreator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import data.DeveloperData;
 import data.SpriteMakerModel;
@@ -28,6 +29,9 @@ public class SpriteDataPane extends ScrollPane{
 	private ComponentLister lister;
 	private DeveloperData developerData;
 	private double PREF_WIDTH=600;
+	public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	public static final String RESOURCE_FILE_NAME = "gameAuthoringEnvironment";
+	private static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + RESOURCE_FILE_NAME);
 	
 	public SpriteDataPane(SpriteMakerModel spriteData, DeveloperData developerData){
 		instantiate(spriteData, developerData);
@@ -41,7 +45,7 @@ public class SpriteDataPane extends ScrollPane{
 		myPane=new VBox();
 		lister=new ComponentLister();
 		updateLister(spriteData);
-		myPane.getChildren().addAll(new Label("Sprite Components"), lister);
+		myPane.getChildren().addAll(new Label(myResources.getString("spriteComponents")), lister);
 		myPane.setPrefWidth(PREF_WIDTH);
 		this.setContent(myPane);
 		this.setPrefWidth(PREF_WIDTH);
@@ -146,7 +150,7 @@ public class SpriteDataPane extends ScrollPane{
 				super(mySetter.getObjectType());
 				this.mySetter=mySetter;
 				this.getChildren().addAll(mySetter);
-				Button removeButton =new Button("Remove component");
+				Button removeButton =new Button(myResources.getString("removeComponent"));
 				removeButton.setOnAction((click)->{
 					removeMe();
 				});
