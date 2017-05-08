@@ -11,6 +11,12 @@ import javafx.scene.layout.HBox;
 import utilities.AlertHandler;
 import utilities.XStreamHandler;
 
+/**
+ * A panel used for each SpriteCreationScreen that allows the user to save a Sprite to file or to 
+ * the DeveloperData object's list of SpriteMakerModels.
+ * @author Daniel
+ *
+ */
 public class SavePanel extends HBox {
 	private XStreamHandler dataHandler;
 	private SpriteCreationScreen screen;
@@ -24,6 +30,10 @@ public class SavePanel extends HBox {
 		dataHandler = new XStreamHandler();
 	}
 
+	/**
+	 * Displays a save dialogue when pressed, to make sure the user wishes to save.
+	 * @return
+	 */
 	private Button saveToFileButton(){
 		AlertHandler alertHandler = new AlertHandler();
 		Button saveButton = new Button("Save Sprite to File");
@@ -45,6 +55,11 @@ public class SavePanel extends HBox {
 		return saveButton;
 	}
 	
+	/**
+	 * Saves a SpriteMakerModel to the DeveloperData's list of models.
+	 * Also shows a save dialogue, and replaces previously listed sprites if they share the same name.
+	 * @return
+	 */
 	private Button saveToGameSpriteButton(){
 		AlertHandler alertHandler = new AlertHandler();
 		Button listSaveButton = new Button("Save Sprite to this game's Sprites");

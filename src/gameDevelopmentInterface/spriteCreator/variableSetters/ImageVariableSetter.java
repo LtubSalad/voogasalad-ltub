@@ -16,6 +16,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import newengine.utils.image.LtubImage;
 
+/**
+ * 
+ * A GUI component that allows the user to choose an LtubImage from a file, and get it back later on.
+ * @author Daniel
+ *
+ */
 public class ImageVariableSetter extends VariableSetter<LtubImage>{
 	private VBox myContents;
 	private StringProperty myImagePath;

@@ -7,7 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import utilities.AlertHandler;
-
+/**
+ * Allows the user to view and  set the name and description of a SpriteMakerModel graphically.
+ * @author Daniel
+ *
+ */
 public class SpriteDescriptorPane extends HBox{
 	private SimpleVariableSetter<String> nameSetter;
 	private SimpleVariableSetter<String> descriptionSetter;

@@ -8,7 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+/**
+ * A GUI component that allows the user to choose a file. Stores the file for later use.
+ * @author Daniel
+ *
+ */
 public class FileVariableSetter extends VariableSetter<File>{
 	private File selectedFile;
 	private Label fileLabel;
