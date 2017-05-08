@@ -1,5 +1,11 @@
 package gameDevelopmentInterface;
-
+/**
+ * This class is the the holder for all of the spawner creation
+ * screen objects. It extends border pane to place them logically
+ * on the screen and provides the logic to create a spawner
+ * SpriteMakerModel to be saved to the model
+ * Jake
+ */
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,8 +46,6 @@ public class SpawnerCreation extends BorderPane {
 		this.setLeft(myPossibleMonsters);
 		this.setCenter(mySpawnerInfo);
 		this.setTop(myMonsterAdder);
-
-		//this.setBottom(new SaveSpawner(model, this, myMonsterAdder));
 		this.setRight(new SpawnerLevelEditorHolder(model.getLevelData(), 600, this));
 	}
 	

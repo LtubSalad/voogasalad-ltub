@@ -19,8 +19,6 @@ public class Path {
 	
 	public Path() {
 		this("A Nameless Path");
-		//myPath.add(new GamePoint(5,3));
-		//makeDefaultPath();
 	}
 	
 	public Path(String name) {
@@ -30,7 +28,6 @@ public class Path {
 	public Path(String name, Queue<GamePoint> path) {
 		this.pathName=name;
 		myPath = path;
-		makeDefaultPath();
 	}
 	
 	/**
@@ -47,10 +44,6 @@ public class Path {
 	 */
 	public void changePath(Queue<GamePoint> replacementPath) {
 		myPath = replacementPath;
-		System.out.println("Current myPath: ");
-		myPath.forEach(gp -> {
-			System.out.println(gp.x() + " "+ gp.y());
-		});
 	}
 	/**
 	 * 
@@ -101,28 +94,6 @@ public class Path {
 		currCoord = nextCoord;
 		nextCoord = myPath.poll();
 	}
-	
-	private void makeDefaultPath() {
-//		myPath.add(new GamePoint(500,200));
-//		myPath.add(new GamePoint(100,0));
-//		myPath.add(new GamePoint(100,100));
-//		myPath.add(new GamePoint(0,300));
-//		myPath.add(new GamePoint(300,300));
-
-		
-//		myPath.add(new GamePoint(0,0));
-//		myPath.add(new GamePoint(0,100));
-//		myPath.add(new GamePoint(100,100));
-//		myPath.add(new GamePoint(100,0));
-//		myPath.add(new GamePoint(0, 0));
-		
-//		myPath.add(new GamePoint(0,0));
-//		myPath.add(new GamePoint(0,0.9));
-//		myPath.add(new GamePoint(0.9,0.9));
-//		myPath.add(new GamePoint(0.9,0));
-//		myPath.add(new GamePoint(0, 0));
-	
-	}	
 
 	public String getName(){
 		return pathName;

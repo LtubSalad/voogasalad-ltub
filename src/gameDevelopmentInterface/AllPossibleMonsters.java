@@ -1,5 +1,10 @@
 package gameDevelopmentInterface;
-
+/**
+ * This class is the left hand side of the spawner creation screen
+ * and holds images of all the possible monsters you could put into
+ * a spawner
+ * Jake
+ */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,14 +13,10 @@ import data.SpriteMakerModel;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import newengine.sprite.components.EventQueue;
-import newengine.sprite.components.GameBus;
 import newengine.sprite.components.Health;
 import newengine.sprite.components.Images;
 import newengine.sprite.components.PathFollower;
-import newengine.sprite.components.SkillSet;
 import newengine.sprite.components.Speed;
-import utilities.AlertHandler;
 
 public class AllPossibleMonsters extends ScrollPane {
 	private static final int IMAGE_SIZE = 100;
@@ -73,11 +74,9 @@ public class AllPossibleMonsters extends ScrollPane {
 	}
 
 	private boolean isMonster(SpriteMakerModel possibleMonster) {
-		return (possibleMonster.getComponentByType(Images.TYPE) != null);// &&
-		// possibleMonster.getComponentByType(Speed.TYPE) != null &&
-		// possibleMonster.getComponentByType(Health.TYPE) != null &&
-		// possibleMonster.getComponentByType(PathFollower.TYPE) != null &&
-		// possibleMonster.getComponentByType(EventQueue.TYPE) != null);
-		// possibleMonster.getComponentByType(GameBus.TYPE) != null);
+		return (possibleMonster.getComponentByType(Images.TYPE) != null) &&
+		 possibleMonster.getComponentByType(Speed.TYPE) != null &&
+		 possibleMonster.getComponentByType(Health.TYPE) != null &&
+		 possibleMonster.getComponentByType(PathFollower.TYPE) != null;
 	}
 }

@@ -1,5 +1,11 @@
 package gameDevelopmentInterface;
-
+/**
+ * This class is the top of the spawner creation screen and will
+ * allow the user to load in a monster from an XML file and also
+ * tell the model how many of the monster it has selected to put
+ * into the spawner
+ * Jake
+ */
 import data.SpriteMakerModel;
 import gameauthorgui.inputhelpers.IntegerInputText;
 import javafx.scene.control.Button;

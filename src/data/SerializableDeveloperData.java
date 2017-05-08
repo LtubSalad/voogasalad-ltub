@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import gamecreation.level.ILevelData;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-import newengine.managers.conditions.Condition;
 import newengine.player.Player;
 
 /**
